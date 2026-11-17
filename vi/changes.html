@@ -261,7 +261,7 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-t
   <button class="btn" type="submit">Gửi</button><p class="fb-done" id="fb-done" role="status"></p></form>
 </div></div>
 <script>(function () {
-  const C = {"form": null, "to": "edandco.biz@gmail.com", "lang": "vi", "thanks": "C\u1ea3m \u01a1n b\u1ea1n! Ch\u00fang t\u00f4i \u0111\u1ecdc m\u1ecdi tin nh\u1eafn."}, sh = document.getElementById("fb"); let ctx = "";
+  const C = {"form": {"action": "https://docs.google.com/forms/d/e/1FAIpQLSfCghsXyPnhlsgILMa_OWagIrsNzKf6kWCPqErBNAXVXlhNkA/formResponse", "msg": "entry.1067526763", "email": "entry.203830250", "ctx": "entry.1755038916"}, "to": "edandco.biz@gmail.com", "lang": "vi", "thanks": "C\u1ea3m \u01a1n b\u1ea1n! Ch\u00fang t\u00f4i \u0111\u1ecdc m\u1ecdi tin nh\u1eafn."}, sh = document.getElementById("fb"); let ctx = "";
   window.openFeedback = function (c) { ctx = c || location.pathname; sh.hidden = false; document.getElementById("fb-done").textContent = ""; document.getElementById("fb-msg").focus(); };
   document.querySelectorAll("[data-feedback]").forEach(b => b.addEventListener("click", () => openFeedback(b.dataset.feedback)));
   document.getElementById("fb-close").addEventListener("click", () => { sh.hidden = true; });

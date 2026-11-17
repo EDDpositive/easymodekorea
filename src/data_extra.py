@@ -353,7 +353,7 @@ HELP_PHRASES = [
 # Feedback. FORM is a Google Form (owned by edandco.biz) once it exists:
 # {"action": "https://docs.google.com/forms/d/e/<id>/formResponse", "msg": "entry.N", "email": "entry.N", "ctx": "entry.N"}
 # Until then, sending opens a prefilled email to the business address.
-FEEDBACK_FORM = None
+FEEDBACK_FORM = {"action": "https://docs.google.com/forms/d/e/1FAIpQLSfCghsXyPnhlsgILMa_OWagIrsNzKf6kWCPqErBNAXVXlhNkA/formResponse", "msg": "entry.1067526763", "email": "entry.203830250", "ctx": "entry.1755038916"}
 FEEDBACK_TO = "edandco.biz@gmail.com"
 FEEDBACK = {
     "en": {"open": "Send feedback", "title": "Tell us anything", "lead": "Something wrong, missing, or confusing? Ideas for us? We read every message.",
