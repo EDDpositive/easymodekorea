@@ -224,7 +224,9 @@ function finish() {
   if (fromOnb) window.scrollTo(0, 0);
 }
 let fromOnb = false;
-document.querySelectorAll("[data-p]").forEach(b => b.addEventListener("click", () => { P = b.dataset.p; if (P === "arc") { DEV = "ios"; finish(); } else { setStep(2); document.querySelector("#onb2 .opt-big").focus(); } }));
+/* The phone type is usually readable from the browser, so most people answer one question. */
+const UAD = /iPhone|iPad|iPod/.test(navigator.userAgent) ? "ios" : /Android/.test(navigator.userAgent) ? "android" : null;
+document.querySelectorAll("[data-p]").forEach(b => b.addEventListener("click", () => { P = b.dataset.p; if (P === "arc") { DEV = "ios"; fromOnb = true; finish(); } else if (UAD) { DEV = UAD; fromOnb = true; finish(); } else { setStep(2); document.querySelector("#onb2 .opt-big").focus(); } }));
 document.querySelectorAll("[data-d]").forEach(b => b.addEventListener("click", () => { DEV = b.dataset.d; fromOnb = true; finish(); }));
 document.querySelectorAll("#onb [data-p]").forEach(b => b.addEventListener("click", () => { fromOnb = true; }));
 /* One answer open at a time keeps the list short on a phone. */
@@ -326,7 +328,9 @@ function stay() {
     const act = el("div", { class: "actions" });
     const t1 = el("button", { type: "button", class: "btn alt", text: S.show_driver }); t1.addEventListener("click", () => show(XS.taxi_card, XS.taxi_ko, a, XS.means + ": " + XS.taxi_means));
     const t2 = el("button", { type: "button", class: "btn ghost", text: XS.deliv_card }); t2.addEventListener("click", () => show(XS.deliv_card, a, XS.deliv_ko, XS.means + ": " + XS.deliv_means));
-    act.append(t1, t2, el("a", { class: "btn ghost", href: "https://map.naver.com/p/search/" + encodeURIComponent(a), rel: "noopener", target: "_blank", text: XS.map }));
+    const cp = el("button", { type: "button", class: "btn ghost", text: UX.copy_addr });
+    cp.addEventListener("click", async () => { try { await navigator.clipboard.writeText(a); cp.textContent = "✓ " + UX.copied; setTimeout(() => { cp.textContent = UX.copy_addr; }, 2000); count("copy-address", "copy address"); } catch (e) {} });
+    act.append(t1, cp, t2, el("a", { class: "btn ghost", href: "https://map.naver.com/p/search/" + encodeURIComponent(a), rel: "noopener", target: "_blank", text: XS.map }));
     box.append(act);
   }
   const dl = el("dl", { class: "kv" });

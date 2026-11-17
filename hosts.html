@@ -54,7 +54,26 @@ pre { white-space: pre-wrap; overflow-wrap: anywhere; background: var(--bg); bor
 .about summary { cursor: pointer; padding: 8px 0; }
 .about ul { padding-left: 18px; margin: 4px 0; }
 :focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; }
+.mini-l { font-size: 13px; font-weight: 700; color: var(--muted); margin: 0 0 6px; }
+.mini { border: 2px solid var(--brand); border-radius: 14px; padding: 12px 14px; margin-bottom: 14px; display: grid; gap: 4px; }
+.mini b { font-size: 15px; }
+.mini-addr { font-size: 18px; font-weight: 800; }
+.mini-btn { justify-self: start; background: var(--easy); color: #0e1430; font-weight: 700; font-size: 13px; padding: 5px 10px; border-radius: 99px; margin-top: 4px; }
+.print-card { border: 1.5px dashed var(--line); border-radius: 16px; padding: 20px; text-align: center; background: #fff; color: #0e1430; }
+.pc-t { font-weight: 800; font-size: 20px; margin: 0; }
+.pc-s { color: #4a5470; font-size: 13px; margin: 4px 0 12px; }
+.qr { display: flex; justify-content: center; }
+.qr svg { width: 200px; height: 200px; }
+.pc-addr { font-weight: 800; font-size: 18px; margin: 12px 0 4px; }
+.pc-b { font-size: 12px; color: #4a5470; margin: 0; }
+@media print {
+  body { background: #fff; }
+  body * { visibility: hidden; }
+  #print-card, #print-card * { visibility: visible; }
+  #print-card { position: absolute; left: 0; right: 0; top: 0; margin: 0 auto; max-width: 360px; border: 1px solid #ccc; }
+}
 </style>
+<script src="qr.js" defer></script>
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -100,6 +119,9 @@ pre { white-space: pre-wrap; overflow-wrap: anywhere; background: var(--bg); bor
     <h2>손님에게 보내기</h2>
     <p class="wait" id="wait">숙소 이름과 주소를 넣으면 보낼 메시지가 나와요.</p>
     <div id="ready" hidden>
+      <p class="mini-l">손님 휴대폰에 이렇게 보여요</p>
+      <div class="mini"><b id="pv-n"></b><span class="mini-addr" id="pv-a"></span><span class="mini-btn">Show driver</span></div>
+      <p class="mini-l">보낼 메시지</p>
       <pre id="msg"></pre>
       <button class="btn" type="button" id="share" hidden>손님에게 보내기</button>
       <button class="btn" type="button" id="copy">메시지 복사</button>
@@ -115,6 +137,20 @@ pre { white-space: pre-wrap; overflow-wrap: anywhere; background: var(--bg); bor
         <span>베트남어</span><input id="l-vi" readonly aria-label="베트남어 링크">
       </details>
     </div>
+  </section>
+
+  <section class="card" id="qr-card" hidden>
+    <p class="step">3단계 (선택)</p>
+    <h2>현관·객실에 붙이기</h2>
+    <p class="hint" style="margin:0 0 12px">메시지를 못 본 손님도 QR만 찍으면 같은 안내를 볼 수 있어요.</p>
+    <div class="print-card" id="print-card">
+      <p class="pc-t">Scan for your arrival guide</p>
+      <p class="pc-s">到着ガイド · 入住指南 · Hướng dẫn</p>
+      <div id="qr" class="qr" role="img" aria-label="QR code"></div>
+      <p class="pc-addr" id="pc-a" lang="ko"></p>
+      <p class="pc-b">EasyModeKorea</p>
+    </div>
+    <button class="btn ghost" type="button" id="print">인쇄하기</button>
   </section>
 
   <details class="about">
@@ -141,7 +177,7 @@ function update() {
   const g = {}; for (const k of F) { const v = $(k).value.trim(); if (v) g[k] = v; }
   const ok = g.n && g.a;
   $("wait").hidden = !!ok; $("ready").hidden = !ok;
-  if (!ok) return;
+  if (!ok) { $("qr-card").hidden = true; return; }
   const h = "#g=" + enc(g);
   const L = { en: BASE + h, ja: BASE + "ja/" + h, zh: BASE + "zh-tw/" + h, cn: BASE + "zh-cn/" + h, vi: BASE + "vi/" + h };
   $("l-en").value = L.en; $("l-ja").value = L.ja; $("l-zh").value = L.zh; $("l-cn").value = L.cn; $("l-vi").value = L.vi; $("preview").href = L.en;
@@ -150,6 +186,19 @@ function update() {
     "\n\nShow it to your taxi driver for our address. It also shows which Korean apps work on your phone, in your language.\n\nSee you soon!\n" + g.n;
   try { localStorage.setItem("emk-host", JSON.stringify(g)); } catch (e) {}
   $("status").textContent = "";
+  $("pv-n").textContent = "Your stay: " + g.n; $("pv-a").textContent = g.a;
+  $("pc-a").textContent = g.a; drawQR(L.en);
+}
+function drawQR(text) {
+  const box = $("qr"), card = $("qr-card");
+  if (!window.QRCode) { card.hidden = true; return; }
+  try {
+    const q = new QRCode(-1, QRErrorCorrectLevel.M); q.addData(text); q.make();
+    const n = q.getModuleCount(), m = 2; let d = "";
+    for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) if (q.isDark(r, c)) d += "M" + (c + m) + " " + (r + m) + "h1v1h-1z";
+    box.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + (n + 2 * m) + ' ' + (n + 2 * m) + '" shape-rendering="crispEdges"><rect width="100%" height="100%" fill="#fff"/><path d="' + d + '" fill="#0e1430"/></svg>';
+    card.hidden = false;
+  } catch (e) { card.hidden = true; }
 }
 try { const saved = JSON.parse(localStorage.getItem("emk-host") || "{}"); for (const k of F) if (saved[k]) $(k).value = saved[k]; if (saved.s || saved.c || saved.k || saved.t) document.querySelector("details.more").open = true; } catch (e) {}
 F.forEach(k => $(k).addEventListener("input", update));
@@ -162,6 +211,8 @@ $("copy").addEventListener("click", async () => {
   try { await navigator.clipboard.writeText($("msg").textContent); $("status").textContent = "복사했어요. 예약 확정 메시지에 붙여 넣으세요."; try { window.goatcounter && window.goatcounter.count({ path: "host-generator/copy", title: "host copy", event: true }); } catch (e) {} }
   catch (e) { $("status").textContent = "복사가 막혀 있어요. 위 메시지를 길게 눌러 복사해 주세요."; }
 });
+$("print").addEventListener("click", () => { try { window.goatcounter && window.goatcounter.count({ path: "host-generator/print", title: "host print", event: true }); } catch (e) {} window.print(); });
+window.addEventListener("load", update);
 update();
 </script>
 </body>

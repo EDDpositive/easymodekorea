@@ -284,6 +284,8 @@ VI = {
 "I'm allergic to nuts.": "Tôi bị dị ứng với các loại hạt.",
 "I can't eat spicy food.": "Tôi không ăn được cay.",
 "I'm lost.": "Tôi bị lạc đường.",
+"Copy address": "Sao chép địa chỉ",
+"Copied": "Đã sao chép",
 }
 
 

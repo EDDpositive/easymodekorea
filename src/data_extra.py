@@ -366,3 +366,6 @@ FEEDBACK = {
               "msg": "你的訊息", "ph": "哪些能用、哪些不行、希望我們加什麼?", "email": "電子郵件(選填,需要回覆再填)",
               "send": "送出", "thanks": "謝謝!每則訊息我們都會看。", "fail": "告訴我們發生了什麼"},
 }
+
+for _l, _t in {"en": ("Copy address", "Copied"), "ja": ("住所をコピー", "コピーしました"), "zh-tw": ("複製地址", "已複製")}.items():
+    UX[_l]["copy_addr"], UX[_l]["copied"] = _t
