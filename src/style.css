@@ -226,3 +226,4 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-t
 #fb-form .btn { margin-top: 12px; width: 100%; justify-content: center; }
 .fb-done { font-weight: 600; color: var(--brand); min-height: 22px; }
 .about { margin-top: 8px; }
+.more-h { font: 700 13px var(--body); text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin: 18px 4px 2px; }

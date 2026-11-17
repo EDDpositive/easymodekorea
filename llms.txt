@@ -14,6 +14,7 @@ Answers depend on the visitor's setup: no Korean number, a Korean prepaid SIM (0
 - [Restaurant bookings without a Korean number](restaurant-reservations.html)
 - [Food delivery as a tourist](food-delivery.html)
 - [Translation apps](translation.html)
+- [Tax-free shopping and refunds](tax-free-shopping.html)
 - [What changed in 2026](changes.html)
 
 ## Other languages

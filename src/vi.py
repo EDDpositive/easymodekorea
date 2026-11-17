@@ -286,6 +286,24 @@ VI = {
 "I'm lost.": "Tôi bị lạc đường.",
 "Copy address": "Sao chép địa chỉ",
 "Copied": "Đã sao chép",
+"While you're here": "Trong chuyến đi",
+"Shopping & tax refund": "Mua sắm và hoàn thuế",
+"Shopping and tax refunds": "Mua sắm và hoàn thuế",
+"How do I get a tax refund when shopping in Korea?": "Mua sắm ở Hàn Quốc được hoàn thuế thế nào?",
+"Tax-free shopping in Korea: instant refunds at Olive Young, Daiso and more (2026)": "Mua sắm miễn thuế ở Hàn Quốc: hoàn thuế ngay tại Olive Young, Daiso và nhiều nơi khác (2026)",
+"Visitors get most of the 10% tax back on shopping. At many stores it comes off at the till when you show your passport.": "Du khách được hoàn phần lớn 10% thuế khi mua sắm. Ở nhiều cửa hàng, thuế được trừ ngay tại quầy khi bạn xuất trình hộ chiếu.",
+"Tax refunds work for visitors. Show your passport at the till and the tax comes off right away at many stores.": "Du khách được hoàn thuế. Ở nhiều cửa hàng, xuất trình hộ chiếu khi thanh toán là được trừ thuế ngay.",
+"Look for the Tax Free or Tax Refund sign, and bring your actual passport.": "Tìm biển Tax Free hoặc Tax Refund và mang theo hộ chiếu thật.",
+"Spend at least 15,000 won in one payment. Receipts can't be added together, so pay for everything at once.": "Mỗi lần thanh toán tối thiểu 15.000 won. Không cộng gộp hóa đơn được, nên hãy thanh toán tất cả một lần.",
+"Instant refund at the till works for payments under 1 million won, up to 5 million won in total per trip.": "Hoàn thuế ngay tại quầy áp dụng cho mỗi lần thanh toán dưới 1 triệu won, tổng cộng tối đa 5 triệu won mỗi chuyến.",
+"No instant refund? Keep the refund receipt and claim it at a city refund booth or the airport kiosk before you check in your bags.": "Không được hoàn ngay? Giữ phiếu hoàn thuế và nhận tại quầy hoàn thuế trong thành phố hoặc máy ở sân bay trước khi ký gửi hành lý.",
+"Refund receipts expire 3 months after purchase. Cosmetic and skin clinic treatments no longer qualify from 2026.": "Phiếu hoàn thuế hết hạn sau 3 tháng kể từ ngày mua. Từ năm 2026, dịch vụ thẩm mỹ và da liễu không còn được hoàn thuế.",
+"Tourist tax refunds are for visitors staying under 6 months. Residents with an ARC usually don't qualify.": "Hoàn thuế du lịch dành cho người lưu trú dưới 6 tháng. Người cư trú có ARC thường không được áp dụng.",
+"Shop as usual. Prices already include tax.": "Mua sắm bình thường. Giá đã bao gồm thuế.",
+"If you've been in Korea less than 6 months, ask the store whether you still qualify.": "Nếu bạn ở Hàn Quốc chưa đến 6 tháng, hãy hỏi cửa hàng xem bạn có được áp dụng không.",
+"Olive Young runs over 110 stores for visitors in areas like Myeongdong, Gangnam, Hongdae, Busan and Jeju, with foreign-language staff and Korean-English price labels.": "Olive Young có hơn 110 cửa hàng dành cho du khách ở Myeongdong, Gangnam, Hongdae, Busan, Jeju..., có nhân viên nói ngoại ngữ và nhãn giá Hàn–Anh.",
+"Musinsa stores put a QR code on every item that shows member prices, stock and reviews.": "Ở cửa hàng Musinsa, mỗi sản phẩm có mã QR để xem giá thành viên, tồn kho và đánh giá.",
+"Tax free, please. I'll pay for everything at once.": "Cho tôi hoàn thuế. Tôi thanh toán tất cả một lần.",
 }
 
 
@@ -308,5 +326,5 @@ for lst in x.PHRASES.values():
 for ko, m in x.HELP_PHRASES: m["vi"] = tr(m["en"])
 VI_KW = {"data": "điện thoại sim esim số data mạng", "airport": "sân bay incheon xe buýt tàu", "maps": "bản đồ chỉ đường", "taxi": "taxi gọi xe",
          "transit": "tàu điện ngầm xe buýt nạp thẻ", "ktx": "tàu ktx vé tàu", "food-booking": "nhà hàng đặt bàn xếp hàng", "delivery": "giao đồ ăn gọi món",
-         "translate": "dịch thực đơn"}
+         "translate": "dịch thực đơn", "shopping": "mua sắm hoàn thuế miễn thuế mỹ phẩm"}
 for k, v in VI_KW.items(): x.KEYWORDS[k] += " " + v

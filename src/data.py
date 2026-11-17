@@ -22,6 +22,8 @@ SOURCES = {
     "herald": ["News1: Seoul and Baemin, ordering without a Korean number (Jul 2026)", "https://www.news1.kr/amp/local/moi/6242106"],
     "arex": ["AREX (airport railroad) official site", "https://www.arex.or.kr"],
     "icn": ["Trip.com: AREX timetable guide", "https://sg.trip.com/guide/transport/arex.html"],
+    "taxfree": ["Korea tax refund guide (2026)", "https://www.haniseoul.com/travels/korea/tax-free-korea"],
+    "oy": ["CJ: Olive Young global tourist stores", "https://cjnews.cj.net/?p=58078"],
     "baemin": ["Bizwatch: Baemin adds English, Japanese, Chinese (Feb 2026)", "https://news.bizwatch.co.kr/article/consumer/2026/02/04/0013"],
 }
 
@@ -36,6 +38,7 @@ TASK_META = [
     ("food-booking", "restaurant-reservations", ["naver", "catch", "catch2"]),
     ("delivery", "food-delivery", ["herald", "baemin"]),
     ("translate", "translation", ["lgu"]),
+    ("shopping", "tax-free-shopping", ["taxfree", "oy"]),
 ]
 
 LANGS = {}
@@ -127,6 +130,13 @@ LANGS["en"] = {
             "seo": "Translate Korean menus and signs: Papago setup (2026)",
             "intro": "A camera translation app covers menus, signs and receipts. Set it up before you fly so it works offline.",
             "all": {"s": "ok", "verdict": "Papago works for everyone. Point the camera at a menu or sign.", "route": ["Install Papago and download the Korean offline pack."], "fallback": "Naver Map also translates place names and reviews."}},
+        "shopping": {"title": "Shopping and tax refunds", "more": True,
+            "seo": "Tax-free shopping in Korea: instant refunds at Olive Young, Daiso and more (2026)",
+            "intro": "Visitors get most of the 10% tax back on shopping. At many stores it comes off at the till when you show your passport.",
+            "v": {"visitor": {"s": "ok", "verdict": "Tax refunds work for visitors. Show your passport at the till and the tax comes off right away at many stores.", "route": ["Look for the Tax Free or Tax Refund sign, and bring your actual passport.", "Spend at least 15,000 won in one payment. Receipts can't be added together, so pay for everything at once.", "Instant refund at the till works for payments under 1 million won, up to 5 million won in total per trip.", "No instant refund? Keep the refund receipt and claim it at a city refund booth or the airport kiosk before you check in your bags."], "fallback": "Refund receipts expire 3 months after purchase. Cosmetic and skin clinic treatments no longer qualify from 2026."},
+                  "krsim": "visitor",
+                  "arc": {"s": "bad", "verdict": "Tourist tax refunds are for visitors staying under 6 months. Residents with an ARC usually don't qualify.", "route": ["Shop as usual. Prices already include tax."], "fallback": "If you've been in Korea less than 6 months, ask the store whether you still qualify."}},
+            "notes": ["Olive Young runs over 110 stores for visitors in areas like Myeongdong, Gangnam, Hongdae, Busan and Jeju, with foreign-language staff and Korean-English price labels.", "Musinsa stores put a QR code on every item that shows member prices, stock and reviews."]},
     },
 }
 
@@ -217,6 +227,13 @@ LANGS["ja"] = {
             "seo": "韓国語のメニュー・看板を翻訳: Papagoの準備(2026)",
             "intro": "カメラ翻訳アプリがあれば、メニュー・看板・レシートを読めます。オフラインで使えるよう出発前に準備しましょう。",
             "all": {"s": "ok", "verdict": "Papagoは誰でも使えます。メニューや看板にカメラを向けるだけです。", "route": ["Papagoを入れ、韓国語のオフラインパックをダウンロードする。"], "fallback": "Naver Mapでも店名や口コミを翻訳できます。"}},
+        "shopping": {"title": "ショッピングと免税", "more": True,
+            "seo": "韓国の免税ショッピング: オリーブヤングやダイソーで即時還付(2026)",
+            "intro": "旅行者は買い物の10%の税金をほぼ取り戻せます。多くの店ではパスポートを見せればレジでその場で差し引かれます。",
+            "v": {"visitor": {"s": "ok", "verdict": "旅行者は税金の還付を受けられます。多くの店ではレジでパスポートを見せるとその場で税金が引かれます。", "route": ["Tax FreeやTax Refundの表示を探し、パスポート本体を持っていく。", "1回の会計で15,000ウォン以上。レシートは合算できないので、まとめて1回で払う。", "レジでの即時還付は1回100万ウォン未満、旅行中の合計500万ウォンまで。", "即時還付できなかったら還付レシートを保管し、市内の還付ブースか、荷物を預ける前に空港のキオスクで受け取る。"], "fallback": "還付レシートは購入から3か月で無効になります。2026年から美容整形・皮膚科の施術は対象外です。"},
+                  "krsim": "visitor",
+                  "arc": {"s": "bad", "verdict": "旅行者向けの税金還付は滞在6か月未満の人が対象です。外国人登録証のある在住者は通常対象外です。", "route": ["普段どおり買い物を。価格には税金が含まれています。"], "fallback": "韓国滞在が6か月未満なら、対象になるか店で確認してください。"}},
+            "notes": ["オリーブヤングは明洞・江南・弘大・釜山・済州などに旅行者向け店舗を110以上運営し、外国語スタッフと韓英表記の値札を置いています。", "ムシンサの店舗では全商品のQRコードで会員価格・在庫・レビューが見られます。"]},
     },
 }
 
@@ -307,5 +324,12 @@ LANGS["zh-tw"] = {
             "seo": "翻譯韓文菜單與招牌:Papago設定(2026)",
             "intro": "有相機翻譯App,就能看懂菜單、招牌和收據。出發前先設定好,離線也能用。",
             "all": {"s": "ok", "verdict": "Papago人人都能用,把相機對準菜單或招牌就行。", "route": ["安裝Papago,下載韓文離線包。"], "fallback": "Naver Map也能翻譯店名和評論。"}},
+        "shopping": {"title": "購物與退稅", "more": True,
+            "seo": "韓國免稅購物:Olive Young、大創等店家當場退稅(2026)",
+            "intro": "旅客購物的10%稅金大多可以拿回來。很多店只要出示護照,結帳時就直接扣掉。",
+            "v": {"visitor": {"s": "ok", "verdict": "旅客可以退稅。很多店結帳時出示護照,稅金當場就扣掉。", "route": ["找Tax Free或Tax Refund標示,帶護照正本。", "單筆消費至少15,000韓元。收據不能合併,所以一次結清。", "櫃台當場退稅限單筆未滿100萬韓元,整趟旅程合計500萬韓元以內。", "沒辦法當場退?保留退稅單,到市區退稅櫃台,或託運行李前在機場自助機辦理。"], "fallback": "退稅單在購買後3個月失效。2026年起醫美與皮膚科療程不再適用。"},
+                  "krsim": "visitor",
+                  "arc": {"s": "bad", "verdict": "旅客退稅限停留未滿6個月的人。持外國人登錄證的居民通常不適用。", "route": ["照常購物,價格已含稅。"], "fallback": "如果在韓國未滿6個月,請向店家確認是否適用。"}},
+            "notes": ["Olive Young在明洞、江南、弘大、釜山、濟州等地有超過110間旅客店,有外語店員與韓英雙語價標。", "MUSINSA門市每件商品都有QR碼,可查看會員價、庫存與評價。"]},
     },
 }

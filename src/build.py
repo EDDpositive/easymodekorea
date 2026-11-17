@@ -249,9 +249,11 @@ function render() {
   const open = new Set([...document.querySelectorAll(".row[open]")].map(r => r.id));
   const rows = document.getElementById("rows"); rows.replaceChildren();
   const n = { ok: 0, warn: 0, mixed: 0, bad: 0 };
+  let moreShown = false;
   for (const t of D.tasks) {
+    if (t.more && !moreShown) { rows.append(el("h2", { class: "more-h", text: UX.more })); moreShown = true; }
     const v = resolve(t, P, DEV); n[v.s]++;
-    const row = el("details", { class: "row " + v.s, id: "task-" + t.id, "data-kw": t.kw });
+    const row = el("details", { class: "row " + v.s + (t.more ? " more" : ""), id: "task-" + t.id, "data-kw": t.kw });
     if (open.has(row.id)) row.open = true;
     const sum = el("summary");
     const txt = el("span", { class: "txt" }, [el("span", { class: "name", text: t.short }), el("span", { class: "pill " + v.s, text: UX.tone[v.s] })]);
@@ -304,7 +306,9 @@ function checklist() {
 function progress(d, n) { document.getElementById("pcount").textContent = d + "/" + n; document.getElementById("pbar").style.width = Math.round(100 * d / n) + "%";  }
 function filter() {
   const q = document.getElementById("q").value.trim().toLowerCase(); let shown = 0;
-  document.querySelectorAll(".row").forEach(r => { const ok = !q || r.dataset.kw.includes(q); r.hidden = !ok; if (ok) shown++; });
+  let moreHits = 0;
+  document.querySelectorAll(".row").forEach(r => { const ok = !q || r.dataset.kw.includes(q); r.hidden = !ok; if (ok) { shown++; if (r.classList.contains("more")) moreHits++; } });
+  const mh = document.querySelector(".more-h"); if (mh) mh.hidden = !!q && !moreHits;
   document.getElementById("nores").hidden = shown > 0;
   if (q && shown === 1) { const r = [...document.querySelectorAll(".row")].find(x => !x.hidden); r.open = true; }
 }
