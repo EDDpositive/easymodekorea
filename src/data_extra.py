@@ -381,3 +381,11 @@ for _l, _t in {"en": ("Copy address", "Copied"), "ja": ("住所をコピー", "�
 
 for _l, _t in {"en": "While you're here", "ja": "滞在中に", "zh-tw": "旅途中"}.items():
     UX[_l]["more"] = _t
+
+# Home page title and description as they appear in search results: plain and specific.
+for _l, (_t, _d) in {
+    "en": ("Which Korean apps work for visitors (checked monthly)", "Taxi, subway, KTX, restaurant booking, delivery and tax refunds: see what works with a foreign phone number and card, based on your setup. Free, no sign-up."),
+    "ja": ("旅行者が使える韓国アプリ早見表(毎月確認)", "タクシー、地下鉄、KTX、レストラン予約、デリバリー、免税。海外の電話番号とカードで使えるものを、あなたの状況別に確認できます。無料・登録不要。"),
+    "zh-tw": ("旅客能用的韓國App一覽(每月確認)", "計程車、地鐵、KTX、餐廳訂位、外送、退稅:依你的狀況查看用國外號碼和信用卡能用哪些。免費、免註冊。"),
+}.items():
+    X[_l]["home_title"], X[_l]["home_desc"] = _t, _d

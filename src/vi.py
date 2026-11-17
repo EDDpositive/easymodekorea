@@ -286,6 +286,8 @@ VI = {
 "I'm lost.": "Tôi bị lạc đường.",
 "Copy address": "Sao chép địa chỉ",
 "Copied": "Đã sao chép",
+"Which Korean apps work for visitors (checked monthly)": "Ứng dụng Hàn Quốc nào du khách dùng được (kiểm tra hằng tháng)",
+"Taxi, subway, KTX, restaurant booking, delivery and tax refunds: see what works with a foreign phone number and card, based on your setup. Free, no sign-up.": "Taxi, tàu điện, KTX, đặt nhà hàng, giao đồ ăn và hoàn thuế: xem cách nào dùng được với số điện thoại và thẻ nước ngoài, theo tình trạng của bạn. Miễn phí, không cần đăng ký.",
 "Luggage": "Gửi hành lý",
 "Sick or hurt": "Ốm hoặc bị thương",
 "Luggage storage and delivery": "Gửi và chuyển hành lý",

@@ -30,6 +30,7 @@ def head(lang, title, desc, path, alt_paths, extra=""):
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#2336e8">
+<link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png"><link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
 <title>{e(title)}</title>
 <meta name="description" content="{e(desc)}">
 <link rel="canonical" href="{SITE}{path}">{alts}
@@ -206,7 +207,10 @@ const D = {json.dumps(data, ensure_ascii=False)};
 </body>
 </html>
 """
-    write(path + "index.html", head(lang, f"{BRAND}: {x['hook']}", x["lede"], path, alt, PWA_HEAD(up)) + body)
+    site_ld = [{"@context": "https://schema.org", "@type": "WebSite", "name": BRAND, "alternateName": ["Easy Mode Korea", "easymodekorea.com"], "url": SITE, "inLanguage": L["html_lang"]},
+               {"@context": "https://schema.org", "@type": "Organization", "name": BRAND, "url": SITE, "logo": SITE + "icon-512.png", "email": "edandco.biz@gmail.com"}]
+    extra = PWA_HEAD(up) + f'\n<script type="application/ld+json">{json.dumps(site_ld, ensure_ascii=False)}</script>'
+    write(path + "index.html", head(lang, f"{BRAND} | {x['home_title']}", x["home_desc"], path, alt, extra) + body)
     return path
 
 
@@ -420,6 +424,7 @@ def build_topic(lang, t):
     first = resolve(t, "visitor", "ios")
     answer = first["verdict"] + " " + " ".join(first["route"])
     ld = [{"@context": "https://schema.org", "@type": "Article", "headline": t["seo"], "dateModified": CHECKED_ISO, "inLanguage": L["html_lang"], "url": SITE + path, "publisher": {"@type": "Organization", "name": BRAND, "url": SITE}},
+          {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": BRAND, "item": SITE + L["dir"]}, {"@type": "ListItem", "position": 2, "name": t["short"], "item": SITE + path}]},
           {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": QUESTION[lang][t["id"]], "acceptedAnswer": {"@type": "Answer", "text": answer}}]}]
     ldtag = f'\n<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>'
     write(path, head(lang, f"{t['seo']} | {BRAND}", t["intro"], path, alt, ldtag) + body)
