@@ -15,6 +15,8 @@ Answers depend on the visitor's setup: no Korean number, a Korean prepaid SIM (0
 - [Food delivery as a tourist](food-delivery.html)
 - [Translation apps](translation.html)
 - [Tax-free shopping and refunds](tax-free-shopping.html)
+- [Luggage storage and delivery](luggage-storage.html)
+- [Sick or hurt: 119, 1339, pharmacies](pharmacy-hospital.html)
 - [What changed in 2026](changes.html)
 
 ## Other languages

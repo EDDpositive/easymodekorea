@@ -24,6 +24,10 @@ SOURCES = {
     "icn": ["Trip.com: AREX timetable guide", "https://sg.trip.com/guide/transport/arex.html"],
     "taxfree": ["Korea tax refund guide (2026)", "https://www.haniseoul.com/travels/korea/tax-free-korea"],
     "oy": ["CJ: Olive Young global tourist stores", "https://cjnews.cj.net/?p=58078"],
+    "tlocker": ["Seoul: T-Locker and T-Luggage", "https://mediahub.seoul.go.kr/archives/2013639"],
+    "bags": ["Luggage storage and delivery guide (2026)", "https://www.haniseoul.com/ko/travels/korea/korea-luggage-storage-and-delivery-guide"],
+    "er": ["Korea emergency rooms and 1339", "https://seoulstart.com/ko/guides/korea-emergency-room-guide"],
+    "night": ["Night pharmacies and ER guide (2026)", "https://www.haniseoul.com/ko/travels/korea/midnight-pharmacy-hospital-guide-korea"],
     "baemin": ["Bizwatch: Baemin adds English, Japanese, Chinese (Feb 2026)", "https://news.bizwatch.co.kr/article/consumer/2026/02/04/0013"],
 }
 
@@ -39,6 +43,8 @@ TASK_META = [
     ("delivery", "food-delivery", ["herald", "baemin"]),
     ("translate", "translation", ["lgu"]),
     ("shopping", "tax-free-shopping", ["taxfree", "oy"]),
+    ("luggage", "luggage-storage", ["tlocker", "bags"]),
+    ("health", "pharmacy-hospital", ["er", "night"]),
 ]
 
 LANGS = {}
@@ -137,6 +143,16 @@ LANGS["en"] = {
                   "krsim": "visitor",
                   "arc": {"s": "bad", "verdict": "Tourist tax refunds are for visitors staying under 6 months. Residents with an ARC usually don't qualify.", "route": ["Shop as usual. Prices already include tax."], "fallback": "If you've been in Korea less than 6 months, ask the store whether you still qualify."}},
             "notes": ["Olive Young runs over 110 stores for visitors in areas like Myeongdong, Gangnam, Hongdae, Busan and Jeju, with foreign-language staff and Korean-English price labels.", "Musinsa stores put a QR code on every item that shows member prices, stock and reviews."]},
+        "luggage": {"title": "Luggage storage and delivery", "more": True,
+            "seo": "Luggage storage in Seoul: subway lockers, staffed counters and same-day delivery (2026)",
+            "intro": "Before check-in or after check-out, you can leave bags at subway lockers or staffed counters, or send them to your hotel or the airport.",
+            "all": {"s": "ok", "verdict": "Lockers and staffed luggage counters work for everyone. You can also send bags to your hotel or the airport the same day.", "route": ["T-Locker: lockers in about 270 Seoul subway stations, from small bags to suitcases. Pay at the locker or in the T-Locker app.", "T-Luggage: staffed counters at Seoul Station, Hongik Univ., Myeongdong, Jamsil and other busy stations store bags and deliver them to hotels or the airport.", "Same-day delivery between the airport and Seoul hotels usually needs you to drop bags off before late morning."], "fallback": "Lockers full or the app won't work? Use a staffed counter, or ask your host or hotel to hold your bags."},
+            "notes": ["Locker fees start at about 2,000 won for 4 hours (small) and 4,000 won (large)."]},
+        "health": {"title": "Sick or hurt", "more": True,
+            "seo": "Getting sick in Korea as a tourist: 119, the 1339 hotline, pharmacies and hospitals (2026)",
+            "intro": "Emergency help in Korea is free to call and has interpreters. For smaller problems, pharmacies and big hospitals' international clinics are easy to use.",
+            "all": {"s": "ok", "verdict": "Call 119 for an ambulance. If you're not sure where to go, call 1339, any time.", "route": ["Emergency: call 119 and say \"English, please\" for an interpreter.", "Not sure how serious it is, or need the nearest open ER or pharmacy? Call 1339. It runs 24 hours.", "Minor problems: pharmacies (look for the 약 sign) sell common medicines. Convenience stores have basic painkillers and cold medicine.", "Major Seoul hospitals have international clinics with English- and Chinese-speaking staff."], "fallback": "Bring your passport. An ER may ask for a deposit before treatment."},
+            "notes": ["1330, the travel helpline, can also interpret for you at a pharmacy or clinic."]},
     },
 }
 
@@ -234,6 +250,16 @@ LANGS["ja"] = {
                   "krsim": "visitor",
                   "arc": {"s": "bad", "verdict": "旅行者向けの税金還付は滞在6か月未満の人が対象です。外国人登録証のある在住者は通常対象外です。", "route": ["普段どおり買い物を。価格には税金が含まれています。"], "fallback": "韓国滞在が6か月未満なら、対象になるか店で確認してください。"}},
             "notes": ["オリーブヤングは明洞・江南・弘大・釜山・済州などに旅行者向け店舗を110以上運営し、外国語スタッフと韓英表記の値札を置いています。", "ムシンサの店舗では全商品のQRコードで会員価格・在庫・レビューが見られます。"]},
+        "luggage": {"title": "荷物の預け・配送", "more": True,
+            "seo": "ソウルで荷物を預ける: 地下鉄ロッカー、有人カウンター、当日配送(2026)",
+            "intro": "チェックイン前やチェックアウト後は、地下鉄のロッカーや有人カウンターに荷物を預けたり、ホテルや空港へ送ったりできます。",
+            "all": {"s": "ok", "verdict": "ロッカーと有人の荷物カウンターは誰でも使えます。ホテルや空港へ当日配送もできます。", "route": ["T-Locker: ソウル地下鉄の約270駅にあるロッカー。小さなバッグからスーツケースまで。支払いはロッカーかT-Lockerアプリで。", "T-Luggage: ソウル駅・弘大入口・明洞・蚕室などの有人カウンターで荷物を預かり、ホテルや空港へ配送。", "空港とソウルのホテル間の当日配送は、通常午前中の早めに預ける必要があります。"], "fallback": "ロッカーが満杯、アプリが使えないときは、有人カウンターを使うか、宿に荷物を預かってもらう。"},
+            "notes": ["ロッカー料金は小サイズ4時間約2,000ウォン、大サイズ約4,000ウォンから。"]},
+        "health": {"title": "病気・けが", "more": True,
+            "seo": "旅行中に韓国で体調を崩したら: 119、1339、薬局と病院(2026)",
+            "intro": "韓国の緊急通報は無料で通訳もつきます。軽い症状なら薬局や大病院の国際診療センターが使いやすいです。",
+            "all": {"s": "ok", "verdict": "救急車は119。どこへ行けばいいかわからないときは1339へ、24時間いつでも。", "route": ["緊急時: 119に電話し「Japanese, please」と言えば通訳につながります。", "どれくらい深刻かわからない、近くで開いている救急室や薬局を知りたい: 1339へ。24時間対応です。", "軽い症状: 薬局(「약」の看板)で一般的な薬が買えます。コンビニにも基本的な鎮痛剤や風邪薬があります。", "ソウルの大病院には英語・中国語が通じる国際診療センターがあります。"], "fallback": "パスポートを持って行く。救急室では治療前に預かり金を求められることがあります。"},
+            "notes": ["観光案内ダイヤル1330も、薬局や病院での通訳を手伝ってくれます。"]},
     },
 }
 
@@ -331,5 +357,15 @@ LANGS["zh-tw"] = {
                   "krsim": "visitor",
                   "arc": {"s": "bad", "verdict": "旅客退稅限停留未滿6個月的人。持外國人登錄證的居民通常不適用。", "route": ["照常購物,價格已含稅。"], "fallback": "如果在韓國未滿6個月,請向店家確認是否適用。"}},
             "notes": ["Olive Young在明洞、江南、弘大、釜山、濟州等地有超過110間旅客店,有外語店員與韓英雙語價標。", "MUSINSA門市每件商品都有QR碼,可查看會員價、庫存與評價。"]},
+        "luggage": {"title": "寄放與寄送行李", "more": True,
+            "seo": "在首爾寄放行李:地鐵置物櫃、人工櫃台與當日配送(2026)",
+            "intro": "入住前或退房後,可以把行李放在地鐵置物櫃或人工櫃台,也能寄到飯店或機場。",
+            "all": {"s": "ok", "verdict": "置物櫃和人工行李櫃台誰都能用,也可以當天寄到飯店或機場。", "route": ["T-Locker:首爾地鐵約270站設有置物櫃,從小包到行李箱都放得下。在置物櫃或T-Locker App付款。", "T-Luggage:首爾站、弘大入口、明洞、蠶室等熱門站有人工櫃台,可寄放行李並送到飯店或機場。", "機場與首爾飯店之間的當日配送,通常要在上午較早時寄出。"], "fallback": "置物櫃滿了或App不能用?改用人工櫃台,或請住宿幫忙保管。"},
+            "notes": ["置物櫃費用小格4小時約2,000韓元起,大格約4,000韓元起。"]},
+        "health": {"title": "生病或受傷", "more": True,
+            "seo": "在韓國旅行生病怎麼辦:119、1339、藥局與醫院(2026)",
+            "intro": "韓國的緊急電話免費而且有口譯。小毛病可以去藥局,或大醫院的國際診療中心。",
+            "all": {"s": "ok", "verdict": "叫救護車打119。不知道該去哪裡就打1339,24小時都有人接。", "route": ["緊急狀況:打119,說「Chinese, please」就會轉接口譯。", "不確定嚴不嚴重,或想找附近還開著的急診室、藥局:打1339,24小時服務。", "小毛病:藥局(找「약」招牌)有常見藥品。便利商店也有基本的止痛藥和感冒藥。", "首爾的大醫院設有國際診療中心,有會說英文、中文的醫護人員。"], "fallback": "帶護照。急診室可能會要求先付保證金。"},
+            "notes": ["觀光諮詢熱線1330也能在藥局或診所幫你翻譯。"]},
     },
 }
