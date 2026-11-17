@@ -68,7 +68,7 @@ pre { white-space: pre-wrap; overflow-wrap: anywhere; background: var(--bg); bor
     <ul class="what">
       <li>기사님께 보여 줄 큰 글씨 한국어 주소</li>
       <li>손님 휴대폰에서 되는 택시·교통카드·배달 앱 안내</li>
-      <li>영어·일본어·중국어(번체·간체), 규정이 바뀌면 저희가 고쳐요</li>
+      <li>영어·일본어·중국어(번체·간체)·베트남어, 규정이 바뀌면 저희가 고쳐요</li>
     </ul>
   </section>
 
@@ -108,6 +108,7 @@ pre { white-space: pre-wrap; overflow-wrap: anywhere; background: var(--bg); bor
         <span>일본어</span><input id="l-ja" readonly aria-label="일본어 링크">
         <span>중국어 번체(대만·홍콩)</span><input id="l-zh" readonly aria-label="중국어 번체 링크">
         <span>중국어 간체(중국)</span><input id="l-cn" readonly aria-label="중국어 간체 링크">
+        <span>베트남어</span><input id="l-vi" readonly aria-label="베트남어 링크">
       </details>
     </div>
   </section>
@@ -137,12 +138,12 @@ function update() {
   $("wait").hidden = !!ok; $("ready").hidden = !ok;
   if (!ok) return;
   const h = "#g=" + enc(g);
-  const L = { en: BASE + h, ja: BASE + "ja/" + h, zh: BASE + "zh-tw/" + h, cn: BASE + "zh-cn/" + h };
-  $("l-en").value = L.en; $("l-ja").value = L.ja; $("l-zh").value = L.zh; $("l-cn").value = L.cn; $("preview").href = L.en;
+  const L = { en: BASE + h, ja: BASE + "ja/" + h, zh: BASE + "zh-tw/" + h, cn: BASE + "zh-cn/" + h, vi: BASE + "vi/" + h };
+  $("l-en").value = L.en; $("l-ja").value = L.ja; $("l-zh").value = L.zh; $("l-cn").value = L.cn; $("l-vi").value = L.vi; $("preview").href = L.en;
   $("msg").textContent =
     "Before you arrive, here's your arrival page:\n" + L.en +
     "\n\nIt shows our address in Korean for your taxi driver, and which Korean apps will work on your phone.\n" +
-    "日本語: " + L.ja + "\n繁體中文: " + L.zh + "\n简体中文: " + L.cn + "\n\nSee you soon!\n" + g.n;
+    "日本語: " + L.ja + "\n繁體中文: " + L.zh + "\n简体中文: " + L.cn + "\nTiếng Việt: " + L.vi + "\n\nSee you soon!\n" + g.n;
   $("status").textContent = "";
 }
 F.forEach(k => $(k).addEventListener("input", update));
