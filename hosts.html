@@ -40,6 +40,7 @@ details.more { margin-top: 16px; }
 details.more > summary { cursor: pointer; color: var(--brand); font-weight: 700; padding: 6px 0; }
 .btn { display: block; width: 100%; text-align: center; font: 700 17px var(--body); padding: 15px; border-radius: 14px; border: 0; background: var(--brand); color: #fff; cursor: pointer; text-decoration: none; }
 .btn.ghost { background: transparent; color: var(--brand); border: 1.5px solid var(--line); margin-top: 10px; font-size: 16px; }
+.warn { color: #c2410c; font-weight: 600; }
 .btn:disabled { opacity: .4; cursor: default; }
 .status { display: block; text-align: center; min-height: 24px; margin-top: 8px; font-weight: 600; color: var(--brand); }
 .wait { color: var(--muted); margin: 0; }
@@ -80,6 +81,7 @@ pre { white-space: pre-wrap; overflow-wrap: anywhere; background: var(--bg); bor
     <label for="a">한국어 주소 <span class="opt">동·호수까지</span></label>
     <input id="a" type="text" maxlength="160" placeholder="예: 서울 마포구 와우산로 00, 101동 1001호">
     <p class="hint">공동현관 비밀번호는 넣지 마세요.</p>
+    <p class="hint warn" id="a-warn" hidden>기사님이 읽을 수 있게 한국어 주소로 넣어 주세요.</p>
     <details class="more">
       <summary>더 알려 주기 (선택)</summary>
       <label for="s">가까운 역과 출구 <span class="opt">영문</span></label>
@@ -99,11 +101,13 @@ pre { white-space: pre-wrap; overflow-wrap: anywhere; background: var(--bg); bor
     <p class="wait" id="wait">숙소 이름과 주소를 넣으면 보낼 메시지가 나와요.</p>
     <div id="ready" hidden>
       <pre id="msg"></pre>
+      <button class="btn" type="button" id="share" hidden>손님에게 보내기</button>
       <button class="btn" type="button" id="copy">메시지 복사</button>
       <span class="status" id="status" role="status"></span>
       <a class="btn ghost" id="preview" href="./" target="_blank" rel="noopener">손님 화면 미리 보기</a>
       <details class="more links">
         <summary>언어별 링크 따로 보기</summary>
+        <span class="hint">링크 하나만 보내도 손님 휴대폰 언어에 맞춰 바꿔 볼 수 있어요.</span>
         <span>영어</span><input id="l-en" readonly aria-label="영어 링크">
         <span>일본어</span><input id="l-ja" readonly aria-label="일본어 링크">
         <span>중국어 번체(대만·홍콩)</span><input id="l-zh" readonly aria-label="중국어 번체 링크">
@@ -118,7 +122,8 @@ pre { white-space: pre-wrap; overflow-wrap: anywhere; background: var(--bg); bor
     <ul>
       <li>가입도, 비용도 없어요. 광고나 제휴 앱도 없어요.</li>
       <li>숙소 정보는 링크 안에만 담기고 저희 서버에 저장되지 않아요.</li>
-      <li>정보를 바꾸려면 여기서 새 링크를 만들면 돼요.</li>
+      <li>입력한 내용은 이 휴대폰에만 저장돼서, 다음에 다시 열면 그대로 남아 있어요.</li>
+      <li>정보를 바꾸려면 여기서 고친 뒤 새 메시지를 보내면 돼요.</li>
       <li>의견은 edandco.biz@gmail.com 으로 보내 주세요.</li>
     </ul>
   </details>
@@ -142,11 +147,17 @@ function update() {
   $("l-en").value = L.en; $("l-ja").value = L.ja; $("l-zh").value = L.zh; $("l-cn").value = L.cn; $("l-vi").value = L.vi; $("preview").href = L.en;
   $("msg").textContent =
     "Before you arrive, here's your arrival page:\n" + L.en +
-    "\n\nIt shows our address in Korean for your taxi driver, and which Korean apps will work on your phone.\n" +
-    "日本語: " + L.ja + "\n繁體中文: " + L.zh + "\n简体中文: " + L.cn + "\nTiếng Việt: " + L.vi + "\n\nSee you soon!\n" + g.n;
+    "\n\nShow it to your taxi driver for our address. It also shows which Korean apps work on your phone, in your language.\n\nSee you soon!\n" + g.n;
+  try { localStorage.setItem("emk-host", JSON.stringify(g)); } catch (e) {}
   $("status").textContent = "";
 }
+try { const saved = JSON.parse(localStorage.getItem("emk-host") || "{}"); for (const k of F) if (saved[k]) $(k).value = saved[k]; if (saved.s || saved.c || saved.k || saved.t) document.querySelector("details.more").open = true; } catch (e) {}
 F.forEach(k => $(k).addEventListener("input", update));
+$("a").addEventListener("blur", () => { const v = $("a").value.trim(); $("a-warn").hidden = !v || /[가-힣]/.test(v); });
+if (navigator.share) { $("share").hidden = false; $("copy").classList.add("ghost"); }
+$("share").addEventListener("click", async () => {
+  try { await navigator.share({ text: $("msg").textContent }); $("status").textContent = "보냈어요."; try { window.goatcounter && window.goatcounter.count({ path: "host-generator/share", title: "host share", event: true }); } catch (e) {} } catch (e) {}
+});
 $("copy").addEventListener("click", async () => {
   try { await navigator.clipboard.writeText($("msg").textContent); $("status").textContent = "복사했어요. 예약 확정 메시지에 붙여 넣으세요."; try { window.goatcounter && window.goatcounter.count({ path: "host-generator/copy", title: "host copy", event: true }); } catch (e) {} }
   catch (e) { $("status").textContent = "복사가 막혀 있어요. 위 메시지를 길게 눌러 복사해 주세요."; }
