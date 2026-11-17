@@ -64,6 +64,7 @@ def hero(lang, alt, up, h1, lede, home="./", trust=True):
 def about(lang, up):
     U = LANGS[lang]["ui"]; x = X[lang]
     return f"""<p class="fb-line"><button type="button" class="linkbtn" data-feedback="">💬 {e(FEEDBACK[lang]['open'])}</button></p><details class="about"><summary>{e(x['about'])}</summary><div class="in">
+<p><b>EasyModeKorea</b> (Easy Mode Korea · 이지모드코리아)</p>
 <p>{e(U['how'])}</p><p>{e(U['indep'])}</p><p><a href="changes.html">{e(x['nav_changes'])}</a> · {U['hosts'].format(base=up)}</p>
 <p>{' · '.join(f'<a href="{t["slug"]}.html">{e(QUESTION[lang][t["id"]])}</a>' for t in task_list(lang))}</p></div></details>"""
 
@@ -207,7 +208,7 @@ const D = {json.dumps(data, ensure_ascii=False)};
 </body>
 </html>
 """
-    site_ld = [{"@context": "https://schema.org", "@type": "WebSite", "name": BRAND, "alternateName": ["Easy Mode Korea", "easymodekorea.com"], "url": SITE, "inLanguage": L["html_lang"]},
+    site_ld = [{"@context": "https://schema.org", "@type": "WebSite", "name": BRAND, "alternateName": ["Easy Mode Korea", "이지모드코리아", "이지모드 코리아", "easymodekorea.com"], "url": SITE, "inLanguage": L["html_lang"]},
                {"@context": "https://schema.org", "@type": "Organization", "name": BRAND, "url": SITE, "logo": SITE + "icon-512.png", "email": "edandco.biz@gmail.com"}]
     extra = PWA_HEAD(up) + f'\n<script type="application/ld+json">{json.dumps(site_ld, ensure_ascii=False)}</script>'
     write(path + "index.html", head(lang, f"{BRAND} | {x['home_title']}", x["home_desc"], path, alt, extra) + body)
