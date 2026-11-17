@@ -1,0 +1,21 @@
+# EasyModeKorea
+
+> Free, independent guide for visitors to Korea: which Korean apps work with a foreign phone number and a foreign card, checked and dated. English, Japanese and Traditional Chinese. No ads, no affiliate links.
+
+Answers depend on the visitor's setup: no Korean number, a Korean prepaid SIM (010), or residence (ARC). Each page states the setup and the date it was last checked.
+
+## Guides
+- [Do I need a Korean phone number?](mobile-data-sim.html)
+- [Incheon Airport to Seoul](incheon-airport-to-seoul.html)
+- [Does Google Maps work in Korea?](maps.html)
+- [Taxi without a Korean number](taxi.html)
+- [T-money top-up with a foreign card](tmoney-subway-bus.html)
+- [Booking KTX trains as a foreigner](ktx-train-booking.html)
+- [Restaurant bookings without a Korean number](restaurant-reservations.html)
+- [Food delivery as a tourist](food-delivery.html)
+- [Translation apps](translation.html)
+- [What changed in 2026](changes.html)
+
+## Other languages
+- [日本語](ja/)
+- [繁體中文](zh-tw/)
