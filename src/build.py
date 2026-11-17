@@ -9,6 +9,7 @@ import html, json, os, sys
 sys.path.insert(0, os.path.dirname(__file__))
 from data import CHECKED, CHECKED_ISO, LANGS, SOURCES, TASK_META  # noqa: E402
 from data_extra import BRAND, FEEDBACK, FEEDBACK_FORM, FEEDBACK_TO, HELP, HELP_PHRASES, ICONS, KEYWORDS, PHRASES, PLAN, QUESTION, SHORT, UX, X  # noqa: E402
+import zh_cn  # noqa: E402,F401  (adds Simplified Chinese)
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 SITE = "https://easymodekorea.com/"
@@ -337,7 +338,7 @@ function stay() {
 (function () {
   if (store("wik-lang-dismiss")) return;
   const want = (navigator.language || "").toLowerCase();
-  const target = want.startsWith("ja") ? "ja" : (want.startsWith("zh-tw") || want.startsWith("zh-hk") || want.startsWith("zh-hant")) ? "zh-tw" : want.startsWith("en") ? "en" : null;
+  const target = want.startsWith("ja") ? "ja" : (want.startsWith("zh-tw") || want.startsWith("zh-hk") || want.startsWith("zh-mo") || want.startsWith("zh-hant")) ? "zh-tw" : want.startsWith("zh") ? "zh-cn" : want.startsWith("en") ? "en" : null;
   if (!target || target === D.lang) return;
   const b = document.getElementById("lang-suggest"), L2 = D.langs[target];
   const go = el("a", { class: "btn alt", href: D.up + L2.dir + location.hash, text: UX.switch });
