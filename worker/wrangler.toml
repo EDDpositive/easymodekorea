@@ -1,0 +1,22 @@
+name = "emk-chat"
+main = "src/index.js"
+compatibility_date = "2026-11-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Create once with: npx wrangler kv namespace create EMK_CHAT_KV  -> paste the id below.
+[[kv_namespaces]]
+binding = "EMK_CHAT_KV"
+id = "PASTE_KV_NAMESPACE_ID_HERE"
+
+[vars]
+CHAT_ENABLED = "true"            # "false" = kill switch, no API calls
+ALLOWED_ORIGINS = "https://easymodekorea.com,https://www.easymodekorea.com"
+KB_URL = "https://easymodekorea.com/chat-kb.txt"
+DAILY_BUDGET_USD = "1"           # stop answering for the day after ~$1
+MONTHLY_BUDGET_USD = "15"        # and for the month after ~$15
+PER_IP_PER_HOUR = "15"
+PER_IP_PER_DAY = "40"
+
+# Secrets (never in this file or git):
+#   npx wrangler secret put ANTHROPIC_API_KEY
+#   npx wrangler secret put IP_SALT        (optional: any random text)

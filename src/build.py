@@ -18,6 +18,26 @@ GOAT = "https://eddpositive.goatcounter.com/count"
 CSS = open(os.path.join(os.path.dirname(__file__), "style.css"), encoding="utf-8").read()
 e = lambda s: html.escape(str(s), quote=True)
 icon = lambda tid: f'<svg viewBox="0 0 24 24" aria-hidden="true">{ICONS[tid]}</svg>'
+FONTS = "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap"
+# Chat assistant (worker/ in this repo). Empty = no widget on the site. Set to the deployed Worker URL,
+# e.g. "https://emk-chat.<your-subdomain>.workers.dev/chat", then rebuild. EMK_CHAT_ENDPOINT overrides it for local tests.
+CHAT_ENDPOINT = os.environ.get("EMK_CHAT_ENDPOINT", "")
+CHAT_UI = {
+    "en": {"open": "Ask a question", "title": "Ask EasyModeKorea", "ph": "e.g. Can I use Kakao T with a foreign card?", "send": "Send", "close": "Close", "note": "AI answers from this site's guides. Can be wrong: check the guide it links. Don't share personal details.", "err": "Sorry, the assistant is busy. Try again later, or use Feedback."},
+    "ja": {"open": "質問する", "title": "EasyModeKoreaに質問", "ph": "例: 海外カードでカカオTは使えますか?", "send": "送信", "close": "閉じる", "note": "このサイトのガイドを元にAIが答えます。誤りがあり得るので、リンク先のガイドも確認してください。個人情報は書かないでください。", "err": "混み合っています。後でもう一度お試しください。"},
+    "zh-tw": {"open": "提問", "title": "問 EasyModeKorea", "ph": "例如:外國信用卡能用 Kakao T 嗎?", "send": "送出", "close": "關閉", "note": "AI 依本站指南回答,可能有誤,請再看它附上的指南。請勿輸入個人資料。", "err": "目前忙碌中,請稍後再試。"},
+    "zh-cn": {"open": "提问", "title": "问 EasyModeKorea", "ph": "例如:外国银行卡能用 Kakao T 吗?", "send": "发送", "close": "关闭", "note": "AI 根据本站指南回答,可能有误,请再看它附上的指南。请勿输入个人信息。", "err": "目前繁忙,请稍后再试。"},
+    "vi": {"open": "Đặt câu hỏi", "title": "Hỏi EasyModeKorea", "ph": "VD: Thẻ nước ngoài có dùng Kakao T được không?", "send": "Gửi", "close": "Đóng", "note": "AI trả lời dựa trên hướng dẫn của trang này, có thể sai: hãy xem hướng dẫn được dẫn link. Đừng gửi thông tin cá nhân.", "err": "Trợ lý đang bận, vui lòng thử lại sau."},
+}
+
+
+def chat_tag(lang, path):
+    if not CHAT_ENDPOINT: return ""
+    up = "../" * path.count("/")
+    cfg = json.dumps({"endpoint": CHAT_ENDPOINT, "lang": lang, "page": path, **CHAT_UI.get(lang, CHAT_UI["en"])}, ensure_ascii=False)
+    return f'\n<script>window.EMK_CHAT={cfg};</script><script defer src="{up}chat.js"></script>'
+
+
 PWA_HEAD = lambda up: f'\n<link rel="manifest" href="{up}manifest.webmanifest"><link rel="apple-touch-icon" href="{up}icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes">'
 
 
@@ -37,10 +57,10 @@ def head(lang, title, desc, path, alt_paths, extra=""):
 <meta property="og:type" content="website"><meta property="og:site_name" content="{BRAND}"><meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(desc)}"><meta property="og:url" content="{SITE}{path}"><meta property="og:image" content="{SITE}og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="robots" content="max-snippet:-1, max-image-preview:large">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="{FONTS}" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="{FONTS}"></noscript>
 <style>
 {CSS}</style>
-<script data-goatcounter="{GOAT}" async src="//gc.zgo.at/count.js"></script>{extra}
+<script data-goatcounter="{GOAT}" async src="//gc.zgo.at/count.js"></script>{chat_tag(lang, path)}{extra}
 </head>
 <body>"""
 
@@ -466,9 +486,49 @@ def main():
         for t in task_list(lang):
             paths.append(build_topic(lang, t))
     paths.append("hosts.html")
-    urls = "".join(f"<url><loc>{SITE}{p}</loc><lastmod>{CHECKED_ISO}</lastmod></url>\n" for p in paths)
-    write("sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}</urlset>\n')
+    by_rel = {}
+    for p in paths:
+        lang = next((k for k in LANGS if LANGS[k]["dir"] and p.startswith(LANGS[k]["dir"])), "en")
+        by_rel.setdefault(p[len(LANGS[lang]["dir"]):], {})[lang] = p
+    def url(p):
+        rel = p[len(next((LANGS[k]["dir"] for k in LANGS if LANGS[k]["dir"] and p.startswith(LANGS[k]["dir"])), "")):]
+        alts = by_rel.get(rel, {})
+        links = "" if len(alts) < 2 else "".join(f'<xhtml:link rel="alternate" hreflang="{LANGS[k]["html_lang"]}" href="{SITE}{q}"/>' for k, q in alts.items()) + f'<xhtml:link rel="alternate" hreflang="x-default" href="{SITE}{alts.get("en", p)}"/>'
+        return f"<url><loc>{SITE}{p}</loc><lastmod>{CHECKED_ISO}</lastmod>{links}</url>\n"
+    urls = "".join(url(p) for p in paths)
+    write("sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n{urls}</urlset>\n')
+    write("chat-kb.txt", chat_kb())
     print(f"built {len(paths)} pages")
+
+
+PROFILE_NAMES = {"visitor": "Visitor with no Korean phone number and a foreign card", "krsim": "Visitor with a Korean prepaid SIM (010 number)", "arc": "Resident with an ARC (alien registration card)"}
+
+
+def chat_kb():
+    """Plain-text knowledge base the chat Worker reads (English; the bot answers in the visitor's language)."""
+    out = [f"EasyModeKorea knowledge base. Source: {SITE}. Last checked: {CHECKED['en']}.", ""]
+    for t in task_list("en"):
+        out += [f"## {t['title']}", f"Question: {QUESTION['en'][t['id']]}", f"Guide: {SITE}{t['slug']}.html", t["intro"]]
+        if "all" in t:
+            cases = [("Everyone", t["all"])]
+        else:
+            cases = []
+            for prof, label in PROFILE_NAMES.items():
+                v = t["v"][prof]
+                if isinstance(v, str): v = t["v"][v]
+                if t.get("dev") and isinstance(v, dict) and "verdict" not in v:
+                    cases += [(f"{label}, {dev}", vv) for dev, vv in v.items()]
+                else:
+                    cases.append((label, v))
+        for label, v in cases:
+            out.append(f"- {label}: {v.get('verdict', '')}")
+            out += [f"  * {r}" for r in v.get("route", [])]
+            if v.get("fallback"): out.append(f"  If that fails: {v['fallback']}")
+        out.append("")
+    out.append("## Emergency and help numbers")
+    out += [f"- {n}: {d}" for n, d in HELP["en"]["nums"]]
+    out += ["", f"Contact / feedback: the Feedback button on any page, or email {FEEDBACK_TO}.", f"Korean host (guesthouse/Airbnb) link maker: {SITE}hosts.html"]
+    return "\n".join(out) + "\n"
 
 
 if __name__ == "__main__":
