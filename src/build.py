@@ -8,7 +8,7 @@ import html, json, os, sys
 
 sys.path.insert(0, os.path.dirname(__file__))
 from data import CHECKED, CHECKED_ISO, LANGS, SOURCES, TASK_META  # noqa: E402
-from data_extra import BRAND, FEEDBACK, FEEDBACK_FORM, FEEDBACK_TO, HELP, HELP_PHRASES, ICONS, KEYWORDS, PHRASES, PLAN, QUESTION, SHORT, UX, X  # noqa: E402
+from data_extra import ASK, BRAND, FEEDBACK, FEEDBACK_FORM, FEEDBACK_TO, HELP, HELP_PHRASES, ICONS, KEYWORDS, PHRASES, PLAN, QUESTION, SHORT, UX, X  # noqa: E402
 import zh_cn  # noqa: E402,F401  (adds Simplified Chinese)
 import vi  # noqa: E402,F401  (adds Vietnamese)
 
@@ -19,25 +19,6 @@ CSS = open(os.path.join(os.path.dirname(__file__), "style.css"), encoding="utf-8
 e = lambda s: html.escape(str(s), quote=True)
 icon = lambda tid: f'<svg viewBox="0 0 24 24" aria-hidden="true">{ICONS[tid]}</svg>'
 FONTS = "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap"
-# Chat assistant (worker/ in this repo). Empty = no widget on the site. Set to the deployed Worker URL,
-# e.g. "https://emk-chat.<your-subdomain>.workers.dev/chat", then rebuild. EMK_CHAT_ENDPOINT overrides it for local tests.
-CHAT_ENDPOINT = os.environ.get("EMK_CHAT_ENDPOINT", "")
-CHAT_UI = {
-    "en": {"open": "Ask a question", "title": "Ask EasyModeKorea", "ph": "e.g. Can I use Kakao T with a foreign card?", "send": "Send", "close": "Close", "note": "AI answers from this site's guides. Can be wrong: check the guide it links. Don't share personal details.", "err": "Sorry, the assistant is busy. Try again later, or use Feedback."},
-    "ja": {"open": "質問する", "title": "EasyModeKoreaに質問", "ph": "例: 海外カードでカカオTは使えますか?", "send": "送信", "close": "閉じる", "note": "このサイトのガイドを元にAIが答えます。誤りがあり得るので、リンク先のガイドも確認してください。個人情報は書かないでください。", "err": "混み合っています。後でもう一度お試しください。"},
-    "zh-tw": {"open": "提問", "title": "問 EasyModeKorea", "ph": "例如:外國信用卡能用 Kakao T 嗎?", "send": "送出", "close": "關閉", "note": "AI 依本站指南回答,可能有誤,請再看它附上的指南。請勿輸入個人資料。", "err": "目前忙碌中,請稍後再試。"},
-    "zh-cn": {"open": "提问", "title": "问 EasyModeKorea", "ph": "例如:外国银行卡能用 Kakao T 吗?", "send": "发送", "close": "关闭", "note": "AI 根据本站指南回答,可能有误,请再看它附上的指南。请勿输入个人信息。", "err": "目前繁忙,请稍后再试。"},
-    "vi": {"open": "Đặt câu hỏi", "title": "Hỏi EasyModeKorea", "ph": "VD: Thẻ nước ngoài có dùng Kakao T được không?", "send": "Gửi", "close": "Đóng", "note": "AI trả lời dựa trên hướng dẫn của trang này, có thể sai: hãy xem hướng dẫn được dẫn link. Đừng gửi thông tin cá nhân.", "err": "Trợ lý đang bận, vui lòng thử lại sau."},
-}
-
-
-def chat_tag(lang, path):
-    if not CHAT_ENDPOINT: return ""
-    up = "../" * path.count("/")
-    cfg = json.dumps({"endpoint": CHAT_ENDPOINT, "lang": lang, "page": path, **CHAT_UI.get(lang, CHAT_UI["en"])}, ensure_ascii=False)
-    return f'\n<script>window.EMK_CHAT={cfg};</script><script defer src="{up}chat.js"></script>'
-
-
 PWA_HEAD = lambda up: f'\n<link rel="manifest" href="{up}manifest.webmanifest"><link rel="apple-touch-icon" href="{up}icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes">'
 
 
@@ -60,7 +41,7 @@ def head(lang, title, desc, path, alt_paths, extra=""):
 <link rel="preload" as="style" href="{FONTS}" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="{FONTS}"></noscript>
 <style>
 {CSS}</style>
-<script data-goatcounter="{GOAT}" async src="//gc.zgo.at/count.js"></script>{chat_tag(lang, path)}{extra}
+<script data-goatcounter="{GOAT}" async src="//gc.zgo.at/count.js"></script>{extra}
 </head>
 <body>"""
 
@@ -81,7 +62,18 @@ def hero(lang, alt, up, h1, lede, home="./", trust=True):
 </div></header>"""
 
 
+def ask_box(lang):
+    a = ASK[lang]
+    return f"""<section class="ask" aria-labelledby="ask-t-{lang}"><h2 id="ask-t-{lang}">{e(a['title'])}</h2><p class="hint">{e(a['lead'])}</p>
+<form class="ask-form" data-thanks="{e(a['thanks'])}"><textarea name="q" required maxlength="1000" aria-label="{e(a['title'])}" placeholder="{e(a['ph'])}"></textarea>
+<input name="em" type="email" maxlength="120" autocomplete="email" aria-label="{e(a['email'])}" placeholder="{e(a['email'])}"><button class="btn" type="submit">{e(a['send'])}</button><p class="fb-done" role="status"></p></form></section>"""
+
+
 def about(lang, up):
+    return ask_box(lang) + _about(lang, up)
+
+
+def _about(lang, up):
     U = LANGS[lang]["ui"]; x = X[lang]
     return f"""<p class="fb-line"><button type="button" class="linkbtn" data-feedback="">💬 {e(FEEDBACK[lang]['open'])}</button></p><details class="about"><summary>{e(x['about'])}</summary><div class="in">
 <p><b>EasyModeKorea</b> (Easy Mode Korea · 이지모드코리아)</p>
@@ -166,6 +158,19 @@ def feedback_html(lang):
     try {{ window.goatcounter && window.goatcounter.count({{ path: "feedback/" + C.lang, title: "feedback", event: true }}); }} catch (e) {{}}
     document.getElementById("fb-msg").value = ""; document.getElementById("fb-done").textContent = C.thanks;
   }});
+  document.querySelectorAll(".ask-form").forEach(f => f.addEventListener("submit", async ev => {{
+    ev.preventDefault();
+    const q = f.q.value.trim(), em = f.em.value.trim(); if (!q) return;
+    const where = C.lang + " question " + location.pathname;
+    if (C.form) {{
+      const b = new URLSearchParams(); b.set(C.form.msg, q); b.set(C.form.email, em); b.set(C.form.ctx, where);
+      try {{ await fetch(C.form.action, {{ method: "POST", mode: "no-cors", body: b }}); }} catch (e) {{}}
+    }} else {{
+      location.href = "mailto:" + C.to + "?subject=" + encodeURIComponent("EasyModeKorea question (" + where + ")") + "&body=" + encodeURIComponent(q);
+    }}
+    try {{ window.goatcounter && window.goatcounter.count({{ path: "question/" + C.lang, title: "question", event: true }}); }} catch (e) {{}}
+    f.q.value = ""; f.querySelector(".fb-done").textContent = f.dataset.thanks;
+  }}));
 }})();</script>"""
 
 
@@ -462,6 +467,7 @@ def build_changes(lang):
 <div class="wrap">
   <section class="panel" style="margin-top:18px"><div class="in timeline" style="padding-top:16px"><ol>{rows}</ol></div></section>
   <div class="actions"><a class="btn" href="./">{e(L['ui']['open_tool'])}</a></div>
+  {ask_box(lang)}
   <p class="fb-line"><button type="button" class="linkbtn" data-feedback="changes">💬 {e(FEEDBACK[lang]['open'])}</button></p>
 </div>
 {feedback_html(lang)}
@@ -497,38 +503,7 @@ def main():
         return f"<url><loc>{SITE}{p}</loc><lastmod>{CHECKED_ISO}</lastmod>{links}</url>\n"
     urls = "".join(url(p) for p in paths)
     write("sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n{urls}</urlset>\n')
-    write("chat-kb.txt", chat_kb())
     print(f"built {len(paths)} pages")
-
-
-PROFILE_NAMES = {"visitor": "Visitor with no Korean phone number and a foreign card", "krsim": "Visitor with a Korean prepaid SIM (010 number)", "arc": "Resident with an ARC (alien registration card)"}
-
-
-def chat_kb():
-    """Plain-text knowledge base the chat Worker reads (English; the bot answers in the visitor's language)."""
-    out = [f"EasyModeKorea knowledge base. Source: {SITE}. Last checked: {CHECKED['en']}.", ""]
-    for t in task_list("en"):
-        out += [f"## {t['title']}", f"Question: {QUESTION['en'][t['id']]}", f"Guide: {SITE}{t['slug']}.html", t["intro"]]
-        if "all" in t:
-            cases = [("Everyone", t["all"])]
-        else:
-            cases = []
-            for prof, label in PROFILE_NAMES.items():
-                v = t["v"][prof]
-                if isinstance(v, str): v = t["v"][v]
-                if t.get("dev") and isinstance(v, dict) and "verdict" not in v:
-                    cases += [(f"{label}, {dev}", vv) for dev, vv in v.items()]
-                else:
-                    cases.append((label, v))
-        for label, v in cases:
-            out.append(f"- {label}: {v.get('verdict', '')}")
-            out += [f"  * {r}" for r in v.get("route", [])]
-            if v.get("fallback"): out.append(f"  If that fails: {v['fallback']}")
-        out.append("")
-    out.append("## Emergency and help numbers")
-    out += [f"- {n}: {d}" for n, d in HELP["en"]["nums"]]
-    out += ["", f"Contact / feedback: the Feedback button on any page, or email {FEEDBACK_TO}.", f"Korean host (guesthouse/Airbnb) link maker: {SITE}hosts.html"]
-    return "\n".join(out) + "\n"
 
 
 if __name__ == "__main__":
