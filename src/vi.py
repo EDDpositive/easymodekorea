@@ -437,6 +437,21 @@ VI = {
 "1339 is the disease-control hotline (KDCA), mainly for infectious diseases. The old 1339 emergency-room information service moved to 119.": "1339 là đường dây của Cơ quan Kiểm soát và Phòng ngừa Dịch bệnh (KDCA), chủ yếu dành cho câu hỏi về bệnh truyền nhiễm. Dịch vụ thông tin phòng cấp cứu 1339 trước đây đã chuyển sang 119.",
 "The 30-day Climate Card was replaced by K-Pass. The 1 to 7-day tourist passes are still sold.": "Climate Card 30 ngày được thay bằng K-Pass. Thẻ du lịch 1 đến 7 ngày vẫn đang bán.",
 "Foreign visitors, including those exempt from K-ETA, must submit the e-Arrival Card within 72 hours before arrival.": "Du khách nước ngoài, kể cả người được miễn K-ETA, phải nộp tờ khai đến điện tử (e-Arrival Card) trong vòng 72 giờ trước khi đến.",
+"Gimpo Airport to Seoul": "Từ sân bay Gimpo vào Seoul",
+"Gimpo Airport to Seoul: AREX, Line 9 express, Line 5, taxi (2026)": "Từ sân bay Gimpo vào Seoul: AREX, tuyến 9 tốc hành, tuyến 5, taxi (2026)",
+"Gimpo is much closer to Seoul than Incheon. Three train lines run from the airport station, so pick the one that goes to your hotel.": "Gimpo gần Seoul hơn Incheon nhiều. Ga sân bay có ba tuyến tàu, hãy chọn tuyến đi đến khách sạn của bạn.",
+"Take AREX to Hongdae or Seoul Station, Line 9 to Yeouido or Gangnam, or Line 5 to Gwanghwamun. T-money works on all three.": "Đi AREX đến Hongdae hoặc ga Seoul, tuyến 9 đến Yeouido hoặc Gangnam, hoặc tuyến 5 đến Gwanghwamun. Cả ba đều dùng T-money được.",
+"Follow the Subway / Railroad signs from arrivals to Gimpo Airport station.": "Từ khu đến, đi theo biển Subway / Railroad đến ga Sân bay Gimpo.",
+"Use Line 9 express trains for Gangnam. They are faster but very crowded at rush hour.": "Đi Gangnam thì dùng tàu tốc hành tuyến 9. Tàu nhanh hơn nhưng rất đông vào giờ cao điểm.",
+"AREX from Gimpo is the all-stop train. The express train runs only from Incheon.": "AREX từ Gimpo là tàu thường dừng mọi ga. Tàu tốc hành chỉ chạy từ Incheon.",
+"Trains stop around midnight. After that, take a taxi from the rank outside arrivals, or use k.ride or Uber.": "Tàu ngừng chạy khoảng nửa đêm. Sau đó, đi taxi ở bến bên ngoài khu đến, hoặc dùng k.ride hay Uber.",
+"Journey times are approximate and change with the timetable. Check the route in Naver Map before you go.": "Thời gian đi chỉ là ước tính và thay đổi theo lịch tàu. Hãy kiểm tra lộ trình trên Naver Map trước khi đi.",
+"Gimpo Airport": "Sân bay Gimpo",
+"How do I get from Gimpo Airport to Seoul?": "Từ sân bay Gimpo vào Seoul bằng cách nào?",
+"Where do I catch the Line 9 express train?": "Tàu tốc hành tuyến 9 đón ở đâu?",
+"Korea Airports Corporation: Gimpo International Airport": "Tổng công ty Sân bay Hàn Quốc: Sân bay quốc tế Gimpo",
+"AREX (Airport Railroad) official site": "Trang chính thức của AREX (đường sắt sân bay)",
+"Seoul Metropolitan Government: getting around Gimpo Airport (Korean)": "Chính quyền thành phố Seoul: đi lại ở sân bay Gimpo (tiếng Hàn)",
 }
 
 
@@ -470,5 +485,5 @@ for lst in x.PHRASES.values():
 for ko, m in x.HELP_PHRASES: m["vi"] = tr(m["en"])
 VI_KW = {"data": "điện thoại sim esim số data mạng", "airport": "sân bay incheon xe buýt tàu", "maps": "bản đồ chỉ đường", "taxi": "taxi gọi xe",
          "transit": "tàu điện ngầm xe buýt nạp thẻ", "ktx": "tàu ktx vé tàu", "food-booking": "nhà hàng đặt bàn xếp hàng", "delivery": "giao đồ ăn gọi món",
-         "translate": "dịch thực đơn", "shopping": "mua sắm hoàn thuế miễn thuế mỹ phẩm", "luggage": "gửi hành lý vali tủ khóa", "entry": "nhập cảnh k-eta visa thị thực hộ chiếu tờ khai", "cash": "tiền mặt atm rút tiền thẻ đổi tiền", "power": "ổ cắm phích cắm đầu chuyển điện áp sạc", "busan": "busan seoul đến busan ktx k-tour pass thẻ du lịch điểm tham quan", "krpass": "kr pass korail thẻ tàu ktx du khách", "dmz": "dmz jsa panmunjom tour đặt tour hộ chiếu imjingak", "jeju": "jeju thuê xe giấy phép lái xe quốc tế xe buýt taxi đi lại", "transitpass": "climate card seoul thẻ du lịch tàu điện ngầm xe buýt k-pass t-money", "health": "ốm bệnh viện hiệu thuốc thuốc cấp cứu sốt"}
+         "translate": "dịch thực đơn", "shopping": "mua sắm hoàn thuế miễn thuế mỹ phẩm", "luggage": "gửi hành lý vali tủ khóa", "entry": "nhập cảnh k-eta visa thị thực hộ chiếu tờ khai", "cash": "tiền mặt atm rút tiền thẻ đổi tiền", "power": "ổ cắm phích cắm đầu chuyển điện áp sạc", "busan": "busan seoul đến busan ktx k-tour pass thẻ du lịch điểm tham quan", "krpass": "kr pass korail thẻ tàu ktx du khách", "dmz": "dmz jsa panmunjom tour đặt tour hộ chiếu imjingak", "jeju": "jeju thuê xe giấy phép lái xe quốc tế xe buýt taxi đi lại", "transitpass": "climate card seoul thẻ du lịch tàu điện ngầm xe buýt k-pass t-money", "health": "ốm bệnh viện hiệu thuốc thuốc cấp cứu sốt", "gimpo": "sân bay gimpo vào seoul tàu điện ngầm tuyến 9 tốc hành arex chuyến bay nội địa"}
 for k, v in VI_KW.items(): x.KEYWORDS[k] += " " + v

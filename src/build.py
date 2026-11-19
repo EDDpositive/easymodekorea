@@ -418,12 +418,13 @@ TOPIC_JS = r"""
 # First publish dates (ISO) for the Article schema; pages not listed fall back to the checked date.
 PUBLISHED = {"k-eta-entry-requirements": "2026-11-19", "atm-foreign-card-cash": "2026-11-19", "korea-power-plug-voltage": "2026-11-19",
              "seoul-to-busan-k-tour-pass": "2026-11-19", "kr-pass-korail-pass": "2026-11-19", "dmz-jsa-tour-booking": "2026-11-19",
-             "jeju-getting-around": "2026-11-19", "seoul-tourist-transit-pass": "2026-11-19"}
+             "jeju-getting-around": "2026-11-19", "seoul-tourist-transit-pass": "2026-11-19",
+             "gimpo-airport-to-seoul": "2026-11-20"}
 FIRST_PUBLISH = "2026-11-17"
 
 RELATED = {
     "data": ["entry", "airport", "taxi", "power"],
-    "airport": ["transit", "luggage", "taxi", "dmz"],
+    "airport": ["transit", "luggage", "taxi", "gimpo"],
     "maps": ["translate", "taxi", "transit"],
     "taxi": ["maps", "airport", "data", "jeju"],
     "transit": ["airport", "cash", "maps", "transitpass"],
@@ -437,10 +438,11 @@ RELATED = {
     "entry": ["data", "airport", "cash", "power"],
     "cash": ["transit", "shopping", "entry"],
     "power": ["data", "entry", "airport"],
+    "gimpo": ["transit", "taxi", "jeju", "airport"],
     "busan": ["ktx", "luggage", "cash", "krpass"],
     "krpass": ["ktx", "busan", "transit"],
     "dmz": ["ktx", "data", "translate"],
-    "jeju": ["airport", "taxi", "cash"],
+    "jeju": ["gimpo", "taxi", "cash"],
     "transitpass": ["transit", "airport", "maps"],
 }
 
@@ -546,7 +548,7 @@ def footer(lang):
 # long-form text (Latin names, so the same list works in every language). Longest first.
 LINK_TERMS = [("CatchTable Global", "food-booking"), ("e-Arrival Card", "entry"), ("Climate Card", "transitpass"),
               ("Naver Map", "maps"), ("KR Pass", "krpass"), ("T-money", "transit"), ("K-ETA", "entry"),
-              ("Papago", "translate"), ("k.ride", "taxi"), ("Baemin", "delivery"), ("AREX", "airport"), ("KTX", "ktx"), ("eSIM", "data")]
+              ("Papago", "translate"), ("k.ride", "taxi"), ("Baemin", "delivery"), ("AREX", "airport"), ("Gimpo", "gimpo"), ("金浦", "gimpo"), ("KTX", "ktx"), ("eSIM", "data")]
 
 def deep_html(lang, tid):
     """Long-form block for guides that have one in deep.py. Returns (html, faq pairs)."""
