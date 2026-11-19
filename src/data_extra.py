@@ -139,20 +139,22 @@ PHRASES = {
     "shopping": [["택스 프리 해 주세요. 한 번에 계산할게요.", {"en": "Tax free, please. I'll pay for everything at once.", "ja": "免税でお願いします。まとめて会計します。", "zh-tw": "麻煩幫我退稅,我一次結帳。"}]],
     "luggage": [["여기 짐 맡길 수 있어요?", {"en": "Can I leave my luggage here?", "ja": "ここに荷物を預けられますか?", "zh-tw": "這裡可以寄放行李嗎?"}]],
     "health": [["열이 나요. 약 있어요?", {"en": "I have a fever. Do you have medicine for it?", "ja": "熱があります。薬はありますか?", "zh-tw": "我發燒了,有藥嗎?"}]],
+    "entry": [["이 서류 작성하는 것 좀 도와주세요.", {"en": "Could you help me fill in this form?", "ja": "この書類の記入を手伝ってもらえますか?", "zh-tw": "可以幫我填這份表格嗎?"}]],
+    "cash": [["외국 카드 되는 ATM이 어디 있어요?", {"en": "Where is an ATM that takes foreign cards?", "ja": "外国のカードが使えるATMはどこですか?", "zh-tw": "哪裡有能用外國卡的ATM?"}]],
     "translate": [["영어 메뉴 있어요?", {"en": "Do you have an English menu?", "ja": "英語のメニューはありますか?", "zh-tw": "有英文菜單嗎?"}]],
 }
 
 # Short tile labels, short setup labels and section labels for the compact layout.
 SHORT = {
-    "en": {"tasks": {"data": "Phone & data", "airport": "Airport to city", "maps": "Maps", "taxi": "Taxi", "transit": "Subway & bus", "ktx": "KTX trains", "food-booking": "Restaurant booking", "delivery": "Food delivery", "translate": "Translation", "shopping": "Shopping & tax refund", "luggage": "Luggage", "health": "Sick or hurt"},
+    "en": {"tasks": {"data": "Phone & data", "airport": "Airport to city", "maps": "Maps", "taxi": "Taxi", "transit": "Subway & bus", "ktx": "KTX trains", "food-booking": "Restaurant booking", "delivery": "Food delivery", "translate": "Translation", "shopping": "Shopping & tax refund", "luggage": "Luggage", "health": "Sick or hurt", "entry": "Entry rules", "cash": "Cash & ATMs"},
            "prof": {"visitor": "No Korean number", "krsim": "Korean SIM (010)", "arc": "Resident (ARC)"},
            "show": "Show staff", "show_driver": "Show driver", "close": "Close", "guide": "Full guide",
            "tap": "Tap any row to see how", "before": "Before you fly", "details": "Sources and notes", "setup_q": "Your setup"},
-    "ja": {"tasks": {"data": "電話・データ", "airport": "空港から市内", "maps": "地図", "taxi": "タクシー", "transit": "地下鉄・バス", "ktx": "KTX", "food-booking": "飲食店の予約", "delivery": "デリバリー", "translate": "翻訳", "shopping": "買い物と免税", "luggage": "荷物の預け", "health": "病気・けが"},
+    "ja": {"tasks": {"data": "電話・データ", "airport": "空港から市内", "maps": "地図", "taxi": "タクシー", "transit": "地下鉄・バス", "ktx": "KTX", "food-booking": "飲食店の予約", "delivery": "デリバリー", "translate": "翻訳", "shopping": "買い物と免税", "luggage": "荷物の預け", "health": "病気・けが", "entry": "入国ルール", "cash": "現金・ATM"},
            "prof": {"visitor": "韓国の番号なし", "krsim": "韓国SIM(010)", "arc": "在住(登録証あり)"},
            "show": "スタッフに見せる", "show_driver": "運転手に見せる", "close": "閉じる", "guide": "詳しいガイド",
            "tap": "項目をタップすると方法が出ます", "before": "出発前", "details": "出典とメモ", "setup_q": "あなたの状況"},
-    "zh-tw": {"tasks": {"data": "電話與上網", "airport": "機場到市區", "maps": "地圖", "taxi": "計程車", "transit": "地鐵與公車", "ktx": "KTX火車", "food-booking": "餐廳訂位", "delivery": "叫外送", "translate": "翻譯", "shopping": "購物與退稅", "luggage": "寄放行李", "health": "生病或受傷"},
+    "zh-tw": {"tasks": {"data": "電話與上網", "airport": "機場到市區", "maps": "地圖", "taxi": "計程車", "transit": "地鐵與公車", "ktx": "KTX火車", "food-booking": "餐廳訂位", "delivery": "叫外送", "translate": "翻譯", "shopping": "購物與退稅", "luggage": "寄放行李", "health": "生病或受傷", "entry": "入境規定", "cash": "現金與ATM"},
               "prof": {"visitor": "沒有韓國號碼", "krsim": "韓國SIM(010)", "arc": "居民(有登錄證)"},
               "show": "給店員看", "show_driver": "給司機看", "close": "關閉", "guide": "完整指南",
               "tap": "點一下就能看做法", "before": "出發前", "details": "資料來源與備註", "setup_q": "你的狀況"},
@@ -171,6 +173,8 @@ ICONS = {
     "shopping": '<path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/>',
     "luggage": '<rect x="6" y="7" width="12" height="13" rx="2"/><path d="M9 7V4h6v3M9 11v6M15 11v6"/>',
     "health": '<path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10z"/><path d="M12 10v5M9.5 12.5h5"/>',
+    "entry": '<rect x="6" y="3" width="12" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M9 16h6"/>',
+    "cash": '<rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 9v.01M18 15v.01"/>',
     "translate": '<path d="M3 5h9M7.5 3v2M5 5c.8 3 2.8 5.3 6 6.5M10 5c-.8 3-2.8 5.3-6 6.5"/><path d="M13 21l4-9 4 9M14.5 18h5"/>',
 }
 
@@ -230,6 +234,8 @@ KEYWORDS = {
     "shopping": "shopping tax free tax refund vat olive young oliveyoung daiso musinsa cosmetics beauty souvenir 買い物 免税 オリーブヤング ダイソー 購物 退稅 免稅 美妝 大創",
     "luggage": "luggage bag suitcase locker storage delivery t-locker t-luggage 荷物 ロッカー コインロッカー 行李 寄放 置物櫃",
     "health": "sick hospital pharmacy doctor medicine er emergency ambulance 119 1339 fever 病院 薬局 薬 救急 醫院 藥局 藥 急診 發燒",
+    "entry": "k-eta keta visa entry arrival card e-arrival immigration passport customs 入国 ビザ 到着カード 入境 簽證 入境卡",
+    "cash": "cash atm withdraw foreign card debit credit exchange won currency global atm 現金 ATM 両替 提款 換錢",
     "translate": "translate translation papago menu sign korean language 翻訳 メニュー 翻譯 菜單",
 }
 
@@ -329,13 +335,13 @@ PLAN = {
 QUESTION = {
     "en": {"data": "Do I need a Korean phone number in Korea?", "airport": "How do I get from Incheon Airport to Seoul?", "maps": "Does Google Maps work in Korea?", "taxi": "Can I call a taxi in Korea without a Korean number?",
            "transit": "Can I top up T-money with a foreign card?", "ktx": "How do I book a KTX train as a foreigner?", "food-booking": "Can I book restaurants in Korea without a Korean number?",
-           "delivery": "Can I order food delivery in Korea as a tourist?", "translate": "What is the best translation app for Korea?", "shopping": "How do I get a tax refund when shopping in Korea?", "luggage": "Where can I store luggage in Seoul?", "health": "What do I do if I get sick in Korea?"},
+           "delivery": "Can I order food delivery in Korea as a tourist?", "translate": "What is the best translation app for Korea?", "shopping": "How do I get a tax refund when shopping in Korea?", "luggage": "Where can I store luggage in Seoul?", "health": "What do I do if I get sick in Korea?", "entry": "Do I need K-ETA to visit Korea?", "cash": "Can I withdraw cash in Korea with a foreign card?"},
     "ja": {"data": "韓国で韓国の電話番号は必要?", "airport": "仁川空港からソウル市内への行き方は?", "maps": "韓国でGoogleマップは使える?", "taxi": "韓国の番号なしでタクシーを呼べる?",
            "transit": "T-moneyに海外カードでチャージできる?", "ktx": "外国人がKTXを予約するには?", "food-booking": "韓国の番号なしでレストランを予約できる?",
-           "delivery": "旅行者でも韓国でデリバリーを頼める?", "translate": "韓国旅行におすすめの翻訳アプリは?", "shopping": "韓国で買い物の免税(タックスリファンド)を受けるには?", "luggage": "ソウルで荷物を預けられる場所は?", "health": "韓国旅行中に体調を崩したらどうする?"},
+           "delivery": "旅行者でも韓国でデリバリーを頼める?", "translate": "韓国旅行におすすめの翻訳アプリは?", "shopping": "韓国で買い物の免税(タックスリファンド)を受けるには?", "luggage": "ソウルで荷物を預けられる場所は?", "health": "韓国旅行中に体調を崩したらどうする?", "entry": "韓国旅行にK-ETAは必要?", "cash": "韓国で外国のカードで現金を下ろせる?"},
     "zh-tw": {"data": "在韓國需要韓國電話號碼嗎?", "airport": "仁川機場怎麼到首爾市區?", "maps": "Google地圖在韓國能用嗎?", "taxi": "沒有韓國號碼能在韓國叫計程車嗎?",
               "transit": "T-money可以用國外信用卡儲值嗎?", "ktx": "外國人怎麼訂KTX?", "food-booking": "沒有韓國號碼能在韓國訂餐廳嗎?",
-              "delivery": "觀光客能在韓國叫外送嗎?", "translate": "去韓國用哪個翻譯App最好?", "shopping": "在韓國購物怎麼退稅?", "luggage": "在首爾哪裡可以寄放行李?", "health": "在韓國生病了怎麼辦?"},
+              "delivery": "觀光客能在韓國叫外送嗎?", "translate": "去韓國用哪個翻譯App最好?", "shopping": "在韓國購物怎麼退稅?", "luggage": "在首爾哪裡可以寄放行李?", "health": "在韓國生病了怎麼辦?", "entry": "去韓國需要申請K-ETA嗎?", "cash": "在韓國能用外國卡領現金嗎?"},
 }
 
 
