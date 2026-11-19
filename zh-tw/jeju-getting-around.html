@@ -12,283 +12,42 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap"></noscript>
-<style>
-:root {
-  /* EasyModeKorea: bold cobalt hero with a yellow "Easy" stamp, then a sticky setup bar and
-     a scannable list of rows (icon, task, status). Detail opens in place; Korean cards open full screen. */
-  --bg: #f3f5fb;
-  --surface: #ffffff;
-  --ink: #0e1430;
-  --muted: #444f6b;
-  --line: #dfe3ee;
-  --brand: #2336e8;
-  --brand-ink: #ffffff;
-  --easy: #ffd23f;
-  --ok: #0f8a45; --ok-bg: #ddf4e7;
-  --warn: #a35f00; --warn-bg: #ffefcf;
-  --mixed: #5a3fd6; --mixed-bg: #ece8ff;
-  --bad: #c62828; --bad-bg: #fde5e5;
-  --display: "Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
-  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", "Apple SD Gothic Neo", "Hiragino Sans", "PingFang TC", sans-serif;
-  --ko: "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
-  color-scheme: light;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0b0f1e; --surface: #141a2e; --ink: #eef1fb; --muted: #aab3cc; --line: #273050;
-    --brand: #5b6cff; --easy: #ffd23f;
-    --ok: #5ad48c; --ok-bg: #11301f; --warn: #f2b453; --warn-bg: #352610;
-    --mixed: #b2a4ff; --mixed-bg: #261f4a; --bad: #ff8a80; --bad-bg: #3a1616;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #0b0f1e; --surface: #141a2e; --ink: #eef1fb; --muted: #aab3cc; --line: #273050;
-  --brand: #5b6cff; --easy: #ffd23f;
-  --ok: #5ad48c; --ok-bg: #11301f; --warn: #f2b453; --warn-bg: #352610;
-  --mixed: #b2a4ff; --mixed-bg: #261f4a; --bad: #ff8a80; --bad-bg: #3a1616;
-  color-scheme: dark;
-}
-* { box-sizing: border-box; }
-[hidden] { display: none !important; }
-html, body { margin: 0; }
-body { background: var(--bg); color: var(--ink); font: 400 17px/1.55 var(--body); -webkit-font-smoothing: antialiased; }
-a { color: var(--brand); }
-:focus-visible { outline: 3px solid var(--easy); outline-offset: 2px; border-radius: 8px; }
-.wrap { max-width: 760px; margin: 0 auto; padding: 0 16px 40px; }
-
-/* Hero */
-.hero { background: var(--brand); color: var(--brand-ink); padding: 18px 0 26px; }
-.hero .wrap { padding-bottom: 0; }
-.toprow { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
-.logo { font: 800 18px var(--display); color: inherit; text-decoration: none; letter-spacing: -0.01em; }
-.logo b { background: var(--easy); color: #0e1430; padding: 0 6px; border-radius: 6px; margin-left: 2px; }
-.langs { display: flex; gap: 10px; font-size: 14px; }
-.langs a { color: rgba(255,255,255,.82); text-decoration: none; display: inline-block; padding: 6px 2px; min-height: 24px; }
-.langs a[aria-current="page"] { color: #fff; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
-.mode { display: flex; align-items: center; gap: 10px; margin: 22px 0 8px; font: 700 13px var(--body); letter-spacing: .08em; text-transform: uppercase; }
-.mode s { opacity: .7; }
-.mode .arrow { opacity: .7; }
-.mode .easy { background: var(--easy); color: #0e1430; padding: 3px 10px; border-radius: 999px; }
-.hero h1 { font: 800 clamp(30px, 7.2vw, 46px)/1.06 var(--display); letter-spacing: -0.025em; margin: 0; text-wrap: balance; }
-.hero p { margin: 12px 0 0; font-size: 17px; color: rgba(255,255,255,.9); max-width: 58ch; }
-.hero .trust { font-size: 13px; color: rgba(255,255,255,.75); }
-
-/* Sticky setup bar */
-.setupbar { position: sticky; top: 0; z-index: 5; background: var(--surface); border-bottom: 1px solid var(--line); box-shadow: 0 6px 18px -14px rgba(14,20,48,.5); }
-.setupbar .wrap { padding: 10px 16px; display: grid; gap: 8px; }
-.setupbar .q { font: 700 12px var(--body); text-transform: uppercase; letter-spacing: .07em; color: var(--muted); }
-.seg { display: flex; gap: 6px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: 0 -16px; padding: 0 16px; }
-.seg::-webkit-scrollbar { display: none; }
-.seg label { position: relative; }
-.seg input { position: absolute; opacity: 0; pointer-events: none; }
-.seg span { display: inline-block; padding: 8px 12px; border-radius: 999px; border: 1.5px solid var(--line); font: 600 14px var(--body); cursor: pointer; background: var(--bg); white-space: nowrap; }
-.seg input:checked + span { background: var(--ink); color: var(--surface); border-color: var(--ink); }
-.seg input:focus-visible + span { outline: 3px solid var(--easy); outline-offset: 2px; }
-
-/* Score line */
-.score { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 18px 0 10px; font-weight: 600; }
-.hint { color: var(--muted); font-size: 14px; margin: 0 0 10px; }
-
-/* Rows */
-.rows { display: grid; gap: 10px; }
-.row { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
-.row > summary { list-style: none; display: grid; grid-template-columns: 44px 1fr 18px; align-items: start; gap: 12px; padding: 14px; cursor: pointer; }
-.row > summary::after { content: ""; width: 10px; height: 10px; margin-top: 16px; border-right: 2.5px solid var(--muted); border-bottom: 2.5px solid var(--muted); transform: rotate(45deg); }
-.row[open] > summary::after { transform: rotate(-135deg); margin-top: 20px; }
-.txt { display: grid; gap: 4px; min-width: 0; }
-.txt .top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.row > summary::-webkit-details-marker { display: none; }
-.ic { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; }
-.ic svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.row.ok .ic { background: var(--ok-bg); color: var(--ok); } .row.warn .ic { background: var(--warn-bg); color: var(--warn); }
-.row.mixed .ic { background: var(--mixed-bg); color: var(--mixed); } .row.bad .ic { background: var(--bad-bg); color: var(--bad); }
-.row .name { font: 700 18px/1.25 var(--body); }
-.row .sub { font: 400 14px/1.4 var(--body); color: var(--muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.row[open] .sub { display: none; }
-.pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font: 700 13px var(--body); white-space: nowrap; }
-.pill.ok { color: var(--ok); background: var(--ok-bg); } .pill.warn { color: var(--warn); background: var(--warn-bg); }
-.pill.mixed { color: var(--mixed); background: var(--mixed-bg); } .pill.bad { color: var(--bad); background: var(--bad-bg); }
-.row[open] > summary { border-bottom: 1px solid var(--line); }
-.body { padding: 14px 16px 16px; display: grid; gap: 12px; }
-.verdict { font-weight: 700; margin: 0; }
-.steps { margin: 0; padding: 0; list-style: none; counter-reset: s; display: grid; gap: 8px; }
-.steps li { counter-increment: s; display: grid; grid-template-columns: 26px 1fr; gap: 8px; }
-.steps li::before { content: counter(s); width: 24px; height: 24px; border-radius: 50%; background: var(--ink); color: var(--surface); font: 700 13px/24px var(--body); text-align: center; }
-.fallback { background: var(--bg); border-radius: 12px; padding: 10px 12px; margin: 0; font-size: 15px; }
-.fallback b { display: block; font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-bottom: 2px; }
-.actions { display: flex; gap: 8px; flex-wrap: wrap; }
-.btn { display: inline-flex; align-items: center; gap: 6px; font: 700 15px var(--body); padding: 11px 16px; border-radius: 12px; border: 0; background: var(--brand); color: #fff; cursor: pointer; text-decoration: none; }
-.btn.alt { background: var(--easy); color: #0e1430; }
-.btn.ghost { background: transparent; color: var(--brand); border: 1.5px solid var(--line); }
-.foot { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; font-size: 13px; color: var(--muted); }
-.foot details summary { cursor: pointer; }
-.foot ul { margin: 6px 0 0; padding-left: 18px; }
-.report { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
-.report button { font: 600 13px var(--body); padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
-.report button[aria-pressed="true"] { background: var(--ink); color: var(--surface); border-color: var(--ink); }
-
-/* Host stay card */
-.stay { background: var(--surface); border: 2px solid var(--brand); border-radius: 18px; padding: 16px; margin: 18px 0 6px; display: grid; gap: 12px; }
-.stay h2 { font: 800 22px/1.2 var(--display); margin: 0; }
-.addr { font: 800 24px/1.35 var(--ko); word-break: keep-all; }
-.kv { display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; margin: 0; font-size: 15px; }
-.kv dt { color: var(--muted); } .kv dd { margin: 0; font-weight: 600; }
-
-/* Sections */
-.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; margin: 14px 0; }
-.panel > summary { list-style: none; cursor: pointer; padding: 16px; font: 800 20px var(--display); display: flex; justify-content: space-between; align-items: center; }
-.panel > summary::-webkit-details-marker { display: none; }
-.panel > summary::after { content: "+"; font: 400 26px var(--body); color: var(--muted); }
-.panel[open] > summary::after { content: "–"; }
-.panel .in { padding: 0 16px 16px; display: grid; gap: 10px; }
-.panel ol { margin: 0; padding-left: 22px; display: grid; gap: 8px; }
-.timeline b { display: block; }
-.copied { font-size: 14px; color: var(--muted); }
-.related { margin: 22px 0 6px; }
-.related h2 { font: 700 18px var(--display); margin: 0 0 8px; }
-.related ul { margin: 0; padding-left: 20px; }
-.related li { margin: 4px 0; }
-.topics { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0; }
-.topics a { padding: 8px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); text-decoration: none; font-size: 14px; font-weight: 600; color: var(--ink); }
-footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-top: 20px; }
-
-/* Topic pages */
-.topic-hero h1 { font-size: clamp(26px, 6vw, 38px); }
-.card { background: var(--surface); border: 1px solid var(--line); border-left: 6px solid var(--line); border-radius: 16px; padding: 16px; display: grid; gap: 10px; }
-.card.ok { border-left-color: var(--ok); } .card.warn { border-left-color: var(--warn); } .card.mixed { border-left-color: var(--mixed); } .card.bad { border-left-color: var(--bad); }
-.card h2 { font: 700 18px/1.3 var(--body); margin: 0; }
-.cards { display: grid; gap: 12px; margin: 16px 0; }
-.card[hidden] { display: none; }
-.linkbtn { background: none; border: 0; color: var(--brand); font: 600 15px var(--body); cursor: pointer; padding: 4px 0; text-decoration: underline; justify-self: start; }
-.notes { font-size: 14px; color: var(--muted); }
-
-/* Full-screen show card */
-.show { position: fixed; inset: 0; z-index: 50; background: #fff; color: #0e1430; display: grid; grid-template-rows: auto 1fr auto; padding: 20px; }
-.show[hidden] { display: none; }
-.show .lbl { font: 700 14px var(--body); text-transform: uppercase; letter-spacing: .08em; color: #444f6b; }
-.show .ko { align-self: center; font: 800 clamp(34px, 9vw, 64px)/1.3 var(--ko); word-break: keep-all; }
-.show .ko small { display: block; font-size: .6em; font-weight: 700; margin-top: 16px; }
-.show .mean { font-size: 16px; color: #444f6b; margin: 0 0 12px; }
-.show .btn { justify-self: stretch; justify-content: center; background: #0e1430; color: #fff; font-size: 17px; padding: 14px; }
-@media (prefers-reduced-motion: no-preference) { .row > summary { transition: background .15s; } .row > summary:hover { background: var(--bg); } }
-/* One question at a time */
-.onb { margin: 18px 0 8px; }
-.onb h2 { font: 800 clamp(22px,6vw,28px)/1.2 var(--display); margin: 0 0 14px; letter-spacing: -.01em; }
-.opts-big { display: grid; gap: 10px; }
-.opts-big.two { grid-template-columns: 1fr 1fr; }
-.opt-big { text-align: left; display: grid; gap: 3px; padding: 18px; border-radius: 18px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); font: inherit; cursor: pointer; min-height: 64px; transition: transform .08s, border-color .15s; }
-.opt-big b { font: 700 18px var(--body); }
-.opt-big span { color: var(--muted); font-size: 14px; }
-.opt-big:hover, .opt-big:focus-visible { border-color: var(--brand); outline: none; }
-.opt-big:active { transform: scale(.98); }
-.linkbtn { background: none; border: 0; color: var(--brand); font: 600 15px var(--body); padding: 12px 0; cursor: pointer; }
-.mybar { position: sticky; top: 0; z-index: 5; background: var(--surface); border-bottom: 1px solid var(--line); }
-.mybar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 16px; font-weight: 600; font-size: 14px; }
-.btn.small { padding: 6px 12px; min-height: 0; font-size: 14px; }
-.greet { font: 700 20px/1.3 var(--display); margin: 18px 0 4px; }
-.search { display: block; margin: 10px 0 12px; }
-.search input { width: 100%; box-sizing: border-box; font: 16px var(--body); padding: 13px 16px; border-radius: 14px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); }
-.search input:focus { border-color: var(--brand); outline: none; }
-.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-.banner { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 14px 0 0; padding: 12px 14px; border-radius: 14px; background: var(--easy); color: #0e1430; font-weight: 600; }
-.progress { display: grid; gap: 6px; margin-bottom: 10px; font-weight: 600; font-size: 14px; }
-.progress .bar { height: 8px; border-radius: 99px; background: var(--line); overflow: hidden; }
-.progress .bar i { display: block; height: 100%; width: 0; background: var(--brand); transition: width .25s; }
-.checks { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; }
-.checks li { display: flex; gap: 12px; align-items: flex-start; padding: 8px 0; }
-.checks input { width: 22px; height: 22px; flex: none; margin: 1px 0 0; accent-color: var(--brand); }
-.checks input:checked + label { color: var(--muted); text-decoration: line-through; }
-@media (prefers-reduced-motion: reduce) { .opt-big, .progress .bar i { transition: none; } }
-.ret .hero .lede, .ret .hero .trust, .ret .hero .mode { display: none; }
-.ret .hero h1 { font-size: 22px; margin: 6px 0 0; }
-.pre:not(:has(> :not([hidden]))) { display: none; }
-/* Calm layout: one line per row, details folded away */
-.row summary .txt { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-width: 0; }
-.row summary .name { font: 700 18px var(--body); }
-.row summary { padding: 16px; }
-.row .body { padding: 4px 18px 18px; line-height: 1.6; }
-.row .body .verdict { font-size: 17px; font-weight: 600; margin: 0 0 12px; }
-.row .body > details { margin-top: 14px; font-size: 14px; color: var(--muted); }
-.row .body > details > summary { cursor: pointer; padding: 6px 0; }
-.row .body .report { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 8px; }
-.rows { display: grid; gap: 10px; }
-.about { margin: 28px 0 40px; font-size: 14px; color: var(--muted); }
-.about summary { cursor: pointer; padding: 8px 0; }
-.about p { line-height: 1.6; }
-.hero { padding-bottom: 14px; }
-.hero h1 { font-size: 26px; margin: 10px 0 0; }
-.row { scroll-margin-top: 64px; }
-.row summary { align-items: center; }
-.why { color: var(--muted); margin: -6px 0 16px; font-size: 16px; }
-.panel summary .count { color: var(--muted); font-weight: 600; margin-left: 6px; }
-.stay { margin-top: 16px; }
-.checks .stage { display: block; font: 700 13px var(--body); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); padding: 14px 0 2px; }
-.hero + .wrap { padding-top: 16px; }
-.bar-btns { display: flex; gap: 6px; flex: none; }
-.sheet { position: fixed; inset: 0; z-index: 40; background: rgba(8,12,30,.45); display: flex; align-items: flex-end; justify-content: center; }
-.sheet-in { background: var(--surface); color: var(--ink); width: 100%; max-width: 560px; max-height: 88vh; overflow: auto; border-radius: 22px 22px 0 0; padding: 18px 16px 28px; }
-.sheet-top { display: flex; align-items: center; justify-content: space-between; }
-.sheet-top h2 { margin: 0; font-size: 22px; }
-.sub-h { font: 700 13px var(--body); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 18px 0 8px; }
-.calls { display: grid; gap: 8px; }
-.call { display: flex; align-items: center; gap: 14px; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 14px; text-decoration: none; color: var(--ink); }
-.call b { font: 800 24px var(--display); color: var(--brand); min-width: 64px; }
-.call span { font-size: 15px; line-height: 1.4; }
-.show { z-index: 50; }
-.toast { position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%); background: var(--ink); color: var(--surface); padding: 10px 16px; border-radius: 99px; font-size: 14px; z-index: 30; max-width: 92vw; }
-.fb-line { margin: 28px 0 0; }
-#fb-form { display: grid; gap: 6px; margin-top: 10px; }
-#fb-form .fl { font-weight: 700; margin-top: 8px; }
-#fb-form textarea, #fb-form input { width: 100%; box-sizing: border-box; font: 16px var(--body); padding: 12px 14px; border-radius: 12px; border: 1.5px solid var(--line); background: var(--bg); color: var(--ink); }
-#fb-form textarea { min-height: 120px; resize: vertical; }
-#fb-form .btn { margin-top: 12px; width: 100%; justify-content: center; }
-.fb-done { font-weight: 600; color: var(--brand); min-height: 22px; }
-.about { margin-top: 8px; }
-.more-h { font: 700 13px var(--body); text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin: 18px 4px 2px; }
-.ask { margin: 28px 0 0; padding: 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
-.ask h2 { margin: 0 0 4px; font: 800 20px/1.2 var(--display); }
-.ask .hint { margin: 0 0 12px; }
-.ask-form { display: grid; gap: 10px; }
-.ask-form textarea, .ask-form input { width: 100%; box-sizing: border-box; padding: 12px; border: 1px solid var(--line); border-radius: 10px; font: 16px/1.4 var(--body); background: var(--bg); color: var(--ink); }
-.ask-form textarea { min-height: 88px; resize: vertical; }
-.ask-form .btn { justify-self: start; }
-.ask-form .fb-done { margin: 0; min-height: 0; }
-
-/* Static guide list on the home page (crawlable, visible to everyone) */
-.guide-list { margin: 8px auto 28px; }
-.guide-list h2 { font: 700 20px var(--display); margin: 0 0 10px; }
-.guide-list ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-.guide-list li { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
-.guide-list a { font-weight: 700; display: block; margin-bottom: 2px; }
-.guide-list span { color: var(--muted); font-size: 15px; }
-
-.checked-line { margin: 10px 2px 0; font-size: 14px; color: var(--muted); }
-.host-cta { margin: 18px 0 0; padding: 12px 14px; border: 1px dashed var(--line); border-radius: 12px; font-size: 15px; color: var(--muted); }
-</style>
+<link rel="stylesheet" href="../style.css?v=82b0412d">
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "濟州島怎麼移動:租車、公車與計程車(2026)", "description": "濟州島很大,景點分散。租車最方便,但需要駕照證件。公車和計程車能到的地方比較有限。", "datePublished": "2026-11-17", "dateModified": "2026-11-17", "inLanguage": "zh-Hant-TW", "url": "https://easymodekorea.com/zh-tw/jeju-getting-around.html", "mainEntityOfPage": "https://easymodekorea.com/zh-tw/jeju-getting-around.html", "image": "https://easymodekorea.com/og.png", "author": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/"}, "publisher": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/", "logo": {"@type": "ImageObject", "url": "https://easymodekorea.com/icon-512.png"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "EasyModeKorea", "item": "https://easymodekorea.com/zh-tw/"}, {"@type": "ListItem", "position": 2, "name": "濟州交通", "item": "https://easymodekorea.com/zh-tw/jeju-getting-around.html"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "在濟州島怎麼玩比較方便?", "acceptedAnswer": {"@type": "Answer", "text": "租車是遊濟州島最方便的方式,但需要國際駕照。公車和計程車只適合部分地方。 開車:帶護照、本國駕照和有效的國際駕照。過期的國際駕照可能會被櫃台拒絕出租。 Visit Jeju說外國人租車需要全額保險。請向租車公司確認保障內容。 離開停車場前,請對方把車內導航設成英文。 沒有國際駕照:公車主要在市區行駛,班次不多;主要區域容易叫到計程車,偏遠景點附近則不多。"}}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "濟州島怎麼移動:租車、公車與計程車(2026)", "description": "濟州島很大,景點分散。租車最方便,但需要駕照證件。公車和計程車能到的地方比較有限。", "datePublished": "2026-11-19", "dateModified": "2026-11-20", "inLanguage": "zh-Hant-TW", "url": "https://easymodekorea.com/zh-tw/jeju-getting-around.html", "mainEntityOfPage": "https://easymodekorea.com/zh-tw/jeju-getting-around.html", "image": "https://easymodekorea.com/og.png", "author": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/zh-tw/about.html"}, "publisher": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/", "logo": {"@type": "ImageObject", "url": "https://easymodekorea.com/icon-512.png"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "EasyModeKorea", "item": "https://easymodekorea.com/zh-tw/"}, {"@type": "ListItem", "position": 2, "name": "濟州交通", "item": "https://easymodekorea.com/zh-tw/jeju-getting-around.html"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "在濟州島怎麼玩比較方便?", "acceptedAnswer": {"@type": "Answer", "text": "租車是遊濟州島最方便的方式,但需要國際駕照。公車和計程車只適合部分地方。 開車:帶護照、本國駕照和有效的國際駕照。過期的國際駕照可能會被櫃台拒絕出租。 Visit Jeju說外國人租車需要全額保險。請向租車公司確認保障內容。 離開停車場前,請對方把車內導航設成英文。 沒有國際駕照:公車主要在市區行駛,班次不多;主要區域容易叫到計程車,偏遠景點附近則不多。"}}, {"@type": "Question", "name": "需要國際駕照嗎?", "acceptedAnswer": {"@type": "Answer", "text": "旅客租車需要。和你國家的駕照、護照一起帶著。"}}, {"@type": "Question", "name": "沒有車可以玩濟州嗎?", "acceptedAnswer": {"@type": "Answer", "text": "可以,但比較慢。公車和計程車能到幾個主要地區;參加行程或包車能去更多地方。"}}, {"@type": "Question", "name": "濟州可以用T-money嗎?", "acceptedAnswer": {"@type": "Answer", "text": "可以,濟州公車能用。"}}, {"@type": "Question", "name": "怎麼去濟州?", "acceptedAnswer": {"@type": "Answer", "text": "大部分旅客從首爾(金浦)或釜山搭飛機,航程短、班次多。"}}]}]</script>
 </head>
 <body>
+<a class="skip" href="#answer">跳到答案</a>
 <header class="hero"><div class="wrap">
   <div class="toprow"><a class="logo" href="./">EasyMode<b>Korea</b></a><nav class="langs" aria-label="語言"><a href="../jeju-getting-around.html" hreflang="en" lang="en">English</a><a href="../ja/jeju-getting-around.html" hreflang="ja" lang="ja">日本語</a><a href="../zh-tw/jeju-getting-around.html" hreflang="zh-Hant-TW" lang="zh-Hant-TW" aria-current="page">繁體中文</a><a href="../zh-cn/jeju-getting-around.html" hreflang="zh-CN" lang="zh-CN">简体中文</a><a href="../vi/jeju-getting-around.html" hreflang="vi" lang="vi">Tiếng Việt</a></nav></div>
-  <h1>在濟州島怎麼玩比較方便?</h1><p class="lede">濟州島很大,景點分散。租車最方便,但需要駕照證件。公車和計程車能到的地方比較有限。</p>
+  <h1>在濟州島怎麼玩比較方便?</h1>
 </div></header>
 <div class="wrap">
-  <div class="actions"><a class="btn" href="./#task-jeju">用自己的狀況確認</a><button class="btn alt" type="button" data-show="렌터카 반납 장소가 어디예요?" data-lbl="給店員看" data-mean="意思: 租來的車要在哪裡還?">🗣 租來的車要在哪裡還?</button></div>
-  <main class="cards"><article class="card warn"><div class="actions" style="justify-content:space-between;align-items:center"><h2>多一個步驟</h2><span class="pill warn">多一個步驟</span></div>
-<p class="verdict">租車是遊濟州島最方便的方式,但需要國際駕照。公車和計程車只適合部分地方。</p><ol class="steps"><li>開車:帶護照、本國駕照和有效的國際駕照。過期的國際駕照可能會被櫃台拒絕出租。</li><li>Visit Jeju說外國人租車需要全額保險。請向租車公司確認保障內容。</li><li>離開停車場前,請對方把車內導航設成英文。</li><li>沒有國際駕照:公車主要在市區行駛,班次不多;主要區域容易叫到計程車,偏遠景點附近則不多。</li></ol><p class="fallback"><b>如果不行</b>沒有國際駕照的話,短程搭計程車,並依主要公車路線規劃行程。</p></article><button class="linkbtn" type="button" id="show-all" hidden>查看其他狀況的答案</button></main>
-  <p class="checked-line">確認日 <time datetime="2026-11-17">2026年11月17日</time></p>
-  <details class="panel" open><summary>資料來源與備註</summary><div class="in notes"><ul><li>確認日 2026年11月17日</li><li>Visit Jeju的頁面是2026年以前的資料,預約前請向租車公司確認駕照與保險規定。</li><li><a href="https://www.visitjeju.net/u/2ls" rel="noopener" target="_blank">Visit Jeju: traffic information</a></li><li><a href="https://sg.trip.com/guide/transport/jeju-transport.html" rel="noopener" target="_blank">Trip.com: Jeju transport guide</a></li><li><a href="https://thesoulofseoul.net/how-to-rent-a-car-in-jeju-island/" rel="noopener" target="_blank">The Soul of Seoul: renting a car in Jeju</a></li></ul></div></details>
+  <main id="answer">
+  <section class="answer warn"><div class="pv warn"><div class="ans-top"><h2 class="sr">多一個步驟</h2><span class="pill warn">多一個步驟</span></div><p class="verdict">租車是遊濟州島最方便的方式,但需要國際駕照。公車和計程車只適合部分地方。</p></div><dl class="glance"><div><dt>注意</dt><dd>租車需要國際駕照 <time class="ck" datetime="2026-11-17">✓ 2026年11月17日</time></dd></div><div><dt>地點</dt><dd>多數旅客從金浦或釜山搭飛機過去 <time class="ck" datetime="2026-11-17">✓ 2026年11月17日</time></dd></div></dl><p class="stamp">已於<time datetime="2026-11-17">2026年11月17日</time>對照<a href="https://www.visitjeju.net/u/2ls" rel="noopener" target="_blank">Visit Jeju: traffic information</a>確認</p></section>
+  <button class="linkbtn" type="button" id="show-all" hidden>查看其他狀況的答案</button>
+  <section class="do" aria-labelledby="do-jeju"><h2 id="do-jeju" class="sr">第一次使用:一步一步來</h2><div class="pv"><ol class="steps"><li>開車:帶護照、本國駕照和有效的國際駕照。過期的國際駕照可能會被櫃台拒絕出租。</li><li>Visit Jeju說外國人租車需要全額保險。請向租車公司確認保障內容。</li><li>離開停車場前,請對方把車內導航設成英文。</li><li>沒有國際駕照:公車主要在市區行駛,班次不多;主要區域容易叫到計程車,偏遠景點附近則不多。</li></ol><p class="fallback"><b>如果不行</b>沒有國際駕照的話,短程搭計程車,並依主要公車路線規劃行程。</p></div></section>
+  <section class="says" aria-labelledby="say-jeju"><h2 id="say-jeju">給店員看</h2><div class="say"><p class="say-ko" lang="ko">렌터카 반납 장소가 어디예요?</p><p class="say-mean">租來的車要在哪裡還?</p><div class="actions"><button class="btn alt" type="button" data-show="렌터카 반납 장소가 어디예요?" data-lbl="給店員看" data-mean="意思: 租來的車要在哪裡還?">🗣 全螢幕顯示</button><button class="btn ghost" type="button" data-copy="렌터카 반납 장소가 어디예요?" data-done="✓ 已複製">📋 複製</button></div></div></section>
+  <section class="names" aria-labelledby="nm-jeju"><h2 id="nm-jeju">可複製的韓文名稱(貼到Naver Map或給司機看)</h2><ul><li><button class="chip" type="button" data-copy="제주국제공항" data-done="✓ 已複製"><span lang="ko">제주국제공항</span><small>濟州國際機場</small><i aria-hidden="true">📋</i></button></li><li><button class="chip" type="button" data-copy="국제운전면허증" data-done="✓ 已複製"><span lang="ko">국제운전면허증</span><small>國際駕照</small><i aria-hidden="true">📋</i></button></li></ul></section>
+  <section class="myaddr" id="myaddr" hidden aria-labelledby="ma-h" data-card="給計程車司機看" data-ko="기사님, 이 주소로 가 주세요." data-mean="意思: 請載我到這個地址。"><h2 id="ma-h">住宿的韓文地址</h2>
+<div id="ma-has" hidden><p class="addr" lang="ko" id="ma-text"></p><div class="actions"><button class="btn alt" type="button" id="ma-show">🚕 給司機看</button><button class="btn ghost" type="button" id="ma-copy" data-copy="" data-done="✓ 已複製">📋 複製地址</button><a class="btn ghost" id="ma-map" href="#" rel="noopener" target="_blank">用Naver Map開啟</a><button class="linkbtn" type="button" id="ma-edit">更改</button></div></div>
+<form id="ma-form" hidden><input id="ma-in" type="text" lang="ko" maxlength="160" autocomplete="street-address" aria-label="住宿的韓文地址" placeholder="貼上訂房確認信裡的韓文地址"><button class="btn" type="submit">存在這支手機</button></form><p class="hint">只存在這支手機裡,不會傳送到任何地方。</p></section>
+  <div class="actions"><a class="btn" href="./#task-jeju">用自己的狀況確認</a></div>
+  <details class="more deep" id="st-jeju"><summary>第一次使用:一步一步來</summary><div class="in"><ol class="steps full"><li>自駕:帶護照、你國家的駕照和有效的國際駕照。租車櫃台可能拒絕過期的國際駕照。<!-- screenshot: jeju-rental --></li><li>事先訂車並確認保險。Visit Jeju說外國租車者需要全險。</li><li>取車時請櫃台把導航設成英文(或中文),出發前先拍下車子的刮痕。</li><li>導航:<a href="maps.html">Naver Map</a>或Kakao Map有開車路線;Google Maps在韓國的開車導航有限。</li><li>沒有駕照:公車可用<a href="tmoney-subway-bus.html">T-money</a>,跑主要道路,但濟州市以外班次少,要多留時間。</li><li>計程車在濟州市區和機場很好叫,偏遠景點就很少。請司機等你,或約好回程接送。</li></ol></div></details>
+<details class="more deep" id="er-jeju"><summary>常見問題與解決方法</summary><div class="in"><ul class="errs"><li><p class="prob"><b>租車櫃台不接受你的駕照。</b></p><p>除了你國家的駕照和護照,還需要有效的國際駕照。沒有的話就搭公車和計程車。</p></li><li><p class="prob"><b>要搭的公車一小時一班。</b></p><p>出發前在Naver Map或Kakao Map查好時間,行程排少一點。</p></li><li><p class="prob"><b>偏遠景點叫不到計程車。</b></p><p>參觀結束前就用App叫車,或和司機約好接送時間。</p></li><li><p class="prob"><b>車上導航只有韓文。</b></p><p>用手機的Naver Map或Kakao Map開車導航。</p></li></ul></div></details>
+<details class="more deep faq" id="fq-jeju"><summary>常見問答</summary><div class="in"><h3>需要國際駕照嗎?</h3><p>旅客租車需要。和你國家的駕照、護照一起帶著。</p><h3>沒有車可以玩濟州嗎?</h3><p>可以,但比較慢。公車和計程車能到幾個主要地區;參加行程或包車能去更多地方。</p><h3>濟州可以用T-money嗎?</h3><p>可以,濟州公車能用。</p><h3>怎麼去濟州?</h3><p>大部分旅客從首爾(<a href="gimpo-airport-to-seoul.html">金浦</a>)或釜山搭飛機,航程短、班次多。</p></div></details>
+<details class="more deep" id="ct-jeju"><summary>官方與一手資料</summary><div class="in"><ul class="cites"><li><a href="https://www.visitjeju.net/u/2ls" rel="noopener" target="_blank">Visit Jeju: traffic information</a></li><li><a href="https://sg.trip.com/guide/transport/jeju-transport.html" rel="noopener" target="_blank">Trip.com: Jeju transport guide</a></li><li><a href="https://thesoulofseoul.net/how-to-rent-a-car-in-jeju-island/" rel="noopener" target="_blank">The Soul of Seoul: renting a car in Jeju</a></li></ul></div></details>
+  <details class="more"><summary>資料來源與備註</summary><div class="in notes"><p>濟州島很大,景點分散。租車最方便,但需要駕照證件。公車和計程車能到的地方比較有限。</p><ul><li>確認日 2026年11月17日</li><li>Visit Jeju的頁面是2026年以前的資料,預約前請向租車公司確認駕照與保險規定。</li><li><a href="https://www.visitjeju.net/u/2ls" rel="noopener" target="_blank">Visit Jeju: traffic information</a></li><li><a href="https://sg.trip.com/guide/transport/jeju-transport.html" rel="noopener" target="_blank">Trip.com: Jeju transport guide</a></li><li><a href="https://thesoulofseoul.net/how-to-rent-a-car-in-jeju-island/" rel="noopener" target="_blank">The Soul of Seoul: renting a car in Jeju</a></li></ul></div></details>
+  </main>
+  <section class="related"><h2>相關指南</h2><ul><li><a href="gimpo-airport-to-seoul.html">從金浦機場怎麼到首爾市區?</a></li><li><a href="taxi.html">沒有韓國號碼能在韓國叫計程車嗎?</a></li><li><a href="atm-foreign-card-cash.html">在韓國能用外國卡領現金嗎?</a></li></ul></section>
+  <details class="more"><summary>所有指南</summary><nav class="topics"><a href="mobile-data-sim.html">電話與上網</a><a href="incheon-airport-to-seoul.html">機場到市區</a><a href="maps.html">地圖</a><a href="taxi.html">計程車</a><a href="tmoney-subway-bus.html">地鐵與公車</a><a href="seoul-tourist-transit-pass.html">交通票券</a><a href="ktx-train-booking.html">KTX火車</a><a href="seoul-to-busan-k-tour-pass.html">釜山之旅</a><a href="kr-pass-korail-pass.html">KR Pass</a><a href="dmz-jsa-tour-booking.html">DMZ導覽</a><a href="restaurant-reservations.html">餐廳訂位</a><a href="food-delivery.html">叫外送</a><a href="translation.html">翻譯</a><a href="tax-free-shopping.html">購物與退稅</a><a href="luggage-storage.html">寄放行李</a><a href="pharmacy-hospital.html">生病或受傷</a><a href="k-eta-entry-requirements.html">入境規定</a><a href="atm-foreign-card-cash.html">現金與ATM</a><a href="korea-power-plug-voltage.html">插頭與電壓</a><a href="gimpo-airport-to-seoul.html">金浦機場</a></nav></details>
   <p class="host-cta">🏠 在韓國經營民宿或旅館嗎?<a href="../hosts.html">把這份指南傳給你的房客</a>(韓文頁面)。</p>
-  <section class="related"><h2>相關指南</h2><ul><li><a href="incheon-airport-to-seoul.html">仁川機場怎麼到首爾市區?</a></li><li><a href="taxi.html">沒有韓國號碼能在韓國叫計程車嗎?</a></li><li><a href="atm-foreign-card-cash.html">在韓國能用外國卡領現金嗎?</a></li></ul></section>
-  <nav class="topics"><a href="mobile-data-sim.html">電話與上網</a><a href="incheon-airport-to-seoul.html">機場到市區</a><a href="maps.html">地圖</a><a href="taxi.html">計程車</a><a href="tmoney-subway-bus.html">地鐵與公車</a><a href="seoul-tourist-transit-pass.html">交通票券</a><a href="ktx-train-booking.html">KTX火車</a><a href="seoul-to-busan-k-tour-pass.html">釜山之旅</a><a href="kr-pass-korail-pass.html">KR Pass</a><a href="dmz-jsa-tour-booking.html">DMZ導覽</a><a href="restaurant-reservations.html">餐廳訂位</a><a href="food-delivery.html">叫外送</a><a href="translation.html">翻譯</a><a href="tax-free-shopping.html">購物與退稅</a><a href="luggage-storage.html">寄放行李</a><a href="pharmacy-hospital.html">生病或受傷</a><a href="k-eta-entry-requirements.html">入境規定</a><a href="atm-foreign-card-cash.html">現金與ATM</a><a href="korea-power-plug-voltage.html">插頭與電壓</a></nav>
   <section class="ask" aria-labelledby="ask-t-zh-tw"><h2 id="ask-t-zh-tw">沒找到需要的資訊嗎?</h2><p class="hint">留下你的問題。我們會補充到指南中;若留下電子郵件,也會回信。</p>
 <form class="ask-form" data-thanks="謝謝!已收到你的問題。"><textarea name="q" required maxlength="1000" aria-label="沒找到需要的資訊嗎?" placeholder="例如:用國外發行的卡可以訂 KTX 嗎?"></textarea>
 <input name="em" type="email" maxlength="120" autocomplete="email" aria-label="電子郵件(選填,用於回覆)" placeholder="電子郵件(選填,用於回覆)"><button class="btn" type="submit">送出問題</button><p class="fb-done" role="status"></p></form></section><p class="fb-line"><button type="button" class="linkbtn" data-feedback="">💬 提供意見</button></p><details class="about"><summary>關於這份指南</summary><div class="in">
 <p><b>EasyModeKorea</b> (Easy Mode Korea · 이지모드코리아)</p>
 <p>確認方式:每個答案都對照官方公告與近期回報確認。「說法不一」代表各來源說法不同,所以我們也列出備用方法。按「成功了」或「沒成功」可以幫助我們更新答案。</p><p>獨立指南,與文中列出的App或公司沒有合作關係。規定常有變動,使用前請在App中確認。</p><p><a href="changes.html">更新紀錄</a> · 在韓國經營民宿或旅館嗎?<a href="../hosts.html">把這份指南傳給你的房客</a>(韓文頁面)。</p>
-<p><a href="mobile-data-sim.html">在韓國需要韓國電話號碼嗎?</a> · <a href="incheon-airport-to-seoul.html">仁川機場怎麼到首爾市區?</a> · <a href="maps.html">Google地圖在韓國能用嗎?</a> · <a href="taxi.html">沒有韓國號碼能在韓國叫計程車嗎?</a> · <a href="tmoney-subway-bus.html">T-money可以用國外信用卡儲值嗎?</a> · <a href="seoul-tourist-transit-pass.html">首爾氣候同行卡觀光客票券值得買嗎?</a> · <a href="ktx-train-booking.html">外國人怎麼訂KTX?</a> · <a href="seoul-to-busan-k-tour-pass.html">從首爾怎麼去釜山?K-Tour Pass是什麼?</a> · <a href="kr-pass-korail-pass.html">KR Pass(Korail通票)值得買嗎?</a> · <a href="dmz-jsa-tour-booking.html">怎麼預約韓國的DMZ或JSA導覽?</a> · <a href="jeju-getting-around.html">在濟州島怎麼玩比較方便?</a> · <a href="restaurant-reservations.html">沒有韓國號碼能在韓國訂餐廳嗎?</a> · <a href="food-delivery.html">觀光客能在韓國叫外送嗎?</a> · <a href="translation.html">去韓國用哪個翻譯App最好?</a> · <a href="tax-free-shopping.html">在韓國購物怎麼退稅?</a> · <a href="luggage-storage.html">在首爾哪裡可以寄放行李?</a> · <a href="pharmacy-hospital.html">在韓國生病了怎麼辦?</a> · <a href="k-eta-entry-requirements.html">去韓國需要申請K-ETA嗎?</a> · <a href="atm-foreign-card-cash.html">在韓國能用外國卡領現金嗎?</a> · <a href="korea-power-plug-voltage.html">去韓國需要轉接頭嗎?</a></p></div></details>
+<p><a href="mobile-data-sim.html">在韓國需要韓國電話號碼嗎?</a> · <a href="incheon-airport-to-seoul.html">仁川機場怎麼到首爾市區?</a> · <a href="maps.html">Google地圖在韓國能用嗎?</a> · <a href="taxi.html">沒有韓國號碼能在韓國叫計程車嗎?</a> · <a href="tmoney-subway-bus.html">T-money可以用國外信用卡儲值嗎?</a> · <a href="seoul-tourist-transit-pass.html">首爾氣候同行卡觀光客票券值得買嗎?</a> · <a href="ktx-train-booking.html">外國人怎麼訂KTX?</a> · <a href="seoul-to-busan-k-tour-pass.html">從首爾怎麼去釜山?K-Tour Pass是什麼?</a> · <a href="kr-pass-korail-pass.html">KR Pass(Korail通票)值得買嗎?</a> · <a href="dmz-jsa-tour-booking.html">怎麼預約韓國的DMZ或JSA導覽?</a> · <a href="jeju-getting-around.html">在濟州島怎麼玩比較方便?</a> · <a href="restaurant-reservations.html">沒有韓國號碼能在韓國訂餐廳嗎?</a> · <a href="food-delivery.html">觀光客能在韓國叫外送嗎?</a> · <a href="translation.html">去韓國用哪個翻譯App最好?</a> · <a href="tax-free-shopping.html">在韓國購物怎麼退稅?</a> · <a href="luggage-storage.html">在首爾哪裡可以寄放行李?</a> · <a href="pharmacy-hospital.html">在韓國生病了怎麼辦?</a> · <a href="k-eta-entry-requirements.html">去韓國需要申請K-ETA嗎?</a> · <a href="atm-foreign-card-cash.html">在韓國能用外國卡領現金嗎?</a> · <a href="korea-power-plug-voltage.html">去韓國需要轉接頭嗎?</a> · <a href="gimpo-airport-to-seoul.html">從金浦機場怎麼到首爾市區?</a></p></div></details>
 </div>
 <div class="show" id="show" hidden role="dialog" aria-modal="true" aria-labelledby="show-lbl">
   <div class="lbl" id="show-lbl"></div><div class="ko" lang="ko" id="show-ko"></div>
@@ -318,7 +77,33 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !documen
 (function () {
   document.querySelectorAll("[data-show]").forEach(b => b.addEventListener("click", () => show(b.dataset.lbl, b.dataset.show, "", b.dataset.mean)));
   const saved = (store("wik-setup") || "visitor|ios").split("|");
-  const blocks = [...document.querySelectorAll(".card[data-p]")];
+  document.querySelectorAll("[data-copy]").forEach(b => b.addEventListener("click", async () => {
+    let ok = false;
+    try { await navigator.clipboard.writeText(b.dataset.copy); ok = true; } catch (e) {}
+    if (!ok) { const ta = document.createElement("textarea"); ta.value = b.dataset.copy; ta.setAttribute("readonly", ""); ta.style.cssText = "position:fixed;opacity:0"; document.body.append(ta); ta.select(); try { ok = document.execCommand("copy"); } catch (e) {} ta.remove(); }
+    if (!ok) { const t = b.querySelector("[lang=ko]") || b.closest(".say")?.querySelector(".say-ko"); if (t) { const r = document.createRange(); r.selectNodeContents(t); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); } return; }
+    const was = b.innerHTML; b.classList.add("done"); b.setAttribute("aria-label", b.dataset.done);
+    const tip = document.createElement("span"); tip.className = "tip"; tip.textContent = b.dataset.done; tip.setAttribute("role", "status"); b.append(tip);
+    setTimeout(() => { b.innerHTML = was; b.classList.remove("done"); b.removeAttribute("aria-label"); }, 1600);
+    count("copy/" + location.pathname, "copy korean");
+  }));
+  /* The stay address lives only in this browser (localStorage), never in a URL or a request. */
+  const ma = document.getElementById("myaddr");
+  if (ma) {
+    const has = document.getElementById("ma-has"), form = document.getElementById("ma-form"), inp = document.getElementById("ma-in");
+    const paint = () => {
+      const a = (store("emk-addr") || "").slice(0, 160);
+      has.hidden = !a; form.hidden = !!a;
+      if (a) { document.getElementById("ma-text").textContent = a; document.getElementById("ma-copy").dataset.copy = a; document.getElementById("ma-map").href = "https://map.naver.com/p/search/" + encodeURIComponent(a); }
+    };
+    form.addEventListener("submit", ev => { ev.preventDefault(); const v = inp.value.trim(); if (v) { store("emk-addr", v); count("addr-saved", "address saved"); } paint(); });
+    document.getElementById("ma-edit").addEventListener("click", () => { inp.value = store("emk-addr") || ""; has.hidden = true; form.hidden = false; inp.focus(); });
+    document.getElementById("ma-show").addEventListener("click", () => show(ma.dataset.card, ma.dataset.ko, store("emk-addr") || "", ma.dataset.mean));
+    ma.hidden = false; paint();
+  }
+  /* A link to a folded section opens it. */
+  const h = location.hash && document.getElementById(location.hash.slice(1)); if (h && h.tagName === "DETAILS") h.open = true;
+  const blocks = [...document.querySelectorAll(".pv[data-p]")];
   if (blocks.length < 2) return;
   let shown = 0;
   for (const b of blocks) { const ok = b.dataset.p === saved[0] && (!b.dataset.d || b.dataset.d === saved[1]); b.hidden = !ok; if (ok) shown++; }
@@ -327,6 +112,7 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !documen
   btn.addEventListener("click", () => { blocks.forEach(b => b.hidden = false); btn.hidden = true; });
 })();
 </script>
+<footer class="foot"><div class="wrap"><nav aria-label="EasyModeKorea"><a href="about.html">關於本站</a> · <a href="contact.html">聯絡我們</a> · <a href="changes.html">更新紀錄</a> · <a href="../hosts.html">給房東(韓文)</a></nav><p>EasyModeKorea · <a href="mailto:edandco.biz@gmail.com">edandco.biz@gmail.com</a></p></div></footer>
 <div class="sheet" id="fb" hidden role="dialog" aria-modal="true" aria-labelledby="fb-t"><div class="sheet-in">
   <div class="sheet-top"><h2 id="fb-t">什麼都可以告訴我們</h2><button type="button" class="btn ghost small" id="fb-close">關閉</button></div>
   <p class="hint">有錯誤、缺少的資訊、看不懂的地方或建議嗎?每則訊息我們都會看。</p>

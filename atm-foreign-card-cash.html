@@ -12,283 +12,40 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap"></noscript>
-<style>
-:root {
-  /* EasyModeKorea: bold cobalt hero with a yellow "Easy" stamp, then a sticky setup bar and
-     a scannable list of rows (icon, task, status). Detail opens in place; Korean cards open full screen. */
-  --bg: #f3f5fb;
-  --surface: #ffffff;
-  --ink: #0e1430;
-  --muted: #444f6b;
-  --line: #dfe3ee;
-  --brand: #2336e8;
-  --brand-ink: #ffffff;
-  --easy: #ffd23f;
-  --ok: #0f8a45; --ok-bg: #ddf4e7;
-  --warn: #a35f00; --warn-bg: #ffefcf;
-  --mixed: #5a3fd6; --mixed-bg: #ece8ff;
-  --bad: #c62828; --bad-bg: #fde5e5;
-  --display: "Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
-  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", "Apple SD Gothic Neo", "Hiragino Sans", "PingFang TC", sans-serif;
-  --ko: "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
-  color-scheme: light;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0b0f1e; --surface: #141a2e; --ink: #eef1fb; --muted: #aab3cc; --line: #273050;
-    --brand: #5b6cff; --easy: #ffd23f;
-    --ok: #5ad48c; --ok-bg: #11301f; --warn: #f2b453; --warn-bg: #352610;
-    --mixed: #b2a4ff; --mixed-bg: #261f4a; --bad: #ff8a80; --bad-bg: #3a1616;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #0b0f1e; --surface: #141a2e; --ink: #eef1fb; --muted: #aab3cc; --line: #273050;
-  --brand: #5b6cff; --easy: #ffd23f;
-  --ok: #5ad48c; --ok-bg: #11301f; --warn: #f2b453; --warn-bg: #352610;
-  --mixed: #b2a4ff; --mixed-bg: #261f4a; --bad: #ff8a80; --bad-bg: #3a1616;
-  color-scheme: dark;
-}
-* { box-sizing: border-box; }
-[hidden] { display: none !important; }
-html, body { margin: 0; }
-body { background: var(--bg); color: var(--ink); font: 400 17px/1.55 var(--body); -webkit-font-smoothing: antialiased; }
-a { color: var(--brand); }
-:focus-visible { outline: 3px solid var(--easy); outline-offset: 2px; border-radius: 8px; }
-.wrap { max-width: 760px; margin: 0 auto; padding: 0 16px 40px; }
-
-/* Hero */
-.hero { background: var(--brand); color: var(--brand-ink); padding: 18px 0 26px; }
-.hero .wrap { padding-bottom: 0; }
-.toprow { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
-.logo { font: 800 18px var(--display); color: inherit; text-decoration: none; letter-spacing: -0.01em; }
-.logo b { background: var(--easy); color: #0e1430; padding: 0 6px; border-radius: 6px; margin-left: 2px; }
-.langs { display: flex; gap: 10px; font-size: 14px; }
-.langs a { color: rgba(255,255,255,.82); text-decoration: none; display: inline-block; padding: 6px 2px; min-height: 24px; }
-.langs a[aria-current="page"] { color: #fff; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
-.mode { display: flex; align-items: center; gap: 10px; margin: 22px 0 8px; font: 700 13px var(--body); letter-spacing: .08em; text-transform: uppercase; }
-.mode s { opacity: .7; }
-.mode .arrow { opacity: .7; }
-.mode .easy { background: var(--easy); color: #0e1430; padding: 3px 10px; border-radius: 999px; }
-.hero h1 { font: 800 clamp(30px, 7.2vw, 46px)/1.06 var(--display); letter-spacing: -0.025em; margin: 0; text-wrap: balance; }
-.hero p { margin: 12px 0 0; font-size: 17px; color: rgba(255,255,255,.9); max-width: 58ch; }
-.hero .trust { font-size: 13px; color: rgba(255,255,255,.75); }
-
-/* Sticky setup bar */
-.setupbar { position: sticky; top: 0; z-index: 5; background: var(--surface); border-bottom: 1px solid var(--line); box-shadow: 0 6px 18px -14px rgba(14,20,48,.5); }
-.setupbar .wrap { padding: 10px 16px; display: grid; gap: 8px; }
-.setupbar .q { font: 700 12px var(--body); text-transform: uppercase; letter-spacing: .07em; color: var(--muted); }
-.seg { display: flex; gap: 6px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: 0 -16px; padding: 0 16px; }
-.seg::-webkit-scrollbar { display: none; }
-.seg label { position: relative; }
-.seg input { position: absolute; opacity: 0; pointer-events: none; }
-.seg span { display: inline-block; padding: 8px 12px; border-radius: 999px; border: 1.5px solid var(--line); font: 600 14px var(--body); cursor: pointer; background: var(--bg); white-space: nowrap; }
-.seg input:checked + span { background: var(--ink); color: var(--surface); border-color: var(--ink); }
-.seg input:focus-visible + span { outline: 3px solid var(--easy); outline-offset: 2px; }
-
-/* Score line */
-.score { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 18px 0 10px; font-weight: 600; }
-.hint { color: var(--muted); font-size: 14px; margin: 0 0 10px; }
-
-/* Rows */
-.rows { display: grid; gap: 10px; }
-.row { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
-.row > summary { list-style: none; display: grid; grid-template-columns: 44px 1fr 18px; align-items: start; gap: 12px; padding: 14px; cursor: pointer; }
-.row > summary::after { content: ""; width: 10px; height: 10px; margin-top: 16px; border-right: 2.5px solid var(--muted); border-bottom: 2.5px solid var(--muted); transform: rotate(45deg); }
-.row[open] > summary::after { transform: rotate(-135deg); margin-top: 20px; }
-.txt { display: grid; gap: 4px; min-width: 0; }
-.txt .top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.row > summary::-webkit-details-marker { display: none; }
-.ic { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; }
-.ic svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.row.ok .ic { background: var(--ok-bg); color: var(--ok); } .row.warn .ic { background: var(--warn-bg); color: var(--warn); }
-.row.mixed .ic { background: var(--mixed-bg); color: var(--mixed); } .row.bad .ic { background: var(--bad-bg); color: var(--bad); }
-.row .name { font: 700 18px/1.25 var(--body); }
-.row .sub { font: 400 14px/1.4 var(--body); color: var(--muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.row[open] .sub { display: none; }
-.pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font: 700 13px var(--body); white-space: nowrap; }
-.pill.ok { color: var(--ok); background: var(--ok-bg); } .pill.warn { color: var(--warn); background: var(--warn-bg); }
-.pill.mixed { color: var(--mixed); background: var(--mixed-bg); } .pill.bad { color: var(--bad); background: var(--bad-bg); }
-.row[open] > summary { border-bottom: 1px solid var(--line); }
-.body { padding: 14px 16px 16px; display: grid; gap: 12px; }
-.verdict { font-weight: 700; margin: 0; }
-.steps { margin: 0; padding: 0; list-style: none; counter-reset: s; display: grid; gap: 8px; }
-.steps li { counter-increment: s; display: grid; grid-template-columns: 26px 1fr; gap: 8px; }
-.steps li::before { content: counter(s); width: 24px; height: 24px; border-radius: 50%; background: var(--ink); color: var(--surface); font: 700 13px/24px var(--body); text-align: center; }
-.fallback { background: var(--bg); border-radius: 12px; padding: 10px 12px; margin: 0; font-size: 15px; }
-.fallback b { display: block; font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-bottom: 2px; }
-.actions { display: flex; gap: 8px; flex-wrap: wrap; }
-.btn { display: inline-flex; align-items: center; gap: 6px; font: 700 15px var(--body); padding: 11px 16px; border-radius: 12px; border: 0; background: var(--brand); color: #fff; cursor: pointer; text-decoration: none; }
-.btn.alt { background: var(--easy); color: #0e1430; }
-.btn.ghost { background: transparent; color: var(--brand); border: 1.5px solid var(--line); }
-.foot { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; font-size: 13px; color: var(--muted); }
-.foot details summary { cursor: pointer; }
-.foot ul { margin: 6px 0 0; padding-left: 18px; }
-.report { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
-.report button { font: 600 13px var(--body); padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
-.report button[aria-pressed="true"] { background: var(--ink); color: var(--surface); border-color: var(--ink); }
-
-/* Host stay card */
-.stay { background: var(--surface); border: 2px solid var(--brand); border-radius: 18px; padding: 16px; margin: 18px 0 6px; display: grid; gap: 12px; }
-.stay h2 { font: 800 22px/1.2 var(--display); margin: 0; }
-.addr { font: 800 24px/1.35 var(--ko); word-break: keep-all; }
-.kv { display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; margin: 0; font-size: 15px; }
-.kv dt { color: var(--muted); } .kv dd { margin: 0; font-weight: 600; }
-
-/* Sections */
-.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; margin: 14px 0; }
-.panel > summary { list-style: none; cursor: pointer; padding: 16px; font: 800 20px var(--display); display: flex; justify-content: space-between; align-items: center; }
-.panel > summary::-webkit-details-marker { display: none; }
-.panel > summary::after { content: "+"; font: 400 26px var(--body); color: var(--muted); }
-.panel[open] > summary::after { content: "–"; }
-.panel .in { padding: 0 16px 16px; display: grid; gap: 10px; }
-.panel ol { margin: 0; padding-left: 22px; display: grid; gap: 8px; }
-.timeline b { display: block; }
-.copied { font-size: 14px; color: var(--muted); }
-.related { margin: 22px 0 6px; }
-.related h2 { font: 700 18px var(--display); margin: 0 0 8px; }
-.related ul { margin: 0; padding-left: 20px; }
-.related li { margin: 4px 0; }
-.topics { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0; }
-.topics a { padding: 8px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); text-decoration: none; font-size: 14px; font-weight: 600; color: var(--ink); }
-footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-top: 20px; }
-
-/* Topic pages */
-.topic-hero h1 { font-size: clamp(26px, 6vw, 38px); }
-.card { background: var(--surface); border: 1px solid var(--line); border-left: 6px solid var(--line); border-radius: 16px; padding: 16px; display: grid; gap: 10px; }
-.card.ok { border-left-color: var(--ok); } .card.warn { border-left-color: var(--warn); } .card.mixed { border-left-color: var(--mixed); } .card.bad { border-left-color: var(--bad); }
-.card h2 { font: 700 18px/1.3 var(--body); margin: 0; }
-.cards { display: grid; gap: 12px; margin: 16px 0; }
-.card[hidden] { display: none; }
-.linkbtn { background: none; border: 0; color: var(--brand); font: 600 15px var(--body); cursor: pointer; padding: 4px 0; text-decoration: underline; justify-self: start; }
-.notes { font-size: 14px; color: var(--muted); }
-
-/* Full-screen show card */
-.show { position: fixed; inset: 0; z-index: 50; background: #fff; color: #0e1430; display: grid; grid-template-rows: auto 1fr auto; padding: 20px; }
-.show[hidden] { display: none; }
-.show .lbl { font: 700 14px var(--body); text-transform: uppercase; letter-spacing: .08em; color: #444f6b; }
-.show .ko { align-self: center; font: 800 clamp(34px, 9vw, 64px)/1.3 var(--ko); word-break: keep-all; }
-.show .ko small { display: block; font-size: .6em; font-weight: 700; margin-top: 16px; }
-.show .mean { font-size: 16px; color: #444f6b; margin: 0 0 12px; }
-.show .btn { justify-self: stretch; justify-content: center; background: #0e1430; color: #fff; font-size: 17px; padding: 14px; }
-@media (prefers-reduced-motion: no-preference) { .row > summary { transition: background .15s; } .row > summary:hover { background: var(--bg); } }
-/* One question at a time */
-.onb { margin: 18px 0 8px; }
-.onb h2 { font: 800 clamp(22px,6vw,28px)/1.2 var(--display); margin: 0 0 14px; letter-spacing: -.01em; }
-.opts-big { display: grid; gap: 10px; }
-.opts-big.two { grid-template-columns: 1fr 1fr; }
-.opt-big { text-align: left; display: grid; gap: 3px; padding: 18px; border-radius: 18px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); font: inherit; cursor: pointer; min-height: 64px; transition: transform .08s, border-color .15s; }
-.opt-big b { font: 700 18px var(--body); }
-.opt-big span { color: var(--muted); font-size: 14px; }
-.opt-big:hover, .opt-big:focus-visible { border-color: var(--brand); outline: none; }
-.opt-big:active { transform: scale(.98); }
-.linkbtn { background: none; border: 0; color: var(--brand); font: 600 15px var(--body); padding: 12px 0; cursor: pointer; }
-.mybar { position: sticky; top: 0; z-index: 5; background: var(--surface); border-bottom: 1px solid var(--line); }
-.mybar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 16px; font-weight: 600; font-size: 14px; }
-.btn.small { padding: 6px 12px; min-height: 0; font-size: 14px; }
-.greet { font: 700 20px/1.3 var(--display); margin: 18px 0 4px; }
-.search { display: block; margin: 10px 0 12px; }
-.search input { width: 100%; box-sizing: border-box; font: 16px var(--body); padding: 13px 16px; border-radius: 14px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); }
-.search input:focus { border-color: var(--brand); outline: none; }
-.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-.banner { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 14px 0 0; padding: 12px 14px; border-radius: 14px; background: var(--easy); color: #0e1430; font-weight: 600; }
-.progress { display: grid; gap: 6px; margin-bottom: 10px; font-weight: 600; font-size: 14px; }
-.progress .bar { height: 8px; border-radius: 99px; background: var(--line); overflow: hidden; }
-.progress .bar i { display: block; height: 100%; width: 0; background: var(--brand); transition: width .25s; }
-.checks { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; }
-.checks li { display: flex; gap: 12px; align-items: flex-start; padding: 8px 0; }
-.checks input { width: 22px; height: 22px; flex: none; margin: 1px 0 0; accent-color: var(--brand); }
-.checks input:checked + label { color: var(--muted); text-decoration: line-through; }
-@media (prefers-reduced-motion: reduce) { .opt-big, .progress .bar i { transition: none; } }
-.ret .hero .lede, .ret .hero .trust, .ret .hero .mode { display: none; }
-.ret .hero h1 { font-size: 22px; margin: 6px 0 0; }
-.pre:not(:has(> :not([hidden]))) { display: none; }
-/* Calm layout: one line per row, details folded away */
-.row summary .txt { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-width: 0; }
-.row summary .name { font: 700 18px var(--body); }
-.row summary { padding: 16px; }
-.row .body { padding: 4px 18px 18px; line-height: 1.6; }
-.row .body .verdict { font-size: 17px; font-weight: 600; margin: 0 0 12px; }
-.row .body > details { margin-top: 14px; font-size: 14px; color: var(--muted); }
-.row .body > details > summary { cursor: pointer; padding: 6px 0; }
-.row .body .report { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 8px; }
-.rows { display: grid; gap: 10px; }
-.about { margin: 28px 0 40px; font-size: 14px; color: var(--muted); }
-.about summary { cursor: pointer; padding: 8px 0; }
-.about p { line-height: 1.6; }
-.hero { padding-bottom: 14px; }
-.hero h1 { font-size: 26px; margin: 10px 0 0; }
-.row { scroll-margin-top: 64px; }
-.row summary { align-items: center; }
-.why { color: var(--muted); margin: -6px 0 16px; font-size: 16px; }
-.panel summary .count { color: var(--muted); font-weight: 600; margin-left: 6px; }
-.stay { margin-top: 16px; }
-.checks .stage { display: block; font: 700 13px var(--body); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); padding: 14px 0 2px; }
-.hero + .wrap { padding-top: 16px; }
-.bar-btns { display: flex; gap: 6px; flex: none; }
-.sheet { position: fixed; inset: 0; z-index: 40; background: rgba(8,12,30,.45); display: flex; align-items: flex-end; justify-content: center; }
-.sheet-in { background: var(--surface); color: var(--ink); width: 100%; max-width: 560px; max-height: 88vh; overflow: auto; border-radius: 22px 22px 0 0; padding: 18px 16px 28px; }
-.sheet-top { display: flex; align-items: center; justify-content: space-between; }
-.sheet-top h2 { margin: 0; font-size: 22px; }
-.sub-h { font: 700 13px var(--body); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 18px 0 8px; }
-.calls { display: grid; gap: 8px; }
-.call { display: flex; align-items: center; gap: 14px; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 14px; text-decoration: none; color: var(--ink); }
-.call b { font: 800 24px var(--display); color: var(--brand); min-width: 64px; }
-.call span { font-size: 15px; line-height: 1.4; }
-.show { z-index: 50; }
-.toast { position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%); background: var(--ink); color: var(--surface); padding: 10px 16px; border-radius: 99px; font-size: 14px; z-index: 30; max-width: 92vw; }
-.fb-line { margin: 28px 0 0; }
-#fb-form { display: grid; gap: 6px; margin-top: 10px; }
-#fb-form .fl { font-weight: 700; margin-top: 8px; }
-#fb-form textarea, #fb-form input { width: 100%; box-sizing: border-box; font: 16px var(--body); padding: 12px 14px; border-radius: 12px; border: 1.5px solid var(--line); background: var(--bg); color: var(--ink); }
-#fb-form textarea { min-height: 120px; resize: vertical; }
-#fb-form .btn { margin-top: 12px; width: 100%; justify-content: center; }
-.fb-done { font-weight: 600; color: var(--brand); min-height: 22px; }
-.about { margin-top: 8px; }
-.more-h { font: 700 13px var(--body); text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin: 18px 4px 2px; }
-.ask { margin: 28px 0 0; padding: 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
-.ask h2 { margin: 0 0 4px; font: 800 20px/1.2 var(--display); }
-.ask .hint { margin: 0 0 12px; }
-.ask-form { display: grid; gap: 10px; }
-.ask-form textarea, .ask-form input { width: 100%; box-sizing: border-box; padding: 12px; border: 1px solid var(--line); border-radius: 10px; font: 16px/1.4 var(--body); background: var(--bg); color: var(--ink); }
-.ask-form textarea { min-height: 88px; resize: vertical; }
-.ask-form .btn { justify-self: start; }
-.ask-form .fb-done { margin: 0; min-height: 0; }
-
-/* Static guide list on the home page (crawlable, visible to everyone) */
-.guide-list { margin: 8px auto 28px; }
-.guide-list h2 { font: 700 20px var(--display); margin: 0 0 10px; }
-.guide-list ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-.guide-list li { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
-.guide-list a { font-weight: 700; display: block; margin-bottom: 2px; }
-.guide-list span { color: var(--muted); font-size: 15px; }
-
-.checked-line { margin: 10px 2px 0; font-size: 14px; color: var(--muted); }
-.host-cta { margin: 18px 0 0; padding: 12px 14px; border: 1px dashed var(--line); border-radius: 12px; font-size: 15px; color: var(--muted); }
-</style>
+<link rel="stylesheet" href="style.css?v=82b0412d">
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Cash in Korea with a foreign card: Global ATMs and fees (2026)", "description": "Korea is mostly cashless, but some small shops and markets still want cash. Many Korean ATMs refuse foreign cards, so it helps to know which ones work.", "datePublished": "2026-11-19", "dateModified": "2026-11-17", "inLanguage": "en", "url": "https://easymodekorea.com/atm-foreign-card-cash.html", "mainEntityOfPage": "https://easymodekorea.com/atm-foreign-card-cash.html", "image": "https://easymodekorea.com/og.png", "author": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/"}, "publisher": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/", "logo": {"@type": "ImageObject", "url": "https://easymodekorea.com/icon-512.png"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "EasyModeKorea", "item": "https://easymodekorea.com/"}, {"@type": "ListItem", "position": 2, "name": "Cash & ATMs", "item": "https://easymodekorea.com/atm-foreign-card-cash.html"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can I withdraw cash in Korea with a foreign card?", "acceptedAnswer": {"@type": "Answer", "text": "Foreign debit cards work at Global ATMs and many convenience-store ATMs, usually with a fee. Look for ATMs marked \"Global\". Bank ATMs in busy areas such as Myeongdong and Hongdae, and convenience stores such as CU, GS25 and 7-Eleven, often have them. Use a debit card enabled for international withdrawals. A credit card withdrawal counts as a cash advance, with extra fees and interest. If the machine offers to charge you in your home currency, choose won (KRW). Otherwise you get a poor conversion rate."}}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Cash in Korea with a foreign card: Global ATMs and fees (2026)", "description": "Korea is mostly cashless, but some small shops and markets still want cash. Many Korean ATMs refuse foreign cards, so it helps to know which ones work.", "datePublished": "2026-11-19", "dateModified": "2026-11-20", "inLanguage": "en", "url": "https://easymodekorea.com/atm-foreign-card-cash.html", "mainEntityOfPage": "https://easymodekorea.com/atm-foreign-card-cash.html", "image": "https://easymodekorea.com/og.png", "author": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/about.html"}, "publisher": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/", "logo": {"@type": "ImageObject", "url": "https://easymodekorea.com/icon-512.png"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "EasyModeKorea", "item": "https://easymodekorea.com/"}, {"@type": "ListItem", "position": 2, "name": "Cash & ATMs", "item": "https://easymodekorea.com/atm-foreign-card-cash.html"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can I withdraw cash in Korea with a foreign card?", "acceptedAnswer": {"@type": "Answer", "text": "Foreign debit cards work at Global ATMs and many convenience-store ATMs, usually with a fee. Look for ATMs marked \"Global\". Bank ATMs in busy areas such as Myeongdong and Hongdae, and convenience stores such as CU, GS25 and 7-Eleven, often have them. Use a debit card enabled for international withdrawals. A credit card withdrawal counts as a cash advance, with extra fees and interest. If the machine offers to charge you in your home currency, choose won (KRW). Otherwise you get a poor conversion rate."}}, {"@type": "Question", "name": "Do I need cash in Korea?", "acceptedAnswer": {"@type": "Answer", "text": "A little. Cards work in most shops, taxis and restaurants, but markets, street food and T-money top-ups often need cash."}}, {"@type": "Question", "name": "Is it better to exchange money at the airport?", "acceptedAnswer": {"@type": "Answer", "text": "Airport counters are convenient for a small first amount. Rates at city counters are often better, so compare before exchanging a lot."}}, {"@type": "Question", "name": "Which won amount should I carry?", "acceptedAnswer": {"@type": "Answer", "text": "Enough for a day of small purchases. Withdraw again when you need it instead of carrying a lot."}}, {"@type": "Question", "name": "Can I pay by card in a taxi?", "acceptedAnswer": {"@type": "Answer", "text": "Usually yes, and app taxis charge the card saved in the app. See our taxi guide."}}]}]</script>
 </head>
 <body>
+<a class="skip" href="#answer">Skip to the answer</a>
 <header class="hero"><div class="wrap">
   <div class="toprow"><a class="logo" href="./">EasyMode<b>Korea</b></a><nav class="langs" aria-label="Language"><a href="atm-foreign-card-cash.html" hreflang="en" lang="en" aria-current="page">English</a><a href="ja/atm-foreign-card-cash.html" hreflang="ja" lang="ja">日本語</a><a href="zh-tw/atm-foreign-card-cash.html" hreflang="zh-Hant-TW" lang="zh-Hant-TW">繁體中文</a><a href="zh-cn/atm-foreign-card-cash.html" hreflang="zh-CN" lang="zh-CN">简体中文</a><a href="vi/atm-foreign-card-cash.html" hreflang="vi" lang="vi">Tiếng Việt</a></nav></div>
-  <h1>Can I withdraw cash in Korea with a foreign card?</h1><p class="lede">Korea is mostly cashless, but some small shops and markets still want cash. Many Korean ATMs refuse foreign cards, so it helps to know which ones work.</p>
+  <h1>Can I withdraw cash in Korea with a foreign card?</h1>
 </div></header>
 <div class="wrap">
-  <div class="actions"><a class="btn" href="./#task-cash">Check your own setup</a><button class="btn alt" type="button" data-show="외국 카드 되는 ATM이 어디 있어요?" data-lbl="Show staff" data-mean="Means: Where is an ATM that takes foreign cards?">🗣 Where is an ATM that takes foreign cards?</button></div>
-  <main class="cards"><article class="card warn"><div class="actions" style="justify-content:space-between;align-items:center"><h2>One extra step</h2><span class="pill warn">One extra step</span></div>
-<p class="verdict">Foreign debit cards work at Global ATMs and many convenience-store ATMs, usually with a fee.</p><ol class="steps"><li>Look for ATMs marked &quot;Global&quot;. Bank ATMs in busy areas such as Myeongdong and Hongdae, and convenience stores such as CU, GS25 and 7-Eleven, often have them.</li><li>Use a debit card enabled for international withdrawals. A credit card withdrawal counts as a cash advance, with extra fees and interest.</li><li>If the machine offers to charge you in your home currency, choose won (KRW). Otherwise you get a poor conversion rate.</li></ol><p class="fallback"><b>If that fails</b>If one machine rejects your card, try another at a major bank such as KB or Woori, or exchange cash at a bank or exchange counter.</p></article><button class="linkbtn" type="button" id="show-all" hidden>Show answers for other setups</button></main>
-  <p class="checked-line">Checked <time datetime="2026-11-17">17 Nov 2026</time></p>
-  <details class="panel" open><summary>Sources and notes</summary><div class="in notes"><ul><li>Checked 17 Nov 2026</li><li>Expect a machine fee plus your own bank&#x27;s foreign fee. Amounts vary by machine and card issuer, so ask your bank before you fly.</li><li>Woori Bank began issuing a prepaid tourist card at Incheon Airport in May 2026.</li><li><a href="https://www.haniseoul.com/travels/korea/atm-korea" rel="noopener" target="_blank">HaniSeoul: ATMs in Korea</a></li><li><a href="https://wise.com/au/blog/atms-in-south-korea" rel="noopener" target="_blank">Wise: ATMs in South Korea, cards and fees</a></li><li><a href="https://www.koreatimes.co.kr/amp/business/banking-finance/20260513/woori-bank-targets-foreign-tourists-with-prepaid-card-issued-at-airport" rel="noopener" target="_blank">Korea Times: Woori Bank prepaid card for tourists (May 2026)</a></li></ul></div></details>
-  <p class="host-cta">🏠 Run a guesthouse or rental in Korea? <a href="hosts.html">Send this guide to your guests</a> (숙소 사장님용 안내).</p>
+  <main id="answer">
+  <section class="answer warn"><div class="pv warn"><div class="ans-top"><h2 class="sr">One extra step</h2><span class="pill warn">One extra step</span></div><p class="verdict">Foreign debit cards work at Global ATMs and many convenience-store ATMs, usually with a fee.</p></div><dl class="glance"><div><dt>Where</dt><dd>ATMs marked Global, and convenience stores such as CU, GS25, 7-Eleven <time class="ck" datetime="2026-11-17">✓ 17 Nov 2026</time></dd></div><div><dt>Cost</dt><dd>A machine fee plus your bank&#x27;s fee. Choose KRW, not your currency. <time class="ck" datetime="2026-11-17">✓ 17 Nov 2026</time></dd></div></dl><p class="stamp">Checked against <a href="https://www.haniseoul.com/travels/korea/atm-korea" rel="noopener" target="_blank">HaniSeoul: ATMs in Korea</a> on <time datetime="2026-11-17">17 Nov 2026</time></p></section>
+  <button class="linkbtn" type="button" id="show-all" hidden>Show answers for other setups</button>
+  <section class="do" aria-labelledby="do-cash"><h2 id="do-cash" class="sr">Step by step, first time</h2><div class="pv"><ol class="steps"><li>Look for ATMs marked &quot;Global&quot;. Bank ATMs in busy areas such as Myeongdong and Hongdae, and convenience stores such as CU, GS25 and 7-Eleven, often have them.</li><li>Use a debit card enabled for international withdrawals. A credit card withdrawal counts as a cash advance, with extra fees and interest.</li><li>If the machine offers to charge you in your home currency, choose won (KRW). Otherwise you get a poor conversion rate.</li></ol><p class="fallback"><b>If that fails</b>If one machine rejects your card, try another at a major bank such as KB or Woori, or exchange cash at a bank or exchange counter.</p></div></section>
+  <section class="says" aria-labelledby="say-cash"><h2 id="say-cash">Show this to staff</h2><div class="say"><p class="say-ko" lang="ko">외국 카드 되는 ATM이 어디 있어요?</p><p class="say-mean">Where is an ATM that takes foreign cards?</p><div class="actions"><button class="btn alt" type="button" data-show="외국 카드 되는 ATM이 어디 있어요?" data-lbl="Show staff" data-mean="Means: Where is an ATM that takes foreign cards?">🗣 Show full screen</button><button class="btn ghost" type="button" data-copy="외국 카드 되는 ATM이 어디 있어요?" data-done="✓ Copied">📋 Copy</button></div></div></section>
+  <section class="names" aria-labelledby="nm-cash"><h2 id="nm-cash">Korean names to copy (paste into Naver Map or show a driver)</h2><ul><li><button class="chip" type="button" data-copy="글로벌 ATM" data-done="✓ Copied"><span lang="ko">글로벌 ATM</span><small>Global ATM</small><i aria-hidden="true">📋</i></button></li><li><button class="chip" type="button" data-copy="환전소" data-done="✓ Copied"><span lang="ko">환전소</span><small>Currency exchange</small><i aria-hidden="true">📋</i></button></li></ul></section>
+  
+  <div class="actions"><a class="btn" href="./#task-cash">Check your own setup</a></div>
+  <details class="more deep" id="st-cash"><summary>Step by step, first time</summary><div class="in"><ol class="steps full"><li>Before you fly, ask your bank to allow international ATM withdrawals on your debit card, and note your daily limit and fees.</li><li>In Korea, look for ATMs marked Global or showing your card network&#x27;s logo. Bank branches in busy areas, subway stations and convenience stores often have them.<!-- screenshot: cash-global-atm --></li><li>Press the English button, choose withdrawal, and pick an amount. Many machines have a per-withdrawal cap, so you may need two withdrawals.</li><li>If the machine offers to charge you in your home currency, choose won (KRW). The conversion it offers is usually worse.<!-- screenshot: cash-krw-choice --></li><li>Keep a little cash for markets, street food, small shops and topping up <a href="tmoney-subway-bus.html">T-money</a>. Cards work almost everywhere else.</li><li>Exchanging cash instead? Bank and licensed exchange counters work too. Compare the rate shown before you hand over money.</li></ol></div></details>
+<details class="more deep" id="er-cash"><summary>Common problems and fixes</summary><div class="in"><ul class="errs"><li><p class="prob"><b>The ATM rejects your card.</b></p><p>Try a Global ATM at another bank or a convenience store. Not every machine takes foreign cards.</p></li><li><p class="prob"><b>The ATM says the transaction is not allowed.</b></p><p>Your bank may be blocking it. Check your bank&#x27;s app for a block or a travel setting, or call your bank.</p></li><li><p class="prob"><b>You were charged a cash-advance fee.</b></p><p>That happens when you withdraw with a credit card. Use a debit card for cash where you can.</p></li><li><p class="prob"><b>The machine&#x27;s limit is lower than you need.</b></p><p>Withdraw twice, or use another bank&#x27;s machine. Each withdrawal may carry a fee.</p></li></ul></div></details>
+<details class="more deep faq" id="fq-cash"><summary>Questions people ask</summary><div class="in"><h3>Do I need cash in Korea?</h3><p>A little. Cards work in most shops, taxis and restaurants, but markets, street food and T-money top-ups often need cash.</p><h3>Is it better to exchange money at the airport?</h3><p>Airport counters are convenient for a small first amount. Rates at city counters are often better, so compare before exchanging a lot.</p><h3>Which won amount should I carry?</h3><p>Enough for a day of small purchases. Withdraw again when you need it instead of carrying a lot.</p><h3>Can I pay by card in a taxi?</h3><p>Usually yes, and app taxis charge the card saved in the app. See our taxi guide.</p></div></details>
+<details class="more deep" id="ct-cash"><summary>Official and primary sources</summary><div class="in"><ul class="cites"><li><a href="https://www.haniseoul.com/travels/korea/atm-korea" rel="noopener" target="_blank">HaniSeoul: ATMs in Korea</a></li><li><a href="https://wise.com/au/blog/atms-in-south-korea" rel="noopener" target="_blank">Wise: ATMs in South Korea, cards and fees</a></li><li><a href="https://www.koreatimes.co.kr/amp/business/banking-finance/20260513/woori-bank-targets-foreign-tourists-with-prepaid-card-issued-at-airport" rel="noopener" target="_blank">Korea Times: Woori Bank prepaid card for tourists (May 2026)</a></li></ul></div></details>
+  <details class="more"><summary>Sources and notes</summary><div class="in notes"><p>Korea is mostly cashless, but some small shops and markets still want cash. Many Korean ATMs refuse foreign cards, so it helps to know which ones work.</p><ul><li>Checked 17 Nov 2026</li><li>Expect a machine fee plus your own bank&#x27;s foreign fee. Amounts vary by machine and card issuer, so ask your bank before you fly.</li><li>Woori Bank began issuing a prepaid tourist card at Incheon Airport in May 2026.</li><li><a href="https://www.haniseoul.com/travels/korea/atm-korea" rel="noopener" target="_blank">HaniSeoul: ATMs in Korea</a></li><li><a href="https://wise.com/au/blog/atms-in-south-korea" rel="noopener" target="_blank">Wise: ATMs in South Korea, cards and fees</a></li><li><a href="https://www.koreatimes.co.kr/amp/business/banking-finance/20260513/woori-bank-targets-foreign-tourists-with-prepaid-card-issued-at-airport" rel="noopener" target="_blank">Korea Times: Woori Bank prepaid card for tourists (May 2026)</a></li></ul></div></details>
+  </main>
   <section class="related"><h2>Related guides</h2><ul><li><a href="tmoney-subway-bus.html">Can I top up T-money with a foreign card?</a></li><li><a href="tax-free-shopping.html">How do I get a tax refund when shopping in Korea?</a></li><li><a href="k-eta-entry-requirements.html">Do I need K-ETA to visit Korea?</a></li></ul></section>
-  <nav class="topics"><a href="mobile-data-sim.html">Phone &amp; data</a><a href="incheon-airport-to-seoul.html">Airport to city</a><a href="maps.html">Maps</a><a href="taxi.html">Taxi</a><a href="tmoney-subway-bus.html">Subway &amp; bus</a><a href="seoul-tourist-transit-pass.html">Transit pass</a><a href="ktx-train-booking.html">KTX trains</a><a href="seoul-to-busan-k-tour-pass.html">Busan trip</a><a href="kr-pass-korail-pass.html">KR Pass</a><a href="dmz-jsa-tour-booking.html">DMZ tour</a><a href="jeju-getting-around.html">Jeju transport</a><a href="restaurant-reservations.html">Restaurant booking</a><a href="food-delivery.html">Food delivery</a><a href="translation.html">Translation</a><a href="tax-free-shopping.html">Shopping &amp; tax refund</a><a href="luggage-storage.html">Luggage</a><a href="pharmacy-hospital.html">Sick or hurt</a><a href="k-eta-entry-requirements.html">Entry rules</a><a href="korea-power-plug-voltage.html">Power plugs</a></nav>
+  <details class="more"><summary>All guides</summary><nav class="topics"><a href="mobile-data-sim.html">Phone &amp; data</a><a href="incheon-airport-to-seoul.html">Airport to city</a><a href="maps.html">Maps</a><a href="taxi.html">Taxi</a><a href="tmoney-subway-bus.html">Subway &amp; bus</a><a href="seoul-tourist-transit-pass.html">Transit pass</a><a href="ktx-train-booking.html">KTX trains</a><a href="seoul-to-busan-k-tour-pass.html">Busan trip</a><a href="kr-pass-korail-pass.html">KR Pass</a><a href="dmz-jsa-tour-booking.html">DMZ tour</a><a href="jeju-getting-around.html">Jeju transport</a><a href="restaurant-reservations.html">Restaurant booking</a><a href="food-delivery.html">Food delivery</a><a href="translation.html">Translation</a><a href="tax-free-shopping.html">Shopping &amp; tax refund</a><a href="luggage-storage.html">Luggage</a><a href="pharmacy-hospital.html">Sick or hurt</a><a href="k-eta-entry-requirements.html">Entry rules</a><a href="korea-power-plug-voltage.html">Power plugs</a><a href="gimpo-airport-to-seoul.html">Gimpo Airport</a></nav></details>
+  <p class="host-cta">🏠 Run a guesthouse or rental in Korea? <a href="hosts.html">Send this guide to your guests</a> (숙소 사장님용 안내).</p>
   <section class="ask" aria-labelledby="ask-t-en"><h2 id="ask-t-en">Didn&#x27;t find what you need?</h2><p class="hint">Ask your question. We answer by adding it to the guides, and by email if you leave one.</p>
 <form class="ask-form" data-thanks="Thanks! Your question has been sent."><textarea name="q" required maxlength="1000" aria-label="Didn&#x27;t find what you need?" placeholder="e.g. Can I book a KTX seat with a card from my home country?"></textarea>
 <input name="em" type="email" maxlength="120" autocomplete="email" aria-label="Email (optional, for a reply)" placeholder="Email (optional, for a reply)"><button class="btn" type="submit">Send question</button><p class="fb-done" role="status"></p></form></section><p class="fb-line"><button type="button" class="linkbtn" data-feedback="">💬 Send feedback</button></p><details class="about"><summary>About this guide</summary><div class="in">
 <p><b>EasyModeKorea</b> (Easy Mode Korea · 이지모드코리아)</p>
 <p>How we check: each answer is checked against official notices and recent reports. &quot;Mixed reports&quot; means sources disagree, so we show a backup route too. Tap &quot;It worked&quot; or &quot;It failed&quot; to help keep answers current.</p><p>Independent guide. Not affiliated with any app or company listed. Rules change often; confirm in the app before you rely on it.</p><p><a href="changes.html">What changed</a> · Run a guesthouse or rental in Korea? <a href="hosts.html">Send this guide to your guests</a> (숙소 사장님용 안내).</p>
-<p><a href="mobile-data-sim.html">Do I need a Korean phone number in Korea?</a> · <a href="incheon-airport-to-seoul.html">How do I get from Incheon Airport to Seoul?</a> · <a href="maps.html">Does Google Maps work in Korea?</a> · <a href="taxi.html">Can I call a taxi in Korea without a Korean number?</a> · <a href="tmoney-subway-bus.html">Can I top up T-money with a foreign card?</a> · <a href="seoul-tourist-transit-pass.html">Is the Seoul Climate Card tourist pass worth buying?</a> · <a href="ktx-train-booking.html">How do I book a KTX train as a foreigner?</a> · <a href="seoul-to-busan-k-tour-pass.html">How do I get from Seoul to Busan, and what is the K-Tour Pass?</a> · <a href="kr-pass-korail-pass.html">Is the KR Pass (Korail pass) worth it?</a> · <a href="dmz-jsa-tour-booking.html">How do I book a DMZ or JSA tour in Korea?</a> · <a href="jeju-getting-around.html">How do I get around Jeju as a tourist?</a> · <a href="restaurant-reservations.html">Can I book restaurants in Korea without a Korean number?</a> · <a href="food-delivery.html">Can I order food delivery in Korea as a tourist?</a> · <a href="translation.html">What is the best translation app for Korea?</a> · <a href="tax-free-shopping.html">How do I get a tax refund when shopping in Korea?</a> · <a href="luggage-storage.html">Where can I store luggage in Seoul?</a> · <a href="pharmacy-hospital.html">What do I do if I get sick in Korea?</a> · <a href="k-eta-entry-requirements.html">Do I need K-ETA to visit Korea?</a> · <a href="atm-foreign-card-cash.html">Can I withdraw cash in Korea with a foreign card?</a> · <a href="korea-power-plug-voltage.html">Do I need a plug adapter in Korea?</a></p></div></details>
+<p><a href="mobile-data-sim.html">Do I need a Korean phone number in Korea?</a> · <a href="incheon-airport-to-seoul.html">How do I get from Incheon Airport to Seoul?</a> · <a href="maps.html">Does Google Maps work in Korea?</a> · <a href="taxi.html">Can I call a taxi in Korea without a Korean number?</a> · <a href="tmoney-subway-bus.html">Can I top up T-money with a foreign card?</a> · <a href="seoul-tourist-transit-pass.html">Is the Seoul Climate Card tourist pass worth buying?</a> · <a href="ktx-train-booking.html">How do I book a KTX train as a foreigner?</a> · <a href="seoul-to-busan-k-tour-pass.html">How do I get from Seoul to Busan, and what is the K-Tour Pass?</a> · <a href="kr-pass-korail-pass.html">Is the KR Pass (Korail pass) worth it?</a> · <a href="dmz-jsa-tour-booking.html">How do I book a DMZ or JSA tour in Korea?</a> · <a href="jeju-getting-around.html">How do I get around Jeju as a tourist?</a> · <a href="restaurant-reservations.html">Can I book restaurants in Korea without a Korean number?</a> · <a href="food-delivery.html">Can I order food delivery in Korea as a tourist?</a> · <a href="translation.html">What is the best translation app for Korea?</a> · <a href="tax-free-shopping.html">How do I get a tax refund when shopping in Korea?</a> · <a href="luggage-storage.html">Where can I store luggage in Seoul?</a> · <a href="pharmacy-hospital.html">What do I do if I get sick in Korea?</a> · <a href="k-eta-entry-requirements.html">Do I need K-ETA to visit Korea?</a> · <a href="atm-foreign-card-cash.html">Can I withdraw cash in Korea with a foreign card?</a> · <a href="korea-power-plug-voltage.html">Do I need a plug adapter in Korea?</a> · <a href="gimpo-airport-to-seoul.html">How do I get from Gimpo Airport to Seoul?</a></p></div></details>
 </div>
 <div class="show" id="show" hidden role="dialog" aria-modal="true" aria-labelledby="show-lbl">
   <div class="lbl" id="show-lbl"></div><div class="ko" lang="ko" id="show-ko"></div>
@@ -318,7 +75,33 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !documen
 (function () {
   document.querySelectorAll("[data-show]").forEach(b => b.addEventListener("click", () => show(b.dataset.lbl, b.dataset.show, "", b.dataset.mean)));
   const saved = (store("wik-setup") || "visitor|ios").split("|");
-  const blocks = [...document.querySelectorAll(".card[data-p]")];
+  document.querySelectorAll("[data-copy]").forEach(b => b.addEventListener("click", async () => {
+    let ok = false;
+    try { await navigator.clipboard.writeText(b.dataset.copy); ok = true; } catch (e) {}
+    if (!ok) { const ta = document.createElement("textarea"); ta.value = b.dataset.copy; ta.setAttribute("readonly", ""); ta.style.cssText = "position:fixed;opacity:0"; document.body.append(ta); ta.select(); try { ok = document.execCommand("copy"); } catch (e) {} ta.remove(); }
+    if (!ok) { const t = b.querySelector("[lang=ko]") || b.closest(".say")?.querySelector(".say-ko"); if (t) { const r = document.createRange(); r.selectNodeContents(t); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); } return; }
+    const was = b.innerHTML; b.classList.add("done"); b.setAttribute("aria-label", b.dataset.done);
+    const tip = document.createElement("span"); tip.className = "tip"; tip.textContent = b.dataset.done; tip.setAttribute("role", "status"); b.append(tip);
+    setTimeout(() => { b.innerHTML = was; b.classList.remove("done"); b.removeAttribute("aria-label"); }, 1600);
+    count("copy/" + location.pathname, "copy korean");
+  }));
+  /* The stay address lives only in this browser (localStorage), never in a URL or a request. */
+  const ma = document.getElementById("myaddr");
+  if (ma) {
+    const has = document.getElementById("ma-has"), form = document.getElementById("ma-form"), inp = document.getElementById("ma-in");
+    const paint = () => {
+      const a = (store("emk-addr") || "").slice(0, 160);
+      has.hidden = !a; form.hidden = !!a;
+      if (a) { document.getElementById("ma-text").textContent = a; document.getElementById("ma-copy").dataset.copy = a; document.getElementById("ma-map").href = "https://map.naver.com/p/search/" + encodeURIComponent(a); }
+    };
+    form.addEventListener("submit", ev => { ev.preventDefault(); const v = inp.value.trim(); if (v) { store("emk-addr", v); count("addr-saved", "address saved"); } paint(); });
+    document.getElementById("ma-edit").addEventListener("click", () => { inp.value = store("emk-addr") || ""; has.hidden = true; form.hidden = false; inp.focus(); });
+    document.getElementById("ma-show").addEventListener("click", () => show(ma.dataset.card, ma.dataset.ko, store("emk-addr") || "", ma.dataset.mean));
+    ma.hidden = false; paint();
+  }
+  /* A link to a folded section opens it. */
+  const h = location.hash && document.getElementById(location.hash.slice(1)); if (h && h.tagName === "DETAILS") h.open = true;
+  const blocks = [...document.querySelectorAll(".pv[data-p]")];
   if (blocks.length < 2) return;
   let shown = 0;
   for (const b of blocks) { const ok = b.dataset.p === saved[0] && (!b.dataset.d || b.dataset.d === saved[1]); b.hidden = !ok; if (ok) shown++; }
@@ -327,6 +110,7 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !documen
   btn.addEventListener("click", () => { blocks.forEach(b => b.hidden = false); btn.hidden = true; });
 })();
 </script>
+<footer class="foot"><div class="wrap"><nav aria-label="EasyModeKorea"><a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="changes.html">What changed</a> · <a href="hosts.html">For hosts (Korean)</a></nav><p>EasyModeKorea · <a href="mailto:edandco.biz@gmail.com">edandco.biz@gmail.com</a></p></div></footer>
 <div class="sheet" id="fb" hidden role="dialog" aria-modal="true" aria-labelledby="fb-t"><div class="sheet-in">
   <div class="sheet-top"><h2 id="fb-t">Tell us anything</h2><button type="button" class="btn ghost small" id="fb-close">Close</button></div>
   <p class="hint">Something wrong, missing, or confusing? Ideas for us? We read every message.</p>
