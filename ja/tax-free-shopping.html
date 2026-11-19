@@ -12,324 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap"></noscript>
-<style>
-:root {
-  /* EasyModeKorea: bold cobalt hero with a yellow "Easy" stamp, then a sticky setup bar and
-     a scannable list of rows (icon, task, status). Detail opens in place; Korean cards open full screen. */
-  --bg: #f3f5fb;
-  --surface: #ffffff;
-  --ink: #0e1430;
-  --muted: #444f6b;
-  --line: #dfe3ee;
-  --brand: #2336e8;
-  --brand-ink: #ffffff;
-  --easy: #ffd23f;
-  --ok: #0f8a45; --ok-bg: #ddf4e7;
-  --warn: #a35f00; --warn-bg: #ffefcf;
-  --mixed: #5a3fd6; --mixed-bg: #ece8ff;
-  --bad: #c62828; --bad-bg: #fde5e5;
-  --display: "Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
-  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", "Apple SD Gothic Neo", "Hiragino Sans", "PingFang TC", sans-serif;
-  --ko: "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
-  color-scheme: light;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0b0f1e; --surface: #141a2e; --ink: #eef1fb; --muted: #aab3cc; --line: #273050;
-    --brand: #5b6cff; --easy: #ffd23f;
-    --ok: #5ad48c; --ok-bg: #11301f; --warn: #f2b453; --warn-bg: #352610;
-    --mixed: #b2a4ff; --mixed-bg: #261f4a; --bad: #ff8a80; --bad-bg: #3a1616;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #0b0f1e; --surface: #141a2e; --ink: #eef1fb; --muted: #aab3cc; --line: #273050;
-  --brand: #5b6cff; --easy: #ffd23f;
-  --ok: #5ad48c; --ok-bg: #11301f; --warn: #f2b453; --warn-bg: #352610;
-  --mixed: #b2a4ff; --mixed-bg: #261f4a; --bad: #ff8a80; --bad-bg: #3a1616;
-  color-scheme: dark;
-}
-* { box-sizing: border-box; }
-[hidden] { display: none !important; }
-html, body { margin: 0; }
-body { background: var(--bg); color: var(--ink); font: 400 17px/1.55 var(--body); -webkit-font-smoothing: antialiased; }
-a { color: var(--brand); }
-:focus-visible { outline: 3px solid var(--easy); outline-offset: 2px; border-radius: 8px; }
-.wrap { max-width: 760px; margin: 0 auto; padding: 0 16px 40px; }
-
-/* Hero */
-.hero { background: var(--brand); color: var(--brand-ink); padding: 18px 0 26px; }
-.hero .wrap { padding-bottom: 0; }
-.toprow { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
-.logo { font: 800 18px var(--display); color: inherit; text-decoration: none; letter-spacing: -0.01em; }
-.logo b { background: var(--easy); color: #0e1430; padding: 0 6px; border-radius: 6px; margin-left: 2px; }
-.langs { display: flex; gap: 10px; font-size: 14px; }
-.langs a { color: rgba(255,255,255,.82); text-decoration: none; display: inline-block; padding: 6px 2px; min-height: 24px; }
-.langs a[aria-current="page"] { color: #fff; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
-.mode { display: flex; align-items: center; gap: 10px; margin: 22px 0 8px; font: 700 13px var(--body); letter-spacing: .08em; text-transform: uppercase; }
-.mode s { opacity: .7; }
-.mode .arrow { opacity: .7; }
-.mode .easy { background: var(--easy); color: #0e1430; padding: 3px 10px; border-radius: 999px; }
-.hero h1 { font: 800 clamp(30px, 7.2vw, 46px)/1.06 var(--display); letter-spacing: -0.025em; margin: 0; text-wrap: balance; }
-.hero p { margin: 12px 0 0; font-size: 17px; color: rgba(255,255,255,.9); max-width: 58ch; }
-.hero .trust { font-size: 13px; color: rgba(255,255,255,.75); }
-
-/* Sticky setup bar */
-.setupbar { position: sticky; top: 0; z-index: 5; background: var(--surface); border-bottom: 1px solid var(--line); box-shadow: 0 6px 18px -14px rgba(14,20,48,.5); }
-.setupbar .wrap { padding: 10px 16px; display: grid; gap: 8px; }
-.setupbar .q { font: 700 12px var(--body); text-transform: uppercase; letter-spacing: .07em; color: var(--muted); }
-.seg { display: flex; gap: 6px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: 0 -16px; padding: 0 16px; }
-.seg::-webkit-scrollbar { display: none; }
-.seg label { position: relative; }
-.seg input { position: absolute; opacity: 0; pointer-events: none; }
-.seg span { display: inline-block; padding: 8px 12px; border-radius: 999px; border: 1.5px solid var(--line); font: 600 14px var(--body); cursor: pointer; background: var(--bg); white-space: nowrap; }
-.seg input:checked + span { background: var(--ink); color: var(--surface); border-color: var(--ink); }
-.seg input:focus-visible + span { outline: 3px solid var(--easy); outline-offset: 2px; }
-
-/* Score line */
-.score { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 18px 0 10px; font-weight: 600; }
-.hint { color: var(--muted); font-size: 14px; margin: 0 0 10px; }
-
-/* Rows */
-.rows { display: grid; gap: 10px; }
-.row { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
-.row > summary { list-style: none; display: grid; grid-template-columns: 44px 1fr 18px; align-items: start; gap: 12px; padding: 14px; cursor: pointer; }
-.row > summary::after { content: ""; width: 10px; height: 10px; margin-top: 16px; border-right: 2.5px solid var(--muted); border-bottom: 2.5px solid var(--muted); transform: rotate(45deg); }
-.row[open] > summary::after { transform: rotate(-135deg); margin-top: 20px; }
-.txt { display: grid; gap: 4px; min-width: 0; }
-.txt .top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.row > summary::-webkit-details-marker { display: none; }
-.ic { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; }
-.ic svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.row.ok .ic { background: var(--ok-bg); color: var(--ok); } .row.warn .ic { background: var(--warn-bg); color: var(--warn); }
-.row.mixed .ic { background: var(--mixed-bg); color: var(--mixed); } .row.bad .ic { background: var(--bad-bg); color: var(--bad); }
-.row .name { font: 700 18px/1.25 var(--body); }
-.row .sub { font: 400 14px/1.4 var(--body); color: var(--muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.row[open] .sub { display: none; }
-.pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font: 700 13px var(--body); white-space: nowrap; }
-.pill.ok { color: var(--ok); background: var(--ok-bg); } .pill.warn { color: var(--warn); background: var(--warn-bg); }
-.pill.mixed { color: var(--mixed); background: var(--mixed-bg); } .pill.bad { color: var(--bad); background: var(--bad-bg); }
-.row[open] > summary { border-bottom: 1px solid var(--line); }
-.body { padding: 14px 16px 16px; display: grid; gap: 12px; }
-.verdict { font-weight: 700; margin: 0; }
-.steps { margin: 0; padding: 0; list-style: none; counter-reset: s; display: grid; gap: 8px; }
-.steps li { counter-increment: s; display: grid; grid-template-columns: 26px 1fr; gap: 8px; }
-.steps li::before { content: counter(s); width: 24px; height: 24px; border-radius: 50%; background: var(--ink); color: var(--surface); font: 700 13px/24px var(--body); text-align: center; }
-.fallback { background: var(--bg); border-radius: 12px; padding: 10px 12px; margin: 0; font-size: 15px; }
-.fallback b { display: block; font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-bottom: 2px; }
-.actions { display: flex; gap: 8px; flex-wrap: wrap; }
-.btn { display: inline-flex; align-items: center; gap: 6px; font: 700 15px var(--body); padding: 11px 16px; border-radius: 12px; border: 0; background: var(--brand); color: #fff; cursor: pointer; text-decoration: none; }
-.btn.alt { background: var(--easy); color: #0e1430; }
-.btn.ghost { background: transparent; color: var(--brand); border: 1.5px solid var(--line); }
-.foot { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; font-size: 13px; color: var(--muted); }
-.foot details summary { cursor: pointer; }
-.foot ul { margin: 6px 0 0; padding-left: 18px; }
-.report { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
-.report button { font: 600 13px var(--body); padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
-.report button[aria-pressed="true"] { background: var(--ink); color: var(--surface); border-color: var(--ink); }
-
-/* Host stay card */
-.stay { background: var(--surface); border: 2px solid var(--brand); border-radius: 18px; padding: 16px; margin: 18px 0 6px; display: grid; gap: 12px; }
-.stay h2 { font: 800 22px/1.2 var(--display); margin: 0; }
-.addr { font: 800 24px/1.35 var(--ko); word-break: keep-all; }
-.kv { display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; margin: 0; font-size: 15px; }
-.kv dt { color: var(--muted); } .kv dd { margin: 0; font-weight: 600; }
-
-/* Sections */
-.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; margin: 14px 0; }
-.panel > summary { list-style: none; cursor: pointer; padding: 16px; font: 800 20px var(--display); display: flex; justify-content: space-between; align-items: center; }
-.panel > summary::-webkit-details-marker { display: none; }
-.panel > summary::after { content: "+"; font: 400 26px var(--body); color: var(--muted); }
-.panel[open] > summary::after { content: "–"; }
-.panel .in { padding: 0 16px 16px; display: grid; gap: 10px; }
-.panel ol { margin: 0; padding-left: 22px; display: grid; gap: 8px; }
-.timeline b { display: block; }
-.copied { font-size: 14px; color: var(--muted); }
-.related { margin: 22px 0 6px; }
-.related h2 { font: 700 18px var(--display); margin: 0 0 8px; }
-.related ul { margin: 0; padding-left: 20px; }
-.related li { margin: 4px 0; }
-.topics { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0; }
-.topics a { padding: 8px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); text-decoration: none; font-size: 14px; font-weight: 600; color: var(--ink); }
-footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-top: 20px; }
-
-/* Topic pages */
-.topic-hero h1 { font-size: clamp(26px, 6vw, 38px); }
-.card { background: var(--surface); border: 1px solid var(--line); border-left: 6px solid var(--line); border-radius: 16px; padding: 16px; display: grid; gap: 10px; }
-.card.ok { border-left-color: var(--ok); } .card.warn { border-left-color: var(--warn); } .card.mixed { border-left-color: var(--mixed); } .card.bad { border-left-color: var(--bad); }
-.card h2 { font: 700 18px/1.3 var(--body); margin: 0; }
-.cards { display: grid; gap: 12px; margin: 16px 0; }
-.card[hidden] { display: none; }
-.linkbtn { background: none; border: 0; color: var(--brand); font: 600 15px var(--body); cursor: pointer; padding: 4px 0; text-decoration: underline; justify-self: start; }
-.notes { font-size: 14px; color: var(--muted); }
-
-/* Full-screen show card */
-.show { position: fixed; inset: 0; z-index: 50; background: #fff; color: #0e1430; display: grid; grid-template-rows: auto 1fr auto; padding: 20px; }
-.show[hidden] { display: none; }
-.show .lbl { font: 700 14px var(--body); text-transform: uppercase; letter-spacing: .08em; color: #444f6b; }
-.show .ko { align-self: center; font: 800 clamp(34px, 9vw, 64px)/1.3 var(--ko); word-break: keep-all; }
-.show .ko small { display: block; font-size: .6em; font-weight: 700; margin-top: 16px; }
-.show .mean { font-size: 16px; color: #444f6b; margin: 0 0 12px; }
-.show .btn { justify-self: stretch; justify-content: center; background: #0e1430; color: #fff; font-size: 17px; padding: 14px; }
-@media (prefers-reduced-motion: no-preference) { .row > summary { transition: background .15s; } .row > summary:hover { background: var(--bg); } }
-/* One question at a time */
-.onb { margin: 18px 0 8px; }
-.onb h2 { font: 800 clamp(22px,6vw,28px)/1.2 var(--display); margin: 0 0 14px; letter-spacing: -.01em; }
-.opts-big { display: grid; gap: 10px; }
-.opts-big.two { grid-template-columns: 1fr 1fr; }
-.opt-big { text-align: left; display: grid; gap: 3px; padding: 18px; border-radius: 18px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); font: inherit; cursor: pointer; min-height: 64px; transition: transform .08s, border-color .15s; }
-.opt-big b { font: 700 18px var(--body); }
-.opt-big span { color: var(--muted); font-size: 14px; }
-.opt-big:hover, .opt-big:focus-visible { border-color: var(--brand); outline: none; }
-.opt-big:active { transform: scale(.98); }
-.linkbtn { background: none; border: 0; color: var(--brand); font: 600 15px var(--body); padding: 12px 0; cursor: pointer; }
-.mybar { position: sticky; top: 0; z-index: 5; background: var(--surface); border-bottom: 1px solid var(--line); }
-.mybar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 16px; font-weight: 600; font-size: 14px; }
-.btn.small { padding: 6px 12px; min-height: 0; font-size: 14px; }
-.greet { font: 700 20px/1.3 var(--display); margin: 18px 0 4px; }
-.search { display: block; margin: 10px 0 12px; }
-.search input { width: 100%; box-sizing: border-box; font: 16px var(--body); padding: 13px 16px; border-radius: 14px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); }
-.search input:focus { border-color: var(--brand); outline: none; }
-.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-.banner { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 14px 0 0; padding: 12px 14px; border-radius: 14px; background: var(--easy); color: #0e1430; font-weight: 600; }
-.progress { display: grid; gap: 6px; margin-bottom: 10px; font-weight: 600; font-size: 14px; }
-.progress .bar { height: 8px; border-radius: 99px; background: var(--line); overflow: hidden; }
-.progress .bar i { display: block; height: 100%; width: 0; background: var(--brand); transition: width .25s; }
-.checks { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; }
-.checks li { display: flex; gap: 12px; align-items: flex-start; padding: 8px 0; }
-.checks input { width: 22px; height: 22px; flex: none; margin: 1px 0 0; accent-color: var(--brand); }
-.checks input:checked + label { color: var(--muted); text-decoration: line-through; }
-@media (prefers-reduced-motion: reduce) { .opt-big, .progress .bar i { transition: none; } }
-.ret .hero .lede, .ret .hero .trust, .ret .hero .mode { display: none; }
-.ret .hero h1 { font-size: 22px; margin: 6px 0 0; }
-.pre:not(:has(> :not([hidden]))) { display: none; }
-/* Calm layout: one line per row, details folded away */
-.row summary .txt { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-width: 0; }
-.row summary .name { font: 700 18px var(--body); }
-.row summary { padding: 16px; }
-.row .body { padding: 4px 18px 18px; line-height: 1.6; }
-.row .body .verdict { font-size: 17px; font-weight: 600; margin: 0 0 12px; }
-.row .body > details { margin-top: 14px; font-size: 14px; color: var(--muted); }
-.row .body > details > summary { cursor: pointer; padding: 6px 0; }
-.row .body .report { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 8px; }
-.rows { display: grid; gap: 10px; }
-.about { margin: 28px 0 40px; font-size: 14px; color: var(--muted); }
-.about summary { cursor: pointer; padding: 8px 0; }
-.about p { line-height: 1.6; }
-.hero { padding-bottom: 14px; }
-.hero h1 { font-size: 26px; margin: 10px 0 0; }
-.row { scroll-margin-top: 64px; }
-.row summary { align-items: center; }
-.why { color: var(--muted); margin: -6px 0 16px; font-size: 16px; }
-.panel summary .count { color: var(--muted); font-weight: 600; margin-left: 6px; }
-.stay { margin-top: 16px; }
-.checks .stage { display: block; font: 700 13px var(--body); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); padding: 14px 0 2px; }
-.hero + .wrap { padding-top: 16px; }
-.bar-btns { display: flex; gap: 6px; flex: none; }
-.sheet { position: fixed; inset: 0; z-index: 40; background: rgba(8,12,30,.45); display: flex; align-items: flex-end; justify-content: center; }
-.sheet-in { background: var(--surface); color: var(--ink); width: 100%; max-width: 560px; max-height: 88vh; overflow: auto; border-radius: 22px 22px 0 0; padding: 18px 16px 28px; }
-.sheet-top { display: flex; align-items: center; justify-content: space-between; }
-.sheet-top h2 { margin: 0; font-size: 22px; }
-.sub-h { font: 700 13px var(--body); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 18px 0 8px; }
-.calls { display: grid; gap: 8px; }
-.call { display: flex; align-items: center; gap: 14px; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 14px; text-decoration: none; color: var(--ink); }
-.call b { font: 800 24px var(--display); color: var(--brand); min-width: 64px; }
-.call span { font-size: 15px; line-height: 1.4; }
-.show { z-index: 50; }
-.toast { position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%); background: var(--ink); color: var(--surface); padding: 10px 16px; border-radius: 99px; font-size: 14px; z-index: 30; max-width: 92vw; }
-.fb-line { margin: 28px 0 0; }
-#fb-form { display: grid; gap: 6px; margin-top: 10px; }
-#fb-form .fl { font-weight: 700; margin-top: 8px; }
-#fb-form textarea, #fb-form input { width: 100%; box-sizing: border-box; font: 16px var(--body); padding: 12px 14px; border-radius: 12px; border: 1.5px solid var(--line); background: var(--bg); color: var(--ink); }
-#fb-form textarea { min-height: 120px; resize: vertical; }
-#fb-form .btn { margin-top: 12px; width: 100%; justify-content: center; }
-.fb-done { font-weight: 600; color: var(--brand); min-height: 22px; }
-.about { margin-top: 8px; }
-.more-h { font: 700 13px var(--body); text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin: 18px 4px 2px; }
-.ask { margin: 28px 0 0; padding: 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
-.ask h2 { margin: 0 0 4px; font: 800 20px/1.2 var(--display); }
-.ask .hint { margin: 0 0 12px; }
-.ask-form { display: grid; gap: 10px; }
-.ask-form textarea, .ask-form input { width: 100%; box-sizing: border-box; padding: 12px; border: 1px solid var(--line); border-radius: 10px; font: 16px/1.4 var(--body); background: var(--bg); color: var(--ink); }
-.ask-form textarea { min-height: 88px; resize: vertical; }
-.ask-form .btn { justify-self: start; }
-.ask-form .fb-done { margin: 0; min-height: 0; }
-
-.checked-line { margin: 10px 2px 0; font-size: 14px; color: var(--muted); }
-.host-cta { margin: 18px 0 0; padding: 12px 14px; border: 1px dashed var(--line); border-radius: 12px; font-size: 15px; color: var(--muted); }
-.deep { margin: 26px 0 0; }
-.deep h2 { font: 700 21px/1.25 var(--display); margin: 0 0 10px; }
-.deep h3 { font: 700 17px/1.35 var(--body); margin: 18px 0 4px; }
-.deep p { margin: 0 0 8px; }
-.steps.full li { margin: 10px 0; }
-.errs { list-style: none; padding: 0; margin: 0; }
-.errs li { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin: 8px 0; }
-.errs .prob { margin-bottom: 4px; }
-.cites { padding-left: 20px; font-size: 15px; }
-.cites li { margin: 4px 0; overflow-wrap: anywhere; }
-.foot { border-top: 1px solid var(--line); margin-top: 36px; padding: 18px 0 28px; font-size: 14px; color: var(--muted); }
-.foot nav a { display: inline-block; padding: 6px 0; }
-.foot p { margin: 6px 0 0; }
-.skip { position: absolute; left: -9999px; top: 0; z-index: 20; background: var(--easy); color: #0e1430; padding: 10px 14px; border-radius: 0 0 10px 0; font-weight: 700; }
-.skip:focus { left: 0; }
-
-/* Short-first layout (round 14) */
-.hero h1 { line-height: 1.2; }
-.answer { background: var(--surface); border: 1px solid var(--line); border-left: 6px solid var(--line); border-radius: 16px; padding: 14px 16px; display: grid; gap: 10px; margin: 4px 0 0; }
-.answer.ok { border-left-color: var(--ok); } .answer.warn { border-left-color: var(--warn); } .answer.mixed { border-left-color: var(--mixed); } .answer.bad { border-left-color: var(--bad); }
-.pv[hidden] { display: none; }
-.ans-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 6px; }
-.ans-top h2 { font: 700 15px var(--body); color: var(--muted); margin: 0; }
-.answer .verdict { font-size: 18px; line-height: 1.4; }
-.glance { margin: 0; display: grid; gap: 6px; font-size: 15px; line-height: 1.4; }
-.glance > div { display: grid; grid-template-columns: 96px 1fr; gap: 8px; }
-.glance dt { color: var(--muted); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: .04em; padding-top: 2px; }
-.glance dd { margin: 0; }
-.ck { color: var(--muted); font-size: 12px; white-space: nowrap; }
-.stamp { margin: 0; font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 8px; }
-.do { margin: 18px 0 0; display: grid; gap: 12px; }
-.do .steps li { line-height: 1.45; }
-.says, .names { margin: 22px 0 0; }
-.says h2, .names h2 { font: 700 18px var(--display); margin: 0 0 8px; }
-.say { background: var(--surface); border: 2px solid var(--easy); border-radius: 16px; padding: 14px 16px; display: grid; gap: 8px; }
-.say-ko { font: 800 26px/1.35 var(--ko, var(--body)); margin: 0; word-break: keep-all; }
-.say-mean { margin: 0; color: var(--muted); }
-.names ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
-.chip { width: 100%; display: grid; grid-template-columns: 1fr auto; grid-template-areas: "ko i" "en i"; align-items: center; text-align: left; gap: 0 10px; padding: 10px 14px; border: 1.5px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--ink); font: inherit; cursor: pointer; position: relative; }
-.chip span { grid-area: ko; font: 700 19px var(--ko, var(--body)); }
-.chip small { grid-area: en; color: var(--muted); font-size: 13px; }
-.chip i { grid-area: i; font-style: normal; }
-.chip.done, .btn.done { border-color: var(--ok); }
-.tip { position: absolute; right: 10px; top: -10px; background: var(--ink); color: var(--surface); font-size: 12px; padding: 2px 8px; border-radius: 99px; }
-.btn { position: relative; }
-.do + .actions, .names + .actions, .says + .actions { margin-top: 18px; }
-details.more { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; margin: 10px 0 0; }
-details.more > summary { list-style: none; cursor: pointer; padding: 14px 16px; font: 700 16px var(--body); display: flex; justify-content: space-between; align-items: center; gap: 10px; min-height: 24px; }
-details.more > summary::-webkit-details-marker { display: none; }
-details.more > summary::after { content: "+"; font: 400 22px var(--body); color: var(--muted); }
-details.more[open] > summary::after { content: "–"; }
-details.more > .in, details.more > .topics { padding: 0 16px 14px; margin: 0; }
-details.more.deep { margin-top: 10px; }
-.actions + details.more { margin-top: 22px; }
-.notes p { margin: 0 0 8px; }
-/* Home: situation cards */
-.sit { margin: 6px 0 0; }
-.sit > h2, .tool-h { font: 800 20px/1.2 var(--display); margin: 0 0 10px; }
-.sit-grid { display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
-@media (max-width: 360px) { .sit-grid { grid-template-columns: 1fr; } }
-.sit-card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 12px; display: grid; gap: 6px; align-content: start; }
-.sit-card[hidden] { display: none; }
-.sit-card h3 { display: flex; align-items: center; gap: 8px; margin: 0; font: 700 16px/1.2 var(--body); }
-.sit-card h3 svg { width: 22px; height: 22px; flex: none; fill: none; stroke: var(--brand); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.sit-card p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.35; }
-.sit-links { display: flex; flex-wrap: wrap; gap: 6px; }
-.sit-card .sit-links a { display: inline-block; padding: 5px 10px; min-height: 24px; box-sizing: border-box; border-radius: 99px; background: var(--bg); border: 1px solid var(--line); color: var(--ink); font-weight: 600; font-size: 14px; text-decoration: none; }
-.sit-card .sit-links a[hidden] { display: none; }
-.tool { margin: 26px 0 0; }
-.onb { margin: 0; }
-.onb h3 { font: 700 18px/1.3 var(--body); margin: 0 0 10px; }
-.offline-note { margin: 22px 0 0; font-size: 14px; color: var(--muted); }
-</style>
+<link rel="stylesheet" href="../style.css?v=200395c4">
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "韓国の免税ショッピング: オリーブヤングやダイソーで即時還付(2026)", "description": "旅行者は買い物の10%の税金をほぼ取り戻せます。多くの店ではパスポートを見せればレジでその場で差し引かれます。", "datePublished": "2026-11-17", "dateModified": "2026-11-20", "inLanguage": "ja", "url": "https://easymodekorea.com/ja/tax-free-shopping.html", "mainEntityOfPage": "https://easymodekorea.com/ja/tax-free-shopping.html", "image": "https://easymodekorea.com/og.png", "author": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/ja/about.html"}, "publisher": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/", "logo": {"@type": "ImageObject", "url": "https://easymodekorea.com/icon-512.png"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "EasyModeKorea", "item": "https://easymodekorea.com/ja/"}, {"@type": "ListItem", "position": 2, "name": "買い物と免税", "item": "https://easymodekorea.com/ja/tax-free-shopping.html"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "韓国で買い物の免税(タックスリファンド)を受けるには?", "acceptedAnswer": {"@type": "Answer", "text": "旅行者は税金の還付を受けられます。多くの店ではレジでパスポートを見せるとその場で税金が引かれます。 Tax FreeやTax Refundの表示を探し、パスポート本体を持っていく。 1回の会計で15,000ウォン以上。レシートは合算できないので、まとめて1回で払う。 レジでの即時還付は1回100万ウォン未満、旅行中の合計500万ウォンまで。 即時還付できなかったら還付レシートを保管し、市内の還付ブースか、荷物を預ける前に空港のキオスクで受け取る。"}}, {"@type": "Question", "name": "化粧品は対象ですか?", "acceptedAnswer": {"@type": "Answer", "text": "店で買った化粧品は対象です。美容外科や皮膚科の施術は2026年から対象外になりました。"}}, {"@type": "Question", "name": "外国人登録証のある在住者も還付を受けられますか?", "acceptedAnswer": {"@type": "Answer", "text": "基本的に受けられません。旅行者向けの還付は滞在6か月未満の人が対象です。"}}, {"@type": "Question", "name": "いくら戻ってきますか?", "acceptedAnswer": {"@type": "Answer", "text": "10%の税金の大部分です。還付会社と金額によって手数料が引かれます。"}}, {"@type": "Question", "name": "クルーズ船の乗客も対象ですか?", "acceptedAnswer": {"@type": "Answer", "text": "対象です。2026年4月から、国際クルーズの乗客も即時還付と市内還付を受けられるようになりました。"}}]}]</script>
 </head>
@@ -341,11 +24,11 @@ details.more.deep { margin-top: 10px; }
 </div></header>
 <div class="wrap">
   <main id="answer">
-  <section class="answer ok"><div class="pv ok" data-p="visitor"><div class="ans-top"><h2>自国の番号またはデータ専用eSIMの場合</h2><span class="pill ok">そのまま使える</span></div><p class="verdict">旅行者は税金の還付を受けられます。多くの店ではレジでパスポートを見せるとその場で税金が引かれます。</p></div><div class="pv ok" data-p="krsim"><div class="ans-top"><h2>韓国プリペイドの010番号の場合</h2><span class="pill ok">そのまま使える</span></div><p class="verdict">旅行者は税金の還付を受けられます。多くの店ではレジでパスポートを見せるとその場で税金が引かれます。</p></div><div class="pv bad" data-p="arc"><div class="ans-top"><h2>自分名義の韓国の番号(外国人登録証あり)の場合</h2><span class="pill bad">使えない</span></div><p class="verdict">旅行者向けの税金還付は滞在6か月未満の人が対象です。外国人登録証のある在住者は通常対象外です。</p></div><dl class="glance"><div><dt>Where</dt><dd>Stores with a TAX FREE sign; show your passport at the till <time class="ck" datetime="2026-11-17">✓ 2026年11月17日</time></dd></div><div><dt>Cost</dt><dd>Purchases from 15,000 won qualify <time class="ck" datetime="2026-11-20">✓ 2026年11月20日</time></dd></div></dl><p class="stamp">Checked against <a href="https://www.korea.kr/news/policyNewsView.do?newsId=148803831" rel="noopener" target="_blank">Korea.kr: instant tax refunds for visitors (government policy news)</a> on <time datetime="2026-11-20">2026年11月20日</time></p></section>
+  <section class="answer ok"><div class="pv ok" data-p="visitor"><div class="ans-top"><h2>自国の番号またはデータ専用eSIMの場合</h2><span class="pill ok">そのまま使える</span></div><p class="verdict">旅行者は税金の還付を受けられます。多くの店ではレジでパスポートを見せるとその場で税金が引かれます。</p></div><div class="pv ok" data-p="krsim"><div class="ans-top"><h2>韓国プリペイドの010番号の場合</h2><span class="pill ok">そのまま使える</span></div><p class="verdict">旅行者は税金の還付を受けられます。多くの店ではレジでパスポートを見せるとその場で税金が引かれます。</p></div><div class="pv bad" data-p="arc"><div class="ans-top"><h2>自分名義の韓国の番号(外国人登録証あり)の場合</h2><span class="pill bad">使えない</span></div><p class="verdict">旅行者向けの税金還付は滞在6か月未満の人が対象です。外国人登録証のある在住者は通常対象外です。</p></div><dl class="glance"><div><dt>場所</dt><dd>TAX FREE表示のある店。レジでパスポートを提示 <time class="ck" datetime="2026-11-17">✓ 2026年11月17日</time></dd></div><div><dt>費用</dt><dd>15,000ウォン以上の購入が対象 <time class="ck" datetime="2026-11-20">✓ 2026年11月20日</time></dd></div></dl><p class="stamp"><a href="https://www.korea.kr/news/policyNewsView.do?newsId=148803831" rel="noopener" target="_blank">Korea.kr: instant tax refunds for visitors (government policy news)</a>で<time datetime="2026-11-20">2026年11月20日</time>に確認</p></section>
   <button class="linkbtn" type="button" id="show-all" hidden>ほかの状況の回答を見る</button>
   <section class="do" aria-labelledby="do-shopping"><h2 id="do-shopping" class="sr">はじめての人向け: 手順</h2><div class="pv" data-p="visitor"><ol class="steps"><li>Tax FreeやTax Refundの表示を探し、パスポート本体を持っていく。</li><li>1回の会計で15,000ウォン以上。レシートは合算できないので、まとめて1回で払う。</li><li>レジでの即時還付は1回100万ウォン未満、旅行中の合計500万ウォンまで。</li><li>即時還付できなかったら還付レシートを保管し、市内の還付ブースか、荷物を預ける前に空港のキオスクで受け取る。</li></ol><p class="fallback"><b>うまくいかない場合</b>還付レシートは購入から3か月で無効になります。2026年から美容整形・皮膚科の施術は対象外です。</p></div><div class="pv" data-p="krsim"><ol class="steps"><li>Tax FreeやTax Refundの表示を探し、パスポート本体を持っていく。</li><li>1回の会計で15,000ウォン以上。レシートは合算できないので、まとめて1回で払う。</li><li>レジでの即時還付は1回100万ウォン未満、旅行中の合計500万ウォンまで。</li><li>即時還付できなかったら還付レシートを保管し、市内の還付ブースか、荷物を預ける前に空港のキオスクで受け取る。</li></ol><p class="fallback"><b>うまくいかない場合</b>還付レシートは購入から3か月で無効になります。2026年から美容整形・皮膚科の施術は対象外です。</p></div><div class="pv" data-p="arc"><ol class="steps"><li>普段どおり買い物を。価格には税金が含まれています。</li></ol><p class="fallback"><b>うまくいかない場合</b>韓国滞在が6か月未満なら、対象になるか店で確認してください。</p></div></section>
-  <section class="says" aria-labelledby="say-shopping"><h2 id="say-shopping">Show this to staff</h2><div class="say"><p class="say-ko" lang="ko">택스 프리 해 주세요. 한 번에 계산할게요.</p><p class="say-mean">免税でお願いします。まとめて会計します。</p><div class="actions"><button class="btn alt" type="button" data-show="택스 프리 해 주세요. 한 번에 계산할게요." data-lbl="スタッフに見せる" data-mean="意味: 免税でお願いします。まとめて会計します。">🗣 Show full screen</button><button class="btn ghost" type="button" data-copy="택스 프리 해 주세요. 한 번에 계산할게요." data-done="✓ Copied">📋 Copy</button></div></div></section>
-  <section class="names" aria-labelledby="nm-shopping"><h2 id="nm-shopping">Korean names to copy (paste into Naver Map or show a driver)</h2><ul><li><button class="chip" type="button" data-copy="택스 리펀드" data-done="✓ Copied"><span lang="ko">택스 리펀드</span><small>Tax refund</small><i aria-hidden="true">📋</i></button></li><li><button class="chip" type="button" data-copy="올리브영" data-done="✓ Copied"><span lang="ko">올리브영</span><small>Olive Young</small><i aria-hidden="true">📋</i></button></li></ul></section>
+  <section class="says" aria-labelledby="say-shopping"><h2 id="say-shopping">スタッフに見せる</h2><div class="say"><p class="say-ko" lang="ko">택스 프리 해 주세요. 한 번에 계산할게요.</p><p class="say-mean">免税でお願いします。まとめて会計します。</p><div class="actions"><button class="btn alt" type="button" data-show="택스 프리 해 주세요. 한 번에 계산할게요." data-lbl="スタッフに見せる" data-mean="意味: 免税でお願いします。まとめて会計します。">🗣 全画面で見せる</button><button class="btn ghost" type="button" data-copy="택스 프리 해 주세요. 한 번에 계산할게요." data-done="✓ コピーしました">📋 コピー</button></div></div></section>
+  <section class="names" aria-labelledby="nm-shopping"><h2 id="nm-shopping">コピーできる韓国語(Naver Mapに貼る・運転手に見せる)</h2><ul><li><button class="chip" type="button" data-copy="택스 리펀드" data-done="✓ コピーしました"><span lang="ko">택스 리펀드</span><small>タックスリファンド(免税)</small><i aria-hidden="true">📋</i></button></li><li><button class="chip" type="button" data-copy="올리브영" data-done="✓ コピーしました"><span lang="ko">올리브영</span><small>オリーブヤング</small><i aria-hidden="true">📋</i></button></li></ul></section>
   <div class="actions"><a class="btn" href="./#task-shopping">自分の状況で確認する</a></div>
   <details class="more deep" id="st-shopping"><summary>はじめての人向け: 手順</summary><div class="in"><ol class="steps full"><li>TAX FREE・TAX REFUNDの表示がある店で買い物をし、パスポートの現物を持って行きます。写真はたいてい認められません。<!-- screenshot: shop-taxfree-sign --></li><li>1つの店で、1回の支払いで15,000ウォン以上買います。別々に払ったレシートは合算できません。</li><li>レジで即時還付を頼みます。1回100万ウォン未満の支払いなら、その場で税金が差し引かれます(1回の旅行で合計500万ウォンまで)。</li><li>即時還付がない場合は、店でもらう還付伝票を保管し、市内の還付キオスクか、空港で荷物を預ける前に空港のキオスクで申請します。<!-- screenshot: shop-kiosk --></li><li>出国まで商品は未使用のまま手元に置きます。高額の還付では税関で商品を見せるよう求められることがあります。</li><li>購入から3か月以内に申請します。申請しない還付伝票は期限切れになります。</li></ol></div></details>
 <details class="more deep" id="er-shopping"><summary>よくあるトラブルと対処法</summary><div class="in"><ul class="errs"><li><p class="prob"><b>店で即時還付はできないと言われた。</b></p><p>還付伝票をもらい、市内か空港の還付キオスクで申請します。</p></li><li><p class="prob"><b>15,000ウォンに少し足りなかった。</b></p><p>商品を足して1回の支払いにまとめるか、還付なしで買います。</p></li><li><p class="prob"><b>空港の還付の列が長い。</b></p><p>早めに空港へ行くか、出発日より前に市内のキオスクで申請します。</p></li><li><p class="prob"><b>パスポートを忘れた。</b></p><p>多くの店では還付にパスポートの現物が必要です。持ってきてから払うか、レシートを保管して、あとから還付伝票を出せるか店に聞きます。</p></li></ul></div></details>
@@ -354,7 +37,7 @@ details.more.deep { margin-top: 10px; }
   <details class="more"><summary>出典とメモ</summary><div class="in notes"><p>旅行者は買い物の10%の税金をほぼ取り戻せます。多くの店ではパスポートを見せればレジでその場で差し引かれます。</p><ul><li>確認日 2026年11月17日</li><li>オリーブヤングは明洞・江南・弘大・釜山・済州などに旅行者向け店舗を110以上運営し、外国語スタッフと韓英表記の値札を置いています。</li><li>ムシンサの店舗では全商品のQRコードで会員価格・在庫・レビューが見られます。</li><li><a href="https://www.haniseoul.com/travels/korea/tax-free-korea" rel="noopener" target="_blank">Korea tax refund guide (2026)</a></li><li><a href="https://cjnews.cj.net/?p=58078" rel="noopener" target="_blank">CJ: Olive Young global tourist stores</a></li></ul></div></details>
   </main>
   <section class="related"><h2>関連ガイド</h2><ul><li><a href="atm-foreign-card-cash.html">韓国で外国のカードで現金を下ろせる?</a></li><li><a href="luggage-storage.html">ソウルで荷物を預けられる場所は?</a></li><li><a href="tmoney-subway-bus.html">T-moneyに海外カードでチャージできる?</a></li></ul></section>
-  <details class="more"><summary>All guides</summary><nav class="topics"><a href="mobile-data-sim.html">電話・データ</a><a href="incheon-airport-to-seoul.html">空港から市内</a><a href="maps.html">地図</a><a href="taxi.html">タクシー</a><a href="tmoney-subway-bus.html">地下鉄・バス</a><a href="seoul-tourist-transit-pass.html">交通パス</a><a href="ktx-train-booking.html">KTX</a><a href="seoul-to-busan-k-tour-pass.html">釜山旅行</a><a href="kr-pass-korail-pass.html">KRパス</a><a href="dmz-jsa-tour-booking.html">DMZツアー</a><a href="jeju-getting-around.html">済州の移動</a><a href="restaurant-reservations.html">飲食店の予約</a><a href="food-delivery.html">デリバリー</a><a href="translation.html">翻訳</a><a href="luggage-storage.html">荷物の預け</a><a href="pharmacy-hospital.html">病気・けが</a><a href="k-eta-entry-requirements.html">入国ルール</a><a href="atm-foreign-card-cash.html">現金・ATM</a><a href="korea-power-plug-voltage.html">電源プラグ</a><a href="gimpo-airport-to-seoul.html">金浦空港</a></nav></details>
+  <details class="more"><summary>すべてのガイド</summary><nav class="topics"><a href="mobile-data-sim.html">電話・データ</a><a href="incheon-airport-to-seoul.html">空港から市内</a><a href="maps.html">地図</a><a href="taxi.html">タクシー</a><a href="tmoney-subway-bus.html">地下鉄・バス</a><a href="seoul-tourist-transit-pass.html">交通パス</a><a href="ktx-train-booking.html">KTX</a><a href="seoul-to-busan-k-tour-pass.html">釜山旅行</a><a href="kr-pass-korail-pass.html">KRパス</a><a href="dmz-jsa-tour-booking.html">DMZツアー</a><a href="jeju-getting-around.html">済州の移動</a><a href="restaurant-reservations.html">飲食店の予約</a><a href="food-delivery.html">デリバリー</a><a href="translation.html">翻訳</a><a href="luggage-storage.html">荷物の預け</a><a href="pharmacy-hospital.html">病気・けが</a><a href="k-eta-entry-requirements.html">入国ルール</a><a href="atm-foreign-card-cash.html">現金・ATM</a><a href="korea-power-plug-voltage.html">電源プラグ</a><a href="gimpo-airport-to-seoul.html">金浦空港</a></nav></details>
   <p class="host-cta">🏠 韓国で宿を運営していますか? <a href="../hosts.html">このガイドをゲストに送る</a>(韓国語)。</p>
   <section class="ask" aria-labelledby="ask-t-ja"><h2 id="ask-t-ja">知りたい情報が見つかりませんか?</h2><p class="hint">質問をどうぞ。ガイドに追記して回答します。メールを書いていただければ返信もします。</p>
 <form class="ask-form" data-thanks="ありがとうございます。質問を受け付けました。"><textarea name="q" required maxlength="1000" aria-label="知りたい情報が見つかりませんか?" placeholder="例: 海外で発行したカードでKTXを予約できますか?"></textarea>
@@ -392,7 +75,10 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !documen
   document.querySelectorAll("[data-show]").forEach(b => b.addEventListener("click", () => show(b.dataset.lbl, b.dataset.show, "", b.dataset.mean)));
   const saved = (store("wik-setup") || "visitor|ios").split("|");
   document.querySelectorAll("[data-copy]").forEach(b => b.addEventListener("click", async () => {
-    try { await navigator.clipboard.writeText(b.dataset.copy); } catch (e) { return; }
+    let ok = false;
+    try { await navigator.clipboard.writeText(b.dataset.copy); ok = true; } catch (e) {}
+    if (!ok) { const ta = document.createElement("textarea"); ta.value = b.dataset.copy; ta.setAttribute("readonly", ""); ta.style.cssText = "position:fixed;opacity:0"; document.body.append(ta); ta.select(); try { ok = document.execCommand("copy"); } catch (e) {} ta.remove(); }
+    if (!ok) { const t = b.querySelector("[lang=ko]") || b.closest(".say")?.querySelector(".say-ko"); if (t) { const r = document.createRange(); r.selectNodeContents(t); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); } return; }
     const was = b.innerHTML; b.classList.add("done"); b.setAttribute("aria-label", b.dataset.done);
     const tip = document.createElement("span"); tip.className = "tip"; tip.textContent = b.dataset.done; tip.setAttribute("role", "status"); b.append(tip);
     setTimeout(() => { b.innerHTML = was; b.classList.remove("done"); b.removeAttribute("aria-label"); }, 1600);

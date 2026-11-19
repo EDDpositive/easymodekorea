@@ -19,6 +19,7 @@ ROOT = os.path.join(os.path.dirname(__file__), "..")
 SITE = "https://easymodekorea.com/"
 GOAT = "https://eddpositive.goatcounter.com/count"
 CSS = open(os.path.join(os.path.dirname(__file__), "style.css"), encoding="utf-8").read()
+CSS_V = hashlib.sha256(CSS.encode("utf-8")).hexdigest()[:8]  # cache-busting query for the shared stylesheet
 e = lambda s: html.escape(str(s), quote=True)
 icon = lambda tid: f'<svg viewBox="0 0 24 24" aria-hidden="true">{ICONS[tid]}</svg>'
 FONTS = "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap"
@@ -42,11 +43,14 @@ def head(lang, title, desc, path, alt_paths, extra=""):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="{FONTS}" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="{FONTS}"></noscript>
-<style>
-{CSS}</style>
+<link rel="stylesheet" href="{up_of(lang)}style.css?v={CSS_V}">
 <script data-goatcounter="{GOAT}" async src="//gc.zgo.at/count.js"></script>{extra}
 </head>
 <body>"""
+
+
+def up_of(lang):
+    return "../" if LANGS[lang]["dir"] else ""
 
 
 def lang_links(cur, rel_paths, prefix):
@@ -431,7 +435,10 @@ TOPIC_JS = r"""
   document.querySelectorAll("[data-show]").forEach(b => b.addEventListener("click", () => show(b.dataset.lbl, b.dataset.show, "", b.dataset.mean)));
   const saved = (store("wik-setup") || "visitor|ios").split("|");
   document.querySelectorAll("[data-copy]").forEach(b => b.addEventListener("click", async () => {
-    try { await navigator.clipboard.writeText(b.dataset.copy); } catch (e) { return; }
+    let ok = false;
+    try { await navigator.clipboard.writeText(b.dataset.copy); ok = true; } catch (e) {}
+    if (!ok) { const ta = document.createElement("textarea"); ta.value = b.dataset.copy; ta.setAttribute("readonly", ""); ta.style.cssText = "position:fixed;opacity:0"; document.body.append(ta); ta.select(); try { ok = document.execCommand("copy"); } catch (e) {} ta.remove(); }
+    if (!ok) { const t = b.querySelector("[lang=ko]") || b.closest(".say")?.querySelector(".say-ko"); if (t) { const r = document.createRange(); r.selectNodeContents(t); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); } return; }
     const was = b.innerHTML; b.classList.add("done"); b.setAttribute("aria-label", b.dataset.done);
     const tip = document.createElement("span"); tip.className = "tip"; tip.textContent = b.dataset.done; tip.setAttribute("role", "status"); b.append(tip);
     setTimeout(() => { b.innerHTML = was; b.classList.remove("done"); b.removeAttribute("aria-label"); }, 1600);
@@ -687,8 +694,7 @@ def build_404():
 <meta name="theme-color" content="#2336e8">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <title>Page not found | {BRAND}</title>
-<style>
-{CSS}</style>
+<link rel="stylesheet" href="/style.css?v={CSS_V}">
 </head>
 <body>
 <header class="hero"><div class="wrap">
@@ -730,9 +736,10 @@ def main():
         d = DATES[p]["d"] if p in DATED else page_date(p, open(os.path.join(ROOT, (p + "index.html") if (p == "" or p.endswith("/")) else p), encoding="utf-8").read())
         return f"<url><loc>{SITE}{p}</loc><lastmod>{d}</lastmod>{links}</url>\n"
     urls = "".join(url(p) for p in paths)
+    write("style.css", CSS)
     write("sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n{urls}</urlset>\n')
     # Offline: precache every page, so a guide opened once (or not yet) still works without signal.
-    pre = ["./", "ja/", "zh-tw/", "zh-cn/", "vi/", "icon-192.png", "manifest.webmanifest"] + [p for p in paths if p and not p.endswith("/")]
+    pre = ["./", "ja/", "zh-tw/", "zh-cn/", "vi/", "icon-192.png", "manifest.webmanifest", f"style.css?v={CSS_V}"] + [p for p in paths if p and not p.endswith("/")]
     ver = hashlib.sha256("".join(DATES[p]["h"] for p in sorted(DATES)).encode()).hexdigest()[:8]
     sw = open(os.path.join(ROOT, "sw.js"), encoding="utf-8").read()
     sw = re.sub(r"const C='[^']*';const PRE=\[[^\]]*\];", lambda m: f"const C='emk-{ver}';const PRE={json.dumps(pre)};", sw, count=1)

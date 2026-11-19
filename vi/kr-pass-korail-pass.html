@@ -12,324 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap"></noscript>
-<style>
-:root {
-  /* EasyModeKorea: bold cobalt hero with a yellow "Easy" stamp, then a sticky setup bar and
-     a scannable list of rows (icon, task, status). Detail opens in place; Korean cards open full screen. */
-  --bg: #f3f5fb;
-  --surface: #ffffff;
-  --ink: #0e1430;
-  --muted: #444f6b;
-  --line: #dfe3ee;
-  --brand: #2336e8;
-  --brand-ink: #ffffff;
-  --easy: #ffd23f;
-  --ok: #0f8a45; --ok-bg: #ddf4e7;
-  --warn: #a35f00; --warn-bg: #ffefcf;
-  --mixed: #5a3fd6; --mixed-bg: #ece8ff;
-  --bad: #c62828; --bad-bg: #fde5e5;
-  --display: "Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
-  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", "Apple SD Gothic Neo", "Hiragino Sans", "PingFang TC", sans-serif;
-  --ko: "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
-  color-scheme: light;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0b0f1e; --surface: #141a2e; --ink: #eef1fb; --muted: #aab3cc; --line: #273050;
-    --brand: #5b6cff; --easy: #ffd23f;
-    --ok: #5ad48c; --ok-bg: #11301f; --warn: #f2b453; --warn-bg: #352610;
-    --mixed: #b2a4ff; --mixed-bg: #261f4a; --bad: #ff8a80; --bad-bg: #3a1616;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #0b0f1e; --surface: #141a2e; --ink: #eef1fb; --muted: #aab3cc; --line: #273050;
-  --brand: #5b6cff; --easy: #ffd23f;
-  --ok: #5ad48c; --ok-bg: #11301f; --warn: #f2b453; --warn-bg: #352610;
-  --mixed: #b2a4ff; --mixed-bg: #261f4a; --bad: #ff8a80; --bad-bg: #3a1616;
-  color-scheme: dark;
-}
-* { box-sizing: border-box; }
-[hidden] { display: none !important; }
-html, body { margin: 0; }
-body { background: var(--bg); color: var(--ink); font: 400 17px/1.55 var(--body); -webkit-font-smoothing: antialiased; }
-a { color: var(--brand); }
-:focus-visible { outline: 3px solid var(--easy); outline-offset: 2px; border-radius: 8px; }
-.wrap { max-width: 760px; margin: 0 auto; padding: 0 16px 40px; }
-
-/* Hero */
-.hero { background: var(--brand); color: var(--brand-ink); padding: 18px 0 26px; }
-.hero .wrap { padding-bottom: 0; }
-.toprow { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
-.logo { font: 800 18px var(--display); color: inherit; text-decoration: none; letter-spacing: -0.01em; }
-.logo b { background: var(--easy); color: #0e1430; padding: 0 6px; border-radius: 6px; margin-left: 2px; }
-.langs { display: flex; gap: 10px; font-size: 14px; }
-.langs a { color: rgba(255,255,255,.82); text-decoration: none; display: inline-block; padding: 6px 2px; min-height: 24px; }
-.langs a[aria-current="page"] { color: #fff; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
-.mode { display: flex; align-items: center; gap: 10px; margin: 22px 0 8px; font: 700 13px var(--body); letter-spacing: .08em; text-transform: uppercase; }
-.mode s { opacity: .7; }
-.mode .arrow { opacity: .7; }
-.mode .easy { background: var(--easy); color: #0e1430; padding: 3px 10px; border-radius: 999px; }
-.hero h1 { font: 800 clamp(30px, 7.2vw, 46px)/1.06 var(--display); letter-spacing: -0.025em; margin: 0; text-wrap: balance; }
-.hero p { margin: 12px 0 0; font-size: 17px; color: rgba(255,255,255,.9); max-width: 58ch; }
-.hero .trust { font-size: 13px; color: rgba(255,255,255,.75); }
-
-/* Sticky setup bar */
-.setupbar { position: sticky; top: 0; z-index: 5; background: var(--surface); border-bottom: 1px solid var(--line); box-shadow: 0 6px 18px -14px rgba(14,20,48,.5); }
-.setupbar .wrap { padding: 10px 16px; display: grid; gap: 8px; }
-.setupbar .q { font: 700 12px var(--body); text-transform: uppercase; letter-spacing: .07em; color: var(--muted); }
-.seg { display: flex; gap: 6px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: 0 -16px; padding: 0 16px; }
-.seg::-webkit-scrollbar { display: none; }
-.seg label { position: relative; }
-.seg input { position: absolute; opacity: 0; pointer-events: none; }
-.seg span { display: inline-block; padding: 8px 12px; border-radius: 999px; border: 1.5px solid var(--line); font: 600 14px var(--body); cursor: pointer; background: var(--bg); white-space: nowrap; }
-.seg input:checked + span { background: var(--ink); color: var(--surface); border-color: var(--ink); }
-.seg input:focus-visible + span { outline: 3px solid var(--easy); outline-offset: 2px; }
-
-/* Score line */
-.score { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 18px 0 10px; font-weight: 600; }
-.hint { color: var(--muted); font-size: 14px; margin: 0 0 10px; }
-
-/* Rows */
-.rows { display: grid; gap: 10px; }
-.row { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
-.row > summary { list-style: none; display: grid; grid-template-columns: 44px 1fr 18px; align-items: start; gap: 12px; padding: 14px; cursor: pointer; }
-.row > summary::after { content: ""; width: 10px; height: 10px; margin-top: 16px; border-right: 2.5px solid var(--muted); border-bottom: 2.5px solid var(--muted); transform: rotate(45deg); }
-.row[open] > summary::after { transform: rotate(-135deg); margin-top: 20px; }
-.txt { display: grid; gap: 4px; min-width: 0; }
-.txt .top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.row > summary::-webkit-details-marker { display: none; }
-.ic { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; }
-.ic svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.row.ok .ic { background: var(--ok-bg); color: var(--ok); } .row.warn .ic { background: var(--warn-bg); color: var(--warn); }
-.row.mixed .ic { background: var(--mixed-bg); color: var(--mixed); } .row.bad .ic { background: var(--bad-bg); color: var(--bad); }
-.row .name { font: 700 18px/1.25 var(--body); }
-.row .sub { font: 400 14px/1.4 var(--body); color: var(--muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.row[open] .sub { display: none; }
-.pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font: 700 13px var(--body); white-space: nowrap; }
-.pill.ok { color: var(--ok); background: var(--ok-bg); } .pill.warn { color: var(--warn); background: var(--warn-bg); }
-.pill.mixed { color: var(--mixed); background: var(--mixed-bg); } .pill.bad { color: var(--bad); background: var(--bad-bg); }
-.row[open] > summary { border-bottom: 1px solid var(--line); }
-.body { padding: 14px 16px 16px; display: grid; gap: 12px; }
-.verdict { font-weight: 700; margin: 0; }
-.steps { margin: 0; padding: 0; list-style: none; counter-reset: s; display: grid; gap: 8px; }
-.steps li { counter-increment: s; display: grid; grid-template-columns: 26px 1fr; gap: 8px; }
-.steps li::before { content: counter(s); width: 24px; height: 24px; border-radius: 50%; background: var(--ink); color: var(--surface); font: 700 13px/24px var(--body); text-align: center; }
-.fallback { background: var(--bg); border-radius: 12px; padding: 10px 12px; margin: 0; font-size: 15px; }
-.fallback b { display: block; font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-bottom: 2px; }
-.actions { display: flex; gap: 8px; flex-wrap: wrap; }
-.btn { display: inline-flex; align-items: center; gap: 6px; font: 700 15px var(--body); padding: 11px 16px; border-radius: 12px; border: 0; background: var(--brand); color: #fff; cursor: pointer; text-decoration: none; }
-.btn.alt { background: var(--easy); color: #0e1430; }
-.btn.ghost { background: transparent; color: var(--brand); border: 1.5px solid var(--line); }
-.foot { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; font-size: 13px; color: var(--muted); }
-.foot details summary { cursor: pointer; }
-.foot ul { margin: 6px 0 0; padding-left: 18px; }
-.report { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
-.report button { font: 600 13px var(--body); padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
-.report button[aria-pressed="true"] { background: var(--ink); color: var(--surface); border-color: var(--ink); }
-
-/* Host stay card */
-.stay { background: var(--surface); border: 2px solid var(--brand); border-radius: 18px; padding: 16px; margin: 18px 0 6px; display: grid; gap: 12px; }
-.stay h2 { font: 800 22px/1.2 var(--display); margin: 0; }
-.addr { font: 800 24px/1.35 var(--ko); word-break: keep-all; }
-.kv { display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; margin: 0; font-size: 15px; }
-.kv dt { color: var(--muted); } .kv dd { margin: 0; font-weight: 600; }
-
-/* Sections */
-.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; margin: 14px 0; }
-.panel > summary { list-style: none; cursor: pointer; padding: 16px; font: 800 20px var(--display); display: flex; justify-content: space-between; align-items: center; }
-.panel > summary::-webkit-details-marker { display: none; }
-.panel > summary::after { content: "+"; font: 400 26px var(--body); color: var(--muted); }
-.panel[open] > summary::after { content: "–"; }
-.panel .in { padding: 0 16px 16px; display: grid; gap: 10px; }
-.panel ol { margin: 0; padding-left: 22px; display: grid; gap: 8px; }
-.timeline b { display: block; }
-.copied { font-size: 14px; color: var(--muted); }
-.related { margin: 22px 0 6px; }
-.related h2 { font: 700 18px var(--display); margin: 0 0 8px; }
-.related ul { margin: 0; padding-left: 20px; }
-.related li { margin: 4px 0; }
-.topics { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0; }
-.topics a { padding: 8px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); text-decoration: none; font-size: 14px; font-weight: 600; color: var(--ink); }
-footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-top: 20px; }
-
-/* Topic pages */
-.topic-hero h1 { font-size: clamp(26px, 6vw, 38px); }
-.card { background: var(--surface); border: 1px solid var(--line); border-left: 6px solid var(--line); border-radius: 16px; padding: 16px; display: grid; gap: 10px; }
-.card.ok { border-left-color: var(--ok); } .card.warn { border-left-color: var(--warn); } .card.mixed { border-left-color: var(--mixed); } .card.bad { border-left-color: var(--bad); }
-.card h2 { font: 700 18px/1.3 var(--body); margin: 0; }
-.cards { display: grid; gap: 12px; margin: 16px 0; }
-.card[hidden] { display: none; }
-.linkbtn { background: none; border: 0; color: var(--brand); font: 600 15px var(--body); cursor: pointer; padding: 4px 0; text-decoration: underline; justify-self: start; }
-.notes { font-size: 14px; color: var(--muted); }
-
-/* Full-screen show card */
-.show { position: fixed; inset: 0; z-index: 50; background: #fff; color: #0e1430; display: grid; grid-template-rows: auto 1fr auto; padding: 20px; }
-.show[hidden] { display: none; }
-.show .lbl { font: 700 14px var(--body); text-transform: uppercase; letter-spacing: .08em; color: #444f6b; }
-.show .ko { align-self: center; font: 800 clamp(34px, 9vw, 64px)/1.3 var(--ko); word-break: keep-all; }
-.show .ko small { display: block; font-size: .6em; font-weight: 700; margin-top: 16px; }
-.show .mean { font-size: 16px; color: #444f6b; margin: 0 0 12px; }
-.show .btn { justify-self: stretch; justify-content: center; background: #0e1430; color: #fff; font-size: 17px; padding: 14px; }
-@media (prefers-reduced-motion: no-preference) { .row > summary { transition: background .15s; } .row > summary:hover { background: var(--bg); } }
-/* One question at a time */
-.onb { margin: 18px 0 8px; }
-.onb h2 { font: 800 clamp(22px,6vw,28px)/1.2 var(--display); margin: 0 0 14px; letter-spacing: -.01em; }
-.opts-big { display: grid; gap: 10px; }
-.opts-big.two { grid-template-columns: 1fr 1fr; }
-.opt-big { text-align: left; display: grid; gap: 3px; padding: 18px; border-radius: 18px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); font: inherit; cursor: pointer; min-height: 64px; transition: transform .08s, border-color .15s; }
-.opt-big b { font: 700 18px var(--body); }
-.opt-big span { color: var(--muted); font-size: 14px; }
-.opt-big:hover, .opt-big:focus-visible { border-color: var(--brand); outline: none; }
-.opt-big:active { transform: scale(.98); }
-.linkbtn { background: none; border: 0; color: var(--brand); font: 600 15px var(--body); padding: 12px 0; cursor: pointer; }
-.mybar { position: sticky; top: 0; z-index: 5; background: var(--surface); border-bottom: 1px solid var(--line); }
-.mybar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 16px; font-weight: 600; font-size: 14px; }
-.btn.small { padding: 6px 12px; min-height: 0; font-size: 14px; }
-.greet { font: 700 20px/1.3 var(--display); margin: 18px 0 4px; }
-.search { display: block; margin: 10px 0 12px; }
-.search input { width: 100%; box-sizing: border-box; font: 16px var(--body); padding: 13px 16px; border-radius: 14px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); }
-.search input:focus { border-color: var(--brand); outline: none; }
-.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-.banner { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 14px 0 0; padding: 12px 14px; border-radius: 14px; background: var(--easy); color: #0e1430; font-weight: 600; }
-.progress { display: grid; gap: 6px; margin-bottom: 10px; font-weight: 600; font-size: 14px; }
-.progress .bar { height: 8px; border-radius: 99px; background: var(--line); overflow: hidden; }
-.progress .bar i { display: block; height: 100%; width: 0; background: var(--brand); transition: width .25s; }
-.checks { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; }
-.checks li { display: flex; gap: 12px; align-items: flex-start; padding: 8px 0; }
-.checks input { width: 22px; height: 22px; flex: none; margin: 1px 0 0; accent-color: var(--brand); }
-.checks input:checked + label { color: var(--muted); text-decoration: line-through; }
-@media (prefers-reduced-motion: reduce) { .opt-big, .progress .bar i { transition: none; } }
-.ret .hero .lede, .ret .hero .trust, .ret .hero .mode { display: none; }
-.ret .hero h1 { font-size: 22px; margin: 6px 0 0; }
-.pre:not(:has(> :not([hidden]))) { display: none; }
-/* Calm layout: one line per row, details folded away */
-.row summary .txt { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-width: 0; }
-.row summary .name { font: 700 18px var(--body); }
-.row summary { padding: 16px; }
-.row .body { padding: 4px 18px 18px; line-height: 1.6; }
-.row .body .verdict { font-size: 17px; font-weight: 600; margin: 0 0 12px; }
-.row .body > details { margin-top: 14px; font-size: 14px; color: var(--muted); }
-.row .body > details > summary { cursor: pointer; padding: 6px 0; }
-.row .body .report { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 8px; }
-.rows { display: grid; gap: 10px; }
-.about { margin: 28px 0 40px; font-size: 14px; color: var(--muted); }
-.about summary { cursor: pointer; padding: 8px 0; }
-.about p { line-height: 1.6; }
-.hero { padding-bottom: 14px; }
-.hero h1 { font-size: 26px; margin: 10px 0 0; }
-.row { scroll-margin-top: 64px; }
-.row summary { align-items: center; }
-.why { color: var(--muted); margin: -6px 0 16px; font-size: 16px; }
-.panel summary .count { color: var(--muted); font-weight: 600; margin-left: 6px; }
-.stay { margin-top: 16px; }
-.checks .stage { display: block; font: 700 13px var(--body); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); padding: 14px 0 2px; }
-.hero + .wrap { padding-top: 16px; }
-.bar-btns { display: flex; gap: 6px; flex: none; }
-.sheet { position: fixed; inset: 0; z-index: 40; background: rgba(8,12,30,.45); display: flex; align-items: flex-end; justify-content: center; }
-.sheet-in { background: var(--surface); color: var(--ink); width: 100%; max-width: 560px; max-height: 88vh; overflow: auto; border-radius: 22px 22px 0 0; padding: 18px 16px 28px; }
-.sheet-top { display: flex; align-items: center; justify-content: space-between; }
-.sheet-top h2 { margin: 0; font-size: 22px; }
-.sub-h { font: 700 13px var(--body); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 18px 0 8px; }
-.calls { display: grid; gap: 8px; }
-.call { display: flex; align-items: center; gap: 14px; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 14px; text-decoration: none; color: var(--ink); }
-.call b { font: 800 24px var(--display); color: var(--brand); min-width: 64px; }
-.call span { font-size: 15px; line-height: 1.4; }
-.show { z-index: 50; }
-.toast { position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%); background: var(--ink); color: var(--surface); padding: 10px 16px; border-radius: 99px; font-size: 14px; z-index: 30; max-width: 92vw; }
-.fb-line { margin: 28px 0 0; }
-#fb-form { display: grid; gap: 6px; margin-top: 10px; }
-#fb-form .fl { font-weight: 700; margin-top: 8px; }
-#fb-form textarea, #fb-form input { width: 100%; box-sizing: border-box; font: 16px var(--body); padding: 12px 14px; border-radius: 12px; border: 1.5px solid var(--line); background: var(--bg); color: var(--ink); }
-#fb-form textarea { min-height: 120px; resize: vertical; }
-#fb-form .btn { margin-top: 12px; width: 100%; justify-content: center; }
-.fb-done { font-weight: 600; color: var(--brand); min-height: 22px; }
-.about { margin-top: 8px; }
-.more-h { font: 700 13px var(--body); text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin: 18px 4px 2px; }
-.ask { margin: 28px 0 0; padding: 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
-.ask h2 { margin: 0 0 4px; font: 800 20px/1.2 var(--display); }
-.ask .hint { margin: 0 0 12px; }
-.ask-form { display: grid; gap: 10px; }
-.ask-form textarea, .ask-form input { width: 100%; box-sizing: border-box; padding: 12px; border: 1px solid var(--line); border-radius: 10px; font: 16px/1.4 var(--body); background: var(--bg); color: var(--ink); }
-.ask-form textarea { min-height: 88px; resize: vertical; }
-.ask-form .btn { justify-self: start; }
-.ask-form .fb-done { margin: 0; min-height: 0; }
-
-.checked-line { margin: 10px 2px 0; font-size: 14px; color: var(--muted); }
-.host-cta { margin: 18px 0 0; padding: 12px 14px; border: 1px dashed var(--line); border-radius: 12px; font-size: 15px; color: var(--muted); }
-.deep { margin: 26px 0 0; }
-.deep h2 { font: 700 21px/1.25 var(--display); margin: 0 0 10px; }
-.deep h3 { font: 700 17px/1.35 var(--body); margin: 18px 0 4px; }
-.deep p { margin: 0 0 8px; }
-.steps.full li { margin: 10px 0; }
-.errs { list-style: none; padding: 0; margin: 0; }
-.errs li { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin: 8px 0; }
-.errs .prob { margin-bottom: 4px; }
-.cites { padding-left: 20px; font-size: 15px; }
-.cites li { margin: 4px 0; overflow-wrap: anywhere; }
-.foot { border-top: 1px solid var(--line); margin-top: 36px; padding: 18px 0 28px; font-size: 14px; color: var(--muted); }
-.foot nav a { display: inline-block; padding: 6px 0; }
-.foot p { margin: 6px 0 0; }
-.skip { position: absolute; left: -9999px; top: 0; z-index: 20; background: var(--easy); color: #0e1430; padding: 10px 14px; border-radius: 0 0 10px 0; font-weight: 700; }
-.skip:focus { left: 0; }
-
-/* Short-first layout (round 14) */
-.hero h1 { line-height: 1.2; }
-.answer { background: var(--surface); border: 1px solid var(--line); border-left: 6px solid var(--line); border-radius: 16px; padding: 14px 16px; display: grid; gap: 10px; margin: 4px 0 0; }
-.answer.ok { border-left-color: var(--ok); } .answer.warn { border-left-color: var(--warn); } .answer.mixed { border-left-color: var(--mixed); } .answer.bad { border-left-color: var(--bad); }
-.pv[hidden] { display: none; }
-.ans-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 6px; }
-.ans-top h2 { font: 700 15px var(--body); color: var(--muted); margin: 0; }
-.answer .verdict { font-size: 18px; line-height: 1.4; }
-.glance { margin: 0; display: grid; gap: 6px; font-size: 15px; line-height: 1.4; }
-.glance > div { display: grid; grid-template-columns: 96px 1fr; gap: 8px; }
-.glance dt { color: var(--muted); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: .04em; padding-top: 2px; }
-.glance dd { margin: 0; }
-.ck { color: var(--muted); font-size: 12px; white-space: nowrap; }
-.stamp { margin: 0; font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 8px; }
-.do { margin: 18px 0 0; display: grid; gap: 12px; }
-.do .steps li { line-height: 1.45; }
-.says, .names { margin: 22px 0 0; }
-.says h2, .names h2 { font: 700 18px var(--display); margin: 0 0 8px; }
-.say { background: var(--surface); border: 2px solid var(--easy); border-radius: 16px; padding: 14px 16px; display: grid; gap: 8px; }
-.say-ko { font: 800 26px/1.35 var(--ko, var(--body)); margin: 0; word-break: keep-all; }
-.say-mean { margin: 0; color: var(--muted); }
-.names ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
-.chip { width: 100%; display: grid; grid-template-columns: 1fr auto; grid-template-areas: "ko i" "en i"; align-items: center; text-align: left; gap: 0 10px; padding: 10px 14px; border: 1.5px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--ink); font: inherit; cursor: pointer; position: relative; }
-.chip span { grid-area: ko; font: 700 19px var(--ko, var(--body)); }
-.chip small { grid-area: en; color: var(--muted); font-size: 13px; }
-.chip i { grid-area: i; font-style: normal; }
-.chip.done, .btn.done { border-color: var(--ok); }
-.tip { position: absolute; right: 10px; top: -10px; background: var(--ink); color: var(--surface); font-size: 12px; padding: 2px 8px; border-radius: 99px; }
-.btn { position: relative; }
-.do + .actions, .names + .actions, .says + .actions { margin-top: 18px; }
-details.more { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; margin: 10px 0 0; }
-details.more > summary { list-style: none; cursor: pointer; padding: 14px 16px; font: 700 16px var(--body); display: flex; justify-content: space-between; align-items: center; gap: 10px; min-height: 24px; }
-details.more > summary::-webkit-details-marker { display: none; }
-details.more > summary::after { content: "+"; font: 400 22px var(--body); color: var(--muted); }
-details.more[open] > summary::after { content: "–"; }
-details.more > .in, details.more > .topics { padding: 0 16px 14px; margin: 0; }
-details.more.deep { margin-top: 10px; }
-.actions + details.more { margin-top: 22px; }
-.notes p { margin: 0 0 8px; }
-/* Home: situation cards */
-.sit { margin: 6px 0 0; }
-.sit > h2, .tool-h { font: 800 20px/1.2 var(--display); margin: 0 0 10px; }
-.sit-grid { display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
-@media (max-width: 360px) { .sit-grid { grid-template-columns: 1fr; } }
-.sit-card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 12px; display: grid; gap: 6px; align-content: start; }
-.sit-card[hidden] { display: none; }
-.sit-card h3 { display: flex; align-items: center; gap: 8px; margin: 0; font: 700 16px/1.2 var(--body); }
-.sit-card h3 svg { width: 22px; height: 22px; flex: none; fill: none; stroke: var(--brand); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.sit-card p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.35; }
-.sit-links { display: flex; flex-wrap: wrap; gap: 6px; }
-.sit-card .sit-links a { display: inline-block; padding: 5px 10px; min-height: 24px; box-sizing: border-box; border-radius: 99px; background: var(--bg); border: 1px solid var(--line); color: var(--ink); font-weight: 600; font-size: 14px; text-decoration: none; }
-.sit-card .sit-links a[hidden] { display: none; }
-.tool { margin: 26px 0 0; }
-.onb { margin: 0; }
-.onb h3 { font: 700 18px/1.3 var(--body); margin: 0 0 10px; }
-.offline-note { margin: 22px 0 0; font-size: 14px; color: var(--muted); }
-</style>
+<link rel="stylesheet" href="../style.css?v=200395c4">
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "KR Pass có đáng mua không? Thẻ Korail đi được những đâu và khi nào có lợi (2026)", "description": "KR Pass là thẻ tàu dành cho du khách nước ngoài. Thẻ chỉ có lợi khi bạn đi nhiều chặng dài, nên hãy so với giá vé lẻ trước.", "datePublished": "2026-11-19", "dateModified": "2026-11-20", "inLanguage": "vi", "url": "https://easymodekorea.com/vi/kr-pass-korail-pass.html", "mainEntityOfPage": "https://easymodekorea.com/vi/kr-pass-korail-pass.html", "image": "https://easymodekorea.com/og.png", "author": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/vi/about.html"}, "publisher": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/", "logo": {"@type": "ImageObject", "url": "https://easymodekorea.com/icon-512.png"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "EasyModeKorea", "item": "https://easymodekorea.com/vi/"}, {"@type": "ListItem", "position": 2, "name": "KR Pass", "item": "https://easymodekorea.com/vi/kr-pass-korail-pass.html"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "KR Pass (thẻ tàu Korail) có đáng mua không?", "acceptedAnswer": {"@type": "Answer", "text": "KR Pass có thể tiết kiệm nếu bạn đi nhiều chặng dài, nhưng vẫn phải đặt chỗ cho từng chuyến. Hãy cộng giá vé lẻ trước khi mua. Kiểm tra bạn có đủ điều kiện không. Thẻ dành cho du khách nước ngoài, hãy mang theo hộ chiếu. Người Hàn Quốc và người lưu trú dài hạn không được mua. Liệt kê các chuyến đi và tra giá vé lẻ từng chặng trên trang tiếng Anh của KORAIL. Chỉ mua thẻ khi tổng giá vé lẻ cao hơn rõ rệt. Sau khi mua, hãy đặt chỗ cho từng chuyến. Thẻ không phải là chỗ ngồi, và các tuyến đông khách thường hết vé."}}, {"@type": "Question", "name": "Ai được mua KR Pass?", "acceptedAnswer": {"@type": "Answer", "text": "Du khách nước ngoài có hộ chiếu. Người Hàn và người cư trú dài hạn không được mua."}}, {"@type": "Question", "name": "KR Pass có bao gồm đặt chỗ không?", "acceptedAnswer": {"@type": "Answer", "text": "Bạn đặt chỗ riêng cho từng chuyến bằng thẻ."}}, {"@type": "Question", "name": "Đi Seoul–Busan khứ hồi một lần có đáng không?", "acceptedAnswer": {"@type": "Answer", "text": "Thường là không. Thẻ chỉ có lợi khi đi nhiều chuyến dài trong vài ngày."}}, {"@type": "Question", "name": "Việc nhập SRT có làm thẻ thay đổi không?", "acceptedAnswer": {"@type": "Answer", "text": "SRT đã nhập vào KORAIL từ 1/9/2026. Hãy kiểm tra tuyến của bạn có được áp dụng trước khi mua."}}]}]</script>
 </head>
@@ -341,11 +24,11 @@ details.more.deep { margin-top: 10px; }
 </div></header>
 <div class="wrap">
   <main id="answer">
-  <section class="answer warn"><div class="pv warn"><div class="ans-top"><h2>Thêm một bước</h2><span class="pill warn">Thêm một bước</span></div><p class="verdict">KR Pass có thể tiết kiệm nếu bạn đi nhiều chặng dài, nhưng vẫn phải đặt chỗ cho từng chuyến. Hãy cộng giá vé lẻ trước khi mua.</p></div><dl class="glance"><div><dt>Good to know</dt><dd>Covers KORAIL trains, not AREX or the subway <time class="ck" datetime="2026-11-17">✓ 17/11/2026</time></dd></div><div><dt>Where</dt><dd>You still book each seat after buying the pass <time class="ck" datetime="2026-11-17">✓ 17/11/2026</time></dd></div></dl><p class="stamp">Checked against <a href="https://www.letskorail.com" rel="noopener" target="_blank">KORAIL English booking site</a> on <time datetime="2026-11-17">17/11/2026</time></p></section>
+  <section class="answer warn"><div class="pv warn"><div class="ans-top"><h2>Thêm một bước</h2><span class="pill warn">Thêm một bước</span></div><p class="verdict">KR Pass có thể tiết kiệm nếu bạn đi nhiều chặng dài, nhưng vẫn phải đặt chỗ cho từng chuyến. Hãy cộng giá vé lẻ trước khi mua.</p></div><dl class="glance"><div><dt>Lưu ý</dt><dd>Dùng cho tàu KORAIL, không gồm AREX hay tàu điện ngầm <time class="ck" datetime="2026-11-17">✓ 17/11/2026</time></dd></div><div><dt>Ở đâu</dt><dd>Mua thẻ xong vẫn phải đặt từng chỗ ngồi <time class="ck" datetime="2026-11-17">✓ 17/11/2026</time></dd></div></dl><p class="stamp">Đã kiểm tra với <a href="https://www.letskorail.com" rel="noopener" target="_blank">KORAIL English booking site</a> ngày <time datetime="2026-11-17">17/11/2026</time></p></section>
   <button class="linkbtn" type="button" id="show-all" hidden>Xem câu trả lời cho tình trạng khác</button>
   <section class="do" aria-labelledby="do-krpass"><h2 id="do-krpass" class="sr">Từng bước cho người mới</h2><div class="pv"><ol class="steps"><li>Kiểm tra bạn có đủ điều kiện không. Thẻ dành cho du khách nước ngoài, hãy mang theo hộ chiếu. Người Hàn Quốc và người lưu trú dài hạn không được mua.</li><li>Liệt kê các chuyến đi và tra giá vé lẻ từng chặng trên trang tiếng Anh của KORAIL. Chỉ mua thẻ khi tổng giá vé lẻ cao hơn rõ rệt.</li><li>Sau khi mua, hãy đặt chỗ cho từng chuyến. Thẻ không phải là chỗ ngồi, và các tuyến đông khách thường hết vé.</li></ol><p class="fallback"><b>Nếu không được</b>Không chắc có lợi không? Vé KTX lẻ trên trang tiếng Anh của KORAIL luôn dùng được.</p></div></section>
-  <section class="says" aria-labelledby="say-krpass"><h2 id="say-krpass">Show this to staff</h2><div class="say"><p class="say-ko" lang="ko">이 기차표는 지정석이에요?</p><p class="say-mean">Vé tàu này có chỗ ngồi chỉ định không?</p><div class="actions"><button class="btn alt" type="button" data-show="이 기차표는 지정석이에요?" data-lbl="Cho nhân viên xem" data-mean="Nghĩa là: Vé tàu này có chỗ ngồi chỉ định không?">🗣 Show full screen</button><button class="btn ghost" type="button" data-copy="이 기차표는 지정석이에요?" data-done="✓ Copied">📋 Copy</button></div></div></section>
-  <section class="names" aria-labelledby="nm-krpass"><h2 id="nm-krpass">Korean names to copy (paste into Naver Map or show a driver)</h2><ul><li><button class="chip" type="button" data-copy="코레일" data-done="✓ Copied"><span lang="ko">코레일</span><small>KORAIL</small><i aria-hidden="true">📋</i></button></li></ul></section>
+  <section class="says" aria-labelledby="say-krpass"><h2 id="say-krpass">Đưa cho nhân viên xem</h2><div class="say"><p class="say-ko" lang="ko">이 기차표는 지정석이에요?</p><p class="say-mean">Vé tàu này có chỗ ngồi chỉ định không?</p><div class="actions"><button class="btn alt" type="button" data-show="이 기차표는 지정석이에요?" data-lbl="Cho nhân viên xem" data-mean="Nghĩa là: Vé tàu này có chỗ ngồi chỉ định không?">🗣 Hiện toàn màn hình</button><button class="btn ghost" type="button" data-copy="이 기차표는 지정석이에요?" data-done="✓ Đã sao chép">📋 Sao chép</button></div></div></section>
+  <section class="names" aria-labelledby="nm-krpass"><h2 id="nm-krpass">Tên tiếng Hàn để sao chép (dán vào Naver Map hoặc đưa tài xế xem)</h2><ul><li><button class="chip" type="button" data-copy="코레일" data-done="✓ Đã sao chép"><span lang="ko">코레일</span><small>KORAIL</small><i aria-hidden="true">📋</i></button></li></ul></section>
   <div class="actions"><a class="btn" href="./#task-krpass">Kiểm tra theo tình trạng của bạn</a></div>
   <details class="more deep" id="st-krpass"><summary>Từng bước cho người mới</summary><div class="in"><ol class="steps full"><li>Liệt kê mọi chuyến tàu đường dài trong kế hoạch, kèm ngày đi.</li><li>Tra giá vé lẻ của từng chuyến trên trang tiếng Anh của KORAIL rồi cộng lại.</li><li>So tổng đó với giá KR Pass cho số ngày bạn cần. Chỉ mua khi thẻ rõ ràng rẻ hơn.</li><li>Mua thẻ trực tuyến từ KORAIL hoặc đại lý được ủy quyền bằng thông tin hộ chiếu. Thẻ chỉ dành cho du khách nước ngoài.</li><li>Đặt chỗ cho từng chuyến càng sớm càng tốt. Thẻ không giữ chỗ, và tàu đông sẽ kín ghế.</li><li>Mang hộ chiếu cùng thẻ khi lên tàu; nhân viên có thể kiểm tra cả hai.</li></ol></div></details>
 <details class="more deep" id="er-krpass"><summary>Lỗi thường gặp và cách xử lý</summary><div class="in"><ul class="errs"><li><p class="prob"><b>Chuyến bạn muốn đã hết ghế.</b></p><p>Thử giờ khác hoặc ga khác. Khi hết ghế, đôi khi được đi chỗ đứng.</p></li><li><p class="prob"><b>Thẻ không áp dụng cho chuyến bạn muốn.</b></p><p>Thẻ áp dụng cho tàu KORAIL, không áp dụng cho tàu sân bay <a href="incheon-airport-to-seoul.html">AREX</a> hay tàu điện ngầm; kiểm tra tuyến trước khi mua.</p></li><li><p class="prob"><b>Tính ra thẻ đắt hơn.</b></p><p>Mua vé lẻ. Vé lẻ lúc nào cũng dùng được.</p></li><li><p class="prob"><b>Bạn cần hủy thẻ.</b></p><p>Hạn hoàn tiền tùy nơi mua; xem điều kiện của nơi bán trước khi mua.</p></li></ul></div></details>
@@ -354,7 +37,7 @@ details.more.deep { margin-top: 10px; }
   <details class="more"><summary>Nguồn và ghi chú</summary><div class="in notes"><p>KR Pass là thẻ tàu dành cho du khách nước ngoài. Thẻ chỉ có lợi khi bạn đi nhiều chặng dài, nên hãy so với giá vé lẻ trước.</p><ul><li>Đã kiểm tra 17/11/2026</li><li>Thẻ dùng cho các tàu của KORAIL, không gồm tàu sân bay AREX và tàu điện ngầm.</li><li>Đường sắt có thay đổi năm 2026: SRT sáp nhập vào KORAIL ngày 1/9/2026. Hãy kiểm tra tuyến của bạn có được áp dụng không trước khi mua.</li><li><a href="https://en.wikipedia.org/wiki/Korea_Rail_Pass" rel="noopener" target="_blank">Wikipedia: Korea Rail Pass</a></li><li><a href="https://www.trip.com/guide/train/korail.html" rel="noopener" target="_blank">Trip.com: Korail guide for foreigners</a></li></ul></div></details>
   </main>
   <section class="related"><h2>Hướng dẫn liên quan</h2><ul><li><a href="ktx-train-booking.html">Người nước ngoài đặt vé tàu KTX thế nào?</a></li><li><a href="seoul-to-busan-k-tour-pass.html">Từ Seoul đến Busan thế nào, và K-Tour Pass là gì?</a></li><li><a href="tmoney-subway-bus.html">Có nạp T-money bằng thẻ nước ngoài được không?</a></li></ul></section>
-  <details class="more"><summary>All guides</summary><nav class="topics"><a href="mobile-data-sim.html">Điện thoại và data</a><a href="incheon-airport-to-seoul.html">Sân bay vào thành phố</a><a href="maps.html">Bản đồ</a><a href="taxi.html">Taxi</a><a href="tmoney-subway-bus.html">Tàu điện và xe buýt</a><a href="seoul-tourist-transit-pass.html">Thẻ giao thông</a><a href="ktx-train-booking.html">Tàu KTX</a><a href="seoul-to-busan-k-tour-pass.html">Đi Busan</a><a href="dmz-jsa-tour-booking.html">Tour DMZ</a><a href="jeju-getting-around.html">Đi lại Jeju</a><a href="restaurant-reservations.html">Đặt nhà hàng</a><a href="food-delivery.html">Giao đồ ăn</a><a href="translation.html">Dịch thuật</a><a href="tax-free-shopping.html">Mua sắm và hoàn thuế</a><a href="luggage-storage.html">Gửi hành lý</a><a href="pharmacy-hospital.html">Ốm hoặc bị thương</a><a href="k-eta-entry-requirements.html">Quy định nhập cảnh</a><a href="atm-foreign-card-cash.html">Tiền mặt &amp; ATM</a><a href="korea-power-plug-voltage.html">Ổ cắm điện</a><a href="gimpo-airport-to-seoul.html">Sân bay Gimpo</a></nav></details>
+  <details class="more"><summary>Tất cả hướng dẫn</summary><nav class="topics"><a href="mobile-data-sim.html">Điện thoại và data</a><a href="incheon-airport-to-seoul.html">Sân bay vào thành phố</a><a href="maps.html">Bản đồ</a><a href="taxi.html">Taxi</a><a href="tmoney-subway-bus.html">Tàu điện và xe buýt</a><a href="seoul-tourist-transit-pass.html">Thẻ giao thông</a><a href="ktx-train-booking.html">Tàu KTX</a><a href="seoul-to-busan-k-tour-pass.html">Đi Busan</a><a href="dmz-jsa-tour-booking.html">Tour DMZ</a><a href="jeju-getting-around.html">Đi lại Jeju</a><a href="restaurant-reservations.html">Đặt nhà hàng</a><a href="food-delivery.html">Giao đồ ăn</a><a href="translation.html">Dịch thuật</a><a href="tax-free-shopping.html">Mua sắm và hoàn thuế</a><a href="luggage-storage.html">Gửi hành lý</a><a href="pharmacy-hospital.html">Ốm hoặc bị thương</a><a href="k-eta-entry-requirements.html">Quy định nhập cảnh</a><a href="atm-foreign-card-cash.html">Tiền mặt &amp; ATM</a><a href="korea-power-plug-voltage.html">Ổ cắm điện</a><a href="gimpo-airport-to-seoul.html">Sân bay Gimpo</a></nav></details>
   <p class="host-cta">🏠 Bạn có nhà nghỉ hoặc phòng cho thuê ở Hàn Quốc? <a href="../hosts.html">Gửi hướng dẫn này cho khách</a> (숙소 사장님용 안내).</p>
   <section class="ask" aria-labelledby="ask-t-vi"><h2 id="ask-t-vi">Không tìm thấy thông tin bạn cần?</h2><p class="hint">Hãy gửi câu hỏi. Chúng tôi sẽ bổ sung vào hướng dẫn, và trả lời qua email nếu bạn để lại.</p>
 <form class="ask-form" data-thanks="Cảm ơn! Câu hỏi của bạn đã được gửi."><textarea name="q" required maxlength="1000" aria-label="Không tìm thấy thông tin bạn cần?" placeholder="VD: Thẻ phát hành ở nước ngoài có đặt vé KTX được không?"></textarea>
@@ -392,7 +75,10 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !documen
   document.querySelectorAll("[data-show]").forEach(b => b.addEventListener("click", () => show(b.dataset.lbl, b.dataset.show, "", b.dataset.mean)));
   const saved = (store("wik-setup") || "visitor|ios").split("|");
   document.querySelectorAll("[data-copy]").forEach(b => b.addEventListener("click", async () => {
-    try { await navigator.clipboard.writeText(b.dataset.copy); } catch (e) { return; }
+    let ok = false;
+    try { await navigator.clipboard.writeText(b.dataset.copy); ok = true; } catch (e) {}
+    if (!ok) { const ta = document.createElement("textarea"); ta.value = b.dataset.copy; ta.setAttribute("readonly", ""); ta.style.cssText = "position:fixed;opacity:0"; document.body.append(ta); ta.select(); try { ok = document.execCommand("copy"); } catch (e) {} ta.remove(); }
+    if (!ok) { const t = b.querySelector("[lang=ko]") || b.closest(".say")?.querySelector(".say-ko"); if (t) { const r = document.createRange(); r.selectNodeContents(t); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); } return; }
     const was = b.innerHTML; b.classList.add("done"); b.setAttribute("aria-label", b.dataset.done);
     const tip = document.createElement("span"); tip.className = "tip"; tip.textContent = b.dataset.done; tip.setAttribute("role", "status"); b.append(tip);
     setTimeout(() => { b.innerHTML = was; b.classList.remove("done"); b.removeAttribute("aria-label"); }, 1600);

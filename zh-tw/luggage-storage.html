@@ -12,324 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap"></noscript>
-<style>
-:root {
-  /* EasyModeKorea: bold cobalt hero with a yellow "Easy" stamp, then a sticky setup bar and
-     a scannable list of rows (icon, task, status). Detail opens in place; Korean cards open full screen. */
-  --bg: #f3f5fb;
-  --surface: #ffffff;
-  --ink: #0e1430;
-  --muted: #444f6b;
-  --line: #dfe3ee;
-  --brand: #2336e8;
-  --brand-ink: #ffffff;
-  --easy: #ffd23f;
-  --ok: #0f8a45; --ok-bg: #ddf4e7;
-  --warn: #a35f00; --warn-bg: #ffefcf;
-  --mixed: #5a3fd6; --mixed-bg: #ece8ff;
-  --bad: #c62828; --bad-bg: #fde5e5;
-  --display: "Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
-  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", "Apple SD Gothic Neo", "Hiragino Sans", "PingFang TC", sans-serif;
-  --ko: "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
-  color-scheme: light;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0b0f1e; --surface: #141a2e; --ink: #eef1fb; --muted: #aab3cc; --line: #273050;
-    --brand: #5b6cff; --easy: #ffd23f;
-    --ok: #5ad48c; --ok-bg: #11301f; --warn: #f2b453; --warn-bg: #352610;
-    --mixed: #b2a4ff; --mixed-bg: #261f4a; --bad: #ff8a80; --bad-bg: #3a1616;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #0b0f1e; --surface: #141a2e; --ink: #eef1fb; --muted: #aab3cc; --line: #273050;
-  --brand: #5b6cff; --easy: #ffd23f;
-  --ok: #5ad48c; --ok-bg: #11301f; --warn: #f2b453; --warn-bg: #352610;
-  --mixed: #b2a4ff; --mixed-bg: #261f4a; --bad: #ff8a80; --bad-bg: #3a1616;
-  color-scheme: dark;
-}
-* { box-sizing: border-box; }
-[hidden] { display: none !important; }
-html, body { margin: 0; }
-body { background: var(--bg); color: var(--ink); font: 400 17px/1.55 var(--body); -webkit-font-smoothing: antialiased; }
-a { color: var(--brand); }
-:focus-visible { outline: 3px solid var(--easy); outline-offset: 2px; border-radius: 8px; }
-.wrap { max-width: 760px; margin: 0 auto; padding: 0 16px 40px; }
-
-/* Hero */
-.hero { background: var(--brand); color: var(--brand-ink); padding: 18px 0 26px; }
-.hero .wrap { padding-bottom: 0; }
-.toprow { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
-.logo { font: 800 18px var(--display); color: inherit; text-decoration: none; letter-spacing: -0.01em; }
-.logo b { background: var(--easy); color: #0e1430; padding: 0 6px; border-radius: 6px; margin-left: 2px; }
-.langs { display: flex; gap: 10px; font-size: 14px; }
-.langs a { color: rgba(255,255,255,.82); text-decoration: none; display: inline-block; padding: 6px 2px; min-height: 24px; }
-.langs a[aria-current="page"] { color: #fff; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
-.mode { display: flex; align-items: center; gap: 10px; margin: 22px 0 8px; font: 700 13px var(--body); letter-spacing: .08em; text-transform: uppercase; }
-.mode s { opacity: .7; }
-.mode .arrow { opacity: .7; }
-.mode .easy { background: var(--easy); color: #0e1430; padding: 3px 10px; border-radius: 999px; }
-.hero h1 { font: 800 clamp(30px, 7.2vw, 46px)/1.06 var(--display); letter-spacing: -0.025em; margin: 0; text-wrap: balance; }
-.hero p { margin: 12px 0 0; font-size: 17px; color: rgba(255,255,255,.9); max-width: 58ch; }
-.hero .trust { font-size: 13px; color: rgba(255,255,255,.75); }
-
-/* Sticky setup bar */
-.setupbar { position: sticky; top: 0; z-index: 5; background: var(--surface); border-bottom: 1px solid var(--line); box-shadow: 0 6px 18px -14px rgba(14,20,48,.5); }
-.setupbar .wrap { padding: 10px 16px; display: grid; gap: 8px; }
-.setupbar .q { font: 700 12px var(--body); text-transform: uppercase; letter-spacing: .07em; color: var(--muted); }
-.seg { display: flex; gap: 6px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: 0 -16px; padding: 0 16px; }
-.seg::-webkit-scrollbar { display: none; }
-.seg label { position: relative; }
-.seg input { position: absolute; opacity: 0; pointer-events: none; }
-.seg span { display: inline-block; padding: 8px 12px; border-radius: 999px; border: 1.5px solid var(--line); font: 600 14px var(--body); cursor: pointer; background: var(--bg); white-space: nowrap; }
-.seg input:checked + span { background: var(--ink); color: var(--surface); border-color: var(--ink); }
-.seg input:focus-visible + span { outline: 3px solid var(--easy); outline-offset: 2px; }
-
-/* Score line */
-.score { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 18px 0 10px; font-weight: 600; }
-.hint { color: var(--muted); font-size: 14px; margin: 0 0 10px; }
-
-/* Rows */
-.rows { display: grid; gap: 10px; }
-.row { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
-.row > summary { list-style: none; display: grid; grid-template-columns: 44px 1fr 18px; align-items: start; gap: 12px; padding: 14px; cursor: pointer; }
-.row > summary::after { content: ""; width: 10px; height: 10px; margin-top: 16px; border-right: 2.5px solid var(--muted); border-bottom: 2.5px solid var(--muted); transform: rotate(45deg); }
-.row[open] > summary::after { transform: rotate(-135deg); margin-top: 20px; }
-.txt { display: grid; gap: 4px; min-width: 0; }
-.txt .top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.row > summary::-webkit-details-marker { display: none; }
-.ic { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; }
-.ic svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.row.ok .ic { background: var(--ok-bg); color: var(--ok); } .row.warn .ic { background: var(--warn-bg); color: var(--warn); }
-.row.mixed .ic { background: var(--mixed-bg); color: var(--mixed); } .row.bad .ic { background: var(--bad-bg); color: var(--bad); }
-.row .name { font: 700 18px/1.25 var(--body); }
-.row .sub { font: 400 14px/1.4 var(--body); color: var(--muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.row[open] .sub { display: none; }
-.pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font: 700 13px var(--body); white-space: nowrap; }
-.pill.ok { color: var(--ok); background: var(--ok-bg); } .pill.warn { color: var(--warn); background: var(--warn-bg); }
-.pill.mixed { color: var(--mixed); background: var(--mixed-bg); } .pill.bad { color: var(--bad); background: var(--bad-bg); }
-.row[open] > summary { border-bottom: 1px solid var(--line); }
-.body { padding: 14px 16px 16px; display: grid; gap: 12px; }
-.verdict { font-weight: 700; margin: 0; }
-.steps { margin: 0; padding: 0; list-style: none; counter-reset: s; display: grid; gap: 8px; }
-.steps li { counter-increment: s; display: grid; grid-template-columns: 26px 1fr; gap: 8px; }
-.steps li::before { content: counter(s); width: 24px; height: 24px; border-radius: 50%; background: var(--ink); color: var(--surface); font: 700 13px/24px var(--body); text-align: center; }
-.fallback { background: var(--bg); border-radius: 12px; padding: 10px 12px; margin: 0; font-size: 15px; }
-.fallback b { display: block; font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-bottom: 2px; }
-.actions { display: flex; gap: 8px; flex-wrap: wrap; }
-.btn { display: inline-flex; align-items: center; gap: 6px; font: 700 15px var(--body); padding: 11px 16px; border-radius: 12px; border: 0; background: var(--brand); color: #fff; cursor: pointer; text-decoration: none; }
-.btn.alt { background: var(--easy); color: #0e1430; }
-.btn.ghost { background: transparent; color: var(--brand); border: 1.5px solid var(--line); }
-.foot { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; font-size: 13px; color: var(--muted); }
-.foot details summary { cursor: pointer; }
-.foot ul { margin: 6px 0 0; padding-left: 18px; }
-.report { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
-.report button { font: 600 13px var(--body); padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
-.report button[aria-pressed="true"] { background: var(--ink); color: var(--surface); border-color: var(--ink); }
-
-/* Host stay card */
-.stay { background: var(--surface); border: 2px solid var(--brand); border-radius: 18px; padding: 16px; margin: 18px 0 6px; display: grid; gap: 12px; }
-.stay h2 { font: 800 22px/1.2 var(--display); margin: 0; }
-.addr { font: 800 24px/1.35 var(--ko); word-break: keep-all; }
-.kv { display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; margin: 0; font-size: 15px; }
-.kv dt { color: var(--muted); } .kv dd { margin: 0; font-weight: 600; }
-
-/* Sections */
-.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; margin: 14px 0; }
-.panel > summary { list-style: none; cursor: pointer; padding: 16px; font: 800 20px var(--display); display: flex; justify-content: space-between; align-items: center; }
-.panel > summary::-webkit-details-marker { display: none; }
-.panel > summary::after { content: "+"; font: 400 26px var(--body); color: var(--muted); }
-.panel[open] > summary::after { content: "–"; }
-.panel .in { padding: 0 16px 16px; display: grid; gap: 10px; }
-.panel ol { margin: 0; padding-left: 22px; display: grid; gap: 8px; }
-.timeline b { display: block; }
-.copied { font-size: 14px; color: var(--muted); }
-.related { margin: 22px 0 6px; }
-.related h2 { font: 700 18px var(--display); margin: 0 0 8px; }
-.related ul { margin: 0; padding-left: 20px; }
-.related li { margin: 4px 0; }
-.topics { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0; }
-.topics a { padding: 8px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); text-decoration: none; font-size: 14px; font-weight: 600; color: var(--ink); }
-footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-top: 20px; }
-
-/* Topic pages */
-.topic-hero h1 { font-size: clamp(26px, 6vw, 38px); }
-.card { background: var(--surface); border: 1px solid var(--line); border-left: 6px solid var(--line); border-radius: 16px; padding: 16px; display: grid; gap: 10px; }
-.card.ok { border-left-color: var(--ok); } .card.warn { border-left-color: var(--warn); } .card.mixed { border-left-color: var(--mixed); } .card.bad { border-left-color: var(--bad); }
-.card h2 { font: 700 18px/1.3 var(--body); margin: 0; }
-.cards { display: grid; gap: 12px; margin: 16px 0; }
-.card[hidden] { display: none; }
-.linkbtn { background: none; border: 0; color: var(--brand); font: 600 15px var(--body); cursor: pointer; padding: 4px 0; text-decoration: underline; justify-self: start; }
-.notes { font-size: 14px; color: var(--muted); }
-
-/* Full-screen show card */
-.show { position: fixed; inset: 0; z-index: 50; background: #fff; color: #0e1430; display: grid; grid-template-rows: auto 1fr auto; padding: 20px; }
-.show[hidden] { display: none; }
-.show .lbl { font: 700 14px var(--body); text-transform: uppercase; letter-spacing: .08em; color: #444f6b; }
-.show .ko { align-self: center; font: 800 clamp(34px, 9vw, 64px)/1.3 var(--ko); word-break: keep-all; }
-.show .ko small { display: block; font-size: .6em; font-weight: 700; margin-top: 16px; }
-.show .mean { font-size: 16px; color: #444f6b; margin: 0 0 12px; }
-.show .btn { justify-self: stretch; justify-content: center; background: #0e1430; color: #fff; font-size: 17px; padding: 14px; }
-@media (prefers-reduced-motion: no-preference) { .row > summary { transition: background .15s; } .row > summary:hover { background: var(--bg); } }
-/* One question at a time */
-.onb { margin: 18px 0 8px; }
-.onb h2 { font: 800 clamp(22px,6vw,28px)/1.2 var(--display); margin: 0 0 14px; letter-spacing: -.01em; }
-.opts-big { display: grid; gap: 10px; }
-.opts-big.two { grid-template-columns: 1fr 1fr; }
-.opt-big { text-align: left; display: grid; gap: 3px; padding: 18px; border-radius: 18px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); font: inherit; cursor: pointer; min-height: 64px; transition: transform .08s, border-color .15s; }
-.opt-big b { font: 700 18px var(--body); }
-.opt-big span { color: var(--muted); font-size: 14px; }
-.opt-big:hover, .opt-big:focus-visible { border-color: var(--brand); outline: none; }
-.opt-big:active { transform: scale(.98); }
-.linkbtn { background: none; border: 0; color: var(--brand); font: 600 15px var(--body); padding: 12px 0; cursor: pointer; }
-.mybar { position: sticky; top: 0; z-index: 5; background: var(--surface); border-bottom: 1px solid var(--line); }
-.mybar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 16px; font-weight: 600; font-size: 14px; }
-.btn.small { padding: 6px 12px; min-height: 0; font-size: 14px; }
-.greet { font: 700 20px/1.3 var(--display); margin: 18px 0 4px; }
-.search { display: block; margin: 10px 0 12px; }
-.search input { width: 100%; box-sizing: border-box; font: 16px var(--body); padding: 13px 16px; border-radius: 14px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); }
-.search input:focus { border-color: var(--brand); outline: none; }
-.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-.banner { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 14px 0 0; padding: 12px 14px; border-radius: 14px; background: var(--easy); color: #0e1430; font-weight: 600; }
-.progress { display: grid; gap: 6px; margin-bottom: 10px; font-weight: 600; font-size: 14px; }
-.progress .bar { height: 8px; border-radius: 99px; background: var(--line); overflow: hidden; }
-.progress .bar i { display: block; height: 100%; width: 0; background: var(--brand); transition: width .25s; }
-.checks { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; }
-.checks li { display: flex; gap: 12px; align-items: flex-start; padding: 8px 0; }
-.checks input { width: 22px; height: 22px; flex: none; margin: 1px 0 0; accent-color: var(--brand); }
-.checks input:checked + label { color: var(--muted); text-decoration: line-through; }
-@media (prefers-reduced-motion: reduce) { .opt-big, .progress .bar i { transition: none; } }
-.ret .hero .lede, .ret .hero .trust, .ret .hero .mode { display: none; }
-.ret .hero h1 { font-size: 22px; margin: 6px 0 0; }
-.pre:not(:has(> :not([hidden]))) { display: none; }
-/* Calm layout: one line per row, details folded away */
-.row summary .txt { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-width: 0; }
-.row summary .name { font: 700 18px var(--body); }
-.row summary { padding: 16px; }
-.row .body { padding: 4px 18px 18px; line-height: 1.6; }
-.row .body .verdict { font-size: 17px; font-weight: 600; margin: 0 0 12px; }
-.row .body > details { margin-top: 14px; font-size: 14px; color: var(--muted); }
-.row .body > details > summary { cursor: pointer; padding: 6px 0; }
-.row .body .report { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 8px; }
-.rows { display: grid; gap: 10px; }
-.about { margin: 28px 0 40px; font-size: 14px; color: var(--muted); }
-.about summary { cursor: pointer; padding: 8px 0; }
-.about p { line-height: 1.6; }
-.hero { padding-bottom: 14px; }
-.hero h1 { font-size: 26px; margin: 10px 0 0; }
-.row { scroll-margin-top: 64px; }
-.row summary { align-items: center; }
-.why { color: var(--muted); margin: -6px 0 16px; font-size: 16px; }
-.panel summary .count { color: var(--muted); font-weight: 600; margin-left: 6px; }
-.stay { margin-top: 16px; }
-.checks .stage { display: block; font: 700 13px var(--body); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); padding: 14px 0 2px; }
-.hero + .wrap { padding-top: 16px; }
-.bar-btns { display: flex; gap: 6px; flex: none; }
-.sheet { position: fixed; inset: 0; z-index: 40; background: rgba(8,12,30,.45); display: flex; align-items: flex-end; justify-content: center; }
-.sheet-in { background: var(--surface); color: var(--ink); width: 100%; max-width: 560px; max-height: 88vh; overflow: auto; border-radius: 22px 22px 0 0; padding: 18px 16px 28px; }
-.sheet-top { display: flex; align-items: center; justify-content: space-between; }
-.sheet-top h2 { margin: 0; font-size: 22px; }
-.sub-h { font: 700 13px var(--body); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 18px 0 8px; }
-.calls { display: grid; gap: 8px; }
-.call { display: flex; align-items: center; gap: 14px; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 14px; text-decoration: none; color: var(--ink); }
-.call b { font: 800 24px var(--display); color: var(--brand); min-width: 64px; }
-.call span { font-size: 15px; line-height: 1.4; }
-.show { z-index: 50; }
-.toast { position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%); background: var(--ink); color: var(--surface); padding: 10px 16px; border-radius: 99px; font-size: 14px; z-index: 30; max-width: 92vw; }
-.fb-line { margin: 28px 0 0; }
-#fb-form { display: grid; gap: 6px; margin-top: 10px; }
-#fb-form .fl { font-weight: 700; margin-top: 8px; }
-#fb-form textarea, #fb-form input { width: 100%; box-sizing: border-box; font: 16px var(--body); padding: 12px 14px; border-radius: 12px; border: 1.5px solid var(--line); background: var(--bg); color: var(--ink); }
-#fb-form textarea { min-height: 120px; resize: vertical; }
-#fb-form .btn { margin-top: 12px; width: 100%; justify-content: center; }
-.fb-done { font-weight: 600; color: var(--brand); min-height: 22px; }
-.about { margin-top: 8px; }
-.more-h { font: 700 13px var(--body); text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin: 18px 4px 2px; }
-.ask { margin: 28px 0 0; padding: 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
-.ask h2 { margin: 0 0 4px; font: 800 20px/1.2 var(--display); }
-.ask .hint { margin: 0 0 12px; }
-.ask-form { display: grid; gap: 10px; }
-.ask-form textarea, .ask-form input { width: 100%; box-sizing: border-box; padding: 12px; border: 1px solid var(--line); border-radius: 10px; font: 16px/1.4 var(--body); background: var(--bg); color: var(--ink); }
-.ask-form textarea { min-height: 88px; resize: vertical; }
-.ask-form .btn { justify-self: start; }
-.ask-form .fb-done { margin: 0; min-height: 0; }
-
-.checked-line { margin: 10px 2px 0; font-size: 14px; color: var(--muted); }
-.host-cta { margin: 18px 0 0; padding: 12px 14px; border: 1px dashed var(--line); border-radius: 12px; font-size: 15px; color: var(--muted); }
-.deep { margin: 26px 0 0; }
-.deep h2 { font: 700 21px/1.25 var(--display); margin: 0 0 10px; }
-.deep h3 { font: 700 17px/1.35 var(--body); margin: 18px 0 4px; }
-.deep p { margin: 0 0 8px; }
-.steps.full li { margin: 10px 0; }
-.errs { list-style: none; padding: 0; margin: 0; }
-.errs li { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin: 8px 0; }
-.errs .prob { margin-bottom: 4px; }
-.cites { padding-left: 20px; font-size: 15px; }
-.cites li { margin: 4px 0; overflow-wrap: anywhere; }
-.foot { border-top: 1px solid var(--line); margin-top: 36px; padding: 18px 0 28px; font-size: 14px; color: var(--muted); }
-.foot nav a { display: inline-block; padding: 6px 0; }
-.foot p { margin: 6px 0 0; }
-.skip { position: absolute; left: -9999px; top: 0; z-index: 20; background: var(--easy); color: #0e1430; padding: 10px 14px; border-radius: 0 0 10px 0; font-weight: 700; }
-.skip:focus { left: 0; }
-
-/* Short-first layout (round 14) */
-.hero h1 { line-height: 1.2; }
-.answer { background: var(--surface); border: 1px solid var(--line); border-left: 6px solid var(--line); border-radius: 16px; padding: 14px 16px; display: grid; gap: 10px; margin: 4px 0 0; }
-.answer.ok { border-left-color: var(--ok); } .answer.warn { border-left-color: var(--warn); } .answer.mixed { border-left-color: var(--mixed); } .answer.bad { border-left-color: var(--bad); }
-.pv[hidden] { display: none; }
-.ans-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 6px; }
-.ans-top h2 { font: 700 15px var(--body); color: var(--muted); margin: 0; }
-.answer .verdict { font-size: 18px; line-height: 1.4; }
-.glance { margin: 0; display: grid; gap: 6px; font-size: 15px; line-height: 1.4; }
-.glance > div { display: grid; grid-template-columns: 96px 1fr; gap: 8px; }
-.glance dt { color: var(--muted); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: .04em; padding-top: 2px; }
-.glance dd { margin: 0; }
-.ck { color: var(--muted); font-size: 12px; white-space: nowrap; }
-.stamp { margin: 0; font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 8px; }
-.do { margin: 18px 0 0; display: grid; gap: 12px; }
-.do .steps li { line-height: 1.45; }
-.says, .names { margin: 22px 0 0; }
-.says h2, .names h2 { font: 700 18px var(--display); margin: 0 0 8px; }
-.say { background: var(--surface); border: 2px solid var(--easy); border-radius: 16px; padding: 14px 16px; display: grid; gap: 8px; }
-.say-ko { font: 800 26px/1.35 var(--ko, var(--body)); margin: 0; word-break: keep-all; }
-.say-mean { margin: 0; color: var(--muted); }
-.names ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
-.chip { width: 100%; display: grid; grid-template-columns: 1fr auto; grid-template-areas: "ko i" "en i"; align-items: center; text-align: left; gap: 0 10px; padding: 10px 14px; border: 1.5px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--ink); font: inherit; cursor: pointer; position: relative; }
-.chip span { grid-area: ko; font: 700 19px var(--ko, var(--body)); }
-.chip small { grid-area: en; color: var(--muted); font-size: 13px; }
-.chip i { grid-area: i; font-style: normal; }
-.chip.done, .btn.done { border-color: var(--ok); }
-.tip { position: absolute; right: 10px; top: -10px; background: var(--ink); color: var(--surface); font-size: 12px; padding: 2px 8px; border-radius: 99px; }
-.btn { position: relative; }
-.do + .actions, .names + .actions, .says + .actions { margin-top: 18px; }
-details.more { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; margin: 10px 0 0; }
-details.more > summary { list-style: none; cursor: pointer; padding: 14px 16px; font: 700 16px var(--body); display: flex; justify-content: space-between; align-items: center; gap: 10px; min-height: 24px; }
-details.more > summary::-webkit-details-marker { display: none; }
-details.more > summary::after { content: "+"; font: 400 22px var(--body); color: var(--muted); }
-details.more[open] > summary::after { content: "–"; }
-details.more > .in, details.more > .topics { padding: 0 16px 14px; margin: 0; }
-details.more.deep { margin-top: 10px; }
-.actions + details.more { margin-top: 22px; }
-.notes p { margin: 0 0 8px; }
-/* Home: situation cards */
-.sit { margin: 6px 0 0; }
-.sit > h2, .tool-h { font: 800 20px/1.2 var(--display); margin: 0 0 10px; }
-.sit-grid { display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
-@media (max-width: 360px) { .sit-grid { grid-template-columns: 1fr; } }
-.sit-card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 12px; display: grid; gap: 6px; align-content: start; }
-.sit-card[hidden] { display: none; }
-.sit-card h3 { display: flex; align-items: center; gap: 8px; margin: 0; font: 700 16px/1.2 var(--body); }
-.sit-card h3 svg { width: 22px; height: 22px; flex: none; fill: none; stroke: var(--brand); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.sit-card p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.35; }
-.sit-links { display: flex; flex-wrap: wrap; gap: 6px; }
-.sit-card .sit-links a { display: inline-block; padding: 5px 10px; min-height: 24px; box-sizing: border-box; border-radius: 99px; background: var(--bg); border: 1px solid var(--line); color: var(--ink); font-weight: 600; font-size: 14px; text-decoration: none; }
-.sit-card .sit-links a[hidden] { display: none; }
-.tool { margin: 26px 0 0; }
-.onb { margin: 0; }
-.onb h3 { font: 700 18px/1.3 var(--body); margin: 0 0 10px; }
-.offline-note { margin: 22px 0 0; font-size: 14px; color: var(--muted); }
-</style>
+<link rel="stylesheet" href="../style.css?v=200395c4">
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "在首爾寄放行李:地鐵置物櫃、人工櫃台與當日配送(2026)", "description": "入住前或退房後,可以把行李放在地鐵置物櫃或人工櫃台,也能寄到飯店或機場。", "datePublished": "2026-11-17", "dateModified": "2026-11-20", "inLanguage": "zh-Hant-TW", "url": "https://easymodekorea.com/zh-tw/luggage-storage.html", "mainEntityOfPage": "https://easymodekorea.com/zh-tw/luggage-storage.html", "image": "https://easymodekorea.com/og.png", "author": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/zh-tw/about.html"}, "publisher": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/", "logo": {"@type": "ImageObject", "url": "https://easymodekorea.com/icon-512.png"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "EasyModeKorea", "item": "https://easymodekorea.com/zh-tw/"}, {"@type": "ListItem", "position": 2, "name": "寄放行李", "item": "https://easymodekorea.com/zh-tw/luggage-storage.html"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "在首爾哪裡可以寄放行李?", "acceptedAnswer": {"@type": "Answer", "text": "置物櫃和人工行李櫃台誰都能用,也可以當天寄到飯店或機場。 T-Locker:首爾地鐵約270站設有置物櫃,從小包到行李箱都放得下。在置物櫃或T-Locker App付款。 T-Luggage:首爾站、弘大入口、明洞、蠶室等熱門站有人工櫃台,可寄放行李並送到飯店或機場。 機場與首爾飯店之間的當日配送,通常要在上午較早時寄出。"}}, {"@type": "Question", "name": "置物櫃多少錢?", "acceptedAnswer": {"@type": "Answer", "text": "我們最後確認時,小櫃4小時約2,000韓元起,大櫃約4,000韓元起。"}}, {"@type": "Question", "name": "大行李箱放得進去嗎?", "acceptedAnswer": {"@type": "Answer", "text": "大櫃放得下大部分行李箱。特別大的箱子用人工櫃台比較方便。"}}, {"@type": "Question", "name": "仁川機場有行李寄放嗎?", "acceptedAnswer": {"@type": "Answer", "text": "有,各航廈都有人工行李寄放櫃台。"}}, {"@type": "Question", "name": "可以把行李從首爾寄到釜山嗎?", "acceptedAnswer": {"@type": "Answer", "text": "有些配送服務可以送到其他城市。到櫃台問問,或搭KTX自己帶著。"}}]}]</script>
 </head>
@@ -341,11 +24,11 @@ details.more.deep { margin-top: 10px; }
 </div></header>
 <div class="wrap">
   <main id="answer">
-  <section class="answer ok"><div class="pv ok"><div class="ans-top"><h2>直接能用</h2><span class="pill ok">直接能用</span></div><p class="verdict">置物櫃和人工行李櫃台誰都能用,也可以當天寄到飯店或機場。</p></div><dl class="glance"><div><dt>Where</dt><dd>Station lockers and staffed luggage counters <time class="ck" datetime="2026-11-17">✓ 2026年11月17日</time></dd></div><div><dt>Cost</dt><dd>Lockers from about 2,000 won for 4 hours <time class="ck" datetime="2026-11-17">✓ 2026年11月17日</time></dd></div></dl><p class="stamp">Checked against <a href="https://mediahub.seoul.go.kr/archives/2013639" rel="noopener" target="_blank">Seoul: T-Locker and T-Luggage</a> on <time datetime="2026-11-17">2026年11月17日</time></p></section>
+  <section class="answer ok"><div class="pv ok"><div class="ans-top"><h2>直接能用</h2><span class="pill ok">直接能用</span></div><p class="verdict">置物櫃和人工行李櫃台誰都能用,也可以當天寄到飯店或機場。</p></div><dl class="glance"><div><dt>地點</dt><dd>車站置物櫃和有人行李寄放處 <time class="ck" datetime="2026-11-17">✓ 2026年11月17日</time></dd></div><div><dt>費用</dt><dd>置物櫃4小時約2,000韓元起 <time class="ck" datetime="2026-11-17">✓ 2026年11月17日</time></dd></div></dl><p class="stamp">已於<time datetime="2026-11-17">2026年11月17日</time>對照<a href="https://mediahub.seoul.go.kr/archives/2013639" rel="noopener" target="_blank">Seoul: T-Locker and T-Luggage</a>確認</p></section>
   <button class="linkbtn" type="button" id="show-all" hidden>查看其他狀況的答案</button>
   <section class="do" aria-labelledby="do-luggage"><h2 id="do-luggage" class="sr">第一次使用:一步一步來</h2><div class="pv"><ol class="steps"><li>T-Locker:首爾地鐵約270站設有置物櫃,從小包到行李箱都放得下。在置物櫃或T-Locker App付款。</li><li>T-Luggage:首爾站、弘大入口、明洞、蠶室等熱門站有人工櫃台,可寄放行李並送到飯店或機場。</li><li>機場與首爾飯店之間的當日配送,通常要在上午較早時寄出。</li></ol><p class="fallback"><b>如果不行</b>置物櫃滿了或App不能用?改用人工櫃台,或請住宿幫忙保管。</p></div></section>
-  <section class="says" aria-labelledby="say-luggage"><h2 id="say-luggage">Show this to staff</h2><div class="say"><p class="say-ko" lang="ko">여기 짐 맡길 수 있어요?</p><p class="say-mean">這裡可以寄放行李嗎?</p><div class="actions"><button class="btn alt" type="button" data-show="여기 짐 맡길 수 있어요?" data-lbl="給店員看" data-mean="意思: 這裡可以寄放行李嗎?">🗣 Show full screen</button><button class="btn ghost" type="button" data-copy="여기 짐 맡길 수 있어요?" data-done="✓ Copied">📋 Copy</button></div></div></section>
-  <section class="names" aria-labelledby="nm-luggage"><h2 id="nm-luggage">Korean names to copy (paste into Naver Map or show a driver)</h2><ul><li><button class="chip" type="button" data-copy="물품보관함" data-done="✓ Copied"><span lang="ko">물품보관함</span><small>Lockers</small><i aria-hidden="true">📋</i></button></li><li><button class="chip" type="button" data-copy="짐 보관" data-done="✓ Copied"><span lang="ko">짐 보관</span><small>Luggage storage</small><i aria-hidden="true">📋</i></button></li></ul></section>
+  <section class="says" aria-labelledby="say-luggage"><h2 id="say-luggage">給店員看</h2><div class="say"><p class="say-ko" lang="ko">여기 짐 맡길 수 있어요?</p><p class="say-mean">這裡可以寄放行李嗎?</p><div class="actions"><button class="btn alt" type="button" data-show="여기 짐 맡길 수 있어요?" data-lbl="給店員看" data-mean="意思: 這裡可以寄放行李嗎?">🗣 全螢幕顯示</button><button class="btn ghost" type="button" data-copy="여기 짐 맡길 수 있어요?" data-done="✓ 已複製">📋 複製</button></div></div></section>
+  <section class="names" aria-labelledby="nm-luggage"><h2 id="nm-luggage">可複製的韓文名稱(貼到Naver Map或給司機看)</h2><ul><li><button class="chip" type="button" data-copy="물품보관함" data-done="✓ 已複製"><span lang="ko">물품보관함</span><small>置物櫃</small><i aria-hidden="true">📋</i></button></li><li><button class="chip" type="button" data-copy="짐 보관" data-done="✓ 已複製"><span lang="ko">짐 보관</span><small>行李寄放</small><i aria-hidden="true">📋</i></button></li></ul></section>
   <div class="actions"><a class="btn" href="./#task-luggage">用自己的狀況確認</a></div>
   <details class="more deep" id="st-luggage"><summary>第一次使用:一步一步來</summary><div class="in"><ol class="steps full"><li>短時間寄放:用地鐵的T-Locker。首爾約270個車站有設置,從小包到行李箱的尺寸都有。<!-- screenshot: luggage-tlocker --></li><li>在置物櫃螢幕或T-Locker App付款,保留開櫃用的密碼或收據。</li><li>大件行李或寄放一整天:到首爾站、弘大入口、明洞、蠶室等站的T-Luggage人工櫃台。</li><li>換飯店或出境當天:這些櫃台也能把行李送到飯店或機場。要當天送達,得在上午截止時間前寄放。</li><li>最簡單的方法:入住前或退房後,請房東或飯店幫忙保管行李。</li></ol></div></details>
 <details class="more deep" id="er-luggage"><summary>常見問題與解決方法</summary><div class="in"><ul class="errs"><li><p class="prob"><b>置物櫃全滿。</b></p><p>試試同一站的其他出口、附近的大站,或人工櫃台。</p></li><li><p class="prob"><b>置物櫃不收你的卡。</b></p><p>用置物櫃螢幕上的其他付款方式,或T-Locker App。</p></li><li><p class="prob"><b>錯過配送截止時間。</b></p><p>當天先寄放、自己帶走,或預約隔天配送。</p></li><li><p class="prob"><b>忘了置物櫃密碼。</b></p><p>打置物櫃上的電話。下次記得拍下收據。</p></li></ul></div></details>
@@ -354,7 +37,7 @@ details.more.deep { margin-top: 10px; }
   <details class="more"><summary>資料來源與備註</summary><div class="in notes"><p>入住前或退房後,可以把行李放在地鐵置物櫃或人工櫃台,也能寄到飯店或機場。</p><ul><li>確認日 2026年11月17日</li><li>置物櫃費用小格4小時約2,000韓元起,大格約4,000韓元起。</li><li><a href="https://mediahub.seoul.go.kr/archives/2013639" rel="noopener" target="_blank">Seoul: T-Locker and T-Luggage</a></li><li><a href="https://www.haniseoul.com/ko/travels/korea/korea-luggage-storage-and-delivery-guide" rel="noopener" target="_blank">Luggage storage and delivery guide (2026)</a></li></ul></div></details>
   </main>
   <section class="related"><h2>相關指南</h2><ul><li><a href="incheon-airport-to-seoul.html">仁川機場怎麼到首爾市區?</a></li><li><a href="ktx-train-booking.html">外國人怎麼訂KTX?</a></li><li><a href="tax-free-shopping.html">在韓國購物怎麼退稅?</a></li></ul></section>
-  <details class="more"><summary>All guides</summary><nav class="topics"><a href="mobile-data-sim.html">電話與上網</a><a href="incheon-airport-to-seoul.html">機場到市區</a><a href="maps.html">地圖</a><a href="taxi.html">計程車</a><a href="tmoney-subway-bus.html">地鐵與公車</a><a href="seoul-tourist-transit-pass.html">交通票券</a><a href="ktx-train-booking.html">KTX火車</a><a href="seoul-to-busan-k-tour-pass.html">釜山之旅</a><a href="kr-pass-korail-pass.html">KR Pass</a><a href="dmz-jsa-tour-booking.html">DMZ導覽</a><a href="jeju-getting-around.html">濟州交通</a><a href="restaurant-reservations.html">餐廳訂位</a><a href="food-delivery.html">叫外送</a><a href="translation.html">翻譯</a><a href="tax-free-shopping.html">購物與退稅</a><a href="pharmacy-hospital.html">生病或受傷</a><a href="k-eta-entry-requirements.html">入境規定</a><a href="atm-foreign-card-cash.html">現金與ATM</a><a href="korea-power-plug-voltage.html">插頭與電壓</a><a href="gimpo-airport-to-seoul.html">金浦機場</a></nav></details>
+  <details class="more"><summary>所有指南</summary><nav class="topics"><a href="mobile-data-sim.html">電話與上網</a><a href="incheon-airport-to-seoul.html">機場到市區</a><a href="maps.html">地圖</a><a href="taxi.html">計程車</a><a href="tmoney-subway-bus.html">地鐵與公車</a><a href="seoul-tourist-transit-pass.html">交通票券</a><a href="ktx-train-booking.html">KTX火車</a><a href="seoul-to-busan-k-tour-pass.html">釜山之旅</a><a href="kr-pass-korail-pass.html">KR Pass</a><a href="dmz-jsa-tour-booking.html">DMZ導覽</a><a href="jeju-getting-around.html">濟州交通</a><a href="restaurant-reservations.html">餐廳訂位</a><a href="food-delivery.html">叫外送</a><a href="translation.html">翻譯</a><a href="tax-free-shopping.html">購物與退稅</a><a href="pharmacy-hospital.html">生病或受傷</a><a href="k-eta-entry-requirements.html">入境規定</a><a href="atm-foreign-card-cash.html">現金與ATM</a><a href="korea-power-plug-voltage.html">插頭與電壓</a><a href="gimpo-airport-to-seoul.html">金浦機場</a></nav></details>
   <p class="host-cta">🏠 在韓國經營民宿或旅館嗎?<a href="../hosts.html">把這份指南傳給你的房客</a>(韓文頁面)。</p>
   <section class="ask" aria-labelledby="ask-t-zh-tw"><h2 id="ask-t-zh-tw">沒找到需要的資訊嗎?</h2><p class="hint">留下你的問題。我們會補充到指南中;若留下電子郵件,也會回信。</p>
 <form class="ask-form" data-thanks="謝謝!已收到你的問題。"><textarea name="q" required maxlength="1000" aria-label="沒找到需要的資訊嗎?" placeholder="例如:用國外發行的卡可以訂 KTX 嗎?"></textarea>
@@ -392,7 +75,10 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !documen
   document.querySelectorAll("[data-show]").forEach(b => b.addEventListener("click", () => show(b.dataset.lbl, b.dataset.show, "", b.dataset.mean)));
   const saved = (store("wik-setup") || "visitor|ios").split("|");
   document.querySelectorAll("[data-copy]").forEach(b => b.addEventListener("click", async () => {
-    try { await navigator.clipboard.writeText(b.dataset.copy); } catch (e) { return; }
+    let ok = false;
+    try { await navigator.clipboard.writeText(b.dataset.copy); ok = true; } catch (e) {}
+    if (!ok) { const ta = document.createElement("textarea"); ta.value = b.dataset.copy; ta.setAttribute("readonly", ""); ta.style.cssText = "position:fixed;opacity:0"; document.body.append(ta); ta.select(); try { ok = document.execCommand("copy"); } catch (e) {} ta.remove(); }
+    if (!ok) { const t = b.querySelector("[lang=ko]") || b.closest(".say")?.querySelector(".say-ko"); if (t) { const r = document.createRange(); r.selectNodeContents(t); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); } return; }
     const was = b.innerHTML; b.classList.add("done"); b.setAttribute("aria-label", b.dataset.done);
     const tip = document.createElement("span"); tip.className = "tip"; tip.textContent = b.dataset.done; tip.setAttribute("role", "status"); b.append(tip);
     setTimeout(() => { b.innerHTML = was; b.classList.remove("done"); b.removeAttribute("aria-label"); }, 1600);
