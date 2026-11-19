@@ -290,6 +290,7 @@ VI = {
 "Taxi, subway, KTX, restaurant booking, delivery and tax refunds: see what works with a foreign phone number and card, based on your setup. Free, no sign-up.": "Taxi, tàu điện, KTX, đặt nhà hàng, giao đồ ăn và hoàn thuế: xem cách nào dùng được với số điện thoại và thẻ nước ngoài, theo tình trạng của bạn. Miễn phí, không cần đăng ký.",
 "Luggage": "Gửi hành lý",
 "Sick or hurt": "Ốm hoặc bị thương",
+"Related guides": "Hướng dẫn liên quan",
 "Entry rules": "Quy định nhập cảnh",
 "Cash & ATMs": "Tiền mặt & ATM",
 "Do I need K-ETA to visit Korea?": "Tôi có cần K-ETA để đến Hàn Quốc không?",

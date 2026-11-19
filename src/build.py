@@ -411,6 +411,20 @@ TOPIC_JS = r"""
 """
 
 
+# Related guides shown under each guide, with the question as descriptive anchor text.
+# First publish dates (ISO) for the Article schema; pages not listed fall back to the checked date.
+PUBLISHED = {"luggage-storage": "2026-11-17", "pharmacy-hospital": "2026-11-17", "k-eta-entry-requirements": "2026-11-19", "atm-foreign-card-cash": "2026-11-19"}
+
+RELATED = {
+    "data": ["entry", "airport", "taxi"], "airport": ["transit", "luggage", "taxi"], "maps": ["translate", "taxi", "transit"],
+    "taxi": ["maps", "airport", "data"], "transit": ["airport", "cash", "maps"], "ktx": ["transit", "food-booking", "luggage"],
+    "food-booking": ["delivery", "translate", "cash"], "delivery": ["food-booking", "translate", "data"],
+    "translate": ["maps", "food-booking", "health"], "shopping": ["cash", "luggage", "transit"],
+    "luggage": ["airport", "ktx", "shopping"], "health": ["translate", "data", "entry"],
+    "entry": ["data", "airport", "cash"], "cash": ["transit", "shopping", "entry"],
+}
+
+
 def build_topic(lang, t):
     L = LANGS[lang]; U = L["ui"]; x = X[lang]; S = SHORT[lang]; d = L["dir"]; up = "../" if d else ""
     path = f"{d}{t['slug']}.html"
@@ -432,12 +446,15 @@ def build_topic(lang, t):
     notes = "".join(f"<li>{e(n)}</li>" for n in t.get("notes", []))
     srcs = "".join(f'<li><a href="{e(u)}" rel="noopener" target="_blank">{e(n)}</a></li>' for n, u in t["sources"])
     others = "".join(f'<a href="{o["slug"]}.html">{e(o["short"])}</a>' for o in task_list(lang) if o["id"] != t["id"])
+    slug_of = {tid: sl for tid, sl, _ in TASK_META}
+    related = "".join(f'<li><a href="{slug_of[r]}.html">{e(QUESTION[lang][r])}</a></li>' for r in RELATED.get(t["id"], []))
     body = f"""
 {hero(lang, alt, up, QUESTION[lang][t['id']], '')}
 <div class="wrap">
   <div class="actions"><a class="btn" href="./#task-{t['id']}">{e(U['open_tool'])}</a>{phrases}</div>
   <main class="cards">{''.join(blocks)}<button class="linkbtn" type="button" id="show-all" hidden>{e(x['others'])}</button></main>
   <details class="panel"><summary>{e(S['details'])}</summary><div class="in notes"><ul><li>{e(U['checked'])} {e(CHECKED[lang])}</li>{notes}{srcs}</ul></div></details>
+  <section class="related"><h2>{e(x['related'])}</h2><ul>{related}</ul></section>
   <nav class="topics">{others}</nav>
   {about(lang, up)}
 </div>
@@ -449,7 +466,7 @@ def build_topic(lang, t):
 """
     first = resolve(t, "visitor", "ios")
     answer = first["verdict"] + " " + " ".join(first["route"])
-    ld = [{"@context": "https://schema.org", "@type": "Article", "headline": t["seo"], "dateModified": CHECKED_ISO, "inLanguage": L["html_lang"], "url": SITE + path, "publisher": {"@type": "Organization", "name": BRAND, "url": SITE}},
+    ld = [{"@context": "https://schema.org", "@type": "Article", "headline": t["seo"], "description": t["intro"], "datePublished": PUBLISHED.get(t["slug"], CHECKED_ISO), "dateModified": CHECKED_ISO, "inLanguage": L["html_lang"], "url": SITE + path, "mainEntityOfPage": SITE + path, "image": SITE + "og.png", "author": {"@type": "Organization", "name": BRAND, "url": SITE}, "publisher": {"@type": "Organization", "name": BRAND, "url": SITE, "logo": {"@type": "ImageObject", "url": SITE + "icon-512.png"}}},
           {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": BRAND, "item": SITE + L["dir"]}, {"@type": "ListItem", "position": 2, "name": t["short"], "item": SITE + path}]},
           {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": QUESTION[lang][t["id"]], "acceptedAnswer": {"@type": "Answer", "text": answer}}]}]
     ldtag = f'\n<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>'
