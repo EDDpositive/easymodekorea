@@ -31,6 +31,7 @@ X = {
         "changes": [
             ["2026-10-01", "KTX tickets now open two months ahead."],
             ["2026-09-01", "SRT was folded into KORAIL. All high-speed trains are now sold as KTX."],
+            ["2026-09-01", "The 30-day Climate Card was replaced by K-Pass. The 1 to 7-day tourist passes are still sold."],
             ["2026-08", "The KORAIL+ app replaced Korail Talk."],
             ["2026-07", "Baemin: visitors can order with a foreign phone number. Seoul added delivery zones at Han River parks."],
             ["2026-06-02", "Baemin: Apple Pay now accepts foreign cards."],
@@ -38,6 +39,7 @@ X = {
             ["2026-03", "Mobile T-money on iPhone started accepting some foreign cards for top-up."],
             ["2026-02-03", "Baemin added English, Japanese and Chinese."],
             ["2026-02", "The government conditionally approved Google's map-data export. Better Google routing is not confirmed yet."],
+            ["2026-01-01", "Foreign visitors, including those exempt from K-ETA, must submit the e-Arrival Card within 72 hours before arrival."],
         ],
         "stay_title": "Your stay", "stay_from": "Prepared by {h}",
         "taxi_card": "Show this to your taxi driver", "taxi_ko": "기사님, 이 주소로 가 주세요.", "taxi_means": "Please take me to this address.",
@@ -70,6 +72,7 @@ X = {
         "changes": [
             ["2026-10-01", "KTXの予約が2か月前から可能に。"],
             ["2026-09-01", "SRTがKORAILに統合され、高速列車はすべてKTXとして販売。"],
+            ["2026-09-01", "30日券のクライメートカードがK-Passに移行。1〜7日の観光客向けパスは引き続き販売。"],
             ["2026-08", "KORAIL+アプリがKorail Talkに代わる。"],
             ["2026-07", "Baemin: 海外の電話番号で注文可能に。ソウル市は漢江公園に配達ゾーンを案内。"],
             ["2026-06-02", "Baemin: Apple Payで海外カードが使えるように。"],
@@ -77,6 +80,7 @@ X = {
             ["2026-03", "iPhoneのモバイルT-moneyで一部の海外カードからチャージが可能に。"],
             ["2026-02-03", "Baeminが英語・日本語・中国語に対応。"],
             ["2026-02", "政府がGoogleの地図データ持ち出しを条件付きで承認。経路案内の改善は未確認。"],
+            ["2026-01-01", "K-ETA免除の人も含め、外国人旅行者は到着前72時間以内に電子到着カードの提出が必要に。"],
         ],
         "stay_title": "あなたの宿", "stay_from": "{h}より",
         "taxi_card": "タクシーの運転手に見せる", "taxi_ko": "기사님, 이 주소로 가 주세요.", "taxi_means": "この住所までお願いします。",
@@ -109,6 +113,7 @@ X = {
         "changes": [
             ["2026-10-01", "KTX改為提前兩個月開放訂票。"],
             ["2026-09-01", "SRT併入KORAIL,所有高鐵列車都以KTX名義販售。"],
+            ["2026-09-01", "30日氣候同行卡改由K-Pass取代,1至7日觀光客票券仍在販售。"],
             ["2026-08", "KORAIL+ App取代Korail Talk。"],
             ["2026-07", "Baemin:可用國外電話號碼下單。首爾市在漢江公園設外送區。"],
             ["2026-06-02", "Baemin:Apple Pay開始接受國外卡。"],
@@ -116,6 +121,7 @@ X = {
             ["2026-03", "iPhone的Mobile T-money開始接受部分國外信用卡儲值。"],
             ["2026-02-03", "Baemin支援英文、日文和中文。"],
             ["2026-02", "政府有條件批准Google地圖資料出口,導航是否改善尚未確認。"],
+            ["2026-01-01", "外國旅客(包括免K-ETA者)須在抵達前72小時內提交電子入境卡。"],
         ],
         "stay_title": "你的住宿", "stay_from": "由 {h} 提供",
         "taxi_card": "給計程車司機看", "taxi_ko": "기사님, 이 주소로 가 주세요.", "taxi_means": "請載我到這個地址。",

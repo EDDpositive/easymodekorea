@@ -435,6 +435,8 @@ VI = {
 "Musinsa stores put a QR code on every item that shows member prices, stock and reviews.": "Ở cửa hàng Musinsa, mỗi sản phẩm có mã QR để xem giá thành viên, tồn kho và đánh giá.",
 "Tax free, please. I'll pay for everything at once.": "Cho tôi hoàn thuế. Tôi thanh toán tất cả một lần.",
 "1339 is the disease-control hotline (KDCA), mainly for infectious diseases. The old 1339 emergency-room information service moved to 119.": "1339 là đường dây của Cơ quan Kiểm soát và Phòng ngừa Dịch bệnh (KDCA), chủ yếu dành cho câu hỏi về bệnh truyền nhiễm. Dịch vụ thông tin phòng cấp cứu 1339 trước đây đã chuyển sang 119.",
+"The 30-day Climate Card was replaced by K-Pass. The 1 to 7-day tourist passes are still sold.": "Climate Card 30 ngày được thay bằng K-Pass. Thẻ du lịch 1 đến 7 ngày vẫn đang bán.",
+"Foreign visitors, including those exempt from K-ETA, must submit the e-Arrival Card within 72 hours before arrival.": "Du khách nước ngoài, kể cả người được miễn K-ETA, phải nộp tờ khai đến điện tử (e-Arrival Card) trong vòng 72 giờ trước khi đến.",
 }
 
 
