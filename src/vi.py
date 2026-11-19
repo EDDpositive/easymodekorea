@@ -291,6 +291,19 @@ VI = {
 "Luggage": "Gửi hành lý",
 "Sick or hurt": "Ốm hoặc bị thương",
 "Related guides": "Hướng dẫn liên quan",
+"Getting around Jeju": "Di chuyển ở Jeju",
+"Getting around Jeju without a Korean number: rental car, bus and taxi (2026)": "Đi lại ở Jeju khi không có số Hàn Quốc: thuê xe, xe buýt và taxi (2026)",
+"Jeju is big and its sights are spread out. A rental car is the easiest way, but it needs a driving permit. Buses and taxis cover fewer places.": "Jeju rộng và các điểm tham quan nằm rải rác. Thuê xe là cách dễ nhất nhưng cần giấy phép lái xe. Xe buýt và taxi chỉ đến được một số nơi.",
+"A rental car is the easiest way to see Jeju, but you need an International Driving Permit. Buses and taxis work for a few places.": "Thuê xe là cách dễ nhất để đi Jeju, nhưng bạn cần Giấy phép lái xe quốc tế. Xe buýt và taxi dùng được ở một vài nơi.",
+"No driving permit? Use taxis for short hops and plan around the main bus routes.": "Không có giấy phép lái xe? Hãy đi taxi cho quãng ngắn và lên kế hoạch theo các tuyến xe buýt chính.",
+"Driving: bring your passport, your home licence and a valid International Driving Permit. The rental desk can refuse an expired permit.": "Tự lái: mang hộ chiếu, bằng lái nước bạn và Giấy phép lái xe quốc tế còn hiệu lực. Quầy thuê xe có thể từ chối nếu giấy phép đã hết hạn.",
+"Visit Jeju says foreign renters need full-coverage insurance. Confirm the cover with your rental company.": "Visit Jeju cho biết người nước ngoài thuê xe cần bảo hiểm toàn phần. Hãy xác nhận mức bảo hiểm với công ty cho thuê.",
+"Ask for the in-car GPS to be set to English before you leave the lot.": "Nhờ chỉnh GPS trên xe sang tiếng Anh trước khi rời bãi.",
+"No permit: buses run mainly in the city and not often, and taxis are easy in main areas but scarce near remote sights.": "Không có giấy phép: xe buýt chủ yếu chạy trong thành phố và không thường xuyên; taxi dễ gọi ở khu chính nhưng ít ở gần các điểm xa.",
+"Visit Jeju's own pages are older than 2026, so confirm permit and insurance rules with the rental company before you book.": "Các trang của Visit Jeju có từ trước năm 2026, nên hãy xác nhận quy định giấy phép và bảo hiểm với công ty cho thuê trước khi đặt.",
+"Jeju transport": "Đi lại Jeju",
+"How do I get around Jeju as a tourist?": "Du khách đi lại ở đảo Jeju thế nào?",
+"Where do I return the rental car?": "Tôi trả xe thuê ở đâu?",
 "DMZ and JSA tour booking": "Đặt tour DMZ và JSA",
 "How to book a DMZ or JSA (Panmunjom) tour as a foreigner: passport rules (2026)": "Cách đặt tour DMZ hoặc JSA (Panmunjom) cho người nước ngoài: quy định hộ chiếu (2026)",
 "You can't walk into the DMZ or the Joint Security Area on your own. Tours are booked ahead with your passport details, so plan before you fly.": "Bạn không thể tự đi vào DMZ hay Khu vực An ninh Chung (JSA). Tour phải đặt trước kèm thông tin hộ chiếu, nên hãy lên kế hoạch trước khi bay.",
@@ -430,5 +443,5 @@ for lst in x.PHRASES.values():
 for ko, m in x.HELP_PHRASES: m["vi"] = tr(m["en"])
 VI_KW = {"data": "điện thoại sim esim số data mạng", "airport": "sân bay incheon xe buýt tàu", "maps": "bản đồ chỉ đường", "taxi": "taxi gọi xe",
          "transit": "tàu điện ngầm xe buýt nạp thẻ", "ktx": "tàu ktx vé tàu", "food-booking": "nhà hàng đặt bàn xếp hàng", "delivery": "giao đồ ăn gọi món",
-         "translate": "dịch thực đơn", "shopping": "mua sắm hoàn thuế miễn thuế mỹ phẩm", "luggage": "gửi hành lý vali tủ khóa", "entry": "nhập cảnh k-eta visa thị thực hộ chiếu tờ khai", "cash": "tiền mặt atm rút tiền thẻ đổi tiền", "power": "ổ cắm phích cắm đầu chuyển điện áp sạc", "busan": "busan seoul đến busan ktx k-tour pass thẻ du lịch điểm tham quan", "krpass": "kr pass korail thẻ tàu ktx du khách", "dmz": "dmz jsa panmunjom tour đặt tour hộ chiếu imjingak", "health": "ốm bệnh viện hiệu thuốc thuốc cấp cứu sốt"}
+         "translate": "dịch thực đơn", "shopping": "mua sắm hoàn thuế miễn thuế mỹ phẩm", "luggage": "gửi hành lý vali tủ khóa", "entry": "nhập cảnh k-eta visa thị thực hộ chiếu tờ khai", "cash": "tiền mặt atm rút tiền thẻ đổi tiền", "power": "ổ cắm phích cắm đầu chuyển điện áp sạc", "busan": "busan seoul đến busan ktx k-tour pass thẻ du lịch điểm tham quan", "krpass": "kr pass korail thẻ tàu ktx du khách", "dmz": "dmz jsa panmunjom tour đặt tour hộ chiếu imjingak", "jeju": "jeju thuê xe giấy phép lái xe quốc tế xe buýt taxi đi lại", "health": "ốm bệnh viện hiệu thuốc thuốc cấp cứu sốt"}
 for k, v in VI_KW.items(): x.KEYWORDS[k] += " " + v
