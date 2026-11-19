@@ -1,0 +1,47 @@
+name: Weekly freshness check
+
+# Mondays, plus manual runs. Skips quietly until the repository secret ANTHROPIC_API_KEY exists.
+# Output is a GitHub issue listing facts that may have changed. Guides are never edited.
+on:
+  schedule:
+    - cron: "0 0 * * 1"
+  workflow_dispatch:
+    inputs:
+      resume_batch_id:
+        description: "Optional: resume a batch whose earlier run timed out"
+        default: ""
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency: freshness-check
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r tools/requirements.txt
+      - name: Check sources (Batch API, claude-opus-5-5)
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          IN_RESUME: ${{ inputs.resume_batch_id }}
+        run: python tools/freshness_check.py --report freshness-report.md --skip-if-no-key --resume "$IN_RESUME"
+      - name: Open an issue if something changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          [ -f freshness-report.md.count ] || exit 0
+          n=$(cat freshness-report.md.count)
+          if [ "$n" -gt 0 ]; then
+            gh label create freshness --color BFD4F2 --description "Source facts may have changed" 2>/dev/null || true
+            gh issue create --title "Freshness check $(date -u +%F): $n source(s) may have changed" \
+              --label freshness --body-file freshness-report.md
+          else
+            echo "Nothing changed."
+          fi

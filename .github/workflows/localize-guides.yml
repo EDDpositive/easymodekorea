@@ -1,0 +1,61 @@
+name: Localize guides (draft PR)
+
+# Manual only. Needs the repository secret ANTHROPIC_API_KEY.
+# Output is a DRAFT pull request with JSON files under i18n-drafts/. Nothing is deployed.
+on:
+  workflow_dispatch:
+    inputs:
+      tasks:
+        description: "Task ids, comma separated, or all"
+        default: "all"
+      langs:
+        description: "Languages (ja,zh-tw,es,vi,id,th)"
+        default: "ja,zh-tw,es,vi,id,th"
+      max_total_tokens:
+        description: "Output token cap for the whole run (stops the run if the scope is larger)"
+        default: "400000"
+      resume_batch_id:
+        description: "Optional: resume a batch whose earlier run timed out"
+        default: ""
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency: localize-guides
+
+jobs:
+  localize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r tools/requirements.txt
+      - name: Localize (Batch API, claude-opus-5-5)
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          IN_TASKS: ${{ inputs.tasks }}
+          IN_LANGS: ${{ inputs.langs }}
+          IN_CAP: ${{ inputs.max_total_tokens }}
+          IN_RESUME: ${{ inputs.resume_batch_id }}
+        run: |
+          python tools/localize_guides.py --tasks "$IN_TASKS" --langs "$IN_LANGS" \
+            --max-total-tokens "$IN_CAP" --resume "$IN_RESUME"
+      - name: Open a draft PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -z "$(git status --porcelain i18n-drafts)" ]; then echo "No new drafts."; exit 0; fi
+          branch="i18n-drafts/run-${GITHUB_RUN_ID}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
+          git add i18n-drafts
+          git commit -m "Draft localizations (batch run ${GITHUB_RUN_ID})"
+          git push origin "$branch"
+          gh pr create --draft --base "${{ github.event.repository.default_branch }}" --head "$branch" \
+            --title "Draft localizations (run ${GITHUB_RUN_ID})" \
+            --body "Machine-translated drafts from tools/localize_guides.py (claude-opus-5-5, Batch API). Review before use; the build does not read these files yet. Not merged or deployed automatically."
