@@ -230,3 +230,4 @@ DEEP["ktx"] = {
 }
 
 import deep_r4  # noqa: E402,F401
+import deep_r6  # noqa: E402,F401
