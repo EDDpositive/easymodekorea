@@ -421,7 +421,7 @@ RELATED = {
     "maps": ["translate", "taxi", "transit"],
     "taxi": ["maps", "airport", "data"],
     "transit": ["airport", "cash", "maps"],
-    "ktx": ["transit", "food-booking", "luggage"],
+    "ktx": ["transit", "food-booking", "luggage", "busan", "krpass"],
     "food-booking": ["delivery", "translate", "cash"],
     "delivery": ["food-booking", "translate", "data"],
     "translate": ["maps", "food-booking", "health"],
@@ -431,6 +431,8 @@ RELATED = {
     "entry": ["data", "airport", "cash", "power"],
     "cash": ["transit", "shopping", "entry"],
     "power": ["data", "entry", "airport"],
+    "busan": ["ktx", "luggage", "cash", "krpass"],
+    "krpass": ["ktx", "busan", "transit"],
 }
 
 
