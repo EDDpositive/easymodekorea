@@ -265,9 +265,22 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-t
 
 .checked-line { margin: 10px 2px 0; font-size: 14px; color: var(--muted); }
 .host-cta { margin: 18px 0 0; padding: 12px 14px; border: 1px dashed var(--line); border-radius: 12px; font-size: 15px; color: var(--muted); }
+.deep { margin: 26px 0 0; }
+.deep h2 { font: 700 21px/1.25 var(--display); margin: 0 0 10px; }
+.deep h3 { font: 700 17px/1.35 var(--body); margin: 18px 0 4px; }
+.deep p { margin: 0 0 8px; }
+.steps.full li { margin: 10px 0; }
+.errs { list-style: none; padding: 0; margin: 0; }
+.errs li { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin: 8px 0; }
+.errs .prob { margin-bottom: 4px; }
+.cites { padding-left: 20px; font-size: 15px; }
+.cites li { margin: 4px 0; overflow-wrap: anywhere; }
+.foot { border-top: 1px solid var(--line); margin-top: 36px; padding: 18px 0 28px; font-size: 14px; color: var(--muted); }
+.foot nav a { display: inline-block; padding: 6px 0; }
+.foot p { margin: 6px 0 0; }
 </style>
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "在韩国用外国卡領现金:Global ATM、手續费与注意事項(2026)", "description": "韩国几乎是无现金社会,但小店和市场有时还是要现金。很多韩国ATM不收外国卡,先知道哪些能用比较放心。", "datePublished": "2026-11-19", "dateModified": "2026-11-17", "inLanguage": "zh-CN", "url": "https://easymodekorea.com/zh-cn/atm-foreign-card-cash.html", "mainEntityOfPage": "https://easymodekorea.com/zh-cn/atm-foreign-card-cash.html", "image": "https://easymodekorea.com/og.png", "author": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/"}, "publisher": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/", "logo": {"@type": "ImageObject", "url": "https://easymodekorea.com/icon-512.png"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "EasyModeKorea", "item": "https://easymodekorea.com/zh-cn/"}, {"@type": "ListItem", "position": 2, "name": "现金与ATM", "item": "https://easymodekorea.com/zh-cn/atm-foreign-card-cash.html"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "在韩国能用外国卡領现金吗?", "acceptedAnswer": {"@type": "Answer", "text": "外国金融卡可以在Global ATM和不少便利商店ATM使用,通常要付手續费。 找标示「Global」的ATM。明洞、弘大等热闹地区的银行ATM,以及CU、GS25、7-Eleven等便利商店常有。 使用已开通国际提款的金融卡。信用卡提款算预借现金,要加收手續费和利息。 如果机器问你要不要用本国货幣结算,请选韩元(KRW),否则匯率会很差。"}}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "在韩国用外国卡領现金:Global ATM、手續费与注意事項(2026)", "description": "韩国几乎是无现金社会,但小店和市场有时还是要现金。很多韩国ATM不收外国卡,先知道哪些能用比较放心。", "datePublished": "2026-11-19", "dateModified": "2026-11-17", "inLanguage": "zh-CN", "url": "https://easymodekorea.com/zh-cn/atm-foreign-card-cash.html", "mainEntityOfPage": "https://easymodekorea.com/zh-cn/atm-foreign-card-cash.html", "image": "https://easymodekorea.com/og.png", "author": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/zh-cn/about.html"}, "publisher": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/", "logo": {"@type": "ImageObject", "url": "https://easymodekorea.com/icon-512.png"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "EasyModeKorea", "item": "https://easymodekorea.com/zh-cn/"}, {"@type": "ListItem", "position": 2, "name": "现金与ATM", "item": "https://easymodekorea.com/zh-cn/atm-foreign-card-cash.html"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "在韩国能用外国卡領现金吗?", "acceptedAnswer": {"@type": "Answer", "text": "外国金融卡可以在Global ATM和不少便利商店ATM使用,通常要付手續费。 找标示「Global」的ATM。明洞、弘大等热闹地区的银行ATM,以及CU、GS25、7-Eleven等便利商店常有。 使用已开通国际提款的金融卡。信用卡提款算预借现金,要加收手續费和利息。 如果机器问你要不要用本国货幣结算,请选韩元(KRW),否则匯率会很差。"}}]}]</script>
 </head>
 <body>
 <header class="hero"><div class="wrap">
@@ -327,6 +340,7 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !documen
   btn.addEventListener("click", () => { blocks.forEach(b => b.hidden = false); btn.hidden = true; });
 })();
 </script>
+<footer class="foot"><div class="wrap"><nav aria-label="EasyModeKorea"><a href="about.html">关于本站</a> · <a href="contact.html">联络我们</a> · <a href="changes.html">更新纪录</a> · <a href="../hosts.html">给房东(韩文)</a></nav><p>EasyModeKorea · <a href="mailto:edandco.biz@gmail.com">edandco.biz@gmail.com</a></p></div></footer>
 <div class="sheet" id="fb" hidden role="dialog" aria-modal="true" aria-labelledby="fb-t"><div class="sheet-in">
   <div class="sheet-top"><h2 id="fb-t">什么都可以告诉我们</h2><button type="button" class="btn ghost small" id="fb-close">关闭</button></div>
   <p class="hint">有错误、缺少的资讯、看不懂的地方或建议吗?每则讯息我们都会看。</p>

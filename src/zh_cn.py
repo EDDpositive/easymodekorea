@@ -24,3 +24,10 @@ for lst in x.PHRASES.values():
 for ko, m in x.HELP_PHRASES: m["zh-cn"] = t2s(m["zh-tw"])
 x.HELP["zh-cn"]["nums"][2][1] = "旅游咨询热线(中文24小时)。用国外SIM请拨 +82-2-1330"
 for k in list(x.KEYWORDS): x.KEYWORDS[k] = x.KEYWORDS[k] + " " + t2s(x.KEYWORDS[k])
+
+import deep  # noqa: E402
+for _g in deep.DEEP.values():
+    if "zh-tw" in _g: _g["zh-cn"] = conv(_g["zh-tw"])
+deep.HEAD["zh-cn"] = conv(deep.HEAD["zh-tw"])
+deep.PAGES["zh-cn"] = conv(deep.PAGES["zh-tw"])
+deep.PAGES["zh-cn"]["hosts"] = "给房东(韩文)"

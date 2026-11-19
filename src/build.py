@@ -11,6 +11,7 @@ from data import CHECKED, CHECKED_ISO, LANGS, SOURCES, TASK_META  # noqa: E402
 from data_extra import ASK, BRAND, FEEDBACK, FEEDBACK_FORM, FEEDBACK_TO, HELP, HELP_PHRASES, ICONS, KEYWORDS, PHRASES, PLAN, QUESTION, SHORT, UX, X  # noqa: E402
 import zh_cn  # noqa: E402,F401  (adds Simplified Chinese)
 import vi  # noqa: E402,F401  (adds Vietnamese)
+from deep import CONTACT_EMAIL, DEEP, HEAD as DEEP_HEAD, PAGES  # noqa: E402
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 SITE = "https://easymodekorea.com/"
@@ -230,6 +231,7 @@ const D = {json.dumps(data, ensure_ascii=False)};
 {COMMON_JS}
 {TOOL_JS}
 </script>
+{footer(lang)}
 {feedback_html(lang)}
 </body>
 </html>
@@ -463,11 +465,12 @@ def build_topic(lang, t):
     others = "".join(f'<a href="{o["slug"]}.html">{e(o["short"])}</a>' for o in task_list(lang) if o["id"] != t["id"])
     slug_of = {tid: sl for tid, sl, _ in TASK_META}
     related = "".join(f'<li><a href="{slug_of[r]}.html">{e(QUESTION[lang][r])}</a></li>' for r in RELATED.get(t["id"], []))
+    deep, faq_extra = deep_html(lang, t["id"])
     body = f"""
 {hero(lang, alt, up, QUESTION[lang][t['id']], t['intro'])}
 <div class="wrap">
   <div class="actions"><a class="btn" href="./#task-{t['id']}">{e(U['open_tool'])}</a>{phrases}</div>
-  <main class="cards">{''.join(blocks)}<button class="linkbtn" type="button" id="show-all" hidden>{e(x['others'])}</button></main>
+  <main class="cards">{''.join(blocks)}<button class="linkbtn" type="button" id="show-all" hidden>{e(x['others'])}</button>{deep}</main>
   <p class="checked-line">{e(U['checked'])} <time datetime="{CHECKED_ISO}">{e(CHECKED[lang])}</time></p>
   <details class="panel" open><summary>{e(S['details'])}</summary><div class="in notes"><ul><li>{e(U['checked'])} {e(CHECKED[lang])}</li>{notes}{srcs}</ul></div></details>
   <p class="host-cta">🏠 {U['hosts'].format(base=up)}</p>
@@ -477,15 +480,16 @@ def build_topic(lang, t):
 </div>
 {SHOW_HTML(lang)}
 <script>{COMMON_JS}{TOPIC_JS}</script>
+{footer(lang)}
 {feedback_html(lang)}
 </body>
 </html>
 """
     first = resolve(t, "visitor", "ios")
     answer = first["verdict"] + " " + " ".join(first["route"])
-    ld = [{"@context": "https://schema.org", "@type": "Article", "headline": t["seo"], "description": t["intro"], "datePublished": PUBLISHED.get(t["slug"], CHECKED_ISO), "dateModified": CHECKED_ISO, "inLanguage": L["html_lang"], "url": SITE + path, "mainEntityOfPage": SITE + path, "image": SITE + "og.png", "author": {"@type": "Organization", "name": BRAND, "url": SITE}, "publisher": {"@type": "Organization", "name": BRAND, "url": SITE, "logo": {"@type": "ImageObject", "url": SITE + "icon-512.png"}}},
+    ld = [{"@context": "https://schema.org", "@type": "Article", "headline": t["seo"], "description": t["intro"], "datePublished": PUBLISHED.get(t["slug"], CHECKED_ISO), "dateModified": CHECKED_ISO, "inLanguage": L["html_lang"], "url": SITE + path, "mainEntityOfPage": SITE + path, "image": SITE + "og.png", "author": {"@type": "Organization", "name": BRAND, "url": SITE + L["dir"] + "about.html"}, "publisher": {"@type": "Organization", "name": BRAND, "url": SITE, "logo": {"@type": "ImageObject", "url": SITE + "icon-512.png"}}},
           {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": BRAND, "item": SITE + L["dir"]}, {"@type": "ListItem", "position": 2, "name": t["short"], "item": SITE + path}]},
-          {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": QUESTION[lang][t["id"]], "acceptedAnswer": {"@type": "Answer", "text": answer}}]}]
+          {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": QUESTION[lang][t["id"]], "acceptedAnswer": {"@type": "Answer", "text": answer}}] + [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faq_extra]}]
     ldtag = f'\n<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>'
     write(path, head(lang, f"{t['seo']} | {BRAND}", t["intro"], path, alt, ldtag) + body)
     return path
@@ -504,11 +508,70 @@ def build_changes(lang):
   {ask_box(lang)}
   <p class="fb-line"><button type="button" class="linkbtn" data-feedback="changes">💬 {e(FEEDBACK[lang]['open'])}</button></p>
 </div>
+{footer(lang)}
 {feedback_html(lang)}
 </body>
 </html>
 """
     write(path, head(lang, f"{x['changes_title']} | {BRAND}", x["changes_lead"], path, alt) + body)
+    return path
+
+
+def footer(lang):
+    P = PAGES[lang]; up = "../" if LANGS[lang]["dir"] else ""
+    links = [("about.html", P["about"]), ("contact.html", P["contact"]), ("changes.html", P["changes"]), (f"{up}hosts.html", P["hosts"])]
+    return '<footer class="foot"><div class="wrap"><nav aria-label="EasyModeKorea">' + " · ".join(f'<a href="{h}">{e(t)}</a>' for h, t in links) + f'</nav><p>EasyModeKorea · <a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a></p></div></footer>'
+
+
+def deep_html(lang, tid):
+    """Long-form block for guides that have one in deep.py. Returns (html, faq pairs)."""
+    g = DEEP.get(tid)
+    if not g or lang not in g: return "", []
+    c = g[lang]; H = DEEP_HEAD[lang]
+    def step(s):
+        if isinstance(s, (list, tuple)):
+            return f"<li>{e(s[0])}<!-- screenshot: {e(s[1])} --></li>"
+        return f"<li>{e(s)}</li>"
+    steps = "".join(step(s) for s in c["steps"])
+    errs = "".join(f'<li><p class="prob"><b>{e(a)}</b></p><p>{e(b)}</p></li>' for a, b in c["errors"])
+    faq = "".join(f'<h3>{e(q)}</h3><p>{e(a)}</p>' for q, a in c["faq"])
+    cites = "".join(f'<li><a href="{e(u)}" rel="noopener" target="_blank">{e(n)}</a></li>' for n, u in g["cites"])
+    out = f"""<section class="deep" aria-labelledby="st-{tid}"><h2 id="st-{tid}">{e(H['steps'])}</h2><ol class="steps full">{steps}</ol></section>
+<section class="deep" aria-labelledby="er-{tid}"><h2 id="er-{tid}">{e(H['errors'])}</h2><ul class="errs">{errs}</ul></section>
+<section class="deep faq" aria-labelledby="fq-{tid}"><h2 id="fq-{tid}">{e(H['faq'])}</h2>{faq}</section>
+<section class="deep" aria-labelledby="ct-{tid}"><h2 id="ct-{tid}">{e(H['cites'])}</h2><ul class="cites">{cites}</ul></section>"""
+    return out, c["faq"]
+
+
+def build_info(lang, kind):
+    """About or contact page. kind is 'about' or 'contact'."""
+    P = PAGES[lang]; L = LANGS[lang]; d = L["dir"]; up = "../" if d else ""
+    path = f"{d}{kind}.html"
+    alt = {k: f"{LANGS[k]['dir']}{kind}.html" for k in LANGS}
+    if kind == "about":
+        title, desc = P["about_title"], P["about_desc"]
+        inner = "".join(f'<section class="deep"><h2>{e(h)}</h2><p>{e(t)}</p></section>' for h, t in P["about_body"])
+        inner += f'<section class="deep"><h2>{e(P["contact"])}</h2><p><a href="contact.html">{e(P["contact_title"])}</a> · <a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a></p></section>'
+        ld = {"@context": "https://schema.org", "@type": "AboutPage", "name": title, "url": SITE + path, "inLanguage": L["html_lang"],
+              "mainEntity": {"@type": "Organization", "name": BRAND, "url": SITE, "email": CONTACT_EMAIL, "logo": SITE + "icon-512.png"}}
+    else:
+        title, desc = P["contact_title"], P["contact_desc"]
+        inner = f'<section class="deep"><p>{e(P["contact_lead"])}</p><p><b>{e(P["contact_email"])}:</b> <a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a></p><p>{e(P["contact_ask"])}</p></section>' + ask_box(lang)
+        ld = {"@context": "https://schema.org", "@type": "ContactPage", "name": title, "url": SITE + path, "inLanguage": L["html_lang"],
+              "mainEntity": {"@type": "Organization", "name": BRAND, "url": SITE, "email": CONTACT_EMAIL}}
+    body = f"""
+{hero(lang, alt, up, title, desc)}
+<div class="wrap"><main>{inner}</main>
+  <div class="actions"><a class="btn" href="./">{e(L['ui']['open_tool'])}</a></div>
+  <p class="fb-line"><button type="button" class="linkbtn" data-feedback="{kind}">💬 {e(FEEDBACK[lang]['open'])}</button></p>
+</div>
+{footer(lang)}
+{feedback_html(lang)}
+</body>
+</html>
+"""
+    ldtag = f'\n<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>'
+    write(path, head(lang, f"{title} | {BRAND}", desc, path, alt, ldtag) + body)
     return path
 
 
@@ -551,6 +614,8 @@ def main():
     for lang in LANGS:
         paths.append(build_tool(lang))
         paths.append(build_changes(lang))
+        paths.append(build_info(lang, "about"))
+        paths.append(build_info(lang, "contact"))
         for t in task_list(lang):
             paths.append(build_topic(lang, t))
     paths.append("hosts.html")

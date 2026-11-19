@@ -250,3 +250,16 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-t
 
 .checked-line { margin: 10px 2px 0; font-size: 14px; color: var(--muted); }
 .host-cta { margin: 18px 0 0; padding: 12px 14px; border: 1px dashed var(--line); border-radius: 12px; font-size: 15px; color: var(--muted); }
+.deep { margin: 26px 0 0; }
+.deep h2 { font: 700 21px/1.25 var(--display); margin: 0 0 10px; }
+.deep h3 { font: 700 17px/1.35 var(--body); margin: 18px 0 4px; }
+.deep p { margin: 0 0 8px; }
+.steps.full li { margin: 10px 0; }
+.errs { list-style: none; padding: 0; margin: 0; }
+.errs li { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin: 8px 0; }
+.errs .prob { margin-bottom: 4px; }
+.cites { padding-left: 20px; font-size: 15px; }
+.cites li { margin: 4px 0; overflow-wrap: anywhere; }
+.foot { border-top: 1px solid var(--line); margin-top: 36px; padding: 18px 0 28px; font-size: 14px; color: var(--muted); }
+.foot nav a { display: inline-block; padding: 6px 0; }
+.foot p { margin: 6px 0 0; }
