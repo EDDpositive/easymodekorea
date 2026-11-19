@@ -228,3 +228,5 @@ DEEP["ktx"] = {
                 ["Trên tàu có Wi-Fi và đồ ăn không?", "Nên mang đồ ăn nhẹ và dùng data của bạn; dịch vụ trên tàu tùy từng chuyến."]],
     },
 }
+
+import deep_r4  # noqa: E402,F401

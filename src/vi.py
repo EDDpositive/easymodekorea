@@ -122,7 +122,7 @@ VI = {
 "Popular Korean restaurants run bookings and waitlists through apps that used to need a Korean number. Two routes now work for visitors.": "Nhà hàng nổi tiếng ở Hàn Quốc nhận đặt bàn và xếp hàng qua ứng dụng trước đây cần số Hàn Quốc. Giờ du khách có hai cách.",
 "CatchTable Global and Naver passport verification both work without a Korean number.": "CatchTable Global và xác minh hộ chiếu của Naver đều dùng được khi không có số Hàn Quốc.",
 "CatchTable Global: sign up by email, pay deposits with a foreign card.": "CatchTable Global: đăng ký bằng email, trả tiền cọc bằng thẻ nước ngoài.",
-"Deposits in the global app are usually not refundable. Check the date before you pay.": "Tiền cọc trên bản quốc tế thường không được hoàn lại. Kiểm tra kỹ ngày trước khi trả.",
+"Each restaurant sets its own cancellation rules. The app shows how much of the deposit comes back before you confirm a cancellation.": "Mỗi nhà hàng có quy định hủy riêng. Ứng dụng cho biết bạn được hoàn bao nhiêu tiền cọc trước khi xác nhận hủy.",
 "Naver Map bookings: verify with your passport (available since 4 Jun 2026).": "Đặt chỗ trên Naver Map: xác minh bằng hộ chiếu (có từ 4/6/2026).",
 "Not every restaurant is on these apps. Ask staff to add you to the waitlist in person.": "Không phải nhà hàng nào cũng có trên các ứng dụng này. Hãy nhờ nhân viên ghi tên bạn vào danh sách chờ.",
 "All booking apps work, including the local CatchTable app and Naver.": "Mọi ứng dụng đặt chỗ đều dùng được, kể cả CatchTable bản Hàn và Naver.",
