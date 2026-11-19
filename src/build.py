@@ -523,18 +523,33 @@ def footer(lang):
     return '<footer class="foot"><div class="wrap"><nav aria-label="EasyModeKorea">' + " · ".join(f'<a href="{h}">{e(t)}</a>' for h, t in links) + f'</nav><p>EasyModeKorea · <a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a></p></div></footer>'
 
 
+# App and topic names that get a link to their guide the first time they appear in a guide's
+# long-form text (Latin names, so the same list works in every language). Longest first.
+LINK_TERMS = [("CatchTable Global", "food-booking"), ("e-Arrival Card", "entry"), ("Climate Card", "transitpass"),
+              ("Naver Map", "maps"), ("KR Pass", "krpass"), ("T-money", "transit"), ("K-ETA", "entry"),
+              ("Papago", "translate"), ("k.ride", "taxi"), ("Baemin", "delivery"), ("AREX", "airport"), ("KTX", "ktx"), ("eSIM", "data")]
+
 def deep_html(lang, tid):
     """Long-form block for guides that have one in deep.py. Returns (html, faq pairs)."""
     g = DEEP.get(tid)
     if not g or lang not in g: return "", []
     c = g[lang]; H = DEEP_HEAD[lang]
+    slug_of = {i: sl for i, sl, _ in TASK_META}
+    used = {tid}
+    def link(text):
+        """Escape text and link the first mention of each app or topic on the page to its guide."""
+        out = e(text)
+        for term, target in LINK_TERMS:
+            if target in used or term not in out: continue
+            out = out.replace(term, f'<a href="{slug_of[target]}.html">{term}</a>', 1); used.add(target)
+        return out
     def step(s):
         if isinstance(s, (list, tuple)):
-            return f"<li>{e(s[0])}<!-- screenshot: {e(s[1])} --></li>"
-        return f"<li>{e(s)}</li>"
+            return f"<li>{link(s[0])}<!-- screenshot: {e(s[1])} --></li>"
+        return f"<li>{link(s)}</li>"
     steps = "".join(step(s) for s in c["steps"])
-    errs = "".join(f'<li><p class="prob"><b>{e(a)}</b></p><p>{e(b)}</p></li>' for a, b in c["errors"])
-    faq = "".join(f'<h3>{e(q)}</h3><p>{e(a)}</p>' for q, a in c["faq"])
+    errs = "".join(f'<li><p class="prob"><b>{e(a)}</b></p><p>{link(b)}</p></li>' for a, b in c["errors"])
+    faq = "".join(f'<h3>{e(q)}</h3><p>{link(a)}</p>' for q, a in c["faq"])
     cites = "".join(f'<li><a href="{e(u)}" rel="noopener" target="_blank">{e(n)}</a></li>' for n, u in g["cites"])
     out = f"""<section class="deep" aria-labelledby="st-{tid}"><h2 id="st-{tid}">{e(H['steps'])}</h2><ol class="steps full">{steps}</ol></section>
 <section class="deep" aria-labelledby="er-{tid}"><h2 id="er-{tid}">{e(H['errors'])}</h2><ul class="errs">{errs}</ul></section>
