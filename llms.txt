@@ -22,6 +22,7 @@ Answers depend on the visitor's setup: no Korean number, a Korean prepaid SIM (0
 - [Do I need a plug adapter in Korea?](korea-power-plug-voltage.html)
 - [How do I get from Seoul to Busan, and what is the K-Tour Pass?](seoul-to-busan-k-tour-pass.html)
 - [Is the KR Pass (Korail pass) worth it?](kr-pass-korail-pass.html)
+- [How do I book a DMZ or JSA tour in Korea?](dmz-jsa-tour-booking.html)
 - [What changed in 2026](changes.html)
 
 ## Other languages

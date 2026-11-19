@@ -417,7 +417,7 @@ PUBLISHED = {"luggage-storage": "2026-11-17", "pharmacy-hospital": "2026-11-17",
 
 RELATED = {
     "data": ["entry", "airport", "taxi", "power"],
-    "airport": ["transit", "luggage", "taxi"],
+    "airport": ["transit", "luggage", "taxi", "dmz"],
     "maps": ["translate", "taxi", "transit"],
     "taxi": ["maps", "airport", "data"],
     "transit": ["airport", "cash", "maps"],
@@ -433,6 +433,7 @@ RELATED = {
     "power": ["data", "entry", "airport"],
     "busan": ["ktx", "luggage", "cash", "krpass"],
     "krpass": ["ktx", "busan", "transit"],
+    "dmz": ["ktx", "data", "translate"],
 }
 
 

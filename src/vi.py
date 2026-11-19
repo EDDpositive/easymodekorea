@@ -291,6 +291,19 @@ VI = {
 "Luggage": "Gửi hành lý",
 "Sick or hurt": "Ốm hoặc bị thương",
 "Related guides": "Hướng dẫn liên quan",
+"DMZ and JSA tour booking": "Đặt tour DMZ và JSA",
+"How to book a DMZ or JSA (Panmunjom) tour as a foreigner: passport rules (2026)": "Cách đặt tour DMZ hoặc JSA (Panmunjom) cho người nước ngoài: quy định hộ chiếu (2026)",
+"You can't walk into the DMZ or the Joint Security Area on your own. Tours are booked ahead with your passport details, so plan before you fly.": "Bạn không thể tự đi vào DMZ hay Khu vực An ninh Chung (JSA). Tour phải đặt trước kèm thông tin hộ chiếu, nên hãy lên kế hoạch trước khi bay.",
+"Book a guided tour in advance and carry your physical passport on the day. JSA visits can't be arranged on the spot.": "Hãy đặt tour có hướng dẫn viên từ trước và mang theo hộ chiếu bản gốc vào ngày đi. Không thể xin vào JSA ngay tại chỗ.",
+"No tour slot? Imjingak Park is open without a booking, but it does not give access to the JSA or the 3rd Tunnel.": "Hết chỗ tour? Công viên Imjingak mở cửa không cần đặt trước, nhưng không dẫn vào JSA hay Đường hầm số 3.",
+"Book a DMZ or JSA tour ahead through a tour operator or a travel site. Same-day JSA booking is generally not possible, because names are registered in advance.": "Đặt tour DMZ hoặc JSA trước qua công ty lữ hành hoặc trang du lịch. Thường không thể đặt JSA trong ngày vì danh sách tên được đăng ký trước.",
+"Enter your passport details exactly as printed when you book. The list is checked against your passport on the day.": "Nhập thông tin hộ chiếu đúng như in trên hộ chiếu khi đặt. Ngày đi, danh sách sẽ được đối chiếu với hộ chiếu của bạn.",
+"Bring the physical passport on the tour day. Copies and expired passports are not accepted, and operators often do not refund a missed entry.": "Mang hộ chiếu bản gốc vào ngày đi. Bản sao và hộ chiếu hết hạn không được chấp nhận, và nếu không vào được thì công ty thường không hoàn tiền.",
+"Rules differ by operator. Some ask visitors from certain countries to send a passport copy several days ahead, and some JSA tours do not accept Korean passport holders. Read the operator's terms.": "Quy định khác nhau tùy công ty. Một số yêu cầu du khách từ vài quốc gia gửi bản sao hộ chiếu trước vài ngày, và một số tour JSA không nhận người cầm hộ chiếu Hàn Quốc. Hãy đọc điều khoản của công ty.",
+"We found operator and local-government pages but no single official 2026 notice, so confirm details with your operator.": "Chúng tôi chỉ tìm thấy trang của các công ty tour và chính quyền địa phương, chưa có thông báo chính thức riêng cho năm 2026, nên hãy xác nhận với công ty tour.",
+"DMZ tour": "Tour DMZ",
+"How do I book a DMZ or JSA tour in Korea?": "Làm sao đặt tour DMZ hoặc JSA ở Hàn Quốc?",
+"I brought my passport. Where is the tour meeting point?": "Tôi mang hộ chiếu rồi. Điểm tập trung của tour ở đâu?",
 "KR Pass rail pass": "Thẻ tàu KR Pass",
 "Is the KR Pass worth it? What the Korail pass covers and when it pays off (2026)": "KR Pass có đáng mua không? Thẻ Korail đi được những đâu và khi nào có lợi (2026)",
 "The KR Pass is a rail pass for foreign visitors. It only pays off if you ride several long trips, so compare it with single tickets first.": "KR Pass là thẻ tàu dành cho du khách nước ngoài. Thẻ chỉ có lợi khi bạn đi nhiều chặng dài, nên hãy so với giá vé lẻ trước.",
@@ -417,5 +430,5 @@ for lst in x.PHRASES.values():
 for ko, m in x.HELP_PHRASES: m["vi"] = tr(m["en"])
 VI_KW = {"data": "điện thoại sim esim số data mạng", "airport": "sân bay incheon xe buýt tàu", "maps": "bản đồ chỉ đường", "taxi": "taxi gọi xe",
          "transit": "tàu điện ngầm xe buýt nạp thẻ", "ktx": "tàu ktx vé tàu", "food-booking": "nhà hàng đặt bàn xếp hàng", "delivery": "giao đồ ăn gọi món",
-         "translate": "dịch thực đơn", "shopping": "mua sắm hoàn thuế miễn thuế mỹ phẩm", "luggage": "gửi hành lý vali tủ khóa", "entry": "nhập cảnh k-eta visa thị thực hộ chiếu tờ khai", "cash": "tiền mặt atm rút tiền thẻ đổi tiền", "power": "ổ cắm phích cắm đầu chuyển điện áp sạc", "busan": "busan seoul đến busan ktx k-tour pass thẻ du lịch điểm tham quan", "krpass": "kr pass korail thẻ tàu ktx du khách", "health": "ốm bệnh viện hiệu thuốc thuốc cấp cứu sốt"}
+         "translate": "dịch thực đơn", "shopping": "mua sắm hoàn thuế miễn thuế mỹ phẩm", "luggage": "gửi hành lý vali tủ khóa", "entry": "nhập cảnh k-eta visa thị thực hộ chiếu tờ khai", "cash": "tiền mặt atm rút tiền thẻ đổi tiền", "power": "ổ cắm phích cắm đầu chuyển điện áp sạc", "busan": "busan seoul đến busan ktx k-tour pass thẻ du lịch điểm tham quan", "krpass": "kr pass korail thẻ tàu ktx du khách", "dmz": "dmz jsa panmunjom tour đặt tour hộ chiếu imjingak", "health": "ốm bệnh viện hiệu thuốc thuốc cấp cứu sốt"}
 for k, v in VI_KW.items(): x.KEYWORDS[k] += " " + v
