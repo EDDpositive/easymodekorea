@@ -367,11 +367,11 @@ QUESTION = {
 # Tourism Organization and city sites (1330 is 24h in EN/JA/ZH).
 HELP = {
     "en": {"btn": "Help", "title": "Help", "calls": "Call", "phrases": "Show someone",
-           "nums": [["112", "Police"], ["119", "Fire and ambulance"], ["1330", "Travel helpline, 24h in English. From a foreign SIM: +82-2-1330"], ["1339", "Medical advice and the nearest open ER, 24h"]]},
+           "nums": [["112", "Police"], ["119", "Fire, ambulance, medical advice and nearest open ER, 24h"], ["1330", "Travel helpline, 24h in English. From a foreign SIM: +82-2-1330"], ["1339", "Disease-control hotline (KDCA), for infectious diseases"]]},
     "ja": {"btn": "ヘルプ", "title": "ヘルプ", "calls": "電話する", "phrases": "見せて伝える",
-           "nums": [["112", "警察"], ["119", "消防・救急"], ["1330", "観光案内ダイヤル(日本語24時間)。海外のSIMからは +82-2-1330"], ["1339", "医療相談と近くの救急室の案内(24時間)"]]},
+           "nums": [["112", "警察"], ["119", "消防・救急・医療相談と救急室の案内(24時間)"], ["1330", "観光案内ダイヤル(日本語24時間)。海外のSIMからは +82-2-1330"], ["1339", "疾病管理庁の相談窓口(感染症)"]]},
     "zh-tw": {"btn": "求助", "title": "求助", "calls": "打電話", "phrases": "給對方看",
-              "nums": [["112", "警察"], ["119", "消防與救護車"], ["1330", "觀光諮詢熱線(中文24小時)。用國外SIM請撥 +82-2-1330"], ["1339", "醫療諮詢與最近急診室資訊(24小時)"]]},
+              "nums": [["112", "警察"], ["119", "消防、救護車、醫療諮詢與急診室資訊(24小時)"], ["1330", "觀光諮詢熱線(中文24小時)。用國外SIM請撥 +82-2-1330"], ["1339", "疾病管理廳諮詢專線(傳染病)"]]},
 }
 HELP_PHRASES = [
     ["도와주세요.", {"en": "Please help me.", "ja": "助けてください。", "zh-tw": "請幫幫我。"}],
