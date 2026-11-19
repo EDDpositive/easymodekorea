@@ -451,7 +451,7 @@ def tr(o):
 _missing = set()
 def _walk(o):
     if isinstance(o, str):
-        if o not in VI and " " in o and any(c.isalpha() for c in o) and not any("Ac00" <= c <= "D7a3" for c in o): _missing.add(o)
+        if o not in VI and " " in o and any(c.isalpha() for c in o) and not any("가" <= c <= "힣" for c in o): _missing.add(o)
     elif isinstance(o, dict): [_walk(v) for v in o.values()]
     elif isinstance(o, (list, tuple)): [_walk(v) for v in o]
 _walk({k: v for k, v in data.LANGS["en"].items() if k != "check"})

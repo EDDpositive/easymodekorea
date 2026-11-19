@@ -64,7 +64,7 @@ a { color: var(--brand); }
 .logo { font: 800 18px var(--display); color: inherit; text-decoration: none; letter-spacing: -0.01em; }
 .logo b { background: var(--easy); color: #0e1430; padding: 0 6px; border-radius: 6px; margin-left: 2px; }
 .langs { display: flex; gap: 10px; font-size: 14px; }
-.langs a { color: rgba(255,255,255,.82); text-decoration: none; }
+.langs a { color: rgba(255,255,255,.82); text-decoration: none; display: inline-block; padding: 6px 2px; min-height: 24px; }
 .langs a[aria-current="page"] { color: #fff; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
 .mode { display: flex; align-items: center; gap: 10px; margin: 22px 0 8px; font: 700 13px var(--body); letter-spacing: .08em; text-transform: uppercase; }
 .mode s { opacity: .7; }
@@ -272,7 +272,7 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-t
 </head>
 <body>
 <header class="hero"><div class="wrap">
-  <div class="toprow"><a class="logo" href="./">EasyMode<b>Korea</b></a><nav class="langs" aria-label="Ngôn ngữ"><a href="../" hreflang="en">English</a><a href="../ja/" hreflang="ja">日本語</a><a href="../zh-tw/" hreflang="zh-Hant-TW">繁體中文</a><a href="../zh-cn/" hreflang="zh-CN">简体中文</a><a href="../vi/" hreflang="vi" aria-current="page">Tiếng Việt</a></nav></div>
+  <div class="toprow"><a class="logo" href="./">EasyMode<b>Korea</b></a><nav class="langs" aria-label="Ngôn ngữ"><a href="../" hreflang="en" lang="en">English</a><a href="../ja/" hreflang="ja" lang="ja">日本語</a><a href="../zh-tw/" hreflang="zh-Hant-TW" lang="zh-Hant-TW">繁體中文</a><a href="../zh-cn/" hreflang="zh-CN" lang="zh-CN">简体中文</a><a href="../vi/" hreflang="vi" lang="vi" aria-current="page">Tiếng Việt</a></nav></div>
   
 </div></header>
 <h1 class="sr">Ứng dụng Hàn Quốc khó dùng? Chuyển sang Easy Mode.</h1>
@@ -296,7 +296,7 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-t
     <div class="actions"><button class="btn" type="button" id="copy-btn">Sao chép danh sách</button><span class="copied" id="copied" role="status"></span></div>
   </div></details>
   <section class="ask" aria-labelledby="ask-t-vi"><h2 id="ask-t-vi">Không tìm thấy thông tin bạn cần?</h2><p class="hint">Hãy gửi câu hỏi. Chúng tôi sẽ bổ sung vào hướng dẫn, và trả lời qua email nếu bạn để lại.</p>
-<form class="ask-form" data-thanks="Cảm ơn! Câu hỏi của bạn đã được gửi."><textarea name="q" required maxlength="1000" aria-label="Không tìm thấy thông tin bạn cần?" placeholder="VD: Thẻ Visa nước ngoài có đặt vé KTX được không?"></textarea>
+<form class="ask-form" data-thanks="Cảm ơn! Câu hỏi của bạn đã được gửi."><textarea name="q" required maxlength="1000" aria-label="Không tìm thấy thông tin bạn cần?" placeholder="VD: Thẻ phát hành ở nước ngoài có đặt vé KTX được không?"></textarea>
 <input name="em" type="email" maxlength="120" autocomplete="email" aria-label="Email (không bắt buộc, để nhận trả lời)" placeholder="Email (không bắt buộc, để nhận trả lời)"><button class="btn" type="submit">Gửi câu hỏi</button><p class="fb-done" role="status"></p></form></section><p class="fb-line"><button type="button" class="linkbtn" data-feedback="">💬 Gửi góp ý</button></p><details class="about"><summary>Về hướng dẫn này</summary><div class="in">
 <p><b>EasyModeKorea</b> (Easy Mode Korea · 이지모드코리아)</p>
 <p>Cách chúng tôi kiểm tra: mỗi câu trả lời được đối chiếu với thông báo chính thức và các phản hồi gần đây. &quot;Thông tin trái chiều&quot; nghĩa là các nguồn nói khác nhau, nên chúng tôi đưa thêm cách dự phòng. Bấm &quot;Đã dùng được&quot; hoặc &quot;Không được&quot; để giúp cập nhật.</p><p>Hướng dẫn độc lập, không liên kết với ứng dụng hay công ty nào được nhắc đến. Quy định thay đổi thường xuyên; hãy kiểm tra lại trong ứng dụng trước khi dùng.</p><p><a href="changes.html">Thay đổi gần đây</a> · Bạn có nhà nghỉ hoặc phòng cho thuê ở Hàn Quốc? <a href="../hosts.html">Gửi hướng dẫn này cho khách</a> (숙소 사장님용 안내).</p>

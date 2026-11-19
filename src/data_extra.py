@@ -417,13 +417,13 @@ for _l, (_t, _d) in {
 # "Didn't find it?" question box at the end of pages. Sent to the same Google Form as feedback (no API, no new account).
 ASK = {
     "en": {"title": "Didn't find what you need?", "lead": "Ask your question. We answer by adding it to the guides, and by email if you leave one.",
-           "ph": "e.g. Can I book a KTX seat with a foreign Visa card?", "email": "Email (optional, for a reply)", "send": "Send question", "thanks": "Thanks! Your question has been sent."},
+           "ph": "e.g. Can I book a KTX seat with a card from my home country?", "email": "Email (optional, for a reply)", "send": "Send question", "thanks": "Thanks! Your question has been sent."},
     "ja": {"title": "知りたい情報が見つかりませんか?", "lead": "質問をどうぞ。ガイドに追記して回答します。メールを書いていただければ返信もします。",
-           "ph": "例: 海外のVisaカードでKTXを予約できますか?", "email": "メール(任意。返信用)", "send": "質問を送る", "thanks": "ありがとうございます。質問を受け付けました。"},
+           "ph": "例: 海外で発行したカードでKTXを予約できますか?", "email": "メール(任意。返信用)", "send": "質問を送る", "thanks": "ありがとうございます。質問を受け付けました。"},
     "zh-tw": {"title": "沒找到需要的資訊嗎?", "lead": "留下你的問題。我們會補充到指南中;若留下電子郵件,也會回信。",
-              "ph": "例如:外國 Visa 卡可以訂 KTX 嗎?", "email": "電子郵件(選填,用於回覆)", "send": "送出問題", "thanks": "謝謝!已收到你的問題。"},
+              "ph": "例如:用國外發行的卡可以訂 KTX 嗎?", "email": "電子郵件(選填,用於回覆)", "send": "送出問題", "thanks": "謝謝!已收到你的問題。"},
     "zh-cn": {"title": "没找到需要的信息吗?", "lead": "留下你的问题。我们会补充到指南里;如果留下邮箱,也会回信。",
-              "ph": "例如:外国 Visa 卡可以订 KTX 吗?", "email": "邮箱(选填,用于回复)", "send": "发送问题", "thanks": "谢谢!已收到你的问题。"},
+              "ph": "例如:用国外发行的卡可以订 KTX 吗?", "email": "邮箱(选填,用于回复)", "send": "发送问题", "thanks": "谢谢!已收到你的问题。"},
     "vi": {"title": "Không tìm thấy thông tin bạn cần?", "lead": "Hãy gửi câu hỏi. Chúng tôi sẽ bổ sung vào hướng dẫn, và trả lời qua email nếu bạn để lại.",
-           "ph": "VD: Thẻ Visa nước ngoài có đặt vé KTX được không?", "email": "Email (không bắt buộc, để nhận trả lời)", "send": "Gửi câu hỏi", "thanks": "Cảm ơn! Câu hỏi của bạn đã được gửi."},
+           "ph": "VD: Thẻ phát hành ở nước ngoài có đặt vé KTX được không?", "email": "Email (không bắt buộc, để nhận trả lời)", "send": "Gửi câu hỏi", "thanks": "Cảm ơn! Câu hỏi của bạn đã được gửi."},
 }

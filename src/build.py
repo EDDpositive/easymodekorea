@@ -50,7 +50,7 @@ def lang_links(cur, rel_paths, prefix):
     out = []
     for k, L in LANGS.items():
         cur_attr = ' aria-current="page"' if k == cur else ""
-        out.append(f'<a href="{prefix}{rel_paths[k]}" hreflang="{L["html_lang"]}"{cur_attr}>{e(L["name"])}</a>')
+        out.append(f'<a href="{prefix}{rel_paths[k]}" hreflang="{L["html_lang"]}" lang="{L["html_lang"]}"{cur_attr}>{e(L["name"])}</a>')
     return f'<nav class="langs" aria-label="{e(LANGS[cur]["ui"]["langs"])}">' + "".join(out) + "</nav>"
 
 
@@ -512,6 +512,34 @@ def build_changes(lang):
     return path
 
 
+def build_404():
+    """GitHub Pages serves /404.html for any missing path, so every link here is absolute."""
+    homes = " · ".join(f'<a href="/{LANGS[k]["dir"]}" lang="{LANGS[k]["html_lang"]}">{e(LANGS[k]["name"])}</a>' for k in LANGS)
+    guides = "".join(f'<li><a href="/{t["slug"]}.html">{e(QUESTION["en"][t["id"]])}</a></li>' for t in task_list("en"))
+    write("404.html", f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2336e8">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<title>Page not found | {BRAND}</title>
+<style>
+{CSS}</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+  <div class="toprow"><a class="logo" href="/">EasyMode<b>Korea</b></a></div>
+  <h1>This page isn't here</h1><p class="lede">The link may be old. Pick a guide below, or start from the home page in your language: {homes}</p>
+</div></header>
+<div class="wrap"><main><section class="related"><h2>Guides</h2><ul>{guides}</ul></section>
+<div class="actions"><a class="btn" href="/">Check your own setup</a></div></main></div>
+</body>
+</html>
+""")
+
+
 def write(rel, text):
     full = os.path.join(ROOT, rel)
     os.makedirs(os.path.dirname(full) or ".", exist_ok=True)
@@ -526,6 +554,7 @@ def main():
         for t in task_list(lang):
             paths.append(build_topic(lang, t))
     paths.append("hosts.html")
+    build_404()
     by_rel = {}
     for p in paths:
         lang = next((k for k in LANGS if LANGS[k]["dir"] and p.startswith(LANGS[k]["dir"])), "en")

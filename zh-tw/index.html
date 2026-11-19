@@ -64,7 +64,7 @@ a { color: var(--brand); }
 .logo { font: 800 18px var(--display); color: inherit; text-decoration: none; letter-spacing: -0.01em; }
 .logo b { background: var(--easy); color: #0e1430; padding: 0 6px; border-radius: 6px; margin-left: 2px; }
 .langs { display: flex; gap: 10px; font-size: 14px; }
-.langs a { color: rgba(255,255,255,.82); text-decoration: none; }
+.langs a { color: rgba(255,255,255,.82); text-decoration: none; display: inline-block; padding: 6px 2px; min-height: 24px; }
 .langs a[aria-current="page"] { color: #fff; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
 .mode { display: flex; align-items: center; gap: 10px; margin: 22px 0 8px; font: 700 13px var(--body); letter-spacing: .08em; text-transform: uppercase; }
 .mode s { opacity: .7; }
@@ -272,7 +272,7 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-t
 </head>
 <body>
 <header class="hero"><div class="wrap">
-  <div class="toprow"><a class="logo" href="./">EasyMode<b>Korea</b></a><nav class="langs" aria-label="語言"><a href="../" hreflang="en">English</a><a href="../ja/" hreflang="ja">日本語</a><a href="../zh-tw/" hreflang="zh-Hant-TW" aria-current="page">繁體中文</a><a href="../zh-cn/" hreflang="zh-CN">简体中文</a><a href="../vi/" hreflang="vi">Tiếng Việt</a></nav></div>
+  <div class="toprow"><a class="logo" href="./">EasyMode<b>Korea</b></a><nav class="langs" aria-label="語言"><a href="../" hreflang="en" lang="en">English</a><a href="../ja/" hreflang="ja" lang="ja">日本語</a><a href="../zh-tw/" hreflang="zh-Hant-TW" lang="zh-Hant-TW" aria-current="page">繁體中文</a><a href="../zh-cn/" hreflang="zh-CN" lang="zh-CN">简体中文</a><a href="../vi/" hreflang="vi" lang="vi">Tiếng Việt</a></nav></div>
   
 </div></header>
 <h1 class="sr">韓國App是困難模式?切換成簡單模式。</h1>
@@ -296,7 +296,7 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-t
     <div class="actions"><button class="btn" type="button" id="copy-btn">複製我的清單</button><span class="copied" id="copied" role="status"></span></div>
   </div></details>
   <section class="ask" aria-labelledby="ask-t-zh-tw"><h2 id="ask-t-zh-tw">沒找到需要的資訊嗎?</h2><p class="hint">留下你的問題。我們會補充到指南中;若留下電子郵件,也會回信。</p>
-<form class="ask-form" data-thanks="謝謝!已收到你的問題。"><textarea name="q" required maxlength="1000" aria-label="沒找到需要的資訊嗎?" placeholder="例如:外國 Visa 卡可以訂 KTX 嗎?"></textarea>
+<form class="ask-form" data-thanks="謝謝!已收到你的問題。"><textarea name="q" required maxlength="1000" aria-label="沒找到需要的資訊嗎?" placeholder="例如:用國外發行的卡可以訂 KTX 嗎?"></textarea>
 <input name="em" type="email" maxlength="120" autocomplete="email" aria-label="電子郵件(選填,用於回覆)" placeholder="電子郵件(選填,用於回覆)"><button class="btn" type="submit">送出問題</button><p class="fb-done" role="status"></p></form></section><p class="fb-line"><button type="button" class="linkbtn" data-feedback="">💬 提供意見</button></p><details class="about"><summary>關於這份指南</summary><div class="in">
 <p><b>EasyModeKorea</b> (Easy Mode Korea · 이지모드코리아)</p>
 <p>確認方式:每個答案都對照官方公告與近期回報確認。「說法不一」代表各來源說法不同,所以我們也列出備用方法。按「成功了」或「沒成功」可以幫助我們更新答案。</p><p>獨立指南,與文中列出的App或公司沒有合作關係。規定常有變動,使用前請在App中確認。</p><p><a href="changes.html">更新紀錄</a> · 在韓國經營民宿或旅館嗎?<a href="../hosts.html">把這份指南傳給你的房客</a>(韓文頁面)。</p>
