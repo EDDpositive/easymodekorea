@@ -31,6 +31,7 @@ X = {
         "changes": [
             ["2026-10-01", "KTX tickets now open two months ahead."],
             ["2026-09-01", "SRT was folded into KORAIL. All high-speed trains are now sold as KTX."],
+            ["2026-09-01", "The 30-day Climate Card was replaced by K-Pass. The 1 to 7-day tourist passes are still sold."],
             ["2026-08", "The KORAIL+ app replaced Korail Talk."],
             ["2026-07", "Baemin: visitors can order with a foreign phone number. Seoul added delivery zones at Han River parks."],
             ["2026-06-02", "Baemin: Apple Pay now accepts foreign cards."],
@@ -38,6 +39,7 @@ X = {
             ["2026-03", "Mobile T-money on iPhone started accepting some foreign cards for top-up."],
             ["2026-02-03", "Baemin added English, Japanese and Chinese."],
             ["2026-02", "The government conditionally approved Google's map-data export. Better Google routing is not confirmed yet."],
+            ["2026-01-01", "Foreign visitors, including those exempt from K-ETA, must submit the e-Arrival Card within 72 hours before arrival."],
         ],
         "stay_title": "Your stay", "stay_from": "Prepared by {h}",
         "taxi_card": "Show this to your taxi driver", "taxi_ko": "기사님, 이 주소로 가 주세요.", "taxi_means": "Please take me to this address.",
@@ -70,6 +72,7 @@ X = {
         "changes": [
             ["2026-10-01", "KTXの予約が2か月前から可能に。"],
             ["2026-09-01", "SRTがKORAILに統合され、高速列車はすべてKTXとして販売。"],
+            ["2026-09-01", "30日券のクライメートカードがK-Passに移行。1〜7日の観光客向けパスは引き続き販売。"],
             ["2026-08", "KORAIL+アプリがKorail Talkに代わる。"],
             ["2026-07", "Baemin: 海外の電話番号で注文可能に。ソウル市は漢江公園に配達ゾーンを案内。"],
             ["2026-06-02", "Baemin: Apple Payで海外カードが使えるように。"],
@@ -77,6 +80,7 @@ X = {
             ["2026-03", "iPhoneのモバイルT-moneyで一部の海外カードからチャージが可能に。"],
             ["2026-02-03", "Baeminが英語・日本語・中国語に対応。"],
             ["2026-02", "政府がGoogleの地図データ持ち出しを条件付きで承認。経路案内の改善は未確認。"],
+            ["2026-01-01", "K-ETA免除の人も含め、外国人旅行者は到着前72時間以内に電子到着カードの提出が必要に。"],
         ],
         "stay_title": "あなたの宿", "stay_from": "{h}より",
         "taxi_card": "タクシーの運転手に見せる", "taxi_ko": "기사님, 이 주소로 가 주세요.", "taxi_means": "この住所までお願いします。",
@@ -109,6 +113,7 @@ X = {
         "changes": [
             ["2026-10-01", "KTX改為提前兩個月開放訂票。"],
             ["2026-09-01", "SRT併入KORAIL,所有高鐵列車都以KTX名義販售。"],
+            ["2026-09-01", "30日氣候同行卡改由K-Pass取代,1至7日觀光客票券仍在販售。"],
             ["2026-08", "KORAIL+ App取代Korail Talk。"],
             ["2026-07", "Baemin:可用國外電話號碼下單。首爾市在漢江公園設外送區。"],
             ["2026-06-02", "Baemin:Apple Pay開始接受國外卡。"],
@@ -116,6 +121,7 @@ X = {
             ["2026-03", "iPhone的Mobile T-money開始接受部分國外信用卡儲值。"],
             ["2026-02-03", "Baemin支援英文、日文和中文。"],
             ["2026-02", "政府有條件批准Google地圖資料出口,導航是否改善尚未確認。"],
+            ["2026-01-01", "外國旅客(包括免K-ETA者)須在抵達前72小時內提交電子入境卡。"],
         ],
         "stay_title": "你的住宿", "stay_from": "由 {h} 提供",
         "taxi_card": "給計程車司機看", "taxi_ko": "기사님, 이 주소로 가 주세요.", "taxi_means": "請載我到這個地址。",
@@ -367,11 +373,11 @@ QUESTION = {
 # Tourism Organization and city sites (1330 is 24h in EN/JA/ZH).
 HELP = {
     "en": {"btn": "Help", "title": "Help", "calls": "Call", "phrases": "Show someone",
-           "nums": [["112", "Police"], ["119", "Fire and ambulance"], ["1330", "Travel helpline, 24h in English. From a foreign SIM: +82-2-1330"], ["1339", "Medical advice and the nearest open ER, 24h"]]},
+           "nums": [["112", "Police"], ["119", "Fire, ambulance, medical advice and nearest open ER, 24h"], ["1330", "Travel helpline, 24h in English. From a foreign SIM: +82-2-1330"], ["1339", "Disease-control hotline (KDCA), for infectious diseases"]]},
     "ja": {"btn": "ヘルプ", "title": "ヘルプ", "calls": "電話する", "phrases": "見せて伝える",
-           "nums": [["112", "警察"], ["119", "消防・救急"], ["1330", "観光案内ダイヤル(日本語24時間)。海外のSIMからは +82-2-1330"], ["1339", "医療相談と近くの救急室の案内(24時間)"]]},
+           "nums": [["112", "警察"], ["119", "消防・救急・医療相談と救急室の案内(24時間)"], ["1330", "観光案内ダイヤル(日本語24時間)。海外のSIMからは +82-2-1330"], ["1339", "疾病管理庁の相談窓口(感染症)"]]},
     "zh-tw": {"btn": "求助", "title": "求助", "calls": "打電話", "phrases": "給對方看",
-              "nums": [["112", "警察"], ["119", "消防與救護車"], ["1330", "觀光諮詢熱線(中文24小時)。用國外SIM請撥 +82-2-1330"], ["1339", "醫療諮詢與最近急診室資訊(24小時)"]]},
+              "nums": [["112", "警察"], ["119", "消防、救護車、醫療諮詢與急診室資訊(24小時)"], ["1330", "觀光諮詢熱線(中文24小時)。用國外SIM請撥 +82-2-1330"], ["1339", "疾病管理廳諮詢專線(傳染病)"]]},
 }
 HELP_PHRASES = [
     ["도와주세요.", {"en": "Please help me.", "ja": "助けてください。", "zh-tw": "請幫幫我。"}],
@@ -417,13 +423,13 @@ for _l, (_t, _d) in {
 # "Didn't find it?" question box at the end of pages. Sent to the same Google Form as feedback (no API, no new account).
 ASK = {
     "en": {"title": "Didn't find what you need?", "lead": "Ask your question. We answer by adding it to the guides, and by email if you leave one.",
-           "ph": "e.g. Can I book a KTX seat with a foreign Visa card?", "email": "Email (optional, for a reply)", "send": "Send question", "thanks": "Thanks! Your question has been sent."},
+           "ph": "e.g. Can I book a KTX seat with a card from my home country?", "email": "Email (optional, for a reply)", "send": "Send question", "thanks": "Thanks! Your question has been sent."},
     "ja": {"title": "知りたい情報が見つかりませんか?", "lead": "質問をどうぞ。ガイドに追記して回答します。メールを書いていただければ返信もします。",
-           "ph": "例: 海外のVisaカードでKTXを予約できますか?", "email": "メール(任意。返信用)", "send": "質問を送る", "thanks": "ありがとうございます。質問を受け付けました。"},
+           "ph": "例: 海外で発行したカードでKTXを予約できますか?", "email": "メール(任意。返信用)", "send": "質問を送る", "thanks": "ありがとうございます。質問を受け付けました。"},
     "zh-tw": {"title": "沒找到需要的資訊嗎?", "lead": "留下你的問題。我們會補充到指南中;若留下電子郵件,也會回信。",
-              "ph": "例如:外國 Visa 卡可以訂 KTX 嗎?", "email": "電子郵件(選填,用於回覆)", "send": "送出問題", "thanks": "謝謝!已收到你的問題。"},
+              "ph": "例如:用國外發行的卡可以訂 KTX 嗎?", "email": "電子郵件(選填,用於回覆)", "send": "送出問題", "thanks": "謝謝!已收到你的問題。"},
     "zh-cn": {"title": "没找到需要的信息吗?", "lead": "留下你的问题。我们会补充到指南里;如果留下邮箱,也会回信。",
-              "ph": "例如:外国 Visa 卡可以订 KTX 吗?", "email": "邮箱(选填,用于回复)", "send": "发送问题", "thanks": "谢谢!已收到你的问题。"},
+              "ph": "例如:用国外发行的卡可以订 KTX 吗?", "email": "邮箱(选填,用于回复)", "send": "发送问题", "thanks": "谢谢!已收到你的问题。"},
     "vi": {"title": "Không tìm thấy thông tin bạn cần?", "lead": "Hãy gửi câu hỏi. Chúng tôi sẽ bổ sung vào hướng dẫn, và trả lời qua email nếu bạn để lại.",
-           "ph": "VD: Thẻ Visa nước ngoài có đặt vé KTX được không?", "email": "Email (không bắt buộc, để nhận trả lời)", "send": "Gửi câu hỏi", "thanks": "Cảm ơn! Câu hỏi của bạn đã được gửi."},
+           "ph": "VD: Thẻ phát hành ở nước ngoài có đặt vé KTX được không?", "email": "Email (không bắt buộc, để nhận trả lời)", "send": "Gửi câu hỏi", "thanks": "Cảm ơn! Câu hỏi của bạn đã được gửi."},
 }

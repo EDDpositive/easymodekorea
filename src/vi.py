@@ -1,5 +1,5 @@
 """Vietnamese, built by translating every English string. Edit VI when English text changes."""
-import copy
+import copy, sys
 import data, data_extra as x
 
 VI = {
@@ -9,7 +9,7 @@ VI = {
 "Your setup": "Tình trạng của bạn",
 "Your phone number in Korea": "Số điện thoại của bạn ở Hàn Quốc",
 "Your phone": "Điện thoại của bạn",
-"Home number or data-only eSIM": "Số trong nước hoặc eSIM chỉ có data",
+"Home number or data-only eSIM": "Số điện thoại ở nước bạn hoặc eSIM chỉ có data",
 "Most short-trip visitors": "Phần lớn khách du lịch ngắn ngày",
 "Korean prepaid SIM with a 010 number": "SIM trả trước Hàn Quốc có số 010",
 "Tourist SIM, no ARC": "SIM du lịch, không có thẻ cư trú",
@@ -39,7 +39,7 @@ VI = {
 "Guides by topic": "Hướng dẫn theo chủ đề",
 "Check your own setup": "Kiểm tra theo tình trạng của bạn",
 "All topics": "Tất cả chủ đề",
-"With a home number or data-only eSIM": "Dùng số trong nước hoặc eSIM chỉ có data",
+"With a home number or data-only eSIM": "Dùng số điện thoại ở nước bạn hoặc eSIM chỉ có data",
 "With a Korean prepaid 010 number": "Dùng số trả trước Hàn Quốc 010",
 "With a Korean number in your name (ARC)": "Dùng số Hàn Quốc đứng tên bạn (ARC)",
 "Language": "Ngôn ngữ",
@@ -198,7 +198,7 @@ VI = {
 "Full guide": "Hướng dẫn đầy đủ",
 "Tap any row to see how": "Chạm vào mục bất kỳ để xem cách làm",
 "First, do you have a Korean phone number?": "Trước tiên, bạn có số điện thoại Hàn Quốc không?",
-"No, just my home number or a data eSIM": "Không, chỉ có số trong nước hoặc eSIM data",
+"No, just my home number or a data eSIM": "Không, chỉ có số điện thoại ở nước tôi hoặc eSIM data",
 "Most visitors": "Phần lớn du khách",
 "Yes, a Korean prepaid SIM (010)": "Có, SIM trả trước Hàn Quốc (010)",
 "Tourist SIM, no residence card": "SIM du lịch, không có thẻ cư trú",
@@ -257,7 +257,7 @@ VI = {
 "Call": "Gọi",
 "Show someone": "Cho người khác xem",
 "Police": "Cảnh sát",
-"Fire and ambulance": "Cứu hỏa và cấp cứu",
+"Fire, ambulance, medical advice and nearest open ER, 24h": "Cứu hỏa, cấp cứu, tư vấn y tế và phòng cấp cứu gần nhất còn mở, 24 giờ",
 "Travel helpline, 24h in English. From a foreign SIM: +82-2-1330": "Tổng đài du lịch: tiếng Việt 8:00–19:00, tiếng Anh 24 giờ. Từ SIM nước ngoài: +82-2-1330",
 "Send feedback": "Gửi góp ý",
 "Tell us anything": "Hãy cho chúng tôi biết",
@@ -294,12 +294,12 @@ VI = {
 "Seoul tourist transit pass": "Thẻ giao thông cho du khách ở Seoul",
 "Seoul Climate Card tourist pass: worth it? (2026)": "Thẻ du lịch Climate Card của Seoul có đáng mua không? Cái gì thay thế thẻ 30 ngày? (2026)",
 "Seoul has sold short unlimited-ride passes for visitors, but the 30-day Climate Card was replaced by K-Pass in 2026. Check what is on sale before you plan around it.": "Seoul từng bán thẻ đi không giới hạn ngắn ngày cho du khách, nhưng Climate Card 30 ngày đã được K-Pass thay thế năm 2026. Hãy kiểm tra hiện đang bán gì trước khi lên kế hoạch.",
-"Short Climate Card tourist passes were still on sale at our last check, but the 30-day card is gone. Check the price and where to buy before you go.": "Thẻ Climate Card ngắn ngày cho du khách vẫn đang bán vào lần kiểm tra gần nhất, nhưng thẻ 30 ngày đã không còn. Hãy kiểm tra giá và nơi mua trước khi đi.",
+"The 1, 2, 3, 5 and 7-day Climate Card tourist passes are still sold. Only the 30-day card ended, in September 2026. Check the price and where to buy before you go.": "Thẻ Climate Card du lịch loại 1, 2, 3, 5 và 7 ngày vẫn đang bán. Chỉ thẻ 30 ngày đã ngừng từ tháng 9/2026. Hãy kiểm tra giá và nơi mua trước khi đi.",
 "Not sure it pays off? A T-money card works for every subway and bus ride (see our T-money guide).": "Không chắc có lợi không? Thẻ T-money dùng được cho mọi chuyến tàu điện ngầm và xe buýt (xem hướng dẫn T-money của chúng tôi).",
 "Decide if you need it. Add up your planned subway and bus rides. For a short stay, a T-money card that you top up is often enough.": "Cân nhắc xem bạn có cần không. Cộng số lần đi tàu điện ngầm và xe buýt dự kiến. Với chuyến đi ngắn, thẻ T-money nạp tiền thường là đủ.",
 "Know the limits: reports say tourist passes work only in the Seoul area, so use T-money for taxis and trips outside Seoul.": "Biết giới hạn: theo các nguồn tin, thẻ du lịch chỉ dùng trong khu vực Seoul, nên hãy dùng T-money cho taxi và khi ra ngoài Seoul.",
 "If you buy, reports name the tourist information centres, T-Money Town near Seoul Station and online vouchers as places to get it. Check the current price at purchase.": "Nếu mua, các nguồn tin nêu quầy thông tin du lịch, T-Money Town gần ga Seoul và phiếu mua trực tuyến. Hãy kiểm tra giá hiện tại khi mua.",
-"The 30-day Climate Card was replaced by the K-Pass system in 2026. Reports differ on the exact last dates.": "Climate Card 30 ngày đã được hệ thống K-Pass thay thế trong năm 2026. Các nguồn tin khác nhau về ngày cuối cùng.",
+"The 30-day Climate Card was replaced by the K-Pass system from 1 Sep 2026. The short tourist passes are separate and were not affected. Visitors on a tourist stay can't join K-Pass.": "Climate Card 30 ngày đã được hệ thống K-Pass thay thế từ ngày 1/9/2026. Thẻ du lịch ngắn ngày là loại riêng và không bị ảnh hưởng. Khách du lịch ngắn hạn không đăng ký được K-Pass.",
 "Prices have changed since launch and sources disagree, so we do not quote them here. Check Seoul's tourist pass page or T-money.": "Giá đã thay đổi kể từ khi ra mắt và các nguồn không thống nhất nên chúng tôi không nêu giá ở đây. Hãy xem trang thẻ du lịch của Seoul hoặc T-money.",
 "Transit pass": "Thẻ giao thông",
 "Is the Seoul Climate Card tourist pass worth buying?": "Thẻ du lịch Climate Card của Seoul có đáng mua không?",
@@ -380,7 +380,7 @@ VI = {
 "Many passports are exempt from K-ETA through 31 Dec 2026, but not all. Check your own country on the official site before you fly.": "Nhiều hộ chiếu được miễn K-ETA đến hết 31/12/2026, nhưng không phải tất cả. Hãy kiểm tra quốc gia của bạn trên trang chính thức trước khi bay.",
 "Check your passport country on the official K-ETA site (k-eta.go.kr). The temporary exemption for eligible countries runs from 1 Jan to 31 Dec 2026.": "Kiểm tra quốc gia trên hộ chiếu của bạn tại trang K-ETA chính thức (k-eta.go.kr). Diện miễn tạm thời cho các nước đủ điều kiện kéo dài từ 1/1 đến 31/12/2026.",
 "If you are not exempt, apply for K-ETA before you fly, not at check-in.": "Nếu không được miễn, hãy đăng ký K-ETA trước khi bay, đừng đợi đến lúc làm thủ tục.",
-"Reports say a digital arrival card (e-Arrival Card) applies to foreign visitors from 2026, including those exempt from K-ETA. Submit it online before you arrive, and confirm the current rule on the official portal.": "Theo các nguồn tin, từ năm 2026 du khách nước ngoài, kể cả người được miễn K-ETA, phải khai tờ khai đến điện tử (e-Arrival Card). Hãy nộp trực tuyến trước khi đến và xác nhận quy định mới nhất trên cổng chính thức.",
+"Since 1 Jan 2026, foreign visitors, including those exempt from K-ETA, must submit the e-Arrival Card online within 72 hours before arrival. If you already hold an approved K-ETA, you don't need it.": "Từ ngày 1/1/2026, du khách nước ngoài, kể cả người được miễn K-ETA, phải nộp tờ khai đến điện tử (e-Arrival Card) trực tuyến trong vòng 72 giờ trước khi đến. Nếu bạn đã có K-ETA được duyệt thì không cần nộp.",
 "Unsure? Ask your airline or the nearest Korean embassy before you book. Rules for 2027 had not been announced at our last check.": "Chưa chắc? Hãy hỏi hãng bay hoặc đại sứ quán Hàn Quốc gần nhất trước khi đặt vé. Quy định cho năm 2027 chưa được công bố vào lần kiểm tra gần nhất của chúng tôi.",
 "The exemption has been extended one year at a time, so guides written before 2026 may be out of date.": "Diện miễn được gia hạn từng năm một, nên các hướng dẫn viết trước năm 2026 có thể đã lỗi thời.",
 "Cash and ATMs with a foreign card": "Rút tiền mặt bằng thẻ nước ngoài",
@@ -404,16 +404,16 @@ VI = {
 "Same-day delivery between the airport and Seoul hotels usually needs you to drop bags off before late morning.": "Giao trong ngày giữa sân bay và khách sạn ở Seoul thường cần gửi hành lý trước cuối buổi sáng.",
 "Lockers full or the app won't work? Use a staffed counter, or ask your host or hotel to hold your bags.": "Tủ khóa hết chỗ hoặc ứng dụng không chạy? Dùng quầy có nhân viên, hoặc nhờ chủ nhà/khách sạn giữ hành lý.",
 "Locker fees start at about 2,000 won for 4 hours (small) and 4,000 won (large).": "Phí tủ khóa từ khoảng 2.000 won cho 4 giờ (cỡ nhỏ) và 4.000 won (cỡ lớn).",
-"Getting sick in Korea: 119, 1339, pharmacies, hospitals (2026)": "Bị ốm khi du lịch Hàn Quốc: 119, đường dây 1339, hiệu thuốc và bệnh viện (2026)",
+"Getting sick in Korea: 119, 1330, pharmacies, hospitals (2026)": "Bị ốm khi du lịch Hàn Quốc: 119, 1330, hiệu thuốc và bệnh viện (2026)",
 "Emergency help in Korea is free to call and has interpreters. For smaller problems, pharmacies and big hospitals' international clinics are easy to use.": "Gọi cấp cứu ở Hàn Quốc miễn phí và có phiên dịch. Với vấn đề nhẹ, hiệu thuốc và khoa quốc tế của bệnh viện lớn rất dễ dùng.",
-"Call 119 for an ambulance. If you're not sure where to go, call 1339, any time.": "Gọi 119 để gọi xe cứu thương. Nếu không biết nên đi đâu, gọi 1339 bất cứ lúc nào.",
+"Call 119 for an ambulance, and also for medical advice or the nearest open ER. Call 1330 if you need an interpreter.": "Gọi 119 để gọi xe cứu thương, và cũng để được tư vấn y tế hoặc tìm phòng cấp cứu gần nhất còn mở. Gọi 1330 nếu bạn cần phiên dịch.",
 "Emergency: call 119 and say \"English, please\" for an interpreter.": "Khẩn cấp: gọi 119 và nói \"Vietnamese, please\" để được nối phiên dịch.",
-"Not sure how serious it is, or need the nearest open ER or pharmacy? Call 1339. It runs 24 hours.": "Không rõ mức độ nghiêm trọng, hoặc cần phòng cấp cứu hay hiệu thuốc gần nhất đang mở? Gọi 1339, hoạt động 24 giờ.",
+"Not sure how serious it is, or need the nearest open ER or pharmacy? Call 119 too. It gives medical advice and hospital information, not only ambulances, 24 hours a day.": "Không rõ mức độ nghiêm trọng, hoặc cần phòng cấp cứu hay hiệu thuốc gần nhất còn mở? Cũng gọi 119. Ngoài xe cứu thương, 119 còn tư vấn y tế và cung cấp thông tin bệnh viện suốt 24 giờ.",
 "Minor problems: pharmacies (look for the 약 sign) sell common medicines. Convenience stores have basic painkillers and cold medicine.": "Vấn đề nhẹ: hiệu thuốc (tìm biển 약) bán thuốc thông dụng. Cửa hàng tiện lợi có thuốc giảm đau và thuốc cảm cơ bản.",
 "Major Seoul hospitals have international clinics with English- and Chinese-speaking staff.": "Các bệnh viện lớn ở Seoul có khoa quốc tế với nhân viên nói tiếng Anh và tiếng Trung.",
 "Bring your passport. An ER may ask for a deposit before treatment.": "Mang theo hộ chiếu. Phòng cấp cứu có thể yêu cầu đặt cọc trước khi điều trị.",
 "1330, the travel helpline, can also interpret for you at a pharmacy or clinic.": "Tổng đài du lịch 1330 cũng có thể phiên dịch giúp bạn ở hiệu thuốc hoặc phòng khám.",
-"Medical advice and the nearest open ER, 24h": "Tư vấn y tế và phòng cấp cứu gần nhất đang mở, 24 giờ",
+"Disease-control hotline (KDCA), for infectious diseases": "Đường dây của Cơ quan Kiểm soát Dịch bệnh (KDCA), về bệnh truyền nhiễm",
 "Can I leave my luggage here?": "Tôi gửi hành lý ở đây được không?",
 "I have a fever. Do you have medicine for it?": "Tôi bị sốt. Có thuốc không?",
 "While you're here": "Trong chuyến đi",
@@ -434,6 +434,9 @@ VI = {
 "Olive Young runs over 110 stores for visitors in areas like Myeongdong, Gangnam, Hongdae, Busan and Jeju, with foreign-language staff and Korean-English price labels.": "Olive Young có hơn 110 cửa hàng dành cho du khách ở Myeongdong, Gangnam, Hongdae, Busan, Jeju..., có nhân viên nói ngoại ngữ và nhãn giá Hàn–Anh.",
 "Musinsa stores put a QR code on every item that shows member prices, stock and reviews.": "Ở cửa hàng Musinsa, mỗi sản phẩm có mã QR để xem giá thành viên, tồn kho và đánh giá.",
 "Tax free, please. I'll pay for everything at once.": "Cho tôi hoàn thuế. Tôi thanh toán tất cả một lần.",
+"1339 is the disease-control hotline (KDCA), mainly for infectious diseases. The old 1339 emergency-room information service moved to 119.": "1339 là đường dây của Cơ quan Kiểm soát và Phòng ngừa Dịch bệnh (KDCA), chủ yếu dành cho câu hỏi về bệnh truyền nhiễm. Dịch vụ thông tin phòng cấp cứu 1339 trước đây đã chuyển sang 119.",
+"The 30-day Climate Card was replaced by K-Pass. The 1 to 7-day tourist passes are still sold.": "Climate Card 30 ngày được thay bằng K-Pass. Thẻ du lịch 1 đến 7 ngày vẫn đang bán.",
+"Foreign visitors, including those exempt from K-ETA, must submit the e-Arrival Card within 72 hours before arrival.": "Du khách nước ngoài, kể cả người được miễn K-ETA, phải nộp tờ khai đến điện tử (e-Arrival Card) trong vòng 72 giờ trước khi đến.",
 }
 
 
@@ -444,6 +447,17 @@ def tr(o):
     if isinstance(o, tuple): return tuple(tr(v) for v in o)
     return o
 
+
+# Warn when an English string shown on a page has no Vietnamese entry: tr() would
+# silently keep the English text on the Vietnamese page.
+_missing = set()
+def _walk(o):
+    if isinstance(o, str):
+        if o not in VI and " " in o and any(c.isalpha() for c in o) and not any("가" <= c <= "힣" for c in o): _missing.add(o)
+    elif isinstance(o, dict): [_walk(v) for v in o.values()]
+    elif isinstance(o, (list, tuple)): [_walk(v) for v in o]
+_walk({k: v for k, v in data.LANGS["en"].items() if k != "check"})
+for _m in sorted(_missing): print("vi: missing translation:", _m[:90], file=sys.stderr)
 
 L = tr(copy.deepcopy(data.LANGS["en"]))
 L.update({"html_lang": "vi", "dir": "vi/", "name": "Tiếng Việt"})

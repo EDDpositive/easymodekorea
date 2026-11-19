@@ -64,7 +64,7 @@ a { color: var(--brand); }
 .logo { font: 800 18px var(--display); color: inherit; text-decoration: none; letter-spacing: -0.01em; }
 .logo b { background: var(--easy); color: #0e1430; padding: 0 6px; border-radius: 6px; margin-left: 2px; }
 .langs { display: flex; gap: 10px; font-size: 14px; }
-.langs a { color: rgba(255,255,255,.82); text-decoration: none; }
+.langs a { color: rgba(255,255,255,.82); text-decoration: none; display: inline-block; padding: 6px 2px; min-height: 24px; }
 .langs a[aria-current="page"] { color: #fff; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
 .mode { display: flex; align-items: center; gap: 10px; margin: 22px 0 8px; font: 700 13px var(--body); letter-spacing: .08em; text-transform: uppercase; }
 .mode s { opacity: .7; }
@@ -264,19 +264,20 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-t
 .guide-list span { color: var(--muted); font-size: 15px; }
 
 .checked-line { margin: 10px 2px 0; font-size: 14px; color: var(--muted); }
+.host-cta { margin: 18px 0 0; padding: 12px 14px; border: 1px dashed var(--line); border-radius: 12px; font-size: 15px; color: var(--muted); }
 </style>
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
 <header class="hero"><div class="wrap">
-  <div class="toprow"><a class="logo" href="./">EasyMode<b>Korea</b></a><nav class="langs" aria-label="Ngôn ngữ"><a href="../changes.html" hreflang="en">English</a><a href="../ja/changes.html" hreflang="ja">日本語</a><a href="../zh-tw/changes.html" hreflang="zh-Hant-TW">繁體中文</a><a href="../zh-cn/changes.html" hreflang="zh-CN">简体中文</a><a href="../vi/changes.html" hreflang="vi" aria-current="page">Tiếng Việt</a></nav></div>
+  <div class="toprow"><a class="logo" href="./">EasyMode<b>Korea</b></a><nav class="langs" aria-label="Ngôn ngữ"><a href="../changes.html" hreflang="en" lang="en">English</a><a href="../ja/changes.html" hreflang="ja" lang="ja">日本語</a><a href="../zh-tw/changes.html" hreflang="zh-Hant-TW" lang="zh-Hant-TW">繁體中文</a><a href="../zh-cn/changes.html" hreflang="zh-CN" lang="zh-CN">简体中文</a><a href="../vi/changes.html" hreflang="vi" lang="vi" aria-current="page">Tiếng Việt</a></nav></div>
   <h1>Những thay đổi năm 2026</h1>
 </div></header>
 <div class="wrap">
-  <section class="panel" style="margin-top:18px"><div class="in timeline" style="padding-top:16px"><ol><li><b>2026-10-01</b>Vé KTX giờ mở bán trước hai tháng.</li><li><b>2026-09-01</b>SRT sáp nhập vào KORAIL. Mọi tàu cao tốc giờ bán dưới tên KTX.</li><li><b>2026-08</b>Ứng dụng KORAIL+ thay thế Korail Talk.</li><li><b>2026-07</b>Baemin: du khách đặt hàng được bằng số nước ngoài. Seoul thêm khu nhận đồ ăn ở công viên sông Hàn.</li><li><b>2026-06-02</b>Baemin: Apple Pay giờ nhận thẻ nước ngoài.</li><li><b>2026-06-04</b>Naver thêm xác minh hộ chiếu, du khách đặt chỗ và thanh toán được trên Naver Map.</li><li><b>2026-03</b>Mobile T-money trên iPhone bắt đầu nhận nạp tiền bằng một số thẻ nước ngoài.</li><li><b>2026-02-03</b>Baemin thêm tiếng Anh, Nhật và Trung.</li><li><b>2026-02</b>Chính phủ phê duyệt có điều kiện việc xuất dữ liệu bản đồ cho Google. Việc chỉ đường tốt hơn chưa được xác nhận.</li></ol></div></section>
+  <section class="panel" style="margin-top:18px"><div class="in timeline" style="padding-top:16px"><ol><li><b>2026-10-01</b>Vé KTX giờ mở bán trước hai tháng.</li><li><b>2026-09-01</b>SRT sáp nhập vào KORAIL. Mọi tàu cao tốc giờ bán dưới tên KTX.</li><li><b>2026-09-01</b>Climate Card 30 ngày được thay bằng K-Pass. Thẻ du lịch 1 đến 7 ngày vẫn đang bán.</li><li><b>2026-08</b>Ứng dụng KORAIL+ thay thế Korail Talk.</li><li><b>2026-07</b>Baemin: du khách đặt hàng được bằng số nước ngoài. Seoul thêm khu nhận đồ ăn ở công viên sông Hàn.</li><li><b>2026-06-02</b>Baemin: Apple Pay giờ nhận thẻ nước ngoài.</li><li><b>2026-06-04</b>Naver thêm xác minh hộ chiếu, du khách đặt chỗ và thanh toán được trên Naver Map.</li><li><b>2026-03</b>Mobile T-money trên iPhone bắt đầu nhận nạp tiền bằng một số thẻ nước ngoài.</li><li><b>2026-02-03</b>Baemin thêm tiếng Anh, Nhật và Trung.</li><li><b>2026-02</b>Chính phủ phê duyệt có điều kiện việc xuất dữ liệu bản đồ cho Google. Việc chỉ đường tốt hơn chưa được xác nhận.</li><li><b>2026-01-01</b>Du khách nước ngoài, kể cả người được miễn K-ETA, phải nộp tờ khai đến điện tử (e-Arrival Card) trong vòng 72 giờ trước khi đến.</li></ol></div></section>
   <div class="actions"><a class="btn" href="./">Kiểm tra theo tình trạng của bạn</a></div>
   <section class="ask" aria-labelledby="ask-t-vi"><h2 id="ask-t-vi">Không tìm thấy thông tin bạn cần?</h2><p class="hint">Hãy gửi câu hỏi. Chúng tôi sẽ bổ sung vào hướng dẫn, và trả lời qua email nếu bạn để lại.</p>
-<form class="ask-form" data-thanks="Cảm ơn! Câu hỏi của bạn đã được gửi."><textarea name="q" required maxlength="1000" aria-label="Không tìm thấy thông tin bạn cần?" placeholder="VD: Thẻ Visa nước ngoài có đặt vé KTX được không?"></textarea>
+<form class="ask-form" data-thanks="Cảm ơn! Câu hỏi của bạn đã được gửi."><textarea name="q" required maxlength="1000" aria-label="Không tìm thấy thông tin bạn cần?" placeholder="VD: Thẻ phát hành ở nước ngoài có đặt vé KTX được không?"></textarea>
 <input name="em" type="email" maxlength="120" autocomplete="email" aria-label="Email (không bắt buộc, để nhận trả lời)" placeholder="Email (không bắt buộc, để nhận trả lời)"><button class="btn" type="submit">Gửi câu hỏi</button><p class="fb-done" role="status"></p></form></section>
   <p class="fb-line"><button type="button" class="linkbtn" data-feedback="changes">💬 Gửi góp ý</button></p>
 </div>

@@ -50,7 +50,7 @@ def lang_links(cur, rel_paths, prefix):
     out = []
     for k, L in LANGS.items():
         cur_attr = ' aria-current="page"' if k == cur else ""
-        out.append(f'<a href="{prefix}{rel_paths[k]}" hreflang="{L["html_lang"]}"{cur_attr}>{e(L["name"])}</a>')
+        out.append(f'<a href="{prefix}{rel_paths[k]}" hreflang="{L["html_lang"]}" lang="{L["html_lang"]}"{cur_attr}>{e(L["name"])}</a>')
     return f'<nav class="langs" aria-label="{e(LANGS[cur]["ui"]["langs"])}">' + "".join(out) + "</nav>"
 
 
@@ -58,7 +58,7 @@ def hero(lang, alt, up, h1, lede, home="./", trust=True):
     x = X[lang]
     return f"""<header class="hero"><div class="wrap">
   <div class="toprow"><a class="logo" href="{home}">EasyMode<b>Korea</b></a>{lang_links(lang, alt, up)}</div>
-  {f'<h1>{e(h1)}</h1>' if h1 else ''}
+  {f'<h1>{e(h1)}</h1>' if h1 else ''}{f'<p class="lede">{e(lede)}</p>' if lede else ''}
 </div></header>"""
 
 
@@ -464,12 +464,13 @@ def build_topic(lang, t):
     slug_of = {tid: sl for tid, sl, _ in TASK_META}
     related = "".join(f'<li><a href="{slug_of[r]}.html">{e(QUESTION[lang][r])}</a></li>' for r in RELATED.get(t["id"], []))
     body = f"""
-{hero(lang, alt, up, QUESTION[lang][t['id']], '')}
+{hero(lang, alt, up, QUESTION[lang][t['id']], t['intro'])}
 <div class="wrap">
   <div class="actions"><a class="btn" href="./#task-{t['id']}">{e(U['open_tool'])}</a>{phrases}</div>
   <main class="cards">{''.join(blocks)}<button class="linkbtn" type="button" id="show-all" hidden>{e(x['others'])}</button></main>
   <p class="checked-line">{e(U['checked'])} <time datetime="{CHECKED_ISO}">{e(CHECKED[lang])}</time></p>
-  <details class="panel"><summary>{e(S['details'])}</summary><div class="in notes"><ul><li>{e(U['checked'])} {e(CHECKED[lang])}</li>{notes}{srcs}</ul></div></details>
+  <details class="panel" open><summary>{e(S['details'])}</summary><div class="in notes"><ul><li>{e(U['checked'])} {e(CHECKED[lang])}</li>{notes}{srcs}</ul></div></details>
+  <p class="host-cta">🏠 {U['hosts'].format(base=up)}</p>
   <section class="related"><h2>{e(x['related'])}</h2><ul>{related}</ul></section>
   <nav class="topics">{others}</nav>
   {about(lang, up)}
@@ -511,6 +512,34 @@ def build_changes(lang):
     return path
 
 
+def build_404():
+    """GitHub Pages serves /404.html for any missing path, so every link here is absolute."""
+    homes = " · ".join(f'<a href="/{LANGS[k]["dir"]}" lang="{LANGS[k]["html_lang"]}">{e(LANGS[k]["name"])}</a>' for k in LANGS)
+    guides = "".join(f'<li><a href="/{t["slug"]}.html">{e(QUESTION["en"][t["id"]])}</a></li>' for t in task_list("en"))
+    write("404.html", f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2336e8">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<title>Page not found | {BRAND}</title>
+<style>
+{CSS}</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+  <div class="toprow"><a class="logo" href="/">EasyMode<b>Korea</b></a></div>
+  <h1>This page isn't here</h1><p class="lede">The link may be old. Pick a guide below, or start from the home page in your language: {homes}</p>
+</div></header>
+<div class="wrap"><main><section class="related"><h2>Guides</h2><ul>{guides}</ul></section>
+<div class="actions"><a class="btn" href="/">Check your own setup</a></div></main></div>
+</body>
+</html>
+""")
+
+
 def write(rel, text):
     full = os.path.join(ROOT, rel)
     os.makedirs(os.path.dirname(full) or ".", exist_ok=True)
@@ -525,6 +554,7 @@ def main():
         for t in task_list(lang):
             paths.append(build_topic(lang, t))
     paths.append("hosts.html")
+    build_404()
     by_rel = {}
     for p in paths:
         lang = next((k for k in LANGS if LANGS[k]["dir"] and p.startswith(LANGS[k]["dir"])), "en")
