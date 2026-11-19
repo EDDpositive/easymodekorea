@@ -255,15 +255,6 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-t
 .ask-form .btn { justify-self: start; }
 .ask-form .fb-done { margin: 0; min-height: 0; }
 
-/* Static guide list on the home page (crawlable, visible to everyone) */
-.guide-list { margin: 8px auto 28px; }
-.guide-list h2 { font: 700 20px var(--display); margin: 0 0 10px; }
-.guide-list h3 { font: 700 16px var(--display); color: var(--muted); margin: 18px 0 8px; }
-.guide-list ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-.guide-list li { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
-.guide-list a { font-weight: 700; display: block; margin-bottom: 2px; }
-.guide-list span { color: var(--muted); font-size: 15px; }
-
 .checked-line { margin: 10px 2px 0; font-size: 14px; color: var(--muted); }
 .host-cta { margin: 18px 0 0; padding: 12px 14px; border: 1px dashed var(--line); border-radius: 12px; font-size: 15px; color: var(--muted); }
 .deep { margin: 26px 0 0; }
@@ -281,6 +272,63 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-t
 .foot p { margin: 6px 0 0; }
 .skip { position: absolute; left: -9999px; top: 0; z-index: 20; background: var(--easy); color: #0e1430; padding: 10px 14px; border-radius: 0 0 10px 0; font-weight: 700; }
 .skip:focus { left: 0; }
+
+/* Short-first layout (round 14) */
+.hero h1 { line-height: 1.2; }
+.answer { background: var(--surface); border: 1px solid var(--line); border-left: 6px solid var(--line); border-radius: 16px; padding: 14px 16px; display: grid; gap: 10px; margin: 4px 0 0; }
+.answer.ok { border-left-color: var(--ok); } .answer.warn { border-left-color: var(--warn); } .answer.mixed { border-left-color: var(--mixed); } .answer.bad { border-left-color: var(--bad); }
+.pv[hidden] { display: none; }
+.ans-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 6px; }
+.ans-top h2 { font: 700 15px var(--body); color: var(--muted); margin: 0; }
+.answer .verdict { font-size: 18px; line-height: 1.4; }
+.glance { margin: 0; display: grid; gap: 6px; font-size: 15px; line-height: 1.4; }
+.glance > div { display: grid; grid-template-columns: 96px 1fr; gap: 8px; }
+.glance dt { color: var(--muted); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: .04em; padding-top: 2px; }
+.glance dd { margin: 0; }
+.ck { color: var(--muted); font-size: 12px; white-space: nowrap; }
+.stamp { margin: 0; font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 8px; }
+.do { margin: 18px 0 0; display: grid; gap: 12px; }
+.do .steps li { line-height: 1.45; }
+.says, .names { margin: 22px 0 0; }
+.says h2, .names h2 { font: 700 18px var(--display); margin: 0 0 8px; }
+.say { background: var(--surface); border: 2px solid var(--easy); border-radius: 16px; padding: 14px 16px; display: grid; gap: 8px; }
+.say-ko { font: 800 26px/1.35 var(--ko, var(--body)); margin: 0; word-break: keep-all; }
+.say-mean { margin: 0; color: var(--muted); }
+.names ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.chip { width: 100%; display: grid; grid-template-columns: 1fr auto; grid-template-areas: "ko i" "en i"; align-items: center; text-align: left; gap: 0 10px; padding: 10px 14px; border: 1.5px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--ink); font: inherit; cursor: pointer; position: relative; }
+.chip span { grid-area: ko; font: 700 19px var(--ko, var(--body)); }
+.chip small { grid-area: en; color: var(--muted); font-size: 13px; }
+.chip i { grid-area: i; font-style: normal; }
+.chip.done, .btn.done { border-color: var(--ok); }
+.tip { position: absolute; right: 10px; top: -10px; background: var(--ink); color: var(--surface); font-size: 12px; padding: 2px 8px; border-radius: 99px; }
+.btn { position: relative; }
+.do + .actions, .names + .actions, .says + .actions { margin-top: 18px; }
+details.more { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; margin: 10px 0 0; }
+details.more > summary { list-style: none; cursor: pointer; padding: 14px 16px; font: 700 16px var(--body); display: flex; justify-content: space-between; align-items: center; gap: 10px; min-height: 24px; }
+details.more > summary::-webkit-details-marker { display: none; }
+details.more > summary::after { content: "+"; font: 400 22px var(--body); color: var(--muted); }
+details.more[open] > summary::after { content: "–"; }
+details.more > .in, details.more > .topics { padding: 0 16px 14px; margin: 0; }
+details.more.deep { margin-top: 10px; }
+.actions + details.more { margin-top: 22px; }
+.notes p { margin: 0 0 8px; }
+/* Home: situation cards */
+.sit { margin: 6px 0 0; }
+.sit > h2, .tool-h { font: 800 20px/1.2 var(--display); margin: 0 0 10px; }
+.sit-grid { display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
+@media (max-width: 360px) { .sit-grid { grid-template-columns: 1fr; } }
+.sit-card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 12px; display: grid; gap: 6px; align-content: start; }
+.sit-card[hidden] { display: none; }
+.sit-card h3 { display: flex; align-items: center; gap: 8px; margin: 0; font: 700 16px/1.2 var(--body); }
+.sit-card h3 svg { width: 22px; height: 22px; flex: none; fill: none; stroke: var(--brand); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.sit-card p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.35; }
+.sit-links { display: flex; flex-wrap: wrap; gap: 6px; }
+.sit-card .sit-links a { display: inline-block; padding: 5px 10px; min-height: 24px; box-sizing: border-box; border-radius: 99px; background: var(--bg); border: 1px solid var(--line); color: var(--ink); font-weight: 600; font-size: 14px; text-decoration: none; }
+.sit-card .sit-links a[hidden] { display: none; }
+.tool { margin: 26px 0 0; }
+.onb { margin: 0; }
+.onb h3 { font: 700 18px/1.3 var(--body); margin: 0 0 10px; }
+.offline-note { margin: 22px 0 0; font-size: 14px; color: var(--muted); }
 </style>
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "首尔气候同行卡观光客票券值得买吗?30日卡被什么取代?(2026)", "description": "首尔曾为旅客贩售短天期的吃到饱票券,但30日气候同行卡在2026年被K-Pass取代。规划行程前,先确认现在有卖什么。", "datePublished": "2026-11-19", "dateModified": "2026-11-20", "inLanguage": "zh-CN", "url": "https://easymodekorea.com/zh-cn/seoul-tourist-transit-pass.html", "mainEntityOfPage": "https://easymodekorea.com/zh-cn/seoul-tourist-transit-pass.html", "image": "https://easymodekorea.com/og.png", "author": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/zh-cn/about.html"}, "publisher": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/", "logo": {"@type": "ImageObject", "url": "https://easymodekorea.com/icon-512.png"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "EasyModeKorea", "item": "https://easymodekorea.com/zh-cn/"}, {"@type": "ListItem", "position": 2, "name": "交通票券", "item": "https://easymodekorea.com/zh-cn/seoul-tourist-transit-pass.html"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "首尔气候同行卡观光客票券值得买吗?", "acceptedAnswer": {"@type": "Answer", "text": "1、2、3、5、7日的气候同行卡观光客票券仍在贩售,只有30日卡在2026年9月停售。出发前请确认价格和购买地点。 先判断需不需要。把预计搭地铁和公交的次数加起来。短期停留的话,充值的T-money卡通常就够用。 注意限制:据报导,观光客票券只能在首尔地区使用,搭出租车或离开首尔请用T-money。 要买的话,报导提到的购买处有观光案内所、首尔站附近的T-Money Town和线上票券。购买时请确认最新价格。"}}, {"@type": "Question", "name": "气候同行卡还有卖给观光客吗?", "acceptedAnswer": {"@type": "Answer", "text": "有。1到7日的观光客票券持续贩售,只有30日卡停止了。"}}, {"@type": "Question", "name": "观光客票券比T-money便宜吗?", "acceptedAnswer": {"@type": "Answer", "text": "只有搭很多趟的日子才便宜。一天只搭几趟的话,T-money通常比较便宜。"}}, {"@type": "Question", "name": "机场铁路能用吗?", "acceptedAnswer": {"@type": "Answer", "text": "AREX直达车不能用。普通车请看票券条款。"}}, {"@type": "Question", "name": "旅客可以用K-Pass吗?", "acceptedAnswer": {"@type": "Answer", "text": "不行。K-Pass是给居民的,观光停留的旅客无法登记。"}}]}]</script>
@@ -289,20 +337,25 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-t
 <a class="skip" href="#answer">跳到答案</a>
 <header class="hero"><div class="wrap">
   <div class="toprow"><a class="logo" href="./">EasyMode<b>Korea</b></a><nav class="langs" aria-label="语言"><a href="../seoul-tourist-transit-pass.html" hreflang="en" lang="en">English</a><a href="../ja/seoul-tourist-transit-pass.html" hreflang="ja" lang="ja">日本語</a><a href="../zh-tw/seoul-tourist-transit-pass.html" hreflang="zh-Hant-TW" lang="zh-Hant-TW">繁體中文</a><a href="../zh-cn/seoul-tourist-transit-pass.html" hreflang="zh-CN" lang="zh-CN" aria-current="page">简体中文</a><a href="../vi/seoul-tourist-transit-pass.html" hreflang="vi" lang="vi">Tiếng Việt</a></nav></div>
-  <h1>首尔气候同行卡观光客票券值得买吗?</h1><p class="lede">首尔曾为旅客贩售短天期的吃到饱票券,但30日气候同行卡在2026年被K-Pass取代。规划行程前,先确认现在有卖什么。</p>
+  <h1>首尔气候同行卡观光客票券值得买吗?</h1>
 </div></header>
 <div class="wrap">
-  <div class="actions"><a class="btn" href="./#task-transitpass">用自己的状况确认</a><button class="btn alt" type="button" data-show="관광객용 교통카드는 어디서 살 수 있어요?" data-lbl="给店员看" data-mean="意思: 观光客用的交通票券在哪里买?">🗣 观光客用的交通票券在哪里买?</button></div>
-  <main class="cards" id="answer"><article class="card warn"><div class="actions" style="justify-content:space-between;align-items:center"><h2>多一个步骤</h2><span class="pill warn">多一个步骤</span></div>
-<p class="verdict">1、2、3、5、7日的气候同行卡观光客票券仍在贩售,只有30日卡在2026年9月停售。出发前请确认价格和购买地点。</p><ol class="steps"><li>先判断需不需要。把预计搭地铁和公交的次数加起来。短期停留的话,充值的T-money卡通常就够用。</li><li>注意限制:据报导,观光客票券只能在首尔地区使用,搭出租车或离开首尔请用T-money。</li><li>要买的话,报导提到的购买处有观光案内所、首尔站附近的T-Money Town和线上票券。购买时请确认最新价格。</li></ol><p class="fallback"><b>如果不行</b>不确定划不划算?T-money卡可搭乘所有地铁和公交(请看我们的T-money指南)。</p></article><button class="linkbtn" type="button" id="show-all" hidden>查看其他状况的答案</button><section class="deep" aria-labelledby="st-transitpass"><h2 id="st-transitpass">第一次使用:一步一步来</h2><ol class="steps full"><li>算算搭乘次数。把每天在首尔预计搭的地铁和公交次数加起来。</li><li>比较:首尔地铁用卡搭一趟1,550韩元起(2025年6月起的基本票价)。只有搭很多趟的日子,票券才划算。</li><li>划算的话,买气候同行卡观光客票券(1、2、3、5或7日)。报导提到的购买处有车站机台、观光服务中心和首尔站附近的T-Money Town。<!-- screenshot: pass-kiosk --></li><li>购买时确认最新价格、卡片费用和天数怎么算。</li><li>在首尔的地铁和公交使用。出租车、<a href="incheon-airport-to-seoul.html">AREX</a>直达车和首尔地区以外的行程,用<a href="tmoney-subway-bus.html">T-money</a>卡。</li><li>30日气候同行卡已在2026年9月停止,观光停留的旅客也不能加入K-Pass,建议这两者的指南已经过时。</li></ol></section>
-<section class="deep" aria-labelledby="er-transitpass"><h2 id="er-transitpass">常见问题与解决方法</h2><ul class="errs"><li><p class="prob"><b>在首尔以外闸门不接受票券。</b></p><p>观光客票券只能在首尔地区用。在那里改用T-money。</p></li><li><p class="prob"><b>机台不收你的卡。</b></p><p>用现金,或到有人的柜台买。据报导,2026年3月起部分机台可用国外的卡付款,但要加手续费。</p></li><li><p class="prob"><b>票券比预期早到期。</b></p><p>天数可能按日历日计算,而不是每24小时。购买时先确认。</p></li><li><p class="prob"><b>找不到哪里买。</b></p><p>到观光服务中心或车站办公室问。</p></li></ul></section>
-<section class="deep faq" aria-labelledby="fq-transitpass"><h2 id="fq-transitpass">常见问答</h2><h3>气候同行卡还有卖给观光客吗?</h3><p>有。1到7日的观光客票券持续贩售,只有30日卡停止了。</p><h3>观光客票券比T-money便宜吗?</h3><p>只有搭很多趟的日子才便宜。一天只搭几趟的话,T-money通常比较便宜。</p><h3>机场铁路能用吗?</h3><p>AREX直达车不能用。普通车请看票券条款。</p><h3>旅客可以用K-Pass吗?</h3><p>不行。K-Pass是给居民的,观光停留的旅客无法登记。</p></section>
-<section class="deep" aria-labelledby="ct-transitpass"><h2 id="ct-transitpass">官方与一手信息</h2><ul class="cites"><li><a href="https://koreatimes.co.kr/southkorea/20260730/seouls-transit-pass-to-be-replaced-by-nationwide-k-pass-system-sept-1" rel="noopener" target="_blank">Korea Times: Seoul&#x27;s transit pass replaced by K-Pass from 1 Sep (Jul 2026)</a></li><li><a href="https://www.koreajoongangdaily.com/korea/seouls-30day-climate-card-to-end-what-it-means-for-commuters-kpass-users/12758853" rel="noopener" target="_blank">JoongAng Daily: Seoul&#x27;s 30-day Climate Card to end</a></li><li><a href="https://10mag.com/what-k-pass-means-for-foreigners-and-tourists-in-korea/" rel="noopener" target="_blank">10Mag: what K-Pass means for foreigners and tourists</a></li></ul></section></main>
-  <p class="checked-line">确认日 <time datetime="2026-11-17">2026年11月17日</time></p>
-  <details class="panel" open><summary>信息来源与备注</summary><div class="in notes"><ul><li>确认日 2026年11月17日</li><li>30日气候同行卡自2026年9月1日起由K-Pass系统取代。短天期观光客票券是不同的产品,不受影响。观光停留的旅客无法加入K-Pass。</li><li>价格自推出后有调整,信息来源也不一致,所以这里不列价格。请查首尔观光客票券页面或T-money。</li><li><a href="https://10mag.com/what-k-pass-means-for-foreigners-and-tourists-in-korea/" rel="noopener" target="_blank">10Mag: Seoul&#x27;s 30-day Climate Card is ending, what K-Pass means</a></li><li><a href="https://www.koreatimes.co.kr/southkorea/society/20240516/seoul-city-to-launch-all-inclusive-daily-transit-pass-for-tourists-in-july" rel="noopener" target="_blank">Korea Times: Seoul tourist transit pass launch (2024)</a></li><li><a href="https://www.klook.com/blog/seoul-climate-card" rel="noopener" target="_blank">Klook: Seoul Climate Card guide</a></li></ul></div></details>
-  <p class="host-cta">🏠 在韩国经营民宿或旅馆吗?<a href="../hosts.html">把这份指南传给你的房客</a>(韩文页面)。</p>
+  <main id="answer">
+  <section class="answer warn"><div class="pv warn"><div class="ans-top"><h2>多一个步骤</h2><span class="pill warn">多一个步骤</span></div><p class="verdict">1、2、3、5、7日的气候同行卡观光客票券仍在贩售,只有30日卡在2026年9月停售。出发前请确认价格和购买地点。</p></div><dl class="glance"><div><dt>Good to know</dt><dd>1, 2, 3, 5 and 7-day passes are still sold <time class="ck" datetime="2026-11-17">✓ 2026年11月17日</time></dd></div><div><dt>Cost</dt><dd>Prices vary by source; check Seoul&#x27;s or T-money&#x27;s page <time class="ck" datetime="2026-11-17">✓ 2026年11月17日</time></dd></div></dl><p class="stamp">Checked against <a href="https://koreatimes.co.kr/southkorea/20260730/seouls-transit-pass-to-be-replaced-by-nationwide-k-pass-system-sept-1" rel="noopener" target="_blank">Korea Times: Seoul&#x27;s transit pass replaced by K-Pass from 1 Sep (Jul 2026)</a> on <time datetime="2026-11-17">2026年11月17日</time></p></section>
+  <button class="linkbtn" type="button" id="show-all" hidden>查看其他状况的答案</button>
+  <section class="do" aria-labelledby="do-transitpass"><h2 id="do-transitpass" class="sr">第一次使用:一步一步来</h2><div class="pv"><ol class="steps"><li>先判断需不需要。把预计搭地铁和公交的次数加起来。短期停留的话,充值的T-money卡通常就够用。</li><li>注意限制:据报导,观光客票券只能在首尔地区使用,搭出租车或离开首尔请用T-money。</li><li>要买的话,报导提到的购买处有观光案内所、首尔站附近的T-Money Town和线上票券。购买时请确认最新价格。</li></ol><p class="fallback"><b>如果不行</b>不确定划不划算?T-money卡可搭乘所有地铁和公交(请看我们的T-money指南)。</p></div></section>
+  <section class="says" aria-labelledby="say-transitpass"><h2 id="say-transitpass">Show this to staff</h2><div class="say"><p class="say-ko" lang="ko">관광객용 교통카드는 어디서 살 수 있어요?</p><p class="say-mean">观光客用的交通票券在哪里买?</p><div class="actions"><button class="btn alt" type="button" data-show="관광객용 교통카드는 어디서 살 수 있어요?" data-lbl="给店员看" data-mean="意思: 观光客用的交通票券在哪里买?">🗣 Show full screen</button><button class="btn ghost" type="button" data-copy="관광객용 교통카드는 어디서 살 수 있어요?" data-done="✓ Copied">📋 Copy</button></div></div></section>
+  <section class="names" aria-labelledby="nm-transitpass"><h2 id="nm-transitpass">Korean names to copy (paste into Naver Map or show a driver)</h2><ul><li><button class="chip" type="button" data-copy="기후동행카드" data-done="✓ Copied"><span lang="ko">기후동행카드</span><small>Climate Card</small><i aria-hidden="true">📋</i></button></li></ul></section>
+  <div class="actions"><a class="btn" href="./#task-transitpass">用自己的状况确认</a></div>
+  <details class="more deep" id="st-transitpass"><summary>第一次使用:一步一步来</summary><div class="in"><ol class="steps full"><li>算算搭乘次数。把每天在首尔预计搭的地铁和公交次数加起来。</li><li>比较:首尔地铁用卡搭一趟1,550韩元起(2025年6月起的基本票价)。只有搭很多趟的日子,票券才划算。</li><li>划算的话,买气候同行卡观光客票券(1、2、3、5或7日)。报导提到的购买处有车站机台、观光服务中心和首尔站附近的T-Money Town。<!-- screenshot: pass-kiosk --></li><li>购买时确认最新价格、卡片费用和天数怎么算。</li><li>在首尔的地铁和公交使用。出租车、<a href="incheon-airport-to-seoul.html">AREX</a>直达车和首尔地区以外的行程,用<a href="tmoney-subway-bus.html">T-money</a>卡。</li><li>30日气候同行卡已在2026年9月停止,观光停留的旅客也不能加入K-Pass,建议这两者的指南已经过时。</li></ol></div></details>
+<details class="more deep" id="er-transitpass"><summary>常见问题与解决方法</summary><div class="in"><ul class="errs"><li><p class="prob"><b>在首尔以外闸门不接受票券。</b></p><p>观光客票券只能在首尔地区用。在那里改用T-money。</p></li><li><p class="prob"><b>机台不收你的卡。</b></p><p>用现金,或到有人的柜台买。据报导,2026年3月起部分机台可用国外的卡付款,但要加手续费。</p></li><li><p class="prob"><b>票券比预期早到期。</b></p><p>天数可能按日历日计算,而不是每24小时。购买时先确认。</p></li><li><p class="prob"><b>找不到哪里买。</b></p><p>到观光服务中心或车站办公室问。</p></li></ul></div></details>
+<details class="more deep faq" id="fq-transitpass"><summary>常见问答</summary><div class="in"><h3>气候同行卡还有卖给观光客吗?</h3><p>有。1到7日的观光客票券持续贩售,只有30日卡停止了。</p><h3>观光客票券比T-money便宜吗?</h3><p>只有搭很多趟的日子才便宜。一天只搭几趟的话,T-money通常比较便宜。</p><h3>机场铁路能用吗?</h3><p>AREX直达车不能用。普通车请看票券条款。</p><h3>旅客可以用K-Pass吗?</h3><p>不行。K-Pass是给居民的,观光停留的旅客无法登记。</p></div></details>
+<details class="more deep" id="ct-transitpass"><summary>官方与一手信息</summary><div class="in"><ul class="cites"><li><a href="https://koreatimes.co.kr/southkorea/20260730/seouls-transit-pass-to-be-replaced-by-nationwide-k-pass-system-sept-1" rel="noopener" target="_blank">Korea Times: Seoul&#x27;s transit pass replaced by K-Pass from 1 Sep (Jul 2026)</a></li><li><a href="https://www.koreajoongangdaily.com/korea/seouls-30day-climate-card-to-end-what-it-means-for-commuters-kpass-users/12758853" rel="noopener" target="_blank">JoongAng Daily: Seoul&#x27;s 30-day Climate Card to end</a></li><li><a href="https://10mag.com/what-k-pass-means-for-foreigners-and-tourists-in-korea/" rel="noopener" target="_blank">10Mag: what K-Pass means for foreigners and tourists</a></li></ul></div></details>
+  <details class="more"><summary>信息来源与备注</summary><div class="in notes"><p>首尔曾为旅客贩售短天期的吃到饱票券,但30日气候同行卡在2026年被K-Pass取代。规划行程前,先确认现在有卖什么。</p><ul><li>确认日 2026年11月17日</li><li>30日气候同行卡自2026年9月1日起由K-Pass系统取代。短天期观光客票券是不同的产品,不受影响。观光停留的旅客无法加入K-Pass。</li><li>价格自推出后有调整,信息来源也不一致,所以这里不列价格。请查首尔观光客票券页面或T-money。</li><li><a href="https://10mag.com/what-k-pass-means-for-foreigners-and-tourists-in-korea/" rel="noopener" target="_blank">10Mag: Seoul&#x27;s 30-day Climate Card is ending, what K-Pass means</a></li><li><a href="https://www.koreatimes.co.kr/southkorea/society/20240516/seoul-city-to-launch-all-inclusive-daily-transit-pass-for-tourists-in-july" rel="noopener" target="_blank">Korea Times: Seoul tourist transit pass launch (2024)</a></li><li><a href="https://www.klook.com/blog/seoul-climate-card" rel="noopener" target="_blank">Klook: Seoul Climate Card guide</a></li></ul></div></details>
+  </main>
   <section class="related"><h2>相关指南</h2><ul><li><a href="tmoney-subway-bus.html">T-money可以用国外信用卡充值吗?</a></li><li><a href="incheon-airport-to-seoul.html">仁川机场怎么到首尔市区?</a></li><li><a href="maps.html">Google地图在韩国能用吗?</a></li></ul></section>
-  <nav class="topics"><a href="mobile-data-sim.html">电话与上网</a><a href="incheon-airport-to-seoul.html">机场到市区</a><a href="maps.html">地图</a><a href="taxi.html">出租车</a><a href="tmoney-subway-bus.html">地铁与公交</a><a href="ktx-train-booking.html">KTX火车</a><a href="seoul-to-busan-k-tour-pass.html">釜山之旅</a><a href="kr-pass-korail-pass.html">KR Pass</a><a href="dmz-jsa-tour-booking.html">DMZ导览</a><a href="jeju-getting-around.html">济州交通</a><a href="restaurant-reservations.html">餐厅订座</a><a href="food-delivery.html">点外卖</a><a href="translation.html">翻译</a><a href="tax-free-shopping.html">购物与退税</a><a href="luggage-storage.html">寄放行李</a><a href="pharmacy-hospital.html">生病或受伤</a><a href="k-eta-entry-requirements.html">入境规定</a><a href="atm-foreign-card-cash.html">现金与ATM</a><a href="korea-power-plug-voltage.html">插头与电压</a><a href="gimpo-airport-to-seoul.html">金浦机场</a></nav>
+  <details class="more"><summary>All guides</summary><nav class="topics"><a href="mobile-data-sim.html">电话与上网</a><a href="incheon-airport-to-seoul.html">机场到市区</a><a href="maps.html">地图</a><a href="taxi.html">出租车</a><a href="tmoney-subway-bus.html">地铁与公交</a><a href="ktx-train-booking.html">KTX火车</a><a href="seoul-to-busan-k-tour-pass.html">釜山之旅</a><a href="kr-pass-korail-pass.html">KR Pass</a><a href="dmz-jsa-tour-booking.html">DMZ导览</a><a href="jeju-getting-around.html">济州交通</a><a href="restaurant-reservations.html">餐厅订座</a><a href="food-delivery.html">点外卖</a><a href="translation.html">翻译</a><a href="tax-free-shopping.html">购物与退税</a><a href="luggage-storage.html">寄放行李</a><a href="pharmacy-hospital.html">生病或受伤</a><a href="k-eta-entry-requirements.html">入境规定</a><a href="atm-foreign-card-cash.html">现金与ATM</a><a href="korea-power-plug-voltage.html">插头与电压</a><a href="gimpo-airport-to-seoul.html">金浦机场</a></nav></details>
+  <p class="host-cta">🏠 在韩国经营民宿或旅馆吗?<a href="../hosts.html">把这份指南传给你的房客</a>(韩文页面)。</p>
   <section class="ask" aria-labelledby="ask-t-zh-cn"><h2 id="ask-t-zh-cn">没找到需要的信息吗?</h2><p class="hint">留下你的问题。我们会补充到指南里;如果留下邮箱,也会回信。</p>
 <form class="ask-form" data-thanks="谢谢!已收到你的问题。"><textarea name="q" required maxlength="1000" aria-label="没找到需要的信息吗?" placeholder="例如:用国外发行的卡可以订 KTX 吗?"></textarea>
 <input name="em" type="email" maxlength="120" autocomplete="email" aria-label="邮箱(选填,用于回复)" placeholder="邮箱(选填,用于回复)"><button class="btn" type="submit">发送问题</button><p class="fb-done" role="status"></p></form></section><p class="fb-line"><button type="button" class="linkbtn" data-feedback="">💬 提供意见</button></p><details class="about"><summary>关于这份指南</summary><div class="in">
@@ -338,7 +391,16 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !documen
 (function () {
   document.querySelectorAll("[data-show]").forEach(b => b.addEventListener("click", () => show(b.dataset.lbl, b.dataset.show, "", b.dataset.mean)));
   const saved = (store("wik-setup") || "visitor|ios").split("|");
-  const blocks = [...document.querySelectorAll(".card[data-p]")];
+  document.querySelectorAll("[data-copy]").forEach(b => b.addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(b.dataset.copy); } catch (e) { return; }
+    const was = b.innerHTML; b.classList.add("done"); b.setAttribute("aria-label", b.dataset.done);
+    const tip = document.createElement("span"); tip.className = "tip"; tip.textContent = b.dataset.done; tip.setAttribute("role", "status"); b.append(tip);
+    setTimeout(() => { b.innerHTML = was; b.classList.remove("done"); b.removeAttribute("aria-label"); }, 1600);
+    count("copy/" + location.pathname, "copy korean");
+  }));
+  /* A link to a folded section opens it. */
+  const h = location.hash && document.getElementById(location.hash.slice(1)); if (h && h.tagName === "DETAILS") h.open = true;
+  const blocks = [...document.querySelectorAll(".pv[data-p]")];
   if (blocks.length < 2) return;
   let shown = 0;
   for (const b of blocks) { const ok = b.dataset.p === saved[0] && (!b.dataset.d || b.dataset.d === saved[1]); b.hidden = !ok; if (ok) shown++; }

@@ -255,15 +255,6 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-t
 .ask-form .btn { justify-self: start; }
 .ask-form .fb-done { margin: 0; min-height: 0; }
 
-/* Static guide list on the home page (crawlable, visible to everyone) */
-.guide-list { margin: 8px auto 28px; }
-.guide-list h2 { font: 700 20px var(--display); margin: 0 0 10px; }
-.guide-list h3 { font: 700 16px var(--display); color: var(--muted); margin: 18px 0 8px; }
-.guide-list ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-.guide-list li { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
-.guide-list a { font-weight: 700; display: block; margin-bottom: 2px; }
-.guide-list span { color: var(--muted); font-size: 15px; }
-
 .checked-line { margin: 10px 2px 0; font-size: 14px; color: var(--muted); }
 .host-cta { margin: 18px 0 0; padding: 12px 14px; border: 1px dashed var(--line); border-radius: 12px; font-size: 15px; color: var(--muted); }
 .deep { margin: 26px 0 0; }
@@ -281,6 +272,63 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-t
 .foot p { margin: 6px 0 0; }
 .skip { position: absolute; left: -9999px; top: 0; z-index: 20; background: var(--easy); color: #0e1430; padding: 10px 14px; border-radius: 0 0 10px 0; font-weight: 700; }
 .skip:focus { left: 0; }
+
+/* Short-first layout (round 14) */
+.hero h1 { line-height: 1.2; }
+.answer { background: var(--surface); border: 1px solid var(--line); border-left: 6px solid var(--line); border-radius: 16px; padding: 14px 16px; display: grid; gap: 10px; margin: 4px 0 0; }
+.answer.ok { border-left-color: var(--ok); } .answer.warn { border-left-color: var(--warn); } .answer.mixed { border-left-color: var(--mixed); } .answer.bad { border-left-color: var(--bad); }
+.pv[hidden] { display: none; }
+.ans-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 6px; }
+.ans-top h2 { font: 700 15px var(--body); color: var(--muted); margin: 0; }
+.answer .verdict { font-size: 18px; line-height: 1.4; }
+.glance { margin: 0; display: grid; gap: 6px; font-size: 15px; line-height: 1.4; }
+.glance > div { display: grid; grid-template-columns: 96px 1fr; gap: 8px; }
+.glance dt { color: var(--muted); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: .04em; padding-top: 2px; }
+.glance dd { margin: 0; }
+.ck { color: var(--muted); font-size: 12px; white-space: nowrap; }
+.stamp { margin: 0; font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 8px; }
+.do { margin: 18px 0 0; display: grid; gap: 12px; }
+.do .steps li { line-height: 1.45; }
+.says, .names { margin: 22px 0 0; }
+.says h2, .names h2 { font: 700 18px var(--display); margin: 0 0 8px; }
+.say { background: var(--surface); border: 2px solid var(--easy); border-radius: 16px; padding: 14px 16px; display: grid; gap: 8px; }
+.say-ko { font: 800 26px/1.35 var(--ko, var(--body)); margin: 0; word-break: keep-all; }
+.say-mean { margin: 0; color: var(--muted); }
+.names ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.chip { width: 100%; display: grid; grid-template-columns: 1fr auto; grid-template-areas: "ko i" "en i"; align-items: center; text-align: left; gap: 0 10px; padding: 10px 14px; border: 1.5px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--ink); font: inherit; cursor: pointer; position: relative; }
+.chip span { grid-area: ko; font: 700 19px var(--ko, var(--body)); }
+.chip small { grid-area: en; color: var(--muted); font-size: 13px; }
+.chip i { grid-area: i; font-style: normal; }
+.chip.done, .btn.done { border-color: var(--ok); }
+.tip { position: absolute; right: 10px; top: -10px; background: var(--ink); color: var(--surface); font-size: 12px; padding: 2px 8px; border-radius: 99px; }
+.btn { position: relative; }
+.do + .actions, .names + .actions, .says + .actions { margin-top: 18px; }
+details.more { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; margin: 10px 0 0; }
+details.more > summary { list-style: none; cursor: pointer; padding: 14px 16px; font: 700 16px var(--body); display: flex; justify-content: space-between; align-items: center; gap: 10px; min-height: 24px; }
+details.more > summary::-webkit-details-marker { display: none; }
+details.more > summary::after { content: "+"; font: 400 22px var(--body); color: var(--muted); }
+details.more[open] > summary::after { content: "–"; }
+details.more > .in, details.more > .topics { padding: 0 16px 14px; margin: 0; }
+details.more.deep { margin-top: 10px; }
+.actions + details.more { margin-top: 22px; }
+.notes p { margin: 0 0 8px; }
+/* Home: situation cards */
+.sit { margin: 6px 0 0; }
+.sit > h2, .tool-h { font: 800 20px/1.2 var(--display); margin: 0 0 10px; }
+.sit-grid { display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
+@media (max-width: 360px) { .sit-grid { grid-template-columns: 1fr; } }
+.sit-card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 12px; display: grid; gap: 6px; align-content: start; }
+.sit-card[hidden] { display: none; }
+.sit-card h3 { display: flex; align-items: center; gap: 8px; margin: 0; font: 700 16px/1.2 var(--body); }
+.sit-card h3 svg { width: 22px; height: 22px; flex: none; fill: none; stroke: var(--brand); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.sit-card p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.35; }
+.sit-links { display: flex; flex-wrap: wrap; gap: 6px; }
+.sit-card .sit-links a { display: inline-block; padding: 5px 10px; min-height: 24px; box-sizing: border-box; border-radius: 99px; background: var(--bg); border: 1px solid var(--line); color: var(--ink); font-weight: 600; font-size: 14px; text-decoration: none; }
+.sit-card .sit-links a[hidden] { display: none; }
+.tool { margin: 26px 0 0; }
+.onb { margin: 0; }
+.onb h3 { font: 700 18px/1.3 var(--body); margin: 0 0 10px; }
+.offline-note { margin: 22px 0 0; font-size: 14px; color: var(--muted); }
 </style>
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "韓国の免税ショッピング: オリーブヤングやダイソーで即時還付(2026)", "description": "旅行者は買い物の10%の税金をほぼ取り戻せます。多くの店ではパスポートを見せればレジでその場で差し引かれます。", "datePublished": "2026-11-17", "dateModified": "2026-11-20", "inLanguage": "ja", "url": "https://easymodekorea.com/ja/tax-free-shopping.html", "mainEntityOfPage": "https://easymodekorea.com/ja/tax-free-shopping.html", "image": "https://easymodekorea.com/og.png", "author": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/ja/about.html"}, "publisher": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/", "logo": {"@type": "ImageObject", "url": "https://easymodekorea.com/icon-512.png"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "EasyModeKorea", "item": "https://easymodekorea.com/ja/"}, {"@type": "ListItem", "position": 2, "name": "買い物と免税", "item": "https://easymodekorea.com/ja/tax-free-shopping.html"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "韓国で買い物の免税(タックスリファンド)を受けるには?", "acceptedAnswer": {"@type": "Answer", "text": "旅行者は税金の還付を受けられます。多くの店ではレジでパスポートを見せるとその場で税金が引かれます。 Tax FreeやTax Refundの表示を探し、パスポート本体を持っていく。 1回の会計で15,000ウォン以上。レシートは合算できないので、まとめて1回で払う。 レジでの即時還付は1回100万ウォン未満、旅行中の合計500万ウォンまで。 即時還付できなかったら還付レシートを保管し、市内の還付ブースか、荷物を預ける前に空港のキオスクで受け取る。"}}, {"@type": "Question", "name": "化粧品は対象ですか?", "acceptedAnswer": {"@type": "Answer", "text": "店で買った化粧品は対象です。美容外科や皮膚科の施術は2026年から対象外になりました。"}}, {"@type": "Question", "name": "外国人登録証のある在住者も還付を受けられますか?", "acceptedAnswer": {"@type": "Answer", "text": "基本的に受けられません。旅行者向けの還付は滞在6か月未満の人が対象です。"}}, {"@type": "Question", "name": "いくら戻ってきますか?", "acceptedAnswer": {"@type": "Answer", "text": "10%の税金の大部分です。還付会社と金額によって手数料が引かれます。"}}, {"@type": "Question", "name": "クルーズ船の乗客も対象ですか?", "acceptedAnswer": {"@type": "Answer", "text": "対象です。2026年4月から、国際クルーズの乗客も即時還付と市内還付を受けられるようになりました。"}}]}]</script>
@@ -289,22 +337,25 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-t
 <a class="skip" href="#answer">回答へ移動</a>
 <header class="hero"><div class="wrap">
   <div class="toprow"><a class="logo" href="./">EasyMode<b>Korea</b></a><nav class="langs" aria-label="言語"><a href="../tax-free-shopping.html" hreflang="en" lang="en">English</a><a href="../ja/tax-free-shopping.html" hreflang="ja" lang="ja" aria-current="page">日本語</a><a href="../zh-tw/tax-free-shopping.html" hreflang="zh-Hant-TW" lang="zh-Hant-TW">繁體中文</a><a href="../zh-cn/tax-free-shopping.html" hreflang="zh-CN" lang="zh-CN">简体中文</a><a href="../vi/tax-free-shopping.html" hreflang="vi" lang="vi">Tiếng Việt</a></nav></div>
-  <h1>韓国で買い物の免税(タックスリファンド)を受けるには?</h1><p class="lede">旅行者は買い物の10%の税金をほぼ取り戻せます。多くの店ではパスポートを見せればレジでその場で差し引かれます。</p>
+  <h1>韓国で買い物の免税(タックスリファンド)を受けるには?</h1>
 </div></header>
 <div class="wrap">
-  <div class="actions"><a class="btn" href="./#task-shopping">自分の状況で確認する</a><button class="btn alt" type="button" data-show="택스 프리 해 주세요. 한 번에 계산할게요." data-lbl="スタッフに見せる" data-mean="意味: 免税でお願いします。まとめて会計します。">🗣 免税でお願いします。まとめて会計します。</button></div>
-  <main class="cards" id="answer"><article class="card ok" data-p="visitor"><div class="actions" style="justify-content:space-between;align-items:center"><h2>自国の番号またはデータ専用eSIMの場合</h2><span class="pill ok">そのまま使える</span></div>
-<p class="verdict">旅行者は税金の還付を受けられます。多くの店ではレジでパスポートを見せるとその場で税金が引かれます。</p><ol class="steps"><li>Tax FreeやTax Refundの表示を探し、パスポート本体を持っていく。</li><li>1回の会計で15,000ウォン以上。レシートは合算できないので、まとめて1回で払う。</li><li>レジでの即時還付は1回100万ウォン未満、旅行中の合計500万ウォンまで。</li><li>即時還付できなかったら還付レシートを保管し、市内の還付ブースか、荷物を預ける前に空港のキオスクで受け取る。</li></ol><p class="fallback"><b>うまくいかない場合</b>還付レシートは購入から3か月で無効になります。2026年から美容整形・皮膚科の施術は対象外です。</p></article><article class="card ok" data-p="krsim"><div class="actions" style="justify-content:space-between;align-items:center"><h2>韓国プリペイドの010番号の場合</h2><span class="pill ok">そのまま使える</span></div>
-<p class="verdict">旅行者は税金の還付を受けられます。多くの店ではレジでパスポートを見せるとその場で税金が引かれます。</p><ol class="steps"><li>Tax FreeやTax Refundの表示を探し、パスポート本体を持っていく。</li><li>1回の会計で15,000ウォン以上。レシートは合算できないので、まとめて1回で払う。</li><li>レジでの即時還付は1回100万ウォン未満、旅行中の合計500万ウォンまで。</li><li>即時還付できなかったら還付レシートを保管し、市内の還付ブースか、荷物を預ける前に空港のキオスクで受け取る。</li></ol><p class="fallback"><b>うまくいかない場合</b>還付レシートは購入から3か月で無効になります。2026年から美容整形・皮膚科の施術は対象外です。</p></article><article class="card bad" data-p="arc"><div class="actions" style="justify-content:space-between;align-items:center"><h2>自分名義の韓国の番号(外国人登録証あり)の場合</h2><span class="pill bad">使えない</span></div>
-<p class="verdict">旅行者向けの税金還付は滞在6か月未満の人が対象です。外国人登録証のある在住者は通常対象外です。</p><ol class="steps"><li>普段どおり買い物を。価格には税金が含まれています。</li></ol><p class="fallback"><b>うまくいかない場合</b>韓国滞在が6か月未満なら、対象になるか店で確認してください。</p></article><button class="linkbtn" type="button" id="show-all" hidden>ほかの状況の回答を見る</button><section class="deep" aria-labelledby="st-shopping"><h2 id="st-shopping">はじめての人向け: 手順</h2><ol class="steps full"><li>TAX FREE・TAX REFUNDの表示がある店で買い物をし、パスポートの現物を持って行きます。写真はたいてい認められません。<!-- screenshot: shop-taxfree-sign --></li><li>1つの店で、1回の支払いで15,000ウォン以上買います。別々に払ったレシートは合算できません。</li><li>レジで即時還付を頼みます。1回100万ウォン未満の支払いなら、その場で税金が差し引かれます(1回の旅行で合計500万ウォンまで)。</li><li>即時還付がない場合は、店でもらう還付伝票を保管し、市内の還付キオスクか、空港で荷物を預ける前に空港のキオスクで申請します。<!-- screenshot: shop-kiosk --></li><li>出国まで商品は未使用のまま手元に置きます。高額の還付では税関で商品を見せるよう求められることがあります。</li><li>購入から3か月以内に申請します。申請しない還付伝票は期限切れになります。</li></ol></section>
-<section class="deep" aria-labelledby="er-shopping"><h2 id="er-shopping">よくあるトラブルと対処法</h2><ul class="errs"><li><p class="prob"><b>店で即時還付はできないと言われた。</b></p><p>還付伝票をもらい、市内か空港の還付キオスクで申請します。</p></li><li><p class="prob"><b>15,000ウォンに少し足りなかった。</b></p><p>商品を足して1回の支払いにまとめるか、還付なしで買います。</p></li><li><p class="prob"><b>空港の還付の列が長い。</b></p><p>早めに空港へ行くか、出発日より前に市内のキオスクで申請します。</p></li><li><p class="prob"><b>パスポートを忘れた。</b></p><p>多くの店では還付にパスポートの現物が必要です。持ってきてから払うか、レシートを保管して、あとから還付伝票を出せるか店に聞きます。</p></li></ul></section>
-<section class="deep faq" aria-labelledby="fq-shopping"><h2 id="fq-shopping">よくある質問</h2><h3>化粧品は対象ですか?</h3><p>店で買った化粧品は対象です。美容外科や皮膚科の施術は2026年から対象外になりました。</p><h3>外国人登録証のある在住者も還付を受けられますか?</h3><p>基本的に受けられません。旅行者向けの還付は滞在6か月未満の人が対象です。</p><h3>いくら戻ってきますか?</h3><p>10%の税金の大部分です。還付会社と金額によって手数料が引かれます。</p><h3>クルーズ船の乗客も対象ですか?</h3><p>対象です。2026年4月から、国際クルーズの乗客も即時還付と市内還付を受けられるようになりました。</p></section>
-<section class="deep" aria-labelledby="ct-shopping"><h2 id="ct-shopping">公式・一次情報</h2><ul class="cites"><li><a href="https://www.korea.kr/news/policyNewsView.do?newsId=148803831" rel="noopener" target="_blank">Korea.kr: instant tax refunds for visitors (government policy news)</a></li><li><a href="https://www.haniseoul.com/travels/korea/tax-free-korea" rel="noopener" target="_blank">Korea Tax Refund guide (2026)</a></li><li><a href="https://creatrip.com/en/blog/414/How-to-get-a-tax-refund-in-Korea" rel="noopener" target="_blank">Creatrip: how to get a tax refund in Korea</a></li></ul></section></main>
-  <p class="checked-line">確認日 <time datetime="2026-11-17">2026年11月17日</time></p>
-  <details class="panel" open><summary>出典とメモ</summary><div class="in notes"><ul><li>確認日 2026年11月17日</li><li>オリーブヤングは明洞・江南・弘大・釜山・済州などに旅行者向け店舗を110以上運営し、外国語スタッフと韓英表記の値札を置いています。</li><li>ムシンサの店舗では全商品のQRコードで会員価格・在庫・レビューが見られます。</li><li><a href="https://www.haniseoul.com/travels/korea/tax-free-korea" rel="noopener" target="_blank">Korea tax refund guide (2026)</a></li><li><a href="https://cjnews.cj.net/?p=58078" rel="noopener" target="_blank">CJ: Olive Young global tourist stores</a></li></ul></div></details>
-  <p class="host-cta">🏠 韓国で宿を運営していますか? <a href="../hosts.html">このガイドをゲストに送る</a>(韓国語)。</p>
+  <main id="answer">
+  <section class="answer ok"><div class="pv ok" data-p="visitor"><div class="ans-top"><h2>自国の番号またはデータ専用eSIMの場合</h2><span class="pill ok">そのまま使える</span></div><p class="verdict">旅行者は税金の還付を受けられます。多くの店ではレジでパスポートを見せるとその場で税金が引かれます。</p></div><div class="pv ok" data-p="krsim"><div class="ans-top"><h2>韓国プリペイドの010番号の場合</h2><span class="pill ok">そのまま使える</span></div><p class="verdict">旅行者は税金の還付を受けられます。多くの店ではレジでパスポートを見せるとその場で税金が引かれます。</p></div><div class="pv bad" data-p="arc"><div class="ans-top"><h2>自分名義の韓国の番号(外国人登録証あり)の場合</h2><span class="pill bad">使えない</span></div><p class="verdict">旅行者向けの税金還付は滞在6か月未満の人が対象です。外国人登録証のある在住者は通常対象外です。</p></div><dl class="glance"><div><dt>Where</dt><dd>Stores with a TAX FREE sign; show your passport at the till <time class="ck" datetime="2026-11-17">✓ 2026年11月17日</time></dd></div><div><dt>Cost</dt><dd>Purchases from 15,000 won qualify <time class="ck" datetime="2026-11-20">✓ 2026年11月20日</time></dd></div></dl><p class="stamp">Checked against <a href="https://www.korea.kr/news/policyNewsView.do?newsId=148803831" rel="noopener" target="_blank">Korea.kr: instant tax refunds for visitors (government policy news)</a> on <time datetime="2026-11-20">2026年11月20日</time></p></section>
+  <button class="linkbtn" type="button" id="show-all" hidden>ほかの状況の回答を見る</button>
+  <section class="do" aria-labelledby="do-shopping"><h2 id="do-shopping" class="sr">はじめての人向け: 手順</h2><div class="pv" data-p="visitor"><ol class="steps"><li>Tax FreeやTax Refundの表示を探し、パスポート本体を持っていく。</li><li>1回の会計で15,000ウォン以上。レシートは合算できないので、まとめて1回で払う。</li><li>レジでの即時還付は1回100万ウォン未満、旅行中の合計500万ウォンまで。</li><li>即時還付できなかったら還付レシートを保管し、市内の還付ブースか、荷物を預ける前に空港のキオスクで受け取る。</li></ol><p class="fallback"><b>うまくいかない場合</b>還付レシートは購入から3か月で無効になります。2026年から美容整形・皮膚科の施術は対象外です。</p></div><div class="pv" data-p="krsim"><ol class="steps"><li>Tax FreeやTax Refundの表示を探し、パスポート本体を持っていく。</li><li>1回の会計で15,000ウォン以上。レシートは合算できないので、まとめて1回で払う。</li><li>レジでの即時還付は1回100万ウォン未満、旅行中の合計500万ウォンまで。</li><li>即時還付できなかったら還付レシートを保管し、市内の還付ブースか、荷物を預ける前に空港のキオスクで受け取る。</li></ol><p class="fallback"><b>うまくいかない場合</b>還付レシートは購入から3か月で無効になります。2026年から美容整形・皮膚科の施術は対象外です。</p></div><div class="pv" data-p="arc"><ol class="steps"><li>普段どおり買い物を。価格には税金が含まれています。</li></ol><p class="fallback"><b>うまくいかない場合</b>韓国滞在が6か月未満なら、対象になるか店で確認してください。</p></div></section>
+  <section class="says" aria-labelledby="say-shopping"><h2 id="say-shopping">Show this to staff</h2><div class="say"><p class="say-ko" lang="ko">택스 프리 해 주세요. 한 번에 계산할게요.</p><p class="say-mean">免税でお願いします。まとめて会計します。</p><div class="actions"><button class="btn alt" type="button" data-show="택스 프리 해 주세요. 한 번에 계산할게요." data-lbl="スタッフに見せる" data-mean="意味: 免税でお願いします。まとめて会計します。">🗣 Show full screen</button><button class="btn ghost" type="button" data-copy="택스 프리 해 주세요. 한 번에 계산할게요." data-done="✓ Copied">📋 Copy</button></div></div></section>
+  <section class="names" aria-labelledby="nm-shopping"><h2 id="nm-shopping">Korean names to copy (paste into Naver Map or show a driver)</h2><ul><li><button class="chip" type="button" data-copy="택스 리펀드" data-done="✓ Copied"><span lang="ko">택스 리펀드</span><small>Tax refund</small><i aria-hidden="true">📋</i></button></li><li><button class="chip" type="button" data-copy="올리브영" data-done="✓ Copied"><span lang="ko">올리브영</span><small>Olive Young</small><i aria-hidden="true">📋</i></button></li></ul></section>
+  <div class="actions"><a class="btn" href="./#task-shopping">自分の状況で確認する</a></div>
+  <details class="more deep" id="st-shopping"><summary>はじめての人向け: 手順</summary><div class="in"><ol class="steps full"><li>TAX FREE・TAX REFUNDの表示がある店で買い物をし、パスポートの現物を持って行きます。写真はたいてい認められません。<!-- screenshot: shop-taxfree-sign --></li><li>1つの店で、1回の支払いで15,000ウォン以上買います。別々に払ったレシートは合算できません。</li><li>レジで即時還付を頼みます。1回100万ウォン未満の支払いなら、その場で税金が差し引かれます(1回の旅行で合計500万ウォンまで)。</li><li>即時還付がない場合は、店でもらう還付伝票を保管し、市内の還付キオスクか、空港で荷物を預ける前に空港のキオスクで申請します。<!-- screenshot: shop-kiosk --></li><li>出国まで商品は未使用のまま手元に置きます。高額の還付では税関で商品を見せるよう求められることがあります。</li><li>購入から3か月以内に申請します。申請しない還付伝票は期限切れになります。</li></ol></div></details>
+<details class="more deep" id="er-shopping"><summary>よくあるトラブルと対処法</summary><div class="in"><ul class="errs"><li><p class="prob"><b>店で即時還付はできないと言われた。</b></p><p>還付伝票をもらい、市内か空港の還付キオスクで申請します。</p></li><li><p class="prob"><b>15,000ウォンに少し足りなかった。</b></p><p>商品を足して1回の支払いにまとめるか、還付なしで買います。</p></li><li><p class="prob"><b>空港の還付の列が長い。</b></p><p>早めに空港へ行くか、出発日より前に市内のキオスクで申請します。</p></li><li><p class="prob"><b>パスポートを忘れた。</b></p><p>多くの店では還付にパスポートの現物が必要です。持ってきてから払うか、レシートを保管して、あとから還付伝票を出せるか店に聞きます。</p></li></ul></div></details>
+<details class="more deep faq" id="fq-shopping"><summary>よくある質問</summary><div class="in"><h3>化粧品は対象ですか?</h3><p>店で買った化粧品は対象です。美容外科や皮膚科の施術は2026年から対象外になりました。</p><h3>外国人登録証のある在住者も還付を受けられますか?</h3><p>基本的に受けられません。旅行者向けの還付は滞在6か月未満の人が対象です。</p><h3>いくら戻ってきますか?</h3><p>10%の税金の大部分です。還付会社と金額によって手数料が引かれます。</p><h3>クルーズ船の乗客も対象ですか?</h3><p>対象です。2026年4月から、国際クルーズの乗客も即時還付と市内還付を受けられるようになりました。</p></div></details>
+<details class="more deep" id="ct-shopping"><summary>公式・一次情報</summary><div class="in"><ul class="cites"><li><a href="https://www.korea.kr/news/policyNewsView.do?newsId=148803831" rel="noopener" target="_blank">Korea.kr: instant tax refunds for visitors (government policy news)</a></li><li><a href="https://www.haniseoul.com/travels/korea/tax-free-korea" rel="noopener" target="_blank">Korea Tax Refund guide (2026)</a></li><li><a href="https://creatrip.com/en/blog/414/How-to-get-a-tax-refund-in-Korea" rel="noopener" target="_blank">Creatrip: how to get a tax refund in Korea</a></li></ul></div></details>
+  <details class="more"><summary>出典とメモ</summary><div class="in notes"><p>旅行者は買い物の10%の税金をほぼ取り戻せます。多くの店ではパスポートを見せればレジでその場で差し引かれます。</p><ul><li>確認日 2026年11月17日</li><li>オリーブヤングは明洞・江南・弘大・釜山・済州などに旅行者向け店舗を110以上運営し、外国語スタッフと韓英表記の値札を置いています。</li><li>ムシンサの店舗では全商品のQRコードで会員価格・在庫・レビューが見られます。</li><li><a href="https://www.haniseoul.com/travels/korea/tax-free-korea" rel="noopener" target="_blank">Korea tax refund guide (2026)</a></li><li><a href="https://cjnews.cj.net/?p=58078" rel="noopener" target="_blank">CJ: Olive Young global tourist stores</a></li></ul></div></details>
+  </main>
   <section class="related"><h2>関連ガイド</h2><ul><li><a href="atm-foreign-card-cash.html">韓国で外国のカードで現金を下ろせる?</a></li><li><a href="luggage-storage.html">ソウルで荷物を預けられる場所は?</a></li><li><a href="tmoney-subway-bus.html">T-moneyに海外カードでチャージできる?</a></li></ul></section>
-  <nav class="topics"><a href="mobile-data-sim.html">電話・データ</a><a href="incheon-airport-to-seoul.html">空港から市内</a><a href="maps.html">地図</a><a href="taxi.html">タクシー</a><a href="tmoney-subway-bus.html">地下鉄・バス</a><a href="seoul-tourist-transit-pass.html">交通パス</a><a href="ktx-train-booking.html">KTX</a><a href="seoul-to-busan-k-tour-pass.html">釜山旅行</a><a href="kr-pass-korail-pass.html">KRパス</a><a href="dmz-jsa-tour-booking.html">DMZツアー</a><a href="jeju-getting-around.html">済州の移動</a><a href="restaurant-reservations.html">飲食店の予約</a><a href="food-delivery.html">デリバリー</a><a href="translation.html">翻訳</a><a href="luggage-storage.html">荷物の預け</a><a href="pharmacy-hospital.html">病気・けが</a><a href="k-eta-entry-requirements.html">入国ルール</a><a href="atm-foreign-card-cash.html">現金・ATM</a><a href="korea-power-plug-voltage.html">電源プラグ</a><a href="gimpo-airport-to-seoul.html">金浦空港</a></nav>
+  <details class="more"><summary>All guides</summary><nav class="topics"><a href="mobile-data-sim.html">電話・データ</a><a href="incheon-airport-to-seoul.html">空港から市内</a><a href="maps.html">地図</a><a href="taxi.html">タクシー</a><a href="tmoney-subway-bus.html">地下鉄・バス</a><a href="seoul-tourist-transit-pass.html">交通パス</a><a href="ktx-train-booking.html">KTX</a><a href="seoul-to-busan-k-tour-pass.html">釜山旅行</a><a href="kr-pass-korail-pass.html">KRパス</a><a href="dmz-jsa-tour-booking.html">DMZツアー</a><a href="jeju-getting-around.html">済州の移動</a><a href="restaurant-reservations.html">飲食店の予約</a><a href="food-delivery.html">デリバリー</a><a href="translation.html">翻訳</a><a href="luggage-storage.html">荷物の預け</a><a href="pharmacy-hospital.html">病気・けが</a><a href="k-eta-entry-requirements.html">入国ルール</a><a href="atm-foreign-card-cash.html">現金・ATM</a><a href="korea-power-plug-voltage.html">電源プラグ</a><a href="gimpo-airport-to-seoul.html">金浦空港</a></nav></details>
+  <p class="host-cta">🏠 韓国で宿を運営していますか? <a href="../hosts.html">このガイドをゲストに送る</a>(韓国語)。</p>
   <section class="ask" aria-labelledby="ask-t-ja"><h2 id="ask-t-ja">知りたい情報が見つかりませんか?</h2><p class="hint">質問をどうぞ。ガイドに追記して回答します。メールを書いていただければ返信もします。</p>
 <form class="ask-form" data-thanks="ありがとうございます。質問を受け付けました。"><textarea name="q" required maxlength="1000" aria-label="知りたい情報が見つかりませんか?" placeholder="例: 海外で発行したカードでKTXを予約できますか?"></textarea>
 <input name="em" type="email" maxlength="120" autocomplete="email" aria-label="メール(任意。返信用)" placeholder="メール(任意。返信用)"><button class="btn" type="submit">質問を送る</button><p class="fb-done" role="status"></p></form></section><p class="fb-line"><button type="button" class="linkbtn" data-feedback="">💬 ご意見を送る</button></p><details class="about"><summary>このガイドについて</summary><div class="in">
@@ -340,7 +391,16 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !documen
 (function () {
   document.querySelectorAll("[data-show]").forEach(b => b.addEventListener("click", () => show(b.dataset.lbl, b.dataset.show, "", b.dataset.mean)));
   const saved = (store("wik-setup") || "visitor|ios").split("|");
-  const blocks = [...document.querySelectorAll(".card[data-p]")];
+  document.querySelectorAll("[data-copy]").forEach(b => b.addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(b.dataset.copy); } catch (e) { return; }
+    const was = b.innerHTML; b.classList.add("done"); b.setAttribute("aria-label", b.dataset.done);
+    const tip = document.createElement("span"); tip.className = "tip"; tip.textContent = b.dataset.done; tip.setAttribute("role", "status"); b.append(tip);
+    setTimeout(() => { b.innerHTML = was; b.classList.remove("done"); b.removeAttribute("aria-label"); }, 1600);
+    count("copy/" + location.pathname, "copy korean");
+  }));
+  /* A link to a folded section opens it. */
+  const h = location.hash && document.getElementById(location.hash.slice(1)); if (h && h.tagName === "DETAILS") h.open = true;
+  const blocks = [...document.querySelectorAll(".pv[data-p]")];
   if (blocks.length < 2) return;
   let shown = 0;
   for (const b of blocks) { const ok = b.dataset.p === saved[0] && (!b.dataset.d || b.dataset.d === saved[1]); b.hidden = !ok; if (ok) shown++; }

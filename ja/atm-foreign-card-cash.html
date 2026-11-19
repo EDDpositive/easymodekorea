@@ -255,15 +255,6 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-t
 .ask-form .btn { justify-self: start; }
 .ask-form .fb-done { margin: 0; min-height: 0; }
 
-/* Static guide list on the home page (crawlable, visible to everyone) */
-.guide-list { margin: 8px auto 28px; }
-.guide-list h2 { font: 700 20px var(--display); margin: 0 0 10px; }
-.guide-list h3 { font: 700 16px var(--display); color: var(--muted); margin: 18px 0 8px; }
-.guide-list ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-.guide-list li { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
-.guide-list a { font-weight: 700; display: block; margin-bottom: 2px; }
-.guide-list span { color: var(--muted); font-size: 15px; }
-
 .checked-line { margin: 10px 2px 0; font-size: 14px; color: var(--muted); }
 .host-cta { margin: 18px 0 0; padding: 12px 14px; border: 1px dashed var(--line); border-radius: 12px; font-size: 15px; color: var(--muted); }
 .deep { margin: 26px 0 0; }
@@ -281,6 +272,63 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-t
 .foot p { margin: 6px 0 0; }
 .skip { position: absolute; left: -9999px; top: 0; z-index: 20; background: var(--easy); color: #0e1430; padding: 10px 14px; border-radius: 0 0 10px 0; font-weight: 700; }
 .skip:focus { left: 0; }
+
+/* Short-first layout (round 14) */
+.hero h1 { line-height: 1.2; }
+.answer { background: var(--surface); border: 1px solid var(--line); border-left: 6px solid var(--line); border-radius: 16px; padding: 14px 16px; display: grid; gap: 10px; margin: 4px 0 0; }
+.answer.ok { border-left-color: var(--ok); } .answer.warn { border-left-color: var(--warn); } .answer.mixed { border-left-color: var(--mixed); } .answer.bad { border-left-color: var(--bad); }
+.pv[hidden] { display: none; }
+.ans-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 6px; }
+.ans-top h2 { font: 700 15px var(--body); color: var(--muted); margin: 0; }
+.answer .verdict { font-size: 18px; line-height: 1.4; }
+.glance { margin: 0; display: grid; gap: 6px; font-size: 15px; line-height: 1.4; }
+.glance > div { display: grid; grid-template-columns: 96px 1fr; gap: 8px; }
+.glance dt { color: var(--muted); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: .04em; padding-top: 2px; }
+.glance dd { margin: 0; }
+.ck { color: var(--muted); font-size: 12px; white-space: nowrap; }
+.stamp { margin: 0; font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 8px; }
+.do { margin: 18px 0 0; display: grid; gap: 12px; }
+.do .steps li { line-height: 1.45; }
+.says, .names { margin: 22px 0 0; }
+.says h2, .names h2 { font: 700 18px var(--display); margin: 0 0 8px; }
+.say { background: var(--surface); border: 2px solid var(--easy); border-radius: 16px; padding: 14px 16px; display: grid; gap: 8px; }
+.say-ko { font: 800 26px/1.35 var(--ko, var(--body)); margin: 0; word-break: keep-all; }
+.say-mean { margin: 0; color: var(--muted); }
+.names ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.chip { width: 100%; display: grid; grid-template-columns: 1fr auto; grid-template-areas: "ko i" "en i"; align-items: center; text-align: left; gap: 0 10px; padding: 10px 14px; border: 1.5px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--ink); font: inherit; cursor: pointer; position: relative; }
+.chip span { grid-area: ko; font: 700 19px var(--ko, var(--body)); }
+.chip small { grid-area: en; color: var(--muted); font-size: 13px; }
+.chip i { grid-area: i; font-style: normal; }
+.chip.done, .btn.done { border-color: var(--ok); }
+.tip { position: absolute; right: 10px; top: -10px; background: var(--ink); color: var(--surface); font-size: 12px; padding: 2px 8px; border-radius: 99px; }
+.btn { position: relative; }
+.do + .actions, .names + .actions, .says + .actions { margin-top: 18px; }
+details.more { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; margin: 10px 0 0; }
+details.more > summary { list-style: none; cursor: pointer; padding: 14px 16px; font: 700 16px var(--body); display: flex; justify-content: space-between; align-items: center; gap: 10px; min-height: 24px; }
+details.more > summary::-webkit-details-marker { display: none; }
+details.more > summary::after { content: "+"; font: 400 22px var(--body); color: var(--muted); }
+details.more[open] > summary::after { content: "–"; }
+details.more > .in, details.more > .topics { padding: 0 16px 14px; margin: 0; }
+details.more.deep { margin-top: 10px; }
+.actions + details.more { margin-top: 22px; }
+.notes p { margin: 0 0 8px; }
+/* Home: situation cards */
+.sit { margin: 6px 0 0; }
+.sit > h2, .tool-h { font: 800 20px/1.2 var(--display); margin: 0 0 10px; }
+.sit-grid { display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
+@media (max-width: 360px) { .sit-grid { grid-template-columns: 1fr; } }
+.sit-card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 12px; display: grid; gap: 6px; align-content: start; }
+.sit-card[hidden] { display: none; }
+.sit-card h3 { display: flex; align-items: center; gap: 8px; margin: 0; font: 700 16px/1.2 var(--body); }
+.sit-card h3 svg { width: 22px; height: 22px; flex: none; fill: none; stroke: var(--brand); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.sit-card p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.35; }
+.sit-links { display: flex; flex-wrap: wrap; gap: 6px; }
+.sit-card .sit-links a { display: inline-block; padding: 5px 10px; min-height: 24px; box-sizing: border-box; border-radius: 99px; background: var(--bg); border: 1px solid var(--line); color: var(--ink); font-weight: 600; font-size: 14px; text-decoration: none; }
+.sit-card .sit-links a[hidden] { display: none; }
+.tool { margin: 26px 0 0; }
+.onb { margin: 0; }
+.onb h3 { font: 700 18px/1.3 var(--body); margin: 0 0 10px; }
+.offline-note { margin: 22px 0 0; font-size: 14px; color: var(--muted); }
 </style>
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "韓国で外国のカードで現金を下ろす: Global ATM、手数料、注意点(2026)", "description": "韓国はほぼキャッシュレスですが、小さな店や市場では現金が必要なことがあります。外国のカードを受け付けないATMも多いので、使える機械を知っておくと安心です。", "datePublished": "2026-11-19", "dateModified": "2026-11-20", "inLanguage": "ja", "url": "https://easymodekorea.com/ja/atm-foreign-card-cash.html", "mainEntityOfPage": "https://easymodekorea.com/ja/atm-foreign-card-cash.html", "image": "https://easymodekorea.com/og.png", "author": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/ja/about.html"}, "publisher": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/", "logo": {"@type": "ImageObject", "url": "https://easymodekorea.com/icon-512.png"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "EasyModeKorea", "item": "https://easymodekorea.com/ja/"}, {"@type": "ListItem", "position": 2, "name": "現金・ATM", "item": "https://easymodekorea.com/ja/atm-foreign-card-cash.html"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "韓国で外国のカードで現金を下ろせる?", "acceptedAnswer": {"@type": "Answer", "text": "外国のデビットカードはGlobal ATMと多くのコンビニATMで使えます。通常は手数料がかかります。 「Global」表示のATMを探します。明洞や弘大などの繁華街の銀行ATMや、CU・GS25・セブン-イレブンなどのコンビニにあることが多いです。 海外引き出しに対応したデビットカードを使います。クレジットカードの引き出しはキャッシングとなり、手数料と利息がかかります。 自国通貨での請求を勧められたら、ウォン(KRW)を選びます。そうしないと換算レートが悪くなります。"}}, {"@type": "Question", "name": "韓国で現金は必要ですか?", "acceptedAnswer": {"@type": "Answer", "text": "少しは必要です。店、タクシー、飲食店はほとんどカードで払えますが、市場、屋台、T-moneyのチャージには現金が必要なことが多いです。"}}, {"@type": "Question", "name": "空港で両替したほうがいいですか?", "acceptedAnswer": {"@type": "Answer", "text": "最初に少しだけ替えるなら空港が便利です。市内の両替所のほうがレートがよいことが多いので、多く替えるなら比べてからにしましょう。"}}, {"@type": "Question", "name": "いくらくらい持ち歩けばいいですか?", "acceptedAnswer": {"@type": "Answer", "text": "1日分の小さな買い物ができる程度です。たくさん持ち歩かず、必要なときにまた引き出しましょう。"}}, {"@type": "Question", "name": "タクシーでカードは使えますか?", "acceptedAnswer": {"@type": "Answer", "text": "たいてい使えます。アプリで呼んだタクシーはアプリに登録したカードで精算されます。タクシーのガイドもご覧ください。"}}]}]</script>
@@ -289,20 +337,25 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-t
 <a class="skip" href="#answer">回答へ移動</a>
 <header class="hero"><div class="wrap">
   <div class="toprow"><a class="logo" href="./">EasyMode<b>Korea</b></a><nav class="langs" aria-label="言語"><a href="../atm-foreign-card-cash.html" hreflang="en" lang="en">English</a><a href="../ja/atm-foreign-card-cash.html" hreflang="ja" lang="ja" aria-current="page">日本語</a><a href="../zh-tw/atm-foreign-card-cash.html" hreflang="zh-Hant-TW" lang="zh-Hant-TW">繁體中文</a><a href="../zh-cn/atm-foreign-card-cash.html" hreflang="zh-CN" lang="zh-CN">简体中文</a><a href="../vi/atm-foreign-card-cash.html" hreflang="vi" lang="vi">Tiếng Việt</a></nav></div>
-  <h1>韓国で外国のカードで現金を下ろせる?</h1><p class="lede">韓国はほぼキャッシュレスですが、小さな店や市場では現金が必要なことがあります。外国のカードを受け付けないATMも多いので、使える機械を知っておくと安心です。</p>
+  <h1>韓国で外国のカードで現金を下ろせる?</h1>
 </div></header>
 <div class="wrap">
-  <div class="actions"><a class="btn" href="./#task-cash">自分の状況で確認する</a><button class="btn alt" type="button" data-show="외국 카드 되는 ATM이 어디 있어요?" data-lbl="スタッフに見せる" data-mean="意味: 外国のカードが使えるATMはどこですか?">🗣 外国のカードが使えるATMはどこですか?</button></div>
-  <main class="cards" id="answer"><article class="card warn"><div class="actions" style="justify-content:space-between;align-items:center"><h2>ひと手間あり</h2><span class="pill warn">ひと手間あり</span></div>
-<p class="verdict">外国のデビットカードはGlobal ATMと多くのコンビニATMで使えます。通常は手数料がかかります。</p><ol class="steps"><li>「Global」表示のATMを探します。明洞や弘大などの繁華街の銀行ATMや、CU・GS25・セブン-イレブンなどのコンビニにあることが多いです。</li><li>海外引き出しに対応したデビットカードを使います。クレジットカードの引き出しはキャッシングとなり、手数料と利息がかかります。</li><li>自国通貨での請求を勧められたら、ウォン(KRW)を選びます。そうしないと換算レートが悪くなります。</li></ol><p class="fallback"><b>うまくいかない場合</b>1台で断られたら、KBやウリなど大手銀行の別のATMを試すか、銀行や両替所で両替しましょう。</p></article><button class="linkbtn" type="button" id="show-all" hidden>ほかの状況の回答を見る</button><section class="deep" aria-labelledby="st-cash"><h2 id="st-cash">はじめての人向け: 手順</h2><ol class="steps full"><li>出発前に、デビットカードの海外ATM引き出しを銀行で有効にしてもらい、1日の上限と手数料を確認します。</li><li>韓国では「Global」表示や自分のカードのブランドロゴがあるATMを探します。繁華街の銀行、地下鉄駅、コンビニによくあります。<!-- screenshot: cash-global-atm --></li><li>英語のボタンを押し、引き出しを選んで金額を選びます。1回あたりの上限がある機械が多く、2回に分けることもあります。</li><li>自国通貨での請求をすすめられたら、ウォン(KRW)を選びます。機械が示す換算レートはたいてい不利です。<!-- screenshot: cash-krw-choice --></li><li>市場、屋台、小さな店、<a href="tmoney-subway-bus.html">T-money</a>のチャージ用に少し現金を持っておきます。それ以外はほとんどカードで払えます。</li><li>両替する場合: 銀行や公認の両替所でも替えられます。お金を渡す前に表示レートを比べましょう。</li></ol></section>
-<section class="deep" aria-labelledby="er-cash"><h2 id="er-cash">よくあるトラブルと対処法</h2><ul class="errs"><li><p class="prob"><b>ATMでカードが使えない。</b></p><p>別の銀行かコンビニのGlobal ATMを試します。すべての機械が海外カードに対応しているわけではありません。</p></li><li><p class="prob"><b>取引できないと表示される。</b></p><p>銀行側で止めている可能性があります。銀行アプリで利用制限や海外利用の設定を確認するか、銀行に電話します。</p></li><li><p class="prob"><b>キャッシングの手数料がかかった。</b></p><p>クレジットカードで引き出すとそうなります。現金はできるだけデビットカードで引き出しましょう。</p></li><li><p class="prob"><b>機械の上限が必要な額より低い。</b></p><p>2回に分けるか、別の銀行の機械を使います。1回ごとに手数料がかかることがあります。</p></li></ul></section>
-<section class="deep faq" aria-labelledby="fq-cash"><h2 id="fq-cash">よくある質問</h2><h3>韓国で現金は必要ですか?</h3><p>少しは必要です。店、タクシー、飲食店はほとんどカードで払えますが、市場、屋台、T-moneyのチャージには現金が必要なことが多いです。</p><h3>空港で両替したほうがいいですか?</h3><p>最初に少しだけ替えるなら空港が便利です。市内の両替所のほうがレートがよいことが多いので、多く替えるなら比べてからにしましょう。</p><h3>いくらくらい持ち歩けばいいですか?</h3><p>1日分の小さな買い物ができる程度です。たくさん持ち歩かず、必要なときにまた引き出しましょう。</p><h3>タクシーでカードは使えますか?</h3><p>たいてい使えます。アプリで呼んだタクシーはアプリに登録したカードで精算されます。タクシーのガイドもご覧ください。</p></section>
-<section class="deep" aria-labelledby="ct-cash"><h2 id="ct-cash">公式・一次情報</h2><ul class="cites"><li><a href="https://www.haniseoul.com/travels/korea/atm-korea" rel="noopener" target="_blank">HaniSeoul: ATMs in Korea</a></li><li><a href="https://wise.com/au/blog/atms-in-south-korea" rel="noopener" target="_blank">Wise: ATMs in South Korea, cards and fees</a></li><li><a href="https://www.koreatimes.co.kr/amp/business/banking-finance/20260513/woori-bank-targets-foreign-tourists-with-prepaid-card-issued-at-airport" rel="noopener" target="_blank">Korea Times: Woori Bank prepaid card for tourists (May 2026)</a></li></ul></section></main>
-  <p class="checked-line">確認日 <time datetime="2026-11-17">2026年11月17日</time></p>
-  <details class="panel" open><summary>出典とメモ</summary><div class="in notes"><ul><li>確認日 2026年11月17日</li><li>機械の手数料に加え、ご自身の銀行の海外手数料がかかります。金額は機械やカード会社で違うので、出発前に銀行へ確認を。</li><li>ウリ銀行は2026年5月、仁川空港で旅行者向けプリペイドカードの発行を始めました。</li><li><a href="https://www.haniseoul.com/travels/korea/atm-korea" rel="noopener" target="_blank">HaniSeoul: ATMs in Korea</a></li><li><a href="https://wise.com/au/blog/atms-in-south-korea" rel="noopener" target="_blank">Wise: ATMs in South Korea, cards and fees</a></li><li><a href="https://www.koreatimes.co.kr/amp/business/banking-finance/20260513/woori-bank-targets-foreign-tourists-with-prepaid-card-issued-at-airport" rel="noopener" target="_blank">Korea Times: Woori Bank prepaid card for tourists (May 2026)</a></li></ul></div></details>
-  <p class="host-cta">🏠 韓国で宿を運営していますか? <a href="../hosts.html">このガイドをゲストに送る</a>(韓国語)。</p>
+  <main id="answer">
+  <section class="answer warn"><div class="pv warn"><div class="ans-top"><h2>ひと手間あり</h2><span class="pill warn">ひと手間あり</span></div><p class="verdict">外国のデビットカードはGlobal ATMと多くのコンビニATMで使えます。通常は手数料がかかります。</p></div><dl class="glance"><div><dt>Where</dt><dd>ATMs marked Global, and convenience stores such as CU, GS25, 7-Eleven <time class="ck" datetime="2026-11-17">✓ 2026年11月17日</time></dd></div><div><dt>Cost</dt><dd>A machine fee plus your bank&#x27;s fee. Choose KRW, not your currency. <time class="ck" datetime="2026-11-17">✓ 2026年11月17日</time></dd></div></dl><p class="stamp">Checked against <a href="https://www.haniseoul.com/travels/korea/atm-korea" rel="noopener" target="_blank">HaniSeoul: ATMs in Korea</a> on <time datetime="2026-11-17">2026年11月17日</time></p></section>
+  <button class="linkbtn" type="button" id="show-all" hidden>ほかの状況の回答を見る</button>
+  <section class="do" aria-labelledby="do-cash"><h2 id="do-cash" class="sr">はじめての人向け: 手順</h2><div class="pv"><ol class="steps"><li>「Global」表示のATMを探します。明洞や弘大などの繁華街の銀行ATMや、CU・GS25・セブン-イレブンなどのコンビニにあることが多いです。</li><li>海外引き出しに対応したデビットカードを使います。クレジットカードの引き出しはキャッシングとなり、手数料と利息がかかります。</li><li>自国通貨での請求を勧められたら、ウォン(KRW)を選びます。そうしないと換算レートが悪くなります。</li></ol><p class="fallback"><b>うまくいかない場合</b>1台で断られたら、KBやウリなど大手銀行の別のATMを試すか、銀行や両替所で両替しましょう。</p></div></section>
+  <section class="says" aria-labelledby="say-cash"><h2 id="say-cash">Show this to staff</h2><div class="say"><p class="say-ko" lang="ko">외국 카드 되는 ATM이 어디 있어요?</p><p class="say-mean">外国のカードが使えるATMはどこですか?</p><div class="actions"><button class="btn alt" type="button" data-show="외국 카드 되는 ATM이 어디 있어요?" data-lbl="スタッフに見せる" data-mean="意味: 外国のカードが使えるATMはどこですか?">🗣 Show full screen</button><button class="btn ghost" type="button" data-copy="외국 카드 되는 ATM이 어디 있어요?" data-done="✓ Copied">📋 Copy</button></div></div></section>
+  <section class="names" aria-labelledby="nm-cash"><h2 id="nm-cash">Korean names to copy (paste into Naver Map or show a driver)</h2><ul><li><button class="chip" type="button" data-copy="글로벌 ATM" data-done="✓ Copied"><span lang="ko">글로벌 ATM</span><small>Global ATM</small><i aria-hidden="true">📋</i></button></li><li><button class="chip" type="button" data-copy="환전소" data-done="✓ Copied"><span lang="ko">환전소</span><small>Currency exchange</small><i aria-hidden="true">📋</i></button></li></ul></section>
+  <div class="actions"><a class="btn" href="./#task-cash">自分の状況で確認する</a></div>
+  <details class="more deep" id="st-cash"><summary>はじめての人向け: 手順</summary><div class="in"><ol class="steps full"><li>出発前に、デビットカードの海外ATM引き出しを銀行で有効にしてもらい、1日の上限と手数料を確認します。</li><li>韓国では「Global」表示や自分のカードのブランドロゴがあるATMを探します。繁華街の銀行、地下鉄駅、コンビニによくあります。<!-- screenshot: cash-global-atm --></li><li>英語のボタンを押し、引き出しを選んで金額を選びます。1回あたりの上限がある機械が多く、2回に分けることもあります。</li><li>自国通貨での請求をすすめられたら、ウォン(KRW)を選びます。機械が示す換算レートはたいてい不利です。<!-- screenshot: cash-krw-choice --></li><li>市場、屋台、小さな店、<a href="tmoney-subway-bus.html">T-money</a>のチャージ用に少し現金を持っておきます。それ以外はほとんどカードで払えます。</li><li>両替する場合: 銀行や公認の両替所でも替えられます。お金を渡す前に表示レートを比べましょう。</li></ol></div></details>
+<details class="more deep" id="er-cash"><summary>よくあるトラブルと対処法</summary><div class="in"><ul class="errs"><li><p class="prob"><b>ATMでカードが使えない。</b></p><p>別の銀行かコンビニのGlobal ATMを試します。すべての機械が海外カードに対応しているわけではありません。</p></li><li><p class="prob"><b>取引できないと表示される。</b></p><p>銀行側で止めている可能性があります。銀行アプリで利用制限や海外利用の設定を確認するか、銀行に電話します。</p></li><li><p class="prob"><b>キャッシングの手数料がかかった。</b></p><p>クレジットカードで引き出すとそうなります。現金はできるだけデビットカードで引き出しましょう。</p></li><li><p class="prob"><b>機械の上限が必要な額より低い。</b></p><p>2回に分けるか、別の銀行の機械を使います。1回ごとに手数料がかかることがあります。</p></li></ul></div></details>
+<details class="more deep faq" id="fq-cash"><summary>よくある質問</summary><div class="in"><h3>韓国で現金は必要ですか?</h3><p>少しは必要です。店、タクシー、飲食店はほとんどカードで払えますが、市場、屋台、T-moneyのチャージには現金が必要なことが多いです。</p><h3>空港で両替したほうがいいですか?</h3><p>最初に少しだけ替えるなら空港が便利です。市内の両替所のほうがレートがよいことが多いので、多く替えるなら比べてからにしましょう。</p><h3>いくらくらい持ち歩けばいいですか?</h3><p>1日分の小さな買い物ができる程度です。たくさん持ち歩かず、必要なときにまた引き出しましょう。</p><h3>タクシーでカードは使えますか?</h3><p>たいてい使えます。アプリで呼んだタクシーはアプリに登録したカードで精算されます。タクシーのガイドもご覧ください。</p></div></details>
+<details class="more deep" id="ct-cash"><summary>公式・一次情報</summary><div class="in"><ul class="cites"><li><a href="https://www.haniseoul.com/travels/korea/atm-korea" rel="noopener" target="_blank">HaniSeoul: ATMs in Korea</a></li><li><a href="https://wise.com/au/blog/atms-in-south-korea" rel="noopener" target="_blank">Wise: ATMs in South Korea, cards and fees</a></li><li><a href="https://www.koreatimes.co.kr/amp/business/banking-finance/20260513/woori-bank-targets-foreign-tourists-with-prepaid-card-issued-at-airport" rel="noopener" target="_blank">Korea Times: Woori Bank prepaid card for tourists (May 2026)</a></li></ul></div></details>
+  <details class="more"><summary>出典とメモ</summary><div class="in notes"><p>韓国はほぼキャッシュレスですが、小さな店や市場では現金が必要なことがあります。外国のカードを受け付けないATMも多いので、使える機械を知っておくと安心です。</p><ul><li>確認日 2026年11月17日</li><li>機械の手数料に加え、ご自身の銀行の海外手数料がかかります。金額は機械やカード会社で違うので、出発前に銀行へ確認を。</li><li>ウリ銀行は2026年5月、仁川空港で旅行者向けプリペイドカードの発行を始めました。</li><li><a href="https://www.haniseoul.com/travels/korea/atm-korea" rel="noopener" target="_blank">HaniSeoul: ATMs in Korea</a></li><li><a href="https://wise.com/au/blog/atms-in-south-korea" rel="noopener" target="_blank">Wise: ATMs in South Korea, cards and fees</a></li><li><a href="https://www.koreatimes.co.kr/amp/business/banking-finance/20260513/woori-bank-targets-foreign-tourists-with-prepaid-card-issued-at-airport" rel="noopener" target="_blank">Korea Times: Woori Bank prepaid card for tourists (May 2026)</a></li></ul></div></details>
+  </main>
   <section class="related"><h2>関連ガイド</h2><ul><li><a href="tmoney-subway-bus.html">T-moneyに海外カードでチャージできる?</a></li><li><a href="tax-free-shopping.html">韓国で買い物の免税(タックスリファンド)を受けるには?</a></li><li><a href="k-eta-entry-requirements.html">韓国旅行にK-ETAは必要?</a></li></ul></section>
-  <nav class="topics"><a href="mobile-data-sim.html">電話・データ</a><a href="incheon-airport-to-seoul.html">空港から市内</a><a href="maps.html">地図</a><a href="taxi.html">タクシー</a><a href="tmoney-subway-bus.html">地下鉄・バス</a><a href="seoul-tourist-transit-pass.html">交通パス</a><a href="ktx-train-booking.html">KTX</a><a href="seoul-to-busan-k-tour-pass.html">釜山旅行</a><a href="kr-pass-korail-pass.html">KRパス</a><a href="dmz-jsa-tour-booking.html">DMZツアー</a><a href="jeju-getting-around.html">済州の移動</a><a href="restaurant-reservations.html">飲食店の予約</a><a href="food-delivery.html">デリバリー</a><a href="translation.html">翻訳</a><a href="tax-free-shopping.html">買い物と免税</a><a href="luggage-storage.html">荷物の預け</a><a href="pharmacy-hospital.html">病気・けが</a><a href="k-eta-entry-requirements.html">入国ルール</a><a href="korea-power-plug-voltage.html">電源プラグ</a><a href="gimpo-airport-to-seoul.html">金浦空港</a></nav>
+  <details class="more"><summary>All guides</summary><nav class="topics"><a href="mobile-data-sim.html">電話・データ</a><a href="incheon-airport-to-seoul.html">空港から市内</a><a href="maps.html">地図</a><a href="taxi.html">タクシー</a><a href="tmoney-subway-bus.html">地下鉄・バス</a><a href="seoul-tourist-transit-pass.html">交通パス</a><a href="ktx-train-booking.html">KTX</a><a href="seoul-to-busan-k-tour-pass.html">釜山旅行</a><a href="kr-pass-korail-pass.html">KRパス</a><a href="dmz-jsa-tour-booking.html">DMZツアー</a><a href="jeju-getting-around.html">済州の移動</a><a href="restaurant-reservations.html">飲食店の予約</a><a href="food-delivery.html">デリバリー</a><a href="translation.html">翻訳</a><a href="tax-free-shopping.html">買い物と免税</a><a href="luggage-storage.html">荷物の預け</a><a href="pharmacy-hospital.html">病気・けが</a><a href="k-eta-entry-requirements.html">入国ルール</a><a href="korea-power-plug-voltage.html">電源プラグ</a><a href="gimpo-airport-to-seoul.html">金浦空港</a></nav></details>
+  <p class="host-cta">🏠 韓国で宿を運営していますか? <a href="../hosts.html">このガイドをゲストに送る</a>(韓国語)。</p>
   <section class="ask" aria-labelledby="ask-t-ja"><h2 id="ask-t-ja">知りたい情報が見つかりませんか?</h2><p class="hint">質問をどうぞ。ガイドに追記して回答します。メールを書いていただければ返信もします。</p>
 <form class="ask-form" data-thanks="ありがとうございます。質問を受け付けました。"><textarea name="q" required maxlength="1000" aria-label="知りたい情報が見つかりませんか?" placeholder="例: 海外で発行したカードでKTXを予約できますか?"></textarea>
 <input name="em" type="email" maxlength="120" autocomplete="email" aria-label="メール(任意。返信用)" placeholder="メール(任意。返信用)"><button class="btn" type="submit">質問を送る</button><p class="fb-done" role="status"></p></form></section><p class="fb-line"><button type="button" class="linkbtn" data-feedback="">💬 ご意見を送る</button></p><details class="about"><summary>このガイドについて</summary><div class="in">
@@ -338,7 +391,16 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !documen
 (function () {
   document.querySelectorAll("[data-show]").forEach(b => b.addEventListener("click", () => show(b.dataset.lbl, b.dataset.show, "", b.dataset.mean)));
   const saved = (store("wik-setup") || "visitor|ios").split("|");
-  const blocks = [...document.querySelectorAll(".card[data-p]")];
+  document.querySelectorAll("[data-copy]").forEach(b => b.addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(b.dataset.copy); } catch (e) { return; }
+    const was = b.innerHTML; b.classList.add("done"); b.setAttribute("aria-label", b.dataset.done);
+    const tip = document.createElement("span"); tip.className = "tip"; tip.textContent = b.dataset.done; tip.setAttribute("role", "status"); b.append(tip);
+    setTimeout(() => { b.innerHTML = was; b.classList.remove("done"); b.removeAttribute("aria-label"); }, 1600);
+    count("copy/" + location.pathname, "copy korean");
+  }));
+  /* A link to a folded section opens it. */
+  const h = location.hash && document.getElementById(location.hash.slice(1)); if (h && h.tagName === "DETAILS") h.open = true;
+  const blocks = [...document.querySelectorAll(".pv[data-p]")];
   if (blocks.length < 2) return;
   let shown = 0;
   for (const b of blocks) { const ok = b.dataset.p === saved[0] && (!b.dataset.d || b.dataset.d === saved[1]); b.hidden = !ok; if (ok) shown++; }

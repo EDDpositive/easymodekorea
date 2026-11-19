@@ -255,15 +255,6 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-t
 .ask-form .btn { justify-self: start; }
 .ask-form .fb-done { margin: 0; min-height: 0; }
 
-/* Static guide list on the home page (crawlable, visible to everyone) */
-.guide-list { margin: 8px auto 28px; }
-.guide-list h2 { font: 700 20px var(--display); margin: 0 0 10px; }
-.guide-list h3 { font: 700 16px var(--display); color: var(--muted); margin: 18px 0 8px; }
-.guide-list ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-.guide-list li { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
-.guide-list a { font-weight: 700; display: block; margin-bottom: 2px; }
-.guide-list span { color: var(--muted); font-size: 15px; }
-
 .checked-line { margin: 10px 2px 0; font-size: 14px; color: var(--muted); }
 .host-cta { margin: 18px 0 0; padding: 12px 14px; border: 1px dashed var(--line); border-radius: 12px; font-size: 15px; color: var(--muted); }
 .deep { margin: 26px 0 0; }
@@ -281,6 +272,63 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-t
 .foot p { margin: 6px 0 0; }
 .skip { position: absolute; left: -9999px; top: 0; z-index: 20; background: var(--easy); color: #0e1430; padding: 10px 14px; border-radius: 0 0 10px 0; font-weight: 700; }
 .skip:focus { left: 0; }
+
+/* Short-first layout (round 14) */
+.hero h1 { line-height: 1.2; }
+.answer { background: var(--surface); border: 1px solid var(--line); border-left: 6px solid var(--line); border-radius: 16px; padding: 14px 16px; display: grid; gap: 10px; margin: 4px 0 0; }
+.answer.ok { border-left-color: var(--ok); } .answer.warn { border-left-color: var(--warn); } .answer.mixed { border-left-color: var(--mixed); } .answer.bad { border-left-color: var(--bad); }
+.pv[hidden] { display: none; }
+.ans-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 6px; }
+.ans-top h2 { font: 700 15px var(--body); color: var(--muted); margin: 0; }
+.answer .verdict { font-size: 18px; line-height: 1.4; }
+.glance { margin: 0; display: grid; gap: 6px; font-size: 15px; line-height: 1.4; }
+.glance > div { display: grid; grid-template-columns: 96px 1fr; gap: 8px; }
+.glance dt { color: var(--muted); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: .04em; padding-top: 2px; }
+.glance dd { margin: 0; }
+.ck { color: var(--muted); font-size: 12px; white-space: nowrap; }
+.stamp { margin: 0; font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 8px; }
+.do { margin: 18px 0 0; display: grid; gap: 12px; }
+.do .steps li { line-height: 1.45; }
+.says, .names { margin: 22px 0 0; }
+.says h2, .names h2 { font: 700 18px var(--display); margin: 0 0 8px; }
+.say { background: var(--surface); border: 2px solid var(--easy); border-radius: 16px; padding: 14px 16px; display: grid; gap: 8px; }
+.say-ko { font: 800 26px/1.35 var(--ko, var(--body)); margin: 0; word-break: keep-all; }
+.say-mean { margin: 0; color: var(--muted); }
+.names ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.chip { width: 100%; display: grid; grid-template-columns: 1fr auto; grid-template-areas: "ko i" "en i"; align-items: center; text-align: left; gap: 0 10px; padding: 10px 14px; border: 1.5px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--ink); font: inherit; cursor: pointer; position: relative; }
+.chip span { grid-area: ko; font: 700 19px var(--ko, var(--body)); }
+.chip small { grid-area: en; color: var(--muted); font-size: 13px; }
+.chip i { grid-area: i; font-style: normal; }
+.chip.done, .btn.done { border-color: var(--ok); }
+.tip { position: absolute; right: 10px; top: -10px; background: var(--ink); color: var(--surface); font-size: 12px; padding: 2px 8px; border-radius: 99px; }
+.btn { position: relative; }
+.do + .actions, .names + .actions, .says + .actions { margin-top: 18px; }
+details.more { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; margin: 10px 0 0; }
+details.more > summary { list-style: none; cursor: pointer; padding: 14px 16px; font: 700 16px var(--body); display: flex; justify-content: space-between; align-items: center; gap: 10px; min-height: 24px; }
+details.more > summary::-webkit-details-marker { display: none; }
+details.more > summary::after { content: "+"; font: 400 22px var(--body); color: var(--muted); }
+details.more[open] > summary::after { content: "–"; }
+details.more > .in, details.more > .topics { padding: 0 16px 14px; margin: 0; }
+details.more.deep { margin-top: 10px; }
+.actions + details.more { margin-top: 22px; }
+.notes p { margin: 0 0 8px; }
+/* Home: situation cards */
+.sit { margin: 6px 0 0; }
+.sit > h2, .tool-h { font: 800 20px/1.2 var(--display); margin: 0 0 10px; }
+.sit-grid { display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
+@media (max-width: 360px) { .sit-grid { grid-template-columns: 1fr; } }
+.sit-card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 12px; display: grid; gap: 6px; align-content: start; }
+.sit-card[hidden] { display: none; }
+.sit-card h3 { display: flex; align-items: center; gap: 8px; margin: 0; font: 700 16px/1.2 var(--body); }
+.sit-card h3 svg { width: 22px; height: 22px; flex: none; fill: none; stroke: var(--brand); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.sit-card p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.35; }
+.sit-links { display: flex; flex-wrap: wrap; gap: 6px; }
+.sit-card .sit-links a { display: inline-block; padding: 5px 10px; min-height: 24px; box-sizing: border-box; border-radius: 99px; background: var(--bg); border: 1px solid var(--line); color: var(--ink); font-weight: 600; font-size: 14px; text-decoration: none; }
+.sit-card .sit-links a[hidden] { display: none; }
+.tool { margin: 26px 0 0; }
+.onb { margin: 0; }
+.onb h3 { font: 700 18px/1.3 var(--body); margin: 0 0 10px; }
+.offline-note { margin: 22px 0 0; font-size: 14px; color: var(--muted); }
 </style>
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Luggage storage in Seoul: lockers and delivery (2026)", "description": "Before check-in or after check-out, you can leave bags at subway lockers or staffed counters, or send them to your hotel or the airport.", "datePublished": "2026-11-17", "dateModified": "2026-11-20", "inLanguage": "en", "url": "https://easymodekorea.com/luggage-storage.html", "mainEntityOfPage": "https://easymodekorea.com/luggage-storage.html", "image": "https://easymodekorea.com/og.png", "author": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/about.html"}, "publisher": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/", "logo": {"@type": "ImageObject", "url": "https://easymodekorea.com/icon-512.png"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "EasyModeKorea", "item": "https://easymodekorea.com/"}, {"@type": "ListItem", "position": 2, "name": "Luggage", "item": "https://easymodekorea.com/luggage-storage.html"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Where can I store luggage in Seoul?", "acceptedAnswer": {"@type": "Answer", "text": "Lockers and staffed luggage counters work for everyone. You can also send bags to your hotel or the airport the same day. T-Locker: lockers in about 270 Seoul subway stations, from small bags to suitcases. Pay at the locker or in the T-Locker app. T-Luggage: staffed counters at Seoul Station, Hongik Univ., Myeongdong, Jamsil and other busy stations store bags and deliver them to hotels or the airport. Same-day delivery between the airport and Seoul hotels usually needs you to drop bags off before late morning."}}, {"@type": "Question", "name": "How much do lockers cost?", "acceptedAnswer": {"@type": "Answer", "text": "From about 2,000 won for 4 hours for a small locker and about 4,000 won for a large one, at our last check."}}, {"@type": "Question", "name": "Will a large suitcase fit?", "acceptedAnswer": {"@type": "Answer", "text": "Large lockers take most suitcases. Very big cases are easier at a staffed counter."}}, {"@type": "Question", "name": "Is there storage at Incheon Airport?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, there are staffed baggage counters in the terminals."}}, {"@type": "Question", "name": "Can I send bags from Seoul to Busan?", "acceptedAnswer": {"@type": "Answer", "text": "Some delivery services cover other cities. Ask at the counter, or keep bags with you on the KTX."}}]}]</script>
@@ -289,20 +337,25 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-t
 <a class="skip" href="#answer">Skip to the answer</a>
 <header class="hero"><div class="wrap">
   <div class="toprow"><a class="logo" href="./">EasyMode<b>Korea</b></a><nav class="langs" aria-label="Language"><a href="luggage-storage.html" hreflang="en" lang="en" aria-current="page">English</a><a href="ja/luggage-storage.html" hreflang="ja" lang="ja">日本語</a><a href="zh-tw/luggage-storage.html" hreflang="zh-Hant-TW" lang="zh-Hant-TW">繁體中文</a><a href="zh-cn/luggage-storage.html" hreflang="zh-CN" lang="zh-CN">简体中文</a><a href="vi/luggage-storage.html" hreflang="vi" lang="vi">Tiếng Việt</a></nav></div>
-  <h1>Where can I store luggage in Seoul?</h1><p class="lede">Before check-in or after check-out, you can leave bags at subway lockers or staffed counters, or send them to your hotel or the airport.</p>
+  <h1>Where can I store luggage in Seoul?</h1>
 </div></header>
 <div class="wrap">
-  <div class="actions"><a class="btn" href="./#task-luggage">Check your own setup</a><button class="btn alt" type="button" data-show="여기 짐 맡길 수 있어요?" data-lbl="Show staff" data-mean="Means: Can I leave my luggage here?">🗣 Can I leave my luggage here?</button></div>
-  <main class="cards" id="answer"><article class="card ok"><div class="actions" style="justify-content:space-between;align-items:center"><h2>Good to go</h2><span class="pill ok">Good to go</span></div>
-<p class="verdict">Lockers and staffed luggage counters work for everyone. You can also send bags to your hotel or the airport the same day.</p><ol class="steps"><li>T-Locker: lockers in about 270 Seoul subway stations, from small bags to suitcases. Pay at the locker or in the T-Locker app.</li><li>T-Luggage: staffed counters at Seoul Station, Hongik Univ., Myeongdong, Jamsil and other busy stations store bags and deliver them to hotels or the airport.</li><li>Same-day delivery between the airport and Seoul hotels usually needs you to drop bags off before late morning.</li></ol><p class="fallback"><b>If that fails</b>Lockers full or the app won&#x27;t work? Use a staffed counter, or ask your host or hotel to hold your bags.</p></article><button class="linkbtn" type="button" id="show-all" hidden>Show answers for other setups</button><section class="deep" aria-labelledby="st-luggage"><h2 id="st-luggage">Step by step, first time</h2><ol class="steps full"><li>Short storage: use a T-Locker in the subway. About 270 Seoul stations have them, in sizes from small bags to suitcases.<!-- screenshot: luggage-tlocker --></li><li>Pay at the locker&#x27;s screen or in the T-Locker app, then keep the code or receipt you get to open it again.</li><li>Bigger bags or a full day: use a staffed T-Luggage counter at stations such as Seoul Station, Hongik Univ., Myeongdong and Jamsil.</li><li>Moving hotel or flying out: those counters can also deliver bags to your hotel or the airport. For same-day delivery, drop bags off before the morning cut-off.</li><li>Simplest of all: ask your host or hotel to hold your bags before check-in or after check-out.</li></ol></section>
-<section class="deep" aria-labelledby="er-luggage"><h2 id="er-luggage">Common problems and fixes</h2><ul class="errs"><li><p class="prob"><b>All the lockers are full.</b></p><p>Try another exit of the same station, a nearby big station, or a staffed counter.</p></li><li><p class="prob"><b>The locker won&#x27;t take your card.</b></p><p>Use the locker screen&#x27;s other payment options, or the T-Locker app.</p></li><li><p class="prob"><b>You missed the delivery cut-off.</b></p><p>Store the bags for the day and take them with you, or book delivery for the next day.</p></li><li><p class="prob"><b>You lost the locker code.</b></p><p>Call the number on the locker. Keep a photo of the receipt next time.</p></li></ul></section>
-<section class="deep faq" aria-labelledby="fq-luggage"><h2 id="fq-luggage">Questions people ask</h2><h3>How much do lockers cost?</h3><p>From about 2,000 won for 4 hours for a small locker and about 4,000 won for a large one, at our last check.</p><h3>Will a large suitcase fit?</h3><p>Large lockers take most suitcases. Very big cases are easier at a staffed counter.</p><h3>Is there storage at Incheon Airport?</h3><p>Yes, there are staffed baggage counters in the terminals.</p><h3>Can I send bags from Seoul to Busan?</h3><p>Some delivery services cover other cities. Ask at the counter, or keep bags with you on the <a href="ktx-train-booking.html">KTX</a>.</p></section>
-<section class="deep" aria-labelledby="ct-luggage"><h2 id="ct-luggage">Official and primary sources</h2><ul class="cites"><li><a href="https://mediahub.seoul.go.kr/archives/2013639" rel="noopener" target="_blank">Seoul: T-Locker and T-Luggage</a></li><li><a href="https://www.haniseoul.com/ko/travels/korea/korea-luggage-storage-and-delivery-guide" rel="noopener" target="_blank">Luggage storage and delivery guide (2026)</a></li></ul></section></main>
-  <p class="checked-line">Checked <time datetime="2026-11-17">17 Nov 2026</time></p>
-  <details class="panel" open><summary>Sources and notes</summary><div class="in notes"><ul><li>Checked 17 Nov 2026</li><li>Locker fees start at about 2,000 won for 4 hours (small) and 4,000 won (large).</li><li><a href="https://mediahub.seoul.go.kr/archives/2013639" rel="noopener" target="_blank">Seoul: T-Locker and T-Luggage</a></li><li><a href="https://www.haniseoul.com/ko/travels/korea/korea-luggage-storage-and-delivery-guide" rel="noopener" target="_blank">Luggage storage and delivery guide (2026)</a></li></ul></div></details>
-  <p class="host-cta">🏠 Run a guesthouse or rental in Korea? <a href="hosts.html">Send this guide to your guests</a> (숙소 사장님용 안내).</p>
+  <main id="answer">
+  <section class="answer ok"><div class="pv ok"><div class="ans-top"><h2>Good to go</h2><span class="pill ok">Good to go</span></div><p class="verdict">Lockers and staffed luggage counters work for everyone. You can also send bags to your hotel or the airport the same day.</p></div><dl class="glance"><div><dt>Where</dt><dd>Station lockers and staffed luggage counters <time class="ck" datetime="2026-11-17">✓ 17 Nov 2026</time></dd></div><div><dt>Cost</dt><dd>Lockers from about 2,000 won for 4 hours <time class="ck" datetime="2026-11-17">✓ 17 Nov 2026</time></dd></div></dl><p class="stamp">Checked against <a href="https://mediahub.seoul.go.kr/archives/2013639" rel="noopener" target="_blank">Seoul: T-Locker and T-Luggage</a> on <time datetime="2026-11-17">17 Nov 2026</time></p></section>
+  <button class="linkbtn" type="button" id="show-all" hidden>Show answers for other setups</button>
+  <section class="do" aria-labelledby="do-luggage"><h2 id="do-luggage" class="sr">Step by step, first time</h2><div class="pv"><ol class="steps"><li>T-Locker: lockers in about 270 Seoul subway stations, from small bags to suitcases. Pay at the locker or in the T-Locker app.</li><li>T-Luggage: staffed counters at Seoul Station, Hongik Univ., Myeongdong, Jamsil and other busy stations store bags and deliver them to hotels or the airport.</li><li>Same-day delivery between the airport and Seoul hotels usually needs you to drop bags off before late morning.</li></ol><p class="fallback"><b>If that fails</b>Lockers full or the app won&#x27;t work? Use a staffed counter, or ask your host or hotel to hold your bags.</p></div></section>
+  <section class="says" aria-labelledby="say-luggage"><h2 id="say-luggage">Show this to staff</h2><div class="say"><p class="say-ko" lang="ko">여기 짐 맡길 수 있어요?</p><p class="say-mean">Can I leave my luggage here?</p><div class="actions"><button class="btn alt" type="button" data-show="여기 짐 맡길 수 있어요?" data-lbl="Show staff" data-mean="Means: Can I leave my luggage here?">🗣 Show full screen</button><button class="btn ghost" type="button" data-copy="여기 짐 맡길 수 있어요?" data-done="✓ Copied">📋 Copy</button></div></div></section>
+  <section class="names" aria-labelledby="nm-luggage"><h2 id="nm-luggage">Korean names to copy (paste into Naver Map or show a driver)</h2><ul><li><button class="chip" type="button" data-copy="물품보관함" data-done="✓ Copied"><span lang="ko">물품보관함</span><small>Lockers</small><i aria-hidden="true">📋</i></button></li><li><button class="chip" type="button" data-copy="짐 보관" data-done="✓ Copied"><span lang="ko">짐 보관</span><small>Luggage storage</small><i aria-hidden="true">📋</i></button></li></ul></section>
+  <div class="actions"><a class="btn" href="./#task-luggage">Check your own setup</a></div>
+  <details class="more deep" id="st-luggage"><summary>Step by step, first time</summary><div class="in"><ol class="steps full"><li>Short storage: use a T-Locker in the subway. About 270 Seoul stations have them, in sizes from small bags to suitcases.<!-- screenshot: luggage-tlocker --></li><li>Pay at the locker&#x27;s screen or in the T-Locker app, then keep the code or receipt you get to open it again.</li><li>Bigger bags or a full day: use a staffed T-Luggage counter at stations such as Seoul Station, Hongik Univ., Myeongdong and Jamsil.</li><li>Moving hotel or flying out: those counters can also deliver bags to your hotel or the airport. For same-day delivery, drop bags off before the morning cut-off.</li><li>Simplest of all: ask your host or hotel to hold your bags before check-in or after check-out.</li></ol></div></details>
+<details class="more deep" id="er-luggage"><summary>Common problems and fixes</summary><div class="in"><ul class="errs"><li><p class="prob"><b>All the lockers are full.</b></p><p>Try another exit of the same station, a nearby big station, or a staffed counter.</p></li><li><p class="prob"><b>The locker won&#x27;t take your card.</b></p><p>Use the locker screen&#x27;s other payment options, or the T-Locker app.</p></li><li><p class="prob"><b>You missed the delivery cut-off.</b></p><p>Store the bags for the day and take them with you, or book delivery for the next day.</p></li><li><p class="prob"><b>You lost the locker code.</b></p><p>Call the number on the locker. Keep a photo of the receipt next time.</p></li></ul></div></details>
+<details class="more deep faq" id="fq-luggage"><summary>Questions people ask</summary><div class="in"><h3>How much do lockers cost?</h3><p>From about 2,000 won for 4 hours for a small locker and about 4,000 won for a large one, at our last check.</p><h3>Will a large suitcase fit?</h3><p>Large lockers take most suitcases. Very big cases are easier at a staffed counter.</p><h3>Is there storage at Incheon Airport?</h3><p>Yes, there are staffed baggage counters in the terminals.</p><h3>Can I send bags from Seoul to Busan?</h3><p>Some delivery services cover other cities. Ask at the counter, or keep bags with you on the <a href="ktx-train-booking.html">KTX</a>.</p></div></details>
+<details class="more deep" id="ct-luggage"><summary>Official and primary sources</summary><div class="in"><ul class="cites"><li><a href="https://mediahub.seoul.go.kr/archives/2013639" rel="noopener" target="_blank">Seoul: T-Locker and T-Luggage</a></li><li><a href="https://www.haniseoul.com/ko/travels/korea/korea-luggage-storage-and-delivery-guide" rel="noopener" target="_blank">Luggage storage and delivery guide (2026)</a></li></ul></div></details>
+  <details class="more"><summary>Sources and notes</summary><div class="in notes"><p>Before check-in or after check-out, you can leave bags at subway lockers or staffed counters, or send them to your hotel or the airport.</p><ul><li>Checked 17 Nov 2026</li><li>Locker fees start at about 2,000 won for 4 hours (small) and 4,000 won (large).</li><li><a href="https://mediahub.seoul.go.kr/archives/2013639" rel="noopener" target="_blank">Seoul: T-Locker and T-Luggage</a></li><li><a href="https://www.haniseoul.com/ko/travels/korea/korea-luggage-storage-and-delivery-guide" rel="noopener" target="_blank">Luggage storage and delivery guide (2026)</a></li></ul></div></details>
+  </main>
   <section class="related"><h2>Related guides</h2><ul><li><a href="incheon-airport-to-seoul.html">How do I get from Incheon Airport to Seoul?</a></li><li><a href="ktx-train-booking.html">How do I book a KTX train as a foreigner?</a></li><li><a href="tax-free-shopping.html">How do I get a tax refund when shopping in Korea?</a></li></ul></section>
-  <nav class="topics"><a href="mobile-data-sim.html">Phone &amp; data</a><a href="incheon-airport-to-seoul.html">Airport to city</a><a href="maps.html">Maps</a><a href="taxi.html">Taxi</a><a href="tmoney-subway-bus.html">Subway &amp; bus</a><a href="seoul-tourist-transit-pass.html">Transit pass</a><a href="ktx-train-booking.html">KTX trains</a><a href="seoul-to-busan-k-tour-pass.html">Busan trip</a><a href="kr-pass-korail-pass.html">KR Pass</a><a href="dmz-jsa-tour-booking.html">DMZ tour</a><a href="jeju-getting-around.html">Jeju transport</a><a href="restaurant-reservations.html">Restaurant booking</a><a href="food-delivery.html">Food delivery</a><a href="translation.html">Translation</a><a href="tax-free-shopping.html">Shopping &amp; tax refund</a><a href="pharmacy-hospital.html">Sick or hurt</a><a href="k-eta-entry-requirements.html">Entry rules</a><a href="atm-foreign-card-cash.html">Cash &amp; ATMs</a><a href="korea-power-plug-voltage.html">Power plugs</a><a href="gimpo-airport-to-seoul.html">Gimpo Airport</a></nav>
+  <details class="more"><summary>All guides</summary><nav class="topics"><a href="mobile-data-sim.html">Phone &amp; data</a><a href="incheon-airport-to-seoul.html">Airport to city</a><a href="maps.html">Maps</a><a href="taxi.html">Taxi</a><a href="tmoney-subway-bus.html">Subway &amp; bus</a><a href="seoul-tourist-transit-pass.html">Transit pass</a><a href="ktx-train-booking.html">KTX trains</a><a href="seoul-to-busan-k-tour-pass.html">Busan trip</a><a href="kr-pass-korail-pass.html">KR Pass</a><a href="dmz-jsa-tour-booking.html">DMZ tour</a><a href="jeju-getting-around.html">Jeju transport</a><a href="restaurant-reservations.html">Restaurant booking</a><a href="food-delivery.html">Food delivery</a><a href="translation.html">Translation</a><a href="tax-free-shopping.html">Shopping &amp; tax refund</a><a href="pharmacy-hospital.html">Sick or hurt</a><a href="k-eta-entry-requirements.html">Entry rules</a><a href="atm-foreign-card-cash.html">Cash &amp; ATMs</a><a href="korea-power-plug-voltage.html">Power plugs</a><a href="gimpo-airport-to-seoul.html">Gimpo Airport</a></nav></details>
+  <p class="host-cta">🏠 Run a guesthouse or rental in Korea? <a href="hosts.html">Send this guide to your guests</a> (숙소 사장님용 안내).</p>
   <section class="ask" aria-labelledby="ask-t-en"><h2 id="ask-t-en">Didn&#x27;t find what you need?</h2><p class="hint">Ask your question. We answer by adding it to the guides, and by email if you leave one.</p>
 <form class="ask-form" data-thanks="Thanks! Your question has been sent."><textarea name="q" required maxlength="1000" aria-label="Didn&#x27;t find what you need?" placeholder="e.g. Can I book a KTX seat with a card from my home country?"></textarea>
 <input name="em" type="email" maxlength="120" autocomplete="email" aria-label="Email (optional, for a reply)" placeholder="Email (optional, for a reply)"><button class="btn" type="submit">Send question</button><p class="fb-done" role="status"></p></form></section><p class="fb-line"><button type="button" class="linkbtn" data-feedback="">💬 Send feedback</button></p><details class="about"><summary>About this guide</summary><div class="in">
@@ -338,7 +391,16 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !documen
 (function () {
   document.querySelectorAll("[data-show]").forEach(b => b.addEventListener("click", () => show(b.dataset.lbl, b.dataset.show, "", b.dataset.mean)));
   const saved = (store("wik-setup") || "visitor|ios").split("|");
-  const blocks = [...document.querySelectorAll(".card[data-p]")];
+  document.querySelectorAll("[data-copy]").forEach(b => b.addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(b.dataset.copy); } catch (e) { return; }
+    const was = b.innerHTML; b.classList.add("done"); b.setAttribute("aria-label", b.dataset.done);
+    const tip = document.createElement("span"); tip.className = "tip"; tip.textContent = b.dataset.done; tip.setAttribute("role", "status"); b.append(tip);
+    setTimeout(() => { b.innerHTML = was; b.classList.remove("done"); b.removeAttribute("aria-label"); }, 1600);
+    count("copy/" + location.pathname, "copy korean");
+  }));
+  /* A link to a folded section opens it. */
+  const h = location.hash && document.getElementById(location.hash.slice(1)); if (h && h.tagName === "DETAILS") h.open = true;
+  const blocks = [...document.querySelectorAll(".pv[data-p]")];
   if (blocks.length < 2) return;
   let shown = 0;
   for (const b of blocks) { const ok = b.dataset.p === saved[0] && (!b.dataset.d || b.dataset.d === saved[1]); b.hidden = !ok; if (ok) shown++; }

@@ -255,15 +255,6 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-t
 .ask-form .btn { justify-self: start; }
 .ask-form .fb-done { margin: 0; min-height: 0; }
 
-/* Static guide list on the home page (crawlable, visible to everyone) */
-.guide-list { margin: 8px auto 28px; }
-.guide-list h2 { font: 700 20px var(--display); margin: 0 0 10px; }
-.guide-list h3 { font: 700 16px var(--display); color: var(--muted); margin: 18px 0 8px; }
-.guide-list ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-.guide-list li { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
-.guide-list a { font-weight: 700; display: block; margin-bottom: 2px; }
-.guide-list span { color: var(--muted); font-size: 15px; }
-
 .checked-line { margin: 10px 2px 0; font-size: 14px; color: var(--muted); }
 .host-cta { margin: 18px 0 0; padding: 12px 14px; border: 1px dashed var(--line); border-radius: 12px; font-size: 15px; color: var(--muted); }
 .deep { margin: 26px 0 0; }
@@ -281,6 +272,63 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-t
 .foot p { margin: 6px 0 0; }
 .skip { position: absolute; left: -9999px; top: 0; z-index: 20; background: var(--easy); color: #0e1430; padding: 10px 14px; border-radius: 0 0 10px 0; font-weight: 700; }
 .skip:focus { left: 0; }
+
+/* Short-first layout (round 14) */
+.hero h1 { line-height: 1.2; }
+.answer { background: var(--surface); border: 1px solid var(--line); border-left: 6px solid var(--line); border-radius: 16px; padding: 14px 16px; display: grid; gap: 10px; margin: 4px 0 0; }
+.answer.ok { border-left-color: var(--ok); } .answer.warn { border-left-color: var(--warn); } .answer.mixed { border-left-color: var(--mixed); } .answer.bad { border-left-color: var(--bad); }
+.pv[hidden] { display: none; }
+.ans-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 6px; }
+.ans-top h2 { font: 700 15px var(--body); color: var(--muted); margin: 0; }
+.answer .verdict { font-size: 18px; line-height: 1.4; }
+.glance { margin: 0; display: grid; gap: 6px; font-size: 15px; line-height: 1.4; }
+.glance > div { display: grid; grid-template-columns: 96px 1fr; gap: 8px; }
+.glance dt { color: var(--muted); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: .04em; padding-top: 2px; }
+.glance dd { margin: 0; }
+.ck { color: var(--muted); font-size: 12px; white-space: nowrap; }
+.stamp { margin: 0; font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 8px; }
+.do { margin: 18px 0 0; display: grid; gap: 12px; }
+.do .steps li { line-height: 1.45; }
+.says, .names { margin: 22px 0 0; }
+.says h2, .names h2 { font: 700 18px var(--display); margin: 0 0 8px; }
+.say { background: var(--surface); border: 2px solid var(--easy); border-radius: 16px; padding: 14px 16px; display: grid; gap: 8px; }
+.say-ko { font: 800 26px/1.35 var(--ko, var(--body)); margin: 0; word-break: keep-all; }
+.say-mean { margin: 0; color: var(--muted); }
+.names ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.chip { width: 100%; display: grid; grid-template-columns: 1fr auto; grid-template-areas: "ko i" "en i"; align-items: center; text-align: left; gap: 0 10px; padding: 10px 14px; border: 1.5px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--ink); font: inherit; cursor: pointer; position: relative; }
+.chip span { grid-area: ko; font: 700 19px var(--ko, var(--body)); }
+.chip small { grid-area: en; color: var(--muted); font-size: 13px; }
+.chip i { grid-area: i; font-style: normal; }
+.chip.done, .btn.done { border-color: var(--ok); }
+.tip { position: absolute; right: 10px; top: -10px; background: var(--ink); color: var(--surface); font-size: 12px; padding: 2px 8px; border-radius: 99px; }
+.btn { position: relative; }
+.do + .actions, .names + .actions, .says + .actions { margin-top: 18px; }
+details.more { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; margin: 10px 0 0; }
+details.more > summary { list-style: none; cursor: pointer; padding: 14px 16px; font: 700 16px var(--body); display: flex; justify-content: space-between; align-items: center; gap: 10px; min-height: 24px; }
+details.more > summary::-webkit-details-marker { display: none; }
+details.more > summary::after { content: "+"; font: 400 22px var(--body); color: var(--muted); }
+details.more[open] > summary::after { content: "–"; }
+details.more > .in, details.more > .topics { padding: 0 16px 14px; margin: 0; }
+details.more.deep { margin-top: 10px; }
+.actions + details.more { margin-top: 22px; }
+.notes p { margin: 0 0 8px; }
+/* Home: situation cards */
+.sit { margin: 6px 0 0; }
+.sit > h2, .tool-h { font: 800 20px/1.2 var(--display); margin: 0 0 10px; }
+.sit-grid { display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
+@media (max-width: 360px) { .sit-grid { grid-template-columns: 1fr; } }
+.sit-card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 12px; display: grid; gap: 6px; align-content: start; }
+.sit-card[hidden] { display: none; }
+.sit-card h3 { display: flex; align-items: center; gap: 8px; margin: 0; font: 700 16px/1.2 var(--body); }
+.sit-card h3 svg { width: 22px; height: 22px; flex: none; fill: none; stroke: var(--brand); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.sit-card p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.35; }
+.sit-links { display: flex; flex-wrap: wrap; gap: 6px; }
+.sit-card .sit-links a { display: inline-block; padding: 5px 10px; min-height: 24px; box-sizing: border-box; border-radius: 99px; background: var(--bg); border: 1px solid var(--line); color: var(--ink); font-weight: 600; font-size: 14px; text-decoration: none; }
+.sit-card .sit-links a[hidden] { display: none; }
+.tool { margin: 26px 0 0; }
+.onb { margin: 0; }
+.onb h3 { font: 700 18px/1.3 var(--body); margin: 0 0 10px; }
+.offline-note { margin: 22px 0 0; font-size: 14px; color: var(--muted); }
 </style>
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "金浦機場到首爾市區:機場鐵路AREX、9號線急行、5號線、計程車(2026)", "description": "金浦機場比仁川機場離首爾近很多。機場站有三條路線,依飯店位置選一條就好。", "datePublished": "2026-11-20", "dateModified": "2026-11-20", "inLanguage": "zh-Hant-TW", "url": "https://easymodekorea.com/zh-tw/gimpo-airport-to-seoul.html", "mainEntityOfPage": "https://easymodekorea.com/zh-tw/gimpo-airport-to-seoul.html", "image": "https://easymodekorea.com/og.png", "author": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/zh-tw/about.html"}, "publisher": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/", "logo": {"@type": "ImageObject", "url": "https://easymodekorea.com/icon-512.png"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "EasyModeKorea", "item": "https://easymodekorea.com/zh-tw/"}, {"@type": "ListItem", "position": 2, "name": "金浦機場", "item": "https://easymodekorea.com/zh-tw/gimpo-airport-to-seoul.html"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "從金浦機場怎麼到首爾市區?", "acceptedAnswer": {"@type": "Answer", "text": "到弘大或首爾站搭AREX,到汝矣島或江南搭9號線,到光化門搭5號線。三條都能用T-money。 從入境大廳跟著「地鐵/機場鐵路」指標走到金浦機場站。 去江南搭9號線急行比較快,但尖峰時段非常擠。 金浦的AREX是每站停的普通車。直達車只從仁川機場發車。"}}, {"@type": "Question", "name": "金浦和仁川哪個離首爾近?", "acceptedAnswer": {"@type": "Answer", "text": "金浦近很多,搭地鐵到首爾大部分地方都在一小時內。"}}, {"@type": "Question", "name": "哪些航班在金浦起降?", "acceptedAnswer": {"@type": "Answer", "text": "多數國內線,例如濟州、釜山,以及部分短程國際線,例如東京羽田、大阪關西、台北松山、上海虹橋。"}}, {"@type": "Question", "name": "從機場就能用T-money嗎?", "acceptedAnswer": {"@type": "Answer", "text": "可以。AREX、5號線、9號線都能用同一張T-money。"}}, {"@type": "Question", "name": "在金浦入境也要填e-Arrival Card嗎?", "acceptedAnswer": {"@type": "Answer", "text": "國際線要,規定和仁川一樣。國內線不用。"}}]}]</script>
@@ -289,20 +337,25 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-t
 <a class="skip" href="#answer">跳到答案</a>
 <header class="hero"><div class="wrap">
   <div class="toprow"><a class="logo" href="./">EasyMode<b>Korea</b></a><nav class="langs" aria-label="語言"><a href="../gimpo-airport-to-seoul.html" hreflang="en" lang="en">English</a><a href="../ja/gimpo-airport-to-seoul.html" hreflang="ja" lang="ja">日本語</a><a href="../zh-tw/gimpo-airport-to-seoul.html" hreflang="zh-Hant-TW" lang="zh-Hant-TW" aria-current="page">繁體中文</a><a href="../zh-cn/gimpo-airport-to-seoul.html" hreflang="zh-CN" lang="zh-CN">简体中文</a><a href="../vi/gimpo-airport-to-seoul.html" hreflang="vi" lang="vi">Tiếng Việt</a></nav></div>
-  <h1>從金浦機場怎麼到首爾市區?</h1><p class="lede">金浦機場比仁川機場離首爾近很多。機場站有三條路線,依飯店位置選一條就好。</p>
+  <h1>從金浦機場怎麼到首爾市區?</h1>
 </div></header>
 <div class="wrap">
-  <div class="actions"><a class="btn" href="./#task-gimpo">用自己的狀況確認</a><button class="btn alt" type="button" data-show="9호선 급행 타는 곳이 어디예요?" data-lbl="給店員看" data-mean="意思: 9號線急行在哪裡搭?">🗣 9號線急行在哪裡搭?</button></div>
-  <main class="cards" id="answer"><article class="card ok"><div class="actions" style="justify-content:space-between;align-items:center"><h2>直接能用</h2><span class="pill ok">直接能用</span></div>
-<p class="verdict">到弘大或首爾站搭AREX,到汝矣島或江南搭9號線,到光化門搭5號線。三條都能用T-money。</p><ol class="steps"><li>從入境大廳跟著「地鐵/機場鐵路」指標走到金浦機場站。</li><li>去江南搭9號線急行比較快,但尖峰時段非常擠。</li><li>金浦的AREX是每站停的普通車。直達車只從仁川機場發車。</li></ol><p class="fallback"><b>如果不行</b>電車大約午夜收班。之後請到入境大廳外的計程車排班處,或用k.ride、Uber。</p></article><button class="linkbtn" type="button" id="show-all" hidden>查看其他狀況的答案</button><section class="deep" aria-labelledby="st-gimpo"><h2 id="st-gimpo">第一次使用:一步一步來</h2><ol class="steps full"><li>出關後跟著「Subway 地鐵/機場鐵路」的指標走。金浦機場站離國內線和國際線航廈都只要走一小段路。<!-- screenshot: gimpo-signs --></li><li>依住宿地點選路線。機場鐵路(<a href="incheon-airport-to-seoul.html">AREX</a>)到弘大入口和首爾站,9號線到汝矣島和江南一帶,5號線到光化門和鍾路。</li><li>在閘門嗶<a href="tmoney-subway-bus.html">T-money</a>,或在售票機買單程票;售票機有中文和英文介面。</li><li>9號線的急行列車跳過很多站,到江南快很多。看清楚月台標示是急行(급행)。尖峰時段非常擠。<!-- screenshot: gimpo-platform --></li><li>搭AREX的話,金浦只有每站停的普通車。坐到弘大入口或首爾站,到首爾站大約20到25分鐘。</li><li>行李多、深夜或多人同行時,從入境大廳外的排班處搭計程車比較輕鬆。<a href="taxi.html">k.ride</a>和Uber也能用。</li><li>要轉仁川機場?AREX也連接金浦和仁川;第二次報到要預留充足時間。</li></ol></section>
-<section class="deep" aria-labelledby="er-gimpo"><h2 id="er-gimpo">常見問題與解決方法</h2><ul class="errs"><li><p class="prob"><b>坐到9號線的普通車,每站都停。</b></p><p>在汝矣島等急行有停的站下車,在同一個月台換下一班急行。</p></li><li><p class="prob"><b>售票機不收外國卡。</b></p><p>付現金,或在航廈的便利商店幫T-money儲值。</p></li><li><p class="prob"><b>一直等AREX直達車都沒來。</b></p><p>直達車只跑仁川機場到首爾站。請搭普通車。</p></li><li><p class="prob"><b>太晚抵達,電車已經收班。</b></p><p>電車大約午夜收班。從排班處搭計程車,或用k.ride、Uber。</p></li><li><p class="prob"><b>尖峰時段車站非常擠。</b></p><p>等下一班,或如果順路,改搭5號線或AREX。</p></li></ul></section>
-<section class="deep faq" aria-labelledby="fq-gimpo"><h2 id="fq-gimpo">常見問答</h2><h3>金浦和仁川哪個離首爾近?</h3><p>金浦近很多,搭地鐵到首爾大部分地方都在一小時內。</p><h3>哪些航班在金浦起降?</h3><p>多數國內線,例如濟州、釜山,以及部分短程國際線,例如東京羽田、大阪關西、台北松山、上海虹橋。</p><h3>從機場就能用T-money嗎?</h3><p>可以。AREX、5號線、9號線都能用同一張T-money。</p><h3>在金浦入境也要填e-Arrival Card嗎?</h3><p>國際線要,規定和仁川一樣。國內線不用。</p></section>
-<section class="deep" aria-labelledby="ct-gimpo"><h2 id="ct-gimpo">官方與一手資料</h2><ul class="cites"><li><a href="https://www.airport.co.kr/gimpoeng/main.do" rel="noopener" target="_blank">Korea Airports Corporation: Gimpo International Airport</a></li><li><a href="https://www.arex.or.kr/" rel="noopener" target="_blank">AREX (Airport Railroad) official site</a></li><li><a href="https://mediahub.seoul.go.kr/archives/1108547" rel="noopener" target="_blank">Seoul Metropolitan Government: getting around Gimpo Airport (Korean)</a></li></ul></section></main>
-  <p class="checked-line">確認日 <time datetime="2026-11-17">2026年11月17日</time></p>
-  <details class="panel" open><summary>資料來源與備註</summary><div class="in notes"><ul><li>確認日 2026年11月17日</li><li>車程時間僅供參考,會隨時刻表變動。出發前先用Naver Map查路線。</li><li><a href="https://www.airport.co.kr/gimpoeng/main.do" rel="noopener" target="_blank">Korea Airports Corporation: Gimpo International Airport</a></li><li><a href="https://www.arex.or.kr/" rel="noopener" target="_blank">AREX (Airport Railroad) official site</a></li><li><a href="https://mediahub.seoul.go.kr/archives/1108547" rel="noopener" target="_blank">Seoul Metropolitan Government: getting around Gimpo Airport (Korean)</a></li></ul></div></details>
-  <p class="host-cta">🏠 在韓國經營民宿或旅館嗎?<a href="../hosts.html">把這份指南傳給你的房客</a>(韓文頁面)。</p>
+  <main id="answer">
+  <section class="answer ok"><div class="pv ok"><div class="ans-top"><h2>直接能用</h2><span class="pill ok">直接能用</span></div><p class="verdict">到弘大或首爾站搭AREX,到汝矣島或江南搭9號線,到光化門搭5號線。三條都能用T-money。</p></div><dl class="glance"><div><dt>Where</dt><dd>Gimpo Airport station, a short walk from both terminals <time class="ck" datetime="2026-11-20">✓ 2026年11月20日</time></dd></div><div><dt>Time</dt><dd>AREX to Seoul Station: about 20 to 25 min <time class="ck" datetime="2026-11-20">✓ 2026年11月20日</time></dd></div><div><dt>Good to know</dt><dd>T-money works on AREX, Line 5 and Line 9 <time class="ck" datetime="2026-11-20">✓ 2026年11月20日</time></dd></div></dl><p class="stamp">Checked against <a href="https://www.airport.co.kr/gimpoeng/main.do" rel="noopener" target="_blank">Korea Airports Corporation: Gimpo International Airport</a> on <time datetime="2026-11-20">2026年11月20日</time></p></section>
+  <button class="linkbtn" type="button" id="show-all" hidden>查看其他狀況的答案</button>
+  <section class="do" aria-labelledby="do-gimpo"><h2 id="do-gimpo" class="sr">第一次使用:一步一步來</h2><div class="pv"><ol class="steps"><li>從入境大廳跟著「地鐵/機場鐵路」指標走到金浦機場站。</li><li>去江南搭9號線急行比較快,但尖峰時段非常擠。</li><li>金浦的AREX是每站停的普通車。直達車只從仁川機場發車。</li></ol><p class="fallback"><b>如果不行</b>電車大約午夜收班。之後請到入境大廳外的計程車排班處,或用k.ride、Uber。</p></div></section>
+  <section class="says" aria-labelledby="say-gimpo"><h2 id="say-gimpo">Show this to staff</h2><div class="say"><p class="say-ko" lang="ko">9호선 급행 타는 곳이 어디예요?</p><p class="say-mean">9號線急行在哪裡搭?</p><div class="actions"><button class="btn alt" type="button" data-show="9호선 급행 타는 곳이 어디예요?" data-lbl="給店員看" data-mean="意思: 9號線急行在哪裡搭?">🗣 Show full screen</button><button class="btn ghost" type="button" data-copy="9호선 급행 타는 곳이 어디예요?" data-done="✓ Copied">📋 Copy</button></div></div></section>
+  <section class="names" aria-labelledby="nm-gimpo"><h2 id="nm-gimpo">Korean names to copy (paste into Naver Map or show a driver)</h2><ul><li><button class="chip" type="button" data-copy="김포공항역" data-done="✓ Copied"><span lang="ko">김포공항역</span><small>Gimpo Airport station</small><i aria-hidden="true">📋</i></button></li><li><button class="chip" type="button" data-copy="김포공항 국제선" data-done="✓ Copied"><span lang="ko">김포공항 국제선</span><small>Gimpo international terminal</small><i aria-hidden="true">📋</i></button></li></ul></section>
+  <div class="actions"><a class="btn" href="./#task-gimpo">用自己的狀況確認</a></div>
+  <details class="more deep" id="st-gimpo"><summary>第一次使用:一步一步來</summary><div class="in"><ol class="steps full"><li>出關後跟著「Subway 地鐵/機場鐵路」的指標走。金浦機場站離國內線和國際線航廈都只要走一小段路。<!-- screenshot: gimpo-signs --></li><li>依住宿地點選路線。機場鐵路(<a href="incheon-airport-to-seoul.html">AREX</a>)到弘大入口和首爾站,9號線到汝矣島和江南一帶,5號線到光化門和鍾路。</li><li>在閘門嗶<a href="tmoney-subway-bus.html">T-money</a>,或在售票機買單程票;售票機有中文和英文介面。</li><li>9號線的急行列車跳過很多站,到江南快很多。看清楚月台標示是急行(급행)。尖峰時段非常擠。<!-- screenshot: gimpo-platform --></li><li>搭AREX的話,金浦只有每站停的普通車。坐到弘大入口或首爾站,到首爾站大約20到25分鐘。</li><li>行李多、深夜或多人同行時,從入境大廳外的排班處搭計程車比較輕鬆。<a href="taxi.html">k.ride</a>和Uber也能用。</li><li>要轉仁川機場?AREX也連接金浦和仁川;第二次報到要預留充足時間。</li></ol></div></details>
+<details class="more deep" id="er-gimpo"><summary>常見問題與解決方法</summary><div class="in"><ul class="errs"><li><p class="prob"><b>坐到9號線的普通車,每站都停。</b></p><p>在汝矣島等急行有停的站下車,在同一個月台換下一班急行。</p></li><li><p class="prob"><b>售票機不收外國卡。</b></p><p>付現金,或在航廈的便利商店幫T-money儲值。</p></li><li><p class="prob"><b>一直等AREX直達車都沒來。</b></p><p>直達車只跑仁川機場到首爾站。請搭普通車。</p></li><li><p class="prob"><b>太晚抵達,電車已經收班。</b></p><p>電車大約午夜收班。從排班處搭計程車,或用k.ride、Uber。</p></li><li><p class="prob"><b>尖峰時段車站非常擠。</b></p><p>等下一班,或如果順路,改搭5號線或AREX。</p></li></ul></div></details>
+<details class="more deep faq" id="fq-gimpo"><summary>常見問答</summary><div class="in"><h3>金浦和仁川哪個離首爾近?</h3><p>金浦近很多,搭地鐵到首爾大部分地方都在一小時內。</p><h3>哪些航班在金浦起降?</h3><p>多數國內線,例如濟州、釜山,以及部分短程國際線,例如東京羽田、大阪關西、台北松山、上海虹橋。</p><h3>從機場就能用T-money嗎?</h3><p>可以。AREX、5號線、9號線都能用同一張T-money。</p><h3>在金浦入境也要填e-Arrival Card嗎?</h3><p>國際線要,規定和仁川一樣。國內線不用。</p></div></details>
+<details class="more deep" id="ct-gimpo"><summary>官方與一手資料</summary><div class="in"><ul class="cites"><li><a href="https://www.airport.co.kr/gimpoeng/main.do" rel="noopener" target="_blank">Korea Airports Corporation: Gimpo International Airport</a></li><li><a href="https://www.arex.or.kr/" rel="noopener" target="_blank">AREX (Airport Railroad) official site</a></li><li><a href="https://mediahub.seoul.go.kr/archives/1108547" rel="noopener" target="_blank">Seoul Metropolitan Government: getting around Gimpo Airport (Korean)</a></li></ul></div></details>
+  <details class="more"><summary>資料來源與備註</summary><div class="in notes"><p>金浦機場比仁川機場離首爾近很多。機場站有三條路線,依飯店位置選一條就好。</p><ul><li>確認日 2026年11月17日</li><li>車程時間僅供參考,會隨時刻表變動。出發前先用Naver Map查路線。</li><li><a href="https://www.airport.co.kr/gimpoeng/main.do" rel="noopener" target="_blank">Korea Airports Corporation: Gimpo International Airport</a></li><li><a href="https://www.arex.or.kr/" rel="noopener" target="_blank">AREX (Airport Railroad) official site</a></li><li><a href="https://mediahub.seoul.go.kr/archives/1108547" rel="noopener" target="_blank">Seoul Metropolitan Government: getting around Gimpo Airport (Korean)</a></li></ul></div></details>
+  </main>
   <section class="related"><h2>相關指南</h2><ul><li><a href="tmoney-subway-bus.html">T-money可以用國外信用卡儲值嗎?</a></li><li><a href="taxi.html">沒有韓國號碼能在韓國叫計程車嗎?</a></li><li><a href="jeju-getting-around.html">在濟州島怎麼玩比較方便?</a></li><li><a href="incheon-airport-to-seoul.html">仁川機場怎麼到首爾市區?</a></li></ul></section>
-  <nav class="topics"><a href="mobile-data-sim.html">電話與上網</a><a href="incheon-airport-to-seoul.html">機場到市區</a><a href="maps.html">地圖</a><a href="taxi.html">計程車</a><a href="tmoney-subway-bus.html">地鐵與公車</a><a href="seoul-tourist-transit-pass.html">交通票券</a><a href="ktx-train-booking.html">KTX火車</a><a href="seoul-to-busan-k-tour-pass.html">釜山之旅</a><a href="kr-pass-korail-pass.html">KR Pass</a><a href="dmz-jsa-tour-booking.html">DMZ導覽</a><a href="jeju-getting-around.html">濟州交通</a><a href="restaurant-reservations.html">餐廳訂位</a><a href="food-delivery.html">叫外送</a><a href="translation.html">翻譯</a><a href="tax-free-shopping.html">購物與退稅</a><a href="luggage-storage.html">寄放行李</a><a href="pharmacy-hospital.html">生病或受傷</a><a href="k-eta-entry-requirements.html">入境規定</a><a href="atm-foreign-card-cash.html">現金與ATM</a><a href="korea-power-plug-voltage.html">插頭與電壓</a></nav>
+  <details class="more"><summary>All guides</summary><nav class="topics"><a href="mobile-data-sim.html">電話與上網</a><a href="incheon-airport-to-seoul.html">機場到市區</a><a href="maps.html">地圖</a><a href="taxi.html">計程車</a><a href="tmoney-subway-bus.html">地鐵與公車</a><a href="seoul-tourist-transit-pass.html">交通票券</a><a href="ktx-train-booking.html">KTX火車</a><a href="seoul-to-busan-k-tour-pass.html">釜山之旅</a><a href="kr-pass-korail-pass.html">KR Pass</a><a href="dmz-jsa-tour-booking.html">DMZ導覽</a><a href="jeju-getting-around.html">濟州交通</a><a href="restaurant-reservations.html">餐廳訂位</a><a href="food-delivery.html">叫外送</a><a href="translation.html">翻譯</a><a href="tax-free-shopping.html">購物與退稅</a><a href="luggage-storage.html">寄放行李</a><a href="pharmacy-hospital.html">生病或受傷</a><a href="k-eta-entry-requirements.html">入境規定</a><a href="atm-foreign-card-cash.html">現金與ATM</a><a href="korea-power-plug-voltage.html">插頭與電壓</a></nav></details>
+  <p class="host-cta">🏠 在韓國經營民宿或旅館嗎?<a href="../hosts.html">把這份指南傳給你的房客</a>(韓文頁面)。</p>
   <section class="ask" aria-labelledby="ask-t-zh-tw"><h2 id="ask-t-zh-tw">沒找到需要的資訊嗎?</h2><p class="hint">留下你的問題。我們會補充到指南中;若留下電子郵件,也會回信。</p>
 <form class="ask-form" data-thanks="謝謝!已收到你的問題。"><textarea name="q" required maxlength="1000" aria-label="沒找到需要的資訊嗎?" placeholder="例如:用國外發行的卡可以訂 KTX 嗎?"></textarea>
 <input name="em" type="email" maxlength="120" autocomplete="email" aria-label="電子郵件(選填,用於回覆)" placeholder="電子郵件(選填,用於回覆)"><button class="btn" type="submit">送出問題</button><p class="fb-done" role="status"></p></form></section><p class="fb-line"><button type="button" class="linkbtn" data-feedback="">💬 提供意見</button></p><details class="about"><summary>關於這份指南</summary><div class="in">
@@ -338,7 +391,16 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !documen
 (function () {
   document.querySelectorAll("[data-show]").forEach(b => b.addEventListener("click", () => show(b.dataset.lbl, b.dataset.show, "", b.dataset.mean)));
   const saved = (store("wik-setup") || "visitor|ios").split("|");
-  const blocks = [...document.querySelectorAll(".card[data-p]")];
+  document.querySelectorAll("[data-copy]").forEach(b => b.addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(b.dataset.copy); } catch (e) { return; }
+    const was = b.innerHTML; b.classList.add("done"); b.setAttribute("aria-label", b.dataset.done);
+    const tip = document.createElement("span"); tip.className = "tip"; tip.textContent = b.dataset.done; tip.setAttribute("role", "status"); b.append(tip);
+    setTimeout(() => { b.innerHTML = was; b.classList.remove("done"); b.removeAttribute("aria-label"); }, 1600);
+    count("copy/" + location.pathname, "copy korean");
+  }));
+  /* A link to a folded section opens it. */
+  const h = location.hash && document.getElementById(location.hash.slice(1)); if (h && h.tagName === "DETAILS") h.open = true;
+  const blocks = [...document.querySelectorAll(".pv[data-p]")];
   if (blocks.length < 2) return;
   let shown = 0;
   for (const b of blocks) { const ok = b.dataset.p === saved[0] && (!b.dataset.d || b.dataset.d === saved[1]); b.hidden = !ok; if (ok) shown++; }

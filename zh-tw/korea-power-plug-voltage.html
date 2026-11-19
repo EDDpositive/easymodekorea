@@ -255,15 +255,6 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-t
 .ask-form .btn { justify-self: start; }
 .ask-form .fb-done { margin: 0; min-height: 0; }
 
-/* Static guide list on the home page (crawlable, visible to everyone) */
-.guide-list { margin: 8px auto 28px; }
-.guide-list h2 { font: 700 20px var(--display); margin: 0 0 10px; }
-.guide-list h3 { font: 700 16px var(--display); color: var(--muted); margin: 18px 0 8px; }
-.guide-list ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-.guide-list li { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
-.guide-list a { font-weight: 700; display: block; margin-bottom: 2px; }
-.guide-list span { color: var(--muted); font-size: 15px; }
-
 .checked-line { margin: 10px 2px 0; font-size: 14px; color: var(--muted); }
 .host-cta { margin: 18px 0 0; padding: 12px 14px; border: 1px dashed var(--line); border-radius: 12px; font-size: 15px; color: var(--muted); }
 .deep { margin: 26px 0 0; }
@@ -281,6 +272,63 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-t
 .foot p { margin: 6px 0 0; }
 .skip { position: absolute; left: -9999px; top: 0; z-index: 20; background: var(--easy); color: #0e1430; padding: 10px 14px; border-radius: 0 0 10px 0; font-weight: 700; }
 .skip:focus { left: 0; }
+
+/* Short-first layout (round 14) */
+.hero h1 { line-height: 1.2; }
+.answer { background: var(--surface); border: 1px solid var(--line); border-left: 6px solid var(--line); border-radius: 16px; padding: 14px 16px; display: grid; gap: 10px; margin: 4px 0 0; }
+.answer.ok { border-left-color: var(--ok); } .answer.warn { border-left-color: var(--warn); } .answer.mixed { border-left-color: var(--mixed); } .answer.bad { border-left-color: var(--bad); }
+.pv[hidden] { display: none; }
+.ans-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 6px; }
+.ans-top h2 { font: 700 15px var(--body); color: var(--muted); margin: 0; }
+.answer .verdict { font-size: 18px; line-height: 1.4; }
+.glance { margin: 0; display: grid; gap: 6px; font-size: 15px; line-height: 1.4; }
+.glance > div { display: grid; grid-template-columns: 96px 1fr; gap: 8px; }
+.glance dt { color: var(--muted); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: .04em; padding-top: 2px; }
+.glance dd { margin: 0; }
+.ck { color: var(--muted); font-size: 12px; white-space: nowrap; }
+.stamp { margin: 0; font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 8px; }
+.do { margin: 18px 0 0; display: grid; gap: 12px; }
+.do .steps li { line-height: 1.45; }
+.says, .names { margin: 22px 0 0; }
+.says h2, .names h2 { font: 700 18px var(--display); margin: 0 0 8px; }
+.say { background: var(--surface); border: 2px solid var(--easy); border-radius: 16px; padding: 14px 16px; display: grid; gap: 8px; }
+.say-ko { font: 800 26px/1.35 var(--ko, var(--body)); margin: 0; word-break: keep-all; }
+.say-mean { margin: 0; color: var(--muted); }
+.names ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.chip { width: 100%; display: grid; grid-template-columns: 1fr auto; grid-template-areas: "ko i" "en i"; align-items: center; text-align: left; gap: 0 10px; padding: 10px 14px; border: 1.5px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--ink); font: inherit; cursor: pointer; position: relative; }
+.chip span { grid-area: ko; font: 700 19px var(--ko, var(--body)); }
+.chip small { grid-area: en; color: var(--muted); font-size: 13px; }
+.chip i { grid-area: i; font-style: normal; }
+.chip.done, .btn.done { border-color: var(--ok); }
+.tip { position: absolute; right: 10px; top: -10px; background: var(--ink); color: var(--surface); font-size: 12px; padding: 2px 8px; border-radius: 99px; }
+.btn { position: relative; }
+.do + .actions, .names + .actions, .says + .actions { margin-top: 18px; }
+details.more { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; margin: 10px 0 0; }
+details.more > summary { list-style: none; cursor: pointer; padding: 14px 16px; font: 700 16px var(--body); display: flex; justify-content: space-between; align-items: center; gap: 10px; min-height: 24px; }
+details.more > summary::-webkit-details-marker { display: none; }
+details.more > summary::after { content: "+"; font: 400 22px var(--body); color: var(--muted); }
+details.more[open] > summary::after { content: "–"; }
+details.more > .in, details.more > .topics { padding: 0 16px 14px; margin: 0; }
+details.more.deep { margin-top: 10px; }
+.actions + details.more { margin-top: 22px; }
+.notes p { margin: 0 0 8px; }
+/* Home: situation cards */
+.sit { margin: 6px 0 0; }
+.sit > h2, .tool-h { font: 800 20px/1.2 var(--display); margin: 0 0 10px; }
+.sit-grid { display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
+@media (max-width: 360px) { .sit-grid { grid-template-columns: 1fr; } }
+.sit-card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 12px; display: grid; gap: 6px; align-content: start; }
+.sit-card[hidden] { display: none; }
+.sit-card h3 { display: flex; align-items: center; gap: 8px; margin: 0; font: 700 16px/1.2 var(--body); }
+.sit-card h3 svg { width: 22px; height: 22px; flex: none; fill: none; stroke: var(--brand); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.sit-card p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.35; }
+.sit-links { display: flex; flex-wrap: wrap; gap: 6px; }
+.sit-card .sit-links a { display: inline-block; padding: 5px 10px; min-height: 24px; box-sizing: border-box; border-radius: 99px; background: var(--bg); border: 1px solid var(--line); color: var(--ink); font-weight: 600; font-size: 14px; text-decoration: none; }
+.sit-card .sit-links a[hidden] { display: none; }
+.tool { margin: 26px 0 0; }
+.onb { margin: 0; }
+.onb h3 { font: 700 18px/1.3 var(--body); margin: 0 0 10px; }
+.offline-note { margin: 22px 0 0; font-size: 14px; color: var(--muted); }
 </style>
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "韓國插座與電壓:需要轉接頭嗎?C型與F型、220V(2026)", "description": "韓國使用兩孔圓形插座,電壓為220V。手機和筆電的充電器通常只要有轉接頭就能用,但先看一下標籤。", "datePublished": "2026-11-19", "dateModified": "2026-11-20", "inLanguage": "zh-Hant-TW", "url": "https://easymodekorea.com/zh-tw/korea-power-plug-voltage.html", "mainEntityOfPage": "https://easymodekorea.com/zh-tw/korea-power-plug-voltage.html", "image": "https://easymodekorea.com/og.png", "author": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/zh-tw/about.html"}, "publisher": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/", "logo": {"@type": "ImageObject", "url": "https://easymodekorea.com/icon-512.png"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "EasyModeKorea", "item": "https://easymodekorea.com/zh-tw/"}, {"@type": "ListItem", "position": 2, "name": "插頭與電壓", "item": "https://easymodekorea.com/zh-tw/korea-power-plug-voltage.html"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "去韓國需要轉接頭嗎?", "acceptedAnswer": {"@type": "Answer", "text": "韓國插座是兩孔圓形(C型與F型),電壓220V、60Hz。大多數充電器只需要轉接頭。 看充電器上的標籤。如果寫著100-240V,只要轉接頭就能在韓國使用。 帶一個C型轉接頭。C型插頭也能插進韓國的F型插座。 如果設備只標示110V或120V,還需要變壓器。吹風機和電捲棒最常遇到這種情況。"}}, {"@type": "Question", "name": "韓國用哪種插頭?", "acceptedAnswer": {"@type": "Answer", "text": "C型和F型:兩支圓腳,220V、60Hz。"}}, {"@type": "Question", "name": "手機或筆電需要變壓器嗎?", "acceptedAnswer": {"@type": "Answer", "text": "通常不用。手機和筆電的充電器幾乎都支援100-240V,轉接頭就夠了。"}}, {"@type": "Question", "name": "台灣的電器可以直接用嗎?", "acceptedAnswer": {"@type": "Answer", "text": "插頭形狀不同,要轉接頭。只能用110V的電器還需要變壓器。"}}, {"@type": "Question", "name": "飯店有USB插孔嗎?", "acceptedAnswer": {"@type": "Answer", "text": "很多新飯店有,但不要指望,還是帶充電器和轉接頭。"}}]}]</script>
@@ -289,20 +337,25 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-t
 <a class="skip" href="#answer">跳到答案</a>
 <header class="hero"><div class="wrap">
   <div class="toprow"><a class="logo" href="./">EasyMode<b>Korea</b></a><nav class="langs" aria-label="語言"><a href="../korea-power-plug-voltage.html" hreflang="en" lang="en">English</a><a href="../ja/korea-power-plug-voltage.html" hreflang="ja" lang="ja">日本語</a><a href="../zh-tw/korea-power-plug-voltage.html" hreflang="zh-Hant-TW" lang="zh-Hant-TW" aria-current="page">繁體中文</a><a href="../zh-cn/korea-power-plug-voltage.html" hreflang="zh-CN" lang="zh-CN">简体中文</a><a href="../vi/korea-power-plug-voltage.html" hreflang="vi" lang="vi">Tiếng Việt</a></nav></div>
-  <h1>去韓國需要轉接頭嗎?</h1><p class="lede">韓國使用兩孔圓形插座,電壓為220V。手機和筆電的充電器通常只要有轉接頭就能用,但先看一下標籤。</p>
+  <h1>去韓國需要轉接頭嗎?</h1>
 </div></header>
 <div class="wrap">
-  <div class="actions"><a class="btn" href="./#task-power">用自己的狀況確認</a><button class="btn alt" type="button" data-show="여기 충전할 수 있는 콘센트 있어요?" data-lbl="給店員看" data-mean="意思: 這裡有可以充電的插座嗎?">🗣 這裡有可以充電的插座嗎?</button></div>
-  <main class="cards" id="answer"><article class="card ok"><div class="actions" style="justify-content:space-between;align-items:center"><h2>直接能用</h2><span class="pill ok">直接能用</span></div>
-<p class="verdict">韓國插座是兩孔圓形(C型與F型),電壓220V、60Hz。大多數充電器只需要轉接頭。</p><ol class="steps"><li>看充電器上的標籤。如果寫著100-240V,只要轉接頭就能在韓國使用。</li><li>帶一個C型轉接頭。C型插頭也能插進韓國的F型插座。</li><li>如果設備只標示110V或120V,還需要變壓器。吹風機和電捲棒最常遇到這種情況。</li></ol><p class="fallback"><b>如果不行</b>忘了帶轉接頭也沒關係,韓國有賣,到了再買就好。</p></article><button class="linkbtn" type="button" id="show-all" hidden>查看其他狀況的答案</button><section class="deep" aria-labelledby="st-power"><h2 id="st-power">第一次使用:一步一步來</h2><ol class="steps full"><li>看看每個充電器上的小字。寫著INPUT 100-240V,就只要轉接頭就能在韓國用。<!-- screenshot: power-label --></li><li>帶C型轉接頭(兩支圓腳)。也能插韓國牆上的F型插座。<!-- screenshot: power-socket --></li><li>只標示110V的電器,還需要變壓器。吹風機和離子夾最常見;很多飯店有提供吹風機。</li><li>晚上要充電的裝置,每個準備一個轉接頭,或帶一條小延長線加一個轉接頭。</li><li>忘了帶?便利商店和生活百貨店有賣轉接頭,很多飯店櫃台也能借。</li><li>行動電源:放隨身行李,不要放托運行李,機上使用請遵守航空公司規定。</li></ol></section>
-<section class="deep" aria-labelledby="er-power"><h2 id="er-power">常見問題與解決方法</h2><ul class="errs"><li><p class="prob"><b>插得進去但沒有充電。</b></p><p>換一個插座試試,有些插座的開關是關的。確認充電器真的標示100-240V。</p></li><li><p class="prob"><b>電器變燙或有燒焦味。</b></p><p>馬上拔掉。很可能是只能用110V的電器,需要變壓器而不只是轉接頭。</p></li><li><p class="prob"><b>插頭在插座裡鬆鬆的。</b></p><p>韓國插座是凹進去的。把轉接頭插到底,或換細一點的C型轉接頭。</p></li><li><p class="prob"><b>只有台灣的扁腳插頭。</b></p><p>用A型(扁腳)轉C/F型的轉接頭。</p></li></ul></section>
-<section class="deep faq" aria-labelledby="fq-power"><h2 id="fq-power">常見問答</h2><h3>韓國用哪種插頭?</h3><p>C型和F型:兩支圓腳,220V、60Hz。</p><h3>手機或筆電需要變壓器嗎?</h3><p>通常不用。手機和筆電的充電器幾乎都支援100-240V,轉接頭就夠了。</p><h3>台灣的電器可以直接用嗎?</h3><p>插頭形狀不同,要轉接頭。只能用110V的電器還需要變壓器。</p><h3>飯店有USB插孔嗎?</h3><p>很多新飯店有,但不要指望,還是帶充電器和轉接頭。</p></section>
-<section class="deep" aria-labelledby="ct-power"><h2 id="ct-power">官方與一手資料</h2><ul class="cites"><li><a href="https://www.trip.com/guide/info/south-korea-plug.html" rel="noopener" target="_blank">Trip.com: South Korea plug types and voltage</a></li><li><a href="https://www.remitly.com/blog/technology/electrical-outlets-in-south-korea/" rel="noopener" target="_blank">Remitly: electrical outlets in South Korea</a></li></ul></section></main>
-  <p class="checked-line">確認日 <time datetime="2026-11-17">2026年11月17日</time></p>
-  <details class="panel" open><summary>資料來源與備註</summary><div class="in notes"><ul><li>確認日 2026年11月17日</li><li>少數指南寫230V、50Hz,但多數資料都是220V、60Hz。支援100-240V的充電器兩者都能用。</li><li><a href="https://www.trip.com/guide/info/south-korea-plug.html" rel="noopener" target="_blank">Trip.com: South Korea plug types and voltage</a></li><li><a href="https://www.remitly.com/blog/technology/electrical-outlets-in-south-korea/" rel="noopener" target="_blank">Remitly: electrical outlets in South Korea</a></li></ul></div></details>
-  <p class="host-cta">🏠 在韓國經營民宿或旅館嗎?<a href="../hosts.html">把這份指南傳給你的房客</a>(韓文頁面)。</p>
+  <main id="answer">
+  <section class="answer ok"><div class="pv ok"><div class="ans-top"><h2>直接能用</h2><span class="pill ok">直接能用</span></div><p class="verdict">韓國插座是兩孔圓形(C型與F型),電壓220V、60Hz。大多數充電器只需要轉接頭。</p></div><dl class="glance"><div><dt>Good to know</dt><dd>Type C and F sockets, 220 V, 60 Hz <time class="ck" datetime="2026-11-17">✓ 2026年11月17日</time></dd></div><div><dt>Where</dt><dd>Bring a Type C adapter; shops in Korea sell them too <time class="ck" datetime="2026-11-17">✓ 2026年11月17日</time></dd></div></dl><p class="stamp">Checked against <a href="https://www.trip.com/guide/info/south-korea-plug.html" rel="noopener" target="_blank">Trip.com: South Korea plug types and voltage</a> on <time datetime="2026-11-17">2026年11月17日</time></p></section>
+  <button class="linkbtn" type="button" id="show-all" hidden>查看其他狀況的答案</button>
+  <section class="do" aria-labelledby="do-power"><h2 id="do-power" class="sr">第一次使用:一步一步來</h2><div class="pv"><ol class="steps"><li>看充電器上的標籤。如果寫著100-240V,只要轉接頭就能在韓國使用。</li><li>帶一個C型轉接頭。C型插頭也能插進韓國的F型插座。</li><li>如果設備只標示110V或120V,還需要變壓器。吹風機和電捲棒最常遇到這種情況。</li></ol><p class="fallback"><b>如果不行</b>忘了帶轉接頭也沒關係,韓國有賣,到了再買就好。</p></div></section>
+  <section class="says" aria-labelledby="say-power"><h2 id="say-power">Show this to staff</h2><div class="say"><p class="say-ko" lang="ko">여기 충전할 수 있는 콘센트 있어요?</p><p class="say-mean">這裡有可以充電的插座嗎?</p><div class="actions"><button class="btn alt" type="button" data-show="여기 충전할 수 있는 콘센트 있어요?" data-lbl="給店員看" data-mean="意思: 這裡有可以充電的插座嗎?">🗣 Show full screen</button><button class="btn ghost" type="button" data-copy="여기 충전할 수 있는 콘센트 있어요?" data-done="✓ Copied">📋 Copy</button></div></div></section>
+  <section class="names" aria-labelledby="nm-power"><h2 id="nm-power">Korean names to copy (paste into Naver Map or show a driver)</h2><ul><li><button class="chip" type="button" data-copy="여행용 어댑터" data-done="✓ Copied"><span lang="ko">여행용 어댑터</span><small>Travel plug adapter</small><i aria-hidden="true">📋</i></button></li></ul></section>
+  <div class="actions"><a class="btn" href="./#task-power">用自己的狀況確認</a></div>
+  <details class="more deep" id="st-power"><summary>第一次使用:一步一步來</summary><div class="in"><ol class="steps full"><li>看看每個充電器上的小字。寫著INPUT 100-240V,就只要轉接頭就能在韓國用。<!-- screenshot: power-label --></li><li>帶C型轉接頭(兩支圓腳)。也能插韓國牆上的F型插座。<!-- screenshot: power-socket --></li><li>只標示110V的電器,還需要變壓器。吹風機和離子夾最常見;很多飯店有提供吹風機。</li><li>晚上要充電的裝置,每個準備一個轉接頭,或帶一條小延長線加一個轉接頭。</li><li>忘了帶?便利商店和生活百貨店有賣轉接頭,很多飯店櫃台也能借。</li><li>行動電源:放隨身行李,不要放托運行李,機上使用請遵守航空公司規定。</li></ol></div></details>
+<details class="more deep" id="er-power"><summary>常見問題與解決方法</summary><div class="in"><ul class="errs"><li><p class="prob"><b>插得進去但沒有充電。</b></p><p>換一個插座試試,有些插座的開關是關的。確認充電器真的標示100-240V。</p></li><li><p class="prob"><b>電器變燙或有燒焦味。</b></p><p>馬上拔掉。很可能是只能用110V的電器,需要變壓器而不只是轉接頭。</p></li><li><p class="prob"><b>插頭在插座裡鬆鬆的。</b></p><p>韓國插座是凹進去的。把轉接頭插到底,或換細一點的C型轉接頭。</p></li><li><p class="prob"><b>只有台灣的扁腳插頭。</b></p><p>用A型(扁腳)轉C/F型的轉接頭。</p></li></ul></div></details>
+<details class="more deep faq" id="fq-power"><summary>常見問答</summary><div class="in"><h3>韓國用哪種插頭?</h3><p>C型和F型:兩支圓腳,220V、60Hz。</p><h3>手機或筆電需要變壓器嗎?</h3><p>通常不用。手機和筆電的充電器幾乎都支援100-240V,轉接頭就夠了。</p><h3>台灣的電器可以直接用嗎?</h3><p>插頭形狀不同,要轉接頭。只能用110V的電器還需要變壓器。</p><h3>飯店有USB插孔嗎?</h3><p>很多新飯店有,但不要指望,還是帶充電器和轉接頭。</p></div></details>
+<details class="more deep" id="ct-power"><summary>官方與一手資料</summary><div class="in"><ul class="cites"><li><a href="https://www.trip.com/guide/info/south-korea-plug.html" rel="noopener" target="_blank">Trip.com: South Korea plug types and voltage</a></li><li><a href="https://www.remitly.com/blog/technology/electrical-outlets-in-south-korea/" rel="noopener" target="_blank">Remitly: electrical outlets in South Korea</a></li></ul></div></details>
+  <details class="more"><summary>資料來源與備註</summary><div class="in notes"><p>韓國使用兩孔圓形插座,電壓為220V。手機和筆電的充電器通常只要有轉接頭就能用,但先看一下標籤。</p><ul><li>確認日 2026年11月17日</li><li>少數指南寫230V、50Hz,但多數資料都是220V、60Hz。支援100-240V的充電器兩者都能用。</li><li><a href="https://www.trip.com/guide/info/south-korea-plug.html" rel="noopener" target="_blank">Trip.com: South Korea plug types and voltage</a></li><li><a href="https://www.remitly.com/blog/technology/electrical-outlets-in-south-korea/" rel="noopener" target="_blank">Remitly: electrical outlets in South Korea</a></li></ul></div></details>
+  </main>
   <section class="related"><h2>相關指南</h2><ul><li><a href="mobile-data-sim.html">在韓國需要韓國電話號碼嗎?</a></li><li><a href="k-eta-entry-requirements.html">去韓國需要申請K-ETA嗎?</a></li><li><a href="incheon-airport-to-seoul.html">仁川機場怎麼到首爾市區?</a></li></ul></section>
-  <nav class="topics"><a href="mobile-data-sim.html">電話與上網</a><a href="incheon-airport-to-seoul.html">機場到市區</a><a href="maps.html">地圖</a><a href="taxi.html">計程車</a><a href="tmoney-subway-bus.html">地鐵與公車</a><a href="seoul-tourist-transit-pass.html">交通票券</a><a href="ktx-train-booking.html">KTX火車</a><a href="seoul-to-busan-k-tour-pass.html">釜山之旅</a><a href="kr-pass-korail-pass.html">KR Pass</a><a href="dmz-jsa-tour-booking.html">DMZ導覽</a><a href="jeju-getting-around.html">濟州交通</a><a href="restaurant-reservations.html">餐廳訂位</a><a href="food-delivery.html">叫外送</a><a href="translation.html">翻譯</a><a href="tax-free-shopping.html">購物與退稅</a><a href="luggage-storage.html">寄放行李</a><a href="pharmacy-hospital.html">生病或受傷</a><a href="k-eta-entry-requirements.html">入境規定</a><a href="atm-foreign-card-cash.html">現金與ATM</a><a href="gimpo-airport-to-seoul.html">金浦機場</a></nav>
+  <details class="more"><summary>All guides</summary><nav class="topics"><a href="mobile-data-sim.html">電話與上網</a><a href="incheon-airport-to-seoul.html">機場到市區</a><a href="maps.html">地圖</a><a href="taxi.html">計程車</a><a href="tmoney-subway-bus.html">地鐵與公車</a><a href="seoul-tourist-transit-pass.html">交通票券</a><a href="ktx-train-booking.html">KTX火車</a><a href="seoul-to-busan-k-tour-pass.html">釜山之旅</a><a href="kr-pass-korail-pass.html">KR Pass</a><a href="dmz-jsa-tour-booking.html">DMZ導覽</a><a href="jeju-getting-around.html">濟州交通</a><a href="restaurant-reservations.html">餐廳訂位</a><a href="food-delivery.html">叫外送</a><a href="translation.html">翻譯</a><a href="tax-free-shopping.html">購物與退稅</a><a href="luggage-storage.html">寄放行李</a><a href="pharmacy-hospital.html">生病或受傷</a><a href="k-eta-entry-requirements.html">入境規定</a><a href="atm-foreign-card-cash.html">現金與ATM</a><a href="gimpo-airport-to-seoul.html">金浦機場</a></nav></details>
+  <p class="host-cta">🏠 在韓國經營民宿或旅館嗎?<a href="../hosts.html">把這份指南傳給你的房客</a>(韓文頁面)。</p>
   <section class="ask" aria-labelledby="ask-t-zh-tw"><h2 id="ask-t-zh-tw">沒找到需要的資訊嗎?</h2><p class="hint">留下你的問題。我們會補充到指南中;若留下電子郵件,也會回信。</p>
 <form class="ask-form" data-thanks="謝謝!已收到你的問題。"><textarea name="q" required maxlength="1000" aria-label="沒找到需要的資訊嗎?" placeholder="例如:用國外發行的卡可以訂 KTX 嗎?"></textarea>
 <input name="em" type="email" maxlength="120" autocomplete="email" aria-label="電子郵件(選填,用於回覆)" placeholder="電子郵件(選填,用於回覆)"><button class="btn" type="submit">送出問題</button><p class="fb-done" role="status"></p></form></section><p class="fb-line"><button type="button" class="linkbtn" data-feedback="">💬 提供意見</button></p><details class="about"><summary>關於這份指南</summary><div class="in">
@@ -338,7 +391,16 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !documen
 (function () {
   document.querySelectorAll("[data-show]").forEach(b => b.addEventListener("click", () => show(b.dataset.lbl, b.dataset.show, "", b.dataset.mean)));
   const saved = (store("wik-setup") || "visitor|ios").split("|");
-  const blocks = [...document.querySelectorAll(".card[data-p]")];
+  document.querySelectorAll("[data-copy]").forEach(b => b.addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(b.dataset.copy); } catch (e) { return; }
+    const was = b.innerHTML; b.classList.add("done"); b.setAttribute("aria-label", b.dataset.done);
+    const tip = document.createElement("span"); tip.className = "tip"; tip.textContent = b.dataset.done; tip.setAttribute("role", "status"); b.append(tip);
+    setTimeout(() => { b.innerHTML = was; b.classList.remove("done"); b.removeAttribute("aria-label"); }, 1600);
+    count("copy/" + location.pathname, "copy korean");
+  }));
+  /* A link to a folded section opens it. */
+  const h = location.hash && document.getElementById(location.hash.slice(1)); if (h && h.tagName === "DETAILS") h.open = true;
+  const blocks = [...document.querySelectorAll(".pv[data-p]")];
   if (blocks.length < 2) return;
   let shown = 0;
   for (const b of blocks) { const ok = b.dataset.p === saved[0] && (!b.dataset.d || b.dataset.d === saved[1]); b.hidden = !ok; if (ok) shown++; }

@@ -255,15 +255,6 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-t
 .ask-form .btn { justify-self: start; }
 .ask-form .fb-done { margin: 0; min-height: 0; }
 
-/* Static guide list on the home page (crawlable, visible to everyone) */
-.guide-list { margin: 8px auto 28px; }
-.guide-list h2 { font: 700 20px var(--display); margin: 0 0 10px; }
-.guide-list h3 { font: 700 16px var(--display); color: var(--muted); margin: 18px 0 8px; }
-.guide-list ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-.guide-list li { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
-.guide-list a { font-weight: 700; display: block; margin-bottom: 2px; }
-.guide-list span { color: var(--muted); font-size: 15px; }
-
 .checked-line { margin: 10px 2px 0; font-size: 14px; color: var(--muted); }
 .host-cta { margin: 18px 0 0; padding: 12px 14px; border: 1px dashed var(--line); border-radius: 12px; font-size: 15px; color: var(--muted); }
 .deep { margin: 26px 0 0; }
@@ -281,6 +272,63 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-t
 .foot p { margin: 6px 0 0; }
 .skip { position: absolute; left: -9999px; top: 0; z-index: 20; background: var(--easy); color: #0e1430; padding: 10px 14px; border-radius: 0 0 10px 0; font-weight: 700; }
 .skip:focus { left: 0; }
+
+/* Short-first layout (round 14) */
+.hero h1 { line-height: 1.2; }
+.answer { background: var(--surface); border: 1px solid var(--line); border-left: 6px solid var(--line); border-radius: 16px; padding: 14px 16px; display: grid; gap: 10px; margin: 4px 0 0; }
+.answer.ok { border-left-color: var(--ok); } .answer.warn { border-left-color: var(--warn); } .answer.mixed { border-left-color: var(--mixed); } .answer.bad { border-left-color: var(--bad); }
+.pv[hidden] { display: none; }
+.ans-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 6px; }
+.ans-top h2 { font: 700 15px var(--body); color: var(--muted); margin: 0; }
+.answer .verdict { font-size: 18px; line-height: 1.4; }
+.glance { margin: 0; display: grid; gap: 6px; font-size: 15px; line-height: 1.4; }
+.glance > div { display: grid; grid-template-columns: 96px 1fr; gap: 8px; }
+.glance dt { color: var(--muted); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: .04em; padding-top: 2px; }
+.glance dd { margin: 0; }
+.ck { color: var(--muted); font-size: 12px; white-space: nowrap; }
+.stamp { margin: 0; font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 8px; }
+.do { margin: 18px 0 0; display: grid; gap: 12px; }
+.do .steps li { line-height: 1.45; }
+.says, .names { margin: 22px 0 0; }
+.says h2, .names h2 { font: 700 18px var(--display); margin: 0 0 8px; }
+.say { background: var(--surface); border: 2px solid var(--easy); border-radius: 16px; padding: 14px 16px; display: grid; gap: 8px; }
+.say-ko { font: 800 26px/1.35 var(--ko, var(--body)); margin: 0; word-break: keep-all; }
+.say-mean { margin: 0; color: var(--muted); }
+.names ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.chip { width: 100%; display: grid; grid-template-columns: 1fr auto; grid-template-areas: "ko i" "en i"; align-items: center; text-align: left; gap: 0 10px; padding: 10px 14px; border: 1.5px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--ink); font: inherit; cursor: pointer; position: relative; }
+.chip span { grid-area: ko; font: 700 19px var(--ko, var(--body)); }
+.chip small { grid-area: en; color: var(--muted); font-size: 13px; }
+.chip i { grid-area: i; font-style: normal; }
+.chip.done, .btn.done { border-color: var(--ok); }
+.tip { position: absolute; right: 10px; top: -10px; background: var(--ink); color: var(--surface); font-size: 12px; padding: 2px 8px; border-radius: 99px; }
+.btn { position: relative; }
+.do + .actions, .names + .actions, .says + .actions { margin-top: 18px; }
+details.more { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; margin: 10px 0 0; }
+details.more > summary { list-style: none; cursor: pointer; padding: 14px 16px; font: 700 16px var(--body); display: flex; justify-content: space-between; align-items: center; gap: 10px; min-height: 24px; }
+details.more > summary::-webkit-details-marker { display: none; }
+details.more > summary::after { content: "+"; font: 400 22px var(--body); color: var(--muted); }
+details.more[open] > summary::after { content: "–"; }
+details.more > .in, details.more > .topics { padding: 0 16px 14px; margin: 0; }
+details.more.deep { margin-top: 10px; }
+.actions + details.more { margin-top: 22px; }
+.notes p { margin: 0 0 8px; }
+/* Home: situation cards */
+.sit { margin: 6px 0 0; }
+.sit > h2, .tool-h { font: 800 20px/1.2 var(--display); margin: 0 0 10px; }
+.sit-grid { display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
+@media (max-width: 360px) { .sit-grid { grid-template-columns: 1fr; } }
+.sit-card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 12px; display: grid; gap: 6px; align-content: start; }
+.sit-card[hidden] { display: none; }
+.sit-card h3 { display: flex; align-items: center; gap: 8px; margin: 0; font: 700 16px/1.2 var(--body); }
+.sit-card h3 svg { width: 22px; height: 22px; flex: none; fill: none; stroke: var(--brand); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.sit-card p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.35; }
+.sit-links { display: flex; flex-wrap: wrap; gap: 6px; }
+.sit-card .sit-links a { display: inline-block; padding: 5px 10px; min-height: 24px; box-sizing: border-box; border-radius: 99px; background: var(--bg); border: 1px solid var(--line); color: var(--ink); font-weight: 600; font-size: 14px; text-decoration: none; }
+.sit-card .sit-links a[hidden] { display: none; }
+.tool { margin: 26px 0 0; }
+.onb { margin: 0; }
+.onb h3 { font: 700 18px/1.3 var(--body); margin: 0 0 10px; }
+.offline-note { margin: 22px 0 0; font-size: 14px; color: var(--muted); }
 </style>
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "去韩国需要K-ETA吗?2026年免申请与电子入境卡", "description": "到2026年底,许多旅客不用申请K-ETA就能入境,但要看你的护照国家。出发前先确认,若适用也请填写入境卡。", "datePublished": "2026-11-19", "dateModified": "2026-11-20", "inLanguage": "zh-CN", "url": "https://easymodekorea.com/zh-cn/k-eta-entry-requirements.html", "mainEntityOfPage": "https://easymodekorea.com/zh-cn/k-eta-entry-requirements.html", "image": "https://easymodekorea.com/og.png", "author": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/zh-cn/about.html"}, "publisher": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/", "logo": {"@type": "ImageObject", "url": "https://easymodekorea.com/icon-512.png"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "EasyModeKorea", "item": "https://easymodekorea.com/zh-cn/"}, {"@type": "ListItem", "position": 2, "name": "入境规定", "item": "https://easymodekorea.com/zh-cn/k-eta-entry-requirements.html"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "去韩国需要申请K-ETA吗?", "acceptedAnswer": {"@type": "Answer", "text": "到2026年12月31日,许多护照免K-ETA,但不是全部。出发前请到官方网站确认你的国家。 到K-ETA官方网站(k-eta.go.kr)确认你的护照国家。符合资格国家的暂时免除期间为2026年1月1日至12月31日。 若不在免除名单,请在出发前申请K-ETA,不要等到报到时。 2026年1月1日起,外国旅客(包括免K-ETA的旅客)必须在抵达前72小时内上网提交电子入境卡(e-Arrival Card)。已获准K-ETA的人则不需要。"}}, {"@type": "Question", "name": "我的国家免K-ETA,还需要办什么吗?", "acceptedAnswer": {"@type": "Answer", "text": "需要电子入境卡。你也可以自愿申请K-ETA(需付费),这样就不用填电子入境卡。"}}, {"@type": "Question", "name": "K-ETA审核要多久?", "acceptedAnswer": {"@type": "Answer", "text": "通常在72小时内,但也可能更久,建议出发前一周以上申请。"}}, {"@type": "Question", "name": "小孩也要申请K-ETA吗?", "acceptedAnswer": {"@type": "Answer", "text": "要。包括小孩在内,每个人都要各自申请。"}}, {"@type": "Question", "name": "2027年会怎样?", "acceptedAnswer": {"@type": "Answer", "text": "免除期间到2026年12月31日。我们最后确认时,2027年的规定尚未公布,公布后会更新本页。"}}]}]</script>
@@ -289,20 +337,25 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-t
 <a class="skip" href="#answer">跳到答案</a>
 <header class="hero"><div class="wrap">
   <div class="toprow"><a class="logo" href="./">EasyMode<b>Korea</b></a><nav class="langs" aria-label="语言"><a href="../k-eta-entry-requirements.html" hreflang="en" lang="en">English</a><a href="../ja/k-eta-entry-requirements.html" hreflang="ja" lang="ja">日本語</a><a href="../zh-tw/k-eta-entry-requirements.html" hreflang="zh-Hant-TW" lang="zh-Hant-TW">繁體中文</a><a href="../zh-cn/k-eta-entry-requirements.html" hreflang="zh-CN" lang="zh-CN" aria-current="page">简体中文</a><a href="../vi/k-eta-entry-requirements.html" hreflang="vi" lang="vi">Tiếng Việt</a></nav></div>
-  <h1>去韩国需要申请K-ETA吗?</h1><p class="lede">到2026年底,许多旅客不用申请K-ETA就能入境,但要看你的护照国家。出发前先确认,若适用也请填写入境卡。</p>
+  <h1>去韩国需要申请K-ETA吗?</h1>
 </div></header>
 <div class="wrap">
-  <div class="actions"><a class="btn" href="./#task-entry">用自己的状况确认</a><button class="btn alt" type="button" data-show="이 서류 작성하는 것 좀 도와주세요." data-lbl="给店员看" data-mean="意思: 可以帮我填这份表格吗?">🗣 可以帮我填这份表格吗?</button></div>
-  <main class="cards" id="answer"><article class="card warn"><div class="actions" style="justify-content:space-between;align-items:center"><h2>多一个步骤</h2><span class="pill warn">多一个步骤</span></div>
-<p class="verdict">到2026年12月31日,许多护照免K-ETA,但不是全部。出发前请到官方网站确认你的国家。</p><ol class="steps"><li>到K-ETA官方网站(k-eta.go.kr)确认你的护照国家。符合资格国家的暂时免除期间为2026年1月1日至12月31日。</li><li>若不在免除名单,请在出发前申请K-ETA,不要等到报到时。</li><li>2026年1月1日起,外国旅客(包括免K-ETA的旅客)必须在抵达前72小时内上网提交电子入境卡(e-Arrival Card)。已获准K-ETA的人则不需要。</li></ol><p class="fallback"><b>如果不行</b>不确定的话,订票前先问航空公司或最近的韩国驻外馆处。2027年的规定在我们最后检查时尚未公布。</p></article><button class="linkbtn" type="button" id="show-all" hidden>查看其他状况的答案</button><section class="deep" aria-labelledby="st-entry"><h2 id="st-entry">第一次使用:一步一步来</h2><ol class="steps full"><li>到K-ETA官方网站 www.k-eta.go.kr 确认你的护照国家。部分国家在2026年12月31日前免申请,其他国家需要K-ETA。<!-- screenshot: keta-site --></li><li>需要K-ETA的话,只在官方网站或官方K-ETA App申请。每人费用1万韩元。政府没有指定任何代办业者,代办网站会收更高的费用。</li><li>最晚在登机前72小时申请,提早一周以上比较保险。准备好护照、电子邮件、近期的脸部照片和行程信息。</li><li>核准后的K-ETA有效期3年(护照较早到期的话,到护照到期日为止),可以多次入境。有K-ETA就不需要电子入境卡。</li><li>免K-ETA的人,请在抵达前72小时内到官方网站 www.e-arrivalcard.go.kr 提交电子入境卡。<!-- screenshot: earrival-form --></li><li>准备好在韩国的住宿地址,两种申请都会问。从订房页面复制就好。如果房东使用本站的房东页面,他们传来的连结里就有英文和韩文地址。</li><li>把确认画面存在手机里,并带着申请时用的那本护照。</li></ol></section>
-<section class="deep" aria-labelledby="er-entry"><h2 id="er-entry">常见问题与解决方法</h2><ul class="errs"><li><p class="prob"><b>网站收费远高于1万韩元。</b></p><p>你在代办网站上。关掉它,到 www.k-eta.go.kr 申请。</p></li><li><p class="prob"><b>K-ETA没有通过。</b></p><p>这本护照不能免签入境。请向韩国大使馆或领事馆申请签证。</p></li><li><p class="prob"><b>姓名或护照号码填错了。</b></p><p>照护照上的写法重新申请一次。</p></li><li><p class="prob"><b>班机延误超过72小时。</b></p><p>没有在72小时内抵达,电子入境卡就失效了。请重新提交。</p></li></ul></section>
-<section class="deep faq" aria-labelledby="fq-entry"><h2 id="fq-entry">常见问答</h2><h3>我的国家免K-ETA,还需要办什么吗?</h3><p>需要电子入境卡。你也可以自愿申请K-ETA(需付费),这样就不用填电子入境卡。</p><h3>K-ETA审核要多久?</h3><p>通常在72小时内,但也可能更久,建议出发前一周以上申请。</p><h3>小孩也要申请K-ETA吗?</h3><p>要。包括小孩在内,每个人都要各自申请。</p><h3>2027年会怎样?</h3><p>免除期间到2026年12月31日。我们最后确认时,2027年的规定尚未公布,公布后会更新本页。</p></section>
-<section class="deep" aria-labelledby="ct-entry"><h2 id="ct-entry">官方与一手信息</h2><ul class="cites"><li><a href="https://www.k-eta.go.kr" rel="noopener" target="_blank">K-ETA (official site)</a></li><li><a href="https://www.e-arrivalcard.go.kr" rel="noopener" target="_blank">e-Arrival Card (official site)</a></li><li><a href="https://overseas.mofa.go.kr/ie-en/brd/m_23773/view.do?seq=761699" rel="noopener" target="_blank">Korean Ministry of Foreign Affairs: K-ETA notice</a></li><li><a href="https://overseas.mofa.go.kr/dk-en/brd/m_7038/view.do?seq=761304" rel="noopener" target="_blank">Korean Ministry of Foreign Affairs: e-Arrival Card notice</a></li></ul></section></main>
-  <p class="checked-line">确认日 <time datetime="2026-11-17">2026年11月17日</time></p>
-  <details class="panel" open><summary>信息来源与备注</summary><div class="in notes"><ul><li>确认日 2026年11月17日</li><li>免除措施是一年一年延长的,所以2026年以前的攻略可能已经过时。</li><li><a href="https://www.k-eta.go.kr" rel="noopener" target="_blank">K-ETA official site</a></li><li><a href="https://discover.passportindex.org/policy-and-regulations/south-korea-extends-k-eta-exemption-until-end-of-2026/" rel="noopener" target="_blank">Passport Index: K-ETA exemption extended to end of 2026</a></li><li><a href="https://blog.wego.com/south-korea-travel-rules-k-eta-waiver-2026/" rel="noopener" target="_blank">Wego: K-ETA waiver and e-Arrival Card (2026)</a></li></ul></div></details>
-  <p class="host-cta">🏠 在韩国经营民宿或旅馆吗?<a href="../hosts.html">把这份指南传给你的房客</a>(韩文页面)。</p>
+  <main id="answer">
+  <section class="answer warn"><div class="pv warn"><div class="ans-top"><h2>多一个步骤</h2><span class="pill warn">多一个步骤</span></div><p class="verdict">到2026年12月31日,许多护照免K-ETA,但不是全部。出发前请到官方网站确认你的国家。</p></div><dl class="glance"><div><dt>Where</dt><dd>Official sites only: k-eta.go.kr and e-arrivalcard.go.kr <time class="ck" datetime="2026-11-20">✓ 2026年11月20日</time></dd></div><div><dt>Cost</dt><dd>K-ETA 10,000 won. The e-Arrival Card is free. <time class="ck" datetime="2026-11-20">✓ 2026年11月20日</time></dd></div><div><dt>Time</dt><dd>e-Arrival Card: within 72 hours before you land <time class="ck" datetime="2026-11-20">✓ 2026年11月20日</time></dd></div></dl><p class="stamp">Checked against <a href="https://www.k-eta.go.kr" rel="noopener" target="_blank">K-ETA (official site)</a> on <time datetime="2026-11-20">2026年11月20日</time></p></section>
+  <button class="linkbtn" type="button" id="show-all" hidden>查看其他状况的答案</button>
+  <section class="do" aria-labelledby="do-entry"><h2 id="do-entry" class="sr">第一次使用:一步一步来</h2><div class="pv"><ol class="steps"><li>到K-ETA官方网站(k-eta.go.kr)确认你的护照国家。符合资格国家的暂时免除期间为2026年1月1日至12月31日。</li><li>若不在免除名单,请在出发前申请K-ETA,不要等到报到时。</li><li>2026年1月1日起,外国旅客(包括免K-ETA的旅客)必须在抵达前72小时内上网提交电子入境卡(e-Arrival Card)。已获准K-ETA的人则不需要。</li></ol><p class="fallback"><b>如果不行</b>不确定的话,订票前先问航空公司或最近的韩国驻外馆处。2027年的规定在我们最后检查时尚未公布。</p></div></section>
+  <section class="says" aria-labelledby="say-entry"><h2 id="say-entry">Show this to staff</h2><div class="say"><p class="say-ko" lang="ko">이 서류 작성하는 것 좀 도와주세요.</p><p class="say-mean">可以帮我填这份表格吗?</p><div class="actions"><button class="btn alt" type="button" data-show="이 서류 작성하는 것 좀 도와주세요." data-lbl="给店员看" data-mean="意思: 可以帮我填这份表格吗?">🗣 Show full screen</button><button class="btn ghost" type="button" data-copy="이 서류 작성하는 것 좀 도와주세요." data-done="✓ Copied">📋 Copy</button></div></div></section>
+  <section class="names" aria-labelledby="nm-entry"><h2 id="nm-entry">Korean names to copy (paste into Naver Map or show a driver)</h2><ul><li><button class="chip" type="button" data-copy="전자도착카드" data-done="✓ Copied"><span lang="ko">전자도착카드</span><small>e-Arrival Card</small><i aria-hidden="true">📋</i></button></li></ul></section>
+  <div class="actions"><a class="btn" href="./#task-entry">用自己的状况确认</a></div>
+  <details class="more deep" id="st-entry"><summary>第一次使用:一步一步来</summary><div class="in"><ol class="steps full"><li>到K-ETA官方网站 www.k-eta.go.kr 确认你的护照国家。部分国家在2026年12月31日前免申请,其他国家需要K-ETA。<!-- screenshot: keta-site --></li><li>需要K-ETA的话,只在官方网站或官方K-ETA App申请。每人费用1万韩元。政府没有指定任何代办业者,代办网站会收更高的费用。</li><li>最晚在登机前72小时申请,提早一周以上比较保险。准备好护照、电子邮件、近期的脸部照片和行程信息。</li><li>核准后的K-ETA有效期3年(护照较早到期的话,到护照到期日为止),可以多次入境。有K-ETA就不需要电子入境卡。</li><li>免K-ETA的人,请在抵达前72小时内到官方网站 www.e-arrivalcard.go.kr 提交电子入境卡。<!-- screenshot: earrival-form --></li><li>准备好在韩国的住宿地址,两种申请都会问。从订房页面复制就好。如果房东使用本站的房东页面,他们传来的连结里就有英文和韩文地址。</li><li>把确认画面存在手机里,并带着申请时用的那本护照。</li></ol></div></details>
+<details class="more deep" id="er-entry"><summary>常见问题与解决方法</summary><div class="in"><ul class="errs"><li><p class="prob"><b>网站收费远高于1万韩元。</b></p><p>你在代办网站上。关掉它,到 www.k-eta.go.kr 申请。</p></li><li><p class="prob"><b>K-ETA没有通过。</b></p><p>这本护照不能免签入境。请向韩国大使馆或领事馆申请签证。</p></li><li><p class="prob"><b>姓名或护照号码填错了。</b></p><p>照护照上的写法重新申请一次。</p></li><li><p class="prob"><b>班机延误超过72小时。</b></p><p>没有在72小时内抵达,电子入境卡就失效了。请重新提交。</p></li></ul></div></details>
+<details class="more deep faq" id="fq-entry"><summary>常见问答</summary><div class="in"><h3>我的国家免K-ETA,还需要办什么吗?</h3><p>需要电子入境卡。你也可以自愿申请K-ETA(需付费),这样就不用填电子入境卡。</p><h3>K-ETA审核要多久?</h3><p>通常在72小时内,但也可能更久,建议出发前一周以上申请。</p><h3>小孩也要申请K-ETA吗?</h3><p>要。包括小孩在内,每个人都要各自申请。</p><h3>2027年会怎样?</h3><p>免除期间到2026年12月31日。我们最后确认时,2027年的规定尚未公布,公布后会更新本页。</p></div></details>
+<details class="more deep" id="ct-entry"><summary>官方与一手信息</summary><div class="in"><ul class="cites"><li><a href="https://www.k-eta.go.kr" rel="noopener" target="_blank">K-ETA (official site)</a></li><li><a href="https://www.e-arrivalcard.go.kr" rel="noopener" target="_blank">e-Arrival Card (official site)</a></li><li><a href="https://overseas.mofa.go.kr/ie-en/brd/m_23773/view.do?seq=761699" rel="noopener" target="_blank">Korean Ministry of Foreign Affairs: K-ETA notice</a></li><li><a href="https://overseas.mofa.go.kr/dk-en/brd/m_7038/view.do?seq=761304" rel="noopener" target="_blank">Korean Ministry of Foreign Affairs: e-Arrival Card notice</a></li></ul></div></details>
+  <details class="more"><summary>信息来源与备注</summary><div class="in notes"><p>到2026年底,许多旅客不用申请K-ETA就能入境,但要看你的护照国家。出发前先确认,若适用也请填写入境卡。</p><ul><li>确认日 2026年11月17日</li><li>免除措施是一年一年延长的,所以2026年以前的攻略可能已经过时。</li><li><a href="https://www.k-eta.go.kr" rel="noopener" target="_blank">K-ETA official site</a></li><li><a href="https://discover.passportindex.org/policy-and-regulations/south-korea-extends-k-eta-exemption-until-end-of-2026/" rel="noopener" target="_blank">Passport Index: K-ETA exemption extended to end of 2026</a></li><li><a href="https://blog.wego.com/south-korea-travel-rules-k-eta-waiver-2026/" rel="noopener" target="_blank">Wego: K-ETA waiver and e-Arrival Card (2026)</a></li></ul></div></details>
+  </main>
   <section class="related"><h2>相关指南</h2><ul><li><a href="mobile-data-sim.html">在韩国需要韩国电话号码吗?</a></li><li><a href="incheon-airport-to-seoul.html">仁川机场怎么到首尔市区?</a></li><li><a href="atm-foreign-card-cash.html">在韩国能用外国卡领现金吗?</a></li><li><a href="korea-power-plug-voltage.html">去韩国需要转接头吗?</a></li></ul></section>
-  <nav class="topics"><a href="mobile-data-sim.html">电话与上网</a><a href="incheon-airport-to-seoul.html">机场到市区</a><a href="maps.html">地图</a><a href="taxi.html">出租车</a><a href="tmoney-subway-bus.html">地铁与公交</a><a href="seoul-tourist-transit-pass.html">交通票券</a><a href="ktx-train-booking.html">KTX火车</a><a href="seoul-to-busan-k-tour-pass.html">釜山之旅</a><a href="kr-pass-korail-pass.html">KR Pass</a><a href="dmz-jsa-tour-booking.html">DMZ导览</a><a href="jeju-getting-around.html">济州交通</a><a href="restaurant-reservations.html">餐厅订座</a><a href="food-delivery.html">点外卖</a><a href="translation.html">翻译</a><a href="tax-free-shopping.html">购物与退税</a><a href="luggage-storage.html">寄放行李</a><a href="pharmacy-hospital.html">生病或受伤</a><a href="atm-foreign-card-cash.html">现金与ATM</a><a href="korea-power-plug-voltage.html">插头与电压</a><a href="gimpo-airport-to-seoul.html">金浦机场</a></nav>
+  <details class="more"><summary>All guides</summary><nav class="topics"><a href="mobile-data-sim.html">电话与上网</a><a href="incheon-airport-to-seoul.html">机场到市区</a><a href="maps.html">地图</a><a href="taxi.html">出租车</a><a href="tmoney-subway-bus.html">地铁与公交</a><a href="seoul-tourist-transit-pass.html">交通票券</a><a href="ktx-train-booking.html">KTX火车</a><a href="seoul-to-busan-k-tour-pass.html">釜山之旅</a><a href="kr-pass-korail-pass.html">KR Pass</a><a href="dmz-jsa-tour-booking.html">DMZ导览</a><a href="jeju-getting-around.html">济州交通</a><a href="restaurant-reservations.html">餐厅订座</a><a href="food-delivery.html">点外卖</a><a href="translation.html">翻译</a><a href="tax-free-shopping.html">购物与退税</a><a href="luggage-storage.html">寄放行李</a><a href="pharmacy-hospital.html">生病或受伤</a><a href="atm-foreign-card-cash.html">现金与ATM</a><a href="korea-power-plug-voltage.html">插头与电压</a><a href="gimpo-airport-to-seoul.html">金浦机场</a></nav></details>
+  <p class="host-cta">🏠 在韩国经营民宿或旅馆吗?<a href="../hosts.html">把这份指南传给你的房客</a>(韩文页面)。</p>
   <section class="ask" aria-labelledby="ask-t-zh-cn"><h2 id="ask-t-zh-cn">没找到需要的信息吗?</h2><p class="hint">留下你的问题。我们会补充到指南里;如果留下邮箱,也会回信。</p>
 <form class="ask-form" data-thanks="谢谢!已收到你的问题。"><textarea name="q" required maxlength="1000" aria-label="没找到需要的信息吗?" placeholder="例如:用国外发行的卡可以订 KTX 吗?"></textarea>
 <input name="em" type="email" maxlength="120" autocomplete="email" aria-label="邮箱(选填,用于回复)" placeholder="邮箱(选填,用于回复)"><button class="btn" type="submit">发送问题</button><p class="fb-done" role="status"></p></form></section><p class="fb-line"><button type="button" class="linkbtn" data-feedback="">💬 提供意见</button></p><details class="about"><summary>关于这份指南</summary><div class="in">
@@ -338,7 +391,16 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !documen
 (function () {
   document.querySelectorAll("[data-show]").forEach(b => b.addEventListener("click", () => show(b.dataset.lbl, b.dataset.show, "", b.dataset.mean)));
   const saved = (store("wik-setup") || "visitor|ios").split("|");
-  const blocks = [...document.querySelectorAll(".card[data-p]")];
+  document.querySelectorAll("[data-copy]").forEach(b => b.addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(b.dataset.copy); } catch (e) { return; }
+    const was = b.innerHTML; b.classList.add("done"); b.setAttribute("aria-label", b.dataset.done);
+    const tip = document.createElement("span"); tip.className = "tip"; tip.textContent = b.dataset.done; tip.setAttribute("role", "status"); b.append(tip);
+    setTimeout(() => { b.innerHTML = was; b.classList.remove("done"); b.removeAttribute("aria-label"); }, 1600);
+    count("copy/" + location.pathname, "copy korean");
+  }));
+  /* A link to a folded section opens it. */
+  const h = location.hash && document.getElementById(location.hash.slice(1)); if (h && h.tagName === "DETAILS") h.open = true;
+  const blocks = [...document.querySelectorAll(".pv[data-p]")];
   if (blocks.length < 2) return;
   let shown = 0;
   for (const b of blocks) { const ok = b.dataset.p === saved[0] && (!b.dataset.d || b.dataset.d === saved[1]); b.hidden = !ok; if (ok) shown++; }

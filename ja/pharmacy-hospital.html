@@ -255,15 +255,6 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-t
 .ask-form .btn { justify-self: start; }
 .ask-form .fb-done { margin: 0; min-height: 0; }
 
-/* Static guide list on the home page (crawlable, visible to everyone) */
-.guide-list { margin: 8px auto 28px; }
-.guide-list h2 { font: 700 20px var(--display); margin: 0 0 10px; }
-.guide-list h3 { font: 700 16px var(--display); color: var(--muted); margin: 18px 0 8px; }
-.guide-list ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-.guide-list li { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
-.guide-list a { font-weight: 700; display: block; margin-bottom: 2px; }
-.guide-list span { color: var(--muted); font-size: 15px; }
-
 .checked-line { margin: 10px 2px 0; font-size: 14px; color: var(--muted); }
 .host-cta { margin: 18px 0 0; padding: 12px 14px; border: 1px dashed var(--line); border-radius: 12px; font-size: 15px; color: var(--muted); }
 .deep { margin: 26px 0 0; }
@@ -281,6 +272,63 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-t
 .foot p { margin: 6px 0 0; }
 .skip { position: absolute; left: -9999px; top: 0; z-index: 20; background: var(--easy); color: #0e1430; padding: 10px 14px; border-radius: 0 0 10px 0; font-weight: 700; }
 .skip:focus { left: 0; }
+
+/* Short-first layout (round 14) */
+.hero h1 { line-height: 1.2; }
+.answer { background: var(--surface); border: 1px solid var(--line); border-left: 6px solid var(--line); border-radius: 16px; padding: 14px 16px; display: grid; gap: 10px; margin: 4px 0 0; }
+.answer.ok { border-left-color: var(--ok); } .answer.warn { border-left-color: var(--warn); } .answer.mixed { border-left-color: var(--mixed); } .answer.bad { border-left-color: var(--bad); }
+.pv[hidden] { display: none; }
+.ans-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 6px; }
+.ans-top h2 { font: 700 15px var(--body); color: var(--muted); margin: 0; }
+.answer .verdict { font-size: 18px; line-height: 1.4; }
+.glance { margin: 0; display: grid; gap: 6px; font-size: 15px; line-height: 1.4; }
+.glance > div { display: grid; grid-template-columns: 96px 1fr; gap: 8px; }
+.glance dt { color: var(--muted); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: .04em; padding-top: 2px; }
+.glance dd { margin: 0; }
+.ck { color: var(--muted); font-size: 12px; white-space: nowrap; }
+.stamp { margin: 0; font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 8px; }
+.do { margin: 18px 0 0; display: grid; gap: 12px; }
+.do .steps li { line-height: 1.45; }
+.says, .names { margin: 22px 0 0; }
+.says h2, .names h2 { font: 700 18px var(--display); margin: 0 0 8px; }
+.say { background: var(--surface); border: 2px solid var(--easy); border-radius: 16px; padding: 14px 16px; display: grid; gap: 8px; }
+.say-ko { font: 800 26px/1.35 var(--ko, var(--body)); margin: 0; word-break: keep-all; }
+.say-mean { margin: 0; color: var(--muted); }
+.names ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.chip { width: 100%; display: grid; grid-template-columns: 1fr auto; grid-template-areas: "ko i" "en i"; align-items: center; text-align: left; gap: 0 10px; padding: 10px 14px; border: 1.5px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--ink); font: inherit; cursor: pointer; position: relative; }
+.chip span { grid-area: ko; font: 700 19px var(--ko, var(--body)); }
+.chip small { grid-area: en; color: var(--muted); font-size: 13px; }
+.chip i { grid-area: i; font-style: normal; }
+.chip.done, .btn.done { border-color: var(--ok); }
+.tip { position: absolute; right: 10px; top: -10px; background: var(--ink); color: var(--surface); font-size: 12px; padding: 2px 8px; border-radius: 99px; }
+.btn { position: relative; }
+.do + .actions, .names + .actions, .says + .actions { margin-top: 18px; }
+details.more { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; margin: 10px 0 0; }
+details.more > summary { list-style: none; cursor: pointer; padding: 14px 16px; font: 700 16px var(--body); display: flex; justify-content: space-between; align-items: center; gap: 10px; min-height: 24px; }
+details.more > summary::-webkit-details-marker { display: none; }
+details.more > summary::after { content: "+"; font: 400 22px var(--body); color: var(--muted); }
+details.more[open] > summary::after { content: "–"; }
+details.more > .in, details.more > .topics { padding: 0 16px 14px; margin: 0; }
+details.more.deep { margin-top: 10px; }
+.actions + details.more { margin-top: 22px; }
+.notes p { margin: 0 0 8px; }
+/* Home: situation cards */
+.sit { margin: 6px 0 0; }
+.sit > h2, .tool-h { font: 800 20px/1.2 var(--display); margin: 0 0 10px; }
+.sit-grid { display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
+@media (max-width: 360px) { .sit-grid { grid-template-columns: 1fr; } }
+.sit-card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 12px; display: grid; gap: 6px; align-content: start; }
+.sit-card[hidden] { display: none; }
+.sit-card h3 { display: flex; align-items: center; gap: 8px; margin: 0; font: 700 16px/1.2 var(--body); }
+.sit-card h3 svg { width: 22px; height: 22px; flex: none; fill: none; stroke: var(--brand); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.sit-card p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.35; }
+.sit-links { display: flex; flex-wrap: wrap; gap: 6px; }
+.sit-card .sit-links a { display: inline-block; padding: 5px 10px; min-height: 24px; box-sizing: border-box; border-radius: 99px; background: var(--bg); border: 1px solid var(--line); color: var(--ink); font-weight: 600; font-size: 14px; text-decoration: none; }
+.sit-card .sit-links a[hidden] { display: none; }
+.tool { margin: 26px 0 0; }
+.onb { margin: 0; }
+.onb h3 { font: 700 18px/1.3 var(--body); margin: 0 0 10px; }
+.offline-note { margin: 22px 0 0; font-size: 14px; color: var(--muted); }
 </style>
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "旅行中に韓国で体調を崩したら: 119、1330、薬局と病院(2026)", "description": "韓国の緊急通報は無料で通訳もつきます。軽い症状なら薬局や大病院の国際診療センターが使いやすいです。", "datePublished": "2026-11-17", "dateModified": "2026-11-20", "inLanguage": "ja", "url": "https://easymodekorea.com/ja/pharmacy-hospital.html", "mainEntityOfPage": "https://easymodekorea.com/ja/pharmacy-hospital.html", "image": "https://easymodekorea.com/og.png", "author": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/ja/about.html"}, "publisher": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/", "logo": {"@type": "ImageObject", "url": "https://easymodekorea.com/icon-512.png"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "EasyModeKorea", "item": "https://easymodekorea.com/ja/"}, {"@type": "ListItem", "position": 2, "name": "病気・けが", "item": "https://easymodekorea.com/ja/pharmacy-hospital.html"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "韓国旅行中に体調を崩したらどうする?", "acceptedAnswer": {"@type": "Answer", "text": "救急車は119。医療相談や近くで開いている救急室の案内も119で受けられます。通訳が必要なら1330へ。 緊急時: 119に電話し「Japanese, please」と言えば通訳につながります。 どれくらい深刻かわからない、近くで開いている救急室や薬局を知りたい: これも119へ。救急車だけでなく、医療相談と病院案内も24時間対応です。 軽い症状: 薬局(「약」の看板)で一般的な薬が買えます。コンビニにも基本的な鎮痛剤や風邪薬があります。 ソウルの大病院には英語・中国語が通じる国際診療センターがあります。"}}, {"@type": "Question", "name": "旅行者の医療費は高いですか?", "acceptedAnswer": {"@type": "Answer", "text": "韓国の健康保険がないので全額自己負担です。旅行保険に入っておくと安心です。簡単なクリニック受診なら、たいてい高くはありません。"}}, {"@type": "Question", "name": "薬局で抗生物質を買えますか?", "acceptedAnswer": {"@type": "Answer", "text": "買えません。韓国では抗生物質に医師の処方箋が必要です。"}}, {"@type": "Question", "name": "1339は何の番号ですか?", "acceptedAnswer": {"@type": "Answer", "text": "疾病管理庁の相談窓口で、主に感染症の相談用です。緊急時は119に電話します。"}}, {"@type": "Question", "name": "パスポートは必要ですか?", "acceptedAnswer": {"@type": "Answer", "text": "必要です。病院での受付に使います。"}}]}]</script>
@@ -289,20 +337,25 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-t
 <a class="skip" href="#answer">回答へ移動</a>
 <header class="hero"><div class="wrap">
   <div class="toprow"><a class="logo" href="./">EasyMode<b>Korea</b></a><nav class="langs" aria-label="言語"><a href="../pharmacy-hospital.html" hreflang="en" lang="en">English</a><a href="../ja/pharmacy-hospital.html" hreflang="ja" lang="ja" aria-current="page">日本語</a><a href="../zh-tw/pharmacy-hospital.html" hreflang="zh-Hant-TW" lang="zh-Hant-TW">繁體中文</a><a href="../zh-cn/pharmacy-hospital.html" hreflang="zh-CN" lang="zh-CN">简体中文</a><a href="../vi/pharmacy-hospital.html" hreflang="vi" lang="vi">Tiếng Việt</a></nav></div>
-  <h1>韓国旅行中に体調を崩したらどうする?</h1><p class="lede">韓国の緊急通報は無料で通訳もつきます。軽い症状なら薬局や大病院の国際診療センターが使いやすいです。</p>
+  <h1>韓国旅行中に体調を崩したらどうする?</h1>
 </div></header>
 <div class="wrap">
-  <div class="actions"><a class="btn" href="./#task-health">自分の状況で確認する</a><button class="btn alt" type="button" data-show="열이 나요. 약 있어요?" data-lbl="スタッフに見せる" data-mean="意味: 熱があります。薬はありますか?">🗣 熱があります。薬はありますか?</button></div>
-  <main class="cards" id="answer"><article class="card ok"><div class="actions" style="justify-content:space-between;align-items:center"><h2>そのまま使える</h2><span class="pill ok">そのまま使える</span></div>
-<p class="verdict">救急車は119。医療相談や近くで開いている救急室の案内も119で受けられます。通訳が必要なら1330へ。</p><ol class="steps"><li>緊急時: 119に電話し「Japanese, please」と言えば通訳につながります。</li><li>どれくらい深刻かわからない、近くで開いている救急室や薬局を知りたい: これも119へ。救急車だけでなく、医療相談と病院案内も24時間対応です。</li><li>軽い症状: 薬局(「약」の看板)で一般的な薬が買えます。コンビニにも基本的な鎮痛剤や風邪薬があります。</li><li>ソウルの大病院には英語・中国語が通じる国際診療センターがあります。</li></ol><p class="fallback"><b>うまくいかない場合</b>パスポートを持って行く。救急室では治療前に預かり金を求められることがあります。</p></article><button class="linkbtn" type="button" id="show-all" hidden>ほかの状況の回答を見る</button><section class="deep" aria-labelledby="st-health"><h2 id="st-health">はじめての人向け: 手順</h2><ol class="steps full"><li>緊急時は119に電話して救急車を呼びます。「Japanese, please」と言語を伝えると通訳につながります。</li><li>どれくらい深刻かわからない、近くで開いている救急室や薬局を知りたいときも119へ。医療相談と病院案内を24時間受けられます。</li><li>薬局や病院で通訳が必要なら、観光案内ダイヤル1330に電話してスマホを相手に渡します。</li><li>軽い症状なら薬局(「약」の看板)へ。薬剤師が一般的な薬を選んでくれます。抗生物質には医師の処方箋が必要です。<!-- screenshot: health-pharmacy --></li><li>医師に診てもらう: ソウルの大病院には外国語が通じる国際診療センターがあります。簡単な症状なら小さなクリニックのほうが安く早いです。</li><li>パスポートと支払い用のカードを持って行きます。救急室では治療前に預かり金を求められることがあります。</li><li>旅行保険用に、帰る前に英語の明細つき領収書と診断書をもらいます。</li></ol></section>
-<section class="deep" aria-labelledby="er-health"><h2 id="er-health">よくあるトラブルと対処法</h2><ul class="errs"><li><p class="prob"><b>夜で薬局が閉まっている。</b></p><p>119に電話して開いている薬局や救急室を聞きます。コンビニにも基本的な鎮痛剤や風邪薬があります。</p></li><li><p class="prob"><b>スタッフに言葉が通じない。</b></p><p>1330に電話して通訳を頼むか、<a href="translation.html">Papago</a>の翻訳を見せます。</p></li><li><p class="prob"><b>救急室で預かり金を求められた。</b></p><p>カードで払い、保険会社用に領収書はすべて保管します。</p></li><li><p class="prob"><b>保険会社からあとで書類を求められた。</b></p><p>帰る前に、英語の明細つき領収書と診断書を病院でもらっておきます。あとから取り寄せるのは大変です。</p></li></ul></section>
-<section class="deep faq" aria-labelledby="fq-health"><h2 id="fq-health">よくある質問</h2><h3>旅行者の医療費は高いですか?</h3><p>韓国の健康保険がないので全額自己負担です。旅行保険に入っておくと安心です。簡単なクリニック受診なら、たいてい高くはありません。</p><h3>薬局で抗生物質を買えますか?</h3><p>買えません。韓国では抗生物質に医師の処方箋が必要です。</p><h3>1339は何の番号ですか?</h3><p>疾病管理庁の相談窓口で、主に感染症の相談用です。緊急時は119に電話します。</p><h3>パスポートは必要ですか?</h3><p>必要です。病院での受付に使います。</p></section>
-<section class="deep" aria-labelledby="ct-health"><h2 id="ct-health">公式・一次情報</h2><ul class="cites"><li><a href="https://www.koreatimes.co.kr/amp/lifestyle/travel-food/20260314/sick-in-korea-after-hours-heres-what-visitors-need-to-know" rel="noopener" target="_blank">Korea Times: sick in Korea after hours (Mar 2026)</a></li><li><a href="https://kdca.go.kr/eng/4276/subview.do" rel="noopener" target="_blank">KDCA: 1339 call center</a></li><li><a href="https://seoulstart.com/ko/guides/korea-emergency-room-guide" rel="noopener" target="_blank">Korea emergency rooms guide</a></li><li><a href="https://www.haniseoul.com/ko/travels/korea/midnight-pharmacy-hospital-guide-korea" rel="noopener" target="_blank">Night pharmacies and ER guide (2026)</a></li></ul></section></main>
-  <p class="checked-line">確認日 <time datetime="2026-11-17">2026年11月17日</time></p>
-  <details class="panel" open><summary>出典とメモ</summary><div class="in notes"><ul><li>確認日 2026年11月17日</li><li>観光案内ダイヤル1330も、薬局や病院での通訳を手伝ってくれます。</li><li>1339は疾病管理庁の相談窓口で、主に感染症の相談用です。以前の1339救急医療情報の案内は119に統合されました。</li><li><a href="https://seoulstart.com/ko/guides/korea-emergency-room-guide" rel="noopener" target="_blank">Korea emergency rooms and 1339</a></li><li><a href="https://www.haniseoul.com/ko/travels/korea/midnight-pharmacy-hospital-guide-korea" rel="noopener" target="_blank">Night pharmacies and ER guide (2026)</a></li></ul></div></details>
-  <p class="host-cta">🏠 韓国で宿を運営していますか? <a href="../hosts.html">このガイドをゲストに送る</a>(韓国語)。</p>
+  <main id="answer">
+  <section class="answer ok"><div class="pv ok"><div class="ans-top"><h2>そのまま使える</h2><span class="pill ok">そのまま使える</span></div><p class="verdict">救急車は119。医療相談や近くで開いている救急室の案内も119で受けられます。通訳が必要なら1330へ。</p></div><dl class="glance"><div><dt>Where</dt><dd>Call 119 (ambulance, medical advice, nearest ER). 1330 interprets. <time class="ck" datetime="2026-11-20">✓ 2026年11月20日</time></dd></div><div><dt>Cost</dt><dd>Calling 119 is free <time class="ck" datetime="2026-11-17">✓ 2026年11月17日</time></dd></div><div><dt>Good to know</dt><dd>Pharmacies have a 약 sign <time class="ck" datetime="2026-11-17">✓ 2026年11月17日</time></dd></div></dl><p class="stamp">Checked against <a href="https://www.koreatimes.co.kr/amp/lifestyle/travel-food/20260314/sick-in-korea-after-hours-heres-what-visitors-need-to-know" rel="noopener" target="_blank">Korea Times: sick in Korea after hours (Mar 2026)</a> on <time datetime="2026-11-20">2026年11月20日</time></p></section>
+  <button class="linkbtn" type="button" id="show-all" hidden>ほかの状況の回答を見る</button>
+  <section class="do" aria-labelledby="do-health"><h2 id="do-health" class="sr">はじめての人向け: 手順</h2><div class="pv"><ol class="steps"><li>緊急時: 119に電話し「Japanese, please」と言えば通訳につながります。</li><li>どれくらい深刻かわからない、近くで開いている救急室や薬局を知りたい: これも119へ。救急車だけでなく、医療相談と病院案内も24時間対応です。</li><li>軽い症状: 薬局(「약」の看板)で一般的な薬が買えます。コンビニにも基本的な鎮痛剤や風邪薬があります。</li><li>ソウルの大病院には英語・中国語が通じる国際診療センターがあります。</li></ol><p class="fallback"><b>うまくいかない場合</b>パスポートを持って行く。救急室では治療前に預かり金を求められることがあります。</p></div></section>
+  <section class="says" aria-labelledby="say-health"><h2 id="say-health">Show this to staff</h2><div class="say"><p class="say-ko" lang="ko">열이 나요. 약 있어요?</p><p class="say-mean">熱があります。薬はありますか?</p><div class="actions"><button class="btn alt" type="button" data-show="열이 나요. 약 있어요?" data-lbl="スタッフに見せる" data-mean="意味: 熱があります。薬はありますか?">🗣 Show full screen</button><button class="btn ghost" type="button" data-copy="열이 나요. 약 있어요?" data-done="✓ Copied">📋 Copy</button></div></div></section>
+  <section class="names" aria-labelledby="nm-health"><h2 id="nm-health">Korean names to copy (paste into Naver Map or show a driver)</h2><ul><li><button class="chip" type="button" data-copy="약국" data-done="✓ Copied"><span lang="ko">약국</span><small>Pharmacy</small><i aria-hidden="true">📋</i></button></li><li><button class="chip" type="button" data-copy="응급실" data-done="✓ Copied"><span lang="ko">응급실</span><small>Emergency room</small><i aria-hidden="true">📋</i></button></li></ul></section>
+  <div class="actions"><a class="btn" href="./#task-health">自分の状況で確認する</a></div>
+  <details class="more deep" id="st-health"><summary>はじめての人向け: 手順</summary><div class="in"><ol class="steps full"><li>緊急時は119に電話して救急車を呼びます。「Japanese, please」と言語を伝えると通訳につながります。</li><li>どれくらい深刻かわからない、近くで開いている救急室や薬局を知りたいときも119へ。医療相談と病院案内を24時間受けられます。</li><li>薬局や病院で通訳が必要なら、観光案内ダイヤル1330に電話してスマホを相手に渡します。</li><li>軽い症状なら薬局(「약」の看板)へ。薬剤師が一般的な薬を選んでくれます。抗生物質には医師の処方箋が必要です。<!-- screenshot: health-pharmacy --></li><li>医師に診てもらう: ソウルの大病院には外国語が通じる国際診療センターがあります。簡単な症状なら小さなクリニックのほうが安く早いです。</li><li>パスポートと支払い用のカードを持って行きます。救急室では治療前に預かり金を求められることがあります。</li><li>旅行保険用に、帰る前に英語の明細つき領収書と診断書をもらいます。</li></ol></div></details>
+<details class="more deep" id="er-health"><summary>よくあるトラブルと対処法</summary><div class="in"><ul class="errs"><li><p class="prob"><b>夜で薬局が閉まっている。</b></p><p>119に電話して開いている薬局や救急室を聞きます。コンビニにも基本的な鎮痛剤や風邪薬があります。</p></li><li><p class="prob"><b>スタッフに言葉が通じない。</b></p><p>1330に電話して通訳を頼むか、<a href="translation.html">Papago</a>の翻訳を見せます。</p></li><li><p class="prob"><b>救急室で預かり金を求められた。</b></p><p>カードで払い、保険会社用に領収書はすべて保管します。</p></li><li><p class="prob"><b>保険会社からあとで書類を求められた。</b></p><p>帰る前に、英語の明細つき領収書と診断書を病院でもらっておきます。あとから取り寄せるのは大変です。</p></li></ul></div></details>
+<details class="more deep faq" id="fq-health"><summary>よくある質問</summary><div class="in"><h3>旅行者の医療費は高いですか?</h3><p>韓国の健康保険がないので全額自己負担です。旅行保険に入っておくと安心です。簡単なクリニック受診なら、たいてい高くはありません。</p><h3>薬局で抗生物質を買えますか?</h3><p>買えません。韓国では抗生物質に医師の処方箋が必要です。</p><h3>1339は何の番号ですか?</h3><p>疾病管理庁の相談窓口で、主に感染症の相談用です。緊急時は119に電話します。</p><h3>パスポートは必要ですか?</h3><p>必要です。病院での受付に使います。</p></div></details>
+<details class="more deep" id="ct-health"><summary>公式・一次情報</summary><div class="in"><ul class="cites"><li><a href="https://www.koreatimes.co.kr/amp/lifestyle/travel-food/20260314/sick-in-korea-after-hours-heres-what-visitors-need-to-know" rel="noopener" target="_blank">Korea Times: sick in Korea after hours (Mar 2026)</a></li><li><a href="https://kdca.go.kr/eng/4276/subview.do" rel="noopener" target="_blank">KDCA: 1339 call center</a></li><li><a href="https://seoulstart.com/ko/guides/korea-emergency-room-guide" rel="noopener" target="_blank">Korea emergency rooms guide</a></li><li><a href="https://www.haniseoul.com/ko/travels/korea/midnight-pharmacy-hospital-guide-korea" rel="noopener" target="_blank">Night pharmacies and ER guide (2026)</a></li></ul></div></details>
+  <details class="more"><summary>出典とメモ</summary><div class="in notes"><p>韓国の緊急通報は無料で通訳もつきます。軽い症状なら薬局や大病院の国際診療センターが使いやすいです。</p><ul><li>確認日 2026年11月17日</li><li>観光案内ダイヤル1330も、薬局や病院での通訳を手伝ってくれます。</li><li>1339は疾病管理庁の相談窓口で、主に感染症の相談用です。以前の1339救急医療情報の案内は119に統合されました。</li><li><a href="https://seoulstart.com/ko/guides/korea-emergency-room-guide" rel="noopener" target="_blank">Korea emergency rooms and 1339</a></li><li><a href="https://www.haniseoul.com/ko/travels/korea/midnight-pharmacy-hospital-guide-korea" rel="noopener" target="_blank">Night pharmacies and ER guide (2026)</a></li></ul></div></details>
+  </main>
   <section class="related"><h2>関連ガイド</h2><ul><li><a href="translation.html">韓国旅行におすすめの翻訳アプリは?</a></li><li><a href="mobile-data-sim.html">韓国で韓国の電話番号は必要?</a></li><li><a href="k-eta-entry-requirements.html">韓国旅行にK-ETAは必要?</a></li></ul></section>
-  <nav class="topics"><a href="mobile-data-sim.html">電話・データ</a><a href="incheon-airport-to-seoul.html">空港から市内</a><a href="maps.html">地図</a><a href="taxi.html">タクシー</a><a href="tmoney-subway-bus.html">地下鉄・バス</a><a href="seoul-tourist-transit-pass.html">交通パス</a><a href="ktx-train-booking.html">KTX</a><a href="seoul-to-busan-k-tour-pass.html">釜山旅行</a><a href="kr-pass-korail-pass.html">KRパス</a><a href="dmz-jsa-tour-booking.html">DMZツアー</a><a href="jeju-getting-around.html">済州の移動</a><a href="restaurant-reservations.html">飲食店の予約</a><a href="food-delivery.html">デリバリー</a><a href="translation.html">翻訳</a><a href="tax-free-shopping.html">買い物と免税</a><a href="luggage-storage.html">荷物の預け</a><a href="k-eta-entry-requirements.html">入国ルール</a><a href="atm-foreign-card-cash.html">現金・ATM</a><a href="korea-power-plug-voltage.html">電源プラグ</a><a href="gimpo-airport-to-seoul.html">金浦空港</a></nav>
+  <details class="more"><summary>All guides</summary><nav class="topics"><a href="mobile-data-sim.html">電話・データ</a><a href="incheon-airport-to-seoul.html">空港から市内</a><a href="maps.html">地図</a><a href="taxi.html">タクシー</a><a href="tmoney-subway-bus.html">地下鉄・バス</a><a href="seoul-tourist-transit-pass.html">交通パス</a><a href="ktx-train-booking.html">KTX</a><a href="seoul-to-busan-k-tour-pass.html">釜山旅行</a><a href="kr-pass-korail-pass.html">KRパス</a><a href="dmz-jsa-tour-booking.html">DMZツアー</a><a href="jeju-getting-around.html">済州の移動</a><a href="restaurant-reservations.html">飲食店の予約</a><a href="food-delivery.html">デリバリー</a><a href="translation.html">翻訳</a><a href="tax-free-shopping.html">買い物と免税</a><a href="luggage-storage.html">荷物の預け</a><a href="k-eta-entry-requirements.html">入国ルール</a><a href="atm-foreign-card-cash.html">現金・ATM</a><a href="korea-power-plug-voltage.html">電源プラグ</a><a href="gimpo-airport-to-seoul.html">金浦空港</a></nav></details>
+  <p class="host-cta">🏠 韓国で宿を運営していますか? <a href="../hosts.html">このガイドをゲストに送る</a>(韓国語)。</p>
   <section class="ask" aria-labelledby="ask-t-ja"><h2 id="ask-t-ja">知りたい情報が見つかりませんか?</h2><p class="hint">質問をどうぞ。ガイドに追記して回答します。メールを書いていただければ返信もします。</p>
 <form class="ask-form" data-thanks="ありがとうございます。質問を受け付けました。"><textarea name="q" required maxlength="1000" aria-label="知りたい情報が見つかりませんか?" placeholder="例: 海外で発行したカードでKTXを予約できますか?"></textarea>
 <input name="em" type="email" maxlength="120" autocomplete="email" aria-label="メール(任意。返信用)" placeholder="メール(任意。返信用)"><button class="btn" type="submit">質問を送る</button><p class="fb-done" role="status"></p></form></section><p class="fb-line"><button type="button" class="linkbtn" data-feedback="">💬 ご意見を送る</button></p><details class="about"><summary>このガイドについて</summary><div class="in">
@@ -338,7 +391,16 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !documen
 (function () {
   document.querySelectorAll("[data-show]").forEach(b => b.addEventListener("click", () => show(b.dataset.lbl, b.dataset.show, "", b.dataset.mean)));
   const saved = (store("wik-setup") || "visitor|ios").split("|");
-  const blocks = [...document.querySelectorAll(".card[data-p]")];
+  document.querySelectorAll("[data-copy]").forEach(b => b.addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(b.dataset.copy); } catch (e) { return; }
+    const was = b.innerHTML; b.classList.add("done"); b.setAttribute("aria-label", b.dataset.done);
+    const tip = document.createElement("span"); tip.className = "tip"; tip.textContent = b.dataset.done; tip.setAttribute("role", "status"); b.append(tip);
+    setTimeout(() => { b.innerHTML = was; b.classList.remove("done"); b.removeAttribute("aria-label"); }, 1600);
+    count("copy/" + location.pathname, "copy korean");
+  }));
+  /* A link to a folded section opens it. */
+  const h = location.hash && document.getElementById(location.hash.slice(1)); if (h && h.tagName === "DETAILS") h.open = true;
+  const blocks = [...document.querySelectorAll(".pv[data-p]")];
   if (blocks.length < 2) return;
   let shown = 0;
   for (const b of blocks) { const ok = b.dataset.p === saved[0] && (!b.dataset.d || b.dataset.d === saved[1]); b.hidden = !ok; if (ok) shown++; }

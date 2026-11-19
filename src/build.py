@@ -4,7 +4,7 @@ Content: data.py (answers) and data_extra.py (hook, short labels, icons, phrases
 changelog, host-stay strings). Host stay details travel in the link's #g= hash: never sent to a
 server or to analytics, and rendered with textContent only.
 """
-import datetime, hashlib, html, json, os, sys
+import datetime, hashlib, html, json, os, re, sys
 
 sys.path.insert(0, os.path.dirname(__file__))
 from data import CHECKED, CHECKED_ISO, LANGS, SOURCES, TASK_META  # noqa: E402
@@ -12,6 +12,8 @@ from data_extra import ASK, BRAND, FEEDBACK, FEEDBACK_FORM, FEEDBACK_TO, HELP, H
 import zh_cn  # noqa: E402,F401  (adds Simplified Chinese)
 import vi  # noqa: E402,F401  (adds Vietnamese)
 from deep import CONTACT_EMAIL, DEEP, HEAD as DEEP_HEAD, PAGES  # noqa: E402
+import layout  # noqa: E402
+from layout import AT, CARDS, COPY, tx  # noqa: E402
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 SITE = "https://easymodekorea.com/"
@@ -193,36 +195,53 @@ def build_tool(lang):
     topics = "".join(f'<a href="{t["slug"]}.html">{e(t["short"])}</a>' for t in task_list(lang))
     keys = ("staff", "means", "stay_title", "taxi_card", "taxi_ko", "taxi_means", "deliv_card", "deliv_ko", "deliv_means", "station", "checkin", "contact", "note", "map")
     tasks = task_list(lang)
-    for t in tasks: t["kw"] = (KEYWORDS[t["id"]] + " " + t["short"] + " " + t["title"]).lower()
+    for t in tasks:
+        t["kw"] = (KEYWORDS[t["id"]] + " " + t["short"] + " " + t["title"]).lower()
+        for k in ("title", "seo", "intro"): t.pop(k, None)  # not used by the page script
     data = {"ui": U, "x": {k: x[k] for k in keys}, "s": S, "ux": ux, "tasks": tasks, "plan": PLAN[lang], "fbfail": FEEDBACK[lang]["fail"], "checked": CHECKED[lang], "lang": lang,
             "langs": {k: {"name": LANGS[k]["name"], "dir": LANGS[k]["dir"]} for k in LANGS}, "up": up}
     q1 = "".join(f'<button type="button" class="opt-big" data-p="{p}"><b>{e(ux["q1_opts"][p][0])}</b><span>{e(ux["q1_opts"][p][1])}</span></button>' for p in ("visitor", "krsim", "arc"))
     q2 = "".join(f'<button type="button" class="opt-big" data-d="{v}"><b>{e(U[v])}</b></button>' for v in ("ios", "android"))
+    LU = layout.UI.get(lang, layout.UI["en"])
+    kw_of = {t["id"]: t["kw"] for t in tasks}
+    short_of = {t["id"]: t["short"] for t in tasks}
+    slug_of = {t["id"]: t["slug"] for t in tasks}
+    cards = []
+    for cid, ic, ids, txt in CARDS:
+        title, line = tx(txt, lang)
+        links = "".join(f'<a href="{slug_of[i]}.html" data-kw="{e(kw_of[i])}">{e(short_of[i])}</a>' for i in ids)
+        ckw = (title + " " + line).lower()
+        cards.append(f'<article class="sit-card" id="s-{cid}" data-kw="{e(ckw)}"><h3>{icon(ic)}<span>{e(title)}</span></h3><p>{e(line)}</p><p class="sit-links">{links}</p></article>')
     body = f"""
-{hero(lang, alt, up, '', '')}
-<h1 class="sr">{e(x['hook'])}</h1>
+{hero(lang, alt, up, x['hook'], LU['lede'])}
 <div class="wrap pre">
   <div class="banner" id="lang-suggest" hidden></div>
   <section class="stay" id="stay" hidden aria-live="polite"></section>
   <div class="banner" id="install" hidden><span>{e(ux['install'])}</span><button class="btn alt" type="button" id="install-btn">{e(ux['install_btn'])}</button></div>
-  <section class="onb" id="onb" aria-live="polite">
-    <div id="onb1"><h2>{e(ux['q1'])}</h2><p class="why">{e(ux['why'])}</p><div class="opts-big">{q1}</div></div>
-    <div id="onb2" hidden><h2>{e(ux['q2'])}</h2><div class="opts-big two">{q2}</div><button type="button" class="linkbtn" id="onb-back">← {e(ux['back'])}</button></div>
-  </section>
+</div>
+<div class="wrap">
+  <label class="search"><span class="sr">{e(ux['search'])}</span><input id="q" type="search" placeholder="{e(ux['search'])}" autocomplete="off"></label>
+  <p class="hint" id="nores" hidden>{e(ux['nores'])} <button type="button" class="linkbtn" id="clear">{e(ux['clear'])}</button></p>
+  <section class="sit" aria-labelledby="sit-h"><h2 id="sit-h">{e(LU['cards_h'])}</h2><div class="sit-grid">{''.join(cards)}</div></section>
+  <section class="tool" aria-labelledby="tool-h"><h2 id="tool-h" class="tool-h">{e(LU['tool_h'])}</h2>
+  <div class="onb" id="onb" aria-live="polite">
+    <div id="onb1"><h3>{e(ux['q1'])}</h3><p class="why">{e(ux['why'])}</p><div class="opts-big">{q1}</div></div>
+    <div id="onb2" hidden><h3>{e(ux['q2'])}</h3><div class="opts-big two">{q2}</div><button type="button" class="linkbtn" id="onb-back">← {e(ux['back'])}</button></div>
+  </div></section>
 </div>
 <div class="mybar" id="mybar" hidden><div class="wrap"><span id="mysetup"></span><span class="bar-btns"><button type="button" class="btn ghost small" id="help-btn">{e(HELP[lang]['btn'])}</button><button type="button" class="btn ghost small" id="change">{e(ux['change'])}</button></span></div></div>
 <div class="wrap" id="main" hidden>
-  <label class="search"><span class="sr">{e(ux['search'])}</span><input id="q" type="search" placeholder="{e(ux['search'])}" autocomplete="off"></label>
-  <p class="hint" id="nores" hidden>{e(ux['nores'])} <button type="button" class="linkbtn" id="clear">{e(ux['clear'])}</button></p>
   <main class="rows" id="rows"></main>
   <details class="panel" id="cl"><summary><span id="ptitle"></span> <span class="count" id="pcount"></span></summary><div class="in">
     <div class="progress"><div class="bar"><i id="pbar"></i></div></div>
     <ul class="checks" id="checklist"></ul>
     <div class="actions"><button class="btn" type="button" id="copy-btn">{e(U['copy'])}</button><span class="copied" id="copied" role="status"></span></div>
   </div></details>
+</div>
+<div class="wrap">
+  <p class="offline-note">⚡ {e(LU['offline'])}</p>
   {about(lang, up)}
 </div>
-<section class="wrap guide-list" aria-labelledby="gl-t"><h2 id="gl-t">{e(U['guides'])}</h2>{guide_groups(lang)}</section>
 {help_html(lang)}
 {SHOW_HTML(lang)}
 <div class="toast" id="offline" hidden role="status">{e(ux['offline'])}</div>
@@ -248,13 +267,13 @@ const U = D.ui, XS = D.x, S = D.s, UX = D.ux, FB_FAIL = D.fbfail;
 let P = null, DEV = null;
 function resolve(t, p, dev) { if (t.all) return t.all; let v = t.v[p]; if (typeof v === "string") v = t.v[v]; if (t.dev && v[dev]) v = v[dev]; return v; }
 function setStep(n) { document.getElementById("onb1").hidden = n !== 1; document.getElementById("onb2").hidden = n !== 2; }
-function openOnb() { document.getElementById("onb").hidden = false; document.getElementById("main").hidden = true; document.getElementById("mybar").hidden = true; setStep(1); document.querySelector("#onb1 .opt-big").focus(); }
+function openOnb(focus) { document.getElementById("onb").hidden = false; document.getElementById("main").hidden = true; document.getElementById("mybar").hidden = true; setStep(1); if (focus) { document.getElementById("tool-h").scrollIntoView(); document.querySelector("#onb1 .opt-big").focus({ preventScroll: true }); } }
 function finish() {
   store("wik-setup", P + "|" + DEV); document.body.classList.add("ret");
   document.getElementById("onb").hidden = true; document.getElementById("main").hidden = false; document.getElementById("mybar").hidden = false;
   document.getElementById("mysetup").textContent = S.prof[P] + " · " + U[DEV];
   render(); count("setup/" + D.lang + "/" + P + "/" + DEV, "setup");
-  if (fromOnb) window.scrollTo(0, 0);
+  if (fromOnb) document.getElementById("tool-h").scrollIntoView();
 }
 let fromOnb = false;
 /* The phone type is usually readable from the browser, so most people answer one question. */
@@ -277,7 +296,7 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !helpEl.
 const off = () => { document.getElementById("offline").hidden = navigator.onLine; };
 window.addEventListener("online", off); window.addEventListener("offline", off); off();
 document.getElementById("onb-back").addEventListener("click", () => setStep(1));
-document.getElementById("change").addEventListener("click", openOnb);
+document.getElementById("change").addEventListener("click", () => openOnb(true));
 function render() {
   const open = new Set([...document.querySelectorAll(".row[open]")].map(r => r.id));
   const rows = document.getElementById("rows"); rows.replaceChildren();
@@ -342,7 +361,15 @@ function filter() {
   let moreHits = 0;
   document.querySelectorAll(".row").forEach(r => { const ok = !q || r.dataset.kw.includes(q); r.hidden = !ok; if (ok) { shown++; if (r.classList.contains("more")) moreHits++; } });
   const mh = document.querySelector(".more-h"); if (mh) mh.hidden = !!q && !moreHits;
-  document.getElementById("nores").hidden = shown > 0;
+  let cardHits = 0;
+  document.querySelectorAll(".sit-card").forEach(c => {
+    const links = [...c.querySelectorAll("a[data-kw]")];
+    let any = false;
+    links.forEach(a => { const ok = !q || a.dataset.kw.includes(q); a.hidden = !ok; if (ok) any = true; });
+    if (!any && c.dataset.kw.includes(q)) { any = true; links.forEach(a => { a.hidden = false; }); }
+    c.hidden = !any; if (any) cardHits++;
+  });
+  document.getElementById("nores").hidden = !q || shown + cardHits > 0;
   if (q && shown === 1) { const r = [...document.querySelectorAll(".row")].find(x => !x.hidden); r.open = true; }
 }
 document.getElementById("q").addEventListener("input", filter);
@@ -391,9 +418,9 @@ function stay() {
 let deferred = null;
 window.addEventListener("beforeinstallprompt", ev => { ev.preventDefault(); deferred = ev; document.getElementById("install").hidden = false; });
 document.getElementById("install-btn").addEventListener("click", async () => { if (!deferred) return; deferred.prompt(); try { await deferred.userChoice; } catch (e) {} deferred = null; document.getElementById("install").hidden = true; count("install", "install"); });
-if ("serviceWorker" in navigator) navigator.serviceWorker.register(D.up + "sw.js").catch(() => {});
+if ("serviceWorker" in navigator) navigator.serviceWorker.register(D.up + "sw.js?l=" + D.lang).catch(() => {});
 const saved = (store("wik-setup") || "").split("|");
-if (saved[0] && S.prof[saved[0]] && (saved[1] === "ios" || saved[1] === "android")) { P = saved[0]; DEV = saved[1]; finish(); } else { openOnb(); }
+if (saved[0] && S.prof[saved[0]] && (saved[1] === "ios" || saved[1] === "android")) { P = saved[0]; DEV = saved[1]; finish(); } else { openOnb(/^#task-/.test(location.hash)); }
 stay();
 const target = location.hash.match(/^#task-[\w-]+$/); if (target && P) { const r = document.querySelector(target[0]); if (r) { r.open = true; r.scrollIntoView(); } }
 """
@@ -403,7 +430,16 @@ TOPIC_JS = r"""
 (function () {
   document.querySelectorAll("[data-show]").forEach(b => b.addEventListener("click", () => show(b.dataset.lbl, b.dataset.show, "", b.dataset.mean)));
   const saved = (store("wik-setup") || "visitor|ios").split("|");
-  const blocks = [...document.querySelectorAll(".card[data-p]")];
+  document.querySelectorAll("[data-copy]").forEach(b => b.addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(b.dataset.copy); } catch (e) { return; }
+    const was = b.innerHTML; b.classList.add("done"); b.setAttribute("aria-label", b.dataset.done);
+    const tip = document.createElement("span"); tip.className = "tip"; tip.textContent = b.dataset.done; tip.setAttribute("role", "status"); b.append(tip);
+    setTimeout(() => { b.innerHTML = was; b.classList.remove("done"); b.removeAttribute("aria-label"); }, 1600);
+    count("copy/" + location.pathname, "copy korean");
+  }));
+  /* A link to a folded section opens it. */
+  const h = location.hash && document.getElementById(location.hash.slice(1)); if (h && h.tagName === "DETAILS") h.open = true;
+  const blocks = [...document.querySelectorAll(".pv[data-p]")];
   if (blocks.length < 2) return;
   let shown = 0;
   for (const b of blocks) { const ok = b.dataset.p === saved[0] && (!b.dataset.d || b.dataset.d === saved[1]); b.hidden = !ok; if (ok) shown++; }
@@ -447,12 +483,22 @@ RELATED = {
 }
 
 
+def fmt_date(iso, lang):
+    y, m, d = iso.split("-")
+    if lang == "en": return f"{int(d)} {['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][int(m)-1]} {y}"
+    if lang == "vi": return f"{int(d)}/{int(m)}/{y}"
+    return f"{y}年{int(m)}月{int(d)}日"
+
+
 def build_topic(lang, t):
+    """Guide page, short first: answer box (verdict, key facts with check dates, source stamp),
+    numbered steps, phrase and copy cards, then the long-form detail folded in <details>."""
     L = LANGS[lang]; U = L["ui"]; x = X[lang]; S = SHORT[lang]; d = L["dir"]; up = "../" if d else ""
+    LU = layout.UI.get(lang, layout.UI["en"]); H = DEEP_HEAD[lang]
     path = f"{d}{t['slug']}.html"
     alt = {k: f"{LANGS[k]['dir']}{t['slug']}.html" for k in LANGS}
     fail_lbl = U["fails"].strip().rstrip(":：").strip()
-    blocks = []
+    tops, dos = [], []
     profiles = ["visitor", "krsim", "arc"] if "all" not in t else [None]
     for p in profiles:
         devices = ["ios", "android"] if t.get("dev") and p != "arc" else [None]
@@ -460,11 +506,20 @@ def build_topic(lang, t):
             v = resolve(t, p or "visitor", dv or "ios")
             heading = U["for_profile"][p] if p else UX[lang]["tone"][v["s"]]
             if dv: heading += f" · {U[dv]}"
-            route = "".join(f"<li>{e(r)}</li>" for r in v["route"])
             attrs = (f' data-p="{p}"' if p else "") + (f' data-d="{dv}"' if dv else "")
-            blocks.append(f"""<article class="card {v['s']}"{attrs}><div class="actions" style="justify-content:space-between;align-items:center"><h2>{e(heading)}</h2><span class="pill {v['s']}">{e(UX[lang]['tone'][v['s']])}</span></div>
-<p class="verdict">{e(v['verdict'])}</p><ol class="steps">{route}</ol><p class="fallback"><b>{e(fail_lbl)}</b>{e(v['fallback'])}</p></article>""")
-    phrases = "".join(f'<button class="btn alt" type="button" data-show="{e(ko)}" data-lbl="{e(S["show"])}" data-mean="{e(x["means"])}: {e(m)}">🗣 {e(m)}</button>' for ko, m in t["phrases"])
+            route = "".join(f"<li>{e(r)}</li>" for r in v["route"])
+            tops.append(f'<div class="pv {v["s"]}"{attrs}><div class="ans-top"><h2>{e(heading)}</h2><span class="pill {v["s"]}">{e(UX[lang]["tone"][v["s"]])}</span></div><p class="verdict">{e(v["verdict"])}</p></div>')
+            dos.append(f'<div class="pv"{attrs}><ol class="steps">{route}</ol><p class="fallback"><b>{e(fail_lbl)}</b>{e(v["fallback"])}</p></div>')
+    rows = AT.get(t["id"], [])
+    glance = "".join(f'<div><dt>{e(LU[k])}</dt><dd>{e(tx(m, lang))} <time class="ck" datetime="{dt}">✓ {e(fmt_date(dt, lang))}</time></dd></div>' for k, m, dt in rows)
+    stamp_date = max([r[2] for r in rows] or [CHECKED_ISO])
+    g = DEEP.get(t["id"])
+    src_name, src_url = (g["cites"][0] if g else t["sources"][0])
+    stamp = LU["stamp"].format(src=f'<a href="{e(src_url)}" rel="noopener" target="_blank">{e(src_name)}</a>', date=f'<time datetime="{stamp_date}">{e(fmt_date(stamp_date, lang))}</time>')
+    first_s = resolve(t, "visitor", "ios")["s"]
+    say = "".join(f'<div class="say"><p class="say-ko" lang="ko">{e(ko)}</p><p class="say-mean">{e(m)}</p><div class="actions"><button class="btn alt" type="button" data-show="{e(ko)}" data-lbl="{e(S["show"])}" data-mean="{e(x["means"])}: {e(m)}">🗣 {e(LU["full"])}</button><button class="btn ghost" type="button" data-copy="{e(ko)}" data-done="✓ {e(LU["copied"])}">📋 {e(LU["copy"])}</button></div></div>' for ko, m in t["phrases"])
+    names = "".join(f'<li><button class="chip" type="button" data-copy="{e(ko)}" data-done="✓ {e(LU["copied"])}"><span lang="ko">{e(ko)}</span><small>{e(tx(m, lang))}</small><i aria-hidden="true">📋</i></button></li>' for ko, m in COPY.get(t["id"], []))
+    names_html = f'<section class="names" aria-labelledby="nm-{t["id"]}"><h2 id="nm-{t["id"]}">{e(LU["names_h"])}</h2><ul>{names}</ul></section>' if names else ""
     notes = "".join(f"<li>{e(n)}</li>" for n in t.get("notes", []))
     srcs = "".join(f'<li><a href="{e(u)}" rel="noopener" target="_blank">{e(n)}</a></li>' for n, u in t["sources"])
     others = "".join(f'<a href="{o["slug"]}.html">{e(o["short"])}</a>' for o in task_list(lang) if o["id"] != t["id"])
@@ -472,16 +527,22 @@ def build_topic(lang, t):
     related = "".join(f'<li><a href="{slug_of[r]}.html">{e(QUESTION[lang][r])}</a></li>' for r in RELATED.get(t["id"], []))
     deep, faq_extra = deep_html(lang, t["id"])
     body = f"""
-<a class="skip" href="#answer">{e(DEEP_HEAD[lang]['skip'])}</a>
-{hero(lang, alt, up, QUESTION[lang][t['id']], t['intro'])}
+<a class="skip" href="#answer">{e(H['skip'])}</a>
+{hero(lang, alt, up, QUESTION[lang][t['id']], '')}
 <div class="wrap">
-  <div class="actions"><a class="btn" href="./#task-{t['id']}">{e(U['open_tool'])}</a>{phrases}</div>
-  <main class="cards" id="answer">{''.join(blocks)}<button class="linkbtn" type="button" id="show-all" hidden>{e(x['others'])}</button>{deep}</main>
-  <p class="checked-line">{e(U['checked'])} <time datetime="{CHECKED_ISO}">{e(CHECKED[lang])}</time></p>
-  <details class="panel" open><summary>{e(S['details'])}</summary><div class="in notes"><ul><li>{e(U['checked'])} {e(CHECKED[lang])}</li>{notes}{srcs}</ul></div></details>
-  <p class="host-cta">🏠 {U['hosts'].format(base=up)}</p>
+  <main id="answer">
+  <section class="answer {first_s}">{''.join(tops)}<dl class="glance">{glance}</dl><p class="stamp">{stamp}</p></section>
+  <button class="linkbtn" type="button" id="show-all" hidden>{e(x['others'])}</button>
+  <section class="do" aria-labelledby="do-{t['id']}"><h2 id="do-{t['id']}" class="sr">{e(H['steps'])}</h2>{''.join(dos)}</section>
+  {f'<section class="says" aria-labelledby="say-{t["id"]}"><h2 id="say-{t["id"]}">{e(LU["say_h"])}</h2>{say}</section>' if say else ''}
+  {names_html}
+  <div class="actions"><a class="btn" href="./#task-{t['id']}">{e(U['open_tool'])}</a></div>
+  {deep}
+  <details class="more"><summary>{e(S['details'])}</summary><div class="in notes"><p>{e(t['intro'])}</p><ul><li>{e(U['checked'])} {e(CHECKED[lang])}</li>{notes}{srcs}</ul></div></details>
+  </main>
   <section class="related"><h2>{e(x['related'])}</h2><ul>{related}</ul></section>
-  <nav class="topics">{others}</nav>
+  <details class="more"><summary>{e(LU['all'])}</summary><nav class="topics">{others}</nav></details>
+  <p class="host-cta">🏠 {U['hosts'].format(base=up)}</p>
   {about(lang, up)}
 </div>
 {SHOW_HTML(lang)}
@@ -527,34 +588,17 @@ def build_changes(lang):
 # date it last changed, so the sitemap and dateModified move only for pages that changed.
 DATES_FILE = os.path.join(os.path.dirname(__file__), "page_dates.json")
 DATES = json.load(open(DATES_FILE, encoding="utf-8")) if os.path.exists(DATES_FILE) else {}
+DATED = set()  # pages already dated from their body during this build
 TODAY = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).date().isoformat()
 
 
 def page_date(path, content):
     h = hashlib.sha256(content.encode("utf-8")).hexdigest()[:16]
+    DATED.add(path)
     rec = DATES.get(path)
     if not rec or rec["h"] != h:
         DATES[path] = rec = {"h": h, "d": TODAY}
     return rec["d"]
-
-
-# Home page guide list, grouped the way a trip runs: arrival first, then moving around, then daily needs.
-GUIDE_GROUPS = [("g_arrive", ["entry", "data", "airport", "gimpo", "cash", "power"]),
-                ("g_move", ["transit", "transitpass", "maps", "taxi", "ktx", "busan", "krpass", "jeju", "dmz"]),
-                ("g_daily", ["food-booking", "delivery", "translate", "shopping", "luggage", "health"])]
-
-
-def guide_groups(lang):
-    tasks = {t["id"]: t for t in task_list(lang)}
-    grouped = [i for _, ids in GUIDE_GROUPS for i in ids]
-    missing = [i for i in tasks if i not in grouped]
-    if missing:
-        sys.exit(f"guides missing from GUIDE_GROUPS: {missing}")
-    out = []
-    for key, ids in GUIDE_GROUPS:
-        items = "".join(f'<li><a href="{tasks[i]["slug"]}.html">{e(QUESTION[lang][i])}</a><span>{e(tasks[i]["intro"])}</span></li>' for i in ids if i in tasks)
-        out.append(f'<h3>{e(DEEP_HEAD[lang][key])}</h3><ul>{items}</ul>')
-    return "".join(out)
 
 
 def footer(lang):
@@ -591,10 +635,10 @@ def deep_html(lang, tid):
     errs = "".join(f'<li><p class="prob"><b>{e(a)}</b></p><p>{link(b)}</p></li>' for a, b in c["errors"])
     faq = "".join(f'<h3>{e(q)}</h3><p>{link(a)}</p>' for q, a in c["faq"])
     cites = "".join(f'<li><a href="{e(u)}" rel="noopener" target="_blank">{e(n)}</a></li>' for n, u in g["cites"])
-    out = f"""<section class="deep" aria-labelledby="st-{tid}"><h2 id="st-{tid}">{e(H['steps'])}</h2><ol class="steps full">{steps}</ol></section>
-<section class="deep" aria-labelledby="er-{tid}"><h2 id="er-{tid}">{e(H['errors'])}</h2><ul class="errs">{errs}</ul></section>
-<section class="deep faq" aria-labelledby="fq-{tid}"><h2 id="fq-{tid}">{e(H['faq'])}</h2>{faq}</section>
-<section class="deep" aria-labelledby="ct-{tid}"><h2 id="ct-{tid}">{e(H['cites'])}</h2><ul class="cites">{cites}</ul></section>"""
+    out = f"""<details class="more deep" id="st-{tid}"><summary>{e(H['steps'])}</summary><div class="in"><ol class="steps full">{steps}</ol></div></details>
+<details class="more deep" id="er-{tid}"><summary>{e(H['errors'])}</summary><div class="in"><ul class="errs">{errs}</ul></div></details>
+<details class="more deep faq" id="fq-{tid}"><summary>{e(H['faq'])}</summary><div class="in">{faq}</div></details>
+<details class="more deep" id="ct-{tid}"><summary>{e(H['cites'])}</summary><div class="in"><ul class="cites">{cites}</ul></div></details>"""
     return out, c["faq"]
 
 
@@ -683,11 +727,18 @@ def main():
         rel = p[len(next((LANGS[k]["dir"] for k in LANGS if LANGS[k]["dir"] and p.startswith(LANGS[k]["dir"])), "")):]
         alts = by_rel.get(rel, {})
         links = "" if len(alts) < 2 else "".join(f'<xhtml:link rel="alternate" hreflang="{LANGS[k]["html_lang"]}" href="{SITE}{q}"/>' for k, q in alts.items()) + f'<xhtml:link rel="alternate" hreflang="x-default" href="{SITE}{alts.get("en", p)}"/>'
-        d = DATES[p]["d"] if p in DATES else page_date(p, open(os.path.join(ROOT, (p + "index.html") if (p == "" or p.endswith("/")) else p), encoding="utf-8").read())
+        d = DATES[p]["d"] if p in DATED else page_date(p, open(os.path.join(ROOT, (p + "index.html") if (p == "" or p.endswith("/")) else p), encoding="utf-8").read())
         return f"<url><loc>{SITE}{p}</loc><lastmod>{d}</lastmod>{links}</url>\n"
     urls = "".join(url(p) for p in paths)
     write("sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n{urls}</urlset>\n')
+    # Offline: precache every page, so a guide opened once (or not yet) still works without signal.
+    pre = ["./", "ja/", "zh-tw/", "zh-cn/", "vi/", "icon-192.png", "manifest.webmanifest"] + [p for p in paths if p and not p.endswith("/")]
+    ver = hashlib.sha256("".join(DATES[p]["h"] for p in sorted(DATES)).encode()).hexdigest()[:8]
+    sw = open(os.path.join(ROOT, "sw.js"), encoding="utf-8").read()
+    sw = re.sub(r"const C='[^']*';const PRE=\[[^\]]*\];", lambda m: f"const C='emk-{ver}';const PRE={json.dumps(pre)};", sw, count=1)
+    write("sw.js", sw)
     open(DATES_FILE, "w", encoding="utf-8").write(json.dumps(dict(sorted(DATES.items())), indent=0, ensure_ascii=False) + "\n")
+    if layout.MISSING: print("warning: layout.py text falls back to English for: " + ", ".join(sorted(layout.MISSING)))
     print(f"built {len(paths)} pages")
 
 
