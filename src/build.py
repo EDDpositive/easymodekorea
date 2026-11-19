@@ -468,6 +468,7 @@ def build_topic(lang, t):
 <div class="wrap">
   <div class="actions"><a class="btn" href="./#task-{t['id']}">{e(U['open_tool'])}</a>{phrases}</div>
   <main class="cards">{''.join(blocks)}<button class="linkbtn" type="button" id="show-all" hidden>{e(x['others'])}</button></main>
+  <p class="checked-line">{e(U['checked'])} <time datetime="{CHECKED_ISO}">{e(CHECKED[lang])}</time></p>
   <details class="panel"><summary>{e(S['details'])}</summary><div class="in notes"><ul><li>{e(U['checked'])} {e(CHECKED[lang])}</li>{notes}{srcs}</ul></div></details>
   <section class="related"><h2>{e(x['related'])}</h2><ul>{related}</ul></section>
   <nav class="topics">{others}</nav>
