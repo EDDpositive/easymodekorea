@@ -364,7 +364,7 @@ DEEP["transitpass"] = {
               ["10Mag: what K-Pass means for foreigners and tourists", "https://10mag.com/what-k-pass-means-for-foreigners-and-tourists-in-korea/"]],
     "en": {
         "steps": ["Count your rides. Add up the subway and bus trips you plan inside Seoul each day.",
-                  "Compare: a Seoul subway ride costs around 1,500 won by card. A pass only pays off on days with many rides.",
+                  "Compare: a Seoul subway ride starts at 1,550 won by card (the base fare since June 2025). A pass only pays off on days with many rides.",
                   ["If it pays off, buy a 1, 2, 3, 5 or 7-day Climate Card tourist pass. Reports name station kiosks, tourist information centres and T-Money Town near Seoul Station as places to buy it.", "pass-kiosk"],
                   "Check the current price, the card fee and how the days are counted when you buy.",
                   "Use it on Seoul subways and buses. Keep a T-money card for taxis, the AREX Express and trips outside the Seoul area.",
@@ -380,7 +380,7 @@ DEEP["transitpass"] = {
     },
     "ja": {
         "steps": ["乗る回数を数えます。ソウル市内で1日に乗る地下鉄とバスの回数を合計します。",
-                  "比べます: ソウルの地下鉄はカードで1回約1,500ウォン。パスが得になるのは、たくさん乗る日だけです。",
+                  "比べます: ソウルの地下鉄はカードで1回1,550ウォンから(2025年6月からの基本運賃)。パスが得になるのは、たくさん乗る日だけです。",
                   ["得になるなら、クライメートカードの観光客向けパス(1・2・3・5・7日)を買います。駅のキオスク、観光案内所、ソウル駅近くのT-Money Townが購入先として報じられています。", "pass-kiosk"],
                   "購入時に、最新の価格、カード代、日数の数え方を確認します。",
                   "ソウルの地下鉄とバスで使います。タクシー、AREX直通列車、ソウル圏外への移動用にT-moneyも持っておきます。",
@@ -396,7 +396,7 @@ DEEP["transitpass"] = {
     },
     "zh-tw": {
         "steps": ["算算搭乘次數。把每天在首爾預計搭的地鐵和公車次數加起來。",
-                  "比較:首爾地鐵用卡搭一趟約1,500韓元。只有搭很多趟的日子,票券才划算。",
+                  "比較:首爾地鐵用卡搭一趟1,550韓元起(2025年6月起的基本票價)。只有搭很多趟的日子,票券才划算。",
                   ["划算的話,買氣候同行卡觀光客票券(1、2、3、5或7日)。報導提到的購買處有車站機台、觀光服務中心和首爾站附近的T-Money Town。", "pass-kiosk"],
                   "購買時確認最新價格、卡片費用和天數怎麼算。",
                   "在首爾的地鐵和公車使用。計程車、AREX直達車和首爾地區以外的行程,用T-money卡。",
@@ -412,7 +412,7 @@ DEEP["transitpass"] = {
     },
     "vi": {
         "steps": ["Đếm số chuyến. Cộng số chuyến tàu điện ngầm và xe buýt bạn định đi trong Seoul mỗi ngày.",
-                  "So sánh: một chuyến tàu điện ngầm Seoul khoảng 1.500 won khi trả bằng thẻ. Thẻ du lịch chỉ có lợi vào những ngày đi nhiều.",
+                  "So sánh: một chuyến tàu điện ngầm Seoul từ 1.550 won khi trả bằng thẻ (giá cơ bản từ tháng 6/2025). Thẻ du lịch chỉ có lợi vào những ngày đi nhiều.",
                   ["Nếu có lợi, mua thẻ du lịch Climate Card loại 1, 2, 3, 5 hoặc 7 ngày. Các nguồn tin nêu máy ở ga, trung tâm thông tin du lịch và T-Money Town gần ga Seoul là nơi bán.", "pass-kiosk"],
                   "Khi mua, kiểm tra giá hiện tại, phí thẻ và cách tính ngày.",
                   "Dùng cho tàu điện ngầm và xe buýt ở Seoul. Giữ thẻ T-money cho taxi, tàu AREX Express và các chuyến ra ngoài khu vực Seoul.",
