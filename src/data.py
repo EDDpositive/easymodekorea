@@ -28,6 +28,12 @@ SOURCES = {
     "bags": ["Luggage storage and delivery guide (2026)", "https://www.haniseoul.com/ko/travels/korea/korea-luggage-storage-and-delivery-guide"],
     "er": ["Korea emergency rooms and 1339", "https://seoulstart.com/ko/guides/korea-emergency-room-guide"],
     "night": ["Night pharmacies and ER guide (2026)", "https://www.haniseoul.com/ko/travels/korea/midnight-pharmacy-hospital-guide-korea"],
+    "keta": ["K-ETA official site", "https://www.k-eta.go.kr"],
+    "ketaext": ["Passport Index: K-ETA exemption extended to end of 2026", "https://discover.passportindex.org/policy-and-regulations/south-korea-extends-k-eta-exemption-until-end-of-2026/"],
+    "earrival": ["Wego: K-ETA waiver and e-Arrival Card (2026)", "https://blog.wego.com/south-korea-travel-rules-k-eta-waiver-2026/"],
+    "atm": ["HaniSeoul: ATMs in Korea", "https://www.haniseoul.com/travels/korea/atm-korea"],
+    "wiseatm": ["Wise: ATMs in South Korea, cards and fees", "https://wise.com/au/blog/atms-in-south-korea"],
+    "woori": ["Korea Times: Woori Bank prepaid card for tourists (May 2026)", "https://www.koreatimes.co.kr/amp/business/banking-finance/20260513/woori-bank-targets-foreign-tourists-with-prepaid-card-issued-at-airport"],
     "baemin": ["Bizwatch: Baemin adds English, Japanese, Chinese (Feb 2026)", "https://news.bizwatch.co.kr/article/consumer/2026/02/04/0013"],
 }
 
@@ -45,6 +51,8 @@ TASK_META = [
     ("shopping", "tax-free-shopping", ["taxfree", "oy"]),
     ("luggage", "luggage-storage", ["tlocker", "bags"]),
     ("health", "pharmacy-hospital", ["er", "night"]),
+    ("entry", "k-eta-entry-requirements", ["keta", "ketaext", "earrival"]),
+    ("cash", "atm-foreign-card-cash", ["atm", "wiseatm", "woori"]),
 ]
 
 LANGS = {}
@@ -153,6 +161,16 @@ LANGS["en"] = {
             "intro": "Emergency help in Korea is free to call and has interpreters. For smaller problems, pharmacies and big hospitals' international clinics are easy to use.",
             "all": {"s": "ok", "verdict": "Call 119 for an ambulance. If you're not sure where to go, call 1339, any time.", "route": ["Emergency: call 119 and say \"English, please\" for an interpreter.", "Not sure how serious it is, or need the nearest open ER or pharmacy? Call 1339. It runs 24 hours.", "Minor problems: pharmacies (look for the 약 sign) sell common medicines. Convenience stores have basic painkillers and cold medicine.", "Major Seoul hospitals have international clinics with English- and Chinese-speaking staff."], "fallback": "Bring your passport. An ER may ask for a deposit before treatment."},
             "notes": ["1330, the travel helpline, can also interpret for you at a pharmacy or clinic."]},
+        "entry": {"title": "Entry rules: K-ETA and arrival card", "more": True,
+            "seo": "Do I need K-ETA to visit Korea in 2026? Exemption and the arrival card",
+            "intro": "Many visitors can enter Korea without a K-ETA until the end of 2026, but it depends on your passport. Check before you fly, and fill in the arrival card if it applies to you.",
+            "all": {"s": "warn", "verdict": "Many passports are exempt from K-ETA through 31 Dec 2026, but not all. Check your own country on the official site before you fly.", "route": ["Check your passport country on the official K-ETA site (k-eta.go.kr). The temporary exemption for eligible countries runs from 1 Jan to 31 Dec 2026.", "If you are not exempt, apply for K-ETA before you fly, not at check-in.", "Reports say a digital arrival card (e-Arrival Card) applies to foreign visitors from 2026, including those exempt from K-ETA. Submit it online before you arrive, and confirm the current rule on the official portal."], "fallback": "Unsure? Ask your airline or the nearest Korean embassy before you book. Rules for 2027 had not been announced at our last check."},
+            "notes": ["The exemption has been extended one year at a time, so guides written before 2026 may be out of date."]},
+        "cash": {"title": "Cash and ATMs with a foreign card", "more": True,
+            "seo": "Withdrawing cash in Korea with a foreign card: Global ATMs, fees and what to avoid (2026)",
+            "intro": "Korea is mostly cashless, but some small shops and markets still want cash. Many Korean ATMs refuse foreign cards, so it helps to know which ones work.",
+            "all": {"s": "warn", "verdict": "Foreign debit cards work at Global ATMs and many convenience-store ATMs, usually with a fee.", "route": ["Look for ATMs marked \"Global\". Bank ATMs in busy areas such as Myeongdong and Hongdae, and convenience stores such as CU, GS25 and 7-Eleven, often have them.", "Use a debit card enabled for international withdrawals. A credit card withdrawal counts as a cash advance, with extra fees and interest.", "If the machine offers to charge you in your home currency, choose won (KRW). Otherwise you get a poor conversion rate."], "fallback": "If one machine rejects your card, try another at a major bank such as KB or Woori, or exchange cash at a bank or exchange counter."},
+            "notes": ["Expect a machine fee plus your own bank's foreign fee. Amounts vary by machine and card issuer, so ask your bank before you fly.", "Woori Bank began issuing a prepaid tourist card at Incheon Airport in May 2026."]},
     },
 }
 
@@ -260,6 +278,16 @@ LANGS["ja"] = {
             "intro": "韓国の緊急通報は無料で通訳もつきます。軽い症状なら薬局や大病院の国際診療センターが使いやすいです。",
             "all": {"s": "ok", "verdict": "救急車は119。どこへ行けばいいかわからないときは1339へ、24時間いつでも。", "route": ["緊急時: 119に電話し「Japanese, please」と言えば通訳につながります。", "どれくらい深刻かわからない、近くで開いている救急室や薬局を知りたい: 1339へ。24時間対応です。", "軽い症状: 薬局(「약」の看板)で一般的な薬が買えます。コンビニにも基本的な鎮痛剤や風邪薬があります。", "ソウルの大病院には英語・中国語が通じる国際診療センターがあります。"], "fallback": "パスポートを持って行く。救急室では治療前に預かり金を求められることがあります。"},
             "notes": ["観光案内ダイヤル1330も、薬局や病院での通訳を手伝ってくれます。"]},
+        "entry": {"title": "入国ルール: K-ETAと到着カード", "more": True,
+            "seo": "韓国旅行にK-ETAは必要?2026年の免除と到着カード",
+            "intro": "2026年末までは、多くの旅行者がK-ETAなしで入国できますが、パスポートの国によって異なります。出発前に確認し、到着カードが必要な場合は記入してください。",
+            "all": {"s": "warn", "verdict": "2026年12月31日まで多くの国のパスポートはK-ETA免除ですが、すべてではありません。出発前に公式サイトで自分の国を確認してください。", "route": ["公式のK-ETAサイト(k-eta.go.kr)でパスポートの国を確認します。対象国の一時免除は2026年1月1日から12月31日までです。", "免除でない場合は、チェックインではなく出発前にK-ETAを申請します。", "2026年から、K-ETA免除の人も含め外国人旅行者に電子到着カード(e-Arrival Card)が必要になると報じられています。到着前にオンラインで提出し、最新の規則は公式ポータルで確認してください。"], "fallback": "不安な場合は、予約前に航空会社か最寄りの韓国大使館に確認を。2027年の扱いは、最後の確認時点では未発表でした。"},
+            "notes": ["免除は1年ずつ延長されているため、2026年より前のガイドは古い可能性があります。"]},
+        "cash": {"title": "外国のカードで現金を引き出す", "more": True,
+            "seo": "韓国で外国のカードで現金を下ろす: Global ATM、手数料、注意点(2026)",
+            "intro": "韓国はほぼキャッシュレスですが、小さな店や市場では現金が必要なことがあります。外国のカードを受け付けないATMも多いので、使える機械を知っておくと安心です。",
+            "all": {"s": "warn", "verdict": "外国のデビットカードはGlobal ATMと多くのコンビニATMで使えます。通常は手数料がかかります。", "route": ["「Global」表示のATMを探します。明洞や弘大などの繁華街の銀行ATMや、CU・GS25・セブン-イレブンなどのコンビニにあることが多いです。", "海外引き出しに対応したデビットカードを使います。クレジットカードの引き出しはキャッシングとなり、手数料と利息がかかります。", "自国通貨での請求を勧められたら、ウォン(KRW)を選びます。そうしないと換算レートが悪くなります。"], "fallback": "1台で断られたら、KBやウリなど大手銀行の別のATMを試すか、銀行や両替所で両替しましょう。"},
+            "notes": ["機械の手数料に加え、ご自身の銀行の海外手数料がかかります。金額は機械やカード会社で違うので、出発前に銀行へ確認を。", "ウリ銀行は2026年5月、仁川空港で旅行者向けプリペイドカードの発行を始めました。"]},
     },
 }
 
@@ -367,5 +395,15 @@ LANGS["zh-tw"] = {
             "intro": "韓國的緊急電話免費而且有口譯。小毛病可以去藥局,或大醫院的國際診療中心。",
             "all": {"s": "ok", "verdict": "叫救護車打119。不知道該去哪裡就打1339,24小時都有人接。", "route": ["緊急狀況:打119,說「Chinese, please」就會轉接口譯。", "不確定嚴不嚴重,或想找附近還開著的急診室、藥局:打1339,24小時服務。", "小毛病:藥局(找「약」招牌)有常見藥品。便利商店也有基本的止痛藥和感冒藥。", "首爾的大醫院設有國際診療中心,有會說英文、中文的醫護人員。"], "fallback": "帶護照。急診室可能會要求先付保證金。"},
             "notes": ["觀光諮詢熱線1330也能在藥局或診所幫你翻譯。"]},
+        "entry": {"title": "入境規定:K-ETA與入境卡", "more": True,
+            "seo": "去韓國需要K-ETA嗎?2026年免申請與電子入境卡",
+            "intro": "到2026年底,許多旅客不用申請K-ETA就能入境,但要看你的護照國家。出發前先確認,若適用也請填寫入境卡。",
+            "all": {"s": "warn", "verdict": "到2026年12月31日,許多護照免K-ETA,但不是全部。出發前請到官方網站確認你的國家。", "route": ["到K-ETA官方網站(k-eta.go.kr)確認你的護照國家。符合資格國家的暫時免除期間為2026年1月1日至12月31日。", "若不在免除名單,請在出發前申請K-ETA,不要等到報到時。", "據報導,2026年起外國旅客需填寫電子入境卡(e-Arrival Card),包括免K-ETA的旅客。請在抵達前上網提交,並到官方入口確認最新規定。"], "fallback": "不確定的話,訂票前先問航空公司或最近的韓國駐外館處。2027年的規定在我們最後檢查時尚未公布。"},
+            "notes": ["免除措施是一年一年延長的,所以2026年以前的攻略可能已經過時。"]},
+        "cash": {"title": "用外國卡提領現金", "more": True,
+            "seo": "在韓國用外國卡領現金:Global ATM、手續費與注意事項(2026)",
+            "intro": "韓國幾乎是無現金社會,但小店和市場有時還是要現金。很多韓國ATM不收外國卡,先知道哪些能用比較放心。",
+            "all": {"s": "warn", "verdict": "外國金融卡可以在Global ATM和不少便利商店ATM使用,通常要付手續費。", "route": ["找標示「Global」的ATM。明洞、弘大等熱鬧地區的銀行ATM,以及CU、GS25、7-Eleven等便利商店常有。", "使用已開通國際提款的金融卡。信用卡提款算預借現金,要加收手續費和利息。", "如果機器問你要不要用本國貨幣結算,請選韓元(KRW),否則匯率會很差。"], "fallback": "如果一台機器拒收,試試KB、友利等大型銀行的其他ATM,或到銀行、換匯櫃台換現金。"},
+            "notes": ["除了機器手續費,還有你自己銀行的海外手續費。金額依機器和發卡行而異,出發前請先問銀行。", "友利銀行2026年5月起在仁川機場發行旅客預付卡。"]},
     },
 }
