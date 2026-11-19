@@ -6,10 +6,10 @@ Facts follow data.py; when a fact changes, edit both files and the CHECKED date.
 """
 
 HEAD = {
-    "en": {"skip": "Skip to the answer", "steps": "Step by step, first time", "errors": "Common problems and fixes", "faq": "Questions people ask", "cites": "Official and primary sources", "problem": "Problem", "fix": "Fix"},
-    "ja": {"skip": "回答へ移動", "steps": "はじめての人向け: 手順", "errors": "よくあるトラブルと対処法", "faq": "よくある質問", "cites": "公式・一次情報", "problem": "トラブル", "fix": "対処法"},
-    "zh-tw": {"skip": "跳到答案", "steps": "第一次使用:一步一步來", "errors": "常見問題與解決方法", "faq": "常見問答", "cites": "官方與一手資料", "problem": "問題", "fix": "解決方法"},
-    "vi": {"skip": "Chuyển đến câu trả lời", "steps": "Từng bước cho người mới", "errors": "Lỗi thường gặp và cách xử lý", "faq": "Câu hỏi thường gặp", "cites": "Nguồn chính thức", "problem": "Vấn đề", "fix": "Cách xử lý"},
+    "en": {"g_arrive": "Before you fly and when you land", "g_move": "Getting around", "g_daily": "Food, shopping and everyday help", "skip": "Skip to the answer", "steps": "Step by step, first time", "errors": "Common problems and fixes", "faq": "Questions people ask", "cites": "Official and primary sources", "problem": "Problem", "fix": "Fix"},
+    "ja": {"g_arrive": "出発前と到着時", "g_move": "移動する", "g_daily": "食事・買い物・困ったとき", "skip": "回答へ移動", "steps": "はじめての人向け: 手順", "errors": "よくあるトラブルと対処法", "faq": "よくある質問", "cites": "公式・一次情報", "problem": "トラブル", "fix": "対処法"},
+    "zh-tw": {"g_arrive": "出發前與抵達時", "g_move": "交通移動", "g_daily": "吃飯、購物與生活求助", "skip": "跳到答案", "steps": "第一次使用:一步一步來", "errors": "常見問題與解決方法", "faq": "常見問答", "cites": "官方與一手資料", "problem": "問題", "fix": "解決方法"},
+    "vi": {"g_arrive": "Trước chuyến bay và khi hạ cánh", "g_move": "Đi lại", "g_daily": "Ăn uống, mua sắm và trợ giúp hằng ngày", "skip": "Chuyển đến câu trả lời", "steps": "Từng bước cho người mới", "errors": "Lỗi thường gặp và cách xử lý", "faq": "Câu hỏi thường gặp", "cites": "Nguồn chính thức", "problem": "Vấn đề", "fix": "Cách xử lý"},
 }
 
 # Screenshot spots (Korean, for the person taking the screenshots). Ids are used in the steps below.

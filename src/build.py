@@ -222,7 +222,7 @@ def build_tool(lang):
   </div></details>
   {about(lang, up)}
 </div>
-<section class="wrap guide-list" aria-labelledby="gl-t"><h2 id="gl-t">{e(U['guides'])}</h2><ul>{''.join(f'<li><a href="{t["slug"]}.html">{e(QUESTION[lang][t["id"]])}</a><span>{e(t["intro"])}</span></li>' for t in task_list(lang))}</ul></section>
+<section class="wrap guide-list" aria-labelledby="gl-t"><h2 id="gl-t">{e(U['guides'])}</h2>{guide_groups(lang)}</section>
 {help_html(lang)}
 {SHOW_HTML(lang)}
 <div class="toast" id="offline" hidden role="status">{e(ux['offline'])}</div>
@@ -536,6 +536,25 @@ def page_date(path, content):
     if not rec or rec["h"] != h:
         DATES[path] = rec = {"h": h, "d": TODAY}
     return rec["d"]
+
+
+# Home page guide list, grouped the way a trip runs: arrival first, then moving around, then daily needs.
+GUIDE_GROUPS = [("g_arrive", ["entry", "data", "airport", "gimpo", "cash", "power"]),
+                ("g_move", ["transit", "transitpass", "maps", "taxi", "ktx", "busan", "krpass", "jeju", "dmz"]),
+                ("g_daily", ["food-booking", "delivery", "translate", "shopping", "luggage", "health"])]
+
+
+def guide_groups(lang):
+    tasks = {t["id"]: t for t in task_list(lang)}
+    grouped = [i for _, ids in GUIDE_GROUPS for i in ids]
+    missing = [i for i in tasks if i not in grouped]
+    if missing:
+        sys.exit(f"guides missing from GUIDE_GROUPS: {missing}")
+    out = []
+    for key, ids in GUIDE_GROUPS:
+        items = "".join(f'<li><a href="{tasks[i]["slug"]}.html">{e(QUESTION[lang][i])}</a><span>{e(tasks[i]["intro"])}</span></li>' for i in ids if i in tasks)
+        out.append(f'<h3>{e(DEEP_HEAD[lang][key])}</h3><ul>{items}</ul>')
+    return "".join(out)
 
 
 def footer(lang):
