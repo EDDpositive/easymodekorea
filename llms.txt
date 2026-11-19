@@ -1,6 +1,6 @@
 # EasyModeKorea
 
-> Free, independent guide for visitors to Korea: which Korean apps work with a foreign phone number and a foreign card, checked and dated. English, Japanese and Traditional Chinese. No ads, no affiliate links.
+> Free, independent guide for visitors to Korea: which Korean apps work with a foreign phone number and a foreign card, checked and dated. English, Japanese, Traditional Chinese, Simplified Chinese and Vietnamese. No ads, no affiliate links.
 
 Answers depend on the visitor's setup: no Korean number, a Korean prepaid SIM (010), or residence (ARC). Each page states the setup and the date it was last checked.
 
@@ -17,6 +17,14 @@ Answers depend on the visitor's setup: no Korean number, a Korean prepaid SIM (0
 - [Tax-free shopping and refunds](tax-free-shopping.html)
 - [Luggage storage and delivery](luggage-storage.html)
 - [Sick or hurt: 119, 1339, pharmacies](pharmacy-hospital.html)
+- [Do I need K-ETA? Entry rules and arrival card](k-eta-entry-requirements.html)
+- [Cash and ATMs with a foreign card](atm-foreign-card-cash.html)
+- [Do I need a plug adapter in Korea?](korea-power-plug-voltage.html)
+- [How do I get from Seoul to Busan, and what is the K-Tour Pass?](seoul-to-busan-k-tour-pass.html)
+- [Is the KR Pass (Korail pass) worth it?](kr-pass-korail-pass.html)
+- [How do I book a DMZ or JSA tour in Korea?](dmz-jsa-tour-booking.html)
+- [How do I get around Jeju as a tourist?](jeju-getting-around.html)
+- [Is the Seoul Climate Card tourist pass worth buying?](seoul-tourist-transit-pass.html)
 - [What changed in 2026](changes.html)
 
 ## Other languages
