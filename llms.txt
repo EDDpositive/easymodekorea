@@ -19,6 +19,7 @@ Answers depend on the visitor's setup: no Korean number, a Korean prepaid SIM (0
 - [Sick or hurt: 119, 1339, pharmacies](pharmacy-hospital.html)
 - [Do I need K-ETA? Entry rules and arrival card](k-eta-entry-requirements.html)
 - [Cash and ATMs with a foreign card](atm-foreign-card-cash.html)
+- [Do I need a plug adapter in Korea?](korea-power-plug-voltage.html)
 - [What changed in 2026](changes.html)
 
 ## Other languages

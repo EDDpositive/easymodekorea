@@ -34,6 +34,8 @@ SOURCES = {
     "atm": ["HaniSeoul: ATMs in Korea", "https://www.haniseoul.com/travels/korea/atm-korea"],
     "wiseatm": ["Wise: ATMs in South Korea, cards and fees", "https://wise.com/au/blog/atms-in-south-korea"],
     "woori": ["Korea Times: Woori Bank prepaid card for tourists (May 2026)", "https://www.koreatimes.co.kr/amp/business/banking-finance/20260513/woori-bank-targets-foreign-tourists-with-prepaid-card-issued-at-airport"],
+    "plug": ["Trip.com: South Korea plug types and voltage", "https://www.trip.com/guide/info/south-korea-plug.html"],
+    "remitly": ["Remitly: electrical outlets in South Korea", "https://www.remitly.com/blog/technology/electrical-outlets-in-south-korea/"],
     "baemin": ["Bizwatch: Baemin adds English, Japanese, Chinese (Feb 2026)", "https://news.bizwatch.co.kr/article/consumer/2026/02/04/0013"],
 }
 
@@ -53,6 +55,7 @@ TASK_META = [
     ("health", "pharmacy-hospital", ["er", "night"]),
     ("entry", "k-eta-entry-requirements", ["keta", "ketaext", "earrival"]),
     ("cash", "atm-foreign-card-cash", ["atm", "wiseatm", "woori"]),
+    ("power", "korea-power-plug-voltage", ["plug", "remitly"]),
 ]
 
 LANGS = {}
@@ -171,6 +174,11 @@ LANGS["en"] = {
             "intro": "Korea is mostly cashless, but some small shops and markets still want cash. Many Korean ATMs refuse foreign cards, so it helps to know which ones work.",
             "all": {"s": "warn", "verdict": "Foreign debit cards work at Global ATMs and many convenience-store ATMs, usually with a fee.", "route": ["Look for ATMs marked \"Global\". Bank ATMs in busy areas such as Myeongdong and Hongdae, and convenience stores such as CU, GS25 and 7-Eleven, often have them.", "Use a debit card enabled for international withdrawals. A credit card withdrawal counts as a cash advance, with extra fees and interest.", "If the machine offers to charge you in your home currency, choose won (KRW). Otherwise you get a poor conversion rate."], "fallback": "If one machine rejects your card, try another at a major bank such as KB or Woori, or exchange cash at a bank or exchange counter."},
             "notes": ["Expect a machine fee plus your own bank's foreign fee. Amounts vary by machine and card issuer, so ask your bank before you fly.", "Woori Bank began issuing a prepaid tourist card at Incheon Airport in May 2026."]},
+        "power": {"title": "Power plugs and voltage", "more": True,
+            "seo": "Korea power plug and voltage: do you need an adapter? Type C and F, 220V (2026)",
+            "intro": "Korea uses two-round-pin sockets at 220 volts. Most phone and laptop chargers need only a plug adapter, but check the label first.",
+            "all": {"s": "ok", "verdict": "Korean sockets take two round pins (types C and F) at 220 V and 60 Hz. Most chargers need only a plug adapter.", "route": ["Check your charger label. If it says 100-240V, it works in Korea with a plug adapter alone.", "Bring a Type C plug adapter. Type C plugs also fit the Type F sockets used in Korea.", "If a device says only 110V or 120V, it needs a voltage converter as well. Hair dryers and curling irons are the usual cases."], "fallback": "Forgot your adapter? Adapters are sold in Korea, so you can buy one after you arrive."},
+            "notes": ["A few guides list 230 V at 50 Hz. 220 V at 60 Hz is the figure most sources give, and dual-voltage chargers cover both."]},
     },
 }
 
@@ -288,6 +296,11 @@ LANGS["ja"] = {
             "intro": "韓国はほぼキャッシュレスですが、小さな店や市場では現金が必要なことがあります。外国のカードを受け付けないATMも多いので、使える機械を知っておくと安心です。",
             "all": {"s": "warn", "verdict": "外国のデビットカードはGlobal ATMと多くのコンビニATMで使えます。通常は手数料がかかります。", "route": ["「Global」表示のATMを探します。明洞や弘大などの繁華街の銀行ATMや、CU・GS25・セブン-イレブンなどのコンビニにあることが多いです。", "海外引き出しに対応したデビットカードを使います。クレジットカードの引き出しはキャッシングとなり、手数料と利息がかかります。", "自国通貨での請求を勧められたら、ウォン(KRW)を選びます。そうしないと換算レートが悪くなります。"], "fallback": "1台で断られたら、KBやウリなど大手銀行の別のATMを試すか、銀行や両替所で両替しましょう。"},
             "notes": ["機械の手数料に加え、ご自身の銀行の海外手数料がかかります。金額は機械やカード会社で違うので、出発前に銀行へ確認を。", "ウリ銀行は2026年5月、仁川空港で旅行者向けプリペイドカードの発行を始めました。"]},
+        "power": {"title": "電源プラグと電圧", "more": True,
+            "seo": "韓国の電源プラグと電圧: 変換プラグは必要?CタイプとF、220V(2026)",
+            "intro": "韓国のコンセントは丸い2本ピンで、電圧は220Vです。スマホやパソコンの充電器は変換プラグだけで足りることが多いですが、先にラベルを確認しましょう。",
+            "all": {"s": "ok", "verdict": "韓国のコンセントは丸い2本ピン(CタイプとFタイプ)で、220V・60Hzです。多くの充電器は変換プラグだけで使えます。", "route": ["充電器のラベルを確認します。「100-240V」とあれば、変換プラグだけで韓国で使えます。", "Cタイプの変換プラグを持っていきます。CタイプはFタイプのコンセントにも差せます。", "「110V」や「120V」としか書かれていない機器は、変圧器も必要です。ドライヤーやヘアアイロンが典型です。"], "fallback": "変換プラグを忘れても、韓国で売っているので到着後に買えます。"},
+            "notes": ["一部のガイドは230V・50Hzと書いていますが、多くの情報源は220V・60Hzです。100-240V対応の充電器ならどちらでも使えます。"]},
     },
 }
 
@@ -405,5 +418,10 @@ LANGS["zh-tw"] = {
             "intro": "韓國幾乎是無現金社會,但小店和市場有時還是要現金。很多韓國ATM不收外國卡,先知道哪些能用比較放心。",
             "all": {"s": "warn", "verdict": "外國金融卡可以在Global ATM和不少便利商店ATM使用,通常要付手續費。", "route": ["找標示「Global」的ATM。明洞、弘大等熱鬧地區的銀行ATM,以及CU、GS25、7-Eleven等便利商店常有。", "使用已開通國際提款的金融卡。信用卡提款算預借現金,要加收手續費和利息。", "如果機器問你要不要用本國貨幣結算,請選韓元(KRW),否則匯率會很差。"], "fallback": "如果一台機器拒收,試試KB、友利等大型銀行的其他ATM,或到銀行、換匯櫃台換現金。"},
             "notes": ["除了機器手續費,還有你自己銀行的海外手續費。金額依機器和發卡行而異,出發前請先問銀行。", "友利銀行2026年5月起在仁川機場發行旅客預付卡。"]},
+        "power": {"title": "插頭與電壓", "more": True,
+            "seo": "韓國插座與電壓:需要轉接頭嗎?C型與F型、220V(2026)",
+            "intro": "韓國使用兩孔圓形插座,電壓為220V。手機和筆電的充電器通常只要有轉接頭就能用,但先看一下標籤。",
+            "all": {"s": "ok", "verdict": "韓國插座是兩孔圓形(C型與F型),電壓220V、60Hz。大多數充電器只需要轉接頭。", "route": ["看充電器上的標籤。如果寫著100-240V,只要轉接頭就能在韓國使用。", "帶一個C型轉接頭。C型插頭也能插進韓國的F型插座。", "如果設備只標示110V或120V,還需要變壓器。吹風機和電捲棒最常遇到這種情況。"], "fallback": "忘了帶轉接頭也沒關係,韓國有賣,到了再買就好。"},
+            "notes": ["少數指南寫230V、50Hz,但多數資料都是220V、60Hz。支援100-240V的充電器兩者都能用。"]},
     },
 }

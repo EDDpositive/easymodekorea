@@ -416,12 +416,21 @@ TOPIC_JS = r"""
 PUBLISHED = {"luggage-storage": "2026-11-17", "pharmacy-hospital": "2026-11-17", "k-eta-entry-requirements": "2026-11-19", "atm-foreign-card-cash": "2026-11-19"}
 
 RELATED = {
-    "data": ["entry", "airport", "taxi"], "airport": ["transit", "luggage", "taxi"], "maps": ["translate", "taxi", "transit"],
-    "taxi": ["maps", "airport", "data"], "transit": ["airport", "cash", "maps"], "ktx": ["transit", "food-booking", "luggage"],
-    "food-booking": ["delivery", "translate", "cash"], "delivery": ["food-booking", "translate", "data"],
-    "translate": ["maps", "food-booking", "health"], "shopping": ["cash", "luggage", "transit"],
-    "luggage": ["airport", "ktx", "shopping"], "health": ["translate", "data", "entry"],
-    "entry": ["data", "airport", "cash"], "cash": ["transit", "shopping", "entry"],
+    "data": ["entry", "airport", "taxi", "power"],
+    "airport": ["transit", "luggage", "taxi"],
+    "maps": ["translate", "taxi", "transit"],
+    "taxi": ["maps", "airport", "data"],
+    "transit": ["airport", "cash", "maps"],
+    "ktx": ["transit", "food-booking", "luggage"],
+    "food-booking": ["delivery", "translate", "cash"],
+    "delivery": ["food-booking", "translate", "data"],
+    "translate": ["maps", "food-booking", "health"],
+    "shopping": ["cash", "luggage", "transit"],
+    "luggage": ["airport", "ktx", "shopping"],
+    "health": ["translate", "data", "entry"],
+    "entry": ["data", "airport", "cash", "power"],
+    "cash": ["transit", "shopping", "entry"],
+    "power": ["data", "entry", "airport"],
 }
 
 

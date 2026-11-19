@@ -291,6 +291,18 @@ VI = {
 "Luggage": "Gửi hành lý",
 "Sick or hurt": "Ốm hoặc bị thương",
 "Related guides": "Hướng dẫn liên quan",
+"Power plugs and voltage": "Ổ cắm và điện áp",
+"Korea power plug and voltage: do you need an adapter? Type C and F, 220V (2026)": "Ổ cắm và điện áp ở Hàn Quốc: có cần đầu chuyển không? Loại C và F, 220V (2026)",
+"Korea uses two-round-pin sockets at 220 volts. Most phone and laptop chargers need only a plug adapter, but check the label first.": "Hàn Quốc dùng ổ cắm hai chân tròn, điện áp 220 volt. Sạc điện thoại và laptop thường chỉ cần đầu chuyển phích cắm, nhưng hãy xem nhãn trước.",
+"Korean sockets take two round pins (types C and F) at 220 V and 60 Hz. Most chargers need only a plug adapter.": "Ổ cắm Hàn Quốc có hai chân tròn (loại C và F), điện áp 220 V, 60 Hz. Hầu hết bộ sạc chỉ cần đầu chuyển phích cắm.",
+"Forgot your adapter? Adapters are sold in Korea, so you can buy one after you arrive.": "Quên đầu chuyển cũng không sao, ở Hàn Quốc có bán nên bạn có thể mua sau khi đến nơi.",
+"Check your charger label. If it says 100-240V, it works in Korea with a plug adapter alone.": "Xem nhãn trên bộ sạc. Nếu ghi 100-240V thì chỉ cần đầu chuyển phích cắm là dùng được ở Hàn Quốc.",
+"Bring a Type C plug adapter. Type C plugs also fit the Type F sockets used in Korea.": "Mang theo đầu chuyển loại C. Phích cắm loại C cũng cắm vừa ổ loại F ở Hàn Quốc.",
+"If a device says only 110V or 120V, it needs a voltage converter as well. Hair dryers and curling irons are the usual cases.": "Nếu thiết bị chỉ ghi 110V hoặc 120V thì cần thêm bộ đổi điện áp. Máy sấy tóc và máy uốn tóc thường rơi vào trường hợp này.",
+"A few guides list 230 V at 50 Hz. 220 V at 60 Hz is the figure most sources give, and dual-voltage chargers cover both.": "Một vài hướng dẫn ghi 230 V, 50 Hz, nhưng hầu hết nguồn tin nêu 220 V, 60 Hz. Bộ sạc đa điện áp dùng được cả hai.",
+"Power plugs": "Ổ cắm điện",
+"Do I need a plug adapter in Korea?": "Đến Hàn Quốc tôi có cần đầu chuyển phích cắm không?",
+"Is there an outlet here where I can charge my phone?": "Ở đây có ổ cắm để sạc điện thoại không?",
 "Entry rules": "Quy định nhập cảnh",
 "Cash & ATMs": "Tiền mặt & ATM",
 "Do I need K-ETA to visit Korea?": "Tôi có cần K-ETA để đến Hàn Quốc không?",
@@ -379,5 +391,5 @@ for lst in x.PHRASES.values():
 for ko, m in x.HELP_PHRASES: m["vi"] = tr(m["en"])
 VI_KW = {"data": "điện thoại sim esim số data mạng", "airport": "sân bay incheon xe buýt tàu", "maps": "bản đồ chỉ đường", "taxi": "taxi gọi xe",
          "transit": "tàu điện ngầm xe buýt nạp thẻ", "ktx": "tàu ktx vé tàu", "food-booking": "nhà hàng đặt bàn xếp hàng", "delivery": "giao đồ ăn gọi món",
-         "translate": "dịch thực đơn", "shopping": "mua sắm hoàn thuế miễn thuế mỹ phẩm", "luggage": "gửi hành lý vali tủ khóa", "entry": "nhập cảnh k-eta visa thị thực hộ chiếu tờ khai", "cash": "tiền mặt atm rút tiền thẻ đổi tiền", "health": "ốm bệnh viện hiệu thuốc thuốc cấp cứu sốt"}
+         "translate": "dịch thực đơn", "shopping": "mua sắm hoàn thuế miễn thuế mỹ phẩm", "luggage": "gửi hành lý vali tủ khóa", "entry": "nhập cảnh k-eta visa thị thực hộ chiếu tờ khai", "cash": "tiền mặt atm rút tiền thẻ đổi tiền", "power": "ổ cắm phích cắm đầu chuyển điện áp sạc", "health": "ốm bệnh viện hiệu thuốc thuốc cấp cứu sốt"}
 for k, v in VI_KW.items(): x.KEYWORDS[k] += " " + v
