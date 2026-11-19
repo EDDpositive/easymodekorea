@@ -221,6 +221,7 @@ def build_tool(lang):
   </div></details>
   {about(lang, up)}
 </div>
+<section class="wrap guide-list" aria-labelledby="gl-t"><h2 id="gl-t">{e(U['guides'])}</h2><ul>{''.join(f'<li><a href="{t["slug"]}.html">{e(QUESTION[lang][t["id"]])}</a><span>{e(t["intro"])}</span></li>' for t in task_list(lang))}</ul></section>
 {help_html(lang)}
 {SHOW_HTML(lang)}
 <div class="toast" id="offline" hidden role="status">{e(ux['offline'])}</div>
