@@ -4,7 +4,7 @@ Content: data.py (answers) and data_extra.py (hook, short labels, icons, phrases
 changelog, host-stay strings). Host stay details travel in the link's #g= hash: never sent to a
 server or to analytics, and rendered with textContent only.
 """
-import html, json, os, sys
+import datetime, hashlib, html, json, os, sys
 
 sys.path.insert(0, os.path.dirname(__file__))
 from data import CHECKED, CHECKED_ISO, LANGS, SOURCES, TASK_META  # noqa: E402
@@ -416,7 +416,10 @@ TOPIC_JS = r"""
 
 # Related guides shown under each guide, with the question as descriptive anchor text.
 # First publish dates (ISO) for the Article schema; pages not listed fall back to the checked date.
-PUBLISHED = {"luggage-storage": "2026-11-17", "pharmacy-hospital": "2026-11-17", "k-eta-entry-requirements": "2026-11-19", "atm-foreign-card-cash": "2026-11-19"}
+PUBLISHED = {"k-eta-entry-requirements": "2026-11-19", "atm-foreign-card-cash": "2026-11-19", "korea-power-plug-voltage": "2026-11-19",
+             "seoul-to-busan-k-tour-pass": "2026-11-19", "kr-pass-korail-pass": "2026-11-19", "dmz-jsa-tour-booking": "2026-11-19",
+             "jeju-getting-around": "2026-11-19", "seoul-tourist-transit-pass": "2026-11-19"}
+FIRST_PUBLISH = "2026-11-17"
 
 RELATED = {
     "data": ["entry", "airport", "taxi", "power"],
@@ -467,10 +470,11 @@ def build_topic(lang, t):
     related = "".join(f'<li><a href="{slug_of[r]}.html">{e(QUESTION[lang][r])}</a></li>' for r in RELATED.get(t["id"], []))
     deep, faq_extra = deep_html(lang, t["id"])
     body = f"""
+<a class="skip" href="#answer">{e(DEEP_HEAD[lang]['skip'])}</a>
 {hero(lang, alt, up, QUESTION[lang][t['id']], t['intro'])}
 <div class="wrap">
   <div class="actions"><a class="btn" href="./#task-{t['id']}">{e(U['open_tool'])}</a>{phrases}</div>
-  <main class="cards">{''.join(blocks)}<button class="linkbtn" type="button" id="show-all" hidden>{e(x['others'])}</button>{deep}</main>
+  <main class="cards" id="answer">{''.join(blocks)}<button class="linkbtn" type="button" id="show-all" hidden>{e(x['others'])}</button>{deep}</main>
   <p class="checked-line">{e(U['checked'])} <time datetime="{CHECKED_ISO}">{e(CHECKED[lang])}</time></p>
   <details class="panel" open><summary>{e(S['details'])}</summary><div class="in notes"><ul><li>{e(U['checked'])} {e(CHECKED[lang])}</li>{notes}{srcs}</ul></div></details>
   <p class="host-cta">🏠 {U['hosts'].format(base=up)}</p>
@@ -487,7 +491,7 @@ def build_topic(lang, t):
 """
     first = resolve(t, "visitor", "ios")
     answer = first["verdict"] + " " + " ".join(first["route"])
-    ld = [{"@context": "https://schema.org", "@type": "Article", "headline": t["seo"], "description": t["intro"], "datePublished": PUBLISHED.get(t["slug"], CHECKED_ISO), "dateModified": CHECKED_ISO, "inLanguage": L["html_lang"], "url": SITE + path, "mainEntityOfPage": SITE + path, "image": SITE + "og.png", "author": {"@type": "Organization", "name": BRAND, "url": SITE + L["dir"] + "about.html"}, "publisher": {"@type": "Organization", "name": BRAND, "url": SITE, "logo": {"@type": "ImageObject", "url": SITE + "icon-512.png"}}},
+    ld = [{"@context": "https://schema.org", "@type": "Article", "headline": t["seo"], "description": t["intro"], "datePublished": PUBLISHED.get(t["slug"], FIRST_PUBLISH), "dateModified": page_date(path, body), "inLanguage": L["html_lang"], "url": SITE + path, "mainEntityOfPage": SITE + path, "image": SITE + "og.png", "author": {"@type": "Organization", "name": BRAND, "url": SITE + L["dir"] + "about.html"}, "publisher": {"@type": "Organization", "name": BRAND, "url": SITE, "logo": {"@type": "ImageObject", "url": SITE + "icon-512.png"}}},
           {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": BRAND, "item": SITE + L["dir"]}, {"@type": "ListItem", "position": 2, "name": t["short"], "item": SITE + path}]},
           {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": QUESTION[lang][t["id"]], "acceptedAnswer": {"@type": "Answer", "text": answer}}] + [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faq_extra]}]
     ldtag = f'\n<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>'
@@ -515,6 +519,21 @@ def build_changes(lang):
 """
     write(path, head(lang, f"{x['changes_title']} | {BRAND}", x["changes_lead"], path, alt) + body)
     return path
+
+
+# Per-page modified dates. src/page_dates.json stores a hash of each page's content and the
+# date it last changed, so the sitemap and dateModified move only for pages that changed.
+DATES_FILE = os.path.join(os.path.dirname(__file__), "page_dates.json")
+DATES = json.load(open(DATES_FILE, encoding="utf-8")) if os.path.exists(DATES_FILE) else {}
+TODAY = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).date().isoformat()
+
+
+def page_date(path, content):
+    h = hashlib.sha256(content.encode("utf-8")).hexdigest()[:16]
+    rec = DATES.get(path)
+    if not rec or rec["h"] != h:
+        DATES[path] = rec = {"h": h, "d": TODAY}
+    return rec["d"]
 
 
 def footer(lang):
@@ -643,9 +662,11 @@ def main():
         rel = p[len(next((LANGS[k]["dir"] for k in LANGS if LANGS[k]["dir"] and p.startswith(LANGS[k]["dir"])), "")):]
         alts = by_rel.get(rel, {})
         links = "" if len(alts) < 2 else "".join(f'<xhtml:link rel="alternate" hreflang="{LANGS[k]["html_lang"]}" href="{SITE}{q}"/>' for k, q in alts.items()) + f'<xhtml:link rel="alternate" hreflang="x-default" href="{SITE}{alts.get("en", p)}"/>'
-        return f"<url><loc>{SITE}{p}</loc><lastmod>{CHECKED_ISO}</lastmod>{links}</url>\n"
+        d = DATES[p]["d"] if p in DATES else page_date(p, open(os.path.join(ROOT, (p + "index.html") if (p == "" or p.endswith("/")) else p), encoding="utf-8").read())
+        return f"<url><loc>{SITE}{p}</loc><lastmod>{d}</lastmod>{links}</url>\n"
     urls = "".join(url(p) for p in paths)
     write("sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n{urls}</urlset>\n')
+    open(DATES_FILE, "w", encoding="utf-8").write(json.dumps(dict(sorted(DATES.items())), indent=0, ensure_ascii=False) + "\n")
     print(f"built {len(paths)} pages")
 
 

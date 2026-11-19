@@ -16,7 +16,7 @@ Answers depend on the visitor's setup: no Korean number, a Korean prepaid SIM (0
 - [Translation apps](translation.html)
 - [Tax-free shopping and refunds](tax-free-shopping.html)
 - [Luggage storage and delivery](luggage-storage.html)
-- [Sick or hurt: 119, 1339, pharmacies](pharmacy-hospital.html)
+- [Sick or hurt: 119, 1330, pharmacies](pharmacy-hospital.html)
 - [Do I need K-ETA? Entry rules and arrival card](k-eta-entry-requirements.html)
 - [Cash and ATMs with a foreign card](atm-foreign-card-cash.html)
 - [Do I need a plug adapter in Korea?](korea-power-plug-voltage.html)
@@ -26,6 +26,8 @@ Answers depend on the visitor's setup: no Korean number, a Korean prepaid SIM (0
 - [How do I get around Jeju as a tourist?](jeju-getting-around.html)
 - [Is the Seoul Climate Card tourist pass worth buying?](seoul-tourist-transit-pass.html)
 - [What changed in 2026](changes.html)
+- [About: how answers are checked](about.html)
+- [Contact](contact.html)
 
 ## Other languages
 - [日本語](ja/)

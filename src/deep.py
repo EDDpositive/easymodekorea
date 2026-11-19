@@ -6,10 +6,10 @@ Facts follow data.py; when a fact changes, edit both files and the CHECKED date.
 """
 
 HEAD = {
-    "en": {"steps": "Step by step, first time", "errors": "Common problems and fixes", "faq": "Questions people ask", "cites": "Official and primary sources", "problem": "Problem", "fix": "Fix"},
-    "ja": {"steps": "はじめての人向け: 手順", "errors": "よくあるトラブルと対処法", "faq": "よくある質問", "cites": "公式・一次情報", "problem": "トラブル", "fix": "対処法"},
-    "zh-tw": {"steps": "第一次使用:一步一步來", "errors": "常見問題與解決方法", "faq": "常見問答", "cites": "官方與一手資料", "problem": "問題", "fix": "解決方法"},
-    "vi": {"steps": "Từng bước cho người mới", "errors": "Lỗi thường gặp và cách xử lý", "faq": "Câu hỏi thường gặp", "cites": "Nguồn chính thức", "problem": "Vấn đề", "fix": "Cách xử lý"},
+    "en": {"skip": "Skip to the answer", "steps": "Step by step, first time", "errors": "Common problems and fixes", "faq": "Questions people ask", "cites": "Official and primary sources", "problem": "Problem", "fix": "Fix"},
+    "ja": {"skip": "回答へ移動", "steps": "はじめての人向け: 手順", "errors": "よくあるトラブルと対処法", "faq": "よくある質問", "cites": "公式・一次情報", "problem": "トラブル", "fix": "対処法"},
+    "zh-tw": {"skip": "跳到答案", "steps": "第一次使用:一步一步來", "errors": "常見問題與解決方法", "faq": "常見問答", "cites": "官方與一手資料", "problem": "問題", "fix": "解決方法"},
+    "vi": {"skip": "Chuyển đến câu trả lời", "steps": "Từng bước cho người mới", "errors": "Lỗi thường gặp và cách xử lý", "faq": "Câu hỏi thường gặp", "cites": "Nguồn chính thức", "problem": "Vấn đề", "fix": "Cách xử lý"},
 }
 
 # Screenshot spots (Korean, for the person taking the screenshots). Ids are used in the steps below.
