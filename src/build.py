@@ -13,7 +13,7 @@ import zh_cn  # noqa: E402,F401  (adds Simplified Chinese)
 import vi  # noqa: E402,F401  (adds Vietnamese)
 from deep import CONTACT_EMAIL, DEEP, HEAD as DEEP_HEAD, PAGES  # noqa: E402
 import layout  # noqa: E402
-from layout import AT, CARDS, COPY, tx  # noqa: E402
+from layout import ADDR_GUIDES, AT, CARDS, COPY, tx  # noqa: E402
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 SITE = "https://easymodekorea.com/"
@@ -392,6 +392,7 @@ function stay() {
   box.append(el("h2", { text: XS.stay_title + (s("n", 60) ? ": " + s("n", 60) : "") }));
   const a = s("a", 160);
   if (a) {
+    store("emk-addr", a);
     box.append(el("div", { class: "addr", lang: "ko", text: a }));
     const act = el("div", { class: "actions" });
     const t1 = el("button", { type: "button", class: "btn alt", text: S.show_driver }); t1.addEventListener("click", () => show(XS.taxi_card, XS.taxi_ko, a, XS.means + ": " + XS.taxi_means));
@@ -444,6 +445,20 @@ TOPIC_JS = r"""
     setTimeout(() => { b.innerHTML = was; b.classList.remove("done"); b.removeAttribute("aria-label"); }, 1600);
     count("copy/" + location.pathname, "copy korean");
   }));
+  /* The stay address lives only in this browser (localStorage), never in a URL or a request. */
+  const ma = document.getElementById("myaddr");
+  if (ma) {
+    const has = document.getElementById("ma-has"), form = document.getElementById("ma-form"), inp = document.getElementById("ma-in");
+    const paint = () => {
+      const a = (store("emk-addr") || "").slice(0, 160);
+      has.hidden = !a; form.hidden = !!a;
+      if (a) { document.getElementById("ma-text").textContent = a; document.getElementById("ma-copy").dataset.copy = a; document.getElementById("ma-map").href = "https://map.naver.com/p/search/" + encodeURIComponent(a); }
+    };
+    form.addEventListener("submit", ev => { ev.preventDefault(); const v = inp.value.trim(); if (v) { store("emk-addr", v); count("addr-saved", "address saved"); } paint(); });
+    document.getElementById("ma-edit").addEventListener("click", () => { inp.value = store("emk-addr") || ""; has.hidden = true; form.hidden = false; inp.focus(); });
+    document.getElementById("ma-show").addEventListener("click", () => show(ma.dataset.card, ma.dataset.ko, store("emk-addr") || "", ma.dataset.mean));
+    ma.hidden = false; paint();
+  }
   /* A link to a folded section opens it. */
   const h = location.hash && document.getElementById(location.hash.slice(1)); if (h && h.tagName === "DETAILS") h.open = true;
   const blocks = [...document.querySelectorAll(".pv[data-p]")];
@@ -526,6 +541,9 @@ def build_topic(lang, t):
     first_s = resolve(t, "visitor", "ios")["s"]
     say = "".join(f'<div class="say"><p class="say-ko" lang="ko">{e(ko)}</p><p class="say-mean">{e(m)}</p><div class="actions"><button class="btn alt" type="button" data-show="{e(ko)}" data-lbl="{e(S["show"])}" data-mean="{e(x["means"])}: {e(m)}">🗣 {e(LU["full"])}</button><button class="btn ghost" type="button" data-copy="{e(ko)}" data-done="✓ {e(LU["copied"])}">📋 {e(LU["copy"])}</button></div></div>' for ko, m in t["phrases"])
     names = "".join(f'<li><button class="chip" type="button" data-copy="{e(ko)}" data-done="✓ {e(LU["copied"])}"><span lang="ko">{e(ko)}</span><small>{e(tx(m, lang))}</small><i aria-hidden="true">📋</i></button></li>' for ko, m in COPY.get(t["id"], []))
+    addr_html = "" if t["id"] not in ADDR_GUIDES else f"""<section class="myaddr" id="myaddr" hidden aria-labelledby="ma-h" data-card="{e(x['taxi_card'])}" data-ko="{e(x['taxi_ko'])}" data-mean="{e(x['means'])}: {e(x['taxi_means'])}"><h2 id="ma-h">{e(LU['addr_h'])}</h2>
+<div id="ma-has" hidden><p class="addr" lang="ko" id="ma-text"></p><div class="actions"><button class="btn alt" type="button" id="ma-show">🚕 {e(S['show_driver'])}</button><button class="btn ghost" type="button" id="ma-copy" data-copy="" data-done="✓ {e(LU['copied'])}">📋 {e(UX[lang]['copy_addr'])}</button><a class="btn ghost" id="ma-map" href="#" rel="noopener" target="_blank">{e(x['map'])}</a><button class="linkbtn" type="button" id="ma-edit">{e(LU['addr_edit'])}</button></div></div>
+<form id="ma-form" hidden><input id="ma-in" type="text" lang="ko" maxlength="160" autocomplete="street-address" aria-label="{e(LU['addr_h'])}" placeholder="{e(LU['addr_ph'])}"><button class="btn" type="submit">{e(LU['addr_save'])}</button></form><p class="hint">{e(LU['addr_note'])}</p></section>"""
     names_html = f'<section class="names" aria-labelledby="nm-{t["id"]}"><h2 id="nm-{t["id"]}">{e(LU["names_h"])}</h2><ul>{names}</ul></section>' if names else ""
     notes = "".join(f"<li>{e(n)}</li>" for n in t.get("notes", []))
     srcs = "".join(f'<li><a href="{e(u)}" rel="noopener" target="_blank">{e(n)}</a></li>' for n, u in t["sources"])
@@ -543,6 +561,7 @@ def build_topic(lang, t):
   <section class="do" aria-labelledby="do-{t['id']}"><h2 id="do-{t['id']}" class="sr">{e(H['steps'])}</h2>{''.join(dos)}</section>
   {f'<section class="says" aria-labelledby="say-{t["id"]}"><h2 id="say-{t["id"]}">{e(LU["say_h"])}</h2>{say}</section>' if say else ''}
   {names_html}
+  {addr_html}
   <div class="actions"><a class="btn" href="./#task-{t['id']}">{e(U['open_tool'])}</a></div>
   {deep}
   <details class="more"><summary>{e(S['details'])}</summary><div class="in notes"><p>{e(t['intro'])}</p><ul><li>{e(U['checked'])} {e(CHECKED[lang])}</li>{notes}{srcs}</ul></div></details>

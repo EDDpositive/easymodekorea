@@ -13,10 +13,14 @@ UI = {
            "stamp": "Checked against {src} on {date}", "say_h": "Show this to staff", "full": "Show full screen",
            "copy": "Copy", "copied": "Copied", "names_h": "Korean names to copy (paste into Naver Map or show a driver)",
            "all": "All guides", "intro_h": "About this answer",
+           "addr_h": "Your stay's address in Korean", "addr_ph": "Paste the Korean address from your booking", "addr_save": "Save on this phone", "addr_note": "Kept only on this phone. It is never sent anywhere.", "addr_edit": "Change",
            "cards_h": "What do you need right now?", "tool_h": "What works with your phone setup?",
            "offline": "Pages you open keep working offline. Add this site to your home screen for the trip.",
            "lede": "Short answers for visitors in Korea, each checked against an official source, with Korean you can show or copy."},
 }
+
+# Guides that show the saved stay address (taxi rides, deliveries, bag delivery, directions, emergencies).
+ADDR_GUIDES = {"taxi", "airport", "gimpo", "delivery", "luggage", "maps", "health", "busan", "jeju"}
 
 # Home page: situations a visitor is in, each linking to the guides that answer it.
 CARDS = [

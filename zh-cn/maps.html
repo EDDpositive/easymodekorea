@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap"></noscript>
-<link rel="stylesheet" href="../style.css?v=200395c4">
+<link rel="stylesheet" href="../style.css?v=da99d10e">
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Google地图在韩国能用吗?改用Naver Map(2026)", "description": "Google地图在韩国能显示地点,但路线导航有限。韩国的地图App能用英文提供完整的转乘与步行导航。", "datePublished": "2026-11-17", "dateModified": "2026-11-20", "inLanguage": "zh-CN", "url": "https://easymodekorea.com/zh-cn/maps.html", "mainEntityOfPage": "https://easymodekorea.com/zh-cn/maps.html", "image": "https://easymodekorea.com/og.png", "author": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/zh-cn/about.html"}, "publisher": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/", "logo": {"@type": "ImageObject", "url": "https://easymodekorea.com/icon-512.png"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "EasyModeKorea", "item": "https://easymodekorea.com/zh-cn/"}, {"@type": "ListItem", "position": 2, "name": "地图", "item": "https://easymodekorea.com/zh-cn/maps.html"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Google地图在韩国能用吗?", "acceptedAnswer": {"@type": "Answer", "text": "Naver Map人人都能用,支援英文、日文和中文。 安装Naver Map,在设定中切换语言。 用来查步行、地铁和公交路线。"}}, {"@type": "Question", "name": "Google Maps在韩国能用吗?", "acceptedAnswer": {"@type": "Answer", "text": "可以找地点和查大众运输路线,但步行和开车导航有限。政府在2026年2月有条件核准Google的地图信息出口,但我们最后确认时,Google的路线功能还没有改善。"}}, {"@type": "Question", "name": "Naver Map和Kakao Map哪个好?", "acceptedAnswer": {"@type": "Answer", "text": "两者都有完整的大众运输和步行路线。Naver Map有中文、英文、日文介面,还能用护照验证订座,建议先用Naver Map,再把Kakao Map当备用。"}}, {"@type": "Question", "name": "用Naver Map需要韩国电话号码吗?", "acceptedAnswer": {"@type": "Answer", "text": "不用。搜索和查路线不需要账号,只有储存地点、写评论或订座时才需要账号。"}}, {"@type": "Question", "name": "没有移动数据也能用吗?", "acceptedAnswer": {"@type": "Answer", "text": "请当作需要网络。先在有Wi-Fi的地方查好路线,信号不稳的话把步骤截图存起来。"}}]}]</script>
 </head>
@@ -29,6 +29,9 @@
   <section class="do" aria-labelledby="do-maps"><h2 id="do-maps" class="sr">第一次使用:一步一步来</h2><div class="pv"><ol class="steps"><li>安装Naver Map,在设定中切换语言。</li><li>用来查步行、地铁和公交路线。</li></ol><p class="fallback"><b>如果不行</b>Kakao Map是不错的备用地图。Google地图能显示地点,但在韩国的步行与开车导航有限。</p></div></section>
   <section class="says" aria-labelledby="say-maps"><h2 id="say-maps">给店员看</h2><div class="say"><p class="say-ko" lang="ko">여기 어떻게 가요?</p><p class="say-mean">这里要怎么去?(给对方看地图)</p><div class="actions"><button class="btn alt" type="button" data-show="여기 어떻게 가요?" data-lbl="给店员看" data-mean="意思: 这里要怎么去?(给对方看地图)">🗣 全屏幕显示</button><button class="btn ghost" type="button" data-copy="여기 어떻게 가요?" data-done="✓ 已复制">📋 复制</button></div></div></section>
   <section class="names" aria-labelledby="nm-maps"><h2 id="nm-maps">可复制的韩文名称(贴到Naver Map或给司机看)</h2><ul><li><button class="chip" type="button" data-copy="네이버 지도" data-done="✓ 已复制"><span lang="ko">네이버 지도</span><small>Naver Map</small><i aria-hidden="true">📋</i></button></li></ul></section>
+  <section class="myaddr" id="myaddr" hidden aria-labelledby="ma-h" data-card="给出租车司机看" data-ko="기사님, 이 주소로 가 주세요." data-mean="意思: 请载我到这个地址。"><h2 id="ma-h">住宿的韩文地址</h2>
+<div id="ma-has" hidden><p class="addr" lang="ko" id="ma-text"></p><div class="actions"><button class="btn alt" type="button" id="ma-show">🚕 给司机看</button><button class="btn ghost" type="button" id="ma-copy" data-copy="" data-done="✓ 已复制">📋 复制地址</button><a class="btn ghost" id="ma-map" href="#" rel="noopener" target="_blank">用Naver Map开启</a><button class="linkbtn" type="button" id="ma-edit">更改</button></div></div>
+<form id="ma-form" hidden><input id="ma-in" type="text" lang="ko" maxlength="160" autocomplete="street-address" aria-label="住宿的韩文地址" placeholder="贴上订房确认信里的韩文地址"><button class="btn" type="submit">存在这支手机</button></form><p class="hint">只存在这支手机里,不会传送到任何地方。</p></section>
   <div class="actions"><a class="btn" href="./#task-maps">用自己的状况确认</a></div>
   <details class="more deep" id="st-maps"><summary>第一次使用:一步一步来</summary><div class="in"><ol class="steps full"><li>在App Store或Google Play安装Naver Map(NAVER Map),出现提示时允许使用定位。</li><li>切换成中文:在App选单中进入「设定」→「语言」。iPhone也可以在手机的「设定」App里,找到NAVER Map选择语言。<!-- screenshot: maps-language --></li><li>用中文、英文或韩文搜索地点。找不到时,把订房页面上的韩文名称或地址贴上。<!-- screenshot: maps-search --></li><li>点「路线」,选大众运输分页。路线会显示地铁路线、公交号码、转乘站、车站出口号码和即时到站时间。<!-- screenshot: maps-transit --></li><li>到了车站,照路线上的出口号码走。大车站出口很多,选对出口能少走很多路。</li><li>选用:登录Naver账号就能储存地点。2026年6月起,旅客也能用护照验证Naver账号,在Naver Map上订餐厅。</li><li>另外装Kakao Map当备用地图。Google Maps拿来找地点就好,不要依赖它的步行或开车导航。</li></ol></div></details>
 <details class="more deep" id="er-maps"><summary>常见问题与解决方法</summary><div class="in"><ul class="errs"><li><p class="prob"><b>App一直是韩文。</b></p><p>在App的「设定」里改语言。iPhone的手机设定里如果没有NAVER Map的语言选项,先到「一般」→「语言与地区」加入中文。</p></li><li><p class="prob"><b>搜索找不到地点。</b></p><p>贴上订房页面上的韩文名称,或搜索最近的车站,再从车站走过去。</p></li><li><p class="prob"><b>路线很长,或变成开车路线。</b></p><p>确认选的是大众运输或步行分页,而不是开车。</p></li><li><p class="prob"><b>储存或订座时要求登录。</b></p><p>查路线不需要账号。储存地点需要Naver账号,订座需要在App里做一次护照验证。</p></li></ul></div></details>
@@ -84,6 +87,20 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !documen
     setTimeout(() => { b.innerHTML = was; b.classList.remove("done"); b.removeAttribute("aria-label"); }, 1600);
     count("copy/" + location.pathname, "copy korean");
   }));
+  /* The stay address lives only in this browser (localStorage), never in a URL or a request. */
+  const ma = document.getElementById("myaddr");
+  if (ma) {
+    const has = document.getElementById("ma-has"), form = document.getElementById("ma-form"), inp = document.getElementById("ma-in");
+    const paint = () => {
+      const a = (store("emk-addr") || "").slice(0, 160);
+      has.hidden = !a; form.hidden = !!a;
+      if (a) { document.getElementById("ma-text").textContent = a; document.getElementById("ma-copy").dataset.copy = a; document.getElementById("ma-map").href = "https://map.naver.com/p/search/" + encodeURIComponent(a); }
+    };
+    form.addEventListener("submit", ev => { ev.preventDefault(); const v = inp.value.trim(); if (v) { store("emk-addr", v); count("addr-saved", "address saved"); } paint(); });
+    document.getElementById("ma-edit").addEventListener("click", () => { inp.value = store("emk-addr") || ""; has.hidden = true; form.hidden = false; inp.focus(); });
+    document.getElementById("ma-show").addEventListener("click", () => show(ma.dataset.card, ma.dataset.ko, store("emk-addr") || "", ma.dataset.mean));
+    ma.hidden = false; paint();
+  }
   /* A link to a folded section opens it. */
   const h = location.hash && document.getElementById(location.hash.slice(1)); if (h && h.tagName === "DETAILS") h.open = true;
   const blocks = [...document.querySelectorAll(".pv[data-p]")];

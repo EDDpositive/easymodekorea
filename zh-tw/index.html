@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap"></noscript>
-<link rel="stylesheet" href="../style.css?v=200395c4">
+<link rel="stylesheet" href="../style.css?v=da99d10e">
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <link rel="manifest" href="../manifest.webmanifest"><link rel="apple-touch-icon" href="../icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes">
 <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebSite", "name": "EasyModeKorea", "alternateName": ["Easy Mode Korea", "이지모드코리아", "이지모드 코리아", "easymodekorea.com"], "url": "https://easymodekorea.com/", "inLanguage": "zh-Hant-TW"}, {"@context": "https://schema.org", "@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/", "logo": "https://easymodekorea.com/icon-512.png", "email": "edandco.biz@gmail.com"}]</script>
@@ -214,6 +214,7 @@ function stay() {
   box.append(el("h2", { text: XS.stay_title + (s("n", 60) ? ": " + s("n", 60) : "") }));
   const a = s("a", 160);
   if (a) {
+    store("emk-addr", a);
     box.append(el("div", { class: "addr", lang: "ko", text: a }));
     const act = el("div", { class: "actions" });
     const t1 = el("button", { type: "button", class: "btn alt", text: S.show_driver }); t1.addEventListener("click", () => show(XS.taxi_card, XS.taxi_ko, a, XS.means + ": " + XS.taxi_means));

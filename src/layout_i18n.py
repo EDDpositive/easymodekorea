@@ -6,6 +6,7 @@ UI["ja"] = {"where": "場所", "cost": "費用", "time": "時間", "note": "ポ�
             "stamp": "{src}で{date}に確認", "say_h": "スタッフに見せる", "full": "全画面で見せる",
             "copy": "コピー", "copied": "コピーしました", "names_h": "コピーできる韓国語(Naver Mapに貼る・運転手に見せる)",
             "all": "すべてのガイド", "intro_h": "この回答について",
+            "addr_h": "宿の住所(韓国語)", "addr_ph": "予約確認の韓国語住所を貼り付け", "addr_save": "このスマホに保存", "addr_note": "このスマホの中だけに保存され、どこにも送信されません。", "addr_edit": "変更",
             "cards_h": "今、何が必要ですか?", "tool_h": "あなたのスマホで使えるもの",
             "offline": "一度開いたページはオフラインでも使えます。旅行中はホーム画面に追加しておくと便利です。",
             "lede": "韓国を旅行する人のための短い答え。どれも公式情報で確認し、見せたりコピーしたりできる韓国語つきです。"}
@@ -13,6 +14,7 @@ UI["zh-tw"] = {"where": "地點", "cost": "費用", "time": "時間", "note": "�
                "stamp": "已於{date}對照{src}確認", "say_h": "給店員看", "full": "全螢幕顯示",
                "copy": "複製", "copied": "已複製", "names_h": "可複製的韓文名稱(貼到Naver Map或給司機看)",
                "all": "所有指南", "intro_h": "關於這個回答",
+               "addr_h": "住宿的韓文地址", "addr_ph": "貼上訂房確認信裡的韓文地址", "addr_save": "存在這支手機", "addr_note": "只存在這支手機裡,不會傳送到任何地方。", "addr_edit": "更改",
                "cards_h": "你現在需要什麼?", "tool_h": "用你的手機能用哪些?",
                "offline": "開過的頁面離線也能看。旅行期間可以加到主畫面。",
                "lede": "給韓國旅客的簡短答案,每一則都對照官方資料確認,附上可以給人看或複製的韓文。"}
@@ -20,6 +22,7 @@ UI["vi"] = {"where": "Ở đâu", "cost": "Chi phí", "time": "Thời gian", "no
             "stamp": "Đã kiểm tra với {src} ngày {date}", "say_h": "Đưa cho nhân viên xem", "full": "Hiện toàn màn hình",
             "copy": "Sao chép", "copied": "Đã sao chép", "names_h": "Tên tiếng Hàn để sao chép (dán vào Naver Map hoặc đưa tài xế xem)",
             "all": "Tất cả hướng dẫn", "intro_h": "Về câu trả lời này",
+            "addr_h": "Địa chỉ chỗ ở bằng tiếng Hàn", "addr_ph": "Dán địa chỉ tiếng Hàn trong xác nhận đặt phòng", "addr_save": "Lưu trên điện thoại này", "addr_note": "Chỉ lưu trên điện thoại này, không gửi đi đâu cả.", "addr_edit": "Đổi",
             "cards_h": "Bạn cần gì ngay bây giờ?", "tool_h": "Điện thoại của bạn dùng được gì?",
             "offline": "Trang đã mở vẫn dùng được khi không có mạng. Hãy thêm trang này vào màn hình chính cho chuyến đi.",
             "lede": "Câu trả lời ngắn cho du khách ở Hàn Quốc, mỗi câu đều đối chiếu với nguồn chính thức, kèm tiếng Hàn để đưa xem hoặc sao chép."}
