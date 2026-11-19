@@ -1,0 +1,46 @@
+name: Localize promo drafts
+
+# Manual only. Needs the repository secret ANTHROPIC_API_KEY.
+# Paste the draft sections (the "### 3-x" blocks of overnight-promo.md) into the input.
+# The result is a downloadable file (workflow artifact, 7 days). Nothing is posted or committed.
+on:
+  workflow_dispatch:
+    inputs:
+      drafts_text:
+        description: "Pasted draft sections starting with '### 3-1'"
+        required: true
+      langs:
+        description: "Languages (ja,zh-tw,es,vi,id,th)"
+        default: "ja,zh-tw,es,vi,id,th"
+      max_total_tokens:
+        description: "Output token cap for the whole run"
+        default: "100000"
+
+permissions:
+  contents: read
+
+jobs:
+  promo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r tools/requirements.txt
+      - name: Localize drafts (Batch API, claude-opus-5-5)
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          IN_TEXT: ${{ inputs.drafts_text }}
+          IN_LANGS: ${{ inputs.langs }}
+          IN_CAP: ${{ inputs.max_total_tokens }}
+        run: |
+          printf '%s\n' "$IN_TEXT" > "$RUNNER_TEMP/drafts.md"
+          python tools/localize_promo.py --input "$RUNNER_TEMP/drafts.md" --langs "$IN_LANGS" \
+            --max-total-tokens "$IN_CAP" --out promo-localized-drafts.md
+      - uses: actions/upload-artifact@v4
+        with:
+          name: promo-localized-drafts
+          path: promo-localized-drafts.md
+          retention-days: 7
