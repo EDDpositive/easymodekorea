@@ -324,3 +324,5 @@ details.more.deep { margin-top: 10px; }
 .myaddr .hint { margin: 0; font-size: 13px; }
 .ans-top h2.sr + .pill { margin-left: auto; }
 .logo { display: inline-block; padding: 2px 0; min-height: 24px; }
+.hero .home-link { display: inline-block; margin: 10px 0 4px; padding: 8px 14px; border-radius: 999px; background: rgba(255,255,255,.16); color: var(--brand-ink); font-weight: 700; font-size: 15px; text-decoration: none; min-height: 40px; box-sizing: border-box; }
+.hero .home-link:hover, .hero .home-link:focus-visible { background: rgba(255,255,255,.28); }

@@ -12,14 +12,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap"></noscript>
-<link rel="stylesheet" href="style.css?v=82b0412d">
+<link rel="stylesheet" href="style.css?v=1c78a922">
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Does Google Maps work in Korea? Use Naver Map (2026)", "description": "Google Maps shows places in Korea, but its directions are limited. Korean map apps give full transit and walking directions in English.", "datePublished": "2026-11-17", "dateModified": "2026-11-20", "inLanguage": "en", "url": "https://easymodekorea.com/maps.html", "mainEntityOfPage": "https://easymodekorea.com/maps.html", "image": "https://easymodekorea.com/og.png", "author": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/about.html"}, "publisher": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/", "logo": {"@type": "ImageObject", "url": "https://easymodekorea.com/icon-512.png"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "EasyModeKorea", "item": "https://easymodekorea.com/"}, {"@type": "ListItem", "position": 2, "name": "Maps", "item": "https://easymodekorea.com/maps.html"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does Google Maps work in Korea?", "acceptedAnswer": {"@type": "Answer", "text": "Naver Map works for everyone, in English, Japanese and Chinese. Install Naver Map and switch the language in settings. Use it for walking, subway and bus directions."}}, {"@type": "Question", "name": "Does Google Maps work in Korea?", "acceptedAnswer": {"@type": "Answer", "text": "It finds places and gives public transport routes, but walking and driving directions are limited. The government conditionally approved Google's map-data export in February 2026; better Google routing had not arrived at our last check."}}, {"@type": "Question", "name": "Naver Map or Kakao Map: which is better?", "acceptedAnswer": {"@type": "Answer", "text": "Both give full transit and walking directions. Naver Map has English, Japanese and Chinese menus and passport-verified bookings, so start there and keep Kakao Map as a second opinion."}}, {"@type": "Question", "name": "Do I need a Korean phone number to use Naver Map?", "acceptedAnswer": {"@type": "Answer", "text": "No. Search and directions work without an account. You only need an account to save places, write reviews or book."}}, {"@type": "Question", "name": "Does Naver Map work without mobile data?", "acceptedAnswer": {"@type": "Answer", "text": "Plan on needing data. Check your route on Wi-Fi first and take a screenshot of the steps if your signal is patchy."}}]}]</script>
 </head>
 <body>
 <a class="skip" href="#answer">Skip to the answer</a>
 <header class="hero"><div class="wrap">
-  <div class="toprow"><a class="logo" href="./">EasyMode<b>Korea</b></a><nav class="langs" aria-label="Language"><a href="maps.html" hreflang="en" lang="en" aria-current="page">English</a><a href="ja/maps.html" hreflang="ja" lang="ja">日本語</a><a href="zh-tw/maps.html" hreflang="zh-Hant-TW" lang="zh-Hant-TW">繁體中文</a><a href="zh-cn/maps.html" hreflang="zh-CN" lang="zh-CN">简体中文</a><a href="vi/maps.html" hreflang="vi" lang="vi">Tiếng Việt</a></nav></div>
+  <div class="toprow"><a class="logo" href="./">EasyMode<b>Korea</b></a><nav class="langs" aria-label="Language"><a href="maps.html" hreflang="en" lang="en" aria-current="page">English</a><a href="ja/maps.html" hreflang="ja" lang="ja">日本語</a><a href="zh-tw/maps.html" hreflang="zh-Hant-TW" lang="zh-Hant-TW">繁體中文</a><a href="zh-cn/maps.html" hreflang="zh-CN" lang="zh-CN">简体中文</a><a href="vi/maps.html" hreflang="vi" lang="vi">Tiếng Việt</a></nav></div><a class="home-link" href="./">← All guides</a>
   <h1>Does Google Maps work in Korea?</h1>
 </div></header>
 <div class="wrap">
@@ -54,6 +54,14 @@
   <div><p class="mean" id="show-mean"></p><button class="btn" type="button" id="show-close">Close</button></div>
 </div>
 <script>
+/* Arriving from a search result: start at the top (the answer box) instead of the middle of the page,
+   where Google's highlighted-text links (#:~:text=) jump to. Links with a real #anchor are left alone. */
+(function () { try {
+  if (location.hash || !/google\.|bing\.|naver\.|yahoo\.|duckduckgo\.|daum\.|baidu\./i.test(document.referrer)) return;
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  const top = () => window.scrollTo(0, 0);
+  addEventListener("load", () => { top(); setTimeout(top, 60); setTimeout(top, 300); });
+} catch (e) {} })();
 function el(tag, attrs = {}, kids = []) { const n = document.createElement(tag); for (const [k, v] of Object.entries(attrs)) { if (k === "text") n.textContent = v; else if (k === "html") n.innerHTML = v; else n.setAttribute(k, v); } for (const c of [].concat(kids)) if (c) n.append(c); return n; }
 function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
 function count(path, title) { try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path, title, event: true }); } catch (e) {} }

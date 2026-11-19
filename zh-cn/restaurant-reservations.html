@@ -12,14 +12,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap"></noscript>
-<link rel="stylesheet" href="../style.css?v=82b0412d">
+<link rel="stylesheet" href="../style.css?v=1c78a922">
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "没有韩国号码也能订韩国餐厅:CatchTable Global与Naver(2026)", "description": "韩国热门餐厅的订座和候位,过去都要韩国号码。现在旅客有两种可行方法。", "datePublished": "2026-11-17", "dateModified": "2026-11-20", "inLanguage": "zh-CN", "url": "https://easymodekorea.com/zh-cn/restaurant-reservations.html", "mainEntityOfPage": "https://easymodekorea.com/zh-cn/restaurant-reservations.html", "image": "https://easymodekorea.com/og.png", "author": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/zh-cn/about.html"}, "publisher": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/", "logo": {"@type": "ImageObject", "url": "https://easymodekorea.com/icon-512.png"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "EasyModeKorea", "item": "https://easymodekorea.com/zh-cn/"}, {"@type": "ListItem", "position": 2, "name": "餐厅订座", "item": "https://easymodekorea.com/zh-cn/restaurant-reservations.html"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "没有韩国号码能在韩国订餐厅吗?", "acceptedAnswer": {"@type": "Answer", "text": "CatchTable Global和Naver护照认证,都不需要韩国号码。 CatchTable Global:用电子邮件注册,订金可用国外信用卡付。 取消规定由各餐厅自订。确认取消前,App会显示订金能退多少。 Naver Map订座:用护照认证(2026年6月4日起)。"}}, {"@type": "Question", "name": "订金可以退吗?", "acceptedAnswer": {"@type": "Answer", "text": "看餐厅规定和你多早取消。确认取消前,App会显示退款金额。"}}, {"@type": "Question", "name": "需要韩国电话号码吗?", "acceptedAnswer": {"@type": "Answer", "text": "不用。CatchTable Global可用电子邮件注册,Naver接受护照验证。"}}, {"@type": "Question", "name": "热门餐厅要多早订?", "acceptedAnswer": {"@type": "Answer", "text": "餐厅一开放名额就订。有些热门店开放几分钟就满。"}}, {"@type": "Question", "name": "完全不接受订座的店怎么办?", "acceptedAnswer": {"@type": "Answer", "text": "开店前去排队。把餐厅的韩文名字记下来,方便给店员看。"}}]}]</script>
 </head>
 <body>
 <a class="skip" href="#answer">跳到答案</a>
 <header class="hero"><div class="wrap">
-  <div class="toprow"><a class="logo" href="./">EasyMode<b>Korea</b></a><nav class="langs" aria-label="语言"><a href="../restaurant-reservations.html" hreflang="en" lang="en">English</a><a href="../ja/restaurant-reservations.html" hreflang="ja" lang="ja">日本語</a><a href="../zh-tw/restaurant-reservations.html" hreflang="zh-Hant-TW" lang="zh-Hant-TW">繁體中文</a><a href="../zh-cn/restaurant-reservations.html" hreflang="zh-CN" lang="zh-CN" aria-current="page">简体中文</a><a href="../vi/restaurant-reservations.html" hreflang="vi" lang="vi">Tiếng Việt</a></nav></div>
+  <div class="toprow"><a class="logo" href="./">EasyMode<b>Korea</b></a><nav class="langs" aria-label="语言"><a href="../restaurant-reservations.html" hreflang="en" lang="en">English</a><a href="../ja/restaurant-reservations.html" hreflang="ja" lang="ja">日本語</a><a href="../zh-tw/restaurant-reservations.html" hreflang="zh-Hant-TW" lang="zh-Hant-TW">繁體中文</a><a href="../zh-cn/restaurant-reservations.html" hreflang="zh-CN" lang="zh-CN" aria-current="page">简体中文</a><a href="../vi/restaurant-reservations.html" hreflang="vi" lang="vi">Tiếng Việt</a></nav></div><a class="home-link" href="./">← 所有指南</a>
   <h1>没有韩国号码能在韩国订餐厅吗?</h1>
 </div></header>
 <div class="wrap">
@@ -52,6 +52,14 @@
   <div><p class="mean" id="show-mean"></p><button class="btn" type="button" id="show-close">关闭</button></div>
 </div>
 <script>
+/* Arriving from a search result: start at the top (the answer box) instead of the middle of the page,
+   where Google's highlighted-text links (#:~:text=) jump to. Links with a real #anchor are left alone. */
+(function () { try {
+  if (location.hash || !/google\.|bing\.|naver\.|yahoo\.|duckduckgo\.|daum\.|baidu\./i.test(document.referrer)) return;
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  const top = () => window.scrollTo(0, 0);
+  addEventListener("load", () => { top(); setTimeout(top, 60); setTimeout(top, 300); });
+} catch (e) {} })();
 function el(tag, attrs = {}, kids = []) { const n = document.createElement(tag); for (const [k, v] of Object.entries(attrs)) { if (k === "text") n.textContent = v; else if (k === "html") n.innerHTML = v; else n.setAttribute(k, v); } for (const c of [].concat(kids)) if (c) n.append(c); return n; }
 function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
 function count(path, title) { try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path, title, event: true }); } catch (e) {} }
