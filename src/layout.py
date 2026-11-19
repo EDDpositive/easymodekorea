@@ -87,7 +87,7 @@ AT = {
     "shopping": [["where", {"en": "Stores with a TAX FREE sign; show your passport at the till"}, D17],
                  ["cost", {"en": "Purchases from 15,000 won qualify"}, D20]],
     "luggage": [["where", {"en": "Station lockers and staffed luggage counters"}, D17],
-                ["cost", {"en": "Lockers from about 2,000 won for 4 hours"}, D17]],
+                ["cost", {"en": "Set by size and hours; shown on the locker screen and in the T-Locker app"}, D20]],
     "health": [["where", {"en": "Call 119 (ambulance, medical advice, nearest ER). 1330 interprets."}, D20],
                ["cost", {"en": "Calling 119 is free"}, D17],
                ["note", {"en": "Pharmacies have a 약 sign"}, D17]],

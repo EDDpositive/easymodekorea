@@ -82,7 +82,7 @@ AT_TX = {
     "shopping": [{"ja": "TAX FREE表示のある店。レジでパスポートを提示", "zh-tw": "有TAX FREE標示的店,結帳時出示護照", "vi": "Cửa hàng có biển TAX FREE; đưa hộ chiếu ở quầy"},
                  {"ja": "15,000ウォン以上の購入が対象", "zh-tw": "消費滿15,000韓元可退稅", "vi": "Mua từ 15.000 won trở lên được hoàn thuế"}],
     "luggage": [{"ja": "駅のロッカーと有人の荷物預かり所", "zh-tw": "車站置物櫃和有人行李寄放處", "vi": "Tủ khóa ở ga và quầy gửi hành lý có nhân viên"},
-                {"ja": "ロッカーは4時間 約2,000ウォンから", "zh-tw": "置物櫃4小時約2,000韓元起", "vi": "Tủ khóa từ khoảng 2.000 won cho 4 giờ"}],
+                {"ja": "大きさと時間で決まり、ロッカー画面とT-Lockerアプリに表示", "zh-tw": "依大小和時數計費,置物櫃螢幕和T-Locker App會顯示", "vi": "Tính theo cỡ tủ và số giờ; hiện trên màn hình tủ và ứng dụng T-Locker"}],
     "health": [{"ja": "119(救急車・医療相談・近くの救急室)。通訳は1330", "zh-tw": "打119(救護車、醫療諮詢、最近的急診室)。1330可以口譯", "vi": "Gọi 119 (xe cứu thương, tư vấn y tế, phòng cấp cứu gần nhất). 1330 phiên dịch."},
                {"ja": "119への通話は無料", "zh-tw": "撥打119免費", "vi": "Gọi 119 miễn phí"},
                {"ja": "薬局は「약」の看板が目印", "zh-tw": "藥局看「약」字招牌", "vi": "Hiệu thuốc có biển chữ 약"}],

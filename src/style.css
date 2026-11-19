@@ -263,7 +263,7 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-t
 .answer { background: var(--surface); border: 1px solid var(--line); border-left: 6px solid var(--line); border-radius: 16px; padding: 14px 16px; display: grid; gap: 10px; margin: 4px 0 0; }
 .answer.ok { border-left-color: var(--ok); } .answer.warn { border-left-color: var(--warn); } .answer.mixed { border-left-color: var(--mixed); } .answer.bad { border-left-color: var(--bad); }
 .pv[hidden] { display: none; }
-.ans-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 6px; }
+.ans-top { display: flex; justify-content: space-between; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 6px; }
 .ans-top h2 { font: 700 15px var(--body); color: var(--muted); margin: 0; }
 .answer .verdict { font-size: 18px; line-height: 1.4; }
 .glance { margin: 0; display: grid; gap: 6px; font-size: 15px; line-height: 1.4; }
@@ -322,3 +322,4 @@ details.more.deep { margin-top: 10px; }
 #ma-in { width: 100%; box-sizing: border-box; font: 16px var(--body); padding: 12px 14px; border-radius: 12px; border: 1.5px solid var(--line); background: var(--bg); color: var(--ink); }
 #ma-form .btn { justify-self: start; }
 .myaddr .hint { margin: 0; font-size: 13px; }
+.ans-top h2.sr + .pill { margin-left: auto; }

@@ -207,13 +207,12 @@ def build_tool(lang):
     q1 = "".join(f'<button type="button" class="opt-big" data-p="{p}"><b>{e(ux["q1_opts"][p][0])}</b><span>{e(ux["q1_opts"][p][1])}</span></button>' for p in ("visitor", "krsim", "arc"))
     q2 = "".join(f'<button type="button" class="opt-big" data-d="{v}"><b>{e(U[v])}</b></button>' for v in ("ios", "android"))
     LU = layout.UI.get(lang, layout.UI["en"])
-    kw_of = {t["id"]: t["kw"] for t in tasks}
     short_of = {t["id"]: t["short"] for t in tasks}
     slug_of = {t["id"]: t["slug"] for t in tasks}
     cards = []
     for cid, ic, ids, txt in CARDS:
         title, line = tx(txt, lang)
-        links = "".join(f'<a href="{slug_of[i]}.html" data-kw="{e(kw_of[i])}">{e(short_of[i])}</a>' for i in ids)
+        links = "".join(f'<a href="{slug_of[i]}.html" data-t="{i}">{e(short_of[i])}</a>' for i in ids)
         ckw = (title + " " + line).lower()
         cards.append(f'<article class="sit-card" id="s-{cid}" data-kw="{e(ckw)}"><h3>{icon(ic)}<span>{e(title)}</span></h3><p>{e(line)}</p><p class="sit-links">{links}</p></article>')
     body = f"""
@@ -268,6 +267,7 @@ const D = {json.dumps(data, ensure_ascii=False)};
 
 TOOL_JS = r"""
 const U = D.ui, XS = D.x, S = D.s, UX = D.ux, FB_FAIL = D.fbfail;
+const KW = Object.fromEntries(D.tasks.map(t => [t.id, t.kw]));
 let P = null, DEV = null;
 function resolve(t, p, dev) { if (t.all) return t.all; let v = t.v[p]; if (typeof v === "string") v = t.v[v]; if (t.dev && v[dev]) v = v[dev]; return v; }
 function setStep(n) { document.getElementById("onb1").hidden = n !== 1; document.getElementById("onb2").hidden = n !== 2; }
@@ -367,9 +367,9 @@ function filter() {
   const mh = document.querySelector(".more-h"); if (mh) mh.hidden = !!q && !moreHits;
   let cardHits = 0;
   document.querySelectorAll(".sit-card").forEach(c => {
-    const links = [...c.querySelectorAll("a[data-kw]")];
+    const links = [...c.querySelectorAll("a[data-t]")];
     let any = false;
-    links.forEach(a => { const ok = !q || a.dataset.kw.includes(q); a.hidden = !ok; if (ok) any = true; });
+    links.forEach(a => { const ok = !q || KW[a.dataset.t].includes(q); a.hidden = !ok; if (ok) any = true; });
     if (!any && c.dataset.kw.includes(q)) { any = true; links.forEach(a => { a.hidden = false; }); }
     c.hidden = !any; if (any) cardHits++;
   });
@@ -530,7 +530,7 @@ def build_topic(lang, t):
             if dv: heading += f" · {U[dv]}"
             attrs = (f' data-p="{p}"' if p else "") + (f' data-d="{dv}"' if dv else "")
             route = "".join(f"<li>{e(r)}</li>" for r in v["route"])
-            tops.append(f'<div class="pv {v["s"]}"{attrs}><div class="ans-top"><h2>{e(heading)}</h2><span class="pill {v["s"]}">{e(UX[lang]["tone"][v["s"]])}</span></div><p class="verdict">{e(v["verdict"])}</p></div>')
+            tops.append(f'<div class="pv {v["s"]}"{attrs}><div class="ans-top"><h2{'' if p else ' class="sr"'}>{e(heading)}</h2><span class="pill {v["s"]}">{e(UX[lang]["tone"][v["s"]])}</span></div><p class="verdict">{e(v["verdict"])}</p></div>')
             dos.append(f'<div class="pv"{attrs}><ol class="steps">{route}</ol><p class="fallback"><b>{e(fail_lbl)}</b>{e(v["fallback"])}</p></div>')
     rows = AT.get(t["id"], [])
     glance = "".join(f'<div><dt>{e(LU[k])}</dt><dd>{e(tx(m, lang))} <time class="ck" datetime="{dt}">✓ {e(fmt_date(dt, lang))}</time></dd></div>' for k, m, dt in rows)
