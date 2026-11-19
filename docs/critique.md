@@ -68,3 +68,67 @@
 | 전압 | 220V 60Hz, C/F | 일치 | 유지 |
 
 참고 출처: [Korea Times 2026-03 야간 진료 가이드](https://www.koreatimes.co.kr/amp/lifestyle/travel-food/20260314/sick-in-korea-after-hours-heres-what-visitors-need-to-know), [KDCA 1339](https://kdca.go.kr/eng/4276/subview.do), [Ajou 119·1339 통합 연구](https://dspace.ajou.ac.kr/handle/2018.oak/15238), [EY K-ETA 면제 연장](https://www.ey.com/content/dam/ey-unified-site/ey-com/en-gl/technical/tax-alerts/documents/korea-extends-temporary-electronic-travel-authorization-exemption-until-31-december-2026.pdf), [Wego e-Arrival](https://blog.wego.com/south-korea-travel-rules-k-eta-waiver-2026/), [Korea Times 교통패스 전환](https://koreatimes.co.kr/southkorea/20260730/seouls-transit-pass-to-be-replaced-by-nationwide-k-pass-system-sept-1), [JoongAng 30일권 종료](https://www.koreajoongangdaily.com/korea/seouls-30day-climate-card-to-end-what-it-means-for-commuters-kpass-users/12758853), [Korea Times KTX·SRT 통합](https://koreatimes.co.kr/business/companies/20260831/ktx-expands-tuesday-following-srt-absorption), [Creatrip 면세](https://creatrip.com/en/blog/414/How-to-get-a-tax-refund-in-Korea), [Trip.com Naver Map 가이드(경쟁 예시)](https://sg.trip.com/guide/phone/naver-map.html), [Wise Naver Map 가이드(경쟁 예시)](https://wise.com/sg/blog/naver-map).
+
+
+---
+
+# 2차 라운드 (2026-11-20): 얇은 본문 보강
+
+기웅 님 승인("추천대로 적용")에 따라 PR #5를 머지했고, 배포 후 라이브에서 홈, 404(실제 404 상태 코드), 건강·K-ETA 가이드의 수정 문구를 확인했습니다. 2차는 1차의 4번(본문 확장)과 13번(About/연락처)을 다룹니다.
+
+## 한 일
+- **본문 확장 5개 가이드**: 택시, 네이버 지도, T-money, K-ETA·전자도착카드, 배달. 가이드마다 처음 쓰는 사람용 단계(6~8단계), 자주 생기는 문제와 해결(4~5개), FAQ 4개, 공식·1차 출처를 넣었습니다. 영어·일본어·번체·베트남어는 직접 쓰고, 간체는 번체에서 변환했습니다. 내용은 `src/deep.py`에 있습니다.
+- **본문 단어 수(영어, `<main>` 기준)**: 택시 88→665, 네이버 지도 →514, T-money →775, K-ETA →542, 배달 →611. 목표였던 800단어에는 아직 못 미칩니다.
+- **FAQ 스키마**: 화면에 보이는 질문을 전부 FAQPage에 넣었습니다(페이지당 1개→5개).
+- **About·Contact 페이지(5개 언어)**: 운영 방식, 확인 방법, 독립성, 정정 정책을 담았습니다. 연락처는 업무용 이메일만 있고 실명은 없습니다. AboutPage·ContactPage 스키마를 넣었고, Article의 author를 About 페이지로 연결했습니다.
+- **모든 페이지 하단 footer**: About · Contact · 변경 내역 · 숙소 사장님용 · 이메일.
+- 새로 확인한 사실: K-ETA 수수료 1만 원·유효 3년(외교부 공지), 전자도착카드 공식 주소 e-arrivalcard.go.kr과 72시간 규칙(외교부 공지), 서울 택시 기본요금 4,800원과 심야 할증 20/40%(22~04시, 23~02시 40%), T-money 편의점 환불 수수료 500원.
+
+## 2차 점수 (1차 → 2차)
+
+| 영역 | 1차 | 2차 | 근거 |
+|---|---|---|---|
+| 첫인상·신뢰 신호 | 6 | 7 | About·Contact·footer 생김, 출처 펼침. 운영자 얼굴·경력 같은 사람 신호는 여전히 없음 |
+| 내비게이션·검색 | 6 | 7 | footer와 404 생김. 가이드 페이지 내 검색은 여전히 없음 |
+| 정확성 | 6 | 7 | 1339·전자도착카드·교통패스 수정. 면세 최소액은 미확정 |
+| 깊이(경쟁 대비) | 3 | 5 | 20개 중 5개 확장, 510~780단어. 스크린샷 0장이고 나머지 15개는 그대로 |
+| 모바일 가독성 | 7 | 7 | 새 섹션은 기존 카드 스타일을 썼음. 배포 전이라 라이브 375px 화면은 아직 확인 못 함 |
+| 속도 | 9 | 9 | 페이지가 약 8~10KB 커졌지만 이미지는 없음 |
+| 접근성 | 6 | 7 | 언어 링크 lang 속성·탭 영역, 섹션마다 aria-labelledby. 건너뛰기 링크는 아직 없음 |
+| 내부 링크·클러스터 | 6 | 6 | 본문 안 맥락 링크는 아직 0개 |
+| 제목·메타·구조화 데이터 | 7 | 8 | FAQ 전체, About/Contact 스키마, author 연결 |
+| 번역 품질 | 6 | 6 | 새 본문의 일본어·번체·베트남어는 원어민 감수 전. 간체는 자동 변환 |
+| 누락 고의도 주제 | 4 | 4 | 신규 주제는 아직 없음 |
+| 전환(hosts·질문 상자) | 4 | 5 | 가이드마다 숙소 페이지 링크, K-ETA 단계에 호스트 주소 링크 언급, 연락 경로 생김 |
+
+**종합: 5.8 → 6.5 / 10**
+
+## 스크린샷 필요 위치 (기웅 님 / Pickle 작업용)
+
+페이지에는 `<!-- screenshot: id -->` 주석으로 들어가 있어 화면에는 보이지 않습니다. 캡처 파일을 `img/<id>.webp`로 주시면, 3차에서 빌드 코드에 이미지 표시를 추가해 해당 단계에 연결합니다(지금 빌드는 이미지를 아직 표시하지 않음). 영어 앱 화면 기준으로 1장씩 찍고, 개인정보(카드 번호·이름·여권 번호·주소)는 가려 주세요. 가로 1080px 이하 WebP를 권장합니다.
+
+| # | id | 찍을 화면 | 가이드 |
+|---|---|---|---|
+| 1 | `taxi-kride-signup` | k.ride 첫 화면: 이메일·Google·Apple 가입 버튼 | 택시 |
+| 2 | `taxi-kride-card` | k.ride 결제 수단 등록 화면 (카드 번호는 가리기) | 택시 |
+| 3 | `taxi-destination-korean` | k.ride 목적지 입력란에 한국어 주소를 붙여 넣은 화면 | 택시 |
+| 4 | `taxi-pickup-pin` | 공항·역 택시 승차장 위치로 픽업 핀을 옮긴 지도 화면 | 택시 |
+| 5 | `maps-language` | 네이버 지도 설정 > 언어 > English 선택 화면 | 네이버 지도 |
+| 6 | `maps-search` | 네이버 지도 영어 검색 결과 화면 | 네이버 지도 |
+| 7 | `maps-transit` | 네이버 지도 대중교통 길찾기 결과 (노선·출구 번호·도착 시간 보이게) | 네이버 지도 |
+| 8 | `tmoney-store` | 편의점 계산대의 T-money 카드 진열 또는 카드 실물 | T-money |
+| 9 | `tmoney-machine` | 지하철역 교통카드 충전기 화면 (언어 버튼 보이게) | T-money |
+| 10 | `tmoney-bus-tap` | 버스 뒷문 단말기에 하차 태그하는 모습 | T-money |
+| 11 | `keta-site` | k-eta.go.kr 첫 화면 (공식 주소창 보이게) | K-ETA |
+| 12 | `earrival-form` | e-arrivalcard.go.kr 입력 화면 (개인정보 가리기) | K-ETA(전자도착카드) |
+| 13 | `baemin-language` | 배민 앱 설정 > 언어 > English 화면 | 배달 |
+| 14 | `baemin-signup` | 배민 해외 번호 가입: 국가 코드 선택 화면 | 배달 |
+| 15 | `baemin-address` | 배민 주소 입력: 도로명 주소 + 상세 주소(동·호수·공동현관 비밀번호) 칸 | 배달 |
+
+## 3차에 할 일 (우선순위)
+1. 위 스크린샷 15장을 넣고, 이미지 alt 텍스트는 5개 언어로 작성
+2. 나머지 상위 가이드 확장: 공항→시내, 데이터·eSIM, KTX, 면세, 식당 예약
+3. 본문 안 맥락 링크와 토픽 허브(도착 첫날 / 교통 / 돈·쇼핑)
+4. 새 본문 원어민 감수(일본어·번체·베트남어), 간체 대륙식 어휘 검수
+5. 면세 최소 구매액 공식 확인, Baemin 출시일 통일
+6. 신규 주제: 공항 eSIM/유심 수령, 버스 타는 법, Kakao Map vs Naver Map
