@@ -291,6 +291,19 @@ VI = {
 "Luggage": "Gửi hành lý",
 "Sick or hurt": "Ốm hoặc bị thương",
 "Related guides": "Hướng dẫn liên quan",
+"Seoul tourist transit pass": "Thẻ giao thông cho du khách ở Seoul",
+"Seoul Climate Card tourist pass: is it worth it, and what replaced the 30-day card? (2026)": "Thẻ du lịch Climate Card của Seoul có đáng mua không? Cái gì thay thế thẻ 30 ngày? (2026)",
+"Seoul has sold short unlimited-ride passes for visitors, but the 30-day Climate Card was replaced by K-Pass in 2026. Check what is on sale before you plan around it.": "Seoul từng bán thẻ đi không giới hạn ngắn ngày cho du khách, nhưng Climate Card 30 ngày đã được K-Pass thay thế năm 2026. Hãy kiểm tra hiện đang bán gì trước khi lên kế hoạch.",
+"Short Climate Card tourist passes were still on sale at our last check, but the 30-day card is gone. Check the price and where to buy before you go.": "Thẻ Climate Card ngắn ngày cho du khách vẫn đang bán vào lần kiểm tra gần nhất, nhưng thẻ 30 ngày đã không còn. Hãy kiểm tra giá và nơi mua trước khi đi.",
+"Not sure it pays off? A T-money card works for every subway and bus ride (see our T-money guide).": "Không chắc có lợi không? Thẻ T-money dùng được cho mọi chuyến tàu điện ngầm và xe buýt (xem hướng dẫn T-money của chúng tôi).",
+"Decide if you need it. Add up your planned subway and bus rides. For a short stay, a T-money card that you top up is often enough.": "Cân nhắc xem bạn có cần không. Cộng số lần đi tàu điện ngầm và xe buýt dự kiến. Với chuyến đi ngắn, thẻ T-money nạp tiền thường là đủ.",
+"Know the limits: reports say tourist passes work only in the Seoul area, so use T-money for taxis and trips outside Seoul.": "Biết giới hạn: theo các nguồn tin, thẻ du lịch chỉ dùng trong khu vực Seoul, nên hãy dùng T-money cho taxi và khi ra ngoài Seoul.",
+"If you buy, reports name the tourist information centres, T-Money Town near Seoul Station and online vouchers as places to get it. Check the current price at purchase.": "Nếu mua, các nguồn tin nêu quầy thông tin du lịch, T-Money Town gần ga Seoul và phiếu mua trực tuyến. Hãy kiểm tra giá hiện tại khi mua.",
+"The 30-day Climate Card was replaced by the K-Pass system in 2026. Reports differ on the exact last dates.": "Climate Card 30 ngày đã được hệ thống K-Pass thay thế trong năm 2026. Các nguồn tin khác nhau về ngày cuối cùng.",
+"Prices have changed since launch and sources disagree, so we do not quote them here. Check Seoul's tourist pass page or T-money.": "Giá đã thay đổi kể từ khi ra mắt và các nguồn không thống nhất nên chúng tôi không nêu giá ở đây. Hãy xem trang thẻ du lịch của Seoul hoặc T-money.",
+"Transit pass": "Thẻ giao thông",
+"Is the Seoul Climate Card tourist pass worth buying?": "Thẻ du lịch Climate Card của Seoul có đáng mua không?",
+"Where can I buy the tourist transit pass?": "Tôi mua thẻ giao thông cho du khách ở đâu?",
 "Getting around Jeju": "Di chuyển ở Jeju",
 "Getting around Jeju without a Korean number: rental car, bus and taxi (2026)": "Đi lại ở Jeju khi không có số Hàn Quốc: thuê xe, xe buýt và taxi (2026)",
 "Jeju is big and its sights are spread out. A rental car is the easiest way, but it needs a driving permit. Buses and taxis cover fewer places.": "Jeju rộng và các điểm tham quan nằm rải rác. Thuê xe là cách dễ nhất nhưng cần giấy phép lái xe. Xe buýt và taxi chỉ đến được một số nơi.",
@@ -443,5 +456,5 @@ for lst in x.PHRASES.values():
 for ko, m in x.HELP_PHRASES: m["vi"] = tr(m["en"])
 VI_KW = {"data": "điện thoại sim esim số data mạng", "airport": "sân bay incheon xe buýt tàu", "maps": "bản đồ chỉ đường", "taxi": "taxi gọi xe",
          "transit": "tàu điện ngầm xe buýt nạp thẻ", "ktx": "tàu ktx vé tàu", "food-booking": "nhà hàng đặt bàn xếp hàng", "delivery": "giao đồ ăn gọi món",
-         "translate": "dịch thực đơn", "shopping": "mua sắm hoàn thuế miễn thuế mỹ phẩm", "luggage": "gửi hành lý vali tủ khóa", "entry": "nhập cảnh k-eta visa thị thực hộ chiếu tờ khai", "cash": "tiền mặt atm rút tiền thẻ đổi tiền", "power": "ổ cắm phích cắm đầu chuyển điện áp sạc", "busan": "busan seoul đến busan ktx k-tour pass thẻ du lịch điểm tham quan", "krpass": "kr pass korail thẻ tàu ktx du khách", "dmz": "dmz jsa panmunjom tour đặt tour hộ chiếu imjingak", "jeju": "jeju thuê xe giấy phép lái xe quốc tế xe buýt taxi đi lại", "health": "ốm bệnh viện hiệu thuốc thuốc cấp cứu sốt"}
+         "translate": "dịch thực đơn", "shopping": "mua sắm hoàn thuế miễn thuế mỹ phẩm", "luggage": "gửi hành lý vali tủ khóa", "entry": "nhập cảnh k-eta visa thị thực hộ chiếu tờ khai", "cash": "tiền mặt atm rút tiền thẻ đổi tiền", "power": "ổ cắm phích cắm đầu chuyển điện áp sạc", "busan": "busan seoul đến busan ktx k-tour pass thẻ du lịch điểm tham quan", "krpass": "kr pass korail thẻ tàu ktx du khách", "dmz": "dmz jsa panmunjom tour đặt tour hộ chiếu imjingak", "jeju": "jeju thuê xe giấy phép lái xe quốc tế xe buýt taxi đi lại", "transitpass": "climate card seoul thẻ du lịch tàu điện ngầm xe buýt k-pass t-money", "health": "ốm bệnh viện hiệu thuốc thuốc cấp cứu sốt"}
 for k, v in VI_KW.items(): x.KEYWORDS[k] += " " + v

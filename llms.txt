@@ -24,6 +24,7 @@ Answers depend on the visitor's setup: no Korean number, a Korean prepaid SIM (0
 - [Is the KR Pass (Korail pass) worth it?](kr-pass-korail-pass.html)
 - [How do I book a DMZ or JSA tour in Korea?](dmz-jsa-tour-booking.html)
 - [How do I get around Jeju as a tourist?](jeju-getting-around.html)
+- [Is the Seoul Climate Card tourist pass worth buying?](seoul-tourist-transit-pass.html)
 - [What changed in 2026](changes.html)
 
 ## Other languages

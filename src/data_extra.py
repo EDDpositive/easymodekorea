@@ -146,20 +146,21 @@ PHRASES = {
     "krpass": [["이 기차표는 지정석이에요?", {"en": "Is this train ticket for a reserved seat?", "ja": "この切符は指定席ですか?", "zh-tw": "這張車票是指定座位嗎?"}]],
     "dmz": [["여권을 가져왔어요. 투어 집합 장소가 어디예요?", {"en": "I brought my passport. Where is the tour meeting point?", "ja": "パスポートを持ってきました。ツアーの集合場所はどこですか?", "zh-tw": "我帶了護照。導覽集合地點在哪裡?"}]],
     "jeju": [["렌터카 반납 장소가 어디예요?", {"en": "Where do I return the rental car?", "ja": "レンタカーの返却場所はどこですか?", "zh-tw": "租來的車要在哪裡還?"}]],
+    "transitpass": [["관광객용 교통카드는 어디서 살 수 있어요?", {"en": "Where can I buy the tourist transit pass?", "ja": "観光客向けの交通パスはどこで買えますか?", "zh-tw": "觀光客用的交通票券在哪裡買?"}]],
     "translate": [["영어 메뉴 있어요?", {"en": "Do you have an English menu?", "ja": "英語のメニューはありますか?", "zh-tw": "有英文菜單嗎?"}]],
 }
 
 # Short tile labels, short setup labels and section labels for the compact layout.
 SHORT = {
-    "en": {"tasks": {"data": "Phone & data", "airport": "Airport to city", "maps": "Maps", "taxi": "Taxi", "transit": "Subway & bus", "ktx": "KTX trains", "food-booking": "Restaurant booking", "delivery": "Food delivery", "translate": "Translation", "shopping": "Shopping & tax refund", "luggage": "Luggage", "health": "Sick or hurt", "entry": "Entry rules", "cash": "Cash & ATMs", "jeju": "Jeju transport", "dmz": "DMZ tour", "krpass": "KR Pass", "busan": "Busan trip", "power": "Power plugs"},
+    "en": {"tasks": {"data": "Phone & data", "airport": "Airport to city", "maps": "Maps", "taxi": "Taxi", "transit": "Subway & bus", "ktx": "KTX trains", "food-booking": "Restaurant booking", "delivery": "Food delivery", "translate": "Translation", "shopping": "Shopping & tax refund", "luggage": "Luggage", "health": "Sick or hurt", "entry": "Entry rules", "cash": "Cash & ATMs", "transitpass": "Transit pass", "jeju": "Jeju transport", "dmz": "DMZ tour", "krpass": "KR Pass", "busan": "Busan trip", "power": "Power plugs"},
            "prof": {"visitor": "No Korean number", "krsim": "Korean SIM (010)", "arc": "Resident (ARC)"},
            "show": "Show staff", "show_driver": "Show driver", "close": "Close", "guide": "Full guide",
            "tap": "Tap any row to see how", "before": "Before you fly", "details": "Sources and notes", "setup_q": "Your setup"},
-    "ja": {"tasks": {"data": "電話・データ", "airport": "空港から市内", "maps": "地図", "taxi": "タクシー", "transit": "地下鉄・バス", "ktx": "KTX", "food-booking": "飲食店の予約", "delivery": "デリバリー", "translate": "翻訳", "shopping": "買い物と免税", "luggage": "荷物の預け", "health": "病気・けが", "entry": "入国ルール", "cash": "現金・ATM", "jeju": "済州の移動", "dmz": "DMZツアー", "krpass": "KRパス", "busan": "釜山旅行", "power": "電源プラグ"},
+    "ja": {"tasks": {"data": "電話・データ", "airport": "空港から市内", "maps": "地図", "taxi": "タクシー", "transit": "地下鉄・バス", "ktx": "KTX", "food-booking": "飲食店の予約", "delivery": "デリバリー", "translate": "翻訳", "shopping": "買い物と免税", "luggage": "荷物の預け", "health": "病気・けが", "entry": "入国ルール", "cash": "現金・ATM", "transitpass": "交通パス", "jeju": "済州の移動", "dmz": "DMZツアー", "krpass": "KRパス", "busan": "釜山旅行", "power": "電源プラグ"},
            "prof": {"visitor": "韓国の番号なし", "krsim": "韓国SIM(010)", "arc": "在住(登録証あり)"},
            "show": "スタッフに見せる", "show_driver": "運転手に見せる", "close": "閉じる", "guide": "詳しいガイド",
            "tap": "項目をタップすると方法が出ます", "before": "出発前", "details": "出典とメモ", "setup_q": "あなたの状況"},
-    "zh-tw": {"tasks": {"data": "電話與上網", "airport": "機場到市區", "maps": "地圖", "taxi": "計程車", "transit": "地鐵與公車", "ktx": "KTX火車", "food-booking": "餐廳訂位", "delivery": "叫外送", "translate": "翻譯", "shopping": "購物與退稅", "luggage": "寄放行李", "health": "生病或受傷", "entry": "入境規定", "cash": "現金與ATM", "jeju": "濟州交通", "dmz": "DMZ導覽", "krpass": "KR Pass", "busan": "釜山之旅", "power": "插頭與電壓"},
+    "zh-tw": {"tasks": {"data": "電話與上網", "airport": "機場到市區", "maps": "地圖", "taxi": "計程車", "transit": "地鐵與公車", "ktx": "KTX火車", "food-booking": "餐廳訂位", "delivery": "叫外送", "translate": "翻譯", "shopping": "購物與退稅", "luggage": "寄放行李", "health": "生病或受傷", "entry": "入境規定", "cash": "現金與ATM", "transitpass": "交通票券", "jeju": "濟州交通", "dmz": "DMZ導覽", "krpass": "KR Pass", "busan": "釜山之旅", "power": "插頭與電壓"},
               "prof": {"visitor": "沒有韓國號碼", "krsim": "韓國SIM(010)", "arc": "居民(有登錄證)"},
               "show": "給店員看", "show_driver": "給司機看", "close": "關閉", "guide": "完整指南",
               "tap": "點一下就能看做法", "before": "出發前", "details": "資料來源與備註", "setup_q": "你的狀況"},
@@ -185,6 +186,7 @@ ICONS = {
     "krpass": '<rect x="4" y="3" width="16" height="14" rx="3"/><path d="M4 11h16M8 21l2-4M16 21l-2-4"/>',
     "dmz": '<path d="M3 20h18"/><path d="M5 20V9l7-5 7 5v11"/><path d="M9 20v-6h6v6"/>',
     "jeju": '<path d="M5 16l1.5-5h11L19 16"/><rect x="3" y="16" width="18" height="4" rx="1.5"/><circle cx="7.5" cy="18" r=".6"/><circle cx="16.5" cy="18" r=".6"/>',
+    "transitpass": '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M7 15h4"/>',
     "translate": '<path d="M3 5h9M7.5 3v2M5 5c.8 3 2.8 5.3 6 6.5M10 5c-.8 3-2.8 5.3-6 6.5"/><path d="M13 21l4-9 4 9M14.5 18h5"/>',
 }
 
@@ -251,6 +253,7 @@ KEYWORDS = {
     "krpass": "kr pass korail pass rail pass ktx unlimited foreigners train pass worth it 鉄道パス KRパス 鐵路通票 KR Pass",
     "dmz": "dmz jsa panmunjom tour booking passport imjingak third tunnel north korea border tour DMZ 板門店 ツアー 予約 パスポート 板門店 導覽 預約 護照",
     "jeju": "jeju island car rental international driving permit idp bus taxi getting around airport 済州 レンタカー 国際免許 濟州 租車 國際駕照",
+    "transitpass": "climate card seoul tourist pass unlimited subway bus pass k-pass t-money discover seoul pass 1 day pass クライメートカード 交通パス 氣候同行卡 交通卡 一日券",
     "translate": "translate translation papago menu sign korean language 翻訳 メニュー 翻譯 菜單",
 }
 
@@ -350,13 +353,13 @@ PLAN = {
 QUESTION = {
     "en": {"data": "Do I need a Korean phone number in Korea?", "airport": "How do I get from Incheon Airport to Seoul?", "maps": "Does Google Maps work in Korea?", "taxi": "Can I call a taxi in Korea without a Korean number?",
            "transit": "Can I top up T-money with a foreign card?", "ktx": "How do I book a KTX train as a foreigner?", "food-booking": "Can I book restaurants in Korea without a Korean number?",
-           "delivery": "Can I order food delivery in Korea as a tourist?", "translate": "What is the best translation app for Korea?", "shopping": "How do I get a tax refund when shopping in Korea?", "luggage": "Where can I store luggage in Seoul?", "health": "What do I do if I get sick in Korea?", "entry": "Do I need K-ETA to visit Korea?", "cash": "Can I withdraw cash in Korea with a foreign card?", "jeju": "How do I get around Jeju as a tourist?", "dmz": "How do I book a DMZ or JSA tour in Korea?", "krpass": "Is the KR Pass (Korail pass) worth it?", "busan": "How do I get from Seoul to Busan, and what is the K-Tour Pass?", "power": "Do I need a plug adapter in Korea?"},
+           "delivery": "Can I order food delivery in Korea as a tourist?", "translate": "What is the best translation app for Korea?", "shopping": "How do I get a tax refund when shopping in Korea?", "luggage": "Where can I store luggage in Seoul?", "health": "What do I do if I get sick in Korea?", "entry": "Do I need K-ETA to visit Korea?", "cash": "Can I withdraw cash in Korea with a foreign card?", "transitpass": "Is the Seoul Climate Card tourist pass worth buying?", "jeju": "How do I get around Jeju as a tourist?", "dmz": "How do I book a DMZ or JSA tour in Korea?", "krpass": "Is the KR Pass (Korail pass) worth it?", "busan": "How do I get from Seoul to Busan, and what is the K-Tour Pass?", "power": "Do I need a plug adapter in Korea?"},
     "ja": {"data": "韓国で韓国の電話番号は必要?", "airport": "仁川空港からソウル市内への行き方は?", "maps": "韓国でGoogleマップは使える?", "taxi": "韓国の番号なしでタクシーを呼べる?",
            "transit": "T-moneyに海外カードでチャージできる?", "ktx": "外国人がKTXを予約するには?", "food-booking": "韓国の番号なしでレストランを予約できる?",
-           "delivery": "旅行者でも韓国でデリバリーを頼める?", "translate": "韓国旅行におすすめの翻訳アプリは?", "shopping": "韓国で買い物の免税(タックスリファンド)を受けるには?", "luggage": "ソウルで荷物を預けられる場所は?", "health": "韓国旅行中に体調を崩したらどうする?", "entry": "韓国旅行にK-ETAは必要?", "cash": "韓国で外国のカードで現金を下ろせる?", "jeju": "済州島はどうやって回る?", "dmz": "韓国のDMZやJSAツアーはどう予約する?", "krpass": "KRパス(KORAILパス)は買う価値がある?", "busan": "ソウルから釜山への行き方と、K-Tour Passとは?", "power": "韓国旅行で変換プラグは必要?"},
+           "delivery": "旅行者でも韓国でデリバリーを頼める?", "translate": "韓国旅行におすすめの翻訳アプリは?", "shopping": "韓国で買い物の免税(タックスリファンド)を受けるには?", "luggage": "ソウルで荷物を預けられる場所は?", "health": "韓国旅行中に体調を崩したらどうする?", "entry": "韓国旅行にK-ETAは必要?", "cash": "韓国で外国のカードで現金を下ろせる?", "transitpass": "ソウルの気候同行カード(観光客向け)は買う価値がある?", "jeju": "済州島はどうやって回る?", "dmz": "韓国のDMZやJSAツアーはどう予約する?", "krpass": "KRパス(KORAILパス)は買う価値がある?", "busan": "ソウルから釜山への行き方と、K-Tour Passとは?", "power": "韓国旅行で変換プラグは必要?"},
     "zh-tw": {"data": "在韓國需要韓國電話號碼嗎?", "airport": "仁川機場怎麼到首爾市區?", "maps": "Google地圖在韓國能用嗎?", "taxi": "沒有韓國號碼能在韓國叫計程車嗎?",
               "transit": "T-money可以用國外信用卡儲值嗎?", "ktx": "外國人怎麼訂KTX?", "food-booking": "沒有韓國號碼能在韓國訂餐廳嗎?",
-              "delivery": "觀光客能在韓國叫外送嗎?", "translate": "去韓國用哪個翻譯App最好?", "shopping": "在韓國購物怎麼退稅?", "luggage": "在首爾哪裡可以寄放行李?", "health": "在韓國生病了怎麼辦?", "entry": "去韓國需要申請K-ETA嗎?", "cash": "在韓國能用外國卡領現金嗎?", "jeju": "在濟州島怎麼玩比較方便?", "dmz": "怎麼預約韓國的DMZ或JSA導覽?", "krpass": "KR Pass(Korail通票)值得買嗎?", "busan": "從首爾怎麼去釜山?K-Tour Pass是什麼?", "power": "去韓國需要轉接頭嗎?"},
+              "delivery": "觀光客能在韓國叫外送嗎?", "translate": "去韓國用哪個翻譯App最好?", "shopping": "在韓國購物怎麼退稅?", "luggage": "在首爾哪裡可以寄放行李?", "health": "在韓國生病了怎麼辦?", "entry": "去韓國需要申請K-ETA嗎?", "cash": "在韓國能用外國卡領現金嗎?", "transitpass": "首爾氣候同行卡觀光客票券值得買嗎?", "jeju": "在濟州島怎麼玩比較方便?", "dmz": "怎麼預約韓國的DMZ或JSA導覽?", "krpass": "KR Pass(Korail通票)值得買嗎?", "busan": "從首爾怎麼去釜山?K-Tour Pass是什麼?", "power": "去韓國需要轉接頭嗎?"},
 }
 
 
