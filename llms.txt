@@ -1,6 +1,6 @@
 # EasyModeKorea
 
-> Free, independent guide for visitors to Korea: which Korean apps work with a foreign phone number and a foreign card, checked and dated. English, Japanese and Traditional Chinese. No ads, no affiliate links.
+> Free, independent guide for visitors to Korea: which Korean apps work with a foreign phone number and a foreign card, checked and dated. English, Japanese, Traditional Chinese, Simplified Chinese and Vietnamese. No ads, no affiliate links.
 
 Answers depend on the visitor's setup: no Korean number, a Korean prepaid SIM (010), or residence (ARC). Each page states the setup and the date it was last checked.
 

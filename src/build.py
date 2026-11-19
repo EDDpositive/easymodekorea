@@ -8,7 +8,7 @@ import html, json, os, sys
 
 sys.path.insert(0, os.path.dirname(__file__))
 from data import CHECKED, CHECKED_ISO, LANGS, SOURCES, TASK_META  # noqa: E402
-from data_extra import BRAND, FEEDBACK, FEEDBACK_FORM, FEEDBACK_TO, HELP, HELP_PHRASES, ICONS, KEYWORDS, PHRASES, PLAN, QUESTION, SHORT, UX, X  # noqa: E402
+from data_extra import ASK, BRAND, FEEDBACK, FEEDBACK_FORM, FEEDBACK_TO, HELP, HELP_PHRASES, ICONS, KEYWORDS, PHRASES, PLAN, QUESTION, SHORT, UX, X  # noqa: E402
 import zh_cn  # noqa: E402,F401  (adds Simplified Chinese)
 import vi  # noqa: E402,F401  (adds Vietnamese)
 
@@ -18,6 +18,7 @@ GOAT = "https://eddpositive.goatcounter.com/count"
 CSS = open(os.path.join(os.path.dirname(__file__), "style.css"), encoding="utf-8").read()
 e = lambda s: html.escape(str(s), quote=True)
 icon = lambda tid: f'<svg viewBox="0 0 24 24" aria-hidden="true">{ICONS[tid]}</svg>'
+FONTS = "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap"
 PWA_HEAD = lambda up: f'\n<link rel="manifest" href="{up}manifest.webmanifest"><link rel="apple-touch-icon" href="{up}icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes">'
 
 
@@ -37,7 +38,7 @@ def head(lang, title, desc, path, alt_paths, extra=""):
 <meta property="og:type" content="website"><meta property="og:site_name" content="{BRAND}"><meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(desc)}"><meta property="og:url" content="{SITE}{path}"><meta property="og:image" content="{SITE}og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="robots" content="max-snippet:-1, max-image-preview:large">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="{FONTS}" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="{FONTS}"></noscript>
 <style>
 {CSS}</style>
 <script data-goatcounter="{GOAT}" async src="//gc.zgo.at/count.js"></script>{extra}
@@ -61,7 +62,18 @@ def hero(lang, alt, up, h1, lede, home="./", trust=True):
 </div></header>"""
 
 
+def ask_box(lang):
+    a = ASK[lang]
+    return f"""<section class="ask" aria-labelledby="ask-t-{lang}"><h2 id="ask-t-{lang}">{e(a['title'])}</h2><p class="hint">{e(a['lead'])}</p>
+<form class="ask-form" data-thanks="{e(a['thanks'])}"><textarea name="q" required maxlength="1000" aria-label="{e(a['title'])}" placeholder="{e(a['ph'])}"></textarea>
+<input name="em" type="email" maxlength="120" autocomplete="email" aria-label="{e(a['email'])}" placeholder="{e(a['email'])}"><button class="btn" type="submit">{e(a['send'])}</button><p class="fb-done" role="status"></p></form></section>"""
+
+
 def about(lang, up):
+    return ask_box(lang) + _about(lang, up)
+
+
+def _about(lang, up):
     U = LANGS[lang]["ui"]; x = X[lang]
     return f"""<p class="fb-line"><button type="button" class="linkbtn" data-feedback="">💬 {e(FEEDBACK[lang]['open'])}</button></p><details class="about"><summary>{e(x['about'])}</summary><div class="in">
 <p><b>EasyModeKorea</b> (Easy Mode Korea · 이지모드코리아)</p>
@@ -146,6 +158,19 @@ def feedback_html(lang):
     try {{ window.goatcounter && window.goatcounter.count({{ path: "feedback/" + C.lang, title: "feedback", event: true }}); }} catch (e) {{}}
     document.getElementById("fb-msg").value = ""; document.getElementById("fb-done").textContent = C.thanks;
   }});
+  document.querySelectorAll(".ask-form").forEach(f => f.addEventListener("submit", async ev => {{
+    ev.preventDefault();
+    const q = f.q.value.trim(), em = f.em.value.trim(); if (!q) return;
+    const where = C.lang + " question " + location.pathname;
+    if (C.form) {{
+      const b = new URLSearchParams(); b.set(C.form.msg, q); b.set(C.form.email, em); b.set(C.form.ctx, where);
+      try {{ await fetch(C.form.action, {{ method: "POST", mode: "no-cors", body: b }}); }} catch (e) {{}}
+    }} else {{
+      location.href = "mailto:" + C.to + "?subject=" + encodeURIComponent("EasyModeKorea question (" + where + ")") + "&body=" + encodeURIComponent(q);
+    }}
+    try {{ window.goatcounter && window.goatcounter.count({{ path: "question/" + C.lang, title: "question", event: true }}); }} catch (e) {{}}
+    f.q.value = ""; f.querySelector(".fb-done").textContent = f.dataset.thanks;
+  }}));
 }})();</script>"""
 
 
@@ -442,6 +467,7 @@ def build_changes(lang):
 <div class="wrap">
   <section class="panel" style="margin-top:18px"><div class="in timeline" style="padding-top:16px"><ol>{rows}</ol></div></section>
   <div class="actions"><a class="btn" href="./">{e(L['ui']['open_tool'])}</a></div>
+  {ask_box(lang)}
   <p class="fb-line"><button type="button" class="linkbtn" data-feedback="changes">💬 {e(FEEDBACK[lang]['open'])}</button></p>
 </div>
 {feedback_html(lang)}
@@ -466,8 +492,17 @@ def main():
         for t in task_list(lang):
             paths.append(build_topic(lang, t))
     paths.append("hosts.html")
-    urls = "".join(f"<url><loc>{SITE}{p}</loc><lastmod>{CHECKED_ISO}</lastmod></url>\n" for p in paths)
-    write("sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}</urlset>\n')
+    by_rel = {}
+    for p in paths:
+        lang = next((k for k in LANGS if LANGS[k]["dir"] and p.startswith(LANGS[k]["dir"])), "en")
+        by_rel.setdefault(p[len(LANGS[lang]["dir"]):], {})[lang] = p
+    def url(p):
+        rel = p[len(next((LANGS[k]["dir"] for k in LANGS if LANGS[k]["dir"] and p.startswith(LANGS[k]["dir"])), "")):]
+        alts = by_rel.get(rel, {})
+        links = "" if len(alts) < 2 else "".join(f'<xhtml:link rel="alternate" hreflang="{LANGS[k]["html_lang"]}" href="{SITE}{q}"/>' for k, q in alts.items()) + f'<xhtml:link rel="alternate" hreflang="x-default" href="{SITE}{alts.get("en", p)}"/>'
+        return f"<url><loc>{SITE}{p}</loc><lastmod>{CHECKED_ISO}</lastmod>{links}</url>\n"
+    urls = "".join(url(p) for p in paths)
+    write("sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n{urls}</urlset>\n')
     print(f"built {len(paths)} pages")
 
 
