@@ -145,6 +145,10 @@ a { color: var(--brand); }
 .panel ol { margin: 0; padding-left: 22px; display: grid; gap: 8px; }
 .timeline b { display: block; }
 .copied { font-size: 14px; color: var(--muted); }
+.related { margin: 22px 0 6px; }
+.related h2 { font: 700 18px var(--display); margin: 0 0 8px; }
+.related ul { margin: 0; padding-left: 20px; }
+.related li { margin: 4px 0; }
 .topics { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0; }
 .topics a { padding: 8px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); text-decoration: none; font-size: 14px; font-weight: 600; color: var(--ink); }
 footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-top: 20px; }
@@ -250,6 +254,16 @@ footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; margin-t
 .ask-form textarea { min-height: 88px; resize: vertical; }
 .ask-form .btn { justify-self: start; }
 .ask-form .fb-done { margin: 0; min-height: 0; }
+
+/* Static guide list on the home page (crawlable, visible to everyone) */
+.guide-list { margin: 8px auto 28px; }
+.guide-list h2 { font: 700 20px var(--display); margin: 0 0 10px; }
+.guide-list ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.guide-list li { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+.guide-list a { font-weight: 700; display: block; margin-bottom: 2px; }
+.guide-list span { color: var(--muted); font-size: 15px; }
+
+.checked-line { margin: 10px 2px 0; font-size: 14px; color: var(--muted); }
 </style>
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
