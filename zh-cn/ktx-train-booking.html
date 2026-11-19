@@ -12,14 +12,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap"></noscript>
-<link rel="stylesheet" href="../style.css?v=82b0412d">
+<link rel="stylesheet" href="../style.css?v=1c78a922">
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "2026年改制后,外国人怎么订KTX车票", "description": "2026年韩国的铁路订票改了很多:新App、SRT并入KTX、可提前订票的期间变长。以下是现在的订票方式。", "datePublished": "2026-11-17", "dateModified": "2026-11-20", "inLanguage": "zh-CN", "url": "https://easymodekorea.com/zh-cn/ktx-train-booking.html", "mainEntityOfPage": "https://easymodekorea.com/zh-cn/ktx-train-booking.html", "image": "https://easymodekorea.com/og.png", "author": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/zh-cn/about.html"}, "publisher": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/", "logo": {"@type": "ImageObject", "url": "https://easymodekorea.com/icon-512.png"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "EasyModeKorea", "item": "https://easymodekorea.com/zh-cn/"}, {"@type": "ListItem", "position": 2, "name": "KTX火车", "item": "https://easymodekorea.com/zh-cn/ktx-train-booking.html"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "外国人怎么订KTX?", "acceptedAnswer": {"@type": "Answer", "text": "在KORAIL英文网站用国外信用卡订票最可靠。 在KORAIL英文订票网站用护照信息订票。 自2026年10月1日起,可提前两个月订票。周末和连假请提早订。"}}, {"@type": "Question", "name": "SRT还要另外订吗?", "acceptedAnswer": {"@type": "Answer", "text": "不用。SRT在2026年9月1日并入KORAIL,所有高铁列车都以KTX名义贩售。"}}, {"@type": "Question", "name": "没有韩国电话号码可以订KTX吗?", "acceptedAnswer": {"@type": "Answer", "text": "可以。英文网站用护照信息和国外的卡就能订。"}}, {"@type": "Question", "name": "KR Pass划算吗?", "acceptedAnswer": {"@type": "Answer", "text": "只有几天内要搭好几趟长途时才划算。比较方法请看我们的KR Pass指南。"}}, {"@type": "Question", "name": "车上有Wi-Fi和餐点吗?", "acceptedAnswer": {"@type": "Answer", "text": "建议自备点心,上网用自己的数据;车上服务依列车而不同。"}}]}]</script>
 </head>
 <body>
 <a class="skip" href="#answer">跳到答案</a>
 <header class="hero"><div class="wrap">
-  <div class="toprow"><a class="logo" href="./">EasyMode<b>Korea</b></a><nav class="langs" aria-label="语言"><a href="../ktx-train-booking.html" hreflang="en" lang="en">English</a><a href="../ja/ktx-train-booking.html" hreflang="ja" lang="ja">日本語</a><a href="../zh-tw/ktx-train-booking.html" hreflang="zh-Hant-TW" lang="zh-Hant-TW">繁體中文</a><a href="../zh-cn/ktx-train-booking.html" hreflang="zh-CN" lang="zh-CN" aria-current="page">简体中文</a><a href="../vi/ktx-train-booking.html" hreflang="vi" lang="vi">Tiếng Việt</a></nav></div>
+  <div class="toprow"><a class="logo" href="./">EasyMode<b>Korea</b></a><nav class="langs" aria-label="语言"><a href="../ktx-train-booking.html" hreflang="en" lang="en">English</a><a href="../ja/ktx-train-booking.html" hreflang="ja" lang="ja">日本語</a><a href="../zh-tw/ktx-train-booking.html" hreflang="zh-Hant-TW" lang="zh-Hant-TW">繁體中文</a><a href="../zh-cn/ktx-train-booking.html" hreflang="zh-CN" lang="zh-CN" aria-current="page">简体中文</a><a href="../vi/ktx-train-booking.html" hreflang="vi" lang="vi">Tiếng Việt</a></nav></div><a class="home-link" href="./">← 所有指南</a>
   <h1>外国人怎么订KTX?</h1>
 </div></header>
 <div class="wrap">
@@ -52,6 +52,14 @@
   <div><p class="mean" id="show-mean"></p><button class="btn" type="button" id="show-close">关闭</button></div>
 </div>
 <script>
+/* Arriving from a search result: start at the top (the answer box) instead of the middle of the page,
+   where Google's highlighted-text links (#:~:text=) jump to. Links with a real #anchor are left alone. */
+(function () { try {
+  if (location.hash || !/google\.|bing\.|naver\.|yahoo\.|duckduckgo\.|daum\.|baidu\./i.test(document.referrer)) return;
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  const top = () => window.scrollTo(0, 0);
+  addEventListener("load", () => { top(); setTimeout(top, 60); setTimeout(top, 300); });
+} catch (e) {} })();
 function el(tag, attrs = {}, kids = []) { const n = document.createElement(tag); for (const [k, v] of Object.entries(attrs)) { if (k === "text") n.textContent = v; else if (k === "html") n.innerHTML = v; else n.setAttribute(k, v); } for (const c of [].concat(kids)) if (c) n.append(c); return n; }
 function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
 function count(path, title) { try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path, title, event: true }); } catch (e) {} }

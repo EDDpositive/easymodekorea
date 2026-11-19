@@ -12,14 +12,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap"></noscript>
-<link rel="stylesheet" href="../style.css?v=82b0412d">
+<link rel="stylesheet" href="../style.css?v=1c78a922">
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "韓国の番号なしで韓国の飲食店を予約: CatchTable GlobalとNaver(2026)", "description": "韓国の人気店は、以前は韓国の番号が必要だったアプリで予約や順番待ちを受け付けています。今は旅行者向けに2つの方法があります。", "datePublished": "2026-11-17", "dateModified": "2026-11-20", "inLanguage": "ja", "url": "https://easymodekorea.com/ja/restaurant-reservations.html", "mainEntityOfPage": "https://easymodekorea.com/ja/restaurant-reservations.html", "image": "https://easymodekorea.com/og.png", "author": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/ja/about.html"}, "publisher": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/", "logo": {"@type": "ImageObject", "url": "https://easymodekorea.com/icon-512.png"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "EasyModeKorea", "item": "https://easymodekorea.com/ja/"}, {"@type": "ListItem", "position": 2, "name": "飲食店の予約", "item": "https://easymodekorea.com/ja/restaurant-reservations.html"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "韓国の番号なしでレストランを予約できる?", "acceptedAnswer": {"@type": "Answer", "text": "CatchTable GlobalとNaverのパスポート認証は、どちらも韓国の番号なしで使えます。 CatchTable Global: メールで登録し、デポジットは海外カードで払える。 キャンセル規定は店ごとに違います。キャンセル確定前に、デポジットがいくら戻るかアプリに表示されます。 Naver Mapの予約: パスポートで認証(2026年6月4日から)。"}}, {"@type": "Question", "name": "デポジットは返金されますか?", "acceptedAnswer": {"@type": "Answer", "text": "店とキャンセルの時期によります。キャンセル確定前に、アプリに返金額が表示されます。"}}, {"@type": "Question", "name": "韓国の電話番号は必要ですか?", "acceptedAnswer": {"@type": "Answer", "text": "いりません。CatchTable Globalはメールで登録でき、Naverはパスポート認証に対応しています。"}}, {"@type": "Question", "name": "人気店はどれくらい前に予約すべきですか?", "acceptedAnswer": {"@type": "Answer", "text": "店が予約枠を開けたらすぐです。開放から数分で埋まる人気店もあります。"}}, {"@type": "Question", "name": "予約を受けない店は?", "acceptedAnswer": {"@type": "Answer", "text": "開店前に行って並びます。スタッフに見せられるよう、店の韓国語名を控えておきましょう。"}}]}]</script>
 </head>
 <body>
 <a class="skip" href="#answer">回答へ移動</a>
 <header class="hero"><div class="wrap">
-  <div class="toprow"><a class="logo" href="./">EasyMode<b>Korea</b></a><nav class="langs" aria-label="言語"><a href="../restaurant-reservations.html" hreflang="en" lang="en">English</a><a href="../ja/restaurant-reservations.html" hreflang="ja" lang="ja" aria-current="page">日本語</a><a href="../zh-tw/restaurant-reservations.html" hreflang="zh-Hant-TW" lang="zh-Hant-TW">繁體中文</a><a href="../zh-cn/restaurant-reservations.html" hreflang="zh-CN" lang="zh-CN">简体中文</a><a href="../vi/restaurant-reservations.html" hreflang="vi" lang="vi">Tiếng Việt</a></nav></div>
+  <div class="toprow"><a class="logo" href="./">EasyMode<b>Korea</b></a><nav class="langs" aria-label="言語"><a href="../restaurant-reservations.html" hreflang="en" lang="en">English</a><a href="../ja/restaurant-reservations.html" hreflang="ja" lang="ja" aria-current="page">日本語</a><a href="../zh-tw/restaurant-reservations.html" hreflang="zh-Hant-TW" lang="zh-Hant-TW">繁體中文</a><a href="../zh-cn/restaurant-reservations.html" hreflang="zh-CN" lang="zh-CN">简体中文</a><a href="../vi/restaurant-reservations.html" hreflang="vi" lang="vi">Tiếng Việt</a></nav></div><a class="home-link" href="./">← ガイド一覧</a>
   <h1>韓国の番号なしでレストランを予約できる?</h1>
 </div></header>
 <div class="wrap">
@@ -52,6 +52,14 @@
   <div><p class="mean" id="show-mean"></p><button class="btn" type="button" id="show-close">閉じる</button></div>
 </div>
 <script>
+/* Arriving from a search result: start at the top (the answer box) instead of the middle of the page,
+   where Google's highlighted-text links (#:~:text=) jump to. Links with a real #anchor are left alone. */
+(function () { try {
+  if (location.hash || !/google\.|bing\.|naver\.|yahoo\.|duckduckgo\.|daum\.|baidu\./i.test(document.referrer)) return;
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  const top = () => window.scrollTo(0, 0);
+  addEventListener("load", () => { top(); setTimeout(top, 60); setTimeout(top, 300); });
+} catch (e) {} })();
 function el(tag, attrs = {}, kids = []) { const n = document.createElement(tag); for (const [k, v] of Object.entries(attrs)) { if (k === "text") n.textContent = v; else if (k === "html") n.innerHTML = v; else n.setAttribute(k, v); } for (const c of [].concat(kids)) if (c) n.append(c); return n; }
 function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
 function count(path, title) { try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path, title, event: true }); } catch (e) {} }

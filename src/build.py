@@ -61,10 +61,14 @@ def lang_links(cur, rel_paths, prefix):
     return f'<nav class="langs" aria-label="{e(LANGS[cur]["ui"]["langs"])}">' + "".join(out) + "</nav>"
 
 
-def hero(lang, alt, up, h1, lede, home="./", trust=True):
+HOME_LBL = {"en": "All guides", "ja": "ガイド一覧", "zh-tw": "所有指南", "zh-cn": "所有指南", "vi": "Tất cả hướng dẫn"}
+
+
+def hero(lang, alt, up, h1, lede, home="./", trust=True, back=False):
     x = X[lang]
+    back_a = f'<a class="home-link" href="{home}">← {e(HOME_LBL.get(lang, HOME_LBL["en"]))}</a>' if back else ''
     return f"""<header class="hero"><div class="wrap">
-  <div class="toprow"><a class="logo" href="{home}">EasyMode<b>Korea</b></a>{lang_links(lang, alt, up)}</div>
+  <div class="toprow"><a class="logo" href="{home}">EasyMode<b>Korea</b></a>{lang_links(lang, alt, up)}</div>{back_a}
   {f'<h1>{e(h1)}</h1>' if h1 else ''}{f'<p class="lede">{e(lede)}</p>' if lede else ''}
 </div></header>"""
 
@@ -114,6 +118,14 @@ SHOW_HTML = lambda lang: f"""<div class="show" id="show" hidden role="dialog" ar
 </div>"""
 
 COMMON_JS = r"""
+/* Arriving from a search result: start at the top (the answer box) instead of the middle of the page,
+   where Google's highlighted-text links (#:~:text=) jump to. Links with a real #anchor are left alone. */
+(function () { try {
+  if (location.hash || !/google\.|bing\.|naver\.|yahoo\.|duckduckgo\.|daum\.|baidu\./i.test(document.referrer)) return;
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  const top = () => window.scrollTo(0, 0);
+  addEventListener("load", () => { top(); setTimeout(top, 60); setTimeout(top, 300); });
+} catch (e) {} })();
 function el(tag, attrs = {}, kids = []) { const n = document.createElement(tag); for (const [k, v] of Object.entries(attrs)) { if (k === "text") n.textContent = v; else if (k === "html") n.innerHTML = v; else n.setAttribute(k, v); } for (const c of [].concat(kids)) if (c) n.append(c); return n; }
 function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
 function count(path, title) { try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path, title, event: true }); } catch (e) {} }
@@ -553,7 +565,7 @@ def build_topic(lang, t):
     deep, faq_extra = deep_html(lang, t["id"])
     body = f"""
 <a class="skip" href="#answer">{e(H['skip'])}</a>
-{hero(lang, alt, up, QUESTION[lang][t['id']], '')}
+{hero(lang, alt, up, QUESTION[lang][t['id']], '', back=True)}
 <div class="wrap">
   <main id="answer">
   <section class="answer {first_s}">{''.join(tops)}<dl class="glance">{glance}</dl><p class="stamp">{stamp}</p></section>

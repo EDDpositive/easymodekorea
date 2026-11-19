@@ -12,14 +12,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap"></noscript>
-<link rel="stylesheet" href="../style.css?v=82b0412d">
+<link rel="stylesheet" href="../style.css?v=1c78a922">
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Dịch thực đơn và biển hiệu tiếng Hàn: cài đặt Papago (2026)", "description": "Ứng dụng dịch bằng camera dùng được cho thực đơn, biển hiệu và hóa đơn. Cài trước khi bay để dùng được khi không có mạng.", "datePublished": "2026-11-17", "dateModified": "2026-11-20", "inLanguage": "vi", "url": "https://easymodekorea.com/vi/translation.html", "mainEntityOfPage": "https://easymodekorea.com/vi/translation.html", "image": "https://easymodekorea.com/og.png", "author": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/vi/about.html"}, "publisher": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/", "logo": {"@type": "ImageObject", "url": "https://easymodekorea.com/icon-512.png"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "EasyModeKorea", "item": "https://easymodekorea.com/vi/"}, {"@type": "ListItem", "position": 2, "name": "Dịch thuật", "item": "https://easymodekorea.com/vi/translation.html"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Ứng dụng dịch nào tốt nhất khi đi Hàn Quốc?", "acceptedAnswer": {"@type": "Answer", "text": "Ai cũng dùng được Papago. Chĩa camera vào thực đơn hoặc biển hiệu. Cài Papago và tải gói tiếng Hàn ngoại tuyến."}}, {"@type": "Question", "name": "Papago hay Google Dịch?", "acceptedAnswer": {"@type": "Answer", "text": "Cả hai đều dùng được ở Hàn Quốc. Nhiều du khách thấy Papago dịch tiếng Hàn tự nhiên hơn, nên hãy cài cả hai để so sánh."}}, {"@type": "Question", "name": "Papago có cần số điện thoại Hàn Quốc không?", "acceptedAnswer": {"@type": "Answer", "text": "Không. Bạn dùng được mà không cần đăng nhập."}}, {"@type": "Question", "name": "Dịch bằng camera có dùng ngoại tuyến được không?", "acceptedAnswer": {"@type": "Answer", "text": "Một số tính năng cần mạng. Thử chế độ camera khi bật chế độ máy bay ở nhà để biết cái gì dùng được ngoại tuyến."}}, {"@type": "Question", "name": "Có đường dây nào phiên dịch qua điện thoại không?", "acceptedAnswer": {"@type": "Answer", "text": "Có. 1330, đường dây hỗ trợ du lịch, phiên dịch qua điện thoại 24 giờ."}}]}]</script>
 </head>
 <body>
 <a class="skip" href="#answer">Chuyển đến câu trả lời</a>
 <header class="hero"><div class="wrap">
-  <div class="toprow"><a class="logo" href="./">EasyMode<b>Korea</b></a><nav class="langs" aria-label="Ngôn ngữ"><a href="../translation.html" hreflang="en" lang="en">English</a><a href="../ja/translation.html" hreflang="ja" lang="ja">日本語</a><a href="../zh-tw/translation.html" hreflang="zh-Hant-TW" lang="zh-Hant-TW">繁體中文</a><a href="../zh-cn/translation.html" hreflang="zh-CN" lang="zh-CN">简体中文</a><a href="../vi/translation.html" hreflang="vi" lang="vi" aria-current="page">Tiếng Việt</a></nav></div>
+  <div class="toprow"><a class="logo" href="./">EasyMode<b>Korea</b></a><nav class="langs" aria-label="Ngôn ngữ"><a href="../translation.html" hreflang="en" lang="en">English</a><a href="../ja/translation.html" hreflang="ja" lang="ja">日本語</a><a href="../zh-tw/translation.html" hreflang="zh-Hant-TW" lang="zh-Hant-TW">繁體中文</a><a href="../zh-cn/translation.html" hreflang="zh-CN" lang="zh-CN">简体中文</a><a href="../vi/translation.html" hreflang="vi" lang="vi" aria-current="page">Tiếng Việt</a></nav></div><a class="home-link" href="./">← Tất cả hướng dẫn</a>
   <h1>Ứng dụng dịch nào tốt nhất khi đi Hàn Quốc?</h1>
 </div></header>
 <div class="wrap">
@@ -52,6 +52,14 @@
   <div><p class="mean" id="show-mean"></p><button class="btn" type="button" id="show-close">Đóng</button></div>
 </div>
 <script>
+/* Arriving from a search result: start at the top (the answer box) instead of the middle of the page,
+   where Google's highlighted-text links (#:~:text=) jump to. Links with a real #anchor are left alone. */
+(function () { try {
+  if (location.hash || !/google\.|bing\.|naver\.|yahoo\.|duckduckgo\.|daum\.|baidu\./i.test(document.referrer)) return;
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  const top = () => window.scrollTo(0, 0);
+  addEventListener("load", () => { top(); setTimeout(top, 60); setTimeout(top, 300); });
+} catch (e) {} })();
 function el(tag, attrs = {}, kids = []) { const n = document.createElement(tag); for (const [k, v] of Object.entries(attrs)) { if (k === "text") n.textContent = v; else if (k === "html") n.innerHTML = v; else n.setAttribute(k, v); } for (const c of [].concat(kids)) if (c) n.append(c); return n; }
 function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
 function count(path, title) { try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path, title, event: true }); } catch (e) {} }
