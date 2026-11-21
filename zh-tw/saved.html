@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap"></noscript>
-<link rel="stylesheet" href="../style.css?v=727aeb2d">
+<link rel="stylesheet" href="../style.css?v=3132ccd9">
 <script>window.EMK={"lang": "zh-tw", "up": "../", "t": {"save": "收藏", "saved": "已收藏", "share": "分享", "link_copied": "已複製連結", "saved_toast": "已存到「我的旅程」", "unsaved_toast": "已從「我的旅程」移除", "install": "安裝App,沒有網路也能看指南。", "install_btn": "安裝", "later": "先不要", "update": "這一頁有更新的內容。", "refresh": "重新整理", "ready": "已存到這支手機,沒有網路也能看指南。", "miss": "那一頁還沒存到這支手機。有網路時先開一次。", "offline": "目前離線。這頁的內容照樣能用。", "suggest": "這個頁面也有{l}版。", "switch": "切換", "dismiss": "不用了"}}</script><script defer src="../app.js?v=4c40dc42"></script>
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -29,6 +29,12 @@
 <section class="myaddr" id="myaddr" hidden aria-labelledby="ma-h" data-card="給計程車司機看" data-ko="기사님, 이 주소로 가 주세요." data-mean="意思: 請載我到這個地址。"><h2 id="ma-h">住宿的韓文地址</h2>
 <div id="ma-has" hidden><p class="addr" lang="ko" id="ma-text"></p><div class="actions"><button class="btn alt" type="button" id="ma-show">🚕 給司機看</button><button class="btn ghost" type="button" id="ma-copy" data-copy="" data-done="✓ 已複製">📋 複製地址</button><a class="btn ghost" id="ma-map" href="#" rel="noopener" target="_blank">用Naver Map開啟</a><button class="linkbtn" type="button" id="ma-edit">更改</button></div></div>
 <form id="ma-form" hidden><input id="ma-in" type="text" lang="ko" maxlength="160" autocomplete="street-address" aria-label="住宿的韓文地址" placeholder="貼上訂房確認信裡的韓文地址"><button class="btn" type="submit">存在這支手機</button></form><p class="hint">只存在這支手機裡,不會傳送到任何地方。</p></section>
+<section class="arrive" id="arrive" aria-labelledby="ar-h" data-from="從{t}(韓國時間)起到抵達前都可以提交。" data-local="以這支手機的時間:{t}" data-open="現在可以提交了。" data-wait="{r}開放提交。" data-past="這個抵達時間已經過了。">
+<h2 id="ar-h">電子入境卡什麼時候可以提交?</h2><p class="hint">e-Arrival Card:抵達前72小時內填寫 <time class="ck" datetime="2026-11-20">✓ 2026年11月20日</time></p>
+<label class="fl" for="ar-in">抵達韓國的時間(韓國時間)</label><input id="ar-in" type="datetime-local">
+<div id="ar-out" hidden aria-live="polite"><p class="ar-main"></p><p class="hint ar-local"></p><p class="ar-state"></p></div>
+<div class="actions"><a class="btn ghost" href="https://www.e-arrivalcard.go.kr" rel="noopener" target="_blank">電子入境卡官方網站</a><a class="btn ghost" href="k-eta-entry-requirements.html">去韓國需要申請K-ETA嗎?</a></div>
+<p class="hint">只存在這支手機裡,不會傳送到任何地方。</p></section>
 <section class="sec" aria-labelledby="mr-h"><h2 id="mr-h">旅途中用得到</h2><ul class="glist"><li><a href="phrases.html"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H10l-4.5 4v-4H4z"/><path d="M8 9h8M8 12h5"/></svg></span><span>做一張給人看的韓文卡</span></a></li><li><a href="./#tool-h"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg></span><span>查查你的手機能用哪些</span></a></li><li><a href="help.html"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.6"/><path d="M5.7 5.7l3.7 3.7M14.6 14.6l3.7 3.7M18.3 5.7l-3.7 3.7M9.4 14.6l-3.7 3.7"/></svg></span><span>緊急電話</span></a></li></ul></section>
 <section class="sec" aria-labelledby="ap-h"><h2 id="ap-h">這個App</h2>
 <p class="hint" id="off-n" hidden></p><p class="hint" id="ios-hint" hidden>iPhone:點「分享」按鈕,再選「加入主畫面」。</p>
@@ -145,6 +151,30 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !documen
     document.getElementById("cleared").textContent = cfg.cleared; paint();
     const ma = document.getElementById("ma-has"), mf = document.getElementById("ma-form"); if (ma && mf) { ma.hidden = true; mf.hidden = false; }
   });
+})();
+
+(function () {
+  /* e-Arrival Card helper: the landing time is read as Korea time (UTC+9, no summer time) and kept on this phone only. */
+  const box = document.getElementById("arrive"); if (!box) return;
+  const c = box.dataset, inp = document.getElementById("ar-in"), out = document.getElementById("ar-out"), H = 3600e3, loc = document.documentElement.lang || "en";
+  const fmt = (ms, tz) => new Intl.DateTimeFormat(loc, Object.assign({ weekday: "short", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" }, tz ? { timeZone: tz } : { timeZoneName: "short" })).format(new Date(ms));
+  let counted = false;
+  function paint() {
+    const m = (inp.value || "").match(/^(\d{4})-(\d\d)-(\d\d)T(\d\d):(\d\d)/); if (!m) { out.hidden = true; return; }
+    const land = Date.UTC(+m[1], m[2] - 1, +m[3], m[4] - 9, +m[5]), open = land - 72 * H, now = Date.now();
+    out.hidden = false;
+    out.querySelector(".ar-main").textContent = c.from.replace("{t}", fmt(open, "Asia/Seoul"));
+    const l = out.querySelector(".ar-local"); l.hidden = new Date().getTimezoneOffset() === -540; l.textContent = c.local.replace("{t}", fmt(open));
+    const st = out.querySelector(".ar-state"), state = now >= land ? "past" : now >= open ? "open" : "wait";
+    let text = c[state];
+    if (state === "wait") { const h = Math.ceil((open - now) / H), days = h >= 48; let rel = h + " h";
+      try { rel = new Intl.RelativeTimeFormat(loc, { numeric: "always" }).format(days ? Math.round(h / 24) : h, days ? "day" : "hour"); } catch (e) {}
+      text = c.wait.replace("{r}", rel); }
+    st.textContent = text; st.className = "ar-state " + state;
+  }
+  inp.value = store("emk-landing") || "";
+  inp.addEventListener("input", () => { store("emk-landing", inp.value); paint(); if (inp.value && !counted) { counted = true; count("arrival-helper", "arrival helper"); } });
+  paint();
 })();
 </script>
 <footer class="foot"><div class="wrap"><nav aria-label="EasyModeKorea"><a href="about.html">關於本站</a> · <a href="contact.html">聯絡我們</a> · <a href="changes.html">更新紀錄</a> · <a href="privacy.html">隱私權</a> · <a href="../hosts.html">給房東(韓文)</a></nav><p>EasyModeKorea · <a href="mailto:edandco.biz@gmail.com">edandco.biz@gmail.com</a></p></div></footer>

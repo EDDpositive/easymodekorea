@@ -55,20 +55,23 @@ class _Socket:
 
 class Browser:
     def __init__(self, width=360, height=640, scale=3, scheme="light", port=9377):
-        self.profile = tempfile.mkdtemp(prefix="emk-cdp-")
         extra = ["--no-sandbox"] if os.environ.get("CI") else []  # hosted CI runners cannot start the browser sandbox
-        self.proc = subprocess.Popen([find_browser(), "--headless=new", "--disable-gpu", "--no-first-run", "--no-default-browser-check", "--hide-scrollbars", *extra,
-                                      f"--remote-debugging-port={port}", "--remote-allow-origins=*", f"--user-data-dir={self.profile}", "about:blank"],
-                                     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        target = None
-        for _ in range(100):
-            try:
-                pages = json.load(urllib.request.urlopen(f"http://127.0.0.1:{port}/json/list", timeout=2))
-                target = next((p for p in pages if p.get("type") == "page"), None)
-                if target: break
-            except OSError: pass
-            time.sleep(0.2)
-        if not target: self.close(); raise SystemExit("The browser did not start.")
+        target = None; self.proc = None; self.profile = None
+        for attempt in range(3):  # a busy CI runner sometimes fails to bring the browser up; a fresh try fixes it
+            self.profile = tempfile.mkdtemp(prefix="emk-cdp-")
+            self.proc = subprocess.Popen([find_browser(), "--headless=new", "--disable-gpu", "--no-first-run", "--no-default-browser-check", "--hide-scrollbars", *extra,
+                                          f"--remote-debugging-port={port + attempt}", "--remote-allow-origins=*", f"--user-data-dir={self.profile}", "about:blank"],
+                                         stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            for _ in range(150):
+                try:
+                    pages = json.load(urllib.request.urlopen(f"http://127.0.0.1:{port + attempt}/json/list", timeout=2))
+                    target = next((p for p in pages if p.get("type") == "page"), None)
+                    if target: break
+                except OSError: pass
+                time.sleep(0.2)
+            if target: break
+            self.proc.kill(); self.proc.wait(); shutil.rmtree(self.profile, ignore_errors=True)
+        if not target: raise SystemExit("The browser did not start.")
         self.ws = _Socket(target["webSocketDebuggerUrl"]); self.id = 0; self.events = []
         for m in ("Page.enable", "Runtime.enable"): self.cmd(m)
         self.cmd("Emulation.setDeviceMetricsOverride", width=width, height=height, deviceScaleFactor=scale, mobile=True)

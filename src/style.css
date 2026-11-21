@@ -456,5 +456,19 @@ html.offline .install-bar { display: none; }
 #cards .names .chip { height: 100%; }
 #cards .names li.wide { grid-column: 1 / -1; }
 .chip span { word-break: keep-all; }
+/* e-Arrival Card helper */
+.arrive + .actions { margin-top: 18px; }
+.arrive { display: grid; gap: 10px; margin: 22px 0 0; padding: 14px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; }
+.app-main .arrive, #trip .arrive { margin: 0; }
+.arrive h2 { font: 700 18px var(--display); margin: 0; }
+.arrive .hint, .arrive p { margin: 0; }
+.arrive .fl { font-weight: 700; font-size: 15px; }
+.arrive input { width: 100%; box-sizing: border-box; min-height: 48px; font: 16px var(--body); padding: 10px 14px; border-radius: 12px; border: 1.5px solid var(--line); background: var(--bg); color: var(--ink); }
+.arrive input:focus { border-color: var(--link); outline: none; }
+#ar-out { display: grid; gap: 6px; padding: 12px 14px; border-radius: 12px; background: var(--bg); }
+#ar-out[hidden] { display: none; }
+.ar-main { font-weight: 700; font-size: 17px; line-height: 1.4; }
+.ar-state { font-weight: 700; font-size: 15px; }
+.ar-state.open { color: var(--ok); } .ar-state.wait { color: var(--link); } .ar-state.past { color: var(--warn); }
 .cgroup h2 a { display: inline-flex; align-items: center; min-height: 44px; }
 .app-main .hint a { display: inline-block; padding: 12px 0; }

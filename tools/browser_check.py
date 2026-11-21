@@ -83,6 +83,14 @@ def main():
         b.js("history.back()"); time.sleep(0.5)
         check(opened and b.js("document.getElementById('show').hidden && location.pathname === '/taxi.html'"), "the Back button closes a full-screen card and stays on the guide")
 
+        # e-Arrival Card helper: landing 10 Jan 2030 12:00 Korea time means the window opens 7 Jan 12:00; landing in 30 hours means it is open now.
+        b.go(srv.url + "k-eta-entry-requirements.html", wait=0.5)
+        setv = "(v => { const i = document.getElementById('ar-in'); i.value = v; i.dispatchEvent(new Event('input')); return document.querySelector('.ar-main').textContent + '|' + document.querySelector('.ar-state').className; })"
+        far = b.js(setv + "('2030-01-10T12:00')")
+        soon = b.js(setv + "(new Date(Date.now() + 39 * 3600e3).toISOString().slice(0, 16))")
+        check("Jan 7" in far and "12:00" in far and far.endswith("wait") and soon.endswith("open"), "arrival helper works out the 72-hour window in Korea time", far)
+        b.js("localStorage.removeItem('emk-landing')")
+
         b.cmd("Network.enable"); b.cmd("Network.emulateNetworkConditions", offline=True, latency=0, downloadThroughput=-1, uploadThroughput=-1); time.sleep(0.5)
         strip = b.js("(() => { const s = document.querySelector('.net-strip'); return !!s && !s.hidden && s.textContent.length > 5; })()")
         b.cmd("Network.emulateNetworkConditions", offline=False, latency=0, downloadThroughput=-1, uploadThroughput=-1); time.sleep(0.5)

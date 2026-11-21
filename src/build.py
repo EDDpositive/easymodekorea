@@ -612,6 +612,7 @@ def build_topic(lang, t):
   {f'<section class="says" aria-labelledby="say-{t["id"]}"><h2 id="say-{t["id"]}">{e(LU["say_h"])}</h2>{say}</section>' if say else ''}
   {names_html}
   {addr_html}
+  {arrival_card(lang) if t['id'] == 'entry' else ''}
   <div class="actions"><a class="btn" href="./#task-{t['id']}">{e(U['open_tool'])}</a></div>
   {deep}
   <details class="more"><summary>{e(S['details'])}</summary><div class="in notes"><p>{e(t['intro'])}</p><ul><li>{e(U['checked'])} {e(CHECKED[lang])}</li>{notes}{srcs}</ul></div></details>
@@ -622,7 +623,7 @@ def build_topic(lang, t):
   {about(lang, up)}
 </div>
 {SHOW_HTML(lang)}
-<script>{COMMON_JS}{TOPIC_JS}</script>
+<script>{COMMON_JS}{TOPIC_JS}{ARRIVAL_JS if t['id'] == 'entry' else ''}</script>
 {footer(lang)}
 {feedback_html(lang)}
 </body>
@@ -699,6 +700,51 @@ def say_card(lang, ko, mean, kw=""):
     return (f'<div class="say" data-kw="{e((mean + " " + ko + " " + kw).lower())}"><p class="say-ko" lang="ko">{e(ko)}</p><p class="say-mean">{e(mean)}</p><div class="actions">'
             f'<button class="btn alt" type="button" data-show="{e(ko)}" data-lbl="{e(S["show"])}" data-mean="{e(x["means"])}: {e(mean)}">🗣 {e(LU["full"])}</button>'
             f'<button class="btn ghost" type="button" data-copy="{e(ko)}" data-done="✓ {e(LU["copied"])}">📋 {e(LU["copy"])}</button></div></div>')
+
+
+ARRIVAL_SITE = "https://www.e-arrivalcard.go.kr"  # same official address as the entry guide's sources
+
+
+def arrival_card(lang, with_guide=False):
+    """Landing time in, earliest e-Arrival Card time out. The rule line is the dated fact from the entry guide
+    (AT['entry'], 72 hours before arrival); the page only does the arithmetic, in Korea time."""
+    t = A.T[lang]; LU = layout.UI.get(lang, layout.UI["en"])
+    rule, date = next((tx(m, lang), d) for k, m, d in AT["entry"] if k == "time")
+    slug = next(sl for tid, sl, _ in TASK_META if tid == "entry")
+    guide = f'<a class="btn ghost" href="{slug}.html">{e(QUESTION[lang]["entry"])}</a>' if with_guide else ""
+    return f"""<section class="arrive" id="arrive" aria-labelledby="ar-h" data-from="{e(t['arr_from'])}" data-local="{e(t['arr_local'])}" data-open="{e(t['arr_open'])}" data-wait="{e(t['arr_wait'])}" data-past="{e(t['arr_past'])}">
+<h2 id="ar-h">{e(t['arr_h'])}</h2><p class="hint">{e(rule)} <time class="ck" datetime="{date}">✓ {e(fmt_date(date, lang))}</time></p>
+<label class="fl" for="ar-in">{e(t['arr_label'])}</label><input id="ar-in" type="datetime-local">
+<div id="ar-out" hidden aria-live="polite"><p class="ar-main"></p><p class="hint ar-local"></p><p class="ar-state"></p></div>
+<div class="actions"><a class="btn ghost" href="{ARRIVAL_SITE}" rel="noopener" target="_blank">{e(t['arr_site'])}</a>{guide}</div>
+<p class="hint">{e(LU['addr_note'])}</p></section>"""
+
+
+ARRIVAL_JS = r"""
+(function () {
+  /* e-Arrival Card helper: the landing time is read as Korea time (UTC+9, no summer time) and kept on this phone only. */
+  const box = document.getElementById("arrive"); if (!box) return;
+  const c = box.dataset, inp = document.getElementById("ar-in"), out = document.getElementById("ar-out"), H = 3600e3, loc = document.documentElement.lang || "en";
+  const fmt = (ms, tz) => new Intl.DateTimeFormat(loc, Object.assign({ weekday: "short", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" }, tz ? { timeZone: tz } : { timeZoneName: "short" })).format(new Date(ms));
+  let counted = false;
+  function paint() {
+    const m = (inp.value || "").match(/^(\d{4})-(\d\d)-(\d\d)T(\d\d):(\d\d)/); if (!m) { out.hidden = true; return; }
+    const land = Date.UTC(+m[1], m[2] - 1, +m[3], m[4] - 9, +m[5]), open = land - 72 * H, now = Date.now();
+    out.hidden = false;
+    out.querySelector(".ar-main").textContent = c.from.replace("{t}", fmt(open, "Asia/Seoul"));
+    const l = out.querySelector(".ar-local"); l.hidden = new Date().getTimezoneOffset() === -540; l.textContent = c.local.replace("{t}", fmt(open));
+    const st = out.querySelector(".ar-state"), state = now >= land ? "past" : now >= open ? "open" : "wait";
+    let text = c[state];
+    if (state === "wait") { const h = Math.ceil((open - now) / H), days = h >= 48; let rel = h + " h";
+      try { rel = new Intl.RelativeTimeFormat(loc, { numeric: "always" }).format(days ? Math.round(h / 24) : h, days ? "day" : "hour"); } catch (e) {}
+      text = c.wait.replace("{r}", rel); }
+    st.textContent = text; st.className = "ar-state " + state;
+  }
+  inp.value = store("emk-landing") || "";
+  inp.addEventListener("input", () => { store("emk-landing", inp.value); paint(); if (inp.value && !counted) { counted = true; count("arrival-helper", "arrival helper"); } });
+  paint();
+})();
+"""
 
 
 def say_row(lang, ko, mean, kw=""):
@@ -825,13 +871,14 @@ def build_trip(lang):
 <section class="sec" aria-labelledby="sv-h"><h2 id="sv-h">{e(t['trip_saved_h'])}</h2><ul class="glist" id="saved-list"></ul><p class="hint" id="saved-empty">{e(t['trip_saved_empty'])}</p></section>
 <section class="sec" id="recent" hidden aria-labelledby="rc-h"><h2 id="rc-h">{e(t['trip_recent_h'])}</h2><ul class="glist" id="recent-list"></ul></section>
 {addr_card(lang)}
+{arrival_card(lang, with_guide=True)}
 <section class="sec" aria-labelledby="mr-h"><h2 id="mr-h">{e(t['trip_more_h'])}</h2><ul class="glist">{link('phrases.html', 'cards', t['trip_cards'])}{link('./#tool-h', 'guides', t['trip_setup'])}{link('help.html', 'help', t['trip_help'])}</ul></section>
 <section class="sec" aria-labelledby="ap-h"><h2 id="ap-h">{e(t['trip_app_h'])}</h2>
 <p class="hint" id="off-n" hidden></p><p class="hint" id="ios-hint" hidden>{e(t['ios_hint'])}</p>
 <div class="actions"><button class="btn" type="button" id="app-install" hidden>{e(t['trip_install'])}</button><button class="btn ghost" type="button" id="clear">{e(t['trip_clear'])}</button></div><p class="hint" id="cleared" role="status"></p>
 <p class="hint"><a href="privacy.html">{e(t['privacy_title'])}</a> · <a href="about.html">{e(P['about'])}</a> · <a href="changes.html">{e(P['changes'])}</a></p></section>
 </div><script type="application/json" id="trip-data">{json.dumps(G, ensure_ascii=False).replace("</", "<\\/")}</script>"""
-    return app_page(lang, "saved", (t["trip_title"], t["trip_lede"]), t["trip_title"], t["trip_lede"], inner, "trip", TRIP_JS, index=False)
+    return app_page(lang, "saved", (t["trip_title"], t["trip_lede"]), t["trip_title"], t["trip_lede"], inner, "trip", TRIP_JS + ARRIVAL_JS, index=False)
 
 
 def build_help(lang):
