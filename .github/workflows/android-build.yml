@@ -68,6 +68,13 @@ jobs:
           grep -q "targetSdkVersion:'36'" app-info.txt
           # The privacy policy says the app asks for no access to location, contacts, camera or files.
           if grep -E "LOCATION|CONTACTS|CAMERA|STORAGE|RECORD_AUDIO|READ_MEDIA" app-info.txt; then echo "Unexpected permission"; exit 1; fi
+          # The app must open this site and claim it (that claim is what assetlinks.json answers).
+          "$AAPT" dump strings app-release-unsigned-aligned.apk > strings.txt
+          grep -q "https://easymodekorea.com/" strings.txt
+          grep -q "delegate_permission/common.handle_all_urls" strings.txt
+          # No native code, so Google's 16 KB page-size rule does not apply.
+          if unzip -l app-release-unsigned-aligned.apk | grep -E "\.so$"; then echo "Unexpected native library"; exit 1; fi
+          echo "opens https://easymodekorea.com/ full screen; no native code" >> app-info.txt
       - uses: actions/upload-artifact@v4
         with:
           name: emk-android-unsigned
@@ -77,3 +84,29 @@ jobs:
             android/build/app-info.txt
           if-no-files-found: error
           retention-days: 30
+
+  signing-rehearsal:
+    # Runs the owner's signing script from start to finish on Windows, with a throwaway key made on
+    # this runner. That key and its password exist only inside this job and vanish with it; the file
+    # signed here is not kept. The real upload key is only ever made and used on the owner's PC.
+    needs: build
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: actions/download-artifact@v4
+        with:
+          name: emk-android-unsigned
+          path: dl
+      - name: Sign with a throwaway key, the way the owner will
+        shell: bash
+        run: |
+          printf 'rehearsal-only\nrehearsal-only\nrehearsal-only\n' | powershell.exe -NoProfile -ExecutionPolicy Bypass -File android/sign-aab.ps1 -Aab "$(cygpath -w "$PWD/dl/easymodekorea-unsigned.aab")" -NoOpen
+          SIGNED=$(ls "$USERPROFILE"/.emk-android/out/easymodekorea-*.aab | head -1)
+          test -n "$SIGNED"
+          jarsigner -verify "$SIGNED" | grep "jar verified"
+          keytool -printcert -jarfile "$SIGNED" | grep "SHA256:"

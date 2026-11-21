@@ -11,7 +11,7 @@
 #   3. Downloads the newest unsigned bundle built by GitHub (or uses the file given with -Aab).
 #   4. Signs it (asks for the password) and checks the signature.
 #   5. Prints the key's SHA-256 fingerprint and where the signed file is.
-param([string]$Aab = "")
+param([string]$Aab = "", [switch]$NoOpen)
 
 $ErrorActionPreference = "Stop"
 $KeyDir = Join-Path $env:USERPROFILE ".emk-android"
@@ -88,4 +88,4 @@ Write-Host "Upload key fingerprint (SHA-256). This is public; it is safe to shar
 & $Keytool -printcert -jarfile $Signed | Select-String "SHA256"
 Write-Host ""
 Write-Host "Next: upload the signed file in Play Console (Testing > Closed testing > Create new release)."
-Start-Process explorer.exe "/select,`"$Signed`""
+if (-not $NoOpen) { Start-Process explorer.exe "/select,`"$Signed`"" }
