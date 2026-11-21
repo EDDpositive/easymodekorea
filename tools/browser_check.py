@@ -73,6 +73,8 @@ def main():
         b.js("localStorage.setItem('emk-lang', 'ja'); sessionStorage.removeItem('emk-go')")
         b.go(srv.url, wait=1.0)
         check(b.js("location.pathname") == "/ja/", "installed app opens in the language chosen last time")
+        b.js("sessionStorage.removeItem('emk-go')"); b.go(srv.url + "help.html", wait=1.0)
+        check(b.js("location.pathname") == "/ja/help.html", "an app shortcut opens in that language too")
         if len(sys.argv) > 1: b.shot(sys.argv[1])
     finally:
         b.close(); srv.stop()

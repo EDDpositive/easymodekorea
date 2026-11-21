@@ -244,9 +244,10 @@ def page_config(lang, up, ux, guide=None):
     return json.dumps(cfg, ensure_ascii=False).replace("</", "<\\/")
 
 
-# Opens the installed app in the language the visitor picked last time. English home page only.
+# Opens the installed app in the language the visitor picked last time. Goes on the English pages the
+# app can start from (home and the three shortcuts); the site is served from the domain root.
 LAUNCH_JS = ('<script>try{var l=localStorage.getItem("emk-lang");if(l&&/^(ja|zh-tw|zh-cn|vi)$/.test(l)&&!sessionStorage.getItem("emk-go")&&'
-             '(matchMedia("(display-mode: standalone)").matches||navigator.standalone)){sessionStorage.setItem("emk-go","1");location.replace(l+"/"+location.hash)}}catch(e){}</script>')
+             '(matchMedia("(display-mode: standalone)").matches||navigator.standalone)){sessionStorage.setItem("emk-go","1");location.replace("/"+l+location.pathname+location.hash)}}catch(e){}</script>')
 
 
 APP_JS = r"""/* EasyModeKorea app shell: offline, install, save, share, notices. Shared by every page. */

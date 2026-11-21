@@ -88,6 +88,13 @@
    "label": "A short answer with the date it was checked"
   },
   {
+   "src": "/shots/show.png",
+   "sizes": "1080x1920",
+   "type": "image/png",
+   "form_factor": "narrow",
+   "label": "Show a driver where to go, in big Korean"
+  },
+  {
    "src": "/shots/cards.png",
    "sizes": "1080x1920",
    "type": "image/png",

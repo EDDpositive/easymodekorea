@@ -696,6 +696,7 @@ def app_page(lang, name, title, seo, desc, inner, tab, script="", index=True, ld
 </html>
 """
     ldtag = f'\n<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>' if ld else ""
+    if lang == "en" and tab: ldtag = "\n" + A.LAUNCH_JS + ldtag  # the app's shortcuts start on these pages
     write(path, head(lang, f"{seo} | {BRAND}", desc, path, alt, ldtag, index=index) + body)
     return path
 
@@ -942,7 +943,8 @@ def png_size(rel):
 
 # Phone screenshots shown in the install dialog (and reused for the store listing).
 SHOTS = [("shots/home.png", "Pick what you need right now"), ("shots/guide.png", "A short answer with the date it was checked"),
-         ("shots/cards.png", "Korean cards to show a driver or staff"), ("shots/help.png", "Emergency numbers, one tap away")]
+         ("shots/show.png", "Show a driver where to go, in big Korean"), ("shots/cards.png", "Korean cards to show a driver or staff"),
+         ("shots/help.png", "Emergency numbers, one tap away")]
 LINKS_FILE = os.path.join(ROOT, "android", "fingerprints.json")
 
 
