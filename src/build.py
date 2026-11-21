@@ -149,10 +149,17 @@ function show(label, ko, big, mean) {
   document.getElementById("show-mean").textContent = mean || "";
   document.getElementById("show").hidden = false; document.getElementById("show-close").focus();
   try { if (navigator.wakeLock) navigator.wakeLock.request("screen").then(l => { wake = l; }).catch(() => {}); } catch (e) {}
+  /* The phone's Back button closes the card instead of leaving the page. */
+  try { if (!(history.state && history.state.emkCard)) history.pushState({ emkCard: 1 }, ""); } catch (e) {}
   count("show-card", label);
 }
 let wake = null;
-function hideShow() { document.getElementById("show").hidden = true; try { if (wake) wake.release(); } catch (e) {} wake = null; if (lastFocus) lastFocus.focus(); }
+function hideShow(fromBack) {
+  if (document.getElementById("show").hidden) return;
+  document.getElementById("show").hidden = true; try { if (wake) wake.release(); } catch (e) {} wake = null; if (lastFocus) lastFocus.focus();
+  try { if (fromBack !== true && history.state && history.state.emkCard) history.back(); } catch (e) {}
+}
+addEventListener("popstate", () => hideShow(true));
 document.getElementById("show-close").addEventListener("click", hideShow);
 document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !document.getElementById("show").hidden) hideShow(); });
 """
@@ -203,9 +210,15 @@ def feedback_html(lang):
 }})();</script>"""
 
 
+def call_rows(lang):
+    """Emergency numbers as large call buttons, each with a phone mark so it reads as something to tap."""
+    return "".join(f'<a class="call" href="tel:{"+82-2-1330" if n == "1330" else n}" aria-label="{e(A.T[lang]["call"])} {n}: {e(d)}"><b>{n}</b><span>{e(d)}</span><i aria-hidden="true">{A.IC["phone"]}</i></a>'
+                   for n, d in HELP[lang]["nums"])
+
+
 def help_html(lang):
     h = HELP[lang]
-    nums = "".join(f'<a class="call" href="tel:{'+82-2-1330' if n == '1330' else n}"><b>{n}</b><span>{e(d)}</span></a>' for n, d in h["nums"])
+    nums = call_rows(lang)
     ph = "".join(f'<button type="button" class="btn alt" data-ko="{e(ko)}" data-mean="{e(m[lang])}">🗣 {e(m[lang])}</button>' for ko, m in HELP_PHRASES)
     return f"""<div class="sheet" id="help" hidden role="dialog" aria-modal="true" aria-labelledby="help-t"><div class="sheet-in">
   <div class="sheet-top"><h2 id="help-t">{e(h['title'])}</h2><button type="button" class="btn ghost small" id="help-close">{e(SHORT[lang]['close'])}</button></div>
@@ -238,6 +251,8 @@ def build_tool(lang):
         links = "".join(f'<a href="{slug_of[i]}.html" data-t="{i}">{e(short_of[i])}</a>' for i in ids)
         ckw = (title + " " + line).lower()
         cards.append(f'<article class="sit-card" id="s-{cid}" data-kw="{e(ckw)}"><h3>{icon(ic)}<span>{e(title)}</span></h3><p>{e(line)}</p><p class="sit-links">{links}</p></article>')
+    # Jump grid: all eight situations fit the first screen of a phone; a tap scrolls to that card.
+    jump = "".join(f'<a href="#s-{cid}" data-go="s-{cid}"><span class="ic">{icon(ic)}</span><span>{e(A.JUMP[cid][lang])}</span></a>' for cid, ic, _ids, _txt in CARDS)
     body = f"""
 {hero(lang, alt, up, x['hook'], LU['lede'], search=False)}
 <div class="wrap pre">
@@ -247,6 +262,7 @@ def build_tool(lang):
 <div class="wrap">
   <label class="search"><span class="sr">{e(ux['search'])}</span><input id="q" type="search" placeholder="{e(ux['search'])}" autocomplete="off"></label>
   <p class="hint" id="nores" hidden>{e(ux['nores'])} <button type="button" class="linkbtn" id="clear">{e(ux['clear'])}</button></p>
+  <nav class="jump" id="jump" aria-label="{e(A.T[lang]['jump_label'])}">{jump}</nav>
   <section class="sit" aria-labelledby="sit-h"><h2 id="sit-h">{e(LU['cards_h'])}</h2><div class="sit-grid">{''.join(cards)}</div></section>
   <div class="found" id="found" aria-live="polite"></div>
   <section class="tool" aria-labelledby="tool-h"><h2 id="tool-h" class="tool-h">{e(LU['tool_h'])}</h2>
@@ -393,6 +409,7 @@ function filter() {
     if (!any && c.dataset.kw.includes(q)) { any = true; links.forEach(a => { a.hidden = false; }); }
     c.hidden = !any; if (any) cardHits++;
   });
+  document.getElementById("jump").hidden = !!q;
   /* Deeper matches from the search index: questions answered inside guides, and Korean cards. */
   const found = document.getElementById("found"); found.replaceChildren(); let deep = 0;
   if (q.length >= 2 && IDX) {
@@ -451,6 +468,12 @@ function stay() {
   const no = el("button", { type: "button", class: "linkbtn", text: UX.dismiss }); no.addEventListener("click", () => { store("wik-lang-dismiss", "1"); b.hidden = true; });
   b.append(el("span", { text: UX.suggest.replace("{l}", L2.name) }), go, no); b.hidden = false;
 })();
+/* Jump grid: scroll to the card without adding a step to the Back button. */
+document.querySelectorAll("#jump [data-go]").forEach(a => a.addEventListener("click", ev => {
+  const t = document.getElementById(a.dataset.go); if (!t) return; ev.preventDefault();
+  t.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+  t.classList.add("lit"); setTimeout(() => t.classList.remove("lit"), 1400); count("jump/" + a.dataset.go, "jump");
+}));
 /* Install prompt, offline copy and notices live in app.js, shared by every page. */
 if (location.hash === "#q") { const qi = document.getElementById("q"); qi.focus(); loadIdx(); }
 const saved = (store("wik-setup") || "").split("|");
@@ -593,7 +616,7 @@ def build_topic(lang, t):
   {deep}
   <details class="more"><summary>{e(S['details'])}</summary><div class="in notes"><p>{e(t['intro'])}</p><ul><li>{e(U['checked'])} {e(CHECKED[lang])}</li>{notes}{srcs}</ul></div></details>
   </main>
-  <section class="related"><h2>{e(x['related'])}</h2><ul>{related}</ul></section>
+  <section class="related"><h2>{e(x['related'])}</h2><ul class="glist">{related}</ul></section>
   <details class="more"><summary>{e(LU['all'])}</summary><nav class="topics">{others}</nav></details>
   <p class="host-cta">🏠 {U['hosts'].format(base=up)}</p>
   {about(lang, up)}
@@ -678,6 +701,15 @@ def say_card(lang, ko, mean, kw=""):
             f'<button class="btn ghost" type="button" data-copy="{e(ko)}" data-done="✓ {e(LU["copied"])}">📋 {e(LU["copy"])}</button></div></div>')
 
 
+def say_row(lang, ko, mean, kw=""):
+    """One Korean card as a compact row for long lists: tap the row to show it full screen, tap the icon to copy."""
+    x = X[lang]; S = SHORT[lang]; LU = layout.UI.get(lang, layout.UI["en"])
+    return (f'<div class="sayrow" data-kw="{e((mean + " " + ko + " " + kw).lower())}">'
+            f'<button class="sayrow-main" type="button" data-show="{e(ko)}" data-lbl="{e(S["show"])}" data-mean="{e(x["means"])}: {e(mean)}" aria-label="{e(LU["full"])}: {e(mean)}">'
+            f'<b lang="ko">{e(ko)}</b><span>{e(mean)}</span><i aria-hidden="true">{A.IC["expand"]}</i></button>'
+            f'<button class="sayrow-copy" type="button" data-copy="{e(ko)}" data-done="✓ {e(LU["copied"])}">{A.IC["copy"]}<span class="sr">{e(LU["copy"])}: {e(mean)}</span></button></div>')
+
+
 def app_page(lang, name, title, seo, desc, inner, tab, script="", index=True, ld=None):
     """Shared frame for the app pages (Korean cards, My trip, help, privacy)."""
     L = LANGS[lang]; d = L["dir"]; up = "../" if d else ""
@@ -706,8 +738,8 @@ CARDS_JS = r"""
   /* Filter the cards, and keep the visitor's own cards on this phone. */
   const q = document.getElementById("cq"), nores = document.getElementById("cnores");
   const run = () => { const v = q.value.trim().toLowerCase(); let n = 0;
-    document.querySelectorAll("#cards .say, #cards .names li").forEach(c => { const ok = !v || (c.dataset.kw || c.textContent.toLowerCase()).includes(v); c.hidden = !ok; if (ok) n++; });
-    document.querySelectorAll("#cards .cgroup").forEach(g => { g.hidden = !g.querySelector(".say:not([hidden]), .names li:not([hidden])"); });
+    document.querySelectorAll("#cards .sayrow, #cards .names li").forEach(c => { const ok = !v || (c.dataset.kw || c.textContent.toLowerCase()).includes(v); c.hidden = !ok; if (ok) n++; });
+    document.querySelectorAll("#cards .cgroup").forEach(g => { g.hidden = !g.querySelector(".sayrow:not([hidden]), .names li:not([hidden])"); });
     nores.hidden = !v || n > 0; };
   q.addEventListener("input", run);
   const cfg = document.getElementById("own").dataset, inp = document.getElementById("own-in"), box = document.getElementById("own-list"), wrap = document.getElementById("own-wrap");
@@ -732,13 +764,14 @@ def build_cards(lang):
 <textarea id="own-in" lang="ko" maxlength="200" rows="1" aria-label="{e(t['own_h'])}" placeholder="{e(t['own_ph'])}"></textarea>
 <div class="actions"><button class="btn alt" type="button" id="own-show">🗣 {e(t['own_show'])}</button><button class="btn ghost" type="submit">{e(t['own_save'])}</button></div><p class="hint">{e(t['own_note'])}</p></form>
 <section id="own-wrap" class="names" hidden><h2>{e(t['own_list_h'])}</h2><ul id="own-list"></ul></section>"""
-    groups = [f'<section class="cgroup"><h2>{e(t["basics_h"])}</h2>' + "".join(say_card(lang, ko, m[lang]) for ko, m in HELP_PHRASES) + "</section>"]
+    groups = [f'<section class="cgroup"><h2>{e(t["basics_h"])}</h2>' + "".join(say_row(lang, ko, m[lang]) for ko, m in HELP_PHRASES) + "</section>"]
     for tk in task_list(lang):
         names = COPY.get(tk["id"], [])
         if not tk["phrases"] and not names: continue
         kw = tk["short"] + " " + KEYWORDS[tk["id"]]
-        says = "".join(say_card(lang, ko, m, kw) for ko, m in tk["phrases"])
-        chips = "".join(f'<li data-kw="{e((ko + " " + tx(m, lang) + " " + kw).lower())}"><button class="chip" type="button" data-copy="{e(ko)}" data-done="✓ {e(LU["copied"])}"><span lang="ko">{e(ko)}</span><small>{e(tx(m, lang))}</small><i aria-hidden="true">📋</i></button></li>' for ko, m in names)
+        says = "".join(say_row(lang, ko, m, kw) for ko, m in tk["phrases"])
+        wide = ' class="wide"'
+        chips = "".join(f'<li{wide if len(ko) > 8 else ''} data-kw="{e((ko + " " + tx(m, lang) + " " + kw).lower())}"><button class="chip" type="button" data-copy="{e(ko)}" data-done="✓ {e(LU["copied"])}"><span lang="ko">{e(ko)}</span><small>{e(tx(m, lang))}</small><i aria-hidden="true">📋</i></button></li>' for ko, m in names)
         groups.append(f'<section class="cgroup"><h2>{tk["icon"]}<a href="{tk["slug"]}.html">{e(tk["short"])}</a></h2>{says}' + (f'<div class="names"><ul>{chips}</ul></div>' if chips else "") + "</section>")
     inner = f"""{own}
 <label class="search"><span class="sr">{e(t['cards_filter'])}</span><input id="cq" type="search" placeholder="{e(t['cards_filter'])}" autocomplete="off"></label>
@@ -804,8 +837,8 @@ def build_trip(lang):
 def build_help(lang):
     """Emergency numbers and the Korean cards to show someone. Facts come from HELP in data_extra.py."""
     t = A.T[lang]; h = HELP[lang]; slug_of = {tid: sl for tid, sl, _ in TASK_META}
-    nums = "".join(f'<a class="call" href="tel:{"+82-2-1330" if n == "1330" else n}"><b>{n}</b><span>{e(d)}</span></a>' for n, d in h["nums"])
-    says = "".join(say_card(lang, ko, m[lang]) for ko, m in HELP_PHRASES[:4]) + "".join(say_card(lang, ko, m[lang]) for ko, m in PHRASES["health"])
+    nums = call_rows(lang)
+    says = "".join(say_row(lang, ko, m[lang]) for ko, m in HELP_PHRASES[:4]) + "".join(say_row(lang, ko, m[lang]) for ko, m in PHRASES["health"])
     more = "".join(f'<li><a href="{slug_of[i]}.html"><span class="ic">{icon(i)}</span><span>{e(QUESTION[lang][i])}</span></a></li>' for i in ("health", "translate"))
     inner = f"""<section class="sec" aria-labelledby="cl-h"><h2 id="cl-h">{e(h['calls'])}</h2><div class="calls">{nums}</div><p class="hint">{e(t['help_offline'])}</p></section>
 <section class="sec says" aria-labelledby="sh-h"><h2 id="sh-h">{e(h['phrases'])}</h2>{says}</section>

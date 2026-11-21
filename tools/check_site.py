@@ -98,7 +98,7 @@ def main():
     check(isinstance(links, list) and not probs, "Android link file (assetlinks.json) is valid", "; ".join(probs[:3]))
     if has("android/twa-manifest.json"):
         tw = json.loads(rd("android/twa-manifest.json"))
-        ok = (tw["packageId"] == A.PACKAGE_ID and tw["host"] == "easymodekorea.com" and tw["startUrl"] == m["start_url"]
+        ok = (tw["packageId"] == A.PACKAGE_ID and tw["host"] == "easymodekorea.com" and tw["startUrl"] == m["start_url"] and tw["backgroundColor"].lower() == m["background_color"].lower()
               and tw["themeColor"].lower() == m["theme_color"].lower() and tw["display"] == "standalone" and not tw.get("enableNotifications"))
         check(ok, "Android wrapper settings match the web manifest")
 

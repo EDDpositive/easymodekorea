@@ -13,8 +13,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap"></noscript>
-<link rel="stylesheet" href="../style.css?v=404abda8">
-<script>window.EMK={"lang": "zh-cn", "up": "../", "t": {"save": "收藏", "saved": "已收藏", "share": "分享", "link_copied": "已复制链接", "saved_toast": "已存到“我的行程”", "unsaved_toast": "已从“我的行程”移除", "install": "安装App,没有网络也能看指南。", "install_btn": "安装", "later": "暂不", "update": "这一页有更新的内容。", "refresh": "刷新", "offline": "目前离线。这页的内容照样能用。", "suggest": "这个页面也有{l}版。", "switch": "切换", "dismiss": "不用了"}}</script><script defer src="../app.js?v=624a394b"></script>
+<link rel="stylesheet" href="../style.css?v=727aeb2d">
+<script>window.EMK={"lang": "zh-cn", "up": "../", "t": {"save": "收藏", "saved": "已收藏", "share": "分享", "link_copied": "已复制链接", "saved_toast": "已存到“我的行程”", "unsaved_toast": "已从“我的行程”移除", "install": "安装App,没有网络也能看指南。", "install_btn": "安装", "later": "暂不", "update": "这一页有更新的内容。", "refresh": "刷新", "ready": "已存到这部手机,没有网络也能看指南。", "miss": "那一页还没存到这部手机。有网络时先打开一次。", "offline": "目前离线。这页的内容照样能用。", "suggest": "这个页面也有{l}版。", "switch": "切换", "dismiss": "不用了"}}</script><script defer src="../app.js?v=4c40dc42"></script>
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body class="has-tabs">
@@ -62,10 +62,17 @@ function show(label, ko, big, mean) {
   document.getElementById("show-mean").textContent = mean || "";
   document.getElementById("show").hidden = false; document.getElementById("show-close").focus();
   try { if (navigator.wakeLock) navigator.wakeLock.request("screen").then(l => { wake = l; }).catch(() => {}); } catch (e) {}
+  /* The phone's Back button closes the card instead of leaving the page. */
+  try { if (!(history.state && history.state.emkCard)) history.pushState({ emkCard: 1 }, ""); } catch (e) {}
   count("show-card", label);
 }
 let wake = null;
-function hideShow() { document.getElementById("show").hidden = true; try { if (wake) wake.release(); } catch (e) {} wake = null; if (lastFocus) lastFocus.focus(); }
+function hideShow(fromBack) {
+  if (document.getElementById("show").hidden) return;
+  document.getElementById("show").hidden = true; try { if (wake) wake.release(); } catch (e) {} wake = null; if (lastFocus) lastFocus.focus();
+  try { if (fromBack !== true && history.state && history.state.emkCard) history.back(); } catch (e) {}
+}
+addEventListener("popstate", () => hideShow(true));
 document.getElementById("show-close").addEventListener("click", hideShow);
 document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !document.getElementById("show").hidden) hideShow(); });
 

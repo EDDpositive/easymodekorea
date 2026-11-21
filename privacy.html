@@ -13,8 +13,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap"></noscript>
-<link rel="stylesheet" href="style.css?v=404abda8">
-<script>window.EMK={"lang": "en", "up": "", "t": {"save": "Save", "saved": "Saved", "share": "Share", "link_copied": "Link copied", "saved_toast": "Saved to My trip", "unsaved_toast": "Removed from My trip", "install": "Install the app. Guides open without data.", "install_btn": "Install", "later": "Not now", "update": "This page has newer info.", "refresh": "Refresh", "offline": "You're offline. Everything here still works.", "suggest": "This page is also in {l}.", "switch": "Switch", "dismiss": "No thanks"}}</script><script defer src="app.js?v=624a394b"></script>
+<link rel="stylesheet" href="style.css?v=727aeb2d">
+<script>window.EMK={"lang": "en", "up": "", "t": {"save": "Save", "saved": "Saved", "share": "Share", "link_copied": "Link copied", "saved_toast": "Saved to My trip", "unsaved_toast": "Removed from My trip", "install": "Install the app. Guides open without data.", "install_btn": "Install", "later": "Not now", "update": "This page has newer info.", "refresh": "Refresh", "ready": "Saved on this phone. Guides now open without data.", "miss": "That page isn't saved on this phone yet. Open it once with data.", "offline": "You're offline. Everything here still works.", "suggest": "This page is also in {l}.", "switch": "Switch", "dismiss": "No thanks"}}</script><script defer src="app.js?v=4c40dc42"></script>
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "Privacy policy", "url": "https://easymodekorea.com/privacy.html", "inLanguage": "en", "dateModified": "2026-11-21"}</script>
 </head>
@@ -52,10 +52,17 @@ function show(label, ko, big, mean) {
   document.getElementById("show-mean").textContent = mean || "";
   document.getElementById("show").hidden = false; document.getElementById("show-close").focus();
   try { if (navigator.wakeLock) navigator.wakeLock.request("screen").then(l => { wake = l; }).catch(() => {}); } catch (e) {}
+  /* The phone's Back button closes the card instead of leaving the page. */
+  try { if (!(history.state && history.state.emkCard)) history.pushState({ emkCard: 1 }, ""); } catch (e) {}
   count("show-card", label);
 }
 let wake = null;
-function hideShow() { document.getElementById("show").hidden = true; try { if (wake) wake.release(); } catch (e) {} wake = null; if (lastFocus) lastFocus.focus(); }
+function hideShow(fromBack) {
+  if (document.getElementById("show").hidden) return;
+  document.getElementById("show").hidden = true; try { if (wake) wake.release(); } catch (e) {} wake = null; if (lastFocus) lastFocus.focus();
+  try { if (fromBack !== true && history.state && history.state.emkCard) history.back(); } catch (e) {}
+}
+addEventListener("popstate", () => hideShow(true));
 document.getElementById("show-close").addEventListener("click", hideShow);
 document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !document.getElementById("show").hidden) hideShow(); });
 

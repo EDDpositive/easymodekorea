@@ -72,6 +72,11 @@ jobs:
           "$AAPT" dump strings app-release-unsigned-aligned.apk > strings.txt
           grep -q "https://easymodekorea.com/" strings.txt
           grep -q "delegate_permission/common.handle_all_urls" strings.txt
+          # Links to the site should open in the app: the manifest must ask Android to verify the domain.
+          "$AAPT" dump xmltree --file AndroidManifest.xml app-release-unsigned-aligned.apk > manifest.txt
+          grep -q "autoVerify" manifest.txt
+          grep -q "easymodekorea.com" manifest.txt
+          echo "asks Android to verify easymodekorea.com links (opens them in the app once assetlinks.json lists the key)" >> app-info.txt
           # No native code, so Google's 16 KB page-size rule does not apply.
           if unzip -l app-release-unsigned-aligned.apk | grep -E "\.so$"; then echo "Unexpected native library"; exit 1; fi
           echo "opens https://easymodekorea.com/ full screen; no native code" >> app-info.txt

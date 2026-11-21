@@ -5,7 +5,8 @@ It starts its own local server, then checks:
   1. the browser finds no reason the site can't be installed as an app,
   2. every page fits a 375px screen and has the bottom tabs and the shared script,
   3. with the server switched off, saved pages still open (true offline test),
-  4. opened as an installed app, pages run in app mode and start in the language chosen last time.
+  4. opened as an installed app, pages run in app mode and start in the language chosen last time,
+  5. tap sizes, the Back button on a full-screen card, and the offline notices.
 Exit code 0 means every check passed.
 """
 import json, os, re, sys, time
@@ -35,6 +36,14 @@ SWEEP = """(async () => {
   return out; })()"""
 
 
+# Things people tap with a thumb must be at least 40px tall (most are 44px or more).
+TAPS = """(() => {
+  const vis = e => { const r = e.getBoundingClientRect(); return r.width > 0 && r.height > 0 && !e.closest('[hidden]') && !e.closest('details:not([open]) > :not(summary)'); };
+  return [...document.querySelectorAll('.tabbar a, .jump a, .sit-links a, .glist a, .sayrow button, a.call, .act, .icon-btn, .lang-menu > summary, .btn, .chip, .opt-big')]
+    .filter(vis).map(e => ({t: (e.innerText || e.getAttribute('aria-label') || e.className).trim().slice(0, 24), h: Math.round(e.getBoundingClientRect().height)})).filter(x => x.h < 40);
+})()"""
+
+
 def main():
     pre = json.loads(re.search(r"const PRE=(\[[^\]]*\]);", open(os.path.join(ROOT, "sw.js"), encoding="utf-8").read()).group(1))
     pages = [p for p in pre if p.endswith("/") or p.endswith(".html")]
@@ -53,6 +62,31 @@ def main():
             if n >= 30: break
             time.sleep(0.5)
         check(n >= 30, "offline copy saved on first visit", f"{n} files")
+        told = False
+        for _ in range(20):
+            told = b.js("localStorage.getItem('emk-ready') === '1'")
+            if told: break
+            time.sleep(0.3)
+        check(bool(told), "first visit: the reader is told the guides are now on the phone")
+        b.js("localStorage.setItem('emk-install-no', String(Date.now()))")
+
+        small = []
+        for page in ("", "taxi.html", "phrases.html", "saved.html", "help.html", "ja/", "vi/phrases.html"):
+            b.go(srv.url + page, wait=0.5)
+            small += [f"/{page} {x['t']} {x['h']}px" for x in b.js(TAPS)]
+        check(not small, "buttons and links are at least 40px tall on the main screens", "; ".join(small[:5]))
+        check(b.js("document.querySelectorAll('#jump a').length") == 8 if b.go(srv.url, wait=0.5) else False, "home shows all eight situations as a jump grid")
+
+        b.go(srv.url + "taxi.html", wait=0.5)
+        b.js("document.querySelector('[data-show]').click()")
+        opened = b.js("!document.getElementById('show').hidden")
+        b.js("history.back()"); time.sleep(0.5)
+        check(opened and b.js("document.getElementById('show').hidden && location.pathname === '/taxi.html'"), "the Back button closes a full-screen card and stays on the guide")
+
+        b.cmd("Network.enable"); b.cmd("Network.emulateNetworkConditions", offline=True, latency=0, downloadThroughput=-1, uploadThroughput=-1); time.sleep(0.5)
+        strip = b.js("(() => { const s = document.querySelector('.net-strip'); return !!s && !s.hidden && s.textContent.length > 5; })()")
+        b.cmd("Network.emulateNetworkConditions", offline=False, latency=0, downloadThroughput=-1, uploadThroughput=-1); time.sleep(0.5)
+        check(strip and b.js("document.querySelector('.net-strip').hidden"), "an offline strip shows while there is no connection and goes away after")
 
         r = b.js(SWEEP % json.dumps(pages))
         check(not r["overflow"], f"{len(pages)} pages fit a 375px screen", ", ".join(r["overflow"][:5]))
@@ -63,8 +97,11 @@ def main():
         for page in ("", "taxi.html", "phrases.html", "saved.html", "help.html", "privacy.html"):
             ok = b.go(srv.url + page, wait=0.6) and b.js("document.querySelectorAll('.tabbar a').length === 4 && document.title.includes('EasyModeKorea')")
             check(bool(ok), f"offline: /{page} opens")
-        ok = b.go(srv.url + "vi/taxi.html", wait=0.6) and b.js("document.querySelectorAll('.tabbar a').length === 4")
-        check(bool(ok), "offline: a page that was never saved falls back to the home page")
+        # The sweep above saved every page, so take one off the "phone" first (and empty the browser's own short-term cache).
+        b.js("caches.keys().then(ks => Promise.all(ks.map(k => caches.open(k).then(c => c.delete(location.origin + '/zh-tw/taxi.html')))))")
+        b.cmd("Network.clearBrowserCache")
+        ok = b.go(srv.url + "zh-tw/taxi.html", wait=0.8) and b.js("location.pathname.endsWith('/') && !!document.querySelector('.app-toast') && document.querySelector('.app-toast').textContent.length > 10")
+        check(bool(ok), "offline: a page that was never saved leads to the home page with an explanation")
 
         # The browser cannot pretend to be an installed app, so the page is told it is one (the iOS flag app.js also reads).
         b.cmd("Page.addScriptToEvaluateOnNewDocument", source="Object.defineProperty(navigator, 'standalone', {value: true})")

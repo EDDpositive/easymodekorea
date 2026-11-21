@@ -22,15 +22,29 @@
   }
   window.emkToast = toast;
 
-  /* Offline notice. */
-  function net() { if (!navigator.onLine) toast(T.offline, null, null, 6000); }
-  addEventListener("offline", net); net();
+  /* Offline: a strip above the tabs for as long as there is no connection. */
+  var strip = null;
+  function net() {
+    var off = !navigator.onLine; d.documentElement.classList.toggle("offline", off);
+    if (off && !strip) { strip = mk("div", "net-strip", T.offline); strip.setAttribute("role", "status"); d.body.appendChild(strip); }
+    if (strip) strip.hidden = !off;
+  }
+  addEventListener("offline", net); addEventListener("online", net); net();
+  /* Sent here by the offline worker when a page that is not on the phone was asked for without a connection. */
+  if (location.hash === "#offline-miss") {
+    toast(T.miss, null, null, 8000);
+    try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {}
+  }
 
   /* Offline copy of the site, and a notice when the page on screen has a newer version. */
   if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register(E.up + "sw.js?l=" + E.lang).catch(function () {});
+    var reg = function () { navigator.serviceWorker.register(E.up + "sw.js?l=" + E.lang).catch(function () {}); };
+    if (d.readyState === "complete") reg(); else addEventListener("load", reg);
     navigator.serviceWorker.addEventListener("message", function (ev) {
-      if (ev.data && ev.data.t === "upd" && ev.data.p === location.pathname) toast(T.update, T.refresh, function () { location.reload(); }, 12000);
+      if (!ev.data) return;
+      if (ev.data.t === "upd" && ev.data.p === location.pathname) toast(T.update, T.refresh, function () { location.reload(); }, 12000);
+      /* First visit: say once that the guides are now on the phone. */
+      if (ev.data.t === "ready" && !get("emk-ready")) { set("emk-ready", "1"); toast(T.ready, null, null, 6000); }
     });
   }
 

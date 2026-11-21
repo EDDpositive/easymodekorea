@@ -19,6 +19,7 @@ T = {
         "install": "Install the app. Guides open without data.", "install_btn": "Install", "later": "Not now",
         "ios_hint": "On iPhone: tap the Share button, then Add to Home Screen.",
         "update": "This page has newer info.", "refresh": "Refresh",
+        "ready": "Saved on this phone. Guides now open without data.", "miss": "That page isn't saved on this phone yet. Open it once with data.", "call": "Call", "jump_label": "Jump to a topic",
         "trip_title": "My trip", "trip_lede": "Your saved guides, your stay's address and your Korean cards. Everything here stays on this phone.",
         "trip_saved_h": "Saved guides", "trip_saved_empty": "Nothing saved yet. Tap Save at the top of any guide.",
         "trip_recent_h": "Recently opened",
@@ -57,6 +58,7 @@ T = {
         "install": "アプリを追加。通信なしでもガイドが開けます。", "install_btn": "インストール", "later": "今はしない",
         "ios_hint": "iPhoneの場合: 共有ボタンをタップし、「ホーム画面に追加」を選びます。",
         "update": "このページに新しい情報があります。", "refresh": "更新",
+        "ready": "このスマホに保存しました。通信なしでもガイドが開けます。", "miss": "そのページはまだこのスマホに保存されていません。通信できるときに一度開いてください。", "call": "電話する", "jump_label": "テーマへ移動",
         "trip_title": "マイページ", "trip_lede": "保存したガイド、宿の住所、自分の韓国語カード。すべてこのスマホの中だけに保存されます。",
         "trip_saved_h": "保存したガイド", "trip_saved_empty": "まだ保存していません。ガイド上部の「保存」をタップしてください。",
         "trip_recent_h": "最近開いたガイド",
@@ -95,6 +97,7 @@ T = {
         "install": "安裝App,沒有網路也能看指南。", "install_btn": "安裝", "later": "先不要",
         "ios_hint": "iPhone:點「分享」按鈕,再選「加入主畫面」。",
         "update": "這一頁有更新的內容。", "refresh": "重新整理",
+        "ready": "已存到這支手機,沒有網路也能看指南。", "miss": "那一頁還沒存到這支手機。有網路時先開一次。", "call": "撥打", "jump_label": "跳到主題",
         "trip_title": "我的旅程", "trip_lede": "你收藏的指南、住宿地址和自己做的韓文卡。全部只存在這支手機裡。",
         "trip_saved_h": "收藏的指南", "trip_saved_empty": "還沒有收藏。在任何指南上方點「收藏」。",
         "trip_recent_h": "最近看過",
@@ -133,6 +136,7 @@ T = {
         "install": "安装App,没有网络也能看指南。", "install_btn": "安装", "later": "暂不",
         "ios_hint": "iPhone:点“分享”按钮,再选“添加到主屏幕”。",
         "update": "这一页有更新的内容。", "refresh": "刷新",
+        "ready": "已存到这部手机,没有网络也能看指南。", "miss": "那一页还没存到这部手机。有网络时先打开一次。", "call": "拨打", "jump_label": "跳到主题",
         "trip_title": "我的行程", "trip_lede": "你收藏的指南、住宿地址和自己做的韩文卡。全部只存在这部手机里。",
         "trip_saved_h": "收藏的指南", "trip_saved_empty": "还没有收藏。在任何指南上方点“收藏”。",
         "trip_recent_h": "最近看过",
@@ -171,6 +175,7 @@ T = {
         "install": "Cài ứng dụng. Xem hướng dẫn cả khi không có mạng.", "install_btn": "Cài đặt", "later": "Để sau",
         "ios_hint": "Trên iPhone: chạm nút Chia sẻ, rồi chọn Thêm vào Màn hình chính.",
         "update": "Trang này có thông tin mới hơn.", "refresh": "Tải lại",
+        "ready": "Đã lưu trên điện thoại này. Giờ có thể mở hướng dẫn khi không có mạng.", "miss": "Trang đó chưa được lưu trên điện thoại này. Hãy mở một lần khi có mạng.", "call": "Gọi", "jump_label": "Chuyển đến chủ đề",
         "trip_title": "Chuyến đi của tôi", "trip_lede": "Hướng dẫn đã lưu, địa chỉ chỗ ở và thẻ tiếng Hàn của bạn. Tất cả chỉ nằm trên điện thoại này.",
         "trip_saved_h": "Hướng dẫn đã lưu", "trip_saved_empty": "Chưa lưu gì. Chạm Lưu ở đầu bất kỳ hướng dẫn nào.",
         "trip_recent_h": "Mới mở gần đây",
@@ -204,8 +209,20 @@ T = {
     },
 }
 
+# Home jump grid: a short label per situation card (card ids from layout.CARDS).
+JUMP = {
+    "landed": {"en": "Arrival", "ja": "到着", "zh-tw": "抵達", "zh-cn": "抵达", "vi": "Đến nơi"},
+    "move": {"en": "Transport", "ja": "移動", "zh-tw": "交通", "zh-cn": "交通", "vi": "Đi lại"},
+    "pay": {"en": "Money", "ja": "お金", "zh-tw": "付款", "zh-cn": "付款", "vi": "Tiền"},
+    "phone": {"en": "Phone", "ja": "スマホ", "zh-tw": "手機", "zh-cn": "手机", "vi": "Điện thoại"},
+    "eat": {"en": "Food", "ja": "食事", "zh-tw": "吃飯", "zh-cn": "吃饭", "vi": "Ăn uống"},
+    "shop": {"en": "Shopping", "ja": "買い物", "zh-tw": "購物", "zh-cn": "购物", "vi": "Mua sắm"},
+    "sick": {"en": "Sick", "ja": "病気", "zh-tw": "生病", "zh-cn": "生病", "vi": "Ốm đau"},
+    "trips": {"en": "Trips", "ja": "遠出", "zh-tw": "遠行", "zh-cn": "远行", "vi": "Đi xa"},
+}
+
 # Strings the shared script needs on every page (the rest are only used at build time).
-JS_KEYS = ("save", "saved", "share", "link_copied", "saved_toast", "unsaved_toast", "install", "install_btn", "later", "update", "refresh")
+JS_KEYS = ("save", "saved", "share", "link_copied", "saved_toast", "unsaved_toast", "install", "install_btn", "later", "update", "refresh", "ready", "miss")
 
 SVG = lambda body: f'<svg viewBox="0 0 24 24" aria-hidden="true">{body}</svg>'
 IC = {
@@ -216,6 +233,9 @@ IC = {
     "search": SVG('<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/>'),
     "globe": SVG('<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"/>'),
     "save": SVG('<path d="M7 3h10a1 1 0 0 1 1 1v17l-6-4-6 4V4a1 1 0 0 1 1-1z"/>'),
+    "phone": SVG('<path d="M6.5 3.5h3l1.5 4-2 1.5a12 12 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2 2A16 16 0 0 1 4.5 5.5a2 2 0 0 1 2-2z"/>'),
+    "expand": SVG('<path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/>'),
+    "copy": SVG('<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/>'),
     "share": SVG('<path d="M12 15V3M8 7l4-4 4 4"/><path d="M5 12v7a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-7"/>'),
 }
 
@@ -274,15 +294,29 @@ APP_JS = r"""/* EasyModeKorea app shell: offline, install, save, share, notices.
   }
   window.emkToast = toast;
 
-  /* Offline notice. */
-  function net() { if (!navigator.onLine) toast(T.offline, null, null, 6000); }
-  addEventListener("offline", net); net();
+  /* Offline: a strip above the tabs for as long as there is no connection. */
+  var strip = null;
+  function net() {
+    var off = !navigator.onLine; d.documentElement.classList.toggle("offline", off);
+    if (off && !strip) { strip = mk("div", "net-strip", T.offline); strip.setAttribute("role", "status"); d.body.appendChild(strip); }
+    if (strip) strip.hidden = !off;
+  }
+  addEventListener("offline", net); addEventListener("online", net); net();
+  /* Sent here by the offline worker when a page that is not on the phone was asked for without a connection. */
+  if (location.hash === "#offline-miss") {
+    toast(T.miss, null, null, 8000);
+    try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {}
+  }
 
   /* Offline copy of the site, and a notice when the page on screen has a newer version. */
   if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register(E.up + "sw.js?l=" + E.lang).catch(function () {});
+    var reg = function () { navigator.serviceWorker.register(E.up + "sw.js?l=" + E.lang).catch(function () {}); };
+    if (d.readyState === "complete") reg(); else addEventListener("load", reg);
     navigator.serviceWorker.addEventListener("message", function (ev) {
-      if (ev.data && ev.data.t === "upd" && ev.data.p === location.pathname) toast(T.update, T.refresh, function () { location.reload(); }, 12000);
+      if (!ev.data) return;
+      if (ev.data.t === "upd" && ev.data.p === location.pathname) toast(T.update, T.refresh, function () { location.reload(); }, 12000);
+      /* First visit: say once that the guides are now on the phone. */
+      if (ev.data.t === "ready" && !get("emk-ready")) { set("emk-ready", "1"); toast(T.ready, null, null, 6000); }
     });
   }
 
@@ -366,7 +400,9 @@ const isPage=u=>u.pathname.endsWith('/')||u.pathname.endsWith('.html');
 const keyOf=u=>isPage(u)?u.origin+u.pathname:u.href;
 const clean=r=>r.redirected?new Response(r.body,{status:r.status,statusText:r.statusText,headers:r.headers}):r;
 self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>Promise.all(MINE.map(p=>{const u=new URL(p,ROOT);
-  return fetch(new Request(u.href,{cache:'reload'})).then(r=>r.ok?c.put(keyOf(u),clean(r)):null).catch(()=>null)}))).then(()=>self.skipWaiting()))});
+  return fetch(new Request(u.href,{cache:'reload'})).then(r=>r.ok?c.put(keyOf(u),clean(r)):null).catch(()=>null)})))
+  .then(()=>self.clients.matchAll({type:'window',includeUncontrolled:true})).then(cs=>cs.forEach(cl=>cl.postMessage({t:'ready'})))
+  .then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
 /* Only what the reader sees counts as newer info: a new stylesheet or script name in the head does not. */
 const body=t=>t.slice(Math.max(0,t.indexOf('<body')));
@@ -385,7 +421,8 @@ self.addEventListener('fetch',e=>{const r=e.request;if(r.method!=='GET')return;
       return res});
     if(hit){e.waitUntil(net.catch(()=>{}));return hit}
     try{return clean(await net)}catch(err){
-      if(nav){const home=await c.match(new URL(D||'./',ROOT).href)||await c.match(ROOT);if(home)return home}
+      /* A page that is not on the phone: go to the reader's home page, which says so. */
+      if(nav){const h=new URL(D||'./',ROOT).href;if(k!==h&&await c.match(h))return Response.redirect(h+'#offline-miss',302)}
       throw err}
   })())});
 """
@@ -396,7 +433,7 @@ def manifest(desc, shots):
     m = {
         "id": "/", "name": APP_NAME, "short_name": "EasyMode", "description": desc,
         "lang": "en", "dir": "ltr", "start_url": "/", "scope": "/", "display": "standalone",
-        "background_color": "#ffffff", "theme_color": "#2336e8", "categories": ["travel", "navigation"],
+        "background_color": "#2336e8", "theme_color": "#2336e8", "categories": ["travel", "navigation"],
         "icons": [{"src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
                   {"src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
                   {"src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}],

@@ -1,38 +1,38 @@
 {
 "": {
-"h": "dc83ab1d502f6602",
+"h": "8e3c61877ee3c1c6",
 "d": "2026-11-21"
 },
 "about.html": {
-"h": "931153d298367deb",
+"h": "341d52cf242c5631",
 "d": "2026-11-21"
 },
 "atm-foreign-card-cash.html": {
-"h": "08871ae1bc042905",
+"h": "ade64d72422fd966",
 "d": "2026-11-21"
 },
 "changes.html": {
-"h": "732524b6e16b0da6",
+"h": "9105687b4328579a",
 "d": "2026-11-21"
 },
 "contact.html": {
-"h": "dfbfb6977887de10",
+"h": "a2b12232f4345ef7",
 "d": "2026-11-21"
 },
 "dmz-jsa-tour-booking.html": {
-"h": "c4013aba256685aa",
+"h": "e120e109c3105df5",
 "d": "2026-11-21"
 },
 "food-delivery.html": {
-"h": "b142dd7a4338299a",
+"h": "e3c458ef8f71f891",
 "d": "2026-11-21"
 },
 "gimpo-airport-to-seoul.html": {
-"h": "9128d3f81c29cee9",
+"h": "e49717b8ddb08a66",
 "d": "2026-11-21"
 },
 "help.html": {
-"h": "466abd769af88734",
+"h": "412cfd340ad14f74",
 "d": "2026-11-21"
 },
 "hosts.html": {
@@ -40,527 +40,527 @@
 "d": "2026-11-20"
 },
 "incheon-airport-to-seoul.html": {
-"h": "a449a8f96ce47358",
+"h": "3825aa2e2d720867",
 "d": "2026-11-21"
 },
 "ja/": {
-"h": "ded13bf459edfa50",
+"h": "418e0c0016fe0193",
 "d": "2026-11-21"
 },
 "ja/about.html": {
-"h": "f035dca3f3a3797e",
+"h": "c2a7e6f5a0528392",
 "d": "2026-11-21"
 },
 "ja/atm-foreign-card-cash.html": {
-"h": "355102bf8d048980",
+"h": "4dcd1b724b27ca49",
 "d": "2026-11-21"
 },
 "ja/changes.html": {
-"h": "9d77afabfe00083b",
+"h": "164fc56d1a57dbf0",
 "d": "2026-11-21"
 },
 "ja/contact.html": {
-"h": "8d550b2c15d1c5ca",
+"h": "ecb5b328082558e0",
 "d": "2026-11-21"
 },
 "ja/dmz-jsa-tour-booking.html": {
-"h": "54940627b5c93fb2",
+"h": "721e560dc9d20aba",
 "d": "2026-11-21"
 },
 "ja/food-delivery.html": {
-"h": "e00e4b569769d397",
+"h": "35f7028aa90705d2",
 "d": "2026-11-21"
 },
 "ja/gimpo-airport-to-seoul.html": {
-"h": "dd4a38e7a8df2f10",
+"h": "41919d41ed12692e",
 "d": "2026-11-21"
 },
 "ja/help.html": {
-"h": "7251d58fbbe04677",
+"h": "e56b789536e91a19",
 "d": "2026-11-21"
 },
 "ja/incheon-airport-to-seoul.html": {
-"h": "162da62250021627",
+"h": "0181a7870bf45495",
 "d": "2026-11-21"
 },
 "ja/jeju-getting-around.html": {
-"h": "741c993f6557729a",
+"h": "fe4389f185fa7774",
 "d": "2026-11-21"
 },
 "ja/k-eta-entry-requirements.html": {
-"h": "e8bf532ee9c61e8e",
+"h": "9ffaf9aba25d5897",
 "d": "2026-11-21"
 },
 "ja/korea-power-plug-voltage.html": {
-"h": "2e81b1e05e036ccb",
+"h": "f57497b6bbd66bd0",
 "d": "2026-11-21"
 },
 "ja/kr-pass-korail-pass.html": {
-"h": "5e909f8a8ff30277",
+"h": "e38c2da895a9f230",
 "d": "2026-11-21"
 },
 "ja/ktx-train-booking.html": {
-"h": "ef80d0a44d41979e",
+"h": "c3635f633ac19a6d",
 "d": "2026-11-21"
 },
 "ja/luggage-storage.html": {
-"h": "de40367ad68a5f1d",
+"h": "72edb2665ee1d4e5",
 "d": "2026-11-21"
 },
 "ja/maps.html": {
-"h": "2dc1c766bce3d80e",
+"h": "bf38903ad4e97410",
 "d": "2026-11-21"
 },
 "ja/mobile-data-sim.html": {
-"h": "ecb5d4fa106925cf",
+"h": "a392b8d0e71d70f9",
 "d": "2026-11-21"
 },
 "ja/pharmacy-hospital.html": {
-"h": "ad8a7566461a1a2b",
+"h": "11299736b4d389af",
 "d": "2026-11-21"
 },
 "ja/phrases.html": {
-"h": "6eee22b7d8318bf1",
+"h": "649530f3096715b1",
 "d": "2026-11-21"
 },
 "ja/privacy.html": {
-"h": "09394f3077e93041",
+"h": "af33c2925b19900a",
 "d": "2026-11-21"
 },
 "ja/restaurant-reservations.html": {
-"h": "ad9891db95bb21f7",
+"h": "bc816df08b93d323",
 "d": "2026-11-21"
 },
 "ja/seoul-to-busan-k-tour-pass.html": {
-"h": "4409e114ebb8c87f",
+"h": "924c9671b1f9eed0",
 "d": "2026-11-21"
 },
 "ja/seoul-tourist-transit-pass.html": {
-"h": "e6682f0d08aabc1d",
+"h": "b8ea41f147660246",
 "d": "2026-11-21"
 },
 "ja/tax-free-shopping.html": {
-"h": "4ee6078613d3df0c",
+"h": "088afd4c5939c686",
 "d": "2026-11-21"
 },
 "ja/taxi.html": {
-"h": "b9eb4c84d6fb23e9",
+"h": "77e8bc303a1bfe87",
 "d": "2026-11-21"
 },
 "ja/tmoney-subway-bus.html": {
-"h": "447d3173dae554c3",
+"h": "18ce5fd90929eabe",
 "d": "2026-11-21"
 },
 "ja/translation.html": {
-"h": "4cc8f9cd04bc049e",
+"h": "d2035106a9d2a549",
 "d": "2026-11-21"
 },
 "jeju-getting-around.html": {
-"h": "bb272019ea073be6",
+"h": "49cdbfe5bad9ffab",
 "d": "2026-11-21"
 },
 "k-eta-entry-requirements.html": {
-"h": "52e973f0983255f5",
+"h": "eed5dc9deed8df98",
 "d": "2026-11-21"
 },
 "korea-power-plug-voltage.html": {
-"h": "55453afc0a0ec1f6",
+"h": "d1b03219234afb92",
 "d": "2026-11-21"
 },
 "kr-pass-korail-pass.html": {
-"h": "5e99397e39d39fdb",
+"h": "76cf06beb9cb6ea5",
 "d": "2026-11-21"
 },
 "ktx-train-booking.html": {
-"h": "21a68d3fd6527972",
+"h": "034f031358c9291a",
 "d": "2026-11-21"
 },
 "luggage-storage.html": {
-"h": "0a94d66ac6742fb6",
+"h": "a4641dd5543e4c8e",
 "d": "2026-11-21"
 },
 "maps.html": {
-"h": "674b36d2b2b96a7e",
+"h": "93bb29ddba3cb158",
 "d": "2026-11-21"
 },
 "mobile-data-sim.html": {
-"h": "06f3c60b139616a0",
+"h": "cb698330780e726e",
 "d": "2026-11-21"
 },
 "pharmacy-hospital.html": {
-"h": "4919e6a35febaf7b",
+"h": "0be5f4f74436e9d4",
 "d": "2026-11-21"
 },
 "phrases.html": {
-"h": "882c67914489c9b4",
+"h": "af80abb8c93d2b91",
 "d": "2026-11-21"
 },
 "privacy.html": {
-"h": "c75fa34f2ee2c102",
+"h": "17e76fae643e156f",
 "d": "2026-11-21"
 },
 "restaurant-reservations.html": {
-"h": "1414817ad110e002",
+"h": "b8b25b461e6cff58",
 "d": "2026-11-21"
 },
 "seoul-to-busan-k-tour-pass.html": {
-"h": "223c89def0a2db48",
+"h": "7fbdbf9dd562ca2e",
 "d": "2026-11-21"
 },
 "seoul-tourist-transit-pass.html": {
-"h": "3088fc3453bb96e5",
+"h": "35304c8c3882ad92",
 "d": "2026-11-21"
 },
 "tax-free-shopping.html": {
-"h": "22c9b3ee05480e4e",
+"h": "5871db0841134126",
 "d": "2026-11-21"
 },
 "taxi.html": {
-"h": "2fc148375dc1ba80",
+"h": "55fc3c3cc3e940d4",
 "d": "2026-11-21"
 },
 "tmoney-subway-bus.html": {
-"h": "0acd5a0d201d2725",
+"h": "b28b6c4fd4dff00e",
 "d": "2026-11-21"
 },
 "translation.html": {
-"h": "008f30250fe17c2f",
+"h": "a3f4f849e9d484ce",
 "d": "2026-11-21"
 },
 "vi/": {
-"h": "d4596c1a8dd1b850",
+"h": "ae21895e9dae6634",
 "d": "2026-11-21"
 },
 "vi/about.html": {
-"h": "4bfa23a992be1f3f",
+"h": "ad7b69f81316faae",
 "d": "2026-11-21"
 },
 "vi/atm-foreign-card-cash.html": {
-"h": "dbd2ebfb5d6446e7",
+"h": "4e5a0a70623cddfb",
 "d": "2026-11-21"
 },
 "vi/changes.html": {
-"h": "b336bafb7ad108c8",
+"h": "582985930e2b73cd",
 "d": "2026-11-21"
 },
 "vi/contact.html": {
-"h": "5b934f239d4cf791",
+"h": "8eb441768b66ce4e",
 "d": "2026-11-21"
 },
 "vi/dmz-jsa-tour-booking.html": {
-"h": "24c00841d452c488",
+"h": "2f55b6cde9d35509",
 "d": "2026-11-21"
 },
 "vi/food-delivery.html": {
-"h": "3842943fc246e4cc",
+"h": "a1329f16a10ebae8",
 "d": "2026-11-21"
 },
 "vi/gimpo-airport-to-seoul.html": {
-"h": "5283a4f50f1f017d",
+"h": "69b56e9758532a07",
 "d": "2026-11-21"
 },
 "vi/help.html": {
-"h": "19c183fcb15dff8d",
+"h": "97dff1902cdec563",
 "d": "2026-11-21"
 },
 "vi/incheon-airport-to-seoul.html": {
-"h": "9185f57091e900a2",
+"h": "ec29a1d68de1dd10",
 "d": "2026-11-21"
 },
 "vi/jeju-getting-around.html": {
-"h": "f548c703bbf6bac3",
+"h": "64b84bf1aaa0fe92",
 "d": "2026-11-21"
 },
 "vi/k-eta-entry-requirements.html": {
-"h": "dd6b2e5b9119f0ba",
+"h": "e0338651882f2bba",
 "d": "2026-11-21"
 },
 "vi/korea-power-plug-voltage.html": {
-"h": "26381f63534294e3",
+"h": "d122309b6bc19567",
 "d": "2026-11-21"
 },
 "vi/kr-pass-korail-pass.html": {
-"h": "14cd45d329689861",
+"h": "f7d1b00853843b1c",
 "d": "2026-11-21"
 },
 "vi/ktx-train-booking.html": {
-"h": "9d7952bf16103b3e",
+"h": "e2191918c0e63a18",
 "d": "2026-11-21"
 },
 "vi/luggage-storage.html": {
-"h": "792d52dd4d3b8275",
+"h": "b3f24acba851e703",
 "d": "2026-11-21"
 },
 "vi/maps.html": {
-"h": "a5e37eb097ba551f",
+"h": "bff2781d5a2c93f6",
 "d": "2026-11-21"
 },
 "vi/mobile-data-sim.html": {
-"h": "8115104aa11b3ee0",
+"h": "dfacc7623db7eab1",
 "d": "2026-11-21"
 },
 "vi/pharmacy-hospital.html": {
-"h": "7f4a0475cc770dd3",
+"h": "271ec3cef0ab4568",
 "d": "2026-11-21"
 },
 "vi/phrases.html": {
-"h": "27f1c5ed8697d52a",
+"h": "e6af000c505e1c52",
 "d": "2026-11-21"
 },
 "vi/privacy.html": {
-"h": "9e70fcba5d675950",
+"h": "7b5a96ea497c52ab",
 "d": "2026-11-21"
 },
 "vi/restaurant-reservations.html": {
-"h": "d8f91ffc9845aa1c",
+"h": "9ea8ee4e5f184949",
 "d": "2026-11-21"
 },
 "vi/seoul-to-busan-k-tour-pass.html": {
-"h": "afa68dec8ecbf95e",
+"h": "88763499aae71ce9",
 "d": "2026-11-21"
 },
 "vi/seoul-tourist-transit-pass.html": {
-"h": "1eb6851128aca839",
+"h": "6e99730a0cd7d774",
 "d": "2026-11-21"
 },
 "vi/tax-free-shopping.html": {
-"h": "9d7023c3a971bc96",
+"h": "f83016c2a88492fc",
 "d": "2026-11-21"
 },
 "vi/taxi.html": {
-"h": "291d0caec101a403",
+"h": "43f425624cde10ac",
 "d": "2026-11-21"
 },
 "vi/tmoney-subway-bus.html": {
-"h": "2af73eb00d2b8d51",
+"h": "c09670612af638e2",
 "d": "2026-11-21"
 },
 "vi/translation.html": {
-"h": "4f9626ae7da9e519",
+"h": "85f14647201ef629",
 "d": "2026-11-21"
 },
 "zh-cn/": {
-"h": "023d2b094125bc0f",
+"h": "ba78724bf94d9195",
 "d": "2026-11-21"
 },
 "zh-cn/about.html": {
-"h": "b7e30e7b777e1d22",
+"h": "6c3bb25808545098",
 "d": "2026-11-21"
 },
 "zh-cn/atm-foreign-card-cash.html": {
-"h": "ead6e2782015c395",
+"h": "f4d0ef3a4d84d8e7",
 "d": "2026-11-21"
 },
 "zh-cn/changes.html": {
-"h": "8ca2be269b32494a",
+"h": "06dd0f843ad3413c",
 "d": "2026-11-21"
 },
 "zh-cn/contact.html": {
-"h": "bea046142b10f62d",
+"h": "80e784c2a33879d0",
 "d": "2026-11-21"
 },
 "zh-cn/dmz-jsa-tour-booking.html": {
-"h": "7483f9421eea6262",
+"h": "8dc90d6b60b86a1e",
 "d": "2026-11-21"
 },
 "zh-cn/food-delivery.html": {
-"h": "0af77dadc15e25da",
+"h": "4d7b459a437db6ae",
 "d": "2026-11-21"
 },
 "zh-cn/gimpo-airport-to-seoul.html": {
-"h": "8d7bb419ecbce7b8",
+"h": "de1a0777af32593c",
 "d": "2026-11-21"
 },
 "zh-cn/help.html": {
-"h": "ddf3de2a9b93d370",
+"h": "a05ab07d005f59e8",
 "d": "2026-11-21"
 },
 "zh-cn/incheon-airport-to-seoul.html": {
-"h": "cf65fb71ec5da10f",
+"h": "aedb43963dca57df",
 "d": "2026-11-21"
 },
 "zh-cn/jeju-getting-around.html": {
-"h": "c007480c65373e26",
+"h": "529ef7387b6d49e8",
 "d": "2026-11-21"
 },
 "zh-cn/k-eta-entry-requirements.html": {
-"h": "deaf941f9d889700",
+"h": "6ddf7f295a5350cd",
 "d": "2026-11-21"
 },
 "zh-cn/korea-power-plug-voltage.html": {
-"h": "cc6690a443aa34db",
+"h": "8d8eb0021423ce87",
 "d": "2026-11-21"
 },
 "zh-cn/kr-pass-korail-pass.html": {
-"h": "6d03c1bcbf008976",
+"h": "6dda3ce3e52719b5",
 "d": "2026-11-21"
 },
 "zh-cn/ktx-train-booking.html": {
-"h": "b9b05bdf543eb524",
+"h": "df861e4e229c89f1",
 "d": "2026-11-21"
 },
 "zh-cn/luggage-storage.html": {
-"h": "d5f71e09c702558d",
+"h": "bb9ebd8f629d88db",
 "d": "2026-11-21"
 },
 "zh-cn/maps.html": {
-"h": "11642c066306d931",
+"h": "e0d9399f1d2750d6",
 "d": "2026-11-21"
 },
 "zh-cn/mobile-data-sim.html": {
-"h": "8ddb4d3528d7ed8b",
+"h": "58100e20a2fe9539",
 "d": "2026-11-21"
 },
 "zh-cn/pharmacy-hospital.html": {
-"h": "b903c64c0d71cacd",
+"h": "1a3e69a1155bc013",
 "d": "2026-11-21"
 },
 "zh-cn/phrases.html": {
-"h": "f0f2b0203266e072",
+"h": "0d45fe773d095a3d",
 "d": "2026-11-21"
 },
 "zh-cn/privacy.html": {
-"h": "2ae4849226be316a",
+"h": "e06b407e18b72dd5",
 "d": "2026-11-21"
 },
 "zh-cn/restaurant-reservations.html": {
-"h": "f426bde7b7a7ca84",
+"h": "99420e84b53c0dcb",
 "d": "2026-11-21"
 },
 "zh-cn/seoul-to-busan-k-tour-pass.html": {
-"h": "a5153b097e33b51a",
+"h": "2c019d5994c4bb38",
 "d": "2026-11-21"
 },
 "zh-cn/seoul-tourist-transit-pass.html": {
-"h": "feaec47c2b6c9315",
+"h": "4a8e35fcdc70680e",
 "d": "2026-11-21"
 },
 "zh-cn/tax-free-shopping.html": {
-"h": "a16915d81c55e466",
+"h": "fbcf9c3fa34c0fd3",
 "d": "2026-11-21"
 },
 "zh-cn/taxi.html": {
-"h": "137430d057dba949",
+"h": "34415e9eee7ef834",
 "d": "2026-11-21"
 },
 "zh-cn/tmoney-subway-bus.html": {
-"h": "601df4da5811f1b1",
+"h": "3bcb568d58bd8cc2",
 "d": "2026-11-21"
 },
 "zh-cn/translation.html": {
-"h": "8668c1918c098c3b",
+"h": "e8e4adf5741c890f",
 "d": "2026-11-21"
 },
 "zh-tw/": {
-"h": "046c84aee948a70e",
+"h": "3d54fe3c6e494bf4",
 "d": "2026-11-21"
 },
 "zh-tw/about.html": {
-"h": "9df5eea614734fc4",
+"h": "e6c7a8ecc574a3f7",
 "d": "2026-11-21"
 },
 "zh-tw/atm-foreign-card-cash.html": {
-"h": "1593a21f35853b5b",
+"h": "3b18c776b8628adc",
 "d": "2026-11-21"
 },
 "zh-tw/changes.html": {
-"h": "543fac9947623f84",
+"h": "9d0128c471ad26e3",
 "d": "2026-11-21"
 },
 "zh-tw/contact.html": {
-"h": "08eef0b15d22902b",
+"h": "4f9475b2942398f8",
 "d": "2026-11-21"
 },
 "zh-tw/dmz-jsa-tour-booking.html": {
-"h": "b12dfe50f68e9167",
+"h": "ace71d99280820f2",
 "d": "2026-11-21"
 },
 "zh-tw/food-delivery.html": {
-"h": "7a70b6c4960ed01c",
+"h": "0eb92264cda14578",
 "d": "2026-11-21"
 },
 "zh-tw/gimpo-airport-to-seoul.html": {
-"h": "c3c2062c31ccf57f",
+"h": "537aaa65f5d529db",
 "d": "2026-11-21"
 },
 "zh-tw/help.html": {
-"h": "769bfedb21230904",
+"h": "d078c0fa7c3ab33c",
 "d": "2026-11-21"
 },
 "zh-tw/incheon-airport-to-seoul.html": {
-"h": "c3d7beb7fe11127f",
+"h": "95ad7977bf178431",
 "d": "2026-11-21"
 },
 "zh-tw/jeju-getting-around.html": {
-"h": "40be42d9773f4f81",
+"h": "42a1c7296be0f8c3",
 "d": "2026-11-21"
 },
 "zh-tw/k-eta-entry-requirements.html": {
-"h": "ae67fabae01065e7",
+"h": "f28799961828740c",
 "d": "2026-11-21"
 },
 "zh-tw/korea-power-plug-voltage.html": {
-"h": "71e6fd6e3313c063",
+"h": "e2bbdd0228a21231",
 "d": "2026-11-21"
 },
 "zh-tw/kr-pass-korail-pass.html": {
-"h": "c977f453e82b6974",
+"h": "62d569124dc01a0b",
 "d": "2026-11-21"
 },
 "zh-tw/ktx-train-booking.html": {
-"h": "95acbb937fc2e637",
+"h": "6a22c1b05ba977ca",
 "d": "2026-11-21"
 },
 "zh-tw/luggage-storage.html": {
-"h": "e754ec567d5b6262",
+"h": "f9e0af8b2f027c1e",
 "d": "2026-11-21"
 },
 "zh-tw/maps.html": {
-"h": "2e1093480fd9184e",
+"h": "e6b90577e0be2541",
 "d": "2026-11-21"
 },
 "zh-tw/mobile-data-sim.html": {
-"h": "c56cae9fe60bbab6",
+"h": "5c3c87a8f1f6da47",
 "d": "2026-11-21"
 },
 "zh-tw/pharmacy-hospital.html": {
-"h": "3d09557d1d5fedb1",
+"h": "fd3c9a03042ce1a0",
 "d": "2026-11-21"
 },
 "zh-tw/phrases.html": {
-"h": "50ba1c5b2c07e676",
+"h": "d2ca2ccc52f0ca2e",
 "d": "2026-11-21"
 },
 "zh-tw/privacy.html": {
-"h": "5c40a25e41630a2f",
+"h": "8efc837c753a280b",
 "d": "2026-11-21"
 },
 "zh-tw/restaurant-reservations.html": {
-"h": "6f9f0e7140f925b2",
+"h": "22c38e3bd3487ed0",
 "d": "2026-11-21"
 },
 "zh-tw/seoul-to-busan-k-tour-pass.html": {
-"h": "311c16163e1c5e01",
+"h": "a307b4e53fd97899",
 "d": "2026-11-21"
 },
 "zh-tw/seoul-tourist-transit-pass.html": {
-"h": "e94d55a39ec90ca6",
+"h": "cac14a987bfecc9d",
 "d": "2026-11-21"
 },
 "zh-tw/tax-free-shopping.html": {
-"h": "6d6858e9b87f780b",
+"h": "44ad6ab32fb4c05f",
 "d": "2026-11-21"
 },
 "zh-tw/taxi.html": {
-"h": "fc2c0295d661473c",
+"h": "f81661cd3146a898",
 "d": "2026-11-21"
 },
 "zh-tw/tmoney-subway-bus.html": {
-"h": "13a2ff9c6d68b7de",
+"h": "851ccf4f719d0581",
 "d": "2026-11-21"
 },
 "zh-tw/translation.html": {
-"h": "6835ac0627971c9d",
+"h": "1c144976f995936f",
 "d": "2026-11-21"
 }
 }
