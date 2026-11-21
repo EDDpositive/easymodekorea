@@ -1,0 +1,557 @@
+"""App shell: the parts that make the site behave like an app on a phone.
+Bottom tabs, save and share, the install prompt, the offline and update notices, the Korean cards,
+My trip, emergency help and privacy pages, the web manifest and the Android link file.
+
+Text is written per language here (zh-cn by hand, not converted, so mainland wording is right).
+build.py imports this file; nothing here imports build.py.
+"""
+import json
+
+PACKAGE_ID = "com.easymodekorea.app"   # Android application id. Cannot change after the first Play upload.
+APP_NAME = "EasyModeKorea"
+POLICY_DATE = "2026-11-22"             # ISO date the privacy policy text last changed
+
+T = {
+    "en": {
+        "nav_label": "Main menu", "nav_guides": "Guides", "nav_cards": "Korean cards", "nav_trip": "My trip", "nav_help": "Help",
+        "search": "Search guides", "save": "Save", "saved": "Saved", "share": "Share", "link_copied": "Link copied",
+        "saved_toast": "Saved to My trip", "unsaved_toast": "Removed from My trip",
+        "install": "Install the app. Guides open without data.", "install_btn": "Install", "later": "Not now",
+        "ios_hint": "On iPhone: tap the Share button, then Add to Home Screen.",
+        "update": "This page has newer info.", "refresh": "Refresh",
+        "ready": "Saved on this phone. Guides now open without data.", "miss": "That page isn't saved on this phone yet. Open it once with data.", "call": "Call", "jump_label": "Jump to a topic",
+        "arr_h": "When can I submit the e-Arrival Card?", "arr_label": "Your landing time in Korea (Korea time)", "arr_from": "You can submit from {t}, Korea time, until you land.", "arr_local": "On this phone's clock: {t}",
+        "arr_open": "The window is open now.", "arr_wait": "Opens {r}.", "arr_past": "That landing time has passed.", "arr_site": "Official e-Arrival Card site",
+        "trust": "{n} guides · checked {date}", "chg_note": "Anything written before these dates, including older guides and AI answers, may describe the old rule.",
+        "places_h": "Places to go", "places_ph": "Korean address, place name or Google Maps link", "places_add": "Add", "places_short": "That short link can't be read on the phone. Paste the place name instead.",
+        "food_h": "Food needs and allergies", "pay_h": "When payment fails",
+        "off_ok": "Works offline", "pack_h": "Offline pack", "pack_state": "{n}/{m} saved", "pack_ok": "All saved for offline", "pack_btn": "Download again", "pack_busy": "Downloading…",
+        "share_h": "Share with a companion", "share_lede": "🔒 Nothing uploaded: the list is in the link", "share_btn": "Make link and QR", "share_copy": "Copy link", "share_warn": "Anyone who gets this link can read the list.", "share_empty": "Add your stay address or a place first.",
+        "import_q": "A companion shared a trip list with you: {n} items. Add them to this phone?", "import_done": "Added.",
+        "rd_title": "Korea Ready check", "rd_seo": "Korea Ready check: will your phone, card and apps work in Korea?", "rd_desc": "One minute, taps only, no account. Get a plan for your own trip: which Korean apps work with your phone number, what to set up at home, what to pay with. Every answer is dated.", "rd_lede": "One minute, taps only. You get a plan for your own phone, card and trip.", "rd_start": "Start", "rd_next": "Next", "rd_skip": "Skip", "rd_done": "Show my plan", "rd_multi": "Pick all that apply.", "rd_q_pay": "How will you pay in Korea?", "rd_pay_card": "A card with a chip", "rd_pay_card_s": "Credit or debit card from home", "rd_pay_wallet": "Only my phone wallet", "rd_pay_wallet_s": "Apple Pay, Google Pay or similar, no plastic card", "rd_pay_cash": "Mostly cash", "rd_pay_cash_s": "I will withdraw or exchange money", "rd_q_air": "Where do you land?", "rd_air_icn": "Incheon Airport", "rd_air_gmp": "Gimpo Airport", "rd_air_other": "Another airport or port", "rd_q_city": "Going beyond Seoul?", "rd_city_none": "Just Seoul", "rd_q_food": "Any allergy or food rule?", "rd_food_yes": "Yes, I need to tell restaurants", "rd_food_no": "No", "rd_q_dates": "When are you in Korea?", "rd_score": "Korea Ready: {d}/{n}", "rd_score_sub": "Before your flight · saved on this phone", "rd_nc": "Needs check", "rd_city_busan": "Busan", "rd_city_jeju": "Jeju", "rd_city_dmz": "DMZ", "rd_x_checked": "Checked your phone setup", "rd_x_taxi": "Add your card in the taxi app at home (k.ride reviews: card first)", "rd_later_h": "After you land", "rd_apps_h": "With your phone setup", "rd_plan_h": "Your steps", "rd_help_h": "If something goes wrong", "rd_x_wallet": "Bring a chip card too: many shops refuse phone wallets", "rd_x_card": "Ask your card issuer to allow Korea and online payments", "rd_x_cash": "Cash: Global and convenience-store ATMs, choose KRW", "rd_x_food": "Try a food card full screen", "rd_x_read": "Read: {t}", "rd_x_help": "Know where Help is: lost, sick, trains, card, taxi", "rd_share": "Share my score", "rd_share_text": "I am {d}/{n} Korea Ready. Check your phone, card and apps for Korea in a minute:", "rd_redo": "Change my answers", "rd_saved": "Your dates and guides are now in My trip.", "rd_cta_sub": "1 minute, taps only", "rd_continue": "Plan: {d}/{n} done", "rd_next_step": "Next: {t}",
+        "trip_title": "My trip", "trip_lede": "Your saved guides, your stay's address and your Korean cards. Everything here stays on this phone.",
+        "trip_saved_h": "Saved guides", "trip_saved_empty": "Nothing saved yet.",
+        "trip_recent_h": "Recently opened",
+        "trip_more_h": "More for your trip", "trip_cards": "Make a Korean card to show", "trip_setup": "Check what works with your phone", "trip_help": "Emergency numbers",
+        "trip_app_h": "This app", "trip_offline": "{n} pages are stored on this phone and open without data.", "trip_install": "Install on this phone",
+        "trip_clear": "Erase what I saved on this phone", "trip_clear_q": "Erase your saved guides, address, cards and phone setup from this phone?", "trip_cleared": "Erased.",
+        "remove": "Remove",
+        "cards_title": "Korean cards to show", "cards_seo": "Korean phrases to show staff and drivers in Korea (offline cards)",
+        "cards_desc": "Korean phrases and place names in big letters. Show them to a driver or staff, or copy them into Naver Map. Make your own card too. Works offline.",
+        "cards_lede": "Show a card full screen to a driver or staff. Make your own for a hotel name or an allergy.",
+        "cards_filter": "Filter: taxi, menu, pharmacy",
+        "own_h": "Make your own card", "own_ph": "Type or paste Korean text", "own_show": "Show full screen", "own_save": "Save card", "own_list_h": "Your cards", "own_note": "Kept only on this phone.",
+        "basics_h": "Everyday and urgent", "open_guide": "Open the guide",
+        "help_title": "Emergency help in Korea", "help_seo": "Emergency numbers in Korea for visitors: 112, 119, 1330",
+        "help_desc": "Who to call in Korea: 112 police, 119 ambulance and medical advice, 1330 travel helpline. With Korean cards to show someone. Works offline.",
+        "help_lede": "Tap a number to call. If you can't explain, show a Korean card.",
+        "help_more_h": "More help", "help_offline": "This page opens without data. Calling needs a phone signal.",
+        "deep_faq": "Answered in the guides", "deep_cards": "Korean cards",
+        "privacy": "Privacy", "privacy_title": "Privacy policy",
+        "privacy_desc": "What EasyModeKorea collects (very little), what stays on your phone, and how to reach us. Covers the website and the Android app.",
+        "privacy_updated": "Last updated: {date}",
+        "privacy_body": [
+            ["In short", "EasyModeKorea has no accounts, no ads and no tracking cookies. The Android app shows this website in full screen. It does not ask for access to your location, contacts, camera or files."],
+            ["What stays on your phone", "Your phone setup, your Korea Ready check answers, trip dates, saved guides and places, checklist ticks, your stay's address and the Korean cards you make are stored only in the browser or app on your phone. They are never sent to us. Erase them on the My trip page, or by clearing the site's data in your browser. If you make a share link for a companion, your stay address and places are written inside that link and nowhere else, so anyone who gets the link can read them."],
+            ["Visit counts", "We count page views and button taps with GoatCounter. It sets no cookies and stores no IP addresses. It shows us totals: which pages were opened, the referring site, browser and system type, screen width, language and country. We cannot tell who you are. If you open a link your host made for you, the name of the stay in that link is counted too."],
+            ["Questions and feedback", "When you send a question or feedback, your message, the page you sent it from and your email address (only if you enter one) go to a Google Form that we own. We use them to answer you and to fix the guides. Email us to have a message deleted."],
+            ["Other companies' servers", "The site is hosted on GitHub Pages and loads its fonts from Google Fonts, so those servers receive your IP address and browser type when a page loads, as any web server does. If you tap Naver Map or KakaoMap on a saved address or place, that text is sent to that map service as a search. Outside links lead to services with their own policies."],
+            ["Children", "EasyModeKorea is written for adult travelers and is not directed at children under 13."],
+            ["Contact and changes", "Questions or deletion requests: {email}. When this policy changes, the date below changes."],
+        ],
+    },
+    "ja": {
+        "nav_label": "メインメニュー", "nav_guides": "ガイド", "nav_cards": "韓国語カード", "nav_trip": "マイページ", "nav_help": "ヘルプ",
+        "search": "ガイドを検索", "save": "保存", "saved": "保存済み", "share": "共有", "link_copied": "リンクをコピーしました",
+        "saved_toast": "マイページに保存しました", "unsaved_toast": "マイページから削除しました",
+        "install": "アプリを追加。通信なしでもガイドが開けます。", "install_btn": "インストール", "later": "今はしない",
+        "ios_hint": "iPhoneの場合: 共有ボタンをタップし、「ホーム画面に追加」を選びます。",
+        "update": "このページに新しい情報があります。", "refresh": "更新",
+        "ready": "このスマホに保存しました。通信なしでもガイドが開けます。", "miss": "そのページはまだこのスマホに保存されていません。通信できるときに一度開いてください。", "call": "電話する", "jump_label": "テーマへ移動",
+        "arr_h": "電子到着カードはいつから提出できる?", "arr_label": "韓国に着く日時(韓国時間)", "arr_from": "{t}(韓国時間)から到着まで提出できます。", "arr_local": "このスマホの時計では: {t}",
+        "arr_open": "今、提出できます。", "arr_wait": "提出できるのは{r}です。", "arr_past": "その到着日時は過ぎています。", "arr_site": "電子到着カード公式サイト",
+        "trust": "ガイド{n}本・{date}確認", "chg_note": "これらの日付より前に書かれた情報(古いガイドやAIの回答を含む)は、以前のルールのままの場合があります。",
+        "places_h": "行き先", "places_ph": "韓国語の住所、場所の名前、Googleマップのリンク", "places_add": "追加", "places_short": "短縮リンクはスマホだけでは読み取れません。場所の名前を貼り付けてください。",
+        "food_h": "食事の制限・アレルギー", "pay_h": "支払いがうまくいかないとき",
+        "off_ok": "オフラインで使えます", "pack_h": "オフラインパック", "pack_state": "{n}/{m} 保存済み", "pack_ok": "すべてオフライン保存済み", "pack_btn": "もう一度ダウンロード", "pack_busy": "ダウンロード中…",
+        "share_h": "同行者と共有", "share_lede": "🔒 アップロードなし:内容はリンクの中", "share_btn": "リンクとQRを作る", "share_copy": "リンクをコピー", "share_warn": "このリンクを受け取った人は誰でも内容を読めます。", "share_empty": "先に宿の住所か行き先を追加してください。",
+        "import_q": "同行者から旅行リストが届きました({n}件)。このスマホに追加しますか?", "import_done": "追加しました。",
+        "rd_title": "Korea Readyチェック", "rd_seo": "Korea Readyチェック: 自分のスマホ・カード・アプリは韓国で使える?", "rd_desc": "1分、タップするだけ。入力も登録も不要です。自分の電話番号で使える韓国アプリ、出発前に準備すること、支払い方法が分かります。すべての回答に確認日つき。", "rd_lede": "1分、タップするだけ。自分のスマホ・カード・旅程に合わせた準備プランが出ます。", "rd_start": "始める", "rd_next": "次へ", "rd_skip": "スキップ", "rd_done": "プランを見る", "rd_multi": "当てはまるものをすべて選びます。", "rd_q_pay": "韓国ではどう支払いますか?", "rd_pay_card": "ICチップつきのカード", "rd_pay_card_s": "自国のクレジットカード・デビットカード", "rd_pay_wallet": "スマホ決済だけ", "rd_pay_wallet_s": "Apple PayやGoogle Payなど。カード本体は持たない", "rd_pay_cash": "ほぼ現金", "rd_pay_cash_s": "現地で引き出すか両替する", "rd_q_air": "どこに到着しますか?", "rd_air_icn": "仁川空港", "rd_air_gmp": "金浦空港", "rd_air_other": "ほかの空港・港", "rd_q_city": "ソウル以外にも行きますか?", "rd_city_none": "ソウルだけ", "rd_q_food": "アレルギーや食事の制限はありますか?", "rd_food_yes": "ある(お店に伝えたい)", "rd_food_no": "ない", "rd_q_dates": "韓国にいるのはいつですか?", "rd_score": "Korea Ready: {d}/{n}", "rd_score_sub": "出発前の準備・この端末に保存", "rd_nc": "要確認", "rd_city_busan": "釜山", "rd_city_jeju": "済州", "rd_city_dmz": "DMZ", "rd_x_checked": "スマホの状況を確認した", "rd_x_taxi": "出発前にタクシーアプリへカード登録(k.rideのレビュー:先にカード)", "rd_later_h": "到着してから", "rd_apps_h": "あなたのスマホの条件では", "rd_plan_h": "やること", "rd_help_h": "トラブルのときは", "rd_x_wallet": "ICカードも持参:スマホ決済は多くの店で使えない", "rd_x_card": "カード会社に韓国とネット決済の利用を伝える", "rd_x_cash": "現金:Global表示とコンビニのATM、KRWを選ぶ", "rd_x_food": "食事カードを全画面で試す", "rd_x_read": "読む: {t}", "rd_x_help": "ヘルプの場所を確認:紛失・病気・終電・カード・タクシー", "rd_share": "スコアを共有", "rd_share_text": "Korea Ready {d}/{n}。韓国で自分のスマホ・カード・アプリが使えるか、1分でチェック:", "rd_redo": "回答を変更", "rd_saved": "日程とガイドをマイページに入れました。", "rd_cta_sub": "1分、タップだけ", "rd_continue": "準備 {d}/{n} 完了", "rd_next_step": "次: {t}",
+        "trip_title": "マイページ", "trip_lede": "保存したガイド、宿の住所、自分の韓国語カード。すべてこのスマホの中だけに保存されます。",
+        "trip_saved_h": "保存したガイド", "trip_saved_empty": "まだありません。",
+        "trip_recent_h": "最近開いたガイド",
+        "trip_more_h": "旅行に役立つもの", "trip_cards": "見せる韓国語カードを作る", "trip_setup": "自分のスマホで使えるものを確認", "trip_help": "緊急連絡先",
+        "trip_app_h": "このアプリ", "trip_offline": "{n}ページがこのスマホに保存され、データ通信なしで開けます。", "trip_install": "このスマホにインストール",
+        "trip_clear": "このスマホに保存した内容を消去", "trip_clear_q": "保存したガイド、住所、カード、スマホの設定をこのスマホから消去しますか?", "trip_cleared": "消去しました。",
+        "remove": "削除",
+        "cards_title": "見せる韓国語カード", "cards_seo": "韓国で店員や運転手に見せる韓国語フレーズ(オフライン対応)",
+        "cards_desc": "韓国語のフレーズと地名を大きな文字で表示。運転手や店員に見せたり、Naver Mapにコピーしたりできます。自分のカードも作れます。オフライン対応。",
+        "cards_lede": "カードを全画面で運転手や店員に見せられます。ホテル名やアレルギーは自分で作れます。",
+        "cards_filter": "絞り込み: タクシー、メニュー、薬局",
+        "own_h": "自分のカードを作る", "own_ph": "韓国語を入力または貼り付け", "own_show": "全画面で見せる", "own_save": "保存", "own_list_h": "自分のカード", "own_note": "このスマホの中だけに保存されます。",
+        "basics_h": "ふだんの場面と緊急時", "open_guide": "ガイドを開く",
+        "help_title": "韓国での緊急時ヘルプ", "help_seo": "韓国の緊急連絡先(旅行者向け): 112・119・1330",
+        "help_desc": "韓国で困ったときの連絡先: 112(警察)、119(救急・医療相談)、1330(観光案内)。見せて伝える韓国語カードつき。オフライン対応。",
+        "help_lede": "番号をタップすると電話できます。説明が難しいときは韓国語カードを見せてください。",
+        "help_more_h": "ほかのヘルプ", "help_offline": "このページはデータ通信なしで開けます。電話には電波が必要です。",
+        "deep_faq": "ガイド内の回答", "deep_cards": "韓国語カード",
+        "privacy": "プライバシー", "privacy_title": "プライバシーポリシー",
+        "privacy_desc": "EasyModeKoreaが集める情報(ごくわずか)、スマホの中だけに残る情報、連絡先。ウェブサイトとAndroidアプリの両方が対象です。",
+        "privacy_updated": "最終更新: {date}",
+        "privacy_body": [
+            ["要点", "EasyModeKoreaにはアカウント登録も広告も追跡用Cookieもありません。Androidアプリはこのウェブサイトを全画面で表示するものです。位置情報、連絡先、カメラ、ファイルへのアクセスは求めません。"],
+            ["スマホの中だけに残るもの", "スマホの設定、Korea Readyチェックの回答、旅行の日程、保存したガイドと行き先、チェックリストの印、宿の住所、自分で作った韓国語カードは、あなたのスマホのブラウザまたはアプリの中だけに保存されます。私たちに送信されることはありません。マイページで消去するか、ブラウザでこのサイトのデータを削除すれば消えます。同行者用の共有リンクを作ると、宿の住所と行き先はそのリンクの中だけに書き込まれます。リンクを受け取った人は内容を読めます。"],
+            ["アクセス数の集計", "ページの表示回数とボタンのタップ数をGoatCounterで集計しています。Cookieは使わず、IPアドレスも保存しません。私たちに見えるのは合計だけです(開かれたページ、参照元サイト、ブラウザとOSの種類、画面の幅、言語、国)。個人を特定することはできません。宿の方が作ったリンクを開いた場合は、リンクに含まれる宿の名前も集計されます。"],
+            ["質問とフィードバック", "質問やフィードバックを送ると、メッセージ、送信したページ、メールアドレス(入力した場合のみ)が、私たちが管理するGoogleフォームに届きます。返信とガイドの修正のためだけに使います。削除を希望する場合はメールでお知らせください。"],
+            ["他社のサーバー", "このサイトはGitHub Pagesで公開し、フォントはGoogle Fontsから読み込んでいます。そのため、ページを開くと、どのウェブサーバーでも同じように、IPアドレスとブラウザの種類がこれらのサーバーに伝わります。保存した住所や行き先でNaver MapやKakaoMapをタップすると、その文字が検索語としてその地図サービスに送られます。外部リンク先のサービスには、それぞれのポリシーがあります。"],
+            ["お子さまについて", "EasyModeKoreaは大人の旅行者向けに書かれており、13歳未満のお子さまを対象としていません。"],
+            ["連絡先と変更", "質問や削除の依頼: {email}。このポリシーを変更したときは、下の日付を更新します。"],
+        ],
+    },
+    "zh-tw": {
+        "nav_label": "主選單", "nav_guides": "指南", "nav_cards": "韓文卡", "nav_trip": "我的旅程", "nav_help": "求助",
+        "search": "搜尋指南", "save": "收藏", "saved": "已收藏", "share": "分享", "link_copied": "已複製連結",
+        "saved_toast": "已存到「我的旅程」", "unsaved_toast": "已從「我的旅程」移除",
+        "install": "安裝App,沒有網路也能看指南。", "install_btn": "安裝", "later": "先不要",
+        "ios_hint": "iPhone:點「分享」按鈕,再選「加入主畫面」。",
+        "update": "這一頁有更新的內容。", "refresh": "重新整理",
+        "ready": "已存到這支手機,沒有網路也能看指南。", "miss": "那一頁還沒存到這支手機。有網路時先開一次。", "call": "撥打", "jump_label": "跳到主題",
+        "arr_h": "電子入境卡什麼時候可以提交?", "arr_label": "抵達韓國的時間(韓國時間)", "arr_from": "從{t}(韓國時間)起到抵達前都可以提交。", "arr_local": "以這支手機的時間:{t}",
+        "arr_open": "現在可以提交了。", "arr_wait": "{r}開放提交。", "arr_past": "這個抵達時間已經過了。", "arr_site": "電子入境卡官方網站",
+        "trust": "{n}篇指南·{date}確認", "chg_note": "在這些日期之前寫成的資訊(包括舊的指南和AI的回答),可能還是舊規定。",
+        "places_h": "要去的地方", "places_ph": "韓文地址、地點名稱或Google地圖連結", "places_add": "新增", "places_short": "短網址在手機上無法讀取,請改貼地點名稱。",
+        "food_h": "飲食限制與過敏", "pay_h": "付款不順時",
+        "off_ok": "離線可用", "pack_h": "離線包", "pack_state": "已存 {n}/{m}", "pack_ok": "已全部離線保存", "pack_btn": "重新下載", "pack_busy": "下載中…",
+        "share_h": "分享給同行的人", "share_lede": "🔒 不上傳:內容在連結裡", "share_btn": "產生連結和QR碼", "share_copy": "複製連結", "share_warn": "拿到這個連結的人都能看到內容。", "share_empty": "請先加入住宿地址或地點。",
+        "import_q": "同行的人分享了行程清單給你:{n}項。要加到這支手機嗎?", "import_done": "已加入。",
+        "rd_title": "Korea Ready檢查", "rd_seo": "Korea Ready檢查:你的手機、卡片和App在韓國能用嗎?", "rd_desc": "一分鐘,點一點就好,不用打字,也不用註冊。得到適合你這趟旅程的計畫:你的電話號碼能用哪些韓國App、出發前要設定什麼、要帶什麼付款方式。每個答案都有確認日期。", "rd_lede": "一分鐘,點一點就好,不用打字。得到適合你的手機、卡片和行程的準備計畫。", "rd_start": "開始", "rd_next": "下一步", "rd_skip": "略過", "rd_done": "看我的計畫", "rd_multi": "可以複選。", "rd_q_pay": "在韓國要怎麼付款?", "rd_pay_card": "有晶片的卡", "rd_pay_card_s": "本國的信用卡或金融卡", "rd_pay_wallet": "只用手機支付", "rd_pay_wallet_s": "Apple Pay、Google Pay等,不帶實體卡", "rd_pay_cash": "大多用現金", "rd_pay_cash_s": "到當地提款或換錢", "rd_q_air": "你從哪裡入境?", "rd_air_icn": "仁川機場", "rd_air_gmp": "金浦機場", "rd_air_other": "其他機場或港口", "rd_q_city": "會去首爾以外的地方嗎?", "rd_city_none": "只在首爾", "rd_q_food": "有過敏或飲食限制嗎?", "rd_food_yes": "有,需要告訴餐廳", "rd_food_no": "沒有", "rd_q_dates": "你什麼時候在韓國?", "rd_score": "Korea Ready:{d}/{n}", "rd_score_sub": "出發前要做的事·存在本機", "rd_nc": "待確認", "rd_city_busan": "釜山", "rd_city_jeju": "濟州", "rd_city_dmz": "DMZ", "rd_x_checked": "已確認手機狀況", "rd_x_taxi": "出發前先在計程車App綁卡(k.ride評論:要先綁卡)", "rd_later_h": "抵達之後", "rd_apps_h": "以你的手機條件", "rd_plan_h": "你要做的事", "rd_help_h": "遇到狀況時", "rd_x_wallet": "也帶實體晶片卡:很多店不收手機支付", "rd_x_card": "請發卡銀行開放韓國與網路付款", "rd_x_cash": "現金:Global與便利商店ATM,選KRW", "rd_x_food": "先試一次全螢幕飲食卡", "rd_x_read": "閱讀:{t}", "rd_x_help": "先找到求助:遺失、生病、末班車、刷卡、計程車", "rd_share": "分享我的分數", "rd_share_text": "我的Korea Ready是{d}/{n}。花一分鐘檢查你的手機、卡片和App在韓國能不能用:", "rd_redo": "修改回答", "rd_saved": "日期和指南已放進「我的旅程」。", "rd_cta_sub": "一分鐘,點一點就好", "rd_continue": "準備 {d}/{n} 完成", "rd_next_step": "下一步:{t}",
+        "trip_title": "我的旅程", "trip_lede": "你收藏的指南、住宿地址和自己做的韓文卡。全部只存在這支手機裡。",
+        "trip_saved_h": "收藏的指南", "trip_saved_empty": "還沒有收藏。",
+        "trip_recent_h": "最近看過",
+        "trip_more_h": "旅途中用得到", "trip_cards": "做一張給人看的韓文卡", "trip_setup": "查查你的手機能用哪些", "trip_help": "緊急電話",
+        "trip_app_h": "這個App", "trip_offline": "這支手機已存好{n}個頁面,沒有網路也能開。", "trip_install": "安裝到這支手機",
+        "trip_clear": "清除存在這支手機的內容", "trip_clear_q": "要從這支手機清除收藏的指南、地址、卡片和手機設定嗎?", "trip_cleared": "已清除。",
+        "remove": "移除",
+        "cards_title": "給人看的韓文卡", "cards_seo": "在韓國給店員和司機看的韓文句子(可離線使用)",
+        "cards_desc": "用大字顯示韓文句子和地名,可以給司機或店員看,也能複製到Naver Map。還能自己做卡片。離線也能用。",
+        "cards_lede": "把卡片全螢幕給司機或店員看。飯店名稱或過敏原可以自己做一張。",
+        "cards_filter": "篩選:計程車、菜單、藥局",
+        "own_h": "自己做一張卡", "own_ph": "輸入或貼上韓文", "own_show": "全螢幕顯示", "own_save": "存起來", "own_list_h": "你的卡片", "own_note": "只存在這支手機裡。",
+        "basics_h": "日常與緊急", "open_guide": "打開指南",
+        "help_title": "在韓國緊急求助", "help_seo": "旅客在韓國的緊急電話:112、119、1330",
+        "help_desc": "在韓國該打哪支電話:112警察、119救護車與醫療諮詢、1330觀光諮詢熱線。附上可以給人看的韓文卡。離線也能用。",
+        "help_lede": "點號碼就能撥打。說不清楚時,給對方看韓文卡。",
+        "help_more_h": "更多協助", "help_offline": "這一頁沒有網路也能開。打電話需要手機訊號。",
+        "deep_faq": "指南裡的解答", "deep_cards": "韓文卡",
+        "privacy": "隱私權", "privacy_title": "隱私權政策",
+        "privacy_desc": "EasyModeKorea蒐集哪些資料(非常少)、哪些只留在你的手機裡,以及如何聯絡我們。適用於網站和Android App。",
+        "privacy_updated": "最後更新:{date}",
+        "privacy_body": [
+            ["重點", "EasyModeKorea沒有帳號、沒有廣告,也沒有追蹤用的Cookie。Android App只是把這個網站以全螢幕顯示,不會要求存取你的位置、通訊錄、相機或檔案。"],
+            ["只留在你手機裡的內容", "你的手機設定、Korea Ready檢查的回答、旅行日期、收藏的指南和地點、清單勾選、住宿地址和自己做的韓文卡,只存在你手機的瀏覽器或App裡,不會傳給我們。你可以在「我的旅程」頁面清除,或在瀏覽器裡清除本站資料。如果你為同行的人產生分享連結,住宿地址和地點只會寫在那個連結裡,拿到連結的人都能看到。"],
+            ["瀏覽次數統計", "我們用GoatCounter統計頁面瀏覽和按鈕點擊次數。它不使用Cookie,也不儲存IP位址。我們看到的只有總數:哪些頁面被打開、來源網站、瀏覽器和系統類型、螢幕寬度、語言和國家。我們無法得知你是誰。如果你打開房東為你製作的連結,連結裡的住宿名稱也會被計入。"],
+            ["提問與意見", "你送出問題或意見時,訊息內容、送出時所在的頁面和電子郵件地址(有填才會有)會傳到我們管理的Google表單。我們只用來回覆你和修正指南。想刪除訊息,請寫信給我們。"],
+            ["其他公司的伺服器", "本站架設在GitHub Pages,字型從Google Fonts載入,所以頁面載入時,這些伺服器會收到你的IP位址和瀏覽器類型,任何網站伺服器都是如此。如果你在儲存的地址或地點上點Naver Map或KakaoMap,該文字會作為搜尋內容傳給該地圖服務。外部連結通往的服務各有自己的政策。"],
+            ["兒童", "EasyModeKorea是寫給成年旅客的,並非以13歲以下兒童為對象。"],
+            ["聯絡與變更", "提問或要求刪除:{email}。本政策有變更時,會更新下方日期。"],
+        ],
+    },
+    "zh-cn": {
+        "nav_label": "主菜单", "nav_guides": "指南", "nav_cards": "韩文卡", "nav_trip": "我的行程", "nav_help": "求助",
+        "search": "搜索指南", "save": "收藏", "saved": "已收藏", "share": "分享", "link_copied": "已复制链接",
+        "saved_toast": "已存到“我的行程”", "unsaved_toast": "已从“我的行程”移除",
+        "install": "安装App,没有网络也能看指南。", "install_btn": "安装", "later": "暂不",
+        "ios_hint": "iPhone:点“分享”按钮,再选“添加到主屏幕”。",
+        "update": "这一页有更新的内容。", "refresh": "刷新",
+        "ready": "已存到这部手机,没有网络也能看指南。", "miss": "那一页还没存到这部手机。有网络时先打开一次。", "call": "拨打", "jump_label": "跳到主题",
+        "arr_h": "电子入境卡什么时候可以提交?", "arr_label": "抵达韩国的时间(韩国时间)", "arr_from": "从{t}(韩国时间)起到抵达前都可以提交。", "arr_local": "按这部手机的时间:{t}",
+        "arr_open": "现在可以提交了。", "arr_wait": "{r}开放提交。", "arr_past": "这个抵达时间已经过了。", "arr_site": "电子入境卡官方网站",
+        "trust": "{n}篇指南·{date}确认", "chg_note": "在这些日期之前写成的信息(包括旧的指南和AI的回答),可能还是旧规定。",
+        "places_h": "要去的地方", "places_ph": "韩文地址、地点名称或Google地图链接", "places_add": "添加", "places_short": "短链接在手机上无法读取,请改贴地点名称。",
+        "food_h": "饮食限制与过敏", "pay_h": "付款不顺时",
+        "off_ok": "离线可用", "pack_h": "离线包", "pack_state": "已存 {n}/{m}", "pack_ok": "已全部离线保存", "pack_btn": "重新下载", "pack_busy": "下载中…",
+        "share_h": "分享给同行的人", "share_lede": "🔒 不上传:内容在链接里", "share_btn": "生成链接和二维码", "share_copy": "复制链接", "share_warn": "拿到这个链接的人都能看到内容。", "share_empty": "请先添加住宿地址或地点。",
+        "import_q": "同行的人分享了行程清单给你:{n}项。要添加到这部手机吗?", "import_done": "已添加。",
+        "rd_title": "Korea Ready检查", "rd_seo": "Korea Ready检查:你的手机、银行卡和App在韩国能用吗?", "rd_desc": "一分钟,点一点就好,不用打字,也不用注册。得到适合你这趟行程的计划:你的手机号能用哪些韩国App、出发前要设置什么、要带什么支付方式。每个答案都有确认日期。", "rd_lede": "一分钟,点一点就好,不用打字。得到适合你的手机、银行卡和行程的准备计划。", "rd_start": "开始", "rd_next": "下一步", "rd_skip": "跳过", "rd_done": "看我的计划", "rd_multi": "可以多选。", "rd_q_pay": "在韩国怎么付款?", "rd_pay_card": "带芯片的卡", "rd_pay_card_s": "本国的信用卡或借记卡", "rd_pay_wallet": "只用手机支付", "rd_pay_wallet_s": "Apple Pay、Google Pay等,不带实体卡", "rd_pay_cash": "主要用现金", "rd_pay_cash_s": "到当地取现或换钱", "rd_q_air": "你从哪里入境?", "rd_air_icn": "仁川机场", "rd_air_gmp": "金浦机场", "rd_air_other": "其他机场或港口", "rd_q_city": "会去首尔以外的地方吗?", "rd_city_none": "只在首尔", "rd_q_food": "有过敏或饮食限制吗?", "rd_food_yes": "有,需要告诉餐厅", "rd_food_no": "没有", "rd_q_dates": "你什么时候在韩国?", "rd_score": "Korea Ready:{d}/{n}", "rd_score_sub": "出发前要做的事·存在本机", "rd_nc": "待确认", "rd_city_busan": "釜山", "rd_city_jeju": "济州", "rd_city_dmz": "DMZ", "rd_x_checked": "已确认手机状况", "rd_x_taxi": "出发前先在打车App绑卡(k.ride评论:要先绑卡)", "rd_later_h": "抵达之后", "rd_apps_h": "以你的手机条件", "rd_plan_h": "你要做的事", "rd_help_h": "遇到状况时", "rd_x_wallet": "也带实体芯片卡:很多店不收手机支付", "rd_x_card": "请发卡银行开通韩国与网上支付", "rd_x_cash": "现金:Global与便利店ATM,选KRW", "rd_x_food": "先试一次全屏饮食卡", "rd_x_read": "阅读:{t}", "rd_x_help": "先找到求助:遗失、生病、末班车、刷卡、出租车", "rd_share": "分享我的分数", "rd_share_text": "我的Korea Ready是{d}/{n}。花一分钟检查你的手机、银行卡和App在韩国能不能用:", "rd_redo": "修改回答", "rd_saved": "日期和指南已放进“我的行程”。", "rd_cta_sub": "一分钟,点一点就好", "rd_continue": "准备 {d}/{n} 完成", "rd_next_step": "下一步:{t}",
+        "trip_title": "我的行程", "trip_lede": "你收藏的指南、住宿地址和自己做的韩文卡。全部只存在这部手机里。",
+        "trip_saved_h": "收藏的指南", "trip_saved_empty": "还没有收藏。",
+        "trip_recent_h": "最近看过",
+        "trip_more_h": "旅途中用得到", "trip_cards": "做一张给人看的韩文卡", "trip_setup": "查查你的手机能用哪些", "trip_help": "紧急电话",
+        "trip_app_h": "这个App", "trip_offline": "这部手机已存好{n}个页面,没有网络也能打开。", "trip_install": "安装到这部手机",
+        "trip_clear": "清除存在这部手机的内容", "trip_clear_q": "要从这部手机清除收藏的指南、地址、卡片和手机设置吗?", "trip_cleared": "已清除。",
+        "remove": "移除",
+        "cards_title": "给人看的韩文卡", "cards_seo": "在韩国给店员和司机看的韩文句子(可离线使用)",
+        "cards_desc": "用大字显示韩文句子和地名,可以给司机或店员看,也能复制到Naver Map。还能自己做卡片。离线也能用。",
+        "cards_lede": "把卡片全屏给司机或店员看。酒店名称或过敏原可以自己做一张。",
+        "cards_filter": "筛选:出租车、菜单、药店",
+        "own_h": "自己做一张卡", "own_ph": "输入或粘贴韩文", "own_show": "全屏显示", "own_save": "保存", "own_list_h": "你的卡片", "own_note": "只存在这部手机里。",
+        "basics_h": "日常与紧急", "open_guide": "打开指南",
+        "help_title": "在韩国紧急求助", "help_seo": "游客在韩国的紧急电话:112、119、1330",
+        "help_desc": "在韩国该打哪个电话:112报警、119救护车与医疗咨询、1330旅游咨询热线。附上可以给人看的韩文卡。离线也能用。",
+        "help_lede": "点号码就能拨打。说不清楚时,给对方看韩文卡。",
+        "help_more_h": "更多帮助", "help_offline": "这一页没有网络也能打开。打电话需要手机信号。",
+        "deep_faq": "指南里的解答", "deep_cards": "韩文卡",
+        "privacy": "隐私", "privacy_title": "隐私政策",
+        "privacy_desc": "EasyModeKorea收集哪些信息(非常少)、哪些只留在你的手机里,以及如何联系我们。适用于网站和Android App。",
+        "privacy_updated": "最后更新:{date}",
+        "privacy_body": [
+            ["要点", "EasyModeKorea没有账号、没有广告,也没有用于追踪的Cookie。Android App只是把这个网站全屏显示,不会要求访问你的位置、通讯录、相机或文件。"],
+            ["只留在你手机里的内容", "你的手机设置、Korea Ready检查的回答、旅行日期、收藏的指南和地点、清单勾选、住宿地址和自己做的韩文卡,只存在你手机的浏览器或App里,不会发送给我们。你可以在“我的行程”页面清除,或在浏览器里清除本站数据。如果你为同行的人生成分享链接,住宿地址和地点只会写在那个链接里,拿到链接的人都能看到。"],
+            ["访问次数统计", "我们用GoatCounter统计页面浏览和按钮点击次数。它不使用Cookie,也不保存IP地址。我们看到的只有总数:哪些页面被打开、来源网站、浏览器和系统类型、屏幕宽度、语言和国家。我们无法得知你是谁。如果你打开房东为你制作的链接,链接里的住宿名称也会被计入。"],
+            ["提问与反馈", "你提交问题或反馈时,留言内容、提交时所在的页面和电子邮件地址(填写了才会有)会发送到我们管理的Google表单。我们只用来回复你和修正指南。想删除留言,请给我们发邮件。"],
+            ["其他公司的服务器", "本站托管在GitHub Pages,字体从Google Fonts加载,所以页面加载时,这些服务器会收到你的IP地址和浏览器类型,任何网站服务器都是如此。如果你在保存的地址或地点上点Naver Map或KakaoMap,该文字会作为搜索内容发送给该地图服务。外部链接通往的服务各有自己的政策。"],
+            ["儿童", "EasyModeKorea是写给成年游客的,并非面向13岁以下儿童。"],
+            ["联系与变更", "提问或要求删除:{email}。本政策有变更时,会更新下方日期。"],
+        ],
+    },
+    "vi": {
+        "nav_label": "Menu chính", "nav_guides": "Hướng dẫn", "nav_cards": "Thẻ tiếng Hàn", "nav_trip": "Của tôi", "nav_help": "Trợ giúp",
+        "search": "Tìm hướng dẫn", "save": "Lưu", "saved": "Đã lưu", "share": "Chia sẻ", "link_copied": "Đã sao chép liên kết",
+        "saved_toast": "Đã lưu vào mục Của tôi", "unsaved_toast": "Đã bỏ khỏi mục Của tôi",
+        "install": "Cài ứng dụng. Xem hướng dẫn cả khi không có mạng.", "install_btn": "Cài đặt", "later": "Để sau",
+        "ios_hint": "Trên iPhone: chạm nút Chia sẻ, rồi chọn Thêm vào Màn hình chính.",
+        "update": "Trang này có thông tin mới hơn.", "refresh": "Tải lại",
+        "ready": "Đã lưu trên điện thoại này. Giờ có thể mở hướng dẫn khi không có mạng.", "miss": "Trang đó chưa được lưu trên điện thoại này. Hãy mở một lần khi có mạng.", "call": "Gọi", "jump_label": "Chuyển đến chủ đề",
+        "arr_h": "Khi nào nộp được e-Arrival Card?", "arr_label": "Giờ hạ cánh ở Hàn Quốc (giờ Hàn Quốc)", "arr_from": "Bạn nộp được từ {t} (giờ Hàn Quốc) cho đến khi hạ cánh.", "arr_local": "Theo đồng hồ điện thoại này: {t}",
+        "arr_open": "Bây giờ đã nộp được.", "arr_wait": "Mở {r}.", "arr_past": "Giờ hạ cánh đó đã qua.", "arr_site": "Trang chính thức e-Arrival Card",
+        "trust": "{n} hướng dẫn · kiểm tra {date}", "chg_note": "Thông tin viết trước các ngày này, kể cả hướng dẫn cũ và câu trả lời của AI, có thể vẫn theo quy định cũ.",
+        "places_h": "Nơi cần đến", "places_ph": "Địa chỉ tiếng Hàn, tên địa điểm hoặc liên kết Google Maps", "places_add": "Thêm", "places_short": "Không đọc được liên kết rút gọn trên điện thoại. Hãy dán tên địa điểm.",
+        "food_h": "Ăn kiêng và dị ứng", "pay_h": "Khi thanh toán không được",
+        "off_ok": "Dùng được khi không có mạng", "pack_h": "Gói ngoại tuyến", "pack_state": "Đã lưu {n}/{m}", "pack_ok": "Đã lưu hết để dùng ngoại tuyến", "pack_btn": "Tải lại", "pack_busy": "Đang tải…",
+        "share_h": "Chia sẻ với bạn đồng hành", "share_lede": "🔒 Không tải lên: danh sách nằm trong liên kết", "share_btn": "Tạo liên kết và mã QR", "share_copy": "Sao chép liên kết", "share_warn": "Ai có liên kết này đều đọc được danh sách.", "share_empty": "Hãy thêm địa chỉ chỗ ở hoặc một địa điểm trước.",
+        "import_q": "Bạn đồng hành đã chia sẻ danh sách chuyến đi: {n} mục. Thêm vào điện thoại này?", "import_done": "Đã thêm.",
+        "rd_title": "Kiểm tra Korea Ready", "rd_seo": "Kiểm tra Korea Ready: điện thoại, thẻ và ứng dụng của bạn có dùng được ở Hàn Quốc không?", "rd_desc": "Một phút, chỉ cần chạm, không cần gõ, không cần tài khoản. Nhận kế hoạch cho chính chuyến đi của bạn: ứng dụng Hàn Quốc nào dùng được với số điện thoại của bạn, cần chuẩn bị gì ở nhà, mang gì để thanh toán. Mỗi câu trả lời đều có ngày kiểm tra.", "rd_lede": "Một phút, chỉ cần chạm, không cần gõ. Bạn nhận kế hoạch cho chính điện thoại, thẻ và chuyến đi của mình.", "rd_start": "Bắt đầu", "rd_next": "Tiếp", "rd_skip": "Bỏ qua", "rd_done": "Xem kế hoạch", "rd_multi": "Chọn tất cả mục phù hợp.", "rd_q_pay": "Bạn sẽ thanh toán thế nào ở Hàn Quốc?", "rd_pay_card": "Thẻ có chip", "rd_pay_card_s": "Thẻ tín dụng hoặc ghi nợ từ nước bạn", "rd_pay_wallet": "Chỉ ví trên điện thoại", "rd_pay_wallet_s": "Apple Pay, Google Pay hoặc tương tự, không có thẻ nhựa", "rd_pay_cash": "Chủ yếu tiền mặt", "rd_pay_cash_s": "Tôi sẽ rút hoặc đổi tiền", "rd_q_air": "Bạn hạ cánh ở đâu?", "rd_air_icn": "Sân bay Incheon", "rd_air_gmp": "Sân bay Gimpo", "rd_air_other": "Sân bay hoặc cảng khác", "rd_q_city": "Có đi ngoài Seoul không?", "rd_city_none": "Chỉ ở Seoul", "rd_q_food": "Có dị ứng hoặc kiêng ăn gì không?", "rd_food_yes": "Có, tôi cần báo cho nhà hàng", "rd_food_no": "Không", "rd_q_dates": "Bạn ở Hàn Quốc khi nào?", "rd_score": "Korea Ready: {d}/{n}", "rd_score_sub": "Việc trước chuyến bay · lưu trên máy", "rd_nc": "Cần kiểm tra lại", "rd_city_busan": "Busan", "rd_city_jeju": "Jeju", "rd_city_dmz": "DMZ", "rd_x_checked": "Đã kiểm tra điện thoại", "rd_x_taxi": "Thêm thẻ vào ứng dụng taxi khi còn ở nhà (đánh giá k.ride: cần thẻ trước)", "rd_later_h": "Sau khi hạ cánh", "rd_apps_h": "Với điện thoại của bạn", "rd_plan_h": "Các bước của bạn", "rd_help_h": "Nếu gặp sự cố", "rd_x_wallet": "Mang thêm thẻ chip: nhiều cửa hàng không nhận ví điện thoại", "rd_x_card": "Nhờ ngân hàng cho phép thanh toán ở Hàn và trực tuyến", "rd_x_cash": "Tiền mặt: ATM Global và ở cửa hàng tiện lợi, chọn KRW", "rd_x_food": "Thử một thẻ ăn uống toàn màn hình", "rd_x_read": "Đọc: {t}", "rd_x_help": "Biết chỗ Trợ giúp: mất đồ, ốm, lỡ tàu, thẻ, taxi", "rd_share": "Chia sẻ điểm của tôi", "rd_share_text": "Tôi đạt {d}/{n} Korea Ready. Kiểm tra điện thoại, thẻ và ứng dụng của bạn cho Hàn Quốc trong một phút:", "rd_redo": "Đổi câu trả lời", "rd_saved": "Ngày đi và hướng dẫn đã có trong mục Của tôi.", "rd_cta_sub": "1 phút, chỉ cần chạm", "rd_continue": "Kế hoạch: xong {d}/{n}", "rd_next_step": "Tiếp theo: {t}",
+        "trip_title": "Chuyến đi của tôi", "trip_lede": "Hướng dẫn đã lưu, địa chỉ chỗ ở và thẻ tiếng Hàn của bạn. Tất cả chỉ nằm trên điện thoại này.",
+        "trip_saved_h": "Hướng dẫn đã lưu", "trip_saved_empty": "Chưa lưu gì.",
+        "trip_recent_h": "Mới mở gần đây",
+        "trip_more_h": "Hữu ích cho chuyến đi", "trip_cards": "Tạo thẻ tiếng Hàn để đưa xem", "trip_setup": "Xem điện thoại của bạn dùng được gì", "trip_help": "Số khẩn cấp",
+        "trip_app_h": "Ứng dụng này", "trip_offline": "{n} trang đã lưu trên điện thoại này và mở được khi không có mạng.", "trip_install": "Cài vào điện thoại này",
+        "trip_clear": "Xóa những gì đã lưu trên điện thoại này", "trip_clear_q": "Xóa hướng dẫn đã lưu, địa chỉ, thẻ và thiết lập điện thoại khỏi máy này?", "trip_cleared": "Đã xóa.",
+        "remove": "Bỏ",
+        "cards_title": "Thẻ tiếng Hàn để đưa xem", "cards_seo": "Câu tiếng Hàn để đưa nhân viên và tài xế xem ở Hàn Quốc (dùng offline)",
+        "cards_desc": "Câu và tên địa điểm tiếng Hàn bằng chữ lớn. Đưa cho tài xế hoặc nhân viên xem, hoặc sao chép vào Naver Map. Bạn cũng có thể tự tạo thẻ. Dùng được khi không có mạng.",
+        "cards_lede": "Hiện thẻ toàn màn hình cho tài xế hoặc nhân viên xem. Tự tạo thẻ cho tên khách sạn hoặc dị ứng.",
+        "cards_filter": "Lọc: taxi, thực đơn, hiệu thuốc",
+        "own_h": "Tự tạo thẻ", "own_ph": "Gõ hoặc dán chữ tiếng Hàn", "own_show": "Hiện toàn màn hình", "own_save": "Lưu thẻ", "own_list_h": "Thẻ của bạn", "own_note": "Chỉ lưu trên điện thoại này.",
+        "basics_h": "Hằng ngày và khẩn cấp", "open_guide": "Mở hướng dẫn",
+        "help_title": "Trợ giúp khẩn cấp ở Hàn Quốc", "help_seo": "Số khẩn cấp ở Hàn Quốc cho du khách: 112, 119, 1330",
+        "help_desc": "Gọi số nào ở Hàn Quốc: 112 cảnh sát, 119 cấp cứu và tư vấn y tế, 1330 đường dây du lịch. Kèm thẻ tiếng Hàn để đưa người khác xem. Dùng được khi không có mạng.",
+        "help_lede": "Chạm vào số để gọi. Nếu khó giải thích, hãy đưa thẻ tiếng Hàn.",
+        "help_more_h": "Trợ giúp khác", "help_offline": "Trang này mở được khi không có mạng. Gọi điện cần có sóng điện thoại.",
+        "deep_faq": "Giải đáp trong hướng dẫn", "deep_cards": "Thẻ tiếng Hàn",
+        "privacy": "Quyền riêng tư", "privacy_title": "Chính sách quyền riêng tư",
+        "privacy_desc": "EasyModeKorea thu thập gì (rất ít), những gì chỉ nằm trên điện thoại của bạn và cách liên hệ. Áp dụng cho trang web và ứng dụng Android.",
+        "privacy_updated": "Cập nhật lần cuối: {date}",
+        "privacy_body": [
+            ["Tóm tắt", "EasyModeKorea không có tài khoản, không có quảng cáo và không dùng cookie theo dõi. Ứng dụng Android hiển thị trang web này ở chế độ toàn màn hình. Ứng dụng không xin quyền truy cập vị trí, danh bạ, máy ảnh hay tệp của bạn."],
+            ["Những gì chỉ nằm trên điện thoại của bạn", "Thiết lập điện thoại, câu trả lời Kiểm tra Korea Ready, ngày đi, hướng dẫn và địa điểm đã lưu, các mục đã đánh dấu, địa chỉ chỗ ở và thẻ tiếng Hàn bạn tạo chỉ được lưu trong trình duyệt hoặc ứng dụng trên điện thoại của bạn. Chúng không bao giờ được gửi cho chúng tôi. Bạn có thể xóa ở trang Chuyến đi của tôi, hoặc xóa dữ liệu của trang web trong trình duyệt. Nếu bạn tạo liên kết chia sẻ cho bạn đồng hành, địa chỉ chỗ ở và các địa điểm chỉ được ghi trong chính liên kết đó, nên ai có liên kết đều đọc được."],
+            ["Đếm lượt truy cập", "Chúng tôi đếm lượt xem trang và lượt chạm nút bằng GoatCounter. Dịch vụ này không đặt cookie và không lưu địa chỉ IP. Chúng tôi chỉ thấy tổng số: trang nào được mở, trang giới thiệu, loại trình duyệt và hệ điều hành, chiều rộng màn hình, ngôn ngữ và quốc gia. Chúng tôi không thể biết bạn là ai. Nếu bạn mở liên kết do chủ nhà tạo cho bạn, tên chỗ ở trong liên kết đó cũng được đếm."],
+            ["Câu hỏi và góp ý", "Khi bạn gửi câu hỏi hoặc góp ý, nội dung tin nhắn, trang bạn đang xem và địa chỉ email (chỉ khi bạn nhập) được gửi tới một Google Form do chúng tôi quản lý. Chúng tôi chỉ dùng để trả lời bạn và sửa hướng dẫn. Hãy gửi email nếu bạn muốn xóa tin nhắn."],
+            ["Máy chủ của công ty khác", "Trang web được đặt trên GitHub Pages và tải phông chữ từ Google Fonts, nên các máy chủ đó nhận địa chỉ IP và loại trình duyệt của bạn khi trang được tải, giống như mọi máy chủ web. Nếu bạn chạm Naver Map hoặc KakaoMap trên địa chỉ hay địa điểm đã lưu, nội dung đó được gửi tới dịch vụ bản đồ ấy dưới dạng từ khóa tìm kiếm. Các liên kết ngoài dẫn tới dịch vụ có chính sách riêng."],
+            ["Trẻ em", "EasyModeKorea được viết cho du khách người lớn và không hướng tới trẻ em dưới 13 tuổi."],
+            ["Liên hệ và thay đổi", "Câu hỏi hoặc yêu cầu xóa: {email}. Khi chính sách này thay đổi, ngày bên dưới sẽ được cập nhật."],
+        ],
+    },
+}
+
+# Korean cards for moments with no time to type: [Korean, {language: meaning}]. Sentences only, no facts that can go stale.
+L5 = ("en", "ja", "zh-tw", "zh-cn", "vi")
+_c = lambda ko, *m: [ko, dict(zip(L5, m))]
+FOOD_CARDS = [
+    _c("저는 채식주의자예요. 고기와 해산물은 못 먹어요.", "I'm vegetarian. I can't eat meat or seafood.", "ベジタリアンです。肉と魚介類は食べられません。", "我吃素,不能吃肉和海鮮。", "我吃素,不能吃肉和海鲜。", "Tôi ăn chay. Tôi không ăn được thịt và hải sản."),
+    _c("돼지고기는 못 먹어요.", "I can't eat pork.", "豚肉は食べられません。", "我不能吃豬肉。", "我不能吃猪肉。", "Tôi không ăn được thịt lợn."),
+    _c("돼지고기와 술이 들어간 음식은 못 먹어요.", "I can't eat food with pork or alcohol in it.", "豚肉やお酒が入った料理は食べられません。", "我不能吃含豬肉或酒的食物。", "我不能吃含猪肉或酒的食物。", "Tôi không ăn được món có thịt lợn hoặc rượu."),
+    _c("이 음식에 고기가 들어가나요?", "Does this dish have meat in it?", "この料理に肉は入っていますか?", "這道菜裡有肉嗎?", "这道菜里有肉吗?", "Món này có thịt không?"),
+    _c("육수에 고기나 멸치가 들어가나요?", "Is the broth made with meat or anchovy?", "だしに肉や煮干しは使っていますか?", "湯頭有用肉或小魚乾嗎?", "汤底有用肉或小鱼干吗?", "Nước dùng có nấu bằng thịt hoặc cá cơm không?"),
+    _c("새우, 게 같은 갑각류 알레르기가 있어요.", "I'm allergic to shellfish such as shrimp and crab.", "えび・かになどの甲殻類アレルギーがあります。", "我對蝦、蟹等甲殼類過敏。", "我对虾、蟹等甲壳类过敏。", "Tôi dị ứng với tôm, cua và các loại giáp xác."),
+    _c("땅콩 알레르기가 있어요.", "I'm allergic to peanuts.", "ピーナッツアレルギーがあります。", "我對花生過敏。", "我对花生过敏。", "Tôi dị ứng đậu phộng."),
+    _c("계란 알레르기가 있어요.", "I'm allergic to eggs.", "卵アレルギーがあります。", "我對雞蛋過敏。", "我对鸡蛋过敏。", "Tôi dị ứng trứng."),
+    _c("우유와 유제품을 못 먹어요.", "I can't have milk or dairy.", "牛乳・乳製品は食べられません。", "我不能吃牛奶和乳製品。", "我不能吃牛奶和乳制品。", "Tôi không dùng được sữa và các sản phẩm từ sữa."),
+    _c("밀가루(글루텐)를 못 먹어요.", "I can't eat wheat (gluten).", "小麦(グルテン)は食べられません。", "我不能吃麵粉(麩質)。", "我不能吃面粉(麸质)。", "Tôi không ăn được bột mì (gluten)."),
+    _c("덜 맵게 해 주세요.", "Please make it less spicy.", "辛さを控えめにしてください。", "請不要做太辣。", "请不要做太辣。", "Xin làm ít cay hơn."),
+    _c("이 재료를 빼 주실 수 있나요?", "Could you leave this ingredient out?", "この材料を抜いてもらえますか?", "可以不要加這個食材嗎?", "可以不要加这个食材吗?", "Có thể bỏ nguyên liệu này ra được không?"),
+]
+PAY_CARDS = [
+    _c("카드가 안 돼요. 다른 방법으로 결제할 수 있나요?", "My card isn't working. Can I pay another way?", "カードが使えません。別の方法で支払えますか?", "我的卡刷不過,可以用別的方式付款嗎?", "我的卡刷不了,可以用别的方式付款吗?", "Thẻ của tôi không dùng được. Tôi trả bằng cách khác được không?"),
+    _c("해외 카드인데 결제되나요?", "This is a foreign card. Does it work here?", "海外のカードですが、使えますか?", "這是國外的卡,可以刷嗎?", "这是国外的卡,可以刷吗?", "Đây là thẻ nước ngoài. Ở đây dùng được không?"),
+    _c("카드를 꽂아서 결제해 주세요.", "Please insert the card instead of tapping.", "タッチではなく、カードを差し込んで決済してください。", "請用插卡的方式結帳,不要感應。", "请用插卡的方式结账,不要感应。", "Xin cắm thẻ vào máy thay vì chạm."),
+    _c("키오스크에서 결제가 안 돼요. 카운터에서 계산해도 되나요?", "The kiosk won't take my card. Can I pay at the counter?", "キオスクで決済できません。カウンターで支払えますか?", "自助點餐機刷不過,可以到櫃台結帳嗎?", "自助点餐机刷不了,可以到柜台结账吗?", "Máy tự gọi món không nhận thẻ của tôi. Tôi trả ở quầy được không?"),
+    _c("현금으로 계산할게요.", "I'll pay in cash.", "現金で払います。", "我付現金。", "我付现金。", "Tôi trả bằng tiền mặt."),
+    _c("원화로 결제해 주세요.", "Please charge me in Korean won.", "韓国ウォンで決済してください。", "請用韓元結帳。", "请用韩元结账。", "Xin tính tiền bằng won Hàn Quốc."),
+    _c("영수증 주세요.", "A receipt, please.", "レシートをください。", "請給我收據。", "请给我收据。", "Cho tôi xin hóa đơn."),
+]
+
+# Home jump grid: a short label per situation card (card ids from layout.CARDS).
+JUMP = {
+    "landed": {"en": "Arrival", "ja": "到着", "zh-tw": "抵達", "zh-cn": "抵达", "vi": "Đến nơi"},
+    "move": {"en": "Transport", "ja": "移動", "zh-tw": "交通", "zh-cn": "交通", "vi": "Đi lại"},
+    "pay": {"en": "Money", "ja": "お金", "zh-tw": "付款", "zh-cn": "付款", "vi": "Tiền"},
+    "phone": {"en": "Phone", "ja": "スマホ", "zh-tw": "手機", "zh-cn": "手机", "vi": "Điện thoại"},
+    "eat": {"en": "Food", "ja": "食事", "zh-tw": "吃飯", "zh-cn": "吃饭", "vi": "Ăn uống"},
+    "shop": {"en": "Shopping", "ja": "買い物", "zh-tw": "購物", "zh-cn": "购物", "vi": "Mua sắm"},
+    "sick": {"en": "Sick", "ja": "病気", "zh-tw": "生病", "zh-cn": "生病", "vi": "Ốm đau"},
+    "trips": {"en": "Trips", "ja": "遠出", "zh-tw": "遠行", "zh-cn": "远行", "vi": "Đi xa"},
+}
+
+# Strings the shared script needs on every page (the rest are only used at build time).
+JS_KEYS = ("save", "saved", "share", "link_copied", "saved_toast", "unsaved_toast", "install", "install_btn", "later", "update", "refresh", "ready", "miss", "off_ok")
+
+SVG = lambda body: f'<svg viewBox="0 0 24 24" aria-hidden="true">{body}</svg>'
+IC = {
+    "back": '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>',
+    "guides": SVG('<path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/>'),
+    "cards": SVG('<path d="M4 5h16v11H10l-4.5 4v-4H4z"/><path d="M8 9h8M8 12h5"/>'),
+    "trip": SVG('<path d="M7 3h10a1 1 0 0 1 1 1v17l-6-4-6 4V4a1 1 0 0 1 1-1z"/>'),
+    "help": SVG('<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.6"/><path d="M5.7 5.7l3.7 3.7M14.6 14.6l3.7 3.7M18.3 5.7l-3.7 3.7M9.4 14.6l-3.7 3.7"/>'),
+    "search": SVG('<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/>'),
+    "globe": SVG('<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"/>'),
+    "save": SVG('<path d="M7 3h10a1 1 0 0 1 1 1v17l-6-4-6 4V4a1 1 0 0 1 1-1z"/>'),
+    "phone": SVG('<path d="M6.5 3.5h3l1.5 4-2 1.5a12 12 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2 2A16 16 0 0 1 4.5 5.5a2 2 0 0 1 2-2z"/>'),
+    "expand": SVG('<path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/>'),
+    "copy": SVG('<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/>'),
+    "share": SVG('<path d="M12 15V3M8 7l4-4 4 4"/><path d="M5 12v7a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-7"/>'),
+    "ready": SVG('<circle cx="12" cy="12" r="9"/><path d="M7.5 12.5l3 3 6-6.5"/>'),
+}
+
+TABS = (("guides", "./", "nav_guides"), ("cards", "phrases.html", "nav_cards"), ("trip", "saved.html", "nav_trip"), ("help", "help.html", "nav_help"))
+
+
+def esc(s):
+    import html
+    return html.escape(str(s), quote=True)
+
+
+def tabbar(lang, active):
+    """Bottom tabs. Plain links, so they work without script and offline."""
+    t = T[lang]
+    cur = ' aria-current="page"'
+    items = "".join(f'<a href="{href}" class="tab-{key}"{cur if key == active else ""}>{IC[key]}<span>{esc(t[lbl])}</span></a>' for key, href, lbl in TABS)
+    return f'<nav class="tabbar" aria-label="{esc(t["nav_label"])}">{items}</nav>'
+
+
+def page_config(lang, up, ux, guide=None):
+    """Inline settings for app.js: language, path to the site root, and the few strings it shows."""
+    t = {k: T[lang][k] for k in JS_KEYS}
+    t.update({"offline": ux["offline"], "suggest": ux["suggest"], "switch": ux["switch"], "dismiss": ux["dismiss"]})
+    cfg = {"lang": lang, "up": up, "t": t}
+    if guide: cfg["guide"] = guide
+    return json.dumps(cfg, ensure_ascii=False).replace("</", "<\\/")
+
+
+# Opens the installed app in the language the visitor picked last time. Goes on the English pages the
+# app can start from (home and the three shortcuts); the site is served from the domain root.
+LAUNCH_JS = ('<script>try{var l=localStorage.getItem("emk-lang");if(l&&/^(ja|zh-tw|zh-cn|vi)$/.test(l)&&!sessionStorage.getItem("emk-go")&&'
+             '(matchMedia("(display-mode: standalone)").matches||navigator.standalone)){sessionStorage.setItem("emk-go","1");location.replace("/"+l+location.pathname+location.hash)}}catch(e){}</script>')
+
+
+APP_JS = r"""/* EasyModeKorea app shell: offline, install, save, share, notices. Shared by every page. */
+(function () {
+  "use strict";
+  var E = window.EMK || { lang: "en", up: "", t: {} }, T = E.t, d = document;
+  function get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  function list(k) { try { var a = JSON.parse(get(k) || "[]"); return Array.isArray(a) ? a : []; } catch (e) { return []; } }
+  function count(path, title) { try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: path, title: title, event: true }); } catch (e) {} }
+  function mk(tag, cls, text) { var n = d.createElement(tag); if (cls) n.className = cls; if (text) n.textContent = text; return n; }
+  var standalone = !!((window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true);
+  if (standalone) d.documentElement.classList.add("app");
+  try { sessionStorage.setItem("emk-go", "1"); } catch (e) {}
+
+  /* One small notice above the tabs. */
+  var note = null, noteTimer = 0;
+  function toast(text, actText, act, ms) {
+    if (!note) { note = mk("div", "toast app-toast"); note.setAttribute("role", "status"); d.body.appendChild(note); }
+    note.textContent = text;
+    if (actText) { var b = mk("button", "", actText); b.type = "button"; b.addEventListener("click", act); note.appendChild(b); }
+    note.hidden = false; clearTimeout(noteTimer);
+    if (ms !== 0) noteTimer = setTimeout(function () { note.hidden = true; }, ms || 2600);
+  }
+  window.emkToast = toast;
+
+  /* Offline: a strip above the tabs for as long as there is no connection. */
+  var strip = null;
+  function net() {
+    var off = !navigator.onLine; d.documentElement.classList.toggle("offline", off);
+    if (off && !strip) { strip = mk("div", "net-strip", T.offline); strip.setAttribute("role", "status"); d.body.appendChild(strip); }
+    if (strip) strip.hidden = !off;
+  }
+  addEventListener("offline", net); addEventListener("online", net); net();
+  /* Sent here by the offline worker when a page that is not on the phone was asked for without a connection. */
+  if (location.hash === "#offline-miss") {
+    toast(T.miss, null, null, 8000);
+    try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {}
+  }
+
+  /* A clear mark on any page that is saved on this phone (not on the home screen, which says so in its own words). */
+  function markOffline() {
+    if (!window.caches || d.querySelector(".off-ok") || d.getElementById("jump")) return;
+    caches.match(location.origin + location.pathname).then(function (r) {
+      var h = d.querySelector(".hero .hero-title") || d.querySelector(".hero .wrap"); if (!r || !h || d.querySelector(".off-ok")) return;
+      h.appendChild(mk("p", "off-ok", "\u2713 " + T.off_ok));
+    }).catch(function () {});
+  }
+  markOffline();
+  /* Offline copy of the site, and a notice when the page on screen has a newer version. */
+  if ("serviceWorker" in navigator) {
+    var reg = function () { navigator.serviceWorker.register(E.up + "sw.js?l=" + E.lang).catch(function () {}); };
+    if (d.readyState === "complete") reg(); else addEventListener("load", reg);
+    navigator.serviceWorker.addEventListener("message", function (ev) {
+      if (!ev.data) return;
+      if (ev.data.t === "upd" && ev.data.p === location.pathname) toast(T.update, T.refresh, function () { location.reload(); }, 12000);
+      /* First visit: say once that the guides are now on the phone. */
+      if (ev.data.t === "ready") { markOffline(); if (!get("emk-ready")) { set("emk-ready", "1"); toast(T.ready, null, null, 6000); } }
+    });
+  }
+
+  /* Install prompt: shown after the visitor has looked around, never inside the installed app. */
+  var deferred = null, bar = null;
+  function askInstall() { if (!deferred) return; var p = deferred; deferred = null; hideBar(); p.prompt(); count("install", "install"); }
+  function hideBar() { if (bar) { bar.remove(); bar = null; } }
+  function showBar() {
+    if (bar || !deferred || standalone) return;
+    if (Date.now() - Number(get("emk-install-no") || 0) < 14 * 864e5) return;
+    bar = mk("div", "install-bar"); bar.setAttribute("role", "region"); bar.setAttribute("aria-label", T.install_btn);
+    var go = mk("button", "btn", T.install_btn), no = mk("button", "x", "\u2715"); go.type = no.type = "button"; no.setAttribute("aria-label", T.later);
+    go.addEventListener("click", askInstall);
+    no.addEventListener("click", function () { set("emk-install-no", String(Date.now())); hideBar(); });
+    bar.appendChild(mk("span", "", T.install)); bar.appendChild(go); bar.appendChild(no); d.body.appendChild(bar);
+  }
+  var views = 0; try { views = Number(sessionStorage.getItem("emk-pv") || 0) + 1; sessionStorage.setItem("emk-pv", String(views)); } catch (e) {}
+  addEventListener("beforeinstallprompt", function (ev) {
+    ev.preventDefault(); deferred = ev;
+    d.dispatchEvent(new CustomEvent("emk-installable"));
+    if (views >= 2) showBar(); else setTimeout(showBar, 20000);
+  });
+  addEventListener("appinstalled", function () { deferred = null; hideBar(); count("installed", "installed"); });
+  window.emkInstall = { ready: function () { return !!deferred; }, ask: askInstall, standalone: standalone };
+
+  /* Language: remember the choice, close the menu on an outside tap, suggest the reader's language once. */
+  var menu = d.querySelector(".lang-menu");
+  d.querySelectorAll(".langs a[data-l]").forEach(function (a) { a.addEventListener("click", function () { set("emk-lang", a.getAttribute("data-l")); }); });
+  if (menu) d.addEventListener("click", function (ev) { if (menu.open && !menu.contains(ev.target)) menu.open = false; });
+  (function () {
+    if (d.getElementById("lang-suggest") || get("wik-lang-dismiss") || get("emk-lang")) return;
+    var w = (navigator.language || "").toLowerCase();
+    var want = w.indexOf("ja") === 0 ? "ja" : /^zh-(tw|hk|mo|hant)/.test(w) ? "zh-tw" : w.indexOf("zh") === 0 ? "zh-cn" : w.indexOf("vi") === 0 ? "vi" : w.indexOf("en") === 0 ? "en" : "";
+    if (!want || want === E.lang) return;
+    var a = d.querySelector('.langs a[data-l="' + want + '"]'), hero = d.querySelector(".hero"); if (!a || !hero) return;
+    var wrap = mk("div", "wrap pre"), b = mk("div", "banner");
+    var go = mk("a", "btn alt", T["switch"]); go.href = a.getAttribute("href");
+    go.addEventListener("click", function () { set("emk-lang", want); });
+    var no = mk("button", "linkbtn", T.dismiss); no.type = "button";
+    no.addEventListener("click", function () { set("wik-lang-dismiss", "1"); wrap.remove(); });
+    b.appendChild(mk("span", "", T.suggest.replace("{l}", a.textContent))); b.appendChild(go); b.appendChild(no);
+    wrap.appendChild(b); hero.insertAdjacentElement("afterend", wrap);
+  })();
+
+  /* After the Korea Ready check, its entry on any page shows the score kept on this phone. */
+  (function () {
+    var sc = null; try { sc = JSON.parse(get("emk-rc-score") || "null"); } catch (e) {}
+    if (!sc || !sc.n) return;
+    d.querySelectorAll(".ready-cta").forEach(function (a) {
+      var sub = a.querySelector(".ready-sub"); a.classList.add("done");
+      if (sub) sub.textContent = String(a.getAttribute("data-continue")).replace("{d}", sc.d).replace("{n}", sc.n);
+      var nx = a.querySelector(".ready-next");
+      if (nx && sc.next && sc.lang === a.getAttribute("data-lang")) { nx.textContent = String(a.getAttribute("data-next")).replace("{t}", sc.next); nx.hidden = false; }
+    });
+  })();
+
+  /* Save and share on guide pages. Saved guides and recent guides are lists of slugs kept on this phone. */
+  var sv = d.getElementById("save-btn"), sh = d.getElementById("share-btn");
+  if (E.guide) {
+    var rec = list("emk-recent").filter(function (s) { return s !== E.guide; }); rec.unshift(E.guide); set("emk-recent", JSON.stringify(rec.slice(0, 6)));
+  }
+  if (sv && E.guide) {
+    var paint = function () { var on = list("emk-saved").indexOf(E.guide) >= 0; sv.setAttribute("aria-pressed", String(on)); sv.querySelector("span").textContent = on ? T.saved : T.save; return on; };
+    sv.addEventListener("click", function () {
+      var s = list("emk-saved"), i = s.indexOf(E.guide);
+      if (i >= 0) s.splice(i, 1); else { s.unshift(E.guide); count("save/" + E.guide, "save guide"); }
+      set("emk-saved", JSON.stringify(s.slice(0, 40))); toast(paint() ? T.saved_toast : T.unsaved_toast);
+    });
+    paint();
+  }
+  if (sh) sh.addEventListener("click", function () {
+    var c = d.querySelector('link[rel="canonical"]'), url = c ? c.href : location.href, title = d.title;
+    if (location.hostname !== "easymodekorea.com") url = location.href.split("#")[0];
+    var copied = function () { toast(T.link_copied); };
+    if (navigator.share) { navigator.share({ title: title, url: url }).catch(function () {}); }
+    else if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(url).then(copied, function () {}); }
+    count("share" + location.pathname, "share");
+  });
+})();
+"""
+
+
+SW_JS = r"""const C='emk-0';const PRE=[];
+/* EasyModeKorea offline worker. The line above is rewritten by src/build.py on every build.
+   Pages: answer from the copy on the phone at once, fetch a fresh copy in the background, and tell
+   the page when the fresh copy differs. Versioned files (?v=) never change, so the copy is final. */
+const L=new URL(self.location).searchParams.get('l')||'en',D=L==='en'?'':L+'/',LD=['ja/','zh-tw/','zh-cn/','vi/'];
+const ROOT=self.registration.scope;
+const own=p=>D?p.startsWith(D):!LD.some(x=>p.startsWith(x));
+/* Keep the reader's own language (pages and search index), every language's home page, and shared files. */
+const MINE=PRE.filter(p=>p.endsWith('/')||!/\.(html|json)$/.test(p)||own(p));
+const isPage=u=>u.pathname.endsWith('/')||u.pathname.endsWith('.html');
+const keyOf=u=>isPage(u)?u.origin+u.pathname:u.href;
+const clean=r=>r.redirected?new Response(r.body,{status:r.status,statusText:r.statusText,headers:r.headers}):r;
+/* Save every file of the pack that is not on the phone yet; returns how many are there afterwards. */
+const pack=async()=>{const c=await caches.open(C);let n=0;
+  await Promise.all(MINE.map(async p=>{const u=new URL(p,ROOT),k=keyOf(u);if(await c.match(k)){n++;return}
+    try{const r=await fetch(new Request(u.href,{cache:'reload'}));if(r.ok){await c.put(k,clean(r));n++}}catch(e){}}));return n};
+const count=async()=>{const c=await caches.open(C);let n=0;for(const p of MINE)if(await c.match(keyOf(new URL(p,ROOT))))n++;return n};
+self.addEventListener('install',e=>{e.waitUntil(pack()
+  .then(()=>self.clients.matchAll({type:'window',includeUncontrolled:true})).then(cs=>cs.forEach(cl=>cl.postMessage({t:'ready'})))
+  .then(()=>self.skipWaiting()))});
+/* My trip asks how complete the pack is ('status') or to fetch what is missing ('pack'). */
+self.addEventListener('message',e=>{const t=e.data&&e.data.t;if(t!=='status'&&t!=='pack')return;
+  e.waitUntil((t==='pack'?pack():count()).then(n=>e.source&&e.source.postMessage({t:'pack',n,m:MINE.length})))});
+self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
+/* Only what the reader sees counts as newer info: a new stylesheet or script name in the head does not. */
+const body=t=>t.slice(Math.max(0,t.indexOf('<body')));
+const tell=p=>new Promise(r=>setTimeout(r,1500)).then(()=>self.clients.matchAll({type:'window'})).then(cs=>cs.forEach(cl=>{if(new URL(cl.url).pathname===p)cl.postMessage({t:'upd',p})}));
+self.addEventListener('fetch',e=>{const r=e.request;if(r.method!=='GET')return;
+  const u=new URL(r.url);if(u.origin!==location.origin||u.pathname.endsWith('/sw.js'))return;
+  const nav=r.mode==='navigate',k=nav?u.origin+u.pathname:u.href;
+  e.respondWith((async()=>{
+    const c=await caches.open(C),hit=await c.match(k);
+    if(hit&&u.search.startsWith('?v='))return hit;
+    const old=hit&&nav?hit.clone():null;
+    const net=fetch(r).then(async res=>{
+      if(res.ok&&res.type==='basic'){const fresh=clean(res.clone());
+        if(old){const a=await old.text(),b=await fresh.clone().text();await c.put(k,fresh);if(body(a)!==body(b))await tell(u.pathname)}
+        else await c.put(k,fresh)}
+      return res});
+    if(hit){e.waitUntil(net.catch(()=>{}));return hit}
+    try{return clean(await net)}catch(err){
+      /* A page that is not on the phone: go to the reader's home page, which says so. */
+      if(nav){const h=new URL(D||'./',ROOT).href;if(k!==h&&await c.match(h))return Response.redirect(h+'#offline-miss',302)}
+      throw err}
+  })())});
+"""
+
+
+def manifest(desc, shots):
+    """Web manifest. Absolute paths, so the same file serves every language folder."""
+    m = {
+        "id": "/", "name": APP_NAME, "short_name": "EasyMode", "description": desc,
+        "lang": "en", "dir": "ltr", "start_url": "/", "scope": "/", "display": "standalone",
+        "background_color": "#2336e8", "theme_color": "#2336e8", "categories": ["travel", "navigation"],
+        "icons": [{"src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+                  {"src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+                  {"src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}],
+        "shortcuts": [
+            {"name": T["en"]["help_title"], "short_name": "Help", "url": "/help.html", "icons": [{"src": "/shortcut-help.png", "sizes": "96x96", "type": "image/png"}]},
+            {"name": T["en"]["cards_title"], "short_name": "Korean cards", "url": "/phrases.html", "icons": [{"src": "/shortcut-cards.png", "sizes": "96x96", "type": "image/png"}]},
+            {"name": T["en"]["trip_title"], "short_name": "My trip", "url": "/saved.html", "icons": [{"src": "/shortcut-trip.png", "sizes": "96x96", "type": "image/png"}]},
+        ],
+        "screenshots": [{"src": f"/{name}", "sizes": f"{w}x{h}", "type": "image/png", "form_factor": "narrow", "label": label} for name, w, h, label in shots],
+    }
+    return json.dumps(m, ensure_ascii=False, indent=1) + "\n"
+
+
+def assetlinks(fingerprints):
+    """Digital Asset Links file that lets the Android app open the site without a browser bar.
+    Fingerprints are public SHA-256 certificate fingerprints (Play app signing key, upload key)."""
+    if not fingerprints: return "[]\n"
+    return json.dumps([{"relation": ["delegate_permission/common.handle_all_urls"],
+                        "target": {"namespace": "android_app", "package_name": PACKAGE_ID, "sha256_cert_fingerprints": fingerprints}}], indent=1) + "\n"

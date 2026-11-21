@@ -1,0 +1,61 @@
+{
+  "packageId": "com.easymodekorea.app",
+  "host": "easymodekorea.com",
+  "name": "EasyModeKorea",
+  "launcherName": "EasyMode",
+  "display": "standalone",
+  "themeColor": "#2336E8",
+  "themeColorDark": "#4A59EE",
+  "navigationColor": "#FFFFFF",
+  "navigationColorDark": "#141A2E",
+  "navigationDividerColor": "#DFE3EE",
+  "navigationDividerColorDark": "#273050",
+  "backgroundColor": "#2336E8",
+  "enableNotifications": false,
+  "startUrl": "/",
+  "iconUrl": "https://easymodekorea.com/icon-512.png",
+  "maskableIconUrl": "https://easymodekorea.com/icon-maskable-512.png",
+  "splashScreenFadeOutDuration": 300,
+  "signingKey": {
+    "path": "./android.keystore",
+    "alias": "upload"
+  },
+  "appVersion": "1.0.0",
+  "appVersionCode": 1,
+  "shortcuts": [
+    {
+      "name": "Emergency help in Korea",
+      "shortName": "Help",
+      "url": "/help.html",
+      "chosenIconUrl": "https://easymodekorea.com/shortcut-help.png"
+    },
+    {
+      "name": "Korean cards to show",
+      "shortName": "Korean cards",
+      "url": "/phrases.html",
+      "chosenIconUrl": "https://easymodekorea.com/shortcut-cards.png"
+    },
+    {
+      "name": "My trip",
+      "shortName": "My trip",
+      "url": "/saved.html",
+      "chosenIconUrl": "https://easymodekorea.com/shortcut-trip.png"
+    }
+  ],
+  "generatorApp": "bubblewrap-cli",
+  "webManifestUrl": "https://easymodekorea.com/manifest.webmanifest",
+  "fallbackType": "customtabs",
+  "features": {},
+  "alphaDependencies": {
+    "enabled": false
+  },
+  "enableSiteSettingsShortcut": false,
+  "isChromeOSOnly": false,
+  "isMetaQuest": false,
+  "fullScopeUrl": "https://easymodekorea.com/",
+  "minSdkVersion": 24,
+  "orientation": "default",
+  "fingerprints": [],
+  "additionalTrustedOrigins": [],
+  "retainedBundles": []
+}
