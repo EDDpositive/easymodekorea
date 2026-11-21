@@ -105,7 +105,14 @@ jobs:
       - name: Sign with a throwaway key, the way the owner will
         shell: bash
         run: |
-          printf 'rehearsal-only\nrehearsal-only\nrehearsal-only\n' | powershell.exe -NoProfile -ExecutionPolicy Bypass -File android/sign-aab.ps1 -Aab "$(cygpath -w "$PWD/dl/easymodekorea-unsigned.aab")" -NoOpen
+          AAB="$(cygpath -w "$PWD/dl/easymodekorea-unsigned.aab")"
+          RUN="powershell.exe -NoProfile -ExecutionPolicy Bypass -File android/sign-aab.ps1 -NoOpen -Aab"
+          # First run: the script makes the key (two password lines). A pipe is not a keyboard, so the
+          # key tool drains it and the signing step finds no input and stops; that stop is expected here.
+          printf 'rehearsal-only\nrehearsal-only\n' | $RUN "$AAB" || true
+          test -f "$USERPROFILE/.emk-android/emk-upload.jks"
+          # Every later run: the key exists, one password, signed file out.
+          printf 'rehearsal-only\n' | $RUN "$AAB"
           SIGNED=$(ls "$USERPROFILE"/.emk-android/out/easymodekorea-*.aab | head -1)
           test -n "$SIGNED"
           jarsigner -verify "$SIGNED" | grep "jar verified"
