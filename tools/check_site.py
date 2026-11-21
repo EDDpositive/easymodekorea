@@ -75,6 +75,21 @@ def main():
     check(all(f"easymodekorea.com/{d}{n}</loc>" in sm for d in LANG_DIRS for n in ("phrases.html", "help.html", "privacy.html")) and "saved.html" not in sm
           and all('content="noindex"' in rd(d + "saved.html") for d in LANG_DIRS), "sitemap lists cards, help and privacy; My trip stays out of search")
 
+    # What sets the site apart from an AI answer: dated facts, sources and logged changes, readable by people and machines.
+    slugs = re.findall(r"easymodekorea\.com/([a-z0-9-]+)\.html\): .+\(checked \d{4}-\d\d-\d\d\)", rd("llms.txt"))
+    full = rd("llms-full.txt")
+    check(len(slugs) >= 21 and all(f"URL: https://easymodekorea.com/{s}.html" in full for s in slugs) and "Sources" in full and "Rule changes logged" in rd("llms.txt"),
+          "llms.txt lists every guide with its answer and check date; llms-full.txt has each guide's text and sources", f"{len(slugs)} guides")
+    probs = []
+    for d in LANG_DIRS:
+        g = rd(d + "ktx-train-booking.html"); h = rd(d + "index.html")
+        if '"lastReviewed"' not in g or '"citation"' not in g: probs.append(d + "guide: no lastReviewed/citation in JSON-LD")
+        if 'class="changed"' not in g: probs.append(d + "guide: no change block")
+        if 'class="trust-line"' not in h: probs.append(d + "home: no trust line")
+        if 'id="setup"' not in rd(d + "taxi.html"): probs.append(d + "taxi: no setup choice")
+        if 'id="places"' not in rd(d + "saved.html"): probs.append(d + "My trip: no places list")
+    check(not probs, "guides show what changed, how they were checked and a setup choice; home shows the trust line (all languages)", "; ".join(probs[:4]))
+
     # Web manifest.
     m = json.loads(rd("manifest.webmanifest")); probs = []
     for k in ("id", "name", "short_name", "start_url", "scope", "display", "icons", "theme_color", "background_color"):

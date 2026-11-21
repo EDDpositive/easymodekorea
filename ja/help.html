@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap"></noscript>
-<link rel="stylesheet" href="../style.css?v=3132ccd9">
+<link rel="stylesheet" href="../style.css?v=e99f1e79">
 <script>window.EMK={"lang": "ja", "up": "../", "t": {"save": "保存", "saved": "保存済み", "share": "共有", "link_copied": "リンクをコピーしました", "saved_toast": "マイページに保存しました", "unsaved_toast": "マイページから削除しました", "install": "アプリを追加。通信なしでもガイドが開けます。", "install_btn": "インストール", "later": "今はしない", "update": "このページに新しい情報があります。", "refresh": "更新", "ready": "このスマホに保存しました。通信なしでもガイドが開けます。", "miss": "そのページはまだこのスマホに保存されていません。通信できるときに一度開いてください。", "offline": "オフラインです。このページの内容はそのまま使えます。", "suggest": "このページは{l}でも読めます。", "switch": "切り替える", "dismiss": "このままでいい"}}</script><script defer src="../app.js?v=4c40dc42"></script>
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -101,11 +101,35 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !documen
   const h = location.hash && document.getElementById(location.hash.slice(1)); if (h && h.tagName === "DETAILS") h.open = true;
   const blocks = [...document.querySelectorAll(".pv[data-p]")];
   if (blocks.length < 2) return;
-  let shown = 0;
-  for (const b of blocks) { const ok = b.dataset.p === saved[0] && (!b.dataset.d || b.dataset.d === saved[1]); b.hidden = !ok; if (ok) shown++; }
-  if (!shown) { blocks.forEach(b => b.hidden = false); return; }
-  const btn = document.getElementById("show-all"); btn.hidden = false;
+  const btn = document.getElementById("show-all");
+  /* Show only the answer for one setup; if nothing matches, show them all. */
+  function apply(p, d) {
+    let shown = 0;
+    for (const b of blocks) { const ok = b.dataset.p === p && (!b.dataset.d || b.dataset.d === d); b.hidden = !ok; if (ok) shown++; }
+    if (!shown) blocks.forEach(b => b.hidden = false);
+    btn.hidden = !shown;
+  }
+  apply(saved[0], saved[1]);
   btn.addEventListener("click", () => { blocks.forEach(b => b.hidden = false); btn.hidden = true; });
+  /* Pick the setup right here, once: it is kept on this phone and every guide then answers for it. */
+  const setup = document.getElementById("setup"); if (!setup) return;
+  const names = JSON.parse(setup.dataset.names), now = document.getElementById("setup-now"), pick = document.getElementById("setup-pick"), dev = document.getElementById("setup-dev");
+  const hasDev = blocks.some(b => b.dataset.d), UAD = /iPhone|iPad|iPod/.test(navigator.userAgent) ? "ios" : /Android/.test(navigator.userAgent) ? "android" : null;
+  /* Until the reader chooses, the answer for most visitors (no Korean number) is shown and named, with Change beside it. */
+  let P = saved[0], D = store("wik-setup") ? saved[1] : (UAD || "ios"), pending = null, open = false;
+  function paintSetup() {
+    now.hidden = open; pick.hidden = !open; dev.hidden = true;
+    document.getElementById("setup-lbl").textContent = setup.dataset.is + ": " + names[P] + (hasDev && P !== "arc" ? " · " + names[D] : "");
+  }
+  function choose(p, d) { P = p; D = d; open = false; store("wik-setup", P + "|" + D); apply(P, D); paintSetup(); count("setup-guide/" + P + "/" + D, "setup on guide"); }
+  setup.querySelectorAll("[data-p]").forEach(b => b.addEventListener("click", () => {
+    const p = b.dataset.p;
+    if (p === "arc") choose(p, "ios"); else if (!hasDev || UAD) choose(p, UAD || D); else { pending = p; dev.hidden = false; dev.querySelector("button").focus(); }
+  }));
+  setup.querySelectorAll("[data-d]").forEach(b => b.addEventListener("click", () => choose(pending || P, b.dataset.d)));
+  document.getElementById("setup-change").addEventListener("click", () => { open = true; paintSetup(); pick.querySelector("button").focus(); });
+  apply(P, D);
+  setup.hidden = false; paintSetup();
 })();
 </script>
 <footer class="foot"><div class="wrap"><nav aria-label="EasyModeKorea"><a href="about.html">このサイトについて</a> · <a href="contact.html">お問い合わせ</a> · <a href="changes.html">変更点</a> · <a href="privacy.html">プライバシー</a> · <a href="../hosts.html">宿の方へ(韓国語)</a></nav><p>EasyModeKorea · <a href="mailto:edandco.biz@gmail.com">edandco.biz@gmail.com</a></p></div></footer>

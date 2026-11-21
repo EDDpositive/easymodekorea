@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap"></noscript>
-<link rel="stylesheet" href="style.css?v=3132ccd9">
+<link rel="stylesheet" href="style.css?v=e99f1e79">
 <script>window.EMK={"lang": "en", "up": "", "t": {"save": "Save", "saved": "Saved", "share": "Share", "link_copied": "Link copied", "saved_toast": "Saved to My trip", "unsaved_toast": "Removed from My trip", "install": "Install the app. Guides open without data.", "install_btn": "Install", "later": "Not now", "update": "This page has newer info.", "refresh": "Refresh", "ready": "Saved on this phone. Guides now open without data.", "miss": "That page isn't saved on this phone yet. Open it once with data.", "offline": "You're offline. Everything here still works.", "suggest": "This page is also in {l}.", "switch": "Switch", "dismiss": "No thanks"}}</script><script defer src="app.js?v=4c40dc42"></script>
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script>try{var l=localStorage.getItem("emk-lang");if(l&&/^(ja|zh-tw|zh-cn|vi)$/.test(l)&&!sessionStorage.getItem("emk-go")&&(matchMedia("(display-mode: standalone)").matches||navigator.standalone)){sessionStorage.setItem("emk-go","1");location.replace("/"+l+location.pathname+location.hash)}}catch(e){}</script>
@@ -30,6 +30,10 @@
 <section class="myaddr" id="myaddr" hidden aria-labelledby="ma-h" data-card="Show this to your taxi driver" data-ko="기사님, 이 주소로 가 주세요." data-mean="Means: Please take me to this address."><h2 id="ma-h">Your stay&#x27;s address in Korean</h2>
 <div id="ma-has" hidden><p class="addr" lang="ko" id="ma-text"></p><div class="actions"><button class="btn alt" type="button" id="ma-show">🚕 Show driver</button><button class="btn ghost" type="button" id="ma-copy" data-copy="" data-done="✓ Copied">📋 Copy address</button><a class="btn ghost" id="ma-map" href="#" rel="noopener" target="_blank">Open in Naver Map</a><button class="linkbtn" type="button" id="ma-edit">Change</button></div></div>
 <form id="ma-form" hidden><input id="ma-in" type="text" lang="ko" maxlength="160" autocomplete="street-address" aria-label="Your stay&#x27;s address in Korean" placeholder="Paste the Korean address from your booking"><button class="btn" type="submit">Save on this phone</button></form><p class="hint">Kept only on this phone. It is never sent anywhere.</p></section>
+<section class="sec places" id="places" aria-labelledby="pl-h" data-card="Show this to your taxi driver" data-ko="기사님, 이 주소로 가 주세요." data-mean="Means: Please take me to this address." data-driver="Show driver" data-copy="Copy" data-copied="Copied" data-remove="Remove" data-short="That short link can&#x27;t be read on the phone. Paste the place name instead.">
+<h2 id="pl-h">Places to go</h2>
+<form id="pl-form"><input id="pl-in" type="text" maxlength="400" autocomplete="off" aria-label="Places to go" placeholder="Korean address, place name or Google Maps link"><button class="btn" type="submit">Add</button></form>
+<p class="hint" id="pl-msg" role="status"></p><ul id="pl-list" class="pl-list"></ul><p class="hint">Kept only on this phone. It is never sent anywhere.</p></section>
 <section class="arrive" id="arrive" aria-labelledby="ar-h" data-from="You can submit from {t}, Korea time, until you land." data-local="On this phone&#x27;s clock: {t}" data-open="The window is open now." data-wait="Opens {r}." data-past="That landing time has passed.">
 <h2 id="ar-h">When can I submit the e-Arrival Card?</h2><p class="hint">e-Arrival Card: within 72 hours before you land <time class="ck" datetime="2026-11-20">✓ 20 Nov 2026</time></p>
 <label class="fl" for="ar-in">Your landing time in Korea (Korea time)</label><input id="ar-in" type="datetime-local">
@@ -114,11 +118,35 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !documen
   const h = location.hash && document.getElementById(location.hash.slice(1)); if (h && h.tagName === "DETAILS") h.open = true;
   const blocks = [...document.querySelectorAll(".pv[data-p]")];
   if (blocks.length < 2) return;
-  let shown = 0;
-  for (const b of blocks) { const ok = b.dataset.p === saved[0] && (!b.dataset.d || b.dataset.d === saved[1]); b.hidden = !ok; if (ok) shown++; }
-  if (!shown) { blocks.forEach(b => b.hidden = false); return; }
-  const btn = document.getElementById("show-all"); btn.hidden = false;
+  const btn = document.getElementById("show-all");
+  /* Show only the answer for one setup; if nothing matches, show them all. */
+  function apply(p, d) {
+    let shown = 0;
+    for (const b of blocks) { const ok = b.dataset.p === p && (!b.dataset.d || b.dataset.d === d); b.hidden = !ok; if (ok) shown++; }
+    if (!shown) blocks.forEach(b => b.hidden = false);
+    btn.hidden = !shown;
+  }
+  apply(saved[0], saved[1]);
   btn.addEventListener("click", () => { blocks.forEach(b => b.hidden = false); btn.hidden = true; });
+  /* Pick the setup right here, once: it is kept on this phone and every guide then answers for it. */
+  const setup = document.getElementById("setup"); if (!setup) return;
+  const names = JSON.parse(setup.dataset.names), now = document.getElementById("setup-now"), pick = document.getElementById("setup-pick"), dev = document.getElementById("setup-dev");
+  const hasDev = blocks.some(b => b.dataset.d), UAD = /iPhone|iPad|iPod/.test(navigator.userAgent) ? "ios" : /Android/.test(navigator.userAgent) ? "android" : null;
+  /* Until the reader chooses, the answer for most visitors (no Korean number) is shown and named, with Change beside it. */
+  let P = saved[0], D = store("wik-setup") ? saved[1] : (UAD || "ios"), pending = null, open = false;
+  function paintSetup() {
+    now.hidden = open; pick.hidden = !open; dev.hidden = true;
+    document.getElementById("setup-lbl").textContent = setup.dataset.is + ": " + names[P] + (hasDev && P !== "arc" ? " · " + names[D] : "");
+  }
+  function choose(p, d) { P = p; D = d; open = false; store("wik-setup", P + "|" + D); apply(P, D); paintSetup(); count("setup-guide/" + P + "/" + D, "setup on guide"); }
+  setup.querySelectorAll("[data-p]").forEach(b => b.addEventListener("click", () => {
+    const p = b.dataset.p;
+    if (p === "arc") choose(p, "ios"); else if (!hasDev || UAD) choose(p, UAD || D); else { pending = p; dev.hidden = false; dev.querySelector("button").focus(); }
+  }));
+  setup.querySelectorAll("[data-d]").forEach(b => b.addEventListener("click", () => choose(pending || P, b.dataset.d)));
+  document.getElementById("setup-change").addEventListener("click", () => { open = true; paintSetup(); pick.querySelector("button").focus(); });
+  apply(P, D);
+  setup.hidden = false; paintSetup();
 })();
 
 (function () {
@@ -152,6 +180,43 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !documen
     document.getElementById("cleared").textContent = cfg.cleared; paint();
     const ma = document.getElementById("ma-has"), mf = document.getElementById("ma-form"); if (ma && mf) { ma.hidden = true; mf.hidden = false; }
   });
+})();
+
+(function () {
+  /* Places to go: a list kept on this phone. One tap shows the Korean text to a driver or opens it in a Korean map app. */
+  const box = document.getElementById("places"); if (!box) return;
+  const c = box.dataset, list = document.getElementById("pl-list"), inp = document.getElementById("pl-in"), msg = document.getElementById("pl-msg");
+  const load = () => { try { const a = JSON.parse(store("emk-places") || "[]"); return Array.isArray(a) ? a.filter(s => typeof s === "string" && s).slice(0, 20) : []; } catch (e) { return []; } };
+  /* A full Google Maps link carries the place name in its address. A short link does not, and resolving it would need the network. */
+  function fromLink(v) {
+    if (!/^https?:\/\//i.test(v)) return v;
+    let u; try { u = new URL(v); } catch (e) { return v; }
+    if (!/(^|\.)google\.|goo\.gl$/.test(u.hostname)) return v;
+    const m = u.pathname.match(/\/maps\/(?:place|search)\/([^/@]+)/), raw = m ? m[1] : (u.searchParams.get("q") || u.searchParams.get("query") || "");
+    try { return decodeURIComponent(raw.replace(/\+/g, " ")).trim(); } catch (e) { return ""; }
+  }
+  function paint() {
+    const a = load(); list.replaceChildren();
+    a.forEach((p, i) => {
+      const q = encodeURIComponent(p);
+      const big = el("button", { type: "button", class: "pl-name" }, [el("b", { lang: "ko", text: p }), el("span", { text: "🚕 " + c.driver })]);
+      big.addEventListener("click", () => show(c.card, c.ko, p, c.mean));
+      const cp = el("button", { type: "button", class: "btn ghost", text: c.copy });
+      cp.addEventListener("click", async () => { try { await navigator.clipboard.writeText(p); cp.textContent = "✓ " + c.copied; setTimeout(() => { cp.textContent = c.copy; }, 1500); } catch (e) {} });
+      const rm = el("button", { type: "button", class: "linkbtn", text: c.remove, "aria-label": c.remove + ": " + p });
+      rm.addEventListener("click", () => { const n = load(); n.splice(i, 1); store("emk-places", JSON.stringify(n)); paint(); });
+      list.append(el("li", {}, [big, el("div", { class: "pl-acts" }, [
+        el("a", { class: "btn ghost", href: "https://map.naver.com/p/search/" + q, rel: "noopener", target: "_blank", text: "Naver Map" }),
+        el("a", { class: "btn ghost", href: "https://map.kakao.com/link/search/" + q, rel: "noopener", target: "_blank", text: "KakaoMap" }), cp, rm])]));
+    });
+  }
+  document.getElementById("pl-form").addEventListener("submit", ev => {
+    ev.preventDefault(); msg.textContent = "";
+    const v = fromLink(inp.value.trim()).slice(0, 160);
+    if (!v) { if (inp.value.trim()) msg.textContent = c.short; inp.focus(); return; }
+    const a = load().filter(s => s !== v); a.unshift(v); store("emk-places", JSON.stringify(a.slice(0, 20))); inp.value = ""; paint(); count("place-added", "place added");
+  });
+  paint();
 })();
 
 (function () {

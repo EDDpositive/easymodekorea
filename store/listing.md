@@ -26,10 +26,11 @@ Korea runs on apps, and many of them ask for a Korean phone number. EasyModeKore
 
 WHAT YOU GET
 • Short answers first: the verdict, where, cost and time, then numbered steps.
-• Checked and dated: every key fact shows the date it was checked against an official source.
+• Checked and dated: every key fact shows the date it was checked and the source. Each guide lists what changed this year, the part older guides and AI answers get wrong.
 • Answers for your phone: tell the app once whether you have a Korean number, and it shows what works for you.
 • Korean cards: show a driver or staff a sentence in big Korean letters, or copy place names into a map app. Make your own card for a hotel name or an allergy.
-• Your stay's address: save it once, then show it to a taxi driver full screen.
+• Places to go: save your stay and other places once, show them to a taxi driver full screen, or open them in Naver Map or KakaoMap.
+• Food and payment cards: allergies, vegetarian, no pork, or a card that won't go through, in big Korean.
 • Emergency help: the numbers to call and Korean sentences to show, one tap away.
 • Arrival helper: enter your landing time and see when you can submit the e-Arrival Card.
 • Works offline: guides are stored on your phone, so they open on the plane or underground.
@@ -63,10 +64,11 @@ Questions or corrections: edandco.biz@gmail.com
 
 제공하는 것
 • 짧은 답 먼저: 결론, 장소, 비용, 시간, 그다음 번호 순서 안내.
-• 확인하고 날짜를 적습니다: 핵심 사실마다 공식 출처로 확인한 날짜가 표시됩니다.
+• 확인하고 날짜를 적습니다: 핵심 사실마다 확인한 날짜와 출처가 표시됩니다. 가이드마다 올해 바뀐 내용을 보여 줍니다. 오래된 글이나 AI 답변이 틀리기 쉬운 부분입니다.
 • 내 폰 기준 답: 한국 번호가 있는지 한 번만 알려 주면 나에게 되는 방법을 보여 줍니다.
 • 한국어 카드: 기사님이나 직원에게 큰 한국어 글씨로 보여 주거나, 장소 이름을 지도 앱에 복사합니다. 호텔 이름이나 알레르기는 직접 카드로 만들 수 있습니다.
-• 숙소 주소: 한 번 저장해 두면 택시 기사님에게 전체 화면으로 보여 줄 수 있습니다.
+• 갈 곳 목록: 숙소와 가고 싶은 곳을 한 번 저장해 두면 기사님에게 전체 화면으로 보여 주거나 네이버 지도·카카오맵으로 바로 엽니다.
+• 식사·결제 카드: 알레르기, 채식, 돼지고기 제외, 카드 결제가 안 될 때 쓸 문장을 큰 한국어로 보여 줍니다.
 • 긴급 도움: 전화할 번호와 보여 줄 한국어 문장이 한 번에 열립니다.
 • 입국 도우미: 도착 시각을 넣으면 전자도착카드를 언제부터 낼 수 있는지 알려 줍니다.
 • 오프라인: 가이드가 폰에 저장되어 비행기나 지하에서도 열립니다.

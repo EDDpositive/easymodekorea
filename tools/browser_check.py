@@ -83,6 +83,26 @@ def main():
         b.js("history.back()"); time.sleep(0.5)
         check(opened and b.js("document.getElementById('show').hidden && location.pathname === '/taxi.html'"), "the Back button closes a full-screen card and stays on the guide")
 
+        # Setup choice on a guide: one tap switches the answer and is remembered.
+        b.js("localStorage.removeItem('wik-setup')"); b.go(srv.url + "taxi.html", wait=0.5)
+        before = b.js("[...document.querySelectorAll('.answer .pv')].filter(x => !x.hidden).length")
+        b.js("document.getElementById('setup-change').click(); document.querySelector('#setup [data-p=arc]').click()")
+        check(before == 1 and b.js("localStorage.getItem('wik-setup') === 'arc|ios' && document.querySelector('.answer .pv:not([hidden])').dataset.p === 'arc'"), "a guide lets the reader pick a setup in one tap and remembers it")
+        b.js("localStorage.removeItem('wik-setup')")
+
+        # Places to go: a Google Maps link gives up its place name; each place opens in Naver Map and KakaoMap.
+        b.go(srv.url + "saved.html", wait=0.5)
+        add = "(v => { document.getElementById('pl-in').value = v; document.getElementById('pl-form').requestSubmit(); return (document.querySelector('#pl-list b') || {}).textContent || ''; })"
+        name = b.js(add + "('https://www.google.com/maps/place/Gyeongbokgung+Palace/@37.57,126.97,17z')")
+        links = b.js("[...document.querySelectorAll('#pl-list li:first-child a')].map(a => a.href).join(' ')")
+        check(name == "Gyeongbokgung Palace" and "map.naver.com/p/search/Gyeongbokgung" in links and "map.kakao.com/link/search/Gyeongbokgung" in links, "places list reads a Google Maps link and opens the place in Naver Map and KakaoMap", name)
+        b.js("document.querySelector('#pl-list .pl-name').click()")
+        check(b.js("!document.getElementById('show').hidden && document.getElementById('show-ko').textContent.includes('Gyeongbokgung')"), "a saved place shows full screen for a driver in one tap")
+        b.js("history.back(); localStorage.removeItem('emk-places'); localStorage.setItem('emk-addr', 'TEST ADDRESS 110')"); time.sleep(0.3)
+        b.go(srv.url, wait=0.5)
+        check(b.js("!!document.querySelector('.quick-driver') && document.querySelector('.quick-driver b').textContent === 'TEST ADDRESS 110'"), "with a stay address saved, the home screen offers the driver card in one tap")
+        b.js("localStorage.removeItem('emk-addr')")
+
         # e-Arrival Card helper: landing 10 Jan 2030 12:00 Korea time means the window opens 7 Jan 12:00; landing in 30 hours means it is open now.
         b.go(srv.url + "k-eta-entry-requirements.html", wait=0.5)
         setv = "(v => { const i = document.getElementById('ar-in'); i.value = v; i.dispatchEvent(new Event('input')); return document.querySelector('.ar-main').textContent + '|' + document.querySelector('.ar-state').className; })"
