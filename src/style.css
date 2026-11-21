@@ -343,6 +343,7 @@ body.has-tabs { padding-bottom: calc(66px + env(safe-area-inset-bottom, 0px)); }
 @media (min-width: 800px) { .tabbar { left: 50%; right: auto; bottom: 14px; width: 520px; transform: translateX(-50%); border: 1px solid var(--line); border-radius: 20px; box-shadow: 0 14px 36px -16px rgba(14,20,48,.5); } body.has-tabs { padding-bottom: 96px; } }
 @media print { .tabbar, .install-bar, .toast { display: none; } body.has-tabs { padding-bottom: 0; } }
 .toprow { flex-wrap: nowrap; }
+.hero p a { color: inherit; }
 .top-actions { display: flex; align-items: center; gap: 6px; flex: none; }
 .icon-btn { display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: 999px; color: #fff; background: var(--chip); }
 .icon-btn svg, .lang-menu > summary svg, .act svg { width: 19px; height: 19px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }

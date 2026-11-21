@@ -86,7 +86,7 @@ Write-Host "완료. 서명된 파일:" -ForegroundColor Green
 Write-Host "    $Signed"
 Write-Host ""
 Write-Host "업로드 열쇠 지문(SHA-256). 공개해도 되는 값입니다:" -ForegroundColor Cyan
-& $Keytool -printcert -jarfile $Signed | Select-String "SHA256"
+& $Keytool -printcert -jarfile $Signed | Select-String "SHA256:"
 Write-Host ""
 Write-Host "다음: 플레이 콘솔 > 테스트 > 비공개 테스트 > 새 버전 만들기에서 이 파일을 올리세요."
 if (-not $NoOpen) { Start-Process explorer.exe "/select,`"$Signed`"" }
