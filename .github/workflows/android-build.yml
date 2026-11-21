@@ -60,6 +60,7 @@ jobs:
       - name: Check what the app asks the phone for
         working-directory: android/build
         run: |
+          cp app/build/outputs/bundle/release/app-release.aab easymodekorea-unsigned.aab
           ls -la *.aab *.apk
           AAPT="$ANDROID_HOME/build-tools/36.1.0/aapt2"
           "$AAPT" dump badging app-release-unsigned-aligned.apk | grep -E "^package|sdkVersion|targetSdkVersion|uses-permission" | tee app-info.txt
@@ -71,7 +72,7 @@ jobs:
         with:
           name: emk-android-unsigned
           path: |
-            android/build/app-release-bundle.aab
+            android/build/easymodekorea-unsigned.aab
             android/build/app-release-unsigned-aligned.apk
             android/build/app-info.txt
           if-no-files-found: error
