@@ -1,1 +1,76 @@
-{"name":"EasyModeKorea","short_name":"EasyMode","start_url":"./","scope":"./","display":"standalone","background_color":"#ffffff","theme_color":"#2336e8","icons":[{"src":"icon-192.png","sizes":"192x192","type":"image/png"},{"src":"icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}]}
+{
+ "id": "/",
+ "name": "EasyModeKorea",
+ "short_name": "EasyMode",
+ "description": "Short answers for visitors in Korea, each checked against an official source, with Korean you can show or copy.",
+ "lang": "en",
+ "dir": "ltr",
+ "start_url": "/",
+ "scope": "/",
+ "display": "standalone",
+ "background_color": "#ffffff",
+ "theme_color": "#2336e8",
+ "categories": [
+  "travel",
+  "navigation"
+ ],
+ "icons": [
+  {
+   "src": "/icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "/icon-maskable-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
+ ],
+ "shortcuts": [
+  {
+   "name": "Emergency help in Korea",
+   "short_name": "Help",
+   "url": "/help.html",
+   "icons": [
+    {
+     "src": "/shortcut-help.png",
+     "sizes": "96x96",
+     "type": "image/png"
+    }
+   ]
+  },
+  {
+   "name": "Korean cards to show",
+   "short_name": "Korean cards",
+   "url": "/phrases.html",
+   "icons": [
+    {
+     "src": "/shortcut-cards.png",
+     "sizes": "96x96",
+     "type": "image/png"
+    }
+   ]
+  },
+  {
+   "name": "My trip",
+   "short_name": "My trip",
+   "url": "/saved.html",
+   "icons": [
+    {
+     "src": "/shortcut-trip.png",
+     "sizes": "96x96",
+     "type": "image/png"
+    }
+   ]
+  }
+ ],
+ "screenshots": []
+}
