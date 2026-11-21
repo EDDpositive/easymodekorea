@@ -103,6 +103,34 @@ def main():
         check(b.js("!!document.querySelector('.quick-driver') && document.querySelector('.quick-driver b').textContent === 'TEST ADDRESS 110'"), "with a stay address saved, the home screen offers the driver card in one tap")
         b.js("localStorage.removeItem('emk-addr')")
 
+        # Holiday alerts follow the trip dates: Seollal 2027 shows for a trip over 6 to 9 Feb, and nothing shows for a June trip.
+        b.js("localStorage.setItem('emk-trip', JSON.stringify({from: '2027-02-04', to: '2027-02-10'}))"); b.go(srv.url, wait=0.5)
+        inside = b.js("!document.getElementById('alerts-wrap').hidden && document.querySelectorAll('#alerts .alert').length === 1")
+        b.js("localStorage.setItem('emk-trip', JSON.stringify({from: '2027-06-01', to: '2027-06-10'}))"); b.go(srv.url, wait=0.5)
+        check(inside and b.js("document.getElementById('alerts-wrap').hidden"), "holiday alerts show only for holidays inside the trip dates")
+        b.js("localStorage.removeItem('emk-trip')")
+
+        # Offline pack: My trip reports every file for this language as saved.
+        b.go(srv.url + "saved.html", wait=0.5); state = ""
+        for _ in range(30):
+            state = b.js("document.getElementById('pk-bar').style.width")
+            if state == "100%": break
+            time.sleep(0.4)
+        check(state == "100%" and b.js("document.getElementById('pk-state').classList.contains('ok')"), "offline pack reports the whole language pack as saved", state)
+
+        # Sharing: the list travels in the link; the other phone asks first and adds it only on a tap.
+        b.js("localStorage.setItem('emk-addr', 'STAY 110'); localStorage.setItem('emk-places', JSON.stringify(['PLACE A', 'PLACE B']))")
+        b.go(srv.url + "saved.html", wait=0.5); b.js("document.getElementById('share-make').click()")
+        link = b.js("document.getElementById('share-out').dataset.link || ''")
+        qr = b.js("!!document.querySelector('#share-qr svg')")
+        b.js("localStorage.removeItem('emk-addr'); localStorage.removeItem('emk-places')")   # now it is the companion's phone
+        b.go(link, wait=0.6)
+        asked = b.js("!document.getElementById('import').hidden && !localStorage.getItem('emk-places')")
+        b.js("document.getElementById('import-yes').click()"); time.sleep(1.0)
+        got = b.js("[localStorage.getItem('emk-addr'), localStorage.getItem('emk-places'), location.hash].join('|')")
+        check("#t=" in link and qr and asked and got == 'STAY 110|["PLACE A","PLACE B"]|', "a shared link or QR copies the stay address and places to another phone after asking", got)
+        b.js("localStorage.removeItem('emk-addr'); localStorage.removeItem('emk-places')")
+
         # e-Arrival Card helper: landing 10 Jan 2030 12:00 Korea time means the window opens 7 Jan 12:00; landing in 30 hours means it is open now.
         b.go(srv.url + "k-eta-entry-requirements.html", wait=0.5)
         setv = "(v => { const i = document.getElementById('ar-in'); i.value = v; i.dispatchEvent(new Event('input')); return document.querySelector('.ar-main').textContent + '|' + document.querySelector('.ar-state').className; })"
@@ -122,7 +150,7 @@ def main():
         check(not r["noApp"], "every page loads the shared app script", ", ".join(r["noApp"][:5]))
 
         srv.stop()  # from here on there is no server: only the copy on the "phone" can answer
-        for page in ("", "taxi.html", "phrases.html", "saved.html", "help.html", "privacy.html"):
+        for page in ("", "taxi.html", "phrases.html", "saved.html", "help.html", "privacy.html", "lost-phone-wallet-passport.html", "foreign-card-declined-korea.html"):
             ok = b.go(srv.url + page, wait=0.6) and b.js("document.querySelectorAll('.tabbar a').length === 4 && document.title.includes('EasyModeKorea')")
             check(bool(ok), f"offline: /{page} opens")
         # The sweep above saved every page, so take one off the "phone" first (and empty the browser's own short-term cache).

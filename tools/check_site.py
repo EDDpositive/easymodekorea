@@ -90,6 +90,31 @@ def main():
         if 'id="places"' not in rd(d + "saved.html"): probs.append(d + "My trip: no places list")
     check(not probs, "guides show what changed, how they were checked and a setup choice; home shows the trust line (all languages)", "; ".join(probs[:4]))
 
+    # Trouble flows and the holiday table: five languages, every sourced step dated, every source a real link.
+    import trouble as TR
+    iso = re.compile(r"\d{4}-\d\d-\d\d$")
+    probs = []
+    for f in TR.FLOWS:
+        for s in f["steps"]:
+            if set(s["t"]) != set(TR.L5) or not all(s["t"].values()): probs.append(f["id"] + ": step text missing a language")
+            if bool(s["src"]) != bool(s["d"]) or (s["d"] and not iso.match(s["d"])): probs.append(f["id"] + ": a step has a source without a date, or a date without a source")
+            probs += [f["id"] + ": unknown source " + k for k in s["src"] if not k.startswith("guide:") and k not in TR.SRC]
+        for d in LANG_DIRS:
+            page = d + f["slug"] + ".html"
+            if not has(page): probs.append("missing " + page); continue
+            h = rd(page)
+            if h.count('class="fact-src"') < 2 or '"lastReviewed"' not in h or '"HowTo"' not in h or 'class="sayrow"' not in h: probs.append(page + ": steps, dates or cards missing")
+            if page not in files: probs.append(page + ": not in the offline list")
+    probs += [k + ": source is not an https link" for k, (_n, u) in TR.SRC.items() if not u.startswith("https://")]
+    for a in TR.ALERTS:
+        if not (iso.match(a["from"]) and iso.match(a["to"]) and a["from"] <= a["to"]): probs.append(a["id"] + ": dates")
+        if any(set(p["t"]) != set(TR.L5) or not p["src"] or any(k not in TR.SRC for k in p["src"]) for p in a["points"]): probs.append(a["id"] + ": a point lacks a language or a source")
+    for d in LANG_DIRS:
+        if 'id="alerts-data"' not in rd(d + "index.html") or 'id="trip-from"' not in rd(d + "saved.html"): probs.append(d + ": holiday alerts or trip dates missing")
+        if 'id="pack"' not in rd(d + "saved.html") or 'id="share-make"' not in rd(d + "saved.html") or 'class="glist flows"' not in rd(d + "help.html"): probs.append(d + ": offline pack, sharing or help hub missing")
+    check(not probs, f"{len(TR.FLOWS)} trouble flows and {len(TR.ALERTS)} holiday alerts: all languages, every sourced step dated, on the offline list", "; ".join(probs[:4]))
+    check("qr.js" in pre and all(f["slug"] in rd("llms.txt") for f in TR.FLOWS), "share code script is in the offline list; llms.txt lists the trouble flows")
+
     # Web manifest.
     m = json.loads(rd("manifest.webmanifest")); probs = []
     for k in ("id", "name", "short_name", "start_url", "scope", "display", "icons", "theme_color", "background_color"):

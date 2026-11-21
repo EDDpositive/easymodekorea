@@ -9,7 +9,7 @@ import json
 
 PACKAGE_ID = "com.easymodekorea.app"   # Android application id. Cannot change after the first Play upload.
 APP_NAME = "EasyModeKorea"
-POLICY_DATE = "2026-11-21"             # ISO date the privacy policy text last changed
+POLICY_DATE = "2026-11-22"             # ISO date the privacy policy text last changed
 
 T = {
     "en": {
@@ -25,6 +25,9 @@ T = {
         "trust": "{n} guides, facts last checked {date}. {c} rule changes logged this year.", "chg_note": "Anything written before these dates, including older guides and AI answers, may describe the old rule.",
         "places_h": "Places to go", "places_ph": "Korean address, place name or Google Maps link", "places_add": "Add", "places_short": "That short link can't be read on the phone. Paste the place name instead.",
         "food_h": "Food needs and allergies", "pay_h": "When payment fails",
+        "off_ok": "Works offline", "pack_h": "Offline pack", "pack_state": "{n} of {m} files for your language are on this phone.", "pack_ok": "Everything is saved: guides, Korean cards, trouble screens and My trip open with no signal.", "pack_btn": "Download again", "pack_busy": "Downloading…",
+        "share_h": "Share with a companion", "share_lede": "Makes a link and a QR code with your stay address and places. Nothing is uploaded: the list travels inside the link.", "share_btn": "Make link and QR", "share_copy": "Copy link", "share_warn": "Anyone who gets this link can read the list.", "share_empty": "Add your stay address or a place first.",
+        "import_q": "A companion shared a trip list with you: {n} items. Add them to this phone?", "import_done": "Added.",
         "trip_title": "My trip", "trip_lede": "Your saved guides, your stay's address and your Korean cards. Everything here stays on this phone.",
         "trip_saved_h": "Saved guides", "trip_saved_empty": "Nothing saved yet. Tap Save at the top of any guide.",
         "trip_recent_h": "Recently opened",
@@ -48,7 +51,7 @@ T = {
         "privacy_updated": "Last updated: {date}",
         "privacy_body": [
             ["In short", "EasyModeKorea has no accounts, no ads and no tracking cookies. The Android app shows this website in full screen. It does not ask for access to your location, contacts, camera or files."],
-            ["What stays on your phone", "Your phone setup, saved guides, checklist ticks, your stay's address and the Korean cards you make are stored only in the browser or app on your phone. They are never sent to us. Erase them on the My trip page, or by clearing the site's data in your browser."],
+            ["What stays on your phone", "Your phone setup, saved guides, checklist ticks, your stay's address and the Korean cards you make are stored only in the browser or app on your phone. They are never sent to us. Erase them on the My trip page, or by clearing the site's data in your browser. If you make a share link for a companion, your stay address and places are written inside that link and nowhere else, so anyone who gets the link can read them."],
             ["Visit counts", "We count page views and button taps with GoatCounter. It sets no cookies and stores no IP addresses. It shows us totals: which pages were opened, the referring site, browser and system type, screen width, language and country. We cannot tell who you are. If you open a link your host made for you, the name of the stay in that link is counted too."],
             ["Questions and feedback", "When you send a question or feedback, your message, the page you sent it from and your email address (only if you enter one) go to a Google Form that we own. We use them to answer you and to fix the guides. Email us to have a message deleted."],
             ["Other companies' servers", "The site is hosted on GitHub Pages and loads its fonts from Google Fonts, so those servers receive your IP address and browser type when a page loads, as any web server does. If you tap Naver Map or KakaoMap on a saved address or place, that text is sent to that map service as a search. Outside links lead to services with their own policies."],
@@ -69,6 +72,9 @@ T = {
         "trust": "ガイド{n}本、最終確認日 {date}。今年のルール変更を{c}件記録。", "chg_note": "これらの日付より前に書かれた情報(古いガイドやAIの回答を含む)は、以前のルールのままの場合があります。",
         "places_h": "行き先", "places_ph": "韓国語の住所、場所の名前、Googleマップのリンク", "places_add": "追加", "places_short": "短縮リンクはスマホだけでは読み取れません。場所の名前を貼り付けてください。",
         "food_h": "食事の制限・アレルギー", "pay_h": "支払いがうまくいかないとき",
+        "off_ok": "オフラインで使えます", "pack_h": "オフラインパック", "pack_state": "あなたの言語のファイル{m}個のうち{n}個がこのスマホにあります。", "pack_ok": "すべて保存済みです。ガイド、韓国語カード、トラブル対応、マイページが電波なしで開けます。", "pack_btn": "もう一度ダウンロード", "pack_busy": "ダウンロード中…",
+        "share_h": "同行者と共有", "share_lede": "宿の住所と行き先を入れたリンクとQRコードを作ります。どこにもアップロードされず、内容はリンクの中に入っています。", "share_btn": "リンクとQRを作る", "share_copy": "リンクをコピー", "share_warn": "このリンクを受け取った人は誰でも内容を読めます。", "share_empty": "先に宿の住所か行き先を追加してください。",
+        "import_q": "同行者から旅行リストが届きました({n}件)。このスマホに追加しますか?", "import_done": "追加しました。",
         "trip_title": "マイページ", "trip_lede": "保存したガイド、宿の住所、自分の韓国語カード。すべてこのスマホの中だけに保存されます。",
         "trip_saved_h": "保存したガイド", "trip_saved_empty": "まだ保存していません。ガイド上部の「保存」をタップしてください。",
         "trip_recent_h": "最近開いたガイド",
@@ -92,7 +98,7 @@ T = {
         "privacy_updated": "最終更新: {date}",
         "privacy_body": [
             ["要点", "EasyModeKoreaにはアカウント登録も広告も追跡用Cookieもありません。Androidアプリはこのウェブサイトを全画面で表示するものです。位置情報、連絡先、カメラ、ファイルへのアクセスは求めません。"],
-            ["スマホの中だけに残るもの", "スマホの設定、保存したガイド、チェックリストの印、宿の住所、自分で作った韓国語カードは、あなたのスマホのブラウザまたはアプリの中だけに保存されます。私たちに送信されることはありません。マイページで消去するか、ブラウザでこのサイトのデータを削除すれば消えます。"],
+            ["スマホの中だけに残るもの", "スマホの設定、保存したガイド、チェックリストの印、宿の住所、自分で作った韓国語カードは、あなたのスマホのブラウザまたはアプリの中だけに保存されます。私たちに送信されることはありません。マイページで消去するか、ブラウザでこのサイトのデータを削除すれば消えます。同行者用の共有リンクを作ると、宿の住所と行き先はそのリンクの中だけに書き込まれます。リンクを受け取った人は内容を読めます。"],
             ["アクセス数の集計", "ページの表示回数とボタンのタップ数をGoatCounterで集計しています。Cookieは使わず、IPアドレスも保存しません。私たちに見えるのは合計だけです(開かれたページ、参照元サイト、ブラウザとOSの種類、画面の幅、言語、国)。個人を特定することはできません。宿の方が作ったリンクを開いた場合は、リンクに含まれる宿の名前も集計されます。"],
             ["質問とフィードバック", "質問やフィードバックを送ると、メッセージ、送信したページ、メールアドレス(入力した場合のみ)が、私たちが管理するGoogleフォームに届きます。返信とガイドの修正のためだけに使います。削除を希望する場合はメールでお知らせください。"],
             ["他社のサーバー", "このサイトはGitHub Pagesで公開し、フォントはGoogle Fontsから読み込んでいます。そのため、ページを開くと、どのウェブサーバーでも同じように、IPアドレスとブラウザの種類がこれらのサーバーに伝わります。保存した住所や行き先でNaver MapやKakaoMapをタップすると、その文字が検索語としてその地図サービスに送られます。外部リンク先のサービスには、それぞれのポリシーがあります。"],
@@ -113,6 +119,9 @@ T = {
         "trust": "{n}篇指南,最後確認:{date}。今年記錄了{c}次規定變更。", "chg_note": "在這些日期之前寫成的資訊(包括舊的指南和AI的回答),可能還是舊規定。",
         "places_h": "要去的地方", "places_ph": "韓文地址、地點名稱或Google地圖連結", "places_add": "新增", "places_short": "短網址在手機上無法讀取,請改貼地點名稱。",
         "food_h": "飲食限制與過敏", "pay_h": "付款不順時",
+        "off_ok": "離線可用", "pack_h": "離線包", "pack_state": "你的語言共{m}個檔案,已有{n}個存在這支手機。", "pack_ok": "全部存好了:指南、韓文卡、狀況處理和我的旅程,沒有訊號也能開。", "pack_btn": "重新下載", "pack_busy": "下載中…",
+        "share_h": "分享給同行的人", "share_lede": "把住宿地址和要去的地方做成連結和QR碼。不會上傳到任何地方,內容就放在連結裡。", "share_btn": "產生連結和QR碼", "share_copy": "複製連結", "share_warn": "拿到這個連結的人都能看到內容。", "share_empty": "請先加入住宿地址或地點。",
+        "import_q": "同行的人分享了行程清單給你:{n}項。要加到這支手機嗎?", "import_done": "已加入。",
         "trip_title": "我的旅程", "trip_lede": "你收藏的指南、住宿地址和自己做的韓文卡。全部只存在這支手機裡。",
         "trip_saved_h": "收藏的指南", "trip_saved_empty": "還沒有收藏。在任何指南上方點「收藏」。",
         "trip_recent_h": "最近看過",
@@ -136,7 +145,7 @@ T = {
         "privacy_updated": "最後更新:{date}",
         "privacy_body": [
             ["重點", "EasyModeKorea沒有帳號、沒有廣告,也沒有追蹤用的Cookie。Android App只是把這個網站以全螢幕顯示,不會要求存取你的位置、通訊錄、相機或檔案。"],
-            ["只留在你手機裡的內容", "你的手機設定、收藏的指南、清單勾選、住宿地址和自己做的韓文卡,只存在你手機的瀏覽器或App裡,不會傳給我們。你可以在「我的旅程」頁面清除,或在瀏覽器裡清除本站資料。"],
+            ["只留在你手機裡的內容", "你的手機設定、收藏的指南、清單勾選、住宿地址和自己做的韓文卡,只存在你手機的瀏覽器或App裡,不會傳給我們。你可以在「我的旅程」頁面清除,或在瀏覽器裡清除本站資料。如果你為同行的人產生分享連結,住宿地址和地點只會寫在那個連結裡,拿到連結的人都能看到。"],
             ["瀏覽次數統計", "我們用GoatCounter統計頁面瀏覽和按鈕點擊次數。它不使用Cookie,也不儲存IP位址。我們看到的只有總數:哪些頁面被打開、來源網站、瀏覽器和系統類型、螢幕寬度、語言和國家。我們無法得知你是誰。如果你打開房東為你製作的連結,連結裡的住宿名稱也會被計入。"],
             ["提問與意見", "你送出問題或意見時,訊息內容、送出時所在的頁面和電子郵件地址(有填才會有)會傳到我們管理的Google表單。我們只用來回覆你和修正指南。想刪除訊息,請寫信給我們。"],
             ["其他公司的伺服器", "本站架設在GitHub Pages,字型從Google Fonts載入,所以頁面載入時,這些伺服器會收到你的IP位址和瀏覽器類型,任何網站伺服器都是如此。如果你在儲存的地址或地點上點Naver Map或KakaoMap,該文字會作為搜尋內容傳給該地圖服務。外部連結通往的服務各有自己的政策。"],
@@ -157,6 +166,9 @@ T = {
         "trust": "{n}篇指南,最后确认:{date}。今年记录了{c}次规定变更。", "chg_note": "在这些日期之前写成的信息(包括旧的指南和AI的回答),可能还是旧规定。",
         "places_h": "要去的地方", "places_ph": "韩文地址、地点名称或Google地图链接", "places_add": "添加", "places_short": "短链接在手机上无法读取,请改贴地点名称。",
         "food_h": "饮食限制与过敏", "pay_h": "付款不顺时",
+        "off_ok": "离线可用", "pack_h": "离线包", "pack_state": "你的语言共{m}个文件,已有{n}个存在这部手机。", "pack_ok": "全部存好了:指南、韩文卡、状况处理和我的行程,没有信号也能打开。", "pack_btn": "重新下载", "pack_busy": "下载中…",
+        "share_h": "分享给同行的人", "share_lede": "把住宿地址和要去的地方做成链接和二维码。不会上传到任何地方,内容就放在链接里。", "share_btn": "生成链接和二维码", "share_copy": "复制链接", "share_warn": "拿到这个链接的人都能看到内容。", "share_empty": "请先添加住宿地址或地点。",
+        "import_q": "同行的人分享了行程清单给你:{n}项。要添加到这部手机吗?", "import_done": "已添加。",
         "trip_title": "我的行程", "trip_lede": "你收藏的指南、住宿地址和自己做的韩文卡。全部只存在这部手机里。",
         "trip_saved_h": "收藏的指南", "trip_saved_empty": "还没有收藏。在任何指南上方点“收藏”。",
         "trip_recent_h": "最近看过",
@@ -180,7 +192,7 @@ T = {
         "privacy_updated": "最后更新:{date}",
         "privacy_body": [
             ["要点", "EasyModeKorea没有账号、没有广告,也没有用于追踪的Cookie。Android App只是把这个网站全屏显示,不会要求访问你的位置、通讯录、相机或文件。"],
-            ["只留在你手机里的内容", "你的手机设置、收藏的指南、清单勾选、住宿地址和自己做的韩文卡,只存在你手机的浏览器或App里,不会发送给我们。你可以在“我的行程”页面清除,或在浏览器里清除本站数据。"],
+            ["只留在你手机里的内容", "你的手机设置、收藏的指南、清单勾选、住宿地址和自己做的韩文卡,只存在你手机的浏览器或App里,不会发送给我们。你可以在“我的行程”页面清除,或在浏览器里清除本站数据。如果你为同行的人生成分享链接,住宿地址和地点只会写在那个链接里,拿到链接的人都能看到。"],
             ["访问次数统计", "我们用GoatCounter统计页面浏览和按钮点击次数。它不使用Cookie,也不保存IP地址。我们看到的只有总数:哪些页面被打开、来源网站、浏览器和系统类型、屏幕宽度、语言和国家。我们无法得知你是谁。如果你打开房东为你制作的链接,链接里的住宿名称也会被计入。"],
             ["提问与反馈", "你提交问题或反馈时,留言内容、提交时所在的页面和电子邮件地址(填写了才会有)会发送到我们管理的Google表单。我们只用来回复你和修正指南。想删除留言,请给我们发邮件。"],
             ["其他公司的服务器", "本站托管在GitHub Pages,字体从Google Fonts加载,所以页面加载时,这些服务器会收到你的IP地址和浏览器类型,任何网站服务器都是如此。如果你在保存的地址或地点上点Naver Map或KakaoMap,该文字会作为搜索内容发送给该地图服务。外部链接通往的服务各有自己的政策。"],
@@ -201,6 +213,9 @@ T = {
         "trust": "{n} hướng dẫn, kiểm tra lần cuối {date}. Ghi nhận {c} thay đổi quy định trong năm nay.", "chg_note": "Thông tin viết trước các ngày này, kể cả hướng dẫn cũ và câu trả lời của AI, có thể vẫn theo quy định cũ.",
         "places_h": "Nơi cần đến", "places_ph": "Địa chỉ tiếng Hàn, tên địa điểm hoặc liên kết Google Maps", "places_add": "Thêm", "places_short": "Không đọc được liên kết rút gọn trên điện thoại. Hãy dán tên địa điểm.",
         "food_h": "Ăn kiêng và dị ứng", "pay_h": "Khi thanh toán không được",
+        "off_ok": "Dùng được khi không có mạng", "pack_h": "Gói ngoại tuyến", "pack_state": "{n}/{m} tệp cho ngôn ngữ của bạn đã có trên điện thoại này.", "pack_ok": "Đã lưu đầy đủ: hướng dẫn, thẻ tiếng Hàn, màn hình xử lý sự cố và mục Của tôi đều mở được khi không có sóng.", "pack_btn": "Tải lại", "pack_busy": "Đang tải…",
+        "share_h": "Chia sẻ với bạn đồng hành", "share_lede": "Tạo liên kết và mã QR chứa địa chỉ chỗ ở và các nơi cần đến. Không tải lên đâu cả: danh sách nằm ngay trong liên kết.", "share_btn": "Tạo liên kết và mã QR", "share_copy": "Sao chép liên kết", "share_warn": "Ai có liên kết này đều đọc được danh sách.", "share_empty": "Hãy thêm địa chỉ chỗ ở hoặc một địa điểm trước.",
+        "import_q": "Bạn đồng hành đã chia sẻ danh sách chuyến đi: {n} mục. Thêm vào điện thoại này?", "import_done": "Đã thêm.",
         "trip_title": "Chuyến đi của tôi", "trip_lede": "Hướng dẫn đã lưu, địa chỉ chỗ ở và thẻ tiếng Hàn của bạn. Tất cả chỉ nằm trên điện thoại này.",
         "trip_saved_h": "Hướng dẫn đã lưu", "trip_saved_empty": "Chưa lưu gì. Chạm Lưu ở đầu bất kỳ hướng dẫn nào.",
         "trip_recent_h": "Mới mở gần đây",
@@ -224,7 +239,7 @@ T = {
         "privacy_updated": "Cập nhật lần cuối: {date}",
         "privacy_body": [
             ["Tóm tắt", "EasyModeKorea không có tài khoản, không có quảng cáo và không dùng cookie theo dõi. Ứng dụng Android hiển thị trang web này ở chế độ toàn màn hình. Ứng dụng không xin quyền truy cập vị trí, danh bạ, máy ảnh hay tệp của bạn."],
-            ["Những gì chỉ nằm trên điện thoại của bạn", "Thiết lập điện thoại, hướng dẫn đã lưu, các mục đã đánh dấu, địa chỉ chỗ ở và thẻ tiếng Hàn bạn tạo chỉ được lưu trong trình duyệt hoặc ứng dụng trên điện thoại của bạn. Chúng không bao giờ được gửi cho chúng tôi. Bạn có thể xóa ở trang Chuyến đi của tôi, hoặc xóa dữ liệu của trang web trong trình duyệt."],
+            ["Những gì chỉ nằm trên điện thoại của bạn", "Thiết lập điện thoại, hướng dẫn đã lưu, các mục đã đánh dấu, địa chỉ chỗ ở và thẻ tiếng Hàn bạn tạo chỉ được lưu trong trình duyệt hoặc ứng dụng trên điện thoại của bạn. Chúng không bao giờ được gửi cho chúng tôi. Bạn có thể xóa ở trang Chuyến đi của tôi, hoặc xóa dữ liệu của trang web trong trình duyệt. Nếu bạn tạo liên kết chia sẻ cho bạn đồng hành, địa chỉ chỗ ở và các địa điểm chỉ được ghi trong chính liên kết đó, nên ai có liên kết đều đọc được."],
             ["Đếm lượt truy cập", "Chúng tôi đếm lượt xem trang và lượt chạm nút bằng GoatCounter. Dịch vụ này không đặt cookie và không lưu địa chỉ IP. Chúng tôi chỉ thấy tổng số: trang nào được mở, trang giới thiệu, loại trình duyệt và hệ điều hành, chiều rộng màn hình, ngôn ngữ và quốc gia. Chúng tôi không thể biết bạn là ai. Nếu bạn mở liên kết do chủ nhà tạo cho bạn, tên chỗ ở trong liên kết đó cũng được đếm."],
             ["Câu hỏi và góp ý", "Khi bạn gửi câu hỏi hoặc góp ý, nội dung tin nhắn, trang bạn đang xem và địa chỉ email (chỉ khi bạn nhập) được gửi tới một Google Form do chúng tôi quản lý. Chúng tôi chỉ dùng để trả lời bạn và sửa hướng dẫn. Hãy gửi email nếu bạn muốn xóa tin nhắn."],
             ["Máy chủ của công ty khác", "Trang web được đặt trên GitHub Pages và tải phông chữ từ Google Fonts, nên các máy chủ đó nhận địa chỉ IP và loại trình duyệt của bạn khi trang được tải, giống như mọi máy chủ web. Nếu bạn chạm Naver Map hoặc KakaoMap trên địa chỉ hay địa điểm đã lưu, nội dung đó được gửi tới dịch vụ bản đồ ấy dưới dạng từ khóa tìm kiếm. Các liên kết ngoài dẫn tới dịch vụ có chính sách riêng."],
@@ -274,7 +289,7 @@ JUMP = {
 }
 
 # Strings the shared script needs on every page (the rest are only used at build time).
-JS_KEYS = ("save", "saved", "share", "link_copied", "saved_toast", "unsaved_toast", "install", "install_btn", "later", "update", "refresh", "ready", "miss")
+JS_KEYS = ("save", "saved", "share", "link_copied", "saved_toast", "unsaved_toast", "install", "install_btn", "later", "update", "refresh", "ready", "miss", "off_ok")
 
 SVG = lambda body: f'<svg viewBox="0 0 24 24" aria-hidden="true">{body}</svg>'
 IC = {
@@ -360,6 +375,15 @@ APP_JS = r"""/* EasyModeKorea app shell: offline, install, save, share, notices.
     try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {}
   }
 
+  /* A clear mark on any page that is saved on this phone (not on the home screen, which says so in its own words). */
+  function markOffline() {
+    if (!window.caches || d.querySelector(".off-ok") || d.getElementById("jump")) return;
+    caches.match(location.origin + location.pathname).then(function (r) {
+      var h = d.querySelector(".hero .wrap"); if (!r || !h || d.querySelector(".off-ok")) return;
+      h.appendChild(mk("p", "off-ok", "\u2713 " + T.off_ok));
+    }).catch(function () {});
+  }
+  markOffline();
   /* Offline copy of the site, and a notice when the page on screen has a newer version. */
   if ("serviceWorker" in navigator) {
     var reg = function () { navigator.serviceWorker.register(E.up + "sw.js?l=" + E.lang).catch(function () {}); };
@@ -368,7 +392,7 @@ APP_JS = r"""/* EasyModeKorea app shell: offline, install, save, share, notices.
       if (!ev.data) return;
       if (ev.data.t === "upd" && ev.data.p === location.pathname) toast(T.update, T.refresh, function () { location.reload(); }, 12000);
       /* First visit: say once that the guides are now on the phone. */
-      if (ev.data.t === "ready" && !get("emk-ready")) { set("emk-ready", "1"); toast(T.ready, null, null, 6000); }
+      if (ev.data.t === "ready") { markOffline(); if (!get("emk-ready")) { set("emk-ready", "1"); toast(T.ready, null, null, 6000); } }
     });
   }
 
@@ -451,10 +475,17 @@ const MINE=PRE.filter(p=>p.endsWith('/')||!/\.(html|json)$/.test(p)||own(p));
 const isPage=u=>u.pathname.endsWith('/')||u.pathname.endsWith('.html');
 const keyOf=u=>isPage(u)?u.origin+u.pathname:u.href;
 const clean=r=>r.redirected?new Response(r.body,{status:r.status,statusText:r.statusText,headers:r.headers}):r;
-self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>Promise.all(MINE.map(p=>{const u=new URL(p,ROOT);
-  return fetch(new Request(u.href,{cache:'reload'})).then(r=>r.ok?c.put(keyOf(u),clean(r)):null).catch(()=>null)})))
+/* Save every file of the pack that is not on the phone yet; returns how many are there afterwards. */
+const pack=async()=>{const c=await caches.open(C);let n=0;
+  await Promise.all(MINE.map(async p=>{const u=new URL(p,ROOT),k=keyOf(u);if(await c.match(k)){n++;return}
+    try{const r=await fetch(new Request(u.href,{cache:'reload'}));if(r.ok){await c.put(k,clean(r));n++}}catch(e){}}));return n};
+const count=async()=>{const c=await caches.open(C);let n=0;for(const p of MINE)if(await c.match(keyOf(new URL(p,ROOT))))n++;return n};
+self.addEventListener('install',e=>{e.waitUntil(pack()
   .then(()=>self.clients.matchAll({type:'window',includeUncontrolled:true})).then(cs=>cs.forEach(cl=>cl.postMessage({t:'ready'})))
   .then(()=>self.skipWaiting()))});
+/* My trip asks how complete the pack is ('status') or to fetch what is missing ('pack'). */
+self.addEventListener('message',e=>{const t=e.data&&e.data.t;if(t!=='status'&&t!=='pack')return;
+  e.waitUntil((t==='pack'?pack():count()).then(n=>e.source&&e.source.postMessage({t:'pack',n,m:MINE.length})))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
 /* Only what the reader sees counts as newer info: a new stylesheet or script name in the head does not. */
 const body=t=>t.slice(Math.max(0,t.indexOf('<body')));

@@ -13,8 +13,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap"></noscript>
-<link rel="stylesheet" href="style.css?v=e99f1e79">
-<script>window.EMK={"lang": "en", "up": "", "t": {"save": "Save", "saved": "Saved", "share": "Share", "link_copied": "Link copied", "saved_toast": "Saved to My trip", "unsaved_toast": "Removed from My trip", "install": "Install the app. Guides open without data.", "install_btn": "Install", "later": "Not now", "update": "This page has newer info.", "refresh": "Refresh", "ready": "Saved on this phone. Guides now open without data.", "miss": "That page isn't saved on this phone yet. Open it once with data.", "offline": "You're offline. Everything here still works.", "suggest": "This page is also in {l}.", "switch": "Switch", "dismiss": "No thanks"}}</script><script defer src="app.js?v=4c40dc42"></script>
+<link rel="stylesheet" href="style.css?v=359a648f">
+<script>window.EMK={"lang": "en", "up": "", "t": {"save": "Save", "saved": "Saved", "share": "Share", "link_copied": "Link copied", "saved_toast": "Saved to My trip", "unsaved_toast": "Removed from My trip", "install": "Install the app. Guides open without data.", "install_btn": "Install", "later": "Not now", "update": "This page has newer info.", "refresh": "Refresh", "ready": "Saved on this phone. Guides now open without data.", "miss": "That page isn't saved on this phone yet. Open it once with data.", "off_ok": "Works offline", "offline": "You're offline. Everything here still works.", "suggest": "This page is also in {l}.", "switch": "Switch", "dismiss": "No thanks"}}</script><script defer src="app.js?v=0c961cc9"></script>
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script>try{var l=localStorage.getItem("emk-lang");if(l&&/^(ja|zh-tw|zh-cn|vi)$/.test(l)&&!sessionStorage.getItem("emk-go")&&(matchMedia("(display-mode: standalone)").matches||navigator.standalone)){sessionStorage.setItem("emk-go","1");location.replace("/"+l+location.pathname+location.hash)}}catch(e){}</script>
 </head>
@@ -25,6 +25,7 @@
   <h1>My trip</h1><p class="lede">Your saved guides, your stay&#x27;s address and your Korean cards. Everything here stays on this phone.</p>
 </div></header>
 <div class="wrap"><main id="main" class="app-main"><div id="trip" data-remove="Remove" data-offline="{n} pages are stored on this phone and open without data." data-ask="Erase your saved guides, address, cards and phone setup from this phone?" data-cleared="Erased.">
+<div id="import" hidden><p id="import-q"></p><div class="actions"><button class="btn" type="button" id="import-yes">Add</button><button class="linkbtn" type="button" id="import-no">Not now</button></div></div>
 <section class="sec" aria-labelledby="sv-h"><h2 id="sv-h">Saved guides</h2><ul class="glist" id="saved-list"></ul><p class="hint" id="saved-empty">Nothing saved yet. Tap Save at the top of any guide.</p></section>
 <section class="sec" id="recent" hidden aria-labelledby="rc-h"><h2 id="rc-h">Recently opened</h2><ul class="glist" id="recent-list"></ul></section>
 <section class="myaddr" id="myaddr" hidden aria-labelledby="ma-h" data-card="Show this to your taxi driver" data-ko="기사님, 이 주소로 가 주세요." data-mean="Means: Please take me to this address."><h2 id="ma-h">Your stay&#x27;s address in Korean</h2>
@@ -34,18 +35,29 @@
 <h2 id="pl-h">Places to go</h2>
 <form id="pl-form"><input id="pl-in" type="text" maxlength="400" autocomplete="off" aria-label="Places to go" placeholder="Korean address, place name or Google Maps link"><button class="btn" type="submit">Add</button></form>
 <p class="hint" id="pl-msg" role="status"></p><ul id="pl-list" class="pl-list"></ul><p class="hint">Kept only on this phone. It is never sent anywhere.</p></section>
+<section class="share" id="share" aria-labelledby="sh-h" data-empty="Add your stay address or a place first." data-copied="Link copied" data-q="A companion shared a trip list with you: {n} items. Add them to this phone?" data-done="Added.">
+<h2 id="sh-h">Share with a companion</h2><p class="hint">Makes a link and a QR code with your stay address and places. Nothing is uploaded: the list travels inside the link.</p>
+<div class="actions"><button class="btn" type="button" id="share-make">Make link and QR</button></div><p class="hint" id="share-msg" role="status"></p>
+<div id="share-out" hidden><div id="share-qr" role="img" aria-label="QR"></div>
+<div class="actions"><button class="btn ghost" type="button" id="share-send" hidden>Share</button><button class="btn ghost" type="button" id="share-copy">Copy link</button></div><p class="hint">Anyone who gets this link can read the list.</p></div></section>
+<section class="sec alerts-wrap" id="alerts-wrap" aria-labelledby="alerts-h"><h2>Trip dates</h2><div class="trip-dates"><label>Arrive<input id="trip-from" type="date"></label><label>Leave<input id="trip-to" type="date"></label></div><p class="hint">With dates set, the home screen shows only what affects your trip. Kept on this phone.</p>
+<h3 id="alerts-h" class="alerts-sub">During your trip</h3><div id="alerts" data-h="During your trip" data-soon="Coming up" data-none="No holiday in the table falls inside your dates."></div></section>
+<script type="application/json" id="alerts-data">[{"id": "seollal-2027", "from": "2027-02-06", "to": "2027-02-09", "title": "Seollal (Lunar New Year) holiday", "points": [{"t": "Public holiday from Sat 6 to Tue 9 Feb 2027. Seollal itself is Sun 7 Feb. Government offices and banks are closed.", "src": [["Korea AeroSpace Administration: 2027 official calendar (29 Jun 2026)", "https://m.korea.kr/briefing/pressReleaseView.do?newsId=156768474"]]}, {"t": "Trains: holiday tickets are sold in a short advance sale and go fast. For Seollal 2026 the general sale ran 19 to 21 Jan for trains on 13 to 18 Feb. The 2027 dates were not announced at our last check.", "src": [["Hankyung: KORAIL Seollal 2026 ticket sale (7 Jan 2026)", "https://www.hankyung.com/article/202601075989h"]]}, {"t": "Palaces: for Seollal 2026 the four main palaces and Jongmyo were free for the whole holiday, then closed the day after it ended.", "src": [["Asia Business Daily: palaces free for Seollal 2026 (22 Jan 2026)", "https://view.asiae.co.kr/en/article/2026012209564811302"]]}, {"t": "Sick during the holiday? Open clinics and pharmacies are listed on E-Gen, or call 119.", "src": [["Seoul city: open clinics and pharmacies, Chuseok 2026 (22 Sep 2026)", "https://mediahub.seoul.go.kr/archives/2019473"], ["E-Gen emergency medical portal: open clinics and pharmacies", "https://www.e-gen.or.kr/egen/holiday_medical.do"]]}]}, {"id": "chuseok-2027", "from": "2027-09-14", "to": "2027-09-16", "title": "Chuseok holiday", "points": [{"t": "Public holiday from Tue 14 to Thu 16 Sep 2027. Chuseok itself is Wed 15 Sep. Government offices and banks are closed.", "src": [["Korea AeroSpace Administration: 2027 official calendar (29 Jun 2026)", "https://m.korea.kr/briefing/pressReleaseView.do?newsId=156768474"]]}, {"t": "Getting home late: for Chuseok 2026 Seoul ran the last subway trains and buses until 1 a.m. on the two days after Chuseok, and night N buses ran as usual. Plans for 2027 come out shortly before the holiday.", "src": [["Seoul city: Chuseok 2026 transport plan (22 Sep 2026)", "https://mediahub.seoul.go.kr/archives/2019414"]]}, {"t": "Trains: holiday tickets are sold in a short advance sale and go fast. Book as soon as the sale opens, or travel outside these days.", "src": [["Hankyung: KORAIL Seollal 2026 ticket sale (7 Jan 2026)", "https://www.hankyung.com/article/202601075989h"]]}, {"t": "Sick during the holiday? Open clinics and pharmacies are listed on E-Gen, or call 119.", "src": [["Seoul city: open clinics and pharmacies, Chuseok 2026 (22 Sep 2026)", "https://mediahub.seoul.go.kr/archives/2019473"], ["E-Gen emergency medical portal: open clinics and pharmacies", "https://www.e-gen.or.kr/egen/holiday_medical.do"]]}]}]</script>
 <section class="arrive" id="arrive" aria-labelledby="ar-h" data-from="You can submit from {t}, Korea time, until you land." data-local="On this phone&#x27;s clock: {t}" data-open="The window is open now." data-wait="Opens {r}." data-past="That landing time has passed.">
 <h2 id="ar-h">When can I submit the e-Arrival Card?</h2><p class="hint">e-Arrival Card: within 72 hours before you land <time class="ck" datetime="2026-11-20">✓ 20 Nov 2026</time></p>
 <label class="fl" for="ar-in">Your landing time in Korea (Korea time)</label><input id="ar-in" type="datetime-local">
 <div id="ar-out" hidden aria-live="polite"><p class="ar-main"></p><p class="hint ar-local"></p><p class="ar-state"></p></div>
 <div class="actions"><a class="btn ghost" href="https://www.e-arrivalcard.go.kr" rel="noopener" target="_blank">Official e-Arrival Card site</a><a class="btn ghost" href="k-eta-entry-requirements.html">Do I need K-ETA to visit Korea?</a></div>
 <p class="hint">Kept only on this phone. It is never sent anywhere.</p></section>
+<section class="pack" id="pack" aria-labelledby="pk-h" data-state="{n} of {m} files for your language are on this phone." data-ok="Everything is saved: guides, Korean cards, trouble screens and My trip open with no signal." data-busy="Downloading…"><h2 id="pk-h">Offline pack</h2>
+<div class="pack-bar"><i id="pk-bar"></i></div><p class="pack-state" id="pk-state" role="status"></p>
+<div class="actions"><button class="btn ghost" type="button" id="pk-btn">Download again</button></div></section>
 <section class="sec" aria-labelledby="mr-h"><h2 id="mr-h">More for your trip</h2><ul class="glist"><li><a href="phrases.html"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H10l-4.5 4v-4H4z"/><path d="M8 9h8M8 12h5"/></svg></span><span>Make a Korean card to show</span></a></li><li><a href="./#tool-h"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg></span><span>Check what works with your phone</span></a></li><li><a href="help.html"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.6"/><path d="M5.7 5.7l3.7 3.7M14.6 14.6l3.7 3.7M18.3 5.7l-3.7 3.7M9.4 14.6l-3.7 3.7"/></svg></span><span>Emergency numbers</span></a></li></ul></section>
 <section class="sec" aria-labelledby="ap-h"><h2 id="ap-h">This app</h2>
-<p class="hint" id="off-n" hidden></p><p class="hint" id="ios-hint" hidden>On iPhone: tap the Share button, then Add to Home Screen.</p>
+<p class="hint" id="ios-hint" hidden>On iPhone: tap the Share button, then Add to Home Screen.</p>
 <div class="actions"><button class="btn" type="button" id="app-install" hidden>Install on this phone</button><button class="btn ghost" type="button" id="clear">Erase what I saved on this phone</button></div><p class="hint" id="cleared" role="status"></p>
 <p class="hint"><a href="privacy.html">Privacy policy</a> · <a href="about.html">About</a> · <a href="changes.html">What changed</a></p></section>
-</div><script type="application/json" id="trip-data">{"mobile-data-sim": ["Phone & data", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"7\" y=\"2.5\" width=\"10\" height=\"19\" rx=\"2.5\"/><path d=\"M10.5 18.5h3\"/><\/svg>"], "incheon-airport-to-seoul": ["Airport to city", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M2.5 19h19\"/><path d=\"M3 13.5l3.5 1 3-1.5-5-6 2-.8 7.5 4.6 4.6-2.3a1.8 1.8 0 0 1 1.6 3.2L8 18\"/><\/svg>"], "maps": ["Maps", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 21s-6.5-6.2-6.5-11a6.5 6.5 0 0 1 13 0c0 4.8-6.5 11-6.5 11z\"/><circle cx=\"12\" cy=\"10\" r=\"2.3\"/><\/svg>"], "taxi": ["Taxi", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 16v-3.5L6 8h12l2 4.5V16\"/><path d=\"M3.5 16h17v2.5h-17z\"/><circle cx=\"7.5\" cy=\"18.5\" r=\"1.4\"/><circle cx=\"16.5\" cy=\"18.5\" r=\"1.4\"/><path d=\"M10 5.5h4\"/><\/svg>"], "tmoney-subway-bus": ["Subway & bus", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"5\" y=\"3\" width=\"14\" height=\"14\" rx=\"3\"/><path d=\"M5 11h14\"/><circle cx=\"8.5\" cy=\"14\" r=\"1\"/><circle cx=\"15.5\" cy=\"14\" r=\"1\"/><path d=\"M8 20l2-3M16 20l-2-3\"/><\/svg>"], "seoul-tourist-transit-pass": ["Transit pass", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"3\" y=\"5\" width=\"18\" height=\"14\" rx=\"2\"/><path d=\"M3 10h18M7 15h4\"/><\/svg>"], "ktx-train-booking": ["KTX trains", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 15V9a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v6a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2z\"/><path d=\"M5 11h14\"/><path d=\"M8 21l2-4M16 21l-2-4\"/><\/svg>"], "seoul-to-busan-k-tour-pass": ["Busan trip", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M3 17c3-3 6 3 9 0s6 3 9 0\"/><path d=\"M3 12c3-3 6 3 9 0s6 3 9 0\"/><path d=\"M12 3v6\"/><\/svg>"], "kr-pass-korail-pass": ["KR Pass", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"4\" y=\"3\" width=\"16\" height=\"14\" rx=\"3\"/><path d=\"M4 11h16M8 21l2-4M16 21l-2-4\"/><\/svg>"], "dmz-jsa-tour-booking": ["DMZ tour", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M3 20h18\"/><path d=\"M5 20V9l7-5 7 5v11\"/><path d=\"M9 20v-6h6v6\"/><\/svg>"], "jeju-getting-around": ["Jeju transport", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 16l1.5-5h11L19 16\"/><rect x=\"3\" y=\"16\" width=\"18\" height=\"4\" rx=\"1.5\"/><circle cx=\"7.5\" cy=\"18\" r=\".6\"/><circle cx=\"16.5\" cy=\"18\" r=\".6\"/><\/svg>"], "restaurant-reservations": ["Restaurant booking", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M7 3v8a2 2 0 0 0 2 2v8M11 3v6M7 3v6\"/><path d=\"M17 21V3c-2 1.5-3 4-3 7v3h3\"/><\/svg>"], "food-delivery": ["Food delivery", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 7h12v10H4z\"/><path d=\"M16 10h3l2 3v4h-5\"/><circle cx=\"7.5\" cy=\"18\" r=\"1.6\"/><circle cx=\"17.5\" cy=\"18\" r=\"1.6\"/><\/svg>"], "translation": ["Translation", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M3 5h9M7.5 3v2M5 5c.8 3 2.8 5.3 6 6.5M10 5c-.8 3-2.8 5.3-6 6.5\"/><path d=\"M13 21l4-9 4 9M14.5 18h5\"/><\/svg>"], "tax-free-shopping": ["Shopping & tax refund", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z\"/><path d=\"M9 8V6a3 3 0 0 1 6 0v2\"/><\/svg>"], "luggage-storage": ["Luggage", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"6\" y=\"7\" width=\"12\" height=\"13\" rx=\"2\"/><path d=\"M9 7V4h6v3M9 11v6M15 11v6\"/><\/svg>"], "pharmacy-hospital": ["Sick or hurt", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10z\"/><path d=\"M12 10v5M9.5 12.5h5\"/><\/svg>"], "k-eta-entry-requirements": ["Entry rules", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"6\" y=\"3\" width=\"12\" height=\"18\" rx=\"2\"/><circle cx=\"12\" cy=\"10\" r=\"3\"/><path d=\"M9 16h6\"/><\/svg>"], "atm-foreign-card-cash": ["Cash & ATMs", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"3\" y=\"6\" width=\"18\" height=\"12\" rx=\"2\"/><circle cx=\"12\" cy=\"12\" r=\"2.5\"/><path d=\"M6 9v.01M18 15v.01\"/><\/svg>"], "korea-power-plug-voltage": ["Power plugs", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M9 3v5M15 3v5M7 8h10v3a5 5 0 0 1-10 0z\"/><path d=\"M12 16v5\"/><\/svg>"], "gimpo-airport-to-seoul": ["Gimpo Airport", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M3 15l18-6-3 6H8l-3 3H3z\"/><path d=\"M4 21h16\"/><\/svg>"]}</script></main>
+</div><script type="application/json" id="trip-data">{"mobile-data-sim": ["Phone & data", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"7\" y=\"2.5\" width=\"10\" height=\"19\" rx=\"2.5\"/><path d=\"M10.5 18.5h3\"/><\/svg>"], "incheon-airport-to-seoul": ["Airport to city", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M2.5 19h19\"/><path d=\"M3 13.5l3.5 1 3-1.5-5-6 2-.8 7.5 4.6 4.6-2.3a1.8 1.8 0 0 1 1.6 3.2L8 18\"/><\/svg>"], "maps": ["Maps", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 21s-6.5-6.2-6.5-11a6.5 6.5 0 0 1 13 0c0 4.8-6.5 11-6.5 11z\"/><circle cx=\"12\" cy=\"10\" r=\"2.3\"/><\/svg>"], "taxi": ["Taxi", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 16v-3.5L6 8h12l2 4.5V16\"/><path d=\"M3.5 16h17v2.5h-17z\"/><circle cx=\"7.5\" cy=\"18.5\" r=\"1.4\"/><circle cx=\"16.5\" cy=\"18.5\" r=\"1.4\"/><path d=\"M10 5.5h4\"/><\/svg>"], "tmoney-subway-bus": ["Subway & bus", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"5\" y=\"3\" width=\"14\" height=\"14\" rx=\"3\"/><path d=\"M5 11h14\"/><circle cx=\"8.5\" cy=\"14\" r=\"1\"/><circle cx=\"15.5\" cy=\"14\" r=\"1\"/><path d=\"M8 20l2-3M16 20l-2-3\"/><\/svg>"], "seoul-tourist-transit-pass": ["Transit pass", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"3\" y=\"5\" width=\"18\" height=\"14\" rx=\"2\"/><path d=\"M3 10h18M7 15h4\"/><\/svg>"], "ktx-train-booking": ["KTX trains", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 15V9a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v6a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2z\"/><path d=\"M5 11h14\"/><path d=\"M8 21l2-4M16 21l-2-4\"/><\/svg>"], "seoul-to-busan-k-tour-pass": ["Busan trip", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M3 17c3-3 6 3 9 0s6 3 9 0\"/><path d=\"M3 12c3-3 6 3 9 0s6 3 9 0\"/><path d=\"M12 3v6\"/><\/svg>"], "kr-pass-korail-pass": ["KR Pass", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"4\" y=\"3\" width=\"16\" height=\"14\" rx=\"3\"/><path d=\"M4 11h16M8 21l2-4M16 21l-2-4\"/><\/svg>"], "dmz-jsa-tour-booking": ["DMZ tour", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M3 20h18\"/><path d=\"M5 20V9l7-5 7 5v11\"/><path d=\"M9 20v-6h6v6\"/><\/svg>"], "jeju-getting-around": ["Jeju transport", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 16l1.5-5h11L19 16\"/><rect x=\"3\" y=\"16\" width=\"18\" height=\"4\" rx=\"1.5\"/><circle cx=\"7.5\" cy=\"18\" r=\".6\"/><circle cx=\"16.5\" cy=\"18\" r=\".6\"/><\/svg>"], "restaurant-reservations": ["Restaurant booking", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M7 3v8a2 2 0 0 0 2 2v8M11 3v6M7 3v6\"/><path d=\"M17 21V3c-2 1.5-3 4-3 7v3h3\"/><\/svg>"], "food-delivery": ["Food delivery", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 7h12v10H4z\"/><path d=\"M16 10h3l2 3v4h-5\"/><circle cx=\"7.5\" cy=\"18\" r=\"1.6\"/><circle cx=\"17.5\" cy=\"18\" r=\"1.6\"/><\/svg>"], "translation": ["Translation", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M3 5h9M7.5 3v2M5 5c.8 3 2.8 5.3 6 6.5M10 5c-.8 3-2.8 5.3-6 6.5\"/><path d=\"M13 21l4-9 4 9M14.5 18h5\"/><\/svg>"], "tax-free-shopping": ["Shopping & tax refund", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z\"/><path d=\"M9 8V6a3 3 0 0 1 6 0v2\"/><\/svg>"], "luggage-storage": ["Luggage", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"6\" y=\"7\" width=\"12\" height=\"13\" rx=\"2\"/><path d=\"M9 7V4h6v3M9 11v6M15 11v6\"/><\/svg>"], "pharmacy-hospital": ["Sick or hurt", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10z\"/><path d=\"M12 10v5M9.5 12.5h5\"/><\/svg>"], "k-eta-entry-requirements": ["Entry rules", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"6\" y=\"3\" width=\"12\" height=\"18\" rx=\"2\"/><circle cx=\"12\" cy=\"10\" r=\"3\"/><path d=\"M9 16h6\"/><\/svg>"], "atm-foreign-card-cash": ["Cash & ATMs", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"3\" y=\"6\" width=\"18\" height=\"12\" rx=\"2\"/><circle cx=\"12\" cy=\"12\" r=\"2.5\"/><path d=\"M6 9v.01M18 15v.01\"/><\/svg>"], "korea-power-plug-voltage": ["Power plugs", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M9 3v5M15 3v5M7 8h10v3a5 5 0 0 1-10 0z\"/><path d=\"M12 16v5\"/><\/svg>"], "gimpo-airport-to-seoul": ["Gimpo Airport", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M3 15l18-6-3 6H8l-3 3H3z\"/><path d=\"M4 21h16\"/><\/svg>"]}</script><script src="qr.js"></script></main>
 </div>
 <div class="show" id="show" hidden role="dialog" aria-modal="true" aria-labelledby="show-lbl">
   <div class="lbl" id="show-lbl"></div><div class="ko" lang="ko" id="show-ko"></div>
@@ -164,11 +176,16 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !documen
     document.getElementById("recent-list").replaceChildren(...r.map(x => item(x, false)));
   }
   paint();
-  /* How much is ready offline, and the install button. */
-  if (window.caches) caches.keys().then(ks => Promise.all(ks.filter(k => k.startsWith("emk-")).map(k => caches.open(k).then(c => c.keys())))).then(all => {
-    const n = new Set(all.flat().map(r => new URL(r.url).pathname).filter(p => p.endsWith("/") || p.endsWith(".html"))).size;
-    if (n) { const p = document.getElementById("off-n"); p.textContent = "✓ " + cfg.offline.replace("{n}", n); p.hidden = false; }
-  }).catch(() => {});
+  /* Offline pack: the worker says how many of this language's files are on the phone, and fetches the rest on request. */
+  const pk = document.getElementById("pack");
+  if (pk && navigator.serviceWorker) {
+    const st = document.getElementById("pk-state"), bar = document.getElementById("pk-bar"), btn = document.getElementById("pk-btn");
+    const showPack = (n, m) => { bar.style.width = Math.round(100 * n / m) + "%"; st.textContent = n >= m ? "✓ " + pk.dataset.ok : pk.dataset.state.replace("{n}", n).replace("{m}", m); st.className = "pack-state" + (n >= m ? " ok" : ""); btn.disabled = false; };
+    navigator.serviceWorker.addEventListener("message", ev => { if (ev.data && ev.data.t === "pack") showPack(ev.data.n, ev.data.m); if (ev.data && ev.data.t === "ready") ask("status"); });
+    const ask = t => navigator.serviceWorker.ready.then(r => { if (r.active) r.active.postMessage({ t }); }).catch(() => {});
+    ask("status");
+    btn.addEventListener("click", () => { btn.disabled = true; st.textContent = pk.dataset.busy; st.className = "pack-state"; ask("pack"); });
+  }
   const ib = document.getElementById("app-install"), I = window.emkInstall;
   const ready = () => { if (I && I.ready()) ib.hidden = false; };
   document.addEventListener("emk-installable", ready); ready();
@@ -217,6 +234,91 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !documen
     const a = load().filter(s => s !== v); a.unshift(v); store("emk-places", JSON.stringify(a.slice(0, 20))); inp.value = ""; paint(); count("place-added", "place added");
   });
   paint();
+})();
+
+(function () {
+  /* Share the stay address and the place list with a companion. The list travels inside the link itself (after the #),
+     so it is never sent to a server. The other phone asks before adding anything. */
+  const sh = document.getElementById("share"); if (!sh) return;
+  const c = sh.dataset, msg = document.getElementById("share-msg"), out = document.getElementById("share-out");
+  const enc = o => btoa(String.fromCharCode(...new TextEncoder().encode(JSON.stringify(o)))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  const dec = s => JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(s.replace(/-/g, "+").replace(/_/g, "/")), ch => ch.charCodeAt(0))));
+  const places = () => { try { const a = JSON.parse(store("emk-places") || "[]"); return Array.isArray(a) ? a.filter(x => typeof x === "string" && x).slice(0, 20) : []; } catch (e) { return []; } };
+  let link = "";
+  function drawQR(text) {
+    const box = document.getElementById("share-qr"); box.hidden = true;
+    if (!window.QRCode || text.length > 1600) return;   /* a longer link will not fit a code a phone can read */
+    try {
+      const q = new QRCode(-1, QRErrorCorrectLevel.L); q.addData(text); q.make();
+      const n = q.getModuleCount(), m = 2; let d = "";
+      for (let r = 0; r < n; r++) for (let col = 0; col < n; col++) if (q.isDark(r, col)) d += "M" + (col + m) + " " + (r + m) + "h1v1h-1z";
+      box.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + (n + 2 * m) + " " + (n + 2 * m) + '" shape-rendering="crispEdges"><rect width="100%" height="100%" fill="#fff"/><path d="' + d + '" fill="#0e1430"/></svg>';
+      box.hidden = false;
+    } catch (e) {}
+  }
+  document.getElementById("share-make").addEventListener("click", () => {
+    const o = { v: 1, a: (store("emk-addr") || "").slice(0, 160), p: places() };
+    if (!o.a && !o.p.length) { msg.textContent = c.empty; out.hidden = true; return; }
+    msg.textContent = ""; link = location.origin + location.pathname + "#t=" + enc(o);
+    drawQR(link); out.hidden = false; out.dataset.link = link; document.getElementById("share-send").hidden = !navigator.share; count("share-trip", "share trip");
+  });
+  document.getElementById("share-send").addEventListener("click", () => { navigator.share({ title: document.title, url: link }).catch(() => {}); });
+  document.getElementById("share-copy").addEventListener("click", async () => { try { await navigator.clipboard.writeText(link); msg.textContent = "✓ " + c.copied; } catch (e) { msg.textContent = link; } });
+  /* Arriving with a shared list: show what came and add it only on a tap. Runs on load and again when a link is opened
+     while this page is already on screen (then only the part after # changes). */
+  let a = "", p = [];
+  const clean = () => { try { history.replaceState(null, "", location.pathname); } catch (e) {} document.getElementById("import").hidden = true; };
+  function arrive() {
+    const m = location.hash.match(/[#&]t=([A-Za-z0-9_-]+)/); if (!m) return;
+    let got = null; try { got = dec(m[1]); } catch (e) {}
+    if (!got || typeof got !== "object") { clean(); return; }
+    a = typeof got.a === "string" ? got.a.slice(0, 160) : ""; p = (Array.isArray(got.p) ? got.p : []).filter(x => typeof x === "string" && x).map(x => x.slice(0, 160)).slice(0, 20);
+    if (!a && !p.length) { clean(); return; }
+    document.getElementById("import-q").textContent = c.q.replace("{n}", (a ? 1 : 0) + p.length);
+    const box = document.getElementById("import"); box.hidden = false; box.scrollIntoView({ block: "center" });
+  }
+  document.getElementById("import-no").addEventListener("click", clean);
+  document.getElementById("import-yes").addEventListener("click", () => {
+    const mine = places(), add = p.slice();
+    if (a) { if (!store("emk-addr")) store("emk-addr", a); else if (store("emk-addr") !== a) add.unshift(a); }   /* never overwrite the reader's own stay */
+    store("emk-places", JSON.stringify([...new Set([...add, ...mine])].slice(0, 20)));
+    try { sessionStorage.setItem("emk-imported", "1"); } catch (e) {}
+    try { history.replaceState(null, "", location.pathname); } catch (e) {}
+    location.reload();
+  });
+  addEventListener("hashchange", arrive); arrive();
+})();
+addEventListener("DOMContentLoaded", () => { try { if (sessionStorage.getItem("emk-imported")) { sessionStorage.removeItem("emk-imported"); const s = document.getElementById("share"); if (window.emkToast && s) emkToast(s.dataset.done); } } catch (e) {} });
+
+(function () {
+  /* Holiday alerts from the yearly table. With trip dates set (kept on this phone), only holidays inside the trip show.
+     Without dates, a holiday shows from 45 days before it starts until it ends. */
+  const box = document.getElementById("alerts"); if (!box) return;
+  const data = JSON.parse(document.getElementById("alerts-data").textContent), c = box.dataset, loc = document.documentElement.lang || "en";
+  const day = s => { const m = /^(\d{4})-(\d\d)-(\d\d)/.exec(s || ""); return m ? Date.UTC(+m[1], m[2] - 1, +m[3]) : NaN; };
+  const fmt = s => new Intl.DateTimeFormat(loc, { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" }).format(new Date(day(s)));
+  let trip = {}; try { trip = JSON.parse(store("emk-trip") || "{}") || {}; } catch (e) {}
+  const from = day(trip.from), to = day(trip.to), has = !isNaN(from) && !isNaN(to) && to >= from;
+  const kst = new Date(Date.now() + 9 * 3600e3), today = Date.UTC(kst.getUTCFullYear(), kst.getUTCMonth(), kst.getUTCDate());
+  const hit = data.filter(a => has ? day(a.from) <= to && day(a.to) >= from : today <= day(a.to) && day(a.from) - today <= 45 * 864e5);
+  box.replaceChildren();
+  const heading = document.getElementById("alerts-h"); if (heading) heading.textContent = has ? c.h : c.soon;
+  for (const a of hit) {
+    const d = el("details", { class: "alert" }), ul = el("ul");
+    d.append(el("summary", {}, [el("b", { text: a.title }), el("span", { text: fmt(a.from) + " – " + fmt(a.to) })]));
+    for (const p of a.points) { const li = el("li", { text: p.t + " " }); p.src.forEach(([n, u]) => li.append(el("a", { href: u, rel: "noopener", target: "_blank", class: "src", text: n }))); ul.append(li); }
+    d.append(ul); box.append(d);
+  }
+  /* Trip dates (My trip only). */
+  const f = document.getElementById("trip-from"), t = document.getElementById("trip-to"), wrap = document.getElementById("alerts-wrap");
+  if (!f) wrap.hidden = !hit.length;                       /* home: the block appears only when something applies */
+  else { if (heading) heading.hidden = !hit.length && !has; if (!hit.length && has) box.append(el("p", { class: "hint", text: c.none })); }
+  if (f && t) {
+    f.value = trip.from || ""; t.value = trip.to || "";
+    const save = () => { store("emk-trip", JSON.stringify({ from: f.value, to: t.value })); location.reload(); };
+    f.addEventListener("change", () => { if (f.value && t.value) save(); else store("emk-trip", JSON.stringify({ from: f.value, to: t.value })); });
+    t.addEventListener("change", () => { if (f.value && t.value) save(); else store("emk-trip", JSON.stringify({ from: f.value, to: t.value })); });
+  }
 })();
 
 (function () {

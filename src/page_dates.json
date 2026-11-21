@@ -1,23 +1,23 @@
 {
 "": {
-"h": "42aa2dfc1246ab7b",
-"d": "2026-11-21"
+"h": "16000eada580204c",
+"d": "2026-11-22"
 },
 "about.html": {
-"h": "f6ae0b36d58bfcec",
-"d": "2026-11-21"
+"h": "3a94ec87a6380c0e",
+"d": "2026-11-22"
 },
 "atm-foreign-card-cash.html": {
 "h": "3d497a0e4f16c555",
 "d": "2026-11-21"
 },
 "changes.html": {
-"h": "db5f364f1b5e1a4b",
-"d": "2026-11-21"
+"h": "bc1272e8b918f763",
+"d": "2026-11-22"
 },
 "contact.html": {
-"h": "1ace8363764ff407",
-"d": "2026-11-21"
+"h": "aa4f2aa1515f8cff",
+"d": "2026-11-22"
 },
 "dmz-jsa-tour-booking.html": {
 "h": "267a3a26757e6d4a",
@@ -27,13 +27,17 @@
 "h": "58c78259b9d6dac5",
 "d": "2026-11-21"
 },
+"foreign-card-declined-korea.html": {
+"h": "73f313f396545ece",
+"d": "2026-11-22"
+},
 "gimpo-airport-to-seoul.html": {
 "h": "fbd1c1475c920d66",
 "d": "2026-11-21"
 },
 "help.html": {
-"h": "1feb97bcc7cc0838",
-"d": "2026-11-21"
+"h": "2ccbfc9581b2248c",
+"d": "2026-11-22"
 },
 "hosts.html": {
 "h": "b50f3e0aee4fb922",
@@ -44,24 +48,24 @@
 "d": "2026-11-21"
 },
 "ja/": {
-"h": "679609f73fa8bbf1",
-"d": "2026-11-21"
+"h": "2ba6b857e0eb8e8f",
+"d": "2026-11-22"
 },
 "ja/about.html": {
-"h": "0d3fe88a27452ba4",
-"d": "2026-11-21"
+"h": "17b1e65bb6e73299",
+"d": "2026-11-22"
 },
 "ja/atm-foreign-card-cash.html": {
 "h": "5308f93f25926367",
 "d": "2026-11-21"
 },
 "ja/changes.html": {
-"h": "bf9bd82dfdd3887d",
-"d": "2026-11-21"
+"h": "874cca28c595527f",
+"d": "2026-11-22"
 },
 "ja/contact.html": {
-"h": "ed6e68b8565e8013",
-"d": "2026-11-21"
+"h": "b51c694b75d567a3",
+"d": "2026-11-22"
 },
 "ja/dmz-jsa-tour-booking.html": {
 "h": "b9a68c448f36e21f",
@@ -71,13 +75,17 @@
 "h": "b68b4bc3a002a836",
 "d": "2026-11-21"
 },
+"ja/foreign-card-declined-korea.html": {
+"h": "81bb9e0b8efda7d3",
+"d": "2026-11-22"
+},
 "ja/gimpo-airport-to-seoul.html": {
 "h": "25680dabd2814cf8",
 "d": "2026-11-21"
 },
 "ja/help.html": {
-"h": "7e447c3dcf3613e5",
-"d": "2026-11-21"
+"h": "ca1527ec8156a977",
+"d": "2026-11-22"
 },
 "ja/incheon-airport-to-seoul.html": {
 "h": "92a08665068a474a",
@@ -103,6 +111,10 @@
 "h": "ddd91d8c3c7886ca",
 "d": "2026-11-21"
 },
+"ja/lost-phone-wallet-passport.html": {
+"h": "ac62d982e5aaa132",
+"d": "2026-11-22"
+},
 "ja/luggage-storage.html": {
 "h": "a2e28c02ab6f7697",
 "d": "2026-11-21"
@@ -110,6 +122,10 @@
 "ja/maps.html": {
 "h": "f0fd78174810aaa6",
 "d": "2026-11-21"
+},
+"ja/missed-last-train-seoul.html": {
+"h": "e80e4553a0c74f4b",
+"d": "2026-11-22"
 },
 "ja/mobile-data-sim.html": {
 "h": "dd181ceb1879f6ae",
@@ -120,12 +136,12 @@
 "d": "2026-11-21"
 },
 "ja/phrases.html": {
-"h": "691d1bd60a2a7a22",
-"d": "2026-11-21"
+"h": "1e9953a60bf576c5",
+"d": "2026-11-22"
 },
 "ja/privacy.html": {
-"h": "04f6c09a6f84868e",
-"d": "2026-11-21"
+"h": "2640a9e552177fc6",
+"d": "2026-11-22"
 },
 "ja/restaurant-reservations.html": {
 "h": "93d8f9c71bcd25c8",
@@ -139,9 +155,17 @@
 "h": "fa64de179ddd537a",
 "d": "2026-11-21"
 },
+"ja/sick-or-hurt-what-to-do.html": {
+"h": "775e07d2d8de0661",
+"d": "2026-11-22"
+},
 "ja/tax-free-shopping.html": {
 "h": "02f33ad3f59af26f",
 "d": "2026-11-21"
+},
+"ja/taxi-problem-overcharge-korea.html": {
+"h": "7fec304a542c01f4",
+"d": "2026-11-22"
 },
 "ja/taxi.html": {
 "h": "634e68e218fe06b4",
@@ -175,6 +199,10 @@
 "h": "1123ff32d7f7ac4a",
 "d": "2026-11-21"
 },
+"lost-phone-wallet-passport.html": {
+"h": "1a6ed333754241c4",
+"d": "2026-11-22"
+},
 "luggage-storage.html": {
 "h": "6cc089ac6f7f6563",
 "d": "2026-11-21"
@@ -182,6 +210,10 @@
 "maps.html": {
 "h": "179a4b7eb46bac6b",
 "d": "2026-11-21"
+},
+"missed-last-train-seoul.html": {
+"h": "e0a48afefb1703f4",
+"d": "2026-11-22"
 },
 "mobile-data-sim.html": {
 "h": "551ddc77e2ca8fb6",
@@ -192,12 +224,12 @@
 "d": "2026-11-21"
 },
 "phrases.html": {
-"h": "466f61c6680256bf",
-"d": "2026-11-21"
+"h": "f542d9f9ee93e732",
+"d": "2026-11-22"
 },
 "privacy.html": {
-"h": "bf6a066b64eeadca",
-"d": "2026-11-21"
+"h": "315bd6b83f415c6f",
+"d": "2026-11-22"
 },
 "restaurant-reservations.html": {
 "h": "b43d71afe59a17c4",
@@ -211,9 +243,17 @@
 "h": "6d386ce5609828eb",
 "d": "2026-11-21"
 },
+"sick-or-hurt-what-to-do.html": {
+"h": "6f6faeb3a4e3cae1",
+"d": "2026-11-22"
+},
 "tax-free-shopping.html": {
 "h": "16928dd506b13fde",
 "d": "2026-11-21"
+},
+"taxi-problem-overcharge-korea.html": {
+"h": "87f01d511b2fd699",
+"d": "2026-11-22"
 },
 "taxi.html": {
 "h": "793cefd9c4f5b323",
@@ -228,24 +268,24 @@
 "d": "2026-11-21"
 },
 "vi/": {
-"h": "5f2fe54f71ba831d",
-"d": "2026-11-21"
+"h": "52d939417d23fc16",
+"d": "2026-11-22"
 },
 "vi/about.html": {
-"h": "2aaea33c5ee4f917",
-"d": "2026-11-21"
+"h": "d3fb3963e99b7d78",
+"d": "2026-11-22"
 },
 "vi/atm-foreign-card-cash.html": {
 "h": "aae5d26232b26369",
 "d": "2026-11-21"
 },
 "vi/changes.html": {
-"h": "28b347ba227a685d",
-"d": "2026-11-21"
+"h": "36f543360f2ceae8",
+"d": "2026-11-22"
 },
 "vi/contact.html": {
-"h": "5767ff39d3be8ee2",
-"d": "2026-11-21"
+"h": "ba04601bd6c42b6b",
+"d": "2026-11-22"
 },
 "vi/dmz-jsa-tour-booking.html": {
 "h": "c7a7597154edac4c",
@@ -255,13 +295,17 @@
 "h": "87feb1bdb168b1fd",
 "d": "2026-11-21"
 },
+"vi/foreign-card-declined-korea.html": {
+"h": "74a37e921446f89c",
+"d": "2026-11-22"
+},
 "vi/gimpo-airport-to-seoul.html": {
 "h": "36bd73312537bd0f",
 "d": "2026-11-21"
 },
 "vi/help.html": {
-"h": "7ccca5fd930fa18a",
-"d": "2026-11-21"
+"h": "f069e94d6835bdfc",
+"d": "2026-11-22"
 },
 "vi/incheon-airport-to-seoul.html": {
 "h": "d71b6bbf4ceee071",
@@ -287,6 +331,10 @@
 "h": "74342802d836dc3e",
 "d": "2026-11-21"
 },
+"vi/lost-phone-wallet-passport.html": {
+"h": "c3386c74b76c28c7",
+"d": "2026-11-22"
+},
 "vi/luggage-storage.html": {
 "h": "81556cbc067efd17",
 "d": "2026-11-21"
@@ -294,6 +342,10 @@
 "vi/maps.html": {
 "h": "0296d5fc042772e1",
 "d": "2026-11-21"
+},
+"vi/missed-last-train-seoul.html": {
+"h": "d5d977a9f44fd4a1",
+"d": "2026-11-22"
 },
 "vi/mobile-data-sim.html": {
 "h": "7f6ba71e24313d24",
@@ -304,12 +356,12 @@
 "d": "2026-11-21"
 },
 "vi/phrases.html": {
-"h": "b61278af427a48e5",
-"d": "2026-11-21"
+"h": "3404e251f6d1bb07",
+"d": "2026-11-22"
 },
 "vi/privacy.html": {
-"h": "f83a90c6594a078c",
-"d": "2026-11-21"
+"h": "f54635ebc60a8187",
+"d": "2026-11-22"
 },
 "vi/restaurant-reservations.html": {
 "h": "6d0e5a29e0c505e5",
@@ -323,9 +375,17 @@
 "h": "bb470974ba3c09c8",
 "d": "2026-11-21"
 },
+"vi/sick-or-hurt-what-to-do.html": {
+"h": "f901af0715a685ac",
+"d": "2026-11-22"
+},
 "vi/tax-free-shopping.html": {
 "h": "e2496d64ec80421e",
 "d": "2026-11-21"
+},
+"vi/taxi-problem-overcharge-korea.html": {
+"h": "04ed8912a9121773",
+"d": "2026-11-22"
 },
 "vi/taxi.html": {
 "h": "3492527cc1e80c94",
@@ -340,24 +400,24 @@
 "d": "2026-11-21"
 },
 "zh-cn/": {
-"h": "a651a2d96a727bd7",
-"d": "2026-11-21"
+"h": "bdfa6ec3af2f5e3a",
+"d": "2026-11-22"
 },
 "zh-cn/about.html": {
-"h": "5fcd635b938ff808",
-"d": "2026-11-21"
+"h": "6b8acf38dfb3a268",
+"d": "2026-11-22"
 },
 "zh-cn/atm-foreign-card-cash.html": {
 "h": "fe3ce2edec7ed734",
 "d": "2026-11-21"
 },
 "zh-cn/changes.html": {
-"h": "16e0bb956efbc15e",
-"d": "2026-11-21"
+"h": "d5d51ac3b5a3e35b",
+"d": "2026-11-22"
 },
 "zh-cn/contact.html": {
-"h": "c87f737c94e38f86",
-"d": "2026-11-21"
+"h": "f589af8d5d55c054",
+"d": "2026-11-22"
 },
 "zh-cn/dmz-jsa-tour-booking.html": {
 "h": "917c4b7846e75edb",
@@ -367,13 +427,17 @@
 "h": "1152e308458e8a9c",
 "d": "2026-11-21"
 },
+"zh-cn/foreign-card-declined-korea.html": {
+"h": "8c9f98f7c7605142",
+"d": "2026-11-22"
+},
 "zh-cn/gimpo-airport-to-seoul.html": {
 "h": "e4c86552c01aad27",
 "d": "2026-11-21"
 },
 "zh-cn/help.html": {
-"h": "3761f2838c10431e",
-"d": "2026-11-21"
+"h": "bf3f7ee05bdcb138",
+"d": "2026-11-22"
 },
 "zh-cn/incheon-airport-to-seoul.html": {
 "h": "73475ea1fcca61bc",
@@ -399,6 +463,10 @@
 "h": "1d9d2be8db4947d2",
 "d": "2026-11-21"
 },
+"zh-cn/lost-phone-wallet-passport.html": {
+"h": "789c71a6aba14951",
+"d": "2026-11-22"
+},
 "zh-cn/luggage-storage.html": {
 "h": "20b58ecc52464587",
 "d": "2026-11-21"
@@ -406,6 +474,10 @@
 "zh-cn/maps.html": {
 "h": "663c903817aa0ee6",
 "d": "2026-11-21"
+},
+"zh-cn/missed-last-train-seoul.html": {
+"h": "7f764add0f18c3da",
+"d": "2026-11-22"
 },
 "zh-cn/mobile-data-sim.html": {
 "h": "64a57f42f97bd58c",
@@ -416,12 +488,12 @@
 "d": "2026-11-21"
 },
 "zh-cn/phrases.html": {
-"h": "6e1b8f690102a07a",
-"d": "2026-11-21"
+"h": "a4125a70f6f11824",
+"d": "2026-11-22"
 },
 "zh-cn/privacy.html": {
-"h": "a19a469a276a805c",
-"d": "2026-11-21"
+"h": "52354f94d3fc0efa",
+"d": "2026-11-22"
 },
 "zh-cn/restaurant-reservations.html": {
 "h": "b6dbd4492e3ba269",
@@ -435,9 +507,17 @@
 "h": "7d465135f98034ee",
 "d": "2026-11-21"
 },
+"zh-cn/sick-or-hurt-what-to-do.html": {
+"h": "363c7ce7a925d6ce",
+"d": "2026-11-22"
+},
 "zh-cn/tax-free-shopping.html": {
 "h": "688630aa2c414c99",
 "d": "2026-11-21"
+},
+"zh-cn/taxi-problem-overcharge-korea.html": {
+"h": "c307d4f9c67959c7",
+"d": "2026-11-22"
 },
 "zh-cn/taxi.html": {
 "h": "e31e9d33317277aa",
@@ -452,24 +532,24 @@
 "d": "2026-11-21"
 },
 "zh-tw/": {
-"h": "caa321d666d0f43f",
-"d": "2026-11-21"
+"h": "c9e545178678080c",
+"d": "2026-11-22"
 },
 "zh-tw/about.html": {
-"h": "b1b59f7e3b042792",
-"d": "2026-11-21"
+"h": "f6e3fd57f80e8d55",
+"d": "2026-11-22"
 },
 "zh-tw/atm-foreign-card-cash.html": {
 "h": "99df84a43a2d8097",
 "d": "2026-11-21"
 },
 "zh-tw/changes.html": {
-"h": "8b7c5f4d3f3bb19a",
-"d": "2026-11-21"
+"h": "db2f4aaecd1bf5db",
+"d": "2026-11-22"
 },
 "zh-tw/contact.html": {
-"h": "a21f66890880c5b3",
-"d": "2026-11-21"
+"h": "87f473f8b568be52",
+"d": "2026-11-22"
 },
 "zh-tw/dmz-jsa-tour-booking.html": {
 "h": "d3e9ca15de971eeb",
@@ -479,13 +559,17 @@
 "h": "d50987ff5eebaab8",
 "d": "2026-11-21"
 },
+"zh-tw/foreign-card-declined-korea.html": {
+"h": "a46284703f6141e5",
+"d": "2026-11-22"
+},
 "zh-tw/gimpo-airport-to-seoul.html": {
 "h": "b61cf207e621fe9e",
 "d": "2026-11-21"
 },
 "zh-tw/help.html": {
-"h": "26a0df36a97833f9",
-"d": "2026-11-21"
+"h": "60caed8588fc055b",
+"d": "2026-11-22"
 },
 "zh-tw/incheon-airport-to-seoul.html": {
 "h": "20602ca805b9478d",
@@ -511,6 +595,10 @@
 "h": "a6f052f2f2b57d44",
 "d": "2026-11-21"
 },
+"zh-tw/lost-phone-wallet-passport.html": {
+"h": "6934cf4fa6596fd8",
+"d": "2026-11-22"
+},
 "zh-tw/luggage-storage.html": {
 "h": "0587044e24804d30",
 "d": "2026-11-21"
@@ -518,6 +606,10 @@
 "zh-tw/maps.html": {
 "h": "a5047426090509fd",
 "d": "2026-11-21"
+},
+"zh-tw/missed-last-train-seoul.html": {
+"h": "b07f4c90b6b4cf9a",
+"d": "2026-11-22"
 },
 "zh-tw/mobile-data-sim.html": {
 "h": "34d145def781b130",
@@ -528,12 +620,12 @@
 "d": "2026-11-21"
 },
 "zh-tw/phrases.html": {
-"h": "6891ebadec8debab",
-"d": "2026-11-21"
+"h": "bf4fbc2a2b8a7002",
+"d": "2026-11-22"
 },
 "zh-tw/privacy.html": {
-"h": "9450ba4f3088e57b",
-"d": "2026-11-21"
+"h": "767c8345876577ed",
+"d": "2026-11-22"
 },
 "zh-tw/restaurant-reservations.html": {
 "h": "1efab1987ce1cf87",
@@ -547,9 +639,17 @@
 "h": "9348da4c154e2dc7",
 "d": "2026-11-21"
 },
+"zh-tw/sick-or-hurt-what-to-do.html": {
+"h": "e1e917a44a08ca7d",
+"d": "2026-11-22"
+},
 "zh-tw/tax-free-shopping.html": {
 "h": "09e2665e58c3d8ad",
 "d": "2026-11-21"
+},
+"zh-tw/taxi-problem-overcharge-korea.html": {
+"h": "05acefe4d61298d4",
+"d": "2026-11-22"
 },
 "zh-tw/taxi.html": {
 "h": "12473c0a43cf3dac",

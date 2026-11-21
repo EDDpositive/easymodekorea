@@ -45,6 +45,17 @@
 - 2026-01-01: Foreign visitors, including those exempt from K-ETA, must submit the e-Arrival Card within 72 hours before arrival.
 - Full log: https://easymodekorea.com/changes.html
 
+## When something goes wrong (step by step, each sourced step dated)
+- [Lost your phone, wallet or passport](https://easymodekorea.com/lost-phone-wallet-passport.html): Where to ask first, who to report to, and the Korean to show. (checked 2026-11-22)
+- [Sick or hurt: pharmacy, clinic or ER?](https://easymodekorea.com/sick-or-hurt-what-to-do.html): Pick by how serious it is. One call, 119, covers the cases you are unsure about. (checked 2026-11-22)
+- [Missed the last train](https://easymodekorea.com/missed-last-train-seoul.html): Three ways home in Seoul after the subway stops, cheapest first. (checked 2026-11-22)
+- [Card refused](https://easymodekorea.com/foreign-card-declined-korea.html): What to try at the till, in order, and how to keep paying if the card stays blocked. (checked 2026-11-22)
+- [Taxi problem](https://easymodekorea.com/taxi-problem-overcharge-korea.html): What to keep, what the fare should look like, and where to report. (checked 2026-11-22)
+
+## Public holidays that affect a visit (table updated each December)
+- Seollal (Lunar New Year) holiday: 2027-02-06 to 2027-02-09. Public holiday from Sat 6 to Tue 9 Feb 2027. Seollal itself is Sun 7 Feb. Government offices and banks are closed.
+- Chuseok holiday: 2027-09-14 to 2027-09-16. Public holiday from Tue 14 to Thu 16 Sep 2027. Chuseok itself is Wed 15 Sep. Government offices and banks are closed.
+
 ## Tools on the site (work offline once opened)
 - [Korean cards to show staff and drivers](https://easymodekorea.com/phrases.html): full-screen Korean sentences, place names to copy, the visitor's own cards.
 - [Emergency help in Korea](https://easymodekorea.com/help.html): 112, 119, 1330 and Korean sentences to show.

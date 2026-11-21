@@ -495,6 +495,55 @@ html.offline .install-bar { display: none; }
 .pl-acts .btn { min-height: 42px; padding: 8px 12px; font-size: 14px; }
 .pl-acts .linkbtn { padding: 10px 8px; font-size: 14px; margin-left: auto; }
 .places .hint { margin: 8px 0 0; }
+/* Round 4: when something goes wrong (flows), holiday alerts, offline pack, sharing */
+.flow-steps { margin: 0; padding: 0; list-style: none; counter-reset: fs; display: grid; gap: 10px; }
+.flow-steps > li { counter-increment: fs; position: relative; padding: 14px 14px 14px 54px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; display: grid; gap: 8px; }
+.flow-steps > li::before { content: counter(fs); position: absolute; left: 14px; top: 14px; width: 28px; height: 28px; border-radius: 50%; background: var(--ink); color: var(--surface); font: 800 15px/28px var(--body); text-align: center; }
+.flow-steps p { margin: 0; font-size: 17px; line-height: 1.5; }
+.flow-steps .fact-src { font-size: 13px; line-height: 1.45; color: var(--muted); }
+.flow-steps .fact-src a { color: var(--muted); overflow-wrap: anywhere; }
+.flow-steps .ck { font-weight: 700; color: var(--ok); margin-right: 4px; }
+.flow-steps .actions .btn { min-height: 44px; }
+.call-btn { background: var(--ok); color: #fff; }
+.call-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .call-btn { color: #0b0f1e; } }
+:root[data-theme="dark"] .call-btn { color: #0b0f1e; }
+.glist.flows a { min-height: 60px; font-size: 17px; }
+.glist.flows .ic { width: 42px; height: 42px; background: var(--bad-bg); color: var(--bad); }
+.alerts-wrap { margin: 0 0 14px; }
+.alerts-wrap[hidden] { display: none; }
+.alerts-wrap > h2 { font: 700 14px var(--body); text-transform: uppercase; letter-spacing: .04em; color: var(--warn); margin: 0 0 6px; }
+.app-main .alerts-wrap > h2 { font: 700 18px var(--display); text-transform: none; letter-spacing: 0; color: var(--ink); margin: 0 0 8px; }
+.alerts-sub { font: 700 14px var(--body); text-transform: uppercase; letter-spacing: .04em; color: var(--warn); margin: 14px 0 6px; }
+#alerts { display: grid; gap: 8px; }
+.alert { background: var(--warn-bg); border-radius: 14px; }
+.alert > summary { list-style: none; cursor: pointer; display: grid; gap: 2px; padding: 12px 40px 12px 14px; min-height: 48px; position: relative; }
+.alert > summary::-webkit-details-marker { display: none; }
+.alert > summary::after { content: "+"; position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font: 400 22px var(--body); color: var(--warn); }
+.alert[open] > summary::after { content: "–"; }
+.alert > summary b { font: 700 16px var(--body); }
+.alert > summary span { font-size: 14px; color: var(--warn); font-weight: 600; }
+.alert ul { margin: 0; padding: 0 14px 14px 32px; display: grid; gap: 8px; font-size: 15px; line-height: 1.45; }
+.alert .src { display: inline-block; font-size: 12px; color: var(--muted); overflow-wrap: anywhere; }
+.trip-dates { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.trip-dates label { display: grid; gap: 4px; font: 700 14px var(--body); color: var(--muted); }
+.trip-dates input { min-width: 0; min-height: 48px; font: 16px var(--body); padding: 8px 10px; border-radius: 12px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); }
+.alerts-wrap .hint { margin: 8px 0 0; }
+.off-ok { display: inline-flex; align-items: center; gap: 4px; margin: 10px 0 0; padding: 4px 10px; border-radius: 999px; background: var(--chip); color: #fff; font: 700 12.5px var(--body); }
+.pack, .share { display: grid; gap: 10px; padding: 14px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; }
+.pack h2, .share h2 { font: 700 18px var(--display); margin: 0; }
+.pack p, .share p { margin: 0; }
+.pack-bar { height: 8px; border-radius: 99px; background: var(--line); overflow: hidden; }
+.pack-bar i { display: block; height: 100%; width: 0; background: var(--ok); transition: width .3s; }
+.pack-state { font-weight: 700; }
+.pack-state.ok { color: var(--ok); }
+#share-out { display: grid; gap: 10px; justify-items: start; }
+#share-out[hidden], #import[hidden] { display: none; }
+#share-qr { width: 200px; height: 200px; padding: 8px; background: #fff; border-radius: 12px; }
+#share-qr svg { display: block; width: 100%; height: 100%; }
+#import { display: grid; gap: 10px; padding: 14px 16px; background: var(--easy); color: #0e1430; border-radius: 16px; font-weight: 600; }
+#import .btn { background: #0e1430; color: #fff; }
+#import .linkbtn { color: #0e1430; }
 /* e-Arrival Card helper */
 .arrive + .actions { margin-top: 18px; }
 .arrive { display: grid; gap: 10px; margin: 22px 0 0; padding: 14px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; }

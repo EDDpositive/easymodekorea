@@ -36,6 +36,15 @@
     try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {}
   }
 
+  /* A clear mark on any page that is saved on this phone (not on the home screen, which says so in its own words). */
+  function markOffline() {
+    if (!window.caches || d.querySelector(".off-ok") || d.getElementById("jump")) return;
+    caches.match(location.origin + location.pathname).then(function (r) {
+      var h = d.querySelector(".hero .wrap"); if (!r || !h || d.querySelector(".off-ok")) return;
+      h.appendChild(mk("p", "off-ok", "\u2713 " + T.off_ok));
+    }).catch(function () {});
+  }
+  markOffline();
   /* Offline copy of the site, and a notice when the page on screen has a newer version. */
   if ("serviceWorker" in navigator) {
     var reg = function () { navigator.serviceWorker.register(E.up + "sw.js?l=" + E.lang).catch(function () {}); };
@@ -44,7 +53,7 @@
       if (!ev.data) return;
       if (ev.data.t === "upd" && ev.data.p === location.pathname) toast(T.update, T.refresh, function () { location.reload(); }, 12000);
       /* First visit: say once that the guides are now on the phone. */
-      if (ev.data.t === "ready" && !get("emk-ready")) { set("emk-ready", "1"); toast(T.ready, null, null, 6000); }
+      if (ev.data.t === "ready") { markOffline(); if (!get("emk-ready")) { set("emk-ready", "1"); toast(T.ready, null, null, 6000); } }
     });
   }
 

@@ -13,7 +13,8 @@ on:
         description: "Version name shown to users, e.g. 1.0.1"
         default: ""
   pull_request:
-    paths: ["android/**", ".github/workflows/android-build.yml"]
+    # The app is built from these: its own settings, plus the site's manifest and icons.
+    paths: ["android/**", ".github/workflows/android-build.yml", "manifest.webmanifest", "icon-*.png", "shortcut-*.png"]
 
 permissions:
   contents: read

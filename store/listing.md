@@ -31,9 +31,11 @@ WHAT YOU GET
 • Korean cards: show a driver or staff a sentence in big Korean letters, or copy place names into a map app. Make your own card for a hotel name or an allergy.
 • Places to go: save your stay and other places once, show them to a taxi driver full screen, or open them in Naver Map or KakaoMap.
 • Food and payment cards: allergies, vegetarian, no pork, or a card that won't go through, in big Korean.
-• Emergency help: the numbers to call and Korean sentences to show, one tap away.
+• When something goes wrong: lost phone or passport, sick or hurt, missed the last train, card refused, taxi trouble. One screen each, step by step, with call buttons, Korean to show, and the source and check date for every number.
+• Holiday alerts for your trip dates: what Seollal and Chuseok change for a visitor.
 • Arrival helper: enter your landing time and see when you can submit the e-Arrival Card.
-• Works offline: guides are stored on your phone, so they open on the plane or underground.
+• A real offline pack: guides, Korean cards, trouble screens and your trip list open with no signal, and the app tells you when everything is saved.
+• Share your stay address and place list with a companion by link or QR code. No account.
 • Save guides for your trip, and search every guide, question and Korean card.
 
 TOPICS
@@ -69,9 +71,11 @@ Questions or corrections: edandco.biz@gmail.com
 • 한국어 카드: 기사님이나 직원에게 큰 한국어 글씨로 보여 주거나, 장소 이름을 지도 앱에 복사합니다. 호텔 이름이나 알레르기는 직접 카드로 만들 수 있습니다.
 • 갈 곳 목록: 숙소와 가고 싶은 곳을 한 번 저장해 두면 기사님에게 전체 화면으로 보여 주거나 네이버 지도·카카오맵으로 바로 엽니다.
 • 식사·결제 카드: 알레르기, 채식, 돼지고기 제외, 카드 결제가 안 될 때 쓸 문장을 큰 한국어로 보여 줍니다.
-• 긴급 도움: 전화할 번호와 보여 줄 한국어 문장이 한 번에 열립니다.
+• 문제가 생겼을 때: 휴대폰·여권 분실, 아플 때, 막차를 놓쳤을 때, 카드가 거절될 때, 택시 문제. 상황마다 한 화면에 순서대로, 전화 버튼과 보여 줄 한국어, 번호마다 출처와 확인 날짜가 있습니다.
+• 여행 날짜에 맞춘 명절 알림: 설과 추석에 여행자에게 달라지는 점을 알려 줍니다.
 • 입국 도우미: 도착 시각을 넣으면 전자도착카드를 언제부터 낼 수 있는지 알려 줍니다.
-• 오프라인: 가이드가 폰에 저장되어 비행기나 지하에서도 열립니다.
+• 진짜 오프라인 팩: 가이드, 한국어 카드, 문제 상황 화면, 내 여행 목록이 신호 없이 열리고, 모두 저장됐는지 앱이 알려 줍니다.
+• 숙소 주소와 갈 곳 목록을 링크나 QR로 일행에게 넘길 수 있습니다. 가입이 필요 없습니다.
 • 가이드 저장, 그리고 모든 가이드·질문·한국어 카드 검색.
 
 주제

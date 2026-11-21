@@ -15,6 +15,7 @@ from deep import CONTACT_EMAIL, DEEP, HEAD as DEEP_HEAD, PAGES  # noqa: E402
 import layout  # noqa: E402
 from layout import ADDR_GUIDES, AT, CARDS, COPY, tx  # noqa: E402
 import app_shell as A  # noqa: E402
+import trouble as TR  # noqa: E402
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 SITE = "https://easymodekorea.com/"
@@ -264,6 +265,7 @@ def build_tool(lang):
   <label class="search"><span class="sr">{e(ux['search'])}</span><input id="q" type="search" placeholder="{e(ux['search'])}" autocomplete="off"></label>
   <p class="hint" id="nores" hidden>{e(ux['nores'])} <button type="button" class="linkbtn" id="clear">{e(ux['clear'])}</button></p>
   <p class="trust-line">✓ {e(A.T[lang]['trust'].format(n=len(tasks), date=fmt_date(max(r[2] for rows in AT.values() for r in rows), lang), c=len(x['changes'])))} <a href="changes.html">{e(x['nav_changes'])}</a></p>
+  {alerts_block(lang)}
   <nav class="jump" id="jump" aria-label="{e(A.T[lang]['jump_label'])}">{jump}</nav>
   <section class="sit" aria-labelledby="sit-h"><h2 id="sit-h">{e(LU['cards_h'])}</h2><div class="sit-grid">{''.join(cards)}</div></section>
   <div class="found" id="found" aria-live="polite"></div>
@@ -292,6 +294,7 @@ def build_tool(lang):
 const D = {json.dumps(data, ensure_ascii=False)};
 {COMMON_JS}
 {TOOL_JS}
+{ALERTS_JS}
 </script>
 {footer(lang)}
 {feedback_html(lang)}
@@ -416,9 +419,11 @@ function filter() {
   const found = document.getElementById("found"); found.replaceChildren(); let deep = 0;
   if (q.length >= 2 && IDX) {
     const fq = IDX.faq.filter(x => x[2].toLowerCase().includes(q)).slice(0, 6), cd = IDX.cards.filter(x => (x[0] + " " + x[1]).toLowerCase().includes(q)).slice(0, 6);
+    const fl = (IDX.flows || []).filter(x => (x[1] + " " + x[2]).toLowerCase().includes(q));
+    if (fl.length) { found.append(el("ul", { class: "glist" }, fl.map(x => el("li", {}, el("a", { href: x[0] + ".html", text: x[1] }))))); }
     if (fq.length) { found.append(el("h2", { text: D.found[0] }), el("ul", { class: "glist" }, fq.map(x => el("li", {}, el("a", { href: x[0] + ".html#fq-" + x[1], text: x[2] }))))); }
     if (cd.length) { found.append(el("h2", { text: D.found[1] }), el("ul", { class: "glist" }, cd.map(x => { const b = el("button", { type: "button", class: "card-hit" }, [el("b", { lang: "ko", text: x[0] }), el("span", { text: x[1] })]); b.addEventListener("click", () => show(S.show, x[0], "", XS.means + ": " + x[1])); return el("li", {}, b); }))); }
-    deep = fq.length + cd.length;
+    deep = fq.length + cd.length + fl.length;
   }
   document.getElementById("nores").hidden = !q || shown + cardHits + deep > 0;
   if (q && shown === 1) { const r = [...document.querySelectorAll(".row")].find(x => !x.hidden); r.open = true; }
@@ -830,6 +835,107 @@ def places_card(lang):
 <p class="hint" id="pl-msg" role="status"></p><ul id="pl-list" class="pl-list"></ul><p class="hint">{e(LU['addr_note'])}</p></section>"""
 
 
+def src_links(lang, keys):
+    """Source links for a dated fact: an outside source from trouble.SRC, or one of this site's own guides ('guide:<task id>')."""
+    slug_of = {tid: sl for tid, sl, _ in TASK_META}; out = []
+    for k in keys:
+        if k.startswith("guide:"): out.append(f'<a href="{slug_of[k[6:]]}.html">{e(SHORT[lang]["tasks"][k[6:]])}</a>')
+        else: out.append(f'<a href="{e(TR.SRC[k][1])}" rel="noopener" target="_blank">{e(TR.SRC[k][0])}</a>')
+    return ", ".join(out)
+
+
+def flow_cards(flow):
+    return A.PAY_CARDS if flow["cards"] == "PAY" else flow["cards"]
+
+
+def build_flow(lang, flow):
+    """One 'something went wrong' screen: numbered steps with call and guide buttons, each sourced step showing
+    its check date and source, then the Korean cards to show. Works offline like every other page."""
+    tx_ = TR.TX; slug_of = {tid: sl for tid, sl, _ in TASK_META}; L = LANGS[lang]
+    steps = []
+    for s in flow["steps"]:
+        acts = ""
+        if s["call"]:
+            tel = "+82-2-1330" if s["call"] == "1330" else s["call"]
+            acts += f'<a class="btn call-btn" href="tel:{tel}">{A.IC["phone"]}{e(tx_["call"][lang])} {e(s["call"])}</a>'
+        if s["guide"]: acts += f'<a class="btn ghost" href="{slug_of[s["guide"]]}.html">{e(SHORT[lang]["tasks"][s["guide"]])}</a>'
+        meta = (f'<p class="fact-src"><time class="ck" datetime="{s["d"]}">✓ {e(fmt_date(s["d"], lang))}</time> {src_links(lang, s["src"])}</p>' if s["d"] else "")
+        steps.append(f'<li><p>{e(s["t"][lang])}</p>{meta}{f"<div class=actions>{acts}</div>" if acts else ""}</li>')
+    cards = "".join(say_row(lang, ko, m[lang]) for ko, m in flow_cards(flow))
+    others = "".join(f'<li><a href="{f["slug"]}.html"><span class="ic">{icon(f["icon"])}</span><span>{e(f["title"][lang])}</span></a></li>' for f in TR.FLOWS if f["id"] != flow["id"])
+    inner = f"""<section class="sec flow" aria-labelledby="fl-h"><h2 id="fl-h">{e(tx_['steps_h'][lang])}</h2><ol class="flow-steps">{''.join(steps)}</ol></section>
+<section class="sec says" aria-labelledby="fc-h"><h2 id="fc-h">{e(tx_['cards_h'][lang])}</h2>{cards}</section>
+{addr_card(lang) if flow['id'] in ('train', 'taxi') else ''}
+<section class="sec" aria-labelledby="fo-h"><h2 id="fo-h">{e(tx_['other_h'][lang])}</h2><ul class="glist">{others}<li><a href="help.html"><span class="ic">{A.IC['help']}</span><span>{e(A.T[lang]['help_title'])}</span></a></li></ul></section>"""
+    dates = [s["d"] for s in flow["steps"] if s["d"]]
+    cites = [{"@type": "WebPage", "name": TR.SRC[k][0], "url": TR.SRC[k][1]} for k in dict.fromkeys(k for s in flow["steps"] for k in s["src"] if not k.startswith("guide:"))]
+    path = L["dir"] + flow["slug"] + ".html"
+    ld = [{"@context": "https://schema.org", "@type": "HowTo", "name": flow["title"][lang], "description": flow["lede"][lang], "inLanguage": L["html_lang"], "url": SITE + path,
+           "step": [{"@type": "HowToStep", "position": i, "text": s["t"][lang]} for i, s in enumerate(flow["steps"], 1)], "citation": cites},
+          {"@context": "https://schema.org", "@type": "WebPage", "@id": SITE + path, "url": SITE + path, "name": flow["title"][lang], "inLanguage": L["html_lang"], "lastReviewed": max(dates),
+           "reviewedBy": {"@type": "Organization", "name": BRAND, "url": SITE + L["dir"] + "about.html"}}]
+    return app_page(lang, flow["slug"], (flow["title"][lang], flow["lede"][lang]), flow["title"][lang], flow["lede"][lang], inner, "help", ld=ld)
+
+
+def flow_tiles(lang):
+    """The five situations as large rows, used at the top of the help tab."""
+    rows = "".join(f'<li><a href="{f["slug"]}.html"><span class="ic">{icon(f["icon"])}</span><span>{e(f["title"][lang])}</span></a></li>' for f in TR.FLOWS)
+    return f'<section class="sec" aria-labelledby="hub-h"><h2 id="hub-h">{e(TR.TX["hub_h"][lang])}</h2><ul class="glist flows">{rows}</ul></section>'
+
+
+def alerts_data(lang):
+    """The yearly holiday table for one language, as plain data for the page script."""
+    return [{"id": a["id"], "from": a["from"], "to": a["to"], "title": a["title"][lang],
+             "points": [{"t": p["t"][lang], "src": [[TR.SRC[k][0], TR.SRC[k][1]] for k in p["src"]]} for p in a["points"]]} for a in TR.ALERTS]
+
+
+ALERTS_JS = r"""
+(function () {
+  /* Holiday alerts from the yearly table. With trip dates set (kept on this phone), only holidays inside the trip show.
+     Without dates, a holiday shows from 45 days before it starts until it ends. */
+  const box = document.getElementById("alerts"); if (!box) return;
+  const data = JSON.parse(document.getElementById("alerts-data").textContent), c = box.dataset, loc = document.documentElement.lang || "en";
+  const day = s => { const m = /^(\d{4})-(\d\d)-(\d\d)/.exec(s || ""); return m ? Date.UTC(+m[1], m[2] - 1, +m[3]) : NaN; };
+  const fmt = s => new Intl.DateTimeFormat(loc, { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" }).format(new Date(day(s)));
+  let trip = {}; try { trip = JSON.parse(store("emk-trip") || "{}") || {}; } catch (e) {}
+  const from = day(trip.from), to = day(trip.to), has = !isNaN(from) && !isNaN(to) && to >= from;
+  const kst = new Date(Date.now() + 9 * 3600e3), today = Date.UTC(kst.getUTCFullYear(), kst.getUTCMonth(), kst.getUTCDate());
+  const hit = data.filter(a => has ? day(a.from) <= to && day(a.to) >= from : today <= day(a.to) && day(a.from) - today <= 45 * 864e5);
+  box.replaceChildren();
+  const heading = document.getElementById("alerts-h"); if (heading) heading.textContent = has ? c.h : c.soon;
+  for (const a of hit) {
+    const d = el("details", { class: "alert" }), ul = el("ul");
+    d.append(el("summary", {}, [el("b", { text: a.title }), el("span", { text: fmt(a.from) + " – " + fmt(a.to) })]));
+    for (const p of a.points) { const li = el("li", { text: p.t + " " }); p.src.forEach(([n, u]) => li.append(el("a", { href: u, rel: "noopener", target: "_blank", class: "src", text: n }))); ul.append(li); }
+    d.append(ul); box.append(d);
+  }
+  /* Trip dates (My trip only). */
+  const f = document.getElementById("trip-from"), t = document.getElementById("trip-to"), wrap = document.getElementById("alerts-wrap");
+  if (!f) wrap.hidden = !hit.length;                       /* home: the block appears only when something applies */
+  else { if (heading) heading.hidden = !hit.length && !has; if (!hit.length && has) box.append(el("p", { class: "hint", text: c.none })); }
+  if (f && t) {
+    f.value = trip.from || ""; t.value = trip.to || "";
+    const save = () => { store("emk-trip", JSON.stringify({ from: f.value, to: t.value })); location.reload(); };
+    f.addEventListener("change", () => { if (f.value && t.value) save(); else store("emk-trip", JSON.stringify({ from: f.value, to: t.value })); });
+    t.addEventListener("change", () => { if (f.value && t.value) save(); else store("emk-trip", JSON.stringify({ from: f.value, to: t.value })); });
+  }
+})();
+"""
+
+
+def alerts_block(lang, with_dates=False):
+    """Holiday alerts. On the home screen it appears only when something applies; in My trip it sits under the trip dates."""
+    t = TR.ALERT_TX
+    data = json.dumps(alerts_data(lang), ensure_ascii=False).replace("</", "<\\/")
+    dates = f"""<div class="trip-dates"><label>{e(t['from'][lang])}<input id="trip-from" type="date"></label><label>{e(t['to'][lang])}<input id="trip-to" type="date"></label></div><p class="hint">{e(t['dates_note'][lang])}</p>""" if with_dates else ""
+    head_ = f'<h2 id="alerts-h">{e(t["dates_h"][lang] if with_dates else t["soon"][lang])}</h2>'
+    hidden = "" if with_dates else " hidden"
+    none = e(t["none"][lang]) if with_dates else ""
+    return f"""<section class="sec alerts-wrap" id="alerts-wrap" aria-labelledby="alerts-h"{hidden}>{head_ if not with_dates else f'<h2>{e(t["dates_h"][lang])}</h2>'}{dates}
+{f'<h3 id="alerts-h" class="alerts-sub">{e(t["h"][lang])}</h3>' if with_dates else ''}<div id="alerts" data-h="{e(t['h'][lang])}" data-soon="{e(t['soon'][lang])}" data-none="{none}"></div></section>
+<script type="application/json" id="alerts-data">{data}</script>"""
+
+
 ARRIVAL_SITE = "https://www.e-arrivalcard.go.kr"  # same official address as the entry guide's sources
 
 
@@ -972,11 +1078,16 @@ TRIP_JS = r"""
     document.getElementById("recent-list").replaceChildren(...r.map(x => item(x, false)));
   }
   paint();
-  /* How much is ready offline, and the install button. */
-  if (window.caches) caches.keys().then(ks => Promise.all(ks.filter(k => k.startsWith("emk-")).map(k => caches.open(k).then(c => c.keys())))).then(all => {
-    const n = new Set(all.flat().map(r => new URL(r.url).pathname).filter(p => p.endsWith("/") || p.endsWith(".html"))).size;
-    if (n) { const p = document.getElementById("off-n"); p.textContent = "✓ " + cfg.offline.replace("{n}", n); p.hidden = false; }
-  }).catch(() => {});
+  /* Offline pack: the worker says how many of this language's files are on the phone, and fetches the rest on request. */
+  const pk = document.getElementById("pack");
+  if (pk && navigator.serviceWorker) {
+    const st = document.getElementById("pk-state"), bar = document.getElementById("pk-bar"), btn = document.getElementById("pk-btn");
+    const showPack = (n, m) => { bar.style.width = Math.round(100 * n / m) + "%"; st.textContent = n >= m ? "✓ " + pk.dataset.ok : pk.dataset.state.replace("{n}", n).replace("{m}", m); st.className = "pack-state" + (n >= m ? " ok" : ""); btn.disabled = false; };
+    navigator.serviceWorker.addEventListener("message", ev => { if (ev.data && ev.data.t === "pack") showPack(ev.data.n, ev.data.m); if (ev.data && ev.data.t === "ready") ask("status"); });
+    const ask = t => navigator.serviceWorker.ready.then(r => { if (r.active) r.active.postMessage({ t }); }).catch(() => {});
+    ask("status");
+    btn.addEventListener("click", () => { btn.disabled = true; st.textContent = pk.dataset.busy; st.className = "pack-state"; ask("pack"); });
+  }
   const ib = document.getElementById("app-install"), I = window.emkInstall;
   const ready = () => { if (I && I.ready()) ib.hidden = false; };
   document.addEventListener("emk-installable", ready); ready();
@@ -998,18 +1109,85 @@ def build_trip(lang):
     G = {tk["slug"]: [tk["short"], tk["icon"]] for tk in task_list(lang)}
     link = lambda href, key, text: f'<li><a href="{href}"><span class="ic">{A.IC[key]}</span><span>{e(text)}</span></a></li>'
     inner = f"""<div id="trip" data-remove="{e(t['remove'])}" data-offline="{e(t['trip_offline'])}" data-ask="{e(t['trip_clear_q'])}" data-cleared="{e(t['trip_cleared'])}">
+<div id="import" hidden><p id="import-q"></p><div class="actions"><button class="btn" type="button" id="import-yes">{e(t['places_add'])}</button><button class="linkbtn" type="button" id="import-no">{e(t['later'])}</button></div></div>
 <section class="sec" aria-labelledby="sv-h"><h2 id="sv-h">{e(t['trip_saved_h'])}</h2><ul class="glist" id="saved-list"></ul><p class="hint" id="saved-empty">{e(t['trip_saved_empty'])}</p></section>
 <section class="sec" id="recent" hidden aria-labelledby="rc-h"><h2 id="rc-h">{e(t['trip_recent_h'])}</h2><ul class="glist" id="recent-list"></ul></section>
 {addr_card(lang)}
 {places_card(lang)}
+<section class="share" id="share" aria-labelledby="sh-h" data-empty="{e(t['share_empty'])}" data-copied="{e(t['link_copied'])}" data-q="{e(t['import_q'])}" data-done="{e(t['import_done'])}">
+<h2 id="sh-h">{e(t['share_h'])}</h2><p class="hint">{e(t['share_lede'])}</p>
+<div class="actions"><button class="btn" type="button" id="share-make">{e(t['share_btn'])}</button></div><p class="hint" id="share-msg" role="status"></p>
+<div id="share-out" hidden><div id="share-qr" role="img" aria-label="QR"></div>
+<div class="actions"><button class="btn ghost" type="button" id="share-send" hidden>{e(t['share'])}</button><button class="btn ghost" type="button" id="share-copy">{e(t['share_copy'])}</button></div><p class="hint">{e(t['share_warn'])}</p></div></section>
+{alerts_block(lang, with_dates=True)}
 {arrival_card(lang, with_guide=True)}
+<section class="pack" id="pack" aria-labelledby="pk-h" data-state="{e(t['pack_state'])}" data-ok="{e(t['pack_ok'])}" data-busy="{e(t['pack_busy'])}"><h2 id="pk-h">{e(t['pack_h'])}</h2>
+<div class="pack-bar"><i id="pk-bar"></i></div><p class="pack-state" id="pk-state" role="status"></p>
+<div class="actions"><button class="btn ghost" type="button" id="pk-btn">{e(t['pack_btn'])}</button></div></section>
 <section class="sec" aria-labelledby="mr-h"><h2 id="mr-h">{e(t['trip_more_h'])}</h2><ul class="glist">{link('phrases.html', 'cards', t['trip_cards'])}{link('./#tool-h', 'guides', t['trip_setup'])}{link('help.html', 'help', t['trip_help'])}</ul></section>
 <section class="sec" aria-labelledby="ap-h"><h2 id="ap-h">{e(t['trip_app_h'])}</h2>
-<p class="hint" id="off-n" hidden></p><p class="hint" id="ios-hint" hidden>{e(t['ios_hint'])}</p>
+<p class="hint" id="ios-hint" hidden>{e(t['ios_hint'])}</p>
 <div class="actions"><button class="btn" type="button" id="app-install" hidden>{e(t['trip_install'])}</button><button class="btn ghost" type="button" id="clear">{e(t['trip_clear'])}</button></div><p class="hint" id="cleared" role="status"></p>
 <p class="hint"><a href="privacy.html">{e(t['privacy_title'])}</a> · <a href="about.html">{e(P['about'])}</a> · <a href="changes.html">{e(P['changes'])}</a></p></section>
-</div><script type="application/json" id="trip-data">{json.dumps(G, ensure_ascii=False).replace("</", "<\\/")}</script>"""
-    return app_page(lang, "saved", (t["trip_title"], t["trip_lede"]), t["trip_title"], t["trip_lede"], inner, "trip", TRIP_JS + PLACES_JS + ARRIVAL_JS, index=False)
+</div><script type="application/json" id="trip-data">{json.dumps(G, ensure_ascii=False).replace("</", "<\\/")}</script><script src="{'../' if LANGS[lang]['dir'] else ''}qr.js"></script>"""
+    return app_page(lang, "saved", (t["trip_title"], t["trip_lede"]), t["trip_title"], t["trip_lede"], inner, "trip", TRIP_JS + PLACES_JS + SHARE_JS + ALERTS_JS + ARRIVAL_JS, index=False)
+
+
+SHARE_JS = r"""
+(function () {
+  /* Share the stay address and the place list with a companion. The list travels inside the link itself (after the #),
+     so it is never sent to a server. The other phone asks before adding anything. */
+  const sh = document.getElementById("share"); if (!sh) return;
+  const c = sh.dataset, msg = document.getElementById("share-msg"), out = document.getElementById("share-out");
+  const enc = o => btoa(String.fromCharCode(...new TextEncoder().encode(JSON.stringify(o)))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  const dec = s => JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(s.replace(/-/g, "+").replace(/_/g, "/")), ch => ch.charCodeAt(0))));
+  const places = () => { try { const a = JSON.parse(store("emk-places") || "[]"); return Array.isArray(a) ? a.filter(x => typeof x === "string" && x).slice(0, 20) : []; } catch (e) { return []; } };
+  let link = "";
+  function drawQR(text) {
+    const box = document.getElementById("share-qr"); box.hidden = true;
+    if (!window.QRCode || text.length > 1600) return;   /* a longer link will not fit a code a phone can read */
+    try {
+      const q = new QRCode(-1, QRErrorCorrectLevel.L); q.addData(text); q.make();
+      const n = q.getModuleCount(), m = 2; let d = "";
+      for (let r = 0; r < n; r++) for (let col = 0; col < n; col++) if (q.isDark(r, col)) d += "M" + (col + m) + " " + (r + m) + "h1v1h-1z";
+      box.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + (n + 2 * m) + " " + (n + 2 * m) + '" shape-rendering="crispEdges"><rect width="100%" height="100%" fill="#fff"/><path d="' + d + '" fill="#0e1430"/></svg>';
+      box.hidden = false;
+    } catch (e) {}
+  }
+  document.getElementById("share-make").addEventListener("click", () => {
+    const o = { v: 1, a: (store("emk-addr") || "").slice(0, 160), p: places() };
+    if (!o.a && !o.p.length) { msg.textContent = c.empty; out.hidden = true; return; }
+    msg.textContent = ""; link = location.origin + location.pathname + "#t=" + enc(o);
+    drawQR(link); out.hidden = false; out.dataset.link = link; document.getElementById("share-send").hidden = !navigator.share; count("share-trip", "share trip");
+  });
+  document.getElementById("share-send").addEventListener("click", () => { navigator.share({ title: document.title, url: link }).catch(() => {}); });
+  document.getElementById("share-copy").addEventListener("click", async () => { try { await navigator.clipboard.writeText(link); msg.textContent = "✓ " + c.copied; } catch (e) { msg.textContent = link; } });
+  /* Arriving with a shared list: show what came and add it only on a tap. Runs on load and again when a link is opened
+     while this page is already on screen (then only the part after # changes). */
+  let a = "", p = [];
+  const clean = () => { try { history.replaceState(null, "", location.pathname); } catch (e) {} document.getElementById("import").hidden = true; };
+  function arrive() {
+    const m = location.hash.match(/[#&]t=([A-Za-z0-9_-]+)/); if (!m) return;
+    let got = null; try { got = dec(m[1]); } catch (e) {}
+    if (!got || typeof got !== "object") { clean(); return; }
+    a = typeof got.a === "string" ? got.a.slice(0, 160) : ""; p = (Array.isArray(got.p) ? got.p : []).filter(x => typeof x === "string" && x).map(x => x.slice(0, 160)).slice(0, 20);
+    if (!a && !p.length) { clean(); return; }
+    document.getElementById("import-q").textContent = c.q.replace("{n}", (a ? 1 : 0) + p.length);
+    const box = document.getElementById("import"); box.hidden = false; box.scrollIntoView({ block: "center" });
+  }
+  document.getElementById("import-no").addEventListener("click", clean);
+  document.getElementById("import-yes").addEventListener("click", () => {
+    const mine = places(), add = p.slice();
+    if (a) { if (!store("emk-addr")) store("emk-addr", a); else if (store("emk-addr") !== a) add.unshift(a); }   /* never overwrite the reader's own stay */
+    store("emk-places", JSON.stringify([...new Set([...add, ...mine])].slice(0, 20)));
+    try { sessionStorage.setItem("emk-imported", "1"); } catch (e) {}
+    try { history.replaceState(null, "", location.pathname); } catch (e) {}
+    location.reload();
+  });
+  addEventListener("hashchange", arrive); arrive();
+})();
+addEventListener("DOMContentLoaded", () => { try { if (sessionStorage.getItem("emk-imported")) { sessionStorage.removeItem("emk-imported"); const s = document.getElementById("share"); if (window.emkToast && s) emkToast(s.dataset.done); } } catch (e) {} });
+"""
 
 
 def build_help(lang):
@@ -1018,7 +1196,8 @@ def build_help(lang):
     nums = call_rows(lang)
     says = "".join(say_row(lang, ko, m[lang]) for ko, m in HELP_PHRASES[:4]) + "".join(say_row(lang, ko, m[lang]) for ko, m in PHRASES["health"])
     more = "".join(f'<li><a href="{slug_of[i]}.html"><span class="ic">{icon(i)}</span><span>{e(QUESTION[lang][i])}</span></a></li>' for i in ("health", "translate"))
-    inner = f"""<section class="sec" aria-labelledby="cl-h"><h2 id="cl-h">{e(h['calls'])}</h2><div class="calls">{nums}</div><p class="hint">{e(t['help_offline'])}</p></section>
+    inner = f"""{flow_tiles(lang)}
+<section class="sec" aria-labelledby="cl-h"><h2 id="cl-h">{e(h['calls'])}</h2><div class="calls">{nums}</div><p class="hint">{e(t['help_offline'])}</p></section>
 <section class="sec says" aria-labelledby="sh-h"><h2 id="sh-h">{e(h['phrases'])}</h2>{says}</section>
 {addr_card(lang)}
 <section class="sec" aria-labelledby="mh-h"><h2 id="mh-h">{e(t['help_more_h'])}</h2><ul class="glist">{more}<li><a href="phrases.html"><span class="ic">{A.IC['cards']}</span><span>{e(t['cards_title'])}</span></a></li></ul></section>"""
@@ -1043,7 +1222,9 @@ def search_index(lang):
     for rows in COPY.values():
         for ko, m in rows:
             if ko not in seen: seen.add(ko); cards.append([ko, tx(m, lang)])
-    return json.dumps({"faq": faq, "cards": cards}, ensure_ascii=False, separators=(",", ":"))
+    cards += [[ko, m[lang]] for f in TR.FLOWS if f["cards"] != "PAY" for ko, m in f["cards"] if ko not in seen and not seen.add(ko)]
+    flows = [[f["slug"], f["title"][lang], f["lede"][lang]] for f in TR.FLOWS]
+    return json.dumps({"faq": faq, "cards": cards, "flows": flows}, ensure_ascii=False, separators=(",", ":"))
 
 
 # App and topic names that get a link to their guide the first time they appear in a guide's
@@ -1163,6 +1344,10 @@ def llms_files():
              "## Guides (answer for a visitor with no Korean number)"]
     lines += [f"- [{QUESTION['en'][t['id']]}]({SITE}{t['slug']}.html): {resolve(t, 'visitor', 'ios')['verdict']} (checked {checked(t)})" for t in tasks]
     lines += ["", "## Rule changes logged in 2026"] + [f"- {d}: {text}" for d, text in X["en"]["changes"]] + [f"- Full log: {SITE}changes.html", "",
+              "## When something goes wrong (step by step, each sourced step dated)"] + [
+              f"- [{f['title']['en']}]({SITE}{f['slug']}.html): {f['lede']['en']} (checked {max(s['d'] for s in f['steps'] if s['d'])})" for f in TR.FLOWS] + ["",
+              "## Public holidays that affect a visit (table updated each December)"] + [
+              f"- {a['title']['en']}: {a['from']} to {a['to']}. {a['points'][0]['t']['en']}" for a in TR.ALERTS] + ["",
               "## Tools on the site (work offline once opened)",
               f"- [Korean cards to show staff and drivers]({SITE}phrases.html): full-screen Korean sentences, place names to copy, the visitor's own cards.",
               f"- [Emergency help in Korea]({SITE}help.html): 112, 119, 1330 and Korean sentences to show.",
@@ -1183,6 +1368,14 @@ def llms_files():
         if ch: full += ["", "Changed in 2026"] + [f"- {d}: {text}" for d, text in ch]
         if t["id"] in DEEP and "en" in DEEP[t["id"]]: full += ["", "Questions"] + [f"- {q} {a}" for q, a in DEEP[t["id"]]["en"]["faq"]]
         full += ["", "Sources"] + [f"- {n}: {u}" for n, u in cites(t)]
+    for f in TR.FLOWS:
+        full += ["", f"## {f['title']['en']}", f"URL: {SITE}{f['slug']}.html", f"Last checked: {max(s['d'] for s in f['steps'] if s['d'])}", ""]
+        for i, s in enumerate(f["steps"], 1):
+            src = "; ".join((TR.SRC[k][0] + " " + TR.SRC[k][1]) if not k.startswith("guide:") else f"{SITE}{next(sl for tid, sl, _ in TASK_META if tid == k[6:])}.html" for k in s["src"])
+            full.append(f"{i}. {s['t']['en']}" + (f" (checked {s['d']}; source: {src})" if s["d"] else ""))
+        full += ["", "Korean to show"] + [f"- {ko} = {m['en']}" for ko, m in flow_cards(f)]
+    for a in TR.ALERTS:
+        full += ["", f"## {a['title']['en']}: {a['from']} to {a['to']}"] + [f"- {p['t']['en']} (source: " + "; ".join(TR.SRC[k][1] for k in p["src"]) + ")" for p in a["points"]]
     write("llms-full.txt", NL.join(full) + NL)
 
 
@@ -1208,7 +1401,7 @@ def main():
         paths.append(build_info(lang, "contact"))
         for t in task_list(lang):
             paths.append(build_topic(lang, t))
-        paths += [build_cards(lang), build_help(lang), build_privacy(lang)]
+        paths += [build_cards(lang), build_help(lang), build_privacy(lang)] + [build_flow(lang, f) for f in TR.FLOWS]
         local.append(build_trip(lang))  # personal page: offline copy, but not in the sitemap
         write(LANGS[lang]["dir"] + "search.json", search_index(lang)); local.append(LANGS[lang]["dir"] + "search.json")
     paths.append("hosts.html")
@@ -1233,7 +1426,7 @@ def main():
     write(".well-known/assetlinks.json", A.assetlinks(prints))
     write("sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n{urls}</urlset>\n')
     # Offline: precache every page, so a guide opened once (or not yet) still works without signal.
-    pre = ["./", "ja/", "zh-tw/", "zh-cn/", "vi/", "icon-192.png", "manifest.webmanifest", f"style.css?v={CSS_V}", f"app.js?v={APP_V}"] + [p for p in paths + local if p and not p.endswith("/")]
+    pre = ["./", "ja/", "zh-tw/", "zh-cn/", "vi/", "icon-192.png", "manifest.webmanifest", f"style.css?v={CSS_V}", f"app.js?v={APP_V}", "qr.js"] + [p for p in paths + local if p and not p.endswith("/")]
     # The cache name changes whenever any page, the stylesheet, the script or the worker itself changes.
     ver = hashlib.sha256(("".join(DATES[p]["h"] for p in sorted(DATES)) + CSS_V + APP_V + A.SW_JS + "".join(sorted(pre))).encode()).hexdigest()[:8]
     sw = re.sub(r"const C='[^']*';const PRE=\[[^\]]*\];", lambda m: f"const C='emk-{ver}';const PRE={json.dumps(pre)};", A.SW_JS, count=1)
