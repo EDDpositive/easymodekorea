@@ -31,6 +31,7 @@ WHAT YOU GET
 • Korean cards: show a driver or staff a sentence in big Korean letters, or copy place names into a map app. Make your own card for a hotel name or an allergy.
 • Your stay's address: save it once, then show it to a taxi driver full screen.
 • Emergency help: the numbers to call and Korean sentences to show, one tap away.
+• Arrival helper: enter your landing time and see when you can submit the e-Arrival Card.
 • Works offline: guides are stored on your phone, so they open on the plane or underground.
 • Save guides for your trip, and search every guide, question and Korean card.
 
@@ -67,6 +68,7 @@ Questions or corrections: edandco.biz@gmail.com
 • 한국어 카드: 기사님이나 직원에게 큰 한국어 글씨로 보여 주거나, 장소 이름을 지도 앱에 복사합니다. 호텔 이름이나 알레르기는 직접 카드로 만들 수 있습니다.
 • 숙소 주소: 한 번 저장해 두면 택시 기사님에게 전체 화면으로 보여 줄 수 있습니다.
 • 긴급 도움: 전화할 번호와 보여 줄 한국어 문장이 한 번에 열립니다.
+• 입국 도우미: 도착 시각을 넣으면 전자도착카드를 언제부터 낼 수 있는지 알려 줍니다.
 • 오프라인: 가이드가 폰에 저장되어 비행기나 지하에서도 열립니다.
 • 가이드 저장, 그리고 모든 가이드·질문·한국어 카드 검색.
 
