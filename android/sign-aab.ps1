@@ -1,13 +1,14 @@
-# Signs the EasyModeKorea Android app bundle on this PC.
+﻿# Signs the EasyModeKorea Android app bundle on this PC. On-screen messages are in Korean for the owner.
 #
 #   powershell -ExecutionPolicy Bypass -File android\sign-aab.ps1
 #
-# You type the key password yourself when asked. It is never saved, shown or sent anywhere.
+# The owner types the key password when asked. It is never saved, shown or sent anywhere.
 # The key file lives outside the repo, in %USERPROFILE%\.emk-android, so it cannot be committed.
+# Keep this file saved as UTF-8 with BOM, or Windows PowerShell will garble the Korean text.
 #
 # What it does:
-#   1. Finds Java (keytool and jarsigner). If Java is missing it tells you how to install it and stops.
-#   2. First run only: creates your upload key (asks you to choose a password).
+#   1. Finds Java (keytool and jarsigner). If Java is missing it says how to install it and stops.
+#   2. First run only: creates the upload key (asks the owner to choose a password).
 #   3. Downloads the newest unsigned bundle built by GitHub (or uses the file given with -Aab).
 #   4. Signs it (asks for the password) and checks the signature.
 #   5. Prints the key's SHA-256 fingerprint and where the signed file is.
@@ -34,7 +35,7 @@ $Keytool = Find-JavaTool "keytool"
 $Jarsigner = Find-JavaTool "jarsigner"
 if (-not $Keytool -or -not $Jarsigner) {
     Write-Host ""
-    Write-Host "Java (JDK 17) is not installed on this PC. Install it once with this command, then run this script again:" -ForegroundColor Yellow
+    Write-Host "이 PC에 자바(JDK 17)가 없습니다. 아래 명령으로 한 번 설치한 뒤, 이 스크립트를 다시 실행하세요:" -ForegroundColor Yellow
     Write-Host "    winget install EclipseAdoptium.Temurin.17.JDK"
     exit 1
 }
@@ -43,13 +44,13 @@ New-Item -ItemType Directory -Force -Path $KeyDir | Out-Null
 
 if (-not (Test-Path $Keystore)) {
     Write-Host ""
-    Write-Host "No upload key yet. Creating one now." -ForegroundColor Cyan
-    Write-Host "Choose a password (6+ characters) and type it twice. Keep it in your password manager:"
-    Write-Host "without this file AND this password you cannot upload app updates."
+    Write-Host "업로드 열쇠가 아직 없습니다. 지금 만듭니다." -ForegroundColor Cyan
+    Write-Host "비밀번호(6자 이상)를 직접 정해서 두 번 입력하세요. 입력하는 글자는 화면에 보이지 않습니다."
+    Write-Host "이 비밀번호와 열쇠 파일이 둘 다 있어야 앱 업데이트를 올릴 수 있습니다. 비밀번호 관리자에 보관하세요."
     & $Keytool -genkeypair -v -keystore $Keystore -alias $Alias -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=EasyModeKorea"
-    if ($LASTEXITCODE -ne 0 -or -not (Test-Path $Keystore)) { Write-Host "The key was not created." -ForegroundColor Red; exit 1 }
-    Write-Host "Key created: $Keystore" -ForegroundColor Green
-    Write-Host "Back up this file somewhere safe (not in the repo)."
+    if ($LASTEXITCODE -ne 0 -or -not (Test-Path $Keystore)) { Write-Host "열쇠를 만들지 못했습니다." -ForegroundColor Red; exit 1 }
+    Write-Host "열쇠를 만들었습니다: $Keystore" -ForegroundColor Green
+    Write-Host "이 파일을 안전한 곳에 따로 백업하세요. 저장소 폴더에는 넣지 마세요."
 }
 
 $OutDir = Join-Path $KeyDir "out"
@@ -57,35 +58,35 @@ New-Item -ItemType Directory -Force -Path $OutDir | Out-Null
 
 if (-not $Aab) {
     Write-Host ""
-    Write-Host "Downloading the newest unsigned bundle from GitHub..." -ForegroundColor Cyan
+    Write-Host "GitHub에서 최신 앱 파일(서명 전)을 받는 중..." -ForegroundColor Cyan
     $runId = (& gh run list --repo $Repo --workflow android-build.yml --status success --limit 1 --json databaseId --jq ".[0].databaseId")
-    if (-not $runId) { Write-Host "No finished build found. Run the 'Android app bundle' workflow on GitHub first." -ForegroundColor Red; exit 1 }
+    if (-not $runId) { Write-Host "끝난 빌드가 없습니다. GitHub에서 'Android app bundle' 작업을 먼저 실행하세요." -ForegroundColor Red; exit 1 }
     $dl = Join-Path $OutDir "download-$runId"
     if (Test-Path $dl) { Remove-Item -Recurse -Force $dl }
     & gh run download $runId --repo $Repo --name emk-android-unsigned --dir $dl
-    if ($LASTEXITCODE -ne 0) { Write-Host "Download failed." -ForegroundColor Red; exit 1 }
+    if ($LASTEXITCODE -ne 0) { Write-Host "내려받기에 실패했습니다." -ForegroundColor Red; exit 1 }
     $Aab = (Get-ChildItem -Path $dl -Recurse -Filter "*.aab" | Select-Object -First 1).FullName
 }
-if (-not $Aab -or -not (Test-Path $Aab)) { Write-Host "Bundle file not found." -ForegroundColor Red; exit 1 }
+if (-not $Aab -or -not (Test-Path $Aab)) { Write-Host "앱 파일을 찾지 못했습니다." -ForegroundColor Red; exit 1 }
 
 $stamp = Get-Date -Format "yyyyMMdd-HHmm"
 $Signed = Join-Path $OutDir "easymodekorea-$stamp.aab"
 Copy-Item $Aab $Signed -Force
 
 Write-Host ""
-Write-Host "Signing. Type your key password when asked." -ForegroundColor Cyan
+Write-Host "서명합니다. 비밀번호를 물으면 입력하세요. 입력하는 글자는 화면에 보이지 않습니다." -ForegroundColor Cyan
 & $Jarsigner -sigalg SHA256withRSA -digestalg SHA-256 -keystore $Keystore $Signed $Alias
-if ($LASTEXITCODE -ne 0) { Remove-Item $Signed -ErrorAction SilentlyContinue; Write-Host "Signing failed (wrong password?). Nothing was changed." -ForegroundColor Red; exit 1 }
+if ($LASTEXITCODE -ne 0) { Remove-Item $Signed -ErrorAction SilentlyContinue; Write-Host "서명에 실패했습니다(비밀번호가 틀렸을 수 있습니다). 바뀐 것은 없습니다." -ForegroundColor Red; exit 1 }
 
 & $Jarsigner -verify $Signed | Out-Null
-if ($LASTEXITCODE -ne 0) { Write-Host "The signature could not be verified." -ForegroundColor Red; exit 1 }
+if ($LASTEXITCODE -ne 0) { Write-Host "서명을 확인하지 못했습니다." -ForegroundColor Red; exit 1 }
 
 Write-Host ""
-Write-Host "Done. Signed bundle:" -ForegroundColor Green
+Write-Host "완료. 서명된 파일:" -ForegroundColor Green
 Write-Host "    $Signed"
 Write-Host ""
-Write-Host "Upload key fingerprint (SHA-256). This is public; it is safe to share:" -ForegroundColor Cyan
+Write-Host "업로드 열쇠 지문(SHA-256). 공개해도 되는 값입니다:" -ForegroundColor Cyan
 & $Keytool -printcert -jarfile $Signed | Select-String "SHA256"
 Write-Host ""
-Write-Host "Next: upload the signed file in Play Console (Testing > Closed testing > Create new release)."
+Write-Host "다음: 플레이 콘솔 > 테스트 > 비공개 테스트 > 새 버전 만들기에서 이 파일을 올리세요."
 if (-not $NoOpen) { Start-Process explorer.exe "/select,`"$Signed`"" }

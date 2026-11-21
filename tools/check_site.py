@@ -102,6 +102,9 @@ def main():
               and tw["themeColor"].lower() == m["theme_color"].lower() and tw["display"] == "standalone" and not tw.get("enableNotifications"))
         check(ok, "Android wrapper settings match the web manifest")
 
+    # The signing script shows Korean text; Windows PowerShell only reads that right from UTF-8 with a BOM.
+    check(open(os.path.join(ROOT, "android", "sign-aab.ps1"), "rb").read(3) == bytes([0xEF, 0xBB, 0xBF]), "signing script is saved as UTF-8 with BOM")
+
     # No signing keys or app packages in the repo.
     tracked = subprocess.run(["git", "ls-files"], cwd=ROOT, capture_output=True, text=True).stdout.split("\n")
     secrets = [f for f in tracked if re.search(r"\.(jks|keystore|p12|pfx|aab|apk)$", f)]
