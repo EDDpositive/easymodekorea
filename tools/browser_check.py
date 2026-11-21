@@ -13,6 +13,7 @@ import json, os, re, sys, time
 
 sys.path.insert(0, os.path.dirname(__file__))
 import cdp  # noqa: E402
+import text_density as TD  # noqa: E402
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 FAILS = []
@@ -43,7 +44,7 @@ SWEEP = """(async () => {
 # Things people tap with a thumb must be at least 40px tall (most are 44px or more).
 TAPS = """(() => {
   const vis = e => { const r = e.getBoundingClientRect(); return r.width > 0 && r.height > 0 && !e.closest('[hidden]') && !e.closest('details:not([open]) > :not(summary)'); };
-  return [...document.querySelectorAll('.tabbar a, .jump a, .sit-links a, .glist a, .sayrow button, a.call, .act, .icon-btn, .lang-menu > summary, .btn, .chip, .opt-big, .ready-cta, .rd-app > summary')]
+  return [...document.querySelectorAll('.tabbar a, .jump a, .sit-links a, .glist a, .sayrow button, a.call, .act, .icon-btn, .lang-menu > summary, .btn, .chip, .opt-big, .ready-cta, .rd-app > summary, .steps summary, .flow-steps summary')]
     .filter(vis).map(e => ({t: (e.innerText || e.getAttribute('aria-label') || e.className).trim().slice(0, 24), h: Math.round(e.getBoundingClientRect().height)})).filter(x => x.h < 40);
 })()"""
 
@@ -85,11 +86,21 @@ def main():
         b.js("localStorage.setItem('emk-install-no', String(Date.now()))")
 
         small = []
-        for page in ("", "taxi.html", "phrases.html", "saved.html", "help.html", "ja/", "vi/phrases.html"):
+        for page in ("", "taxi.html", "phrases.html", "saved.html", "help.html", "foreign-card-declined-korea.html", "ja/", "vi/phrases.html"):
             b.go(srv.url + page, wait=0.5)
             small += [f"/{page} {x['t']} {x['h']}px" for x in b.js(TAPS)]
         check(not small, "buttons and links are at least 40px tall on the main screens", "; ".join(small[:5]))
         check(b.js("document.querySelectorAll('#jump a').length") == 8 if b.go(srv.url, wait=0.5) else False, "home shows all eight situations as a jump grid")
+        b.go(srv.url + "taxi.html", wait=0.5)
+        check(b.js("[...document.querySelectorAll('.guide-acts .act')].every(x => { const c = getComputedStyle(x); return c.backgroundColor !== c.color; })"), "save and share buttons on a guide are visible (icon colour differs from the button)")
+
+        # Standing rule (docs/critique.md 26차): short lines, details behind a tap. Words a reader sees on a 375px phone.
+        b.js(TD.READY); over = []
+        for page, name, kind in TD.PAGES:
+            b.go(srv.url + page, wait=0.5); r = b.js(TD.JS); lim = TD.LIMITS[kind]
+            if r["first"] > lim["first"] or r["sentences"] > lim["sentences"] or r["all"] > lim["all"]: over.append(f"{name} {r['first']}/{r['sentences']}/{r['all']}")
+        b.js("localStorage.removeItem('emk-rc'); localStorage.removeItem('emk-rc-score')")
+        check(not over, "main screens stay short: words on the first screen, long lines and whole page within the limits", "; ".join(over))
 
         b.go(srv.url + "taxi.html", wait=0.5)
         b.js("document.querySelector('[data-show]').click()")
@@ -177,7 +188,7 @@ def main():
         ja = b.js("document.getElementById('rd-score').textContent + '|' + document.querySelectorAll('#rd-apps details').length + '|' + !document.getElementById('rd-result').hidden")
         b.js("document.getElementById('rd-redo').click()")
         again = b.js("!document.getElementById('rd-q').hidden && document.getElementById('rd-result').hidden")
-        check(f"2 of {res['n']}" in home and home.endswith("|true") and f"/{res['n']}|" in ja and ja.endswith("|true") and again,   # ticks are kept per language, the answers are shared
+        check(f"2/{res['n']}" in home and home.endswith("|true") and f"/{res['n']}|" in ja and ja.endswith("|true") and again,   # ticks are kept per language, the answers are shared
               "after the check, the home screen shows the plan's progress and the holiday inside the trip; the result reopens in other languages and answers can be changed", home + " " + ja)
         b.js("localStorage.removeItem('emk-trip'); localStorage.removeItem('emk-saved'); localStorage.removeItem('wik-setup')")
 

@@ -499,11 +499,16 @@ html.offline .install-bar { display: none; }
 .flow-steps { margin: 0; padding: 0; list-style: none; counter-reset: fs; display: grid; gap: 10px; }
 .flow-steps > li { counter-increment: fs; position: relative; padding: 14px 14px 14px 54px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; display: grid; gap: 8px; }
 .flow-steps > li::before { content: counter(fs); position: absolute; left: 14px; top: 14px; width: 28px; height: 28px; border-radius: 50%; background: var(--ink); color: var(--surface); font: 800 15px/28px var(--body); text-align: center; }
-.flow-steps p { margin: 0; font-size: 17px; line-height: 1.5; }
+.flow-steps p, .flow-steps summary { margin: 0; font-size: 17px; line-height: 1.5; }
 .flow-steps .fact-src { font-size: 13px; line-height: 1.45; color: var(--muted); }
 .flow-steps .fact-src a { color: var(--muted); overflow-wrap: anywhere; }
 .flow-steps .ck { font-weight: 700; color: var(--ok); margin-right: 4px; }
 .flow-steps .actions .btn { min-height: 44px; }
+.steps details > summary, .flow-steps details > summary { cursor: pointer; list-style: none; font-size: inherit; padding: 9px 0; margin: -9px 0; }
+.steps details > summary::-webkit-details-marker, .flow-steps details > summary::-webkit-details-marker { display: none; }
+.steps details > summary::after, .flow-steps details > summary::after { content: "+"; display: inline-block; margin-left: 8px; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--line); font: 700 15px/20px var(--body); text-align: center; color: var(--muted); }
+.steps details[open] > summary::after, .flow-steps details[open] > summary::after { content: "–"; }
+.steps details > p, .flow-steps details > p { margin: 6px 0 0; color: var(--muted); font-size: 15px; }
 .call-btn { background: var(--ok); color: #fff; }
 .call-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .call-btn { color: #0b0f1e; } }
@@ -530,9 +535,9 @@ html.offline .install-bar { display: none; }
 .trip-dates input { min-width: 0; min-height: 48px; font: 16px var(--body); padding: 8px 10px; border-radius: 12px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); }
 .alerts-wrap .hint { margin: 8px 0 0; }
 .off-ok { display: inline-flex; align-items: center; gap: 4px; margin: 10px 0 0; padding: 4px 10px; border-radius: 999px; background: var(--chip); color: #fff; font: 700 12.5px var(--body); }
-.pack, .share { display: grid; gap: 10px; padding: 14px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; }
-.pack h2, .share h2 { font: 700 18px var(--display); margin: 0; }
-.pack p, .share p { margin: 0; }
+.pack, section.share { display: grid; gap: 10px; padding: 14px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; }
+.pack h2, section.share h2 { font: 700 18px var(--display); margin: 0; }
+.pack p, section.share p { margin: 0; }
 .pack-bar { height: 8px; border-radius: 99px; background: var(--line); overflow: hidden; }
 .pack-bar i { display: block; height: 100%; width: 0; background: var(--ok); transition: width .3s; }
 .pack-state { font-weight: 700; }

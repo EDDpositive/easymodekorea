@@ -86,7 +86,7 @@ def hero(lang, alt, up, h1, lede, home="./", trust=True, back=False, search=True
 
 def ask_box(lang):
     a = ASK[lang]
-    return f"""<section class="ask" aria-labelledby="ask-t-{lang}"><h2 id="ask-t-{lang}">{e(a['title'])}</h2><p class="hint">{e(a['lead'])}</p>
+    return f"""<section class="ask" aria-labelledby="ask-t-{lang}"><h2 id="ask-t-{lang}">{e(a['title'])}</h2>
 <form class="ask-form" data-thanks="{e(a['thanks'])}"><textarea name="q" required maxlength="1000" aria-label="{e(a['title'])}" placeholder="{e(a['ph'])}"></textarea>
 <input name="em" type="email" maxlength="120" autocomplete="email" aria-label="{e(a['email'])}" placeholder="{e(a['email'])}"><button class="btn" type="submit">{e(a['send'])}</button><p class="fb-done" role="status"></p></form></section>"""
 
@@ -251,11 +251,11 @@ def build_tool(lang):
         title, line = tx(txt, lang)
         links = "".join(f'<a href="{slug_of[i]}.html" data-t="{i}">{e(short_of[i])}</a>' for i in ids)
         ckw = (title + " " + line).lower()
-        cards.append(f'<article class="sit-card" id="s-{cid}" data-kw="{e(ckw)}"><h3>{icon(ic)}<span>{e(title)}</span></h3><p>{e(line)}</p><p class="sit-links">{links}</p></article>')
+        cards.append(f'<article class="sit-card" id="s-{cid}" data-kw="{e(ckw)}"><h3>{icon(ic)}<span>{e(title)}</span></h3><p class="sit-links">{links}</p></article>')
     # Jump grid: all eight situations fit the first screen of a phone; a tap scrolls to that card.
     jump = "".join(f'<a href="#s-{cid}" data-go="s-{cid}"><span class="ic">{icon(ic)}</span><span>{e(A.JUMP[cid][lang])}</span></a>' for cid, ic, _ids, _txt in CARDS)
     body = f"""
-{hero(lang, alt, up, x['hook'], LU['lede'], search=False)}
+{hero(lang, alt, up, x['hook'], '', search=False)}
 <div class="wrap pre">
   <div class="banner" id="lang-suggest" hidden></div>
   <section class="stay" id="stay" hidden aria-live="polite"></section>
@@ -272,7 +272,7 @@ def build_tool(lang):
   <div class="found" id="found" aria-live="polite"></div>
   <section class="tool" aria-labelledby="tool-h"><h2 id="tool-h" class="tool-h">{e(LU['tool_h'])}</h2>
   <div class="onb" id="onb" aria-live="polite">
-    <div id="onb1"><h3>{e(ux['q1'])}</h3><p class="why">{e(ux['why'])}</p><div class="opts-big">{q1}</div></div>
+    <div id="onb1"><h3>{e(ux['q1'])}</h3><div class="opts-big">{q1}</div></div>
     <div id="onb2" hidden><h3>{e(ux['q2'])}</h3><div class="opts-big two">{q2}</div><button type="button" class="linkbtn" id="onb-back">← {e(ux['back'])}</button></div>
   </div></section>
 </div>
@@ -286,7 +286,6 @@ def build_tool(lang):
   </div></details>
 </div>
 <div class="wrap">
-  <p class="offline-note">⚡ {e(LU['offline'])}</p>
   {about(lang, up)}
 </div>
 {help_html(lang)}
@@ -620,15 +619,16 @@ def build_topic(lang, t):
             heading = U["for_profile"][p] if p else UX[lang]["tone"][v["s"]]
             if dv: heading += f" · {U[dv]}"
             attrs = (f' data-p="{p}"' if p else "") + (f' data-d="{dv}"' if dv else "")
-            route = "".join(f"<li>{e(r)}</li>" for r in v["route"])
-            tops.append(f'<div class="pv {v["s"]}"{attrs}><div class="ans-top"><h2{'' if p else ' class="sr"'}>{e(heading)}</h2><span class="pill {v["s"]}">{e(UX[lang]["tone"][v["s"]])}</span></div><p class="verdict">{e(v["verdict"])}</p></div>')
+            route = "".join(f"<li>{tap_line(r)}</li>" for r in v["route"])
+            tops.append(f'<div class="pv {v["s"]}"{attrs}><div class="ans-top"><h2 class="sr">{e(heading)}</h2><span class="pill {v["s"]}">{e(UX[lang]["tone"][v["s"]])}</span></div><p class="verdict">{e(v["verdict"])}</p></div>')
             dos.append(f'<div class="pv"{attrs}><ol class="steps">{route}</ol><p class="fallback"><b>{e(fail_lbl)}</b>{e(v["fallback"])}</p></div>')
     rows = AT.get(t["id"], [])
     glance = "".join(f'<div><dt>{e(LU[k])}</dt><dd>{e(tx(m, lang))} <time class="ck" datetime="{dt}">✓ {e(fmt_date(dt, lang))}</time></dd></div>' for k, m, dt in rows)
     stamp_date = max([r[2] for r in rows] or [CHECKED_ISO])
     g = DEEP.get(t["id"])
     src_name, src_url = (g["cites"][0] if g else t["sources"][0])
-    stamp = LU["stamp"].format(src=f'<a href="{e(src_url)}" rel="noopener" target="_blank">{e(src_name)}</a>', date=f'<time datetime="{stamp_date}">{e(fmt_date(stamp_date, lang))}</time>')
+    src_a = f'<a href="{e(src_url)}" rel="noopener" target="_blank" title="{e(src_name)}" aria-label="{e(src_name)}">{e(LU["src_short"])}</a>'
+    stamp = src_a if rows else LU["stamp"].format(src=src_a, date=f'<time datetime="{stamp_date}">{e(fmt_date(stamp_date, lang))}</time>')
     first_s = resolve(t, "visitor", "ios")["s"]
     say = "".join(f'<div class="say"><p class="say-ko" lang="ko">{e(ko)}</p><p class="say-mean">{e(m)}</p><div class="actions"><button class="btn alt" type="button" data-show="{e(ko)}" data-lbl="{e(S["show"])}" data-mean="{e(x["means"])}: {e(m)}">🗣 {e(LU["full"])}</button><button class="btn ghost" type="button" data-copy="{e(ko)}" data-done="✓ {e(LU["copied"])}">📋 {e(LU["copy"])}</button></div></div>' for ko, m in t["phrases"])
     names = "".join(f'<li><button class="chip" type="button" data-copy="{e(ko)}" data-done="✓ {e(LU["copied"])}"><span lang="ko">{e(ko)}</span><small>{e(tx(m, lang))}</small><i aria-hidden="true">📋</i></button></li>' for ko, m in COPY.get(t["id"], []))
@@ -654,14 +654,12 @@ def build_topic(lang, t):
   {names_html}
   {addr_html}
   {arrival_card(lang) if t['id'] == 'entry' else ''}
-  <div class="actions"><a class="btn" href="./#task-{t['id']}">{e(U['open_tool'])}</a></div>
   {deep}
   <details class="more"><summary>{e(S['details'])}</summary><div class="in notes"><p>{e(t['intro'])}</p><ul><li>{e(U['checked'])} {e(CHECKED[lang])}</li>{notes}{srcs}</ul></div></details>
   </main>
   {ready_cta(lang)}
   <section class="related"><h2>{e(x['related'])}</h2><ul class="glist">{related}</ul></section>
   <details class="more"><summary>{e(LU['all'])}</summary><nav class="topics">{others}</nav></details>
-  <p class="host-cta">🏠 {U['hosts'].format(base=up)}</p>
   {about(lang, up)}
 </div>
 {SHOW_HTML(lang)}
@@ -850,6 +848,24 @@ def flow_cards(flow):
     return A.PAY_CARDS if flow["cards"] == "PAY" else flow["cards"]
 
 
+STOP = re.compile(r"(?<=[.!?])\s+(?=[^\sa-z])|(?<=[。！？])\s*(?=\S)|(?<=[?!])(?=[\u3400-\u9fff])")
+
+
+def first_line(text):
+    """Split a step at its first sentence (a question keeps its answer) so the list reads as short lines (critique 26차)."""
+    cut = [m.start() for m in STOP.finditer(text)]
+    k = 1 if cut and text[:cut[0]].rstrip().endswith(("?", "？")) else 0
+    if len(cut) <= k: return text, ""
+    return text[:cut[k]].strip(), text[cut[k]:].strip()
+
+
+def tap_line(text, tail=""):
+    """First sentence as the line; the rest (and any tail, e.g. sources) opens with a tap."""
+    head, rest = first_line(text)
+    more = (f'<p>{e(rest)}</p>' if rest else "") + tail
+    return f'<details class="tap"><summary>{e(head)}</summary>{more}</details>' if more else e(head)
+
+
 def build_flow(lang, flow):
     """One 'something went wrong' screen: numbered steps with call and guide buttons, each sourced step showing
     its check date and source, then the Korean cards to show. Works offline like every other page."""
@@ -861,11 +877,15 @@ def build_flow(lang, flow):
             tel = "+82-2-1330" if s["call"] == "1330" else s["call"]
             acts += f'<a class="btn call-btn" href="tel:{tel}">{A.IC["phone"]}{e(tx_["call"][lang])} {e(s["call"])}</a>'
         if s["guide"]: acts += f'<a class="btn ghost" href="{slug_of[s["guide"]]}.html">{e(SHORT[lang]["tasks"][s["guide"]])}</a>'
-        meta = (f'<p class="fact-src"><time class="ck" datetime="{s["d"]}">✓ {e(fmt_date(s["d"], lang))}</time> {src_links(lang, s["src"])}</p>' if s["d"] else "")
-        steps.append(f'<li><p>{e(s["t"][lang])}</p>{meta}{f"<div class=actions>{acts}</div>" if acts else ""}</li>')
+        head, rest = first_line(s["t"][lang])
+        ck = f' <time class="ck" datetime="{s["d"]}">✓ {e(fmt_date(s["d"], lang))}</time>' if s["d"] else ""
+        more = (f'<p>{e(rest)}</p>' if rest else "") + (f'<p class="fact-src">{src_links(lang, s["src"])}</p>' if s["d"] else "")
+        line = f'<details><summary>{e(head)}{ck}</summary>{more}</details>' if more else f'<p>{e(head)}</p>'
+        acts = f"<div class=actions>{acts}</div>" if acts else ""
+        steps.append(f'<li>{line}{acts}</li>')
     cards = "".join(say_row(lang, ko, m[lang]) for ko, m in flow_cards(flow))
     others = "".join(f'<li><a href="{f["slug"]}.html"><span class="ic">{icon(f["icon"])}</span><span>{e(f["title"][lang])}</span></a></li>' for f in TR.FLOWS if f["id"] != flow["id"])
-    inner = f"""<section class="sec flow" aria-labelledby="fl-h"><h2 id="fl-h">{e(tx_['steps_h'][lang])}</h2><ol class="flow-steps">{''.join(steps)}</ol></section>
+    inner = f"""<section class="sec flow" aria-labelledby="fl-h"><h2 id="fl-h" class="sr">{e(tx_['steps_h'][lang])}</h2><ol class="flow-steps">{''.join(steps)}</ol></section>
 <section class="sec says" aria-labelledby="fc-h"><h2 id="fc-h">{e(tx_['cards_h'][lang])}</h2>{cards}</section>
 {addr_card(lang) if flow['id'] in ('train', 'taxi') else ''}
 {ready_cta(lang)}
@@ -930,7 +950,7 @@ def alerts_block(lang, with_dates=False):
     """Holiday alerts. On the home screen it appears only when something applies; in My trip it sits under the trip dates."""
     t = TR.ALERT_TX
     data = json.dumps(alerts_data(lang), ensure_ascii=False).replace("</", "<\\/")
-    dates = f"""<div class="trip-dates"><label>{e(t['from'][lang])}<input id="trip-from" type="date"></label><label>{e(t['to'][lang])}<input id="trip-to" type="date"></label></div><p class="hint">{e(t['dates_note'][lang])}</p>""" if with_dates else ""
+    dates = f"""<div class="trip-dates"><label>{e(t['from'][lang])}<input id="trip-from" type="date"></label><label>{e(t['to'][lang])}<input id="trip-to" type="date"></label></div>""" if with_dates else ""
     head_ = f'<h2 id="alerts-h">{e(t["dates_h"][lang] if with_dates else t["soon"][lang])}</h2>'
     hidden = "" if with_dates else " hidden"
     none = e(t["none"][lang]) if with_dates else ""
@@ -953,11 +973,11 @@ PLAY_KRIDE = "https://play.google.com/store/apps/details?id=com.kakaomobility.kr
 READY_NC = {
     "food-booking": {
         "p": ["visitor", "krsim"], "d": TR.CHK, "src": ["Google Play: NAVER Map reviews", PLAY_NAVER],
-        "t": {"en": "Play Store reviews from September and October 2026 report that Naver sign-up or verification failed for some foreign accounts. We could not confirm it ourselves. Sign up to CatchTable Global by email first.",
-              "ja": "2026年9〜10月のPlayストアのレビューに、海外アカウントでNAVERの登録や認証ができなかったという報告があります。こちらでは確認できていません。まずCatchTable Globalにメールで登録してください。",
-              "zh-tw": "2026年9至10月的Play商店評論中,有人回報外國帳號無法完成NAVER註冊或驗證。我們還無法自行確認。請先用電子郵件註冊CatchTable Global。",
-              "zh-cn": "2026年9至10月的Play商店评论中,有人反映外国账号无法完成NAVER注册或验证。我们还无法自行确认。请先用邮箱注册CatchTable Global。",
-              "vi": "Một số đánh giá trên Play Store tháng 9 và 10/2026 cho biết tài khoản nước ngoài không đăng ký hoặc xác minh được NAVER. Chúng tôi chưa tự xác nhận được. Hãy đăng ký CatchTable Global bằng email trước."}},
+        "t": {"en": "Play reviews (Sep to Oct 2026): Naver sign-up failed for some foreign accounts. Not confirmed by us. Sign up to CatchTable Global by email first.",
+              "ja": "Playレビュー(2026年9〜10月):海外アカウントでNAVERの登録・認証に失敗との報告。こちらでは未確認。まずCatchTable Globalにメールで登録を。",
+              "zh-tw": "Play評論(2026年9至10月):有外國帳號NAVER註冊或驗證失敗。我們尚未確認。先用電子郵件註冊CatchTable Global。",
+              "zh-cn": "Play评论(2026年9至10月):有外国账号NAVER注册或验证失败。我们尚未确认。先用邮箱注册CatchTable Global。",
+              "vi": "Đánh giá Play (tháng 9–10/2026): một số tài khoản nước ngoài không đăng ký hoặc xác minh được NAVER. Chúng tôi chưa xác nhận. Hãy đăng ký CatchTable Global bằng email trước."}},
 }
 
 
@@ -1015,7 +1035,7 @@ READY_JS = r"""
   const live = () => Q.filter(q => !(q.skip && q.skip()));
   function ask(quiet) {
     const qs = live(), q = qs[step];
-    $("rd-result").hidden = true; $("rd-q").hidden = false; $("rd-about").hidden = step !== 0;
+    $("rd-result").hidden = true; $("rd-q").hidden = false;
     $("rd-step").textContent = (step + 1) + " / " + qs.length; $("rd-bar").style.width = Math.round(100 * step / qs.length) + "%";
     $("rd-qh").textContent = q.h; $("rd-qs").textContent = q.multi ? T.multi : ""; $("rd-qs").hidden = !q.multi;
     const box = $("rd-opts"); box.replaceChildren(); $("rd-next").hidden = !(q.multi || q.dates); $("rd-next").textContent = q.dates ? T.done : T.next; $("rd-skip").hidden = !q.dates;
@@ -1064,7 +1084,6 @@ READY_JS = r"""
           el("p", { text: v[1] }), v[0] === "ok" ? null : el("p", { class: "rd-fb" }, [el("b", { text: D.fails + ": " }), v[2]]),
           stamp(t.d), nc ? el("p", { class: "rd-nc" }, [el("b", { text: T.nc + ": " }), nc.t]) : null, nc ? stamp(nc.d, nc.src) : null,
           el("p", {}, el("a", { href: t.slug + ".html", text: T.x_read.replace("{t}", t.short) }))]);
-        if (s !== "ok") box.open = true;
         apps.append(box);
       });
     /* 2. Steps: the checklist for this setup (same ticks as the home screen), plus what the answers add.
@@ -1142,7 +1161,7 @@ def build_ready(lang):
 <section id="rd-q"><div class="pack-bar"><i id="rd-bar"></i></div><p class="rd-step" id="rd-step"></p><h2 id="rd-qh" tabindex="-1"></h2><p class="hint" id="rd-qs" hidden></p>
 <div class="opts-big" id="rd-opts"></div>
 <div class="trip-dates" id="rd-dates" hidden><label>{e(al['from'][lang])}<input id="rd-from" type="date"></label><label>{e(al['to'][lang])}<input id="rd-to" type="date"></label></div>
-<div class="actions rd-nav"><button class="linkbtn" type="button" id="rd-back">← {e(UX[lang]['back'])}</button><button class="linkbtn" type="button" id="rd-skip" hidden>{e(t['rd_skip'])}</button><button class="btn" type="button" id="rd-next" hidden>{e(t['rd_next'])}</button></div><p class="hint" id="rd-about">{e(t['rd_desc'])}</p></section>
+<div class="actions rd-nav"><button class="linkbtn" type="button" id="rd-back">← {e(UX[lang]['back'])}</button><button class="linkbtn" type="button" id="rd-skip" hidden>{e(t['rd_skip'])}</button><button class="btn" type="button" id="rd-next" hidden>{e(t['rd_next'])}</button></div></section>
 <section id="rd-result" hidden>
 <div class="rd-scorebox"><div class="rd-top"><div><h2 id="rd-score"></h2><div class="pack-bar"><i id="rd-sbar"></i></div></div><canvas id="rd-card" width="1080" height="1080" aria-hidden="true"></canvas></div>
 <p class="hint">{e(t['rd_score_sub'])}</p>
@@ -1220,7 +1239,7 @@ def app_page(lang, name, title, seo, desc, inner, tab, script="", index=True, ld
     alt = {k: f"{LANGS[k]['dir']}{name}.html" for k in LANGS}
     body = f"""
 <a class="skip" href="#main">{e(DEEP_HEAD[lang]['skip'])}</a>
-{hero(lang, alt, up, title[0], title[1])}
+{hero(lang, alt, up, title[0], '')}
 <div class="wrap"><main id="main" class="app-main">{inner}</main>
 </div>
 {SHOW_HTML(lang)}
@@ -1421,7 +1440,7 @@ def build_help(lang):
     says = "".join(say_row(lang, ko, m[lang]) for ko, m in HELP_PHRASES[:4]) + "".join(say_row(lang, ko, m[lang]) for ko, m in PHRASES["health"])
     more = "".join(f'<li><a href="{slug_of[i]}.html"><span class="ic">{icon(i)}</span><span>{e(QUESTION[lang][i])}</span></a></li>' for i in ("health", "translate"))
     inner = f"""{flow_tiles(lang)}
-<section class="sec" aria-labelledby="cl-h"><h2 id="cl-h">{e(h['calls'])}</h2><div class="calls">{nums}</div><p class="hint">{e(t['help_offline'])}</p></section>
+<section class="sec" aria-labelledby="cl-h"><h2 id="cl-h">{e(h['calls'])}</h2><div class="calls">{nums}</div></section>
 <section class="sec says" aria-labelledby="sh-h"><h2 id="sh-h">{e(h['phrases'])}</h2>{says}</section>
 {addr_card(lang)}
 <section class="sec" aria-labelledby="mh-h"><h2 id="mh-h">{e(t['help_more_h'])}</h2><ul class="glist">{more}<li><a href="phrases.html"><span class="ic">{A.IC['cards']}</span><span>{e(t['cards_title'])}</span></a></li></ul></section>"""

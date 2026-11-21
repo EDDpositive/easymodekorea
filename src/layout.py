@@ -10,10 +10,10 @@ from t2s import t2s
 
 UI = {
     "en": {"where": "Where", "cost": "Cost", "time": "Time", "note": "Good to know",
-           "stamp": "Checked against {src} on {date}", "say_h": "Show this to staff", "full": "Show full screen",
-           "copy": "Copy", "copied": "Copied", "names_h": "Korean names to copy (paste into Naver Map or show a driver)",
+           "stamp": "Checked {date} · {src}", "say_h": "Show this to staff", "full": "Show full screen",
+           "copy": "Copy", "copied": "Copied", "names_h": "Korean names to copy",
            "all": "All guides", "intro_h": "About this answer",
-           "addr_h": "Your stay's address in Korean", "addr_ph": "Paste the Korean address from your booking", "addr_save": "Save on this phone", "addr_note": "Kept only on this phone. It is never sent anywhere.", "addr_edit": "Change",
+           "addr_h": "Your stay's address in Korean", "addr_ph": "Paste the Korean address from your booking", "addr_save": "Save on this phone", "addr_note": "🔒 Only on this phone", "src_short": "Source", "addr_edit": "Change",
            "cards_h": "What do you need right now?", "tool_h": "What works with your phone setup?",
            "offline": "Pages you open keep working offline. Add this site to your home screen for the trip.",
            "lede": "Short answers for visitors in Korea, each checked against an official source, with Korean you can show or copy."},
