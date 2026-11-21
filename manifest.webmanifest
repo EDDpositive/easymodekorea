@@ -81,6 +81,13 @@
    "label": "Pick what you need right now"
   },
   {
+   "src": "/shots/ready.png",
+   "sizes": "1080x1920",
+   "type": "image/png",
+   "form_factor": "narrow",
+   "label": "See what works with your phone before you fly"
+  },
+  {
    "src": "/shots/guide.png",
    "sizes": "1080x1920",
    "type": "image/png",

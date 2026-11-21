@@ -33,15 +33,29 @@ SWEEP = """(async () => {
     } catch (e) { out.noApp.push(p + ' ' + e.message); } f.remove(); res(); }, 250);
     f.src = '/' + (p === './' ? '' : p); document.body.append(f); });
   let i = 0; await Promise.all(Array.from({length: 8}, async () => { while (i < pages.length) await one(pages[i++]); }));
+  /* A page that failed while eight were loading at once gets a second look on its own. */
+  const again = [...new Set([...out.overflow, ...out.noTabs, ...out.noApp.map(s => s.split(' ')[0])])];
+  out.overflow = []; out.noTabs = []; out.noApp = [];
+  for (const p of again) await one(p);
   return out; })()"""
 
 
 # Things people tap with a thumb must be at least 40px tall (most are 44px or more).
 TAPS = """(() => {
   const vis = e => { const r = e.getBoundingClientRect(); return r.width > 0 && r.height > 0 && !e.closest('[hidden]') && !e.closest('details:not([open]) > :not(summary)'); };
-  return [...document.querySelectorAll('.tabbar a, .jump a, .sit-links a, .glist a, .sayrow button, a.call, .act, .icon-btn, .lang-menu > summary, .btn, .chip, .opt-big')]
+  return [...document.querySelectorAll('.tabbar a, .jump a, .sit-links a, .glist a, .sayrow button, a.call, .act, .icon-btn, .lang-menu > summary, .btn, .chip, .opt-big, .ready-cta, .rd-app > summary')]
     .filter(vis).map(e => ({t: (e.innerText || e.getAttribute('aria-label') || e.className).trim().slice(0, 24), h: Math.round(e.getBoundingClientRect().height)})).filter(x => x.h < 40);
 })()"""
+
+
+# Korea Ready check, answered by taps alone: no Korean number, (Android when asked), phone wallet only, Incheon, Busan, a food rule, dates.
+READY_RUN = """(() => { const o = () => [...document.querySelectorAll('#rd-opts .opt-big')], n = () => document.getElementById('rd-next'); let taps = 0;
+  const tap = e => { e.click(); taps++; };
+  tap(o()[0]);
+  if (document.getElementById('rd-qh').textContent === JSON.parse(document.getElementById('ready-data').textContent).q2) tap(o()[1]);
+  tap(o()[1]); tap(o()[0]); tap(o()[0]); tap(n()); tap(o()[0]);
+  document.getElementById('rd-from').value = '2027-02-05'; document.getElementById('rd-to').value = '2027-02-12'; tap(n());
+  return taps; })()"""
 
 
 def main():
@@ -139,6 +153,34 @@ def main():
         check("Jan 7" in far and "12:00" in far and far.endswith("wait") and soon.endswith("open"), "arrival helper works out the 72-hour window in Korea time", far)
         b.js("localStorage.removeItem('emk-landing')")
 
+        # Korea Ready check: taps only; the plan, the score, My trip and the home screen follow the answers.
+        b.js("['wik-setup', 'emk-rc', 'emk-rc-x', 'emk-rc-score', 'emk-trip', 'emk-saved'].forEach(k => localStorage.removeItem(k))")
+        b.go(srv.url + "ready.html", wait=0.5)
+        first = b.js("!document.getElementById('rd-q').hidden && document.querySelectorAll('#rd-opts .opt-big').length === 3 && document.getElementById('rd-result').hidden")
+        small = [f"{x['t']} {x['h']}px" for x in b.js(TAPS)]
+        taps = b.js(READY_RUN)
+        res = b.js("""(() => { const D = JSON.parse(document.getElementById('ready-data').textContent), m = /(\\d+)\\/(\\d+)/.exec(document.getElementById('rd-score').textContent) || [0, -1, -1];
+          return { shown: !document.getElementById('rd-result').hidden, d: +m[1], n: +m[2], apps: document.querySelectorAll('#rd-apps details').length,
+            dated: [...document.querySelectorAll('#rd-apps details')].every(x => x.querySelector('time.ck[datetime]')), nc: document.querySelectorAll('#rd-apps .rd-nc').length,
+            wallet: !!document.querySelector('#rd-steps label[for="rd-x-pay-wallet"] a[href*="koreajoongangdaily"]'), later: document.querySelectorAll('#rd-later input').length,
+            setup: localStorage.getItem('wik-setup'), trip: localStorage.getItem('emk-trip'), busan: (localStorage.getItem('emk-saved') || '').includes(D.guides.busan[0]),
+            card: document.getElementById('rd-card').toDataURL().length }; })()""")
+        small += [f"result {x['t']} {x['h']}px" for x in b.js(TAPS)]
+        check(first and taps <= 9 and res["shown"] and res["d"] == 1 and res["n"] >= 9 and res["apps"] >= 5 and res["dated"] and res["nc"] >= 1 and res["wallet"] and res["later"] >= 3,
+              "Korea Ready check: taps only give a dated plan for this phone setup, with the open question marked 'needs check'", json.dumps(res))
+        check(str(res["setup"]).startswith("visitor|") and "2027-02-05" in str(res["trip"]) and res["busan"] and res["card"] > 5000 and not small,
+              "Korea Ready check fills My trip (setup, dates, guides), draws the share card, and its buttons are thumb-sized", json.dumps(res) + " " + "; ".join(small[:4]))
+        b.js("document.querySelector('#rd-steps input:not(:checked):not(:disabled)').click()")
+        b.go(srv.url, wait=0.5)
+        home = b.js("(() => { const a = document.querySelector('.ready-cta.done .ready-sub'); return (a ? a.textContent : '') + '|' + !document.getElementById('alerts-wrap').hidden; })()")
+        b.go(srv.url + "ja/ready.html", wait=0.5)
+        ja = b.js("document.getElementById('rd-score').textContent + '|' + document.querySelectorAll('#rd-apps details').length + '|' + !document.getElementById('rd-result').hidden")
+        b.js("document.getElementById('rd-redo').click()")
+        again = b.js("!document.getElementById('rd-q').hidden && document.getElementById('rd-result').hidden")
+        check(f"2 of {res['n']}" in home and home.endswith("|true") and f"/{res['n']}|" in ja and ja.endswith("|true") and again,   # ticks are kept per language, the answers are shared
+              "after the check, the home screen shows the plan's progress and the holiday inside the trip; the result reopens in other languages and answers can be changed", home + " " + ja)
+        b.js("localStorage.removeItem('emk-trip'); localStorage.removeItem('emk-saved'); localStorage.removeItem('wik-setup')")
+
         b.cmd("Network.enable"); b.cmd("Network.emulateNetworkConditions", offline=True, latency=0, downloadThroughput=-1, uploadThroughput=-1); time.sleep(0.5)
         strip = b.js("(() => { const s = document.querySelector('.net-strip'); return !!s && !s.hidden && s.textContent.length > 5; })()")
         b.cmd("Network.emulateNetworkConditions", offline=False, latency=0, downloadThroughput=-1, uploadThroughput=-1); time.sleep(0.5)
@@ -149,10 +191,18 @@ def main():
         check(not r["noTabs"], "every page has the four bottom tabs", ", ".join(r["noTabs"][:5]))
         check(not r["noApp"], "every page loads the shared app script", ", ".join(r["noApp"][:5]))
 
+        # The sweep opened pages in five languages, so the worker may still be switching language packs: let it finish first.
+        # A reader uses one language at a time: open the English home and wait until its worker is the active one and nothing is queued.
+        b.go(srv.url, wait=0.5)
+        for _ in range(75):
+            if b.js("navigator.serviceWorker.getRegistration().then(r => !!r && !!r.active && /l=en$/.test(r.active.scriptURL) && !r.installing && !r.waiting)"): break
+            time.sleep(0.2)
+        time.sleep(1.0)
         srv.stop()  # from here on there is no server: only the copy on the "phone" can answer
-        for page in ("", "taxi.html", "phrases.html", "saved.html", "help.html", "privacy.html", "lost-phone-wallet-passport.html", "foreign-card-declined-korea.html"):
+        for page in ("", "taxi.html", "phrases.html", "saved.html", "help.html", "privacy.html", "lost-phone-wallet-passport.html", "foreign-card-declined-korea.html", "ready.html"):
             ok = b.go(srv.url + page, wait=0.6) and b.js("document.querySelectorAll('.tabbar a').length === 4 && document.title.includes('EasyModeKorea')")
-            check(bool(ok), f"offline: /{page} opens")
+            why = b.last_error or (b.js("location.href + ' | ' + document.title + ' | tabs ' + document.querySelectorAll('.tabbar a').length") if not ok else "")
+            check(bool(ok), f"offline: /{page} opens", why)
         # The sweep above saved every page, so take one off the "phone" first (and empty the browser's own short-term cache).
         b.js("caches.keys().then(ks => Promise.all(ks.map(k => caches.open(k).then(c => c.delete(location.origin + '/zh-tw/taxi.html')))))")
         b.cmd("Network.clearBrowserCache")

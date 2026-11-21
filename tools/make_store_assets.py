@@ -49,13 +49,18 @@ def screenshots():
     """Phone screenshots at 360x640 drawn at 3x (1080x1920, the 9:16 size Play recommends), light theme."""
     srv = cdp.Server(os.path.abspath(ROOT)); b = cdp.Browser(360, 640, 3, "light")
     try:
-        for page, name, after in (("", "home", ""), ("taxi.html", "guide", ""), ("taxi.html", "show", "document.querySelector('[data-show]').click()"),
+        for page, name, after in (("", "home", ""), ("ready.html", "ready", ""), ("taxi.html", "guide", ""), ("taxi.html", "show", "document.querySelector('[data-show]').click()"),
                                   ("phrases.html", "cards", "document.getElementById('cards').scrollIntoView()"), ("help.html", "help", "")):
             b.go(srv.url + page)
             if not page:  # keep the install prompt out of the pictures
-                b.js("localStorage.setItem('emk-install-no', String(Date.now()))"); b.go(srv.url)
+                b.js("localStorage.setItem('emk-install-no', String(Date.now())); localStorage.setItem('emk-ready', '1')"); b.go(srv.url)
+            if name == "ready":  # a finished check with some steps ticked, as a traveler would see it a week before the flight
+                b.js("localStorage.setItem('emk-rc', JSON.stringify({p: 'visitor', dev: 'ios', pay: 'card', air: 'icn', city: ['busan'], food: 'no', from: '', to: ''}));"
+                     "localStorage.setItem('wik-setup', 'visitor|ios'); localStorage.setItem('wik-plan-en-visitor-ios', '[0,1,2,3,4]'); localStorage.setItem('emk-rc-x', JSON.stringify(['checked', 'pay-card']))")
+                b.go(srv.url + page, wait=1.2)
             if after: b.js(after); time.sleep(0.4)
             b.shot(out(f"shots/{name}.png")); flatten(f"shots/{name}.png")
+            if name == "ready": b.js("['emk-rc', 'emk-rc-x', 'emk-rc-score', 'wik-setup', 'wik-plan-en-visitor-ios', 'emk-saved'].forEach(k => localStorage.removeItem(k))")
         b.cmd("Emulation.setDeviceMetricsOverride", width=1024, height=500, deviceScaleFactor=1, mobile=False)
         b.go(srv.url + "store/feature.html", wait=2.5); b.shot(out("store/feature-graphic.png")); flatten("store/feature-graphic.png")
     finally:

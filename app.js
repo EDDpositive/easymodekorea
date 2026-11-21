@@ -98,6 +98,16 @@
     wrap.appendChild(b); hero.insertAdjacentElement("afterend", wrap);
   })();
 
+  /* After the Korea Ready check, its entry on any page shows the score kept on this phone. */
+  (function () {
+    var sc = null; try { sc = JSON.parse(get("emk-rc-score") || "null"); } catch (e) {}
+    if (!sc || !sc.n) return;
+    d.querySelectorAll(".ready-cta").forEach(function (a) {
+      var sub = a.querySelector(".ready-sub"); a.classList.add("done");
+      if (sub) sub.textContent = String(a.getAttribute("data-continue")).replace("{d}", sc.d).replace("{n}", sc.n);
+    });
+  })();
+
   /* Save and share on guide pages. Saved guides and recent guides are lists of slugs kept on this phone. */
   var sv = d.getElementById("save-btn"), sh = d.getElementById("share-btn");
   if (E.guide) {

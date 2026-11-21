@@ -115,6 +115,26 @@ def main():
     check(not probs, f"{len(TR.FLOWS)} trouble flows and {len(TR.ALERTS)} holiday alerts: all languages, every sourced step dated, on the offline list", "; ".join(probs[:4]))
     check("qr.js" in pre and all(f["slug"] in rd("llms.txt") for f in TR.FLOWS), "share code script is in the offline list; llms.txt lists the trouble flows")
 
+    # Korea Ready check: five languages, built only from dated answers; anything added carries a date and a source, or neither.
+    probs = []
+    for d in LANG_DIRS:
+        page = d + "ready.html"
+        if not has(page): probs.append("missing " + page); continue
+        h = rd(page)
+        data = json.loads(re.search(r'<script type="application/json" id="ready-data">(.*?)</script>', h, re.S).group(1).replace("<\\/", "</"))
+        if page not in files or f"easymodekorea.com/{page}</loc>" not in sm: probs.append(page + ": not in the offline list or the sitemap")
+        if len(data["tasks"]) < 5 or not all(iso.match(t["d"]) and len(t["v"]) >= 3 for t in data["tasks"]): probs.append(page + ": an app answer has no check date or lacks a setup")
+        for k, x in data["x"].items():
+            if bool(x.get("d")) != bool(x.get("src")) or (x.get("d") and not iso.match(x["d"])): probs.append(f"{page}: step {k} has a date without a source, or a source without a date")
+        for t in data["tasks"]:
+            nc = t.get("nc")
+            if nc and not (iso.match(nc["d"]) and nc["src"][1].startswith("https://") and nc["t"]): probs.append(f"{page}: 'needs check' note on {t['id']} lacks a date or a source")
+        if not all(v for v in data["t"].values()): probs.append(page + ": empty text")
+        if re.search(r'<input[^>]+type="(text|search|email|tel)"', h.split('id="ready"')[1].split('id="ready-data"')[0]): probs.append(page + ": the check asks for typing")
+        for g in ("index.html", "saved.html", "taxi.html", "foreign-card-declined-korea.html"):
+            if 'class="ready-cta" href="ready.html"' not in rd(d + g): probs.append(d + g + ": no way into the Ready check")
+    check(not probs and "ready.html" in rd("llms.txt"), "Korea Ready check: all languages, taps only, every added fact dated and sourced, reachable from home, My trip, guides and flows", "; ".join(probs[:4]))
+
     # Web manifest.
     m = json.loads(rd("manifest.webmanifest")); probs = []
     for k in ("id", "name", "short_name", "start_url", "scope", "display", "icons", "theme_color", "background_color"):

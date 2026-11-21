@@ -560,3 +560,57 @@ html.offline .install-bar { display: none; }
 .ar-state.open { color: var(--ok); } .ar-state.wait { color: var(--link); } .ar-state.past { color: var(--warn); }
 .cgroup h2 a { display: inline-flex; align-items: center; min-height: 44px; }
 .app-main .hint a { display: inline-block; padding: 12px 0; }
+/* Round 5: Korea Ready check */
+.ready-cta { display: flex; align-items: center; gap: 14px; margin: 14px 0; padding: 14px 16px; min-height: 68px; box-sizing: border-box; border-radius: 18px; background: var(--easy); color: #0e1430; text-decoration: none; }
+.ready-cta .ic { flex: none; border-radius: 14px; background: #0e1430; color: var(--easy); }
+.ready-cta .ic svg { width: 26px; height: 26px; stroke-width: 2.2; }
+.ready-cta b { display: block; font: 800 18px/1.25 var(--display); }
+.ready-cta .ready-sub { display: block; font-size: 14px; line-height: 1.35; margin-top: 2px; }
+.ready-cta:active { transform: scale(.99); }
+.ready-cta.done { background: var(--surface); color: var(--ink); border: 2px solid var(--brand); }
+.ready-cta.done .ic { background: var(--brand); color: #fff; }
+.ready-cta.done .ready-sub { color: var(--link); font-weight: 700; }
+.app-main .ready-cta { margin: 0; }
+#answer + .ready-cta { margin: 22px 0 6px; }
+#ready { display: grid; gap: 22px; }
+#ready > section[hidden] { display: none; }
+.rd-intro { display: grid; gap: 16px; }
+.rd-intro p { margin: 0; font-size: 17px; line-height: 1.5; }
+.btn.rd-big { width: 100%; justify-content: center; min-height: 56px; font-size: 18px; border-radius: 16px; }
+#rd-q { display: grid; gap: 12px; }
+#rd-q h2 { font: 800 24px/1.25 var(--display); margin: 0; outline: none; }
+.rd-step { margin: 0; font: 700 13px var(--body); letter-spacing: .06em; color: var(--muted); }
+#rd-q .hint { margin: 0; }
+.opt-big.on { border-color: var(--link); background: var(--ok-bg); }
+#rd-dates[hidden] { display: none; }
+.rd-nav { align-items: center; min-height: 48px; }
+.rd-nav [hidden] { display: none; }
+.rd-nav .btn { margin-left: auto; min-height: 48px; padding: 12px 22px; font-size: 16px; }
+.rd-nav .linkbtn { text-decoration: none; }
+#rd-result { display: grid; gap: 22px; }
+#rd-result > section[hidden] { display: none; }
+.rd-scorebox { display: grid; gap: 12px; padding: 16px; border-radius: 18px; background: var(--surface); border: 2px solid var(--brand); }
+.rd-top { display: grid; grid-template-columns: 1fr 84px; gap: 14px; align-items: center; }
+.rd-top > div { display: grid; gap: 12px; min-width: 0; }
+.rd-scorebox h2 { font: 800 26px/1.2 var(--display); margin: 0; }
+#rd-note:empty { display: none; }
+.rd-scorebox .hint { margin: 0; }
+.rd-scorebox .actions { align-items: center; gap: 4px 14px; }
+.rd-scorebox .btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+#rd-card { width: 84px; height: 84px; border-radius: 10px; }
+.rd-apps { display: grid; gap: 8px; }
+.rd-app { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
+.rd-app > summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 52px; padding: 6px 14px; }
+.rd-app > summary::-webkit-details-marker { display: none; }
+.rd-app > summary b { font: 700 16px var(--body); }
+.rd-app > p { margin: 0 14px 10px; font-size: 15px; line-height: 1.5; }
+.rd-app > p.fact-src, .checks .fact-src { font-size: 13px; color: var(--muted); }
+.rd-app .fact-src a, .checks .fact-src a { color: var(--muted); overflow-wrap: anywhere; }
+.rd-app > p:last-child a { display: inline-block; padding: 8px 0; font-weight: 700; }
+.rd-nc { padding: 10px 12px; border-radius: 10px; background: var(--mixed-bg); }
+.rd-nc b { color: var(--mixed); }
+#rd-steps label a.go { display: inline-block; min-width: 44px; min-height: 28px; text-align: center; font-weight: 700; text-decoration: none; }
+.checks li.fixed input:checked + label { text-decoration: none; color: var(--ok); font-weight: 700; }
+.opt-big.on b::after { content: " \2713"; color: var(--ok); }
+.checks .fact-src { display: block; margin-top: 2px; text-decoration: none; }
+@media (max-width: 339px) { .rd-top { grid-template-columns: 1fr; } #rd-card { display: none; } }

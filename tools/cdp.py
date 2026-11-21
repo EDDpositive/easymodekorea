@@ -92,7 +92,7 @@ class Browser:
 
     def go(self, url, wait=1.2):
         """Load a page and give fonts and scripts a moment. Returns False when the page fails to load at all."""
-        r = self.cmd("Page.navigate", url=url)
+        r = self.cmd("Page.navigate", url=url); self.last_error = r.get("errorText", "")
         if r.get("errorText"): return False
         end = time.time() + 20
         while time.time() < end:

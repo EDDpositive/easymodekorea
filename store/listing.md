@@ -1,7 +1,7 @@
 # Google Play listing kit
 
 Everything to paste into Play Console. Text limits: name 30, short description 80, full description 4,000 characters.
-Graphics are in this repo: icon `icon-512.png`, feature graphic `store/feature-graphic.png` (1024x500), phone screenshots `shots/*.png` (1080x1920, five files). Rebuild them with `python tools/make_store_assets.py`.
+Graphics are in this repo: icon `icon-512.png`, feature graphic `store/feature-graphic.png` (1024x500), phone screenshots `shots/*.png` (1080x1920, six files; upload in this order: home, ready, guide, show, cards, help). Rebuild them with `python tools/make_store_assets.py`.
 
 | Field | Value |
 |---|---|
@@ -25,6 +25,7 @@ Graphics are in this repo: icon `icon-512.png`, feature graphic `store/feature-g
 Korea runs on apps, and many of them ask for a Korean phone number. EasyModeKorea tells you what works for a visitor, in a few lines, with the date each answer was last checked.
 
 WHAT YOU GET
+• Korea Ready check: answer a few tap questions before you fly (no typing, no account) and get a plan for your own phone, card and trip: which Korean apps work for you, what to set up at home, and a readiness score you can share.
 • Short answers first: the verdict, where, cost and time, then numbered steps.
 • Checked and dated: every key fact shows the date it was checked and the source. Each guide lists what changed this year, the part older guides and AI answers get wrong.
 • Answers for your phone: tell the app once whether you have a Korean number, and it shows what works for you.
@@ -45,7 +46,7 @@ FIVE LANGUAGES
 English, Japanese, Traditional Chinese, Simplified Chinese and Vietnamese.
 
 PRIVATE BY DESIGN
-No account, no ads. Your saved guides, address and cards stay on your phone.
+No account, no ads. Your answers, saved guides, address and cards stay on your phone.
 
 INDEPENDENT
 EasyModeKorea is an independent guide. It is not affiliated with any app, company or government body it writes about. Rules change often, so confirm in the official app or site before you rely on an answer.
@@ -65,6 +66,7 @@ Questions or corrections: edandco.biz@gmail.com
 한국은 앱으로 움직이는 나라인데, 많은 앱이 한국 전화번호를 요구합니다. EasyModeKorea는 외국인 여행자에게 무엇이 되는지를 몇 줄로 알려 주고, 답마다 마지막으로 확인한 날짜를 보여 줍니다.
 
 제공하는 것
+• Korea Ready 점검: 출발 전에 몇 번 탭해서 답하면(입력·가입 없음) 내 폰·카드·일정에 맞춘 준비 계획이 나옵니다. 나에게 되는 한국 앱, 집에서 미리 할 일, 공유할 수 있는 준비 점수까지.
 • 짧은 답 먼저: 결론, 장소, 비용, 시간, 그다음 번호 순서 안내.
 • 확인하고 날짜를 적습니다: 핵심 사실마다 확인한 날짜와 출처가 표시됩니다. 가이드마다 올해 바뀐 내용을 보여 줍니다. 오래된 글이나 AI 답변이 틀리기 쉬운 부분입니다.
 • 내 폰 기준 답: 한국 번호가 있는지 한 번만 알려 주면 나에게 되는 방법을 보여 줍니다.
@@ -85,7 +87,7 @@ Questions or corrections: edandco.biz@gmail.com
 영어, 일본어, 중국어 번체, 중국어 간체, 베트남어. (앱 화면은 한국어를 지원하지 않습니다.)
 
 개인정보를 모으지 않습니다
-가입도 광고도 없습니다. 저장한 가이드, 주소, 카드는 폰 안에만 남습니다.
+가입도 광고도 없습니다. 점검에서 고른 답, 저장한 가이드, 주소, 카드는 폰 안에만 남습니다.
 
 독립 운영
 EasyModeKorea는 독립적으로 운영하는 안내서입니다. 소개하는 앱, 회사, 정부 기관과 제휴 관계가 없습니다. 규정은 자주 바뀌므로 공식 앱이나 사이트에서 한 번 더 확인하세요.

@@ -262,6 +262,7 @@ def build_tool(lang):
 </div>
 <div class="wrap">
   <div class="quick" id="quick" hidden></div>
+  {ready_cta(lang)}
   <label class="search"><span class="sr">{e(ux['search'])}</span><input id="q" type="search" placeholder="{e(ux['search'])}" autocomplete="off"></label>
   <p class="hint" id="nores" hidden>{e(ux['nores'])} <button type="button" class="linkbtn" id="clear">{e(ux['clear'])}</button></p>
   <p class="trust-line">✓ {e(A.T[lang]['trust'].format(n=len(tasks), date=fmt_date(max(r[2] for rows in AT.values() for r in rows), lang), c=len(x['changes'])))} <a href="changes.html">{e(x['nav_changes'])}</a></p>
@@ -657,6 +658,7 @@ def build_topic(lang, t):
   {deep}
   <details class="more"><summary>{e(S['details'])}</summary><div class="in notes"><p>{e(t['intro'])}</p><ul><li>{e(U['checked'])} {e(CHECKED[lang])}</li>{notes}{srcs}</ul></div></details>
   </main>
+  {ready_cta(lang)}
   <section class="related"><h2>{e(x['related'])}</h2><ul class="glist">{related}</ul></section>
   <details class="more"><summary>{e(LU['all'])}</summary><nav class="topics">{others}</nav></details>
   <p class="host-cta">🏠 {U['hosts'].format(base=up)}</p>
@@ -866,6 +868,7 @@ def build_flow(lang, flow):
     inner = f"""<section class="sec flow" aria-labelledby="fl-h"><h2 id="fl-h">{e(tx_['steps_h'][lang])}</h2><ol class="flow-steps">{''.join(steps)}</ol></section>
 <section class="sec says" aria-labelledby="fc-h"><h2 id="fc-h">{e(tx_['cards_h'][lang])}</h2>{cards}</section>
 {addr_card(lang) if flow['id'] in ('train', 'taxi') else ''}
+{ready_cta(lang)}
 <section class="sec" aria-labelledby="fo-h"><h2 id="fo-h">{e(tx_['other_h'][lang])}</h2><ul class="glist">{others}<li><a href="help.html"><span class="ic">{A.IC['help']}</span><span>{e(A.T[lang]['help_title'])}</span></a></li></ul></section>"""
     dates = [s["d"] for s in flow["steps"] if s["d"]]
     cites = [{"@type": "WebPage", "name": TR.SRC[k][0], "url": TR.SRC[k][1]} for k in dict.fromkeys(k for s in flow["steps"] for k in s["src"] if not k.startswith("guide:"))]
@@ -934,6 +937,226 @@ def alerts_block(lang, with_dates=False):
     return f"""<section class="sec alerts-wrap" id="alerts-wrap" aria-labelledby="alerts-h"{hidden}>{head_ if not with_dates else f'<h2>{e(t["dates_h"][lang])}</h2>'}{dates}
 {f'<h3 id="alerts-h" class="alerts-sub">{e(t["h"][lang])}</h3>' if with_dates else ''}<div id="alerts" data-h="{e(t['h'][lang])}" data-soon="{e(t['soon'][lang])}" data-none="{none}"></div></section>
 <script type="application/json" id="alerts-data">{data}</script>"""
+
+
+def ready_cta(lang):
+    """The entry to the Korea Ready check. Once the check is done, the line under the title shows the score instead."""
+    t = A.T[lang]
+    return (f'<a class="ready-cta" href="ready.html" data-continue="{e(t["rd_continue"])}"><span class="ic">{A.IC["ready"]}</span>'
+            f'<span><b>{e(t["rd_title"])}</b><span class="ready-sub">{e(t["rd_cta_sub"])}</span></span></a>')
+
+
+# Where recent user reports disagree with a dated answer and we could not settle it ourselves, the Ready check says so
+# in plain words instead of picking a side. Each note names where the reports are and the day they were read.
+PLAY_NAVER = "https://play.google.com/store/apps/details?id=com.nhn.android.nmap"
+PLAY_KRIDE = "https://play.google.com/store/apps/details?id=com.kakaomobility.kride"
+READY_NC = {
+    "food-booking": {
+        "p": ["visitor", "krsim"], "d": TR.CHK, "src": ["Google Play: NAVER Map reviews", PLAY_NAVER],
+        "t": {"en": "Play Store reviews from September and October 2026 report that Naver sign-up or verification failed for some foreign accounts. We could not confirm it ourselves. Sign up to CatchTable Global by email first.",
+              "ja": "2026年9〜10月のPlayストアのレビューに、海外アカウントでNAVERの登録や認証ができなかったという報告があります。こちらでは確認できていません。まずCatchTable Globalにメールで登録してください。",
+              "zh-tw": "2026年9至10月的Play商店評論中,有人回報外國帳號無法完成NAVER註冊或驗證。我們還無法自行確認。請先用電子郵件註冊CatchTable Global。",
+              "zh-cn": "2026年9至10月的Play商店评论中,有人反映外国账号无法完成NAVER注册或验证。我们还无法自行确认。请先用邮箱注册CatchTable Global。",
+              "vi": "Một số đánh giá trên Play Store tháng 9 và 10/2026 cho biết tài khoản nước ngoài không đăng ký hoặc xác minh được NAVER. Chúng tôi chưa tự xác nhận được. Hãy đăng ký CatchTable Global bằng email trước."}},
+}
+
+
+def ready_data(lang):
+    """Everything the Korea Ready check needs, taken from data the site already verifies: the answers that differ by
+    phone setup (with their check dates), the checklist, and the guides and flows to link."""
+    t = A.T[lang]; ux = UX[lang]; S = SHORT[lang]; U = LANGS[lang]["ui"]
+    tl = task_list(lang); by = {x["id"]: x for x in tl}
+    tasks = []
+    for x in tl:
+        if "all" in x: continue
+        v = {}
+        for p in ("visitor", "krsim", "arc"):
+            for dv in (("ios", "android") if x.get("dev") and p != "arc" else ("ios",)):
+                r = resolve(x, p, dv); v[p + "|" + dv] = [r["s"], r["verdict"], r["fallback"]]
+        row = {"id": x["id"], "slug": x["slug"], "short": x["short"], "v": v, "d": max([r[2] for r in AT.get(x["id"], [])] or [CHECKED_ISO])}
+        nc = READY_NC.get(x["id"])
+        if nc: row["nc"] = {"p": nc["p"], "d": nc["d"], "src": nc["src"], "t": nc["t"][lang]}
+        tasks.append(row)
+    g = lambda tid: [by[tid]["slug"], by[tid]["short"]]
+    src = lambda k: [TR.SRC[k][0], TR.SRC[k][1]]
+    return {
+        "lang": lang, "tasks": tasks, "plan": PLAN[lang], "tone": ux["tone"], "prof": S["prof"],
+        "q1": ux["q1"], "q1o": ux["q1_opts"], "q2": ux["q2"], "ios": U["ios"], "android": U["android"], "back": ux["back"],
+        "guides": {"icn": g("airport"), "gmp": g("gimpo"), "busan": g("busan"), "jeju": g("jeju"), "dmz": g("dmz"), "entry": g("entry"), "transit": g("transit"), "data": g("data"), "cash": g("cash")},
+        "flows": [[f["slug"], f["title"][lang]] for f in TR.FLOWS],
+        "fails": U["fails"].strip().rstrip(":：").strip(),
+        "x": {"checked": {"t": t["rd_x_checked"]}, "taxi": {"t": t["rd_x_taxi"], "d": TR.CHK, "src": ["Google Play: k.ride reviews", PLAY_KRIDE]},
+              "wallet": {"t": t["rd_x_wallet"], "d": TR.CHK, "src": src("jad26")}, "card": {"t": t["rd_x_card"]},
+              "cash": {"t": t["rd_x_cash"], "d": max(r[2] for r in AT["cash"]), "src": [by["cash"]["short"], by["cash"]["slug"] + ".html"]},
+              "food": {"t": t["rd_x_food"], "href": "phrases.html"}, "help": {"t": t["rd_x_help"], "href": "help.html"}},
+        "t": {k[3:]: t[k] for k in t if k.startswith("rd_")},
+    }
+
+
+READY_JS = r"""
+(function () {
+  /* Korea Ready check: seven taps, no typing. Answers and ticks stay on this phone. The plan is assembled from the
+     site's own dated answers, so nothing here is guessed. */
+  const D = JSON.parse(document.getElementById("ready-data").textContent), T = D.t, $ = id => document.getElementById(id);
+  const load = k => { try { return JSON.parse(store(k) || "null"); } catch (e) { return null; } };
+  const UAD = /iPhone|iPad|iPod/.test(navigator.userAgent) ? "ios" : /Android/.test(navigator.userAgent) ? "android" : null;
+  const loc = document.documentElement.lang || "en";
+  let A = load("emk-rc") || {}, step = 0;
+  const opt = (label, sub, on) => { const b = el("button", { type: "button", class: "opt-big" + (on ? " on" : "") }, [el("b", { text: label }), sub ? el("span", { text: sub }) : null]); return b; };
+  const Q = [
+    { h: D.q1, key: "p", opts: ["visitor", "krsim", "arc"].map(p => [p, D.q1o[p][0], D.q1o[p][1]]) },
+    { h: D.q2, key: "dev", skip: () => A.p === "arc" || !!UAD, opts: [["ios", D.ios], ["android", D.android]] },
+    { h: T.q_pay, key: "pay", opts: [["card", T.pay_card, T.pay_card_s], ["wallet", T.pay_wallet, T.pay_wallet_s], ["cash", T.pay_cash, T.pay_cash_s]] },
+    { h: T.q_air, key: "air", opts: [["icn", T.air_icn], ["gmp", T.air_gmp], ["other", T.air_other]] },
+    { h: T.q_city, key: "city", multi: true, opts: [["busan", T.city_busan], ["jeju", T.city_jeju], ["dmz", T.city_dmz], ["none", T.city_none]] },
+    { h: T.q_food, key: "food", opts: [["yes", T.food_yes], ["no", T.food_no]] },
+    { h: T.q_dates, key: "dates", dates: true },
+  ];
+  const live = () => Q.filter(q => !(q.skip && q.skip()));
+  function ask(quiet) {
+    const qs = live(), q = qs[step];
+    $("rd-result").hidden = true; $("rd-q").hidden = false; $("rd-about").hidden = step !== 0;
+    $("rd-step").textContent = (step + 1) + " / " + qs.length; $("rd-bar").style.width = Math.round(100 * step / qs.length) + "%";
+    $("rd-qh").textContent = q.h; $("rd-qs").textContent = q.multi ? T.multi : ""; $("rd-qs").hidden = !q.multi;
+    const box = $("rd-opts"); box.replaceChildren(); $("rd-next").hidden = !(q.multi || q.dates); $("rd-next").textContent = q.dates ? T.done : T.next; $("rd-skip").hidden = !q.dates;
+    $("rd-dates").hidden = !q.dates; $("rd-back").hidden = step === 0;
+    if (q.dates) { $("rd-from").value = A.from || ""; $("rd-to").value = A.to || ""; }
+    else for (const [val, label, sub] of q.opts) {
+      const on = q.multi ? (A[q.key] || []).includes(val) : A[q.key] === val, b = opt(label, sub, on);
+      b.setAttribute("aria-pressed", String(on));
+      b.addEventListener("click", () => {
+        if (q.multi) { let c = (A[q.key] || []).filter(x => x !== "none"); if (val === "none") c = ["none"]; else c = c.includes(val) ? c.filter(x => x !== val) : c.concat(val); A[q.key] = c; ask(); }
+        else { A[q.key] = val; if (step === 0) count("ready/start", "ready start"); next(); }
+      });
+      box.append(b);
+    }
+    if (quiet !== true) { $("rd-qh").focus({ preventScroll: true }); window.scrollTo(0, 0); }
+  }
+  function next() { if (step + 1 < live().length) { step++; ask(); } else finish(); }
+  $("rd-next").addEventListener("click", () => { const q = live()[step]; if (q.dates) { A.from = $("rd-from").value; A.to = $("rd-to").value; } next(); });
+  $("rd-skip").addEventListener("click", () => { A.from = ""; A.to = ""; next(); });
+  $("rd-back").addEventListener("click", () => { if (step > 0) { step--; ask(); } });
+  $("rd-redo").addEventListener("click", () => { step = 0; ask(); });
+
+  function finish() {
+    if (!A.dev) A.dev = A.p === "arc" ? "ios" : (UAD || "ios");
+    if (!A.city || !A.city.length) A.city = ["none"];
+    store("emk-rc", JSON.stringify(A)); store("wik-setup", A.p + "|" + A.dev);
+    if (A.from && A.to && A.to >= A.from) store("emk-trip", JSON.stringify({ from: A.from, to: A.to }));
+    /* Put the guides this trip needs into My trip (after anything the reader saved, never reordering it). */
+    const want = ["entry", A.air === "icn" ? "icn" : A.air === "gmp" ? "gmp" : null, "data", "transit", A.pay !== "card" ? "cash" : null].concat(A.city.filter(c => c !== "none")).filter(Boolean).map(k => D.guides[k][0]);
+    let saved = load("emk-saved"); saved = Array.isArray(saved) ? saved : [];
+    store("emk-saved", JSON.stringify(saved.concat(want.filter(s => !saved.includes(s))).slice(0, 40)));
+    count("ready/done", "ready done"); result(true);   /* the count carries no answers: they stay on the phone */
+  }
+
+  const fmtDate = iso => new Intl.DateTimeFormat(loc, { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" }).format(new Date(iso + "T00:00:00Z"));
+  function result(fresh) {
+    $("rd-q").hidden = true; $("rd-result").hidden = false;
+    const P = A.p, DEV = A.dev;
+    /* 1. What works with this phone setup: the site's dated answers for this profile, problems first. */
+    const order = { bad: 0, mixed: 1, warn: 2, ok: 3 }, apps = $("rd-apps"); apps.replaceChildren();
+    const stamp = (d, src) => el("p", { class: "fact-src" }, [el("time", { class: "ck", datetime: d, text: "✓ " + fmtDate(d) }), src ? " · " : null, src ? el("a", { href: src[1], rel: "noopener", text: src[0] }) : null]);
+    D.tasks.map(t => { const v = t.v[P + "|" + DEV] || t.v[P + "|ios"], nc = t.nc && t.nc.p.includes(P) ? t.nc : null; return { t, v, nc, s: nc && v[0] === "ok" ? "mixed" : v[0] }; })
+      .sort((a, b) => order[a.s] - order[b.s]).forEach(({ t, v, nc, s }) => {
+        const box = el("details", { class: "rd-app " + s }, [
+          el("summary", {}, [el("b", { text: t.short }), el("span", { class: "pill " + s, text: D.tone[s] })]),
+          el("p", { text: v[1] }), v[0] === "ok" ? null : el("p", { class: "rd-fb" }, [el("b", { text: D.fails + ": " }), v[2]]),
+          stamp(t.d), nc ? el("p", { class: "rd-nc" }, [el("b", { text: T.nc + ": " }), nc.t]) : null, nc ? stamp(nc.d, nc.src) : null,
+          el("p", {}, el("a", { href: t.slug + ".html", text: T.x_read.replace("{t}", t.short) }))]);
+        if (s !== "ok") box.open = true;
+        apps.append(box);
+      });
+    /* 2. Steps: the checklist for this setup (same ticks as the home screen), plus what the answers add.
+          The score counts what can be done before the flight; the steps after landing are listed, not counted. */
+    const pl = D.plan, items = pl.items.filter(it => (!it.p || it.p.includes(P)) && (!it.d || P === "arc" || it.d.includes(DEV)));
+    const key = "wik-plan-" + D.lang + "-" + P + "-" + DEV; let done = load(key); done = Array.isArray(done) ? done : [];
+    let xdone = load("emk-rc-x"); xdone = Array.isArray(xdone) ? xdone : [];
+    const early = it => it.st === "before" || it.st === "setup", extra = [["checked", D.x.checked]];
+    if (!xdone.includes("checked")) { xdone.push("checked"); store("emk-rc-x", JSON.stringify(xdone)); }   /* the check itself is the first step, and it is done */
+    extra.push(["pay-" + A.pay, D.x[A.pay]]);
+    if (A.pay !== "cash" && P !== "arc") extra.push(["taxi", D.x.taxi]);
+    if (A.air === "icn" || A.air === "gmp") extra.push(["air-" + A.air, { t: T.x_read.replace("{t}", D.guides[A.air][1]), href: D.guides[A.air][0] + ".html" }]);
+    A.city.filter(c => c !== "none").forEach(c => extra.push(["c-" + c, { t: T.x_read.replace("{t}", D.guides[c][1]), href: D.guides[c][0] + ".html" }]));
+    if (A.food === "yes") extra.push(["food", D.x.food]);
+    extra.push(["help", D.x.help]);
+    const ul = $("rd-steps"), later = $("rd-later"); ul.replaceChildren(); later.replaceChildren(); let last = "";
+    const total = items.filter(early).length + extra.length;
+    const score = () => { const d = items.filter((it, i) => early(it) && done.includes(i)).length + extra.filter(([id]) => xdone.includes(id)).length;
+      $("rd-score").textContent = T.score.replace("{d}", d).replace("{n}", total); $("rd-sbar").style.width = Math.round(100 * d / total) + "%";
+      store("emk-rc-score", JSON.stringify({ d, n: total })); card(d, total); return d; };
+    const row = (id, checked, text, more, on) => { const cb = el("input", { type: "checkbox", id }); cb.checked = checked; cb.addEventListener("change", () => { on(cb.checked); score(); });
+      return el("li", {}, [cb, el("label", { for: id }, [text].concat(more || []))]); };
+    const xrow = ([id, x]) => {
+      const more = []; if (x.href) more.push(" ", el("a", { class: "go", href: x.href, "aria-label": x.t, text: "→" }));
+      if (x.d) more.push(" ", el("span", { class: "fact-src" }, [el("time", { class: "ck", datetime: x.d, text: "✓ " + fmtDate(x.d) }), " · ", el("a", { href: x.src[1], rel: "noopener", text: x.src[0] })]));
+      const li = row("rd-x-" + id, xdone.includes(id), x.t, more, v => { xdone = v ? [...new Set([...xdone, id])] : xdone.filter(j => j !== id); store("emk-rc-x", JSON.stringify(xdone)); });
+      if (id === "checked") { li.querySelector("input").disabled = true; li.classList.add("fixed"); }
+      return li;
+    };
+    items.forEach((it, i) => {
+      const to = early(it) ? ul : later;
+      if (it.st !== last) { to.append(el("li", { class: "stage", text: pl.stages[it.st] })); last = it.st; if (to === ul && !ul.querySelector("input")) ul.append(xrow(extra[0])); }
+      to.append(row("rd-ck-" + i, done.includes(i), it.t, null, v => { done = v ? [...new Set([...done, i])] : done.filter(j => j !== i); store(key, JSON.stringify(done)); }));
+    });
+    extra.slice(1).forEach(x => ul.append(xrow(x)));
+    $("rd-later-sec").hidden = !later.children.length;
+    score();
+    /* The card is drawn again once the site's own typeface has arrived. */
+    try { document.fonts.load("800 64px 'Bricolage Grotesque'").then(score).catch(() => {}); } catch (e) {}
+    $("rd-flows").replaceChildren(...D.flows.map(([slug, title]) => el("li", {}, el("a", { href: slug + ".html", text: title }))));
+    $("rd-note").textContent = fresh ? T.saved : "";
+    window.scrollTo(0, 0);
+  }
+  /* The share card: a picture with the score and the site name. No personal detail goes into it. */
+  function card(d, n) {
+    const c = $("rd-card"), x = c.getContext("2d"), F = "'Bricolage Grotesque', system-ui, 'Segoe UI', Arial, sans-serif";
+    x.fillStyle = "#2336e8"; x.fillRect(0, 0, 1080, 1080);
+    x.fillStyle = "#ffffff"; x.font = "800 64px " + F; x.textBaseline = "alphabetic"; x.fillText("EasyMode", 84, 150);
+    const w = x.measureText("EasyMode").width; x.fillStyle = "#ffd23f"; x.fillRect(84 + w + 14, 92, x.measureText("Korea").width + 28, 76); x.fillStyle = "#0e1430"; x.fillText("Korea", 84 + w + 28, 150);
+    x.fillStyle = "#ffffff"; x.font = "800 132px " + F; x.fillText("Korea Ready", 84, 470);
+    x.fillStyle = "#ffd23f"; x.font = "800 360px " + F; x.fillText(d + "/" + n, 72, 830);
+    x.fillStyle = "#ffffff"; x.font = "600 46px Arial, sans-serif"; x.fillText("easymodekorea.com/ready.html", 84, 970);
+  }
+  $("rd-share").addEventListener("click", () => {
+    const sc = load("emk-rc-score") || { d: 0, n: 0 }, url = location.origin + location.pathname, text = T.share_text.replace("{d}", sc.d).replace("{n}", sc.n);
+    count("ready/share", "ready share");
+    $("rd-card").toBlob(async blob => {
+      const data = { text: text + " " + url };
+      try { const f = new File([blob], "korea-ready.png", { type: "image/png" }); if (navigator.canShare && navigator.canShare({ files: [f] })) data.files = [f]; } catch (e) {}
+      if (navigator.share) { try { await navigator.share(data); } catch (e) {} }
+      else { try { await navigator.clipboard.writeText(text + " " + url); $("rd-note").textContent = "✓ " + $("ready").dataset.copied; } catch (e) { $("rd-note").textContent = text + " " + url; } }
+    });
+  });
+  if (A.p && A.pay) result(false); else ask(true);
+})();
+"""
+
+
+def build_ready(lang):
+    """The Korea Ready check: the hook before the trip. Questions are taps only; the result is built in the page from
+    ready_data, so it works offline once the page is on the phone."""
+    t = A.T[lang]; L = LANGS[lang]; al = TR.ALERT_TX
+    data = json.dumps(ready_data(lang), ensure_ascii=False).replace("</", "<\\/")
+    inner = f"""<div id="ready" data-copied="{e(t['link_copied'])}">
+<section id="rd-q"><div class="pack-bar"><i id="rd-bar"></i></div><p class="rd-step" id="rd-step"></p><h2 id="rd-qh" tabindex="-1"></h2><p class="hint" id="rd-qs" hidden></p>
+<div class="opts-big" id="rd-opts"></div>
+<div class="trip-dates" id="rd-dates" hidden><label>{e(al['from'][lang])}<input id="rd-from" type="date"></label><label>{e(al['to'][lang])}<input id="rd-to" type="date"></label></div>
+<div class="actions rd-nav"><button class="linkbtn" type="button" id="rd-back">← {e(UX[lang]['back'])}</button><button class="linkbtn" type="button" id="rd-skip" hidden>{e(t['rd_skip'])}</button><button class="btn" type="button" id="rd-next" hidden>{e(t['rd_next'])}</button></div><p class="hint" id="rd-about">{e(t['rd_desc'])}</p></section>
+<section id="rd-result" hidden>
+<div class="rd-scorebox"><div class="rd-top"><div><h2 id="rd-score"></h2><div class="pack-bar"><i id="rd-sbar"></i></div></div><canvas id="rd-card" width="1080" height="1080" aria-hidden="true"></canvas></div>
+<p class="hint">{e(t['rd_score_sub'])}</p>
+<div class="actions"><button class="btn alt" type="button" id="rd-share">{A.IC['share']}{e(t['rd_share'])}</button><button class="linkbtn" type="button" id="rd-redo">{e(t['rd_redo'])}</button></div><p class="hint" id="rd-note" role="status"></p></div>
+<section class="sec"><h2>{e(t['rd_apps_h'])}</h2><div class="rd-apps" id="rd-apps"></div></section>
+<section class="sec"><h2>{e(t['rd_plan_h'])}</h2><ul class="checks" id="rd-steps"></ul></section>
+<section class="sec" id="rd-later-sec"><h2>{e(t['rd_later_h'])}</h2><ul class="checks" id="rd-later"></ul></section>
+<section class="sec"><h2>{e(t['rd_help_h'])}</h2><ul class="glist flows" id="rd-flows"></ul></section>
+</section></div><script type="application/json" id="ready-data">{data}</script>"""
+    path = L["dir"] + "ready.html"
+    ld = {"@context": "https://schema.org", "@type": "WebApplication", "name": t["rd_title"], "description": t["rd_desc"], "url": SITE + path, "inLanguage": L["html_lang"],
+          "applicationCategory": "TravelApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+          "publisher": {"@type": "Organization", "name": BRAND, "url": SITE}}
+    return app_page(lang, "ready", (t["rd_title"], t["rd_lede"]), t["rd_seo"], t["rd_desc"], inner, "guides", READY_JS, ld=ld)
 
 
 ARRIVAL_SITE = "https://www.e-arrivalcard.go.kr"  # same official address as the entry guide's sources
@@ -1110,6 +1333,7 @@ def build_trip(lang):
     link = lambda href, key, text: f'<li><a href="{href}"><span class="ic">{A.IC[key]}</span><span>{e(text)}</span></a></li>'
     inner = f"""<div id="trip" data-remove="{e(t['remove'])}" data-offline="{e(t['trip_offline'])}" data-ask="{e(t['trip_clear_q'])}" data-cleared="{e(t['trip_cleared'])}">
 <div id="import" hidden><p id="import-q"></p><div class="actions"><button class="btn" type="button" id="import-yes">{e(t['places_add'])}</button><button class="linkbtn" type="button" id="import-no">{e(t['later'])}</button></div></div>
+{ready_cta(lang)}
 <section class="sec" aria-labelledby="sv-h"><h2 id="sv-h">{e(t['trip_saved_h'])}</h2><ul class="glist" id="saved-list"></ul><p class="hint" id="saved-empty">{e(t['trip_saved_empty'])}</p></section>
 <section class="sec" id="recent" hidden aria-labelledby="rc-h"><h2 id="rc-h">{e(t['trip_recent_h'])}</h2><ul class="glist" id="recent-list"></ul></section>
 {addr_card(lang)}
@@ -1349,6 +1573,7 @@ def llms_files():
               "## Public holidays that affect a visit (table updated each December)"] + [
               f"- {a['title']['en']}: {a['from']} to {a['to']}. {a['points'][0]['t']['en']}" for a in TR.ALERTS] + ["",
               "## Tools on the site (work offline once opened)",
+              f"- [Korea Ready check]({SITE}ready.html): seven tap questions (Korean number, phone, payment, airport, cities, food rule, dates) give a personal plan built from the dated answers on this site: which apps work with that setup, what to do before the flight, and a readiness score. No account; answers stay on the phone.",
               f"- [Korean cards to show staff and drivers]({SITE}phrases.html): full-screen Korean sentences, place names to copy, the visitor's own cards.",
               f"- [Emergency help in Korea]({SITE}help.html): 112, 119, 1330 and Korean sentences to show.",
               f"- [About: how answers are checked]({SITE}about.html) · [Contact]({SITE}contact.html) · [Privacy]({SITE}privacy.html)", "",
@@ -1386,7 +1611,7 @@ def png_size(rel):
 
 
 # Phone screenshots shown in the install dialog (and reused for the store listing).
-SHOTS = [("shots/home.png", "Pick what you need right now"), ("shots/guide.png", "A short answer with the date it was checked"),
+SHOTS = [("shots/home.png", "Pick what you need right now"), ("shots/ready.png", "See what works with your phone before you fly"), ("shots/guide.png", "A short answer with the date it was checked"),
          ("shots/show.png", "Show a driver where to go, in big Korean"), ("shots/cards.png", "Korean cards to show a driver or staff"),
          ("shots/help.png", "Emergency numbers, one tap away")]
 LINKS_FILE = os.path.join(ROOT, "android", "fingerprints.json")
@@ -1401,7 +1626,7 @@ def main():
         paths.append(build_info(lang, "contact"))
         for t in task_list(lang):
             paths.append(build_topic(lang, t))
-        paths += [build_cards(lang), build_help(lang), build_privacy(lang)] + [build_flow(lang, f) for f in TR.FLOWS]
+        paths += [build_cards(lang), build_help(lang), build_privacy(lang), build_ready(lang)] + [build_flow(lang, f) for f in TR.FLOWS]
         local.append(build_trip(lang))  # personal page: offline copy, but not in the sitemap
         write(LANGS[lang]["dir"] + "search.json", search_index(lang)); local.append(LANGS[lang]["dir"] + "search.json")
     paths.append("hosts.html")

@@ -57,6 +57,7 @@
 - Chuseok holiday: 2027-09-14 to 2027-09-16. Public holiday from Tue 14 to Thu 16 Sep 2027. Chuseok itself is Wed 15 Sep. Government offices and banks are closed.
 
 ## Tools on the site (work offline once opened)
+- [Korea Ready check](https://easymodekorea.com/ready.html): seven tap questions (Korean number, phone, payment, airport, cities, food rule, dates) give a personal plan built from the dated answers on this site: which apps work with that setup, what to do before the flight, and a readiness score. No account; answers stay on the phone.
 - [Korean cards to show staff and drivers](https://easymodekorea.com/phrases.html): full-screen Korean sentences, place names to copy, the visitor's own cards.
 - [Emergency help in Korea](https://easymodekorea.com/help.html): 112, 119, 1330 and Korean sentences to show.
 - [About: how answers are checked](https://easymodekorea.com/about.html) · [Contact](https://easymodekorea.com/contact.html) · [Privacy](https://easymodekorea.com/privacy.html)
