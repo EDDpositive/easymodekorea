@@ -368,6 +368,8 @@ const clean=r=>r.redirected?new Response(r.body,{status:r.status,statusText:r.st
 self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>Promise.all(MINE.map(p=>{const u=new URL(p,ROOT);
   return fetch(new Request(u.href,{cache:'reload'})).then(r=>r.ok?c.put(keyOf(u),clean(r)):null).catch(()=>null)}))).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
+/* Only what the reader sees counts as newer info: a new stylesheet or script name in the head does not. */
+const body=t=>t.slice(Math.max(0,t.indexOf('<body')));
 const tell=p=>new Promise(r=>setTimeout(r,1500)).then(()=>self.clients.matchAll({type:'window'})).then(cs=>cs.forEach(cl=>{if(new URL(cl.url).pathname===p)cl.postMessage({t:'upd',p})}));
 self.addEventListener('fetch',e=>{const r=e.request;if(r.method!=='GET')return;
   const u=new URL(r.url);if(u.origin!==location.origin||u.pathname.endsWith('/sw.js'))return;
@@ -378,7 +380,7 @@ self.addEventListener('fetch',e=>{const r=e.request;if(r.method!=='GET')return;
     const old=hit&&nav?hit.clone():null;
     const net=fetch(r).then(async res=>{
       if(res.ok&&res.type==='basic'){const fresh=clean(res.clone());
-        if(old){const a=await old.text(),b=await fresh.clone().text();await c.put(k,fresh);if(a!==b)await tell(u.pathname)}
+        if(old){const a=await old.text(),b=await fresh.clone().text();await c.put(k,fresh);if(body(a)!==body(b))await tell(u.pathname)}
         else await c.put(k,fresh)}
       return res});
     if(hit){e.waitUntil(net.catch(()=>{}));return hit}

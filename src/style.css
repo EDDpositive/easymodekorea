@@ -360,7 +360,7 @@ body.has-tabs { padding-bottom: calc(66px + env(safe-area-inset-bottom, 0px)); }
 .act[aria-pressed="true"] { background: var(--easy); color: #0e1430; }
 .act[aria-pressed="true"] svg { fill: currentColor; }
 @media (max-width: 480px) { .act.share { width: 40px; padding: 0; justify-content: center; } .act.share span { display: none; } }
-.toast { bottom: calc(78px + env(safe-area-inset-bottom, 0px)); display: flex; align-items: center; gap: 12px; box-shadow: 0 10px 28px -12px rgba(14,20,48,.6); }
+.toast { left: 12px; right: 12px; transform: none; width: fit-content; max-width: 520px; margin: 0 auto; bottom: calc(78px + env(safe-area-inset-bottom, 0px)); display: flex; align-items: center; gap: 12px; border-radius: 18px; box-shadow: 0 10px 28px -12px rgba(14,20,48,.6); }
 .toast button { flex: none; border: 0; border-radius: 99px; padding: 6px 12px; background: var(--easy); color: #0e1430; font: 700 13px var(--body); cursor: pointer; }
 .install-bar { position: fixed; left: 8px; right: 8px; bottom: calc(74px + env(safe-area-inset-bottom, 0px)); z-index: 19; max-width: 560px; margin: 0 auto; display: flex; align-items: center; gap: 10px; padding: 10px 10px 10px 14px; border-radius: 18px; background: var(--ink); color: var(--surface); font: 600 14px/1.35 var(--body); box-shadow: 0 14px 36px -14px rgba(14,20,48,.7); }
 .install-bar span { flex: 1; min-width: 0; }
