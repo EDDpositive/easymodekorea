@@ -40,7 +40,7 @@
   function markOffline() {
     if (!window.caches || d.querySelector(".off-ok") || d.getElementById("jump")) return;
     caches.match(location.origin + location.pathname).then(function (r) {
-      var h = d.querySelector(".hero .wrap"); if (!r || !h || d.querySelector(".off-ok")) return;
+      var h = d.querySelector(".hero .hero-title") || d.querySelector(".hero .wrap"); if (!r || !h || d.querySelector(".off-ok")) return;
       h.appendChild(mk("p", "off-ok", "\u2713 " + T.off_ok));
     }).catch(function () {});
   }
@@ -105,6 +105,8 @@
     d.querySelectorAll(".ready-cta").forEach(function (a) {
       var sub = a.querySelector(".ready-sub"); a.classList.add("done");
       if (sub) sub.textContent = String(a.getAttribute("data-continue")).replace("{d}", sc.d).replace("{n}", sc.n);
+      var nx = a.querySelector(".ready-next");
+      if (nx && sc.next && sc.lang === a.getAttribute("data-lang")) { nx.textContent = String(a.getAttribute("data-next")).replace("{t}", sc.next); nx.hidden = false; }
     });
   })();
 

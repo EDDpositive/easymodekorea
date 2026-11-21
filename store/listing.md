@@ -1,7 +1,7 @@
 # Google Play listing kit
 
 Everything to paste into Play Console. Text limits: name 30, short description 80, full description 4,000 characters.
-Graphics are in this repo: icon `icon-512.png`, feature graphic `store/feature-graphic.png` (1024x500), phone screenshots `shots/*.png` (1080x1920, six files; upload in this order: home, ready, guide, show, cards, help). Rebuild them with `python tools/make_store_assets.py`.
+Graphics are in this repo: icon `icon-512.png`, feature graphic `store/feature-graphic.png` (1024x500), phone screenshots `store/screenshots/1-home.png` to `6-help.png` (1080x1920, a one-line caption above each screen in a phone frame; upload in that order). The plain screens in `shots/` are for the web install prompt. Rebuild them with `python tools/make_store_assets.py`.
 
 | Field | Value |
 |---|---|

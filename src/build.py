@@ -65,23 +65,40 @@ def lang_links(cur, rel_paths, prefix):
         out.append(f'<a href="{prefix}{rel_paths[k]}" hreflang="{L["html_lang"]}" lang="{L["html_lang"]}" data-l="{k}"{cur_attr}>{e(L["name"])}</a>')
     label = e(LANGS[cur]["ui"]["langs"])
     return (f'<details class="lang-menu"><summary aria-label="{label}">{A.IC["globe"]}<span>{e(LANGS[cur]["name"])}</span></summary>'
-            f'<nav class="langs" aria-label="{label}">' + "".join(out) + "</nav></details>")
+            f'<nav class="langs" aria-label="{label}">' + "".join(out) + "</nav></details>").replace(f'<span>{e(LANGS[cur]["name"])}</span>', f'<span class="lc">{LANG_CODE[cur]}</span>', 1)
+
+
+LANG_CODE = {"en": "EN", "ja": "JA", "zh-tw": "繁中", "zh-cn": "简中", "vi": "VI"}  # short label in the app bar; the menu lists full names
 
 
 HOME_LBL = {"en": "All guides", "ja": "ガイド一覧", "zh-tw": "所有指南", "zh-cn": "所有指南", "vi": "Tất cả hướng dẫn"}
 
 
-def hero(lang, alt, up, h1, lede, home="./", trust=True, back=False, search=True):
-    """Top of every page: logo, search, language menu. Guides (back=True) also get save and share."""
-    t = A.T[lang]
-    back_a = (f'<div class="guide-bar"><a class="home-link" href="{home}">← {e(HOME_LBL.get(lang, HOME_LBL["en"]))}</a><span class="guide-acts">'
-              f'<button class="act" type="button" id="save-btn" aria-pressed="false">{A.IC["save"]}<span>{e(t["save"])}</span></button>'
-              f'<button class="act share" type="button" id="share-btn" aria-label="{e(t["share"])}">{A.IC["share"]}<span>{e(t["share"])}</span></button></span></div>') if back else ''
-    find = f'<a class="icon-btn" href="{home}#q" aria-label="{e(t["search"])}">{A.IC["search"]}</a>' if search else ''
-    return f"""<header class="hero"><div class="wrap">
-  <div class="toprow"><a class="logo" href="{home}">EasyMode<b>Korea</b></a><div class="top-actions">{find}{lang_links(lang, alt, up)}</div></div>{back_a}
-  {f'<h1>{e(h1)}</h1>' if h1 else ''}{f'<p class="lede">{e(lede)}</p>' if lede else ''}
-</div></header>"""
+def hero(lang, alt, up, h1, lede, home="./", trust=True, back=False, search=True, extra="", back_to=None, cls=""):
+    """Top of every page, like an app bar: logo (with a back mark on inner pages), then actions; the title sits under it.
+    Guides (back=True) get save and share; back_to adds a back button to another screen (for example Help)."""
+    t = A.T[lang]; lbl = HOME_LBL.get(lang, HOME_LBL["en"])
+    logo = f'<a class="logo" href="{home}">EasyMode<b>Korea</b></a>'
+    if back:
+        lead = f'<a class="backlogo" href="{home}" aria-label="{e(lbl)}">{A.IC["back"]}<span class="logo" aria-hidden="true">EasyMode<b>Korea</b></span></a>'
+    elif back_to:
+        lead = f'<a class="icon-btn back-btn" href="{back_to}" aria-label="{e(UX[lang]["back"])}">{A.IC["back"]}</a>{logo}'
+    else:
+        lead = logo
+    acts = (f'<button class="act" type="button" id="save-btn" aria-pressed="false">{A.IC["save"]}<span>{e(t["save"])}</span></button>'
+            f'<button class="act share" type="button" id="share-btn" aria-label="{e(t["share"])}">{A.IC["share"]}<span>{e(t["share"])}</span></button>') if back else ''
+    find = f'<a class="icon-btn" href="{home}#q" aria-label="{e(t["search"])}">{A.IC["search"]}</a>' if search and not back else ''
+    return f"""<header class="hero{' ' + cls if cls else ''}"><div class="wrap appbar">{lead}<div class="top-actions">{find}{acts}{lang_links(lang, alt, up)}</div></div>
+  <div class="wrap hero-title">{f'<h1>{e(h1)}</h1>' if h1 else ''}{f'<p class="lede">{e(lede)}</p>' if lede else ''}{extra}</div>{SKYLINE if cls == 'hero-home' else ''}
+</header>"""
+
+
+# A quiet Seoul skyline (hills, N Seoul Tower, towers) at the foot of the home header. Drawn here, no image file.
+SKYLINE = ('<svg class="skyline" viewBox="0 0 320 96" preserveAspectRatio="xMaxYMax meet" aria-hidden="true" focusable="false">'
+           '<path d="M0 96C38 70 70 62 104 76c26-30 58-44 92-18 26-12 56-16 88-2 14 6 26 14 36 22v18z" opacity=".55"/>'
+           '<path d="M181 61V22h4v39zM176 36h14l-2.5 6h-9zM182.2 8h1.6v14h-1.6z"/>'
+           '<path d="M20 96V70h12v26zm16 0V60h10v36zm14 0V74h14v22zm150 0V66h10v30zm14 0V56h12v40zm16 0V70h9v26zm13 0V62h12v34zm16 0V74h10v22zm14 0V66h12v30z"/>'
+           '</svg>')
 
 
 def ask_box(lang):
@@ -89,18 +106,6 @@ def ask_box(lang):
     return f"""<section class="ask" aria-labelledby="ask-t-{lang}"><h2 id="ask-t-{lang}">{e(a['title'])}</h2>
 <form class="ask-form" data-thanks="{e(a['thanks'])}"><textarea name="q" required maxlength="1000" aria-label="{e(a['title'])}" placeholder="{e(a['ph'])}"></textarea>
 <input name="em" type="email" maxlength="120" autocomplete="email" aria-label="{e(a['email'])}" placeholder="{e(a['email'])}"><button class="btn" type="submit">{e(a['send'])}</button><p class="fb-done" role="status"></p></form></section>"""
-
-
-def about(lang, up):
-    return ask_box(lang) + _about(lang, up)
-
-
-def _about(lang, up):
-    U = LANGS[lang]["ui"]; x = X[lang]
-    return f"""<p class="fb-line"><button type="button" class="linkbtn" data-feedback="">💬 {e(FEEDBACK[lang]['open'])}</button></p><details class="about"><summary>{e(x['about'])}</summary><div class="in">
-<p><b>EasyModeKorea</b> (Easy Mode Korea · 이지모드코리아)</p>
-<p>{e(U['how'])}</p><p>{e(U['indep'])}</p><p><a href="changes.html">{e(x['nav_changes'])}</a> · {U['hosts'].format(base=up)}</p>
-<p>{' · '.join(f'<a href="{t["slug"]}.html">{e(QUESTION[lang][t["id"]])}</a>' for t in task_list(lang))}</p></div></details>"""
 
 
 def task_list(lang):
@@ -217,78 +222,61 @@ def call_rows(lang):
                    for n, d in HELP[lang]["nums"])
 
 
-def help_html(lang):
-    h = HELP[lang]
-    nums = call_rows(lang)
-    ph = "".join(f'<button type="button" class="btn alt" data-ko="{e(ko)}" data-mean="{e(m[lang])}">🗣 {e(m[lang])}</button>' for ko, m in HELP_PHRASES)
-    return f"""<div class="sheet" id="help" hidden role="dialog" aria-modal="true" aria-labelledby="help-t"><div class="sheet-in">
-  <div class="sheet-top"><h2 id="help-t">{e(h['title'])}</h2><button type="button" class="btn ghost small" id="help-close">{e(SHORT[lang]['close'])}</button></div>
-  <p class="sub-h">{e(h['calls'])}</p><div class="calls">{nums}</div>
-  <p class="sub-h">{e(h['phrases'])}</p><div class="actions">{ph}</div>
-</div></div>"""
-
-
 def build_tool(lang):
+    """Home: the header holds search; then the reader's own trip (Ready progress, driver card, holiday alert), eight
+    colour tiles, and one list of guides grouped by situation, each with its status for the reader's phone setup.
+    A row opens the guide (list, then detail, like an app). Duplicates across situations show only when filtered."""
     L = LANGS[lang]; U = L["ui"]; x = X[lang]; S = SHORT[lang]; ux = UX[lang]; d = L["dir"]; up = "../" if d else ""
     path = d
     alt = {k: LANGS[k]["dir"] for k in LANGS}
-    topics = "".join(f'<a href="{t["slug"]}.html">{e(t["short"])}</a>' for t in task_list(lang))
     keys = ("staff", "means", "stay_title", "taxi_card", "taxi_ko", "taxi_means", "deliv_card", "deliv_ko", "deliv_means", "station", "checkin", "contact", "note", "map")
-    tasks = task_list(lang)
-    for t in tasks:
-        t["kw"] = (KEYWORDS[t["id"]] + " " + t["short"] + " " + t["title"]).lower()
-        for k in ("title", "seo", "intro"): t.pop(k, None)  # not used by the page script
-    data = {"ui": U, "x": {k: x[k] for k in keys}, "s": S, "ux": ux, "tasks": tasks, "plan": PLAN[lang], "fbfail": FEEDBACK[lang]["fail"], "checked": CHECKED[lang], "lang": lang,
-            "found": [A.T[lang]["deep_faq"], A.T[lang]["deep_cards"]],
+    tasks = task_list(lang); by = {t["id"]: t for t in tasks}
+    LU = layout.UI.get(lang, layout.UI["en"])
+    kw = {t["id"]: (KEYWORDS[t["id"]] + " " + t["short"] + " " + t["title"]).lower() for t in tasks}
+    st = {t["id"]: {f"{p}|{dv}": resolve(t, p, dv)["s"] for p in ("visitor", "krsim", "arc") for dv in ("ios", "android")} for t in tasks}
+    data = {"ui": {"ios": U["ios"], "android": U["android"]}, "x": {k: x[k] for k in keys}, "s": S, "ux": {k: ux[k] for k in ("tone", "copy_addr", "copied", "switch", "dismiss", "suggest")},
+            "st": st, "slug": {t["id"]: t["slug"] for t in tasks}, "lang": lang, "found": [A.T[lang]["deep_faq"], A.T[lang]["deep_cards"]],
             "langs": {k: {"name": LANGS[k]["name"], "dir": LANGS[k]["dir"]} for k in LANGS}, "up": up}
     q1 = "".join(f'<button type="button" class="opt-big" data-p="{p}"><b>{e(ux["q1_opts"][p][0])}</b><span>{e(ux["q1_opts"][p][1])}</span></button>' for p in ("visitor", "krsim", "arc"))
     q2 = "".join(f'<button type="button" class="opt-big" data-d="{v}"><b>{e(U[v])}</b></button>' for v in ("ios", "android"))
-    LU = layout.UI.get(lang, layout.UI["en"])
-    short_of = {t["id"]: t["short"] for t in tasks}
-    slug_of = {t["id"]: t["slug"] for t in tasks}
-    cards = []
+    seen, secs = set(), []
     for cid, ic, ids, txt in CARDS:
         title, line = tx(txt, lang)
-        links = "".join(f'<a href="{slug_of[i]}.html" data-t="{i}">{e(short_of[i])}</a>' for i in ids)
-        ckw = (title + " " + line).lower()
-        cards.append(f'<article class="sit-card" id="s-{cid}" data-kw="{e(ckw)}"><h3>{icon(ic)}<span>{e(title)}</span></h3><p class="sit-links">{links}</p></article>')
-    # Jump grid: all eight situations fit the first screen of a phone; a tap scrolls to that card.
-    jump = "".join(f'<a href="#s-{cid}" data-go="s-{cid}"><span class="ic">{icon(ic)}</span><span>{e(A.JUMP[cid][lang])}</span></a>' for cid, ic, _ids, _txt in CARDS)
+        rows = []
+        for i in ids:
+            dup = i in seen; seen.add(i)
+            rows.append(f'<li{" class=dup" if dup else ""} data-t="{i}" data-kw="{e(kw[i])}"><a href="{by[i]["slug"]}.html"><span class="ic">{icon(i)}</span>'
+                        f'<span class="name">{e(by[i]["short"])}</span><span class="pill" hidden></span></a></li>')
+        secs.append(f'<section class="gcat cat-{cid}" id="s-{cid}" data-cat="{cid}" aria-labelledby="h-{cid}"><h3 id="h-{cid}"><span class="ic">{icon(ic)}</span>{e(title)}</h3><ul class="glist grows">{"".join(rows)}</ul></section>')
+    tiles = "".join(f'<a href="#s-{cid}" data-go="{cid}" class="cat-{cid}"><span class="ic">{icon(ic)}</span><span>{e(A.JUMP[cid][lang])}</span></a>' for cid, ic, _ids, _txt in CARDS)
+    trust = A.T[lang]['trust'].format(n=len(tasks), date=fmt_date(max(r[2] for rows in AT.values() for r in rows), lang), c=len(x['changes']))
+    search = (f'<label class="search"><span class="sr">{e(ux["search"])}</span>{A.IC["search"]}<input id="q" type="search" placeholder="{e(ux["search"])}" autocomplete="off"></label>'
+              f'<p class="trust-line">✓ {e(trust)} · <a href="changes.html">{e(x["nav_changes"])}</a></p>')
     body = f"""
-{hero(lang, alt, up, x['hook'], '', search=False)}
+{hero(lang, alt, up, x['hook'], '', search=False, extra=search, cls='hero-home')}
 <div class="wrap pre">
   <div class="banner" id="lang-suggest" hidden></div>
   <section class="stay" id="stay" hidden aria-live="polite"></section>
 </div>
-<div class="wrap">
-  <div class="quick" id="quick" hidden></div>
-  {ready_cta(lang)}
-  <label class="search"><span class="sr">{e(ux['search'])}</span><input id="q" type="search" placeholder="{e(ux['search'])}" autocomplete="off"></label>
+<div class="wrap home">
   <p class="hint" id="nores" hidden>{e(ux['nores'])} <button type="button" class="linkbtn" id="clear">{e(ux['clear'])}</button></p>
-  <p class="trust-line">✓ {e(A.T[lang]['trust'].format(n=len(tasks), date=fmt_date(max(r[2] for rows in AT.values() for r in rows), lang), c=len(x['changes'])))} <a href="changes.html">{e(x['nav_changes'])}</a></p>
-  {alerts_block(lang)}
-  <nav class="jump" id="jump" aria-label="{e(A.T[lang]['jump_label'])}">{jump}</nav>
-  <section class="sit" aria-labelledby="sit-h"><h2 id="sit-h">{e(LU['cards_h'])}</h2><div class="sit-grid">{''.join(cards)}</div></section>
   <div class="found" id="found" aria-live="polite"></div>
-  <section class="tool" aria-labelledby="tool-h"><h2 id="tool-h" class="tool-h">{e(LU['tool_h'])}</h2>
-  <div class="onb" id="onb" aria-live="polite">
-    <div id="onb1"><h3>{e(ux['q1'])}</h3><div class="opts-big">{q1}</div></div>
-    <div id="onb2" hidden><h3>{e(ux['q2'])}</h3><div class="opts-big two">{q2}</div><button type="button" class="linkbtn" id="onb-back">← {e(ux['back'])}</button></div>
-  </div></section>
+  <div class="today" id="today">
+    {ready_cta(lang)}
+    <div class="quick" id="quick" hidden></div>
+    {alerts_block(lang)}
+  </div>
+  <nav class="jump" id="jump" aria-label="{e(A.T[lang]['jump_label'])}">{tiles}</nav>
+  <section class="tool" aria-labelledby="tool-h">
+    <div class="tool-top"><h2 id="tool-h" class="tool-h">{e(LU['tool_h'])}</h2><button type="button" class="linkbtn" id="cat-all" hidden>{e(HOME_LBL.get(lang, HOME_LBL['en']))}</button></div>
+    <div class="setbar" id="mybar"><span id="mysetup"></span><button type="button" class="btn ghost small" id="change">{e(ux['change'])}</button></div>
+    <div class="onb" id="onb" hidden aria-live="polite">
+      <div id="onb1"><h3>{e(ux['q1'])}</h3><div class="opts-big">{q1}</div></div>
+      <div id="onb2" hidden><h3>{e(ux['q2'])}</h3><div class="opts-big two">{q2}</div><button type="button" class="linkbtn" id="onb-back">← {e(ux['back'])}</button></div>
+    </div>
+    <div id="main">{''.join(secs)}</div>
+  </section>
 </div>
-<div class="mybar" id="mybar" hidden><div class="wrap"><span id="mysetup"></span><span class="bar-btns"><button type="button" class="btn ghost small" id="help-btn">{e(HELP[lang]['btn'])}</button><button type="button" class="btn ghost small" id="change">{e(ux['change'])}</button></span></div></div>
-<div class="wrap" id="main" hidden>
-  <main class="rows" id="rows"></main>
-  <details class="panel" id="cl"><summary><span id="ptitle"></span> <span class="count" id="pcount"></span></summary><div class="in">
-    <div class="progress"><div class="bar"><i id="pbar"></i></div></div>
-    <ul class="checks" id="checklist"></ul>
-    <div class="actions"><button class="btn" type="button" id="copy-btn">{e(U['copy'])}</button><span class="copied" id="copied" role="status"></span></div>
-  </div></details>
-</div>
-<div class="wrap">
-  {about(lang, up)}
-</div>
-{help_html(lang)}
 {SHOW_HTML(lang)}
 <script>
 const D = {json.dumps(data, ensure_ascii=False)};
@@ -297,7 +285,6 @@ const D = {json.dumps(data, ensure_ascii=False)};
 {ALERTS_JS}
 </script>
 {footer(lang)}
-{feedback_html(lang)}
 </body>
 </html>
 """
@@ -309,114 +296,52 @@ const D = {json.dumps(data, ensure_ascii=False)};
 
 
 TOOL_JS = r"""
-const U = D.ui, XS = D.x, S = D.s, UX = D.ux, FB_FAIL = D.fbfail;
-const KW = Object.fromEntries(D.tasks.map(t => [t.id, t.kw]));
-let P = null, DEV = null;
-function resolve(t, p, dev) { if (t.all) return t.all; let v = t.v[p]; if (typeof v === "string") v = t.v[v]; if (t.dev && v[dev]) v = v[dev]; return v; }
-function setStep(n) { document.getElementById("onb1").hidden = n !== 1; document.getElementById("onb2").hidden = n !== 2; }
-function openOnb(focus) { document.getElementById("onb").hidden = false; document.getElementById("main").hidden = true; document.getElementById("mybar").hidden = true; setStep(1); if (focus) { document.getElementById("tool-h").scrollIntoView(); document.querySelector("#onb1 .opt-big").focus({ preventScroll: true }); } }
-function finish() {
-  store("wik-setup", P + "|" + DEV); document.body.classList.add("ret");
-  document.getElementById("onb").hidden = true; document.getElementById("main").hidden = false; document.getElementById("mybar").hidden = false;
-  document.getElementById("mysetup").textContent = S.prof[P] + " · " + U[DEV];
-  render(); count("setup/" + D.lang + "/" + P + "/" + DEV, "setup");
-  if (fromOnb) document.getElementById("tool-h").scrollIntoView();
-}
-let fromOnb = false;
-/* The phone type is usually readable from the browser, so most people answer one question. */
+const U = D.ui, XS = D.x, S = D.s, UX = D.ux;
+/* Old links to an answer on the home screen (#task-id) open that guide. */
+(function () { const m = location.hash.match(/^#task-([\w-]+)$/); if (m && D.slug[m[1]]) location.replace(D.slug[m[1]] + ".html"); })();
 const UAD = /iPhone|iPad|iPod/.test(navigator.userAgent) ? "ios" : /Android/.test(navigator.userAgent) ? "android" : null;
-document.querySelectorAll("[data-p]").forEach(b => b.addEventListener("click", () => { P = b.dataset.p; if (P === "arc") { DEV = "ios"; fromOnb = true; finish(); } else if (UAD) { DEV = UAD; fromOnb = true; finish(); } else { setStep(2); document.querySelector("#onb2 .opt-big").focus(); } }));
-document.querySelectorAll("[data-d]").forEach(b => b.addEventListener("click", () => { DEV = b.dataset.d; fromOnb = true; finish(); }));
-document.querySelectorAll("#onb [data-p]").forEach(b => b.addEventListener("click", () => { fromOnb = true; }));
-/* One answer open at a time keeps the list short on a phone. */
-document.getElementById("rows").addEventListener("toggle", ev => {
-  const r = ev.target; if (!r.classList || !r.classList.contains("row") || !r.open) return;
-  document.querySelectorAll(".row[open]").forEach(o => { if (o !== r) o.open = false; });
-  count("open/" + r.id, "open answer");
-}, true);
-const helpEl = document.getElementById("help");
-document.getElementById("help-btn").addEventListener("click", () => { helpEl.hidden = false; document.getElementById("help-close").focus(); count("help", "help"); });
-document.getElementById("help-close").addEventListener("click", () => { helpEl.hidden = true; document.getElementById("help-btn").focus(); });
-helpEl.addEventListener("click", ev => { if (ev.target === helpEl) helpEl.hidden = true; });
-helpEl.querySelectorAll("[data-ko]").forEach(b => b.addEventListener("click", () => show(S.show, b.dataset.ko, "", XS.means + ": " + b.dataset.mean)));
-document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !helpEl.hidden && document.getElementById("show").hidden) helpEl.hidden = true; });
-document.getElementById("onb-back").addEventListener("click", () => setStep(1));
-document.getElementById("change").addEventListener("click", () => openOnb(true));
-function render() {
-  const open = new Set([...document.querySelectorAll(".row[open]")].map(r => r.id));
-  const rows = document.getElementById("rows"); rows.replaceChildren();
-  const n = { ok: 0, warn: 0, mixed: 0, bad: 0 };
-  let moreShown = false;
-  for (const t of D.tasks) {
-    if (t.more && !moreShown) { rows.append(el("h2", { class: "more-h", text: UX.more })); moreShown = true; }
-    const v = resolve(t, P, DEV); n[v.s]++;
-    const row = el("details", { class: "row " + v.s + (t.more ? " more" : ""), id: "task-" + t.id, "data-kw": t.kw });
-    if (open.has(row.id)) row.open = true;
-    const sum = el("summary");
-    const txt = el("span", { class: "txt" }, [el("span", { class: "name", text: t.short }), el("span", { class: "pill " + v.s, text: UX.tone[v.s] })]);
-    sum.append(el("span", { class: "ic", html: t.icon }), txt);
-    row.append(sum);
-    const body = el("div", { class: "body" });
-    body.append(el("p", { class: "verdict", text: v.verdict }));
-    body.append(el("ol", { class: "steps" }, v.route.map(r => el("li", { text: r }))));
-    const fb = el("p", { class: "fallback" }); fb.append(el("b", { text: U.fails.replace(/[:：]\s*$/, "") }), v.fallback); body.append(fb);
-    const act = el("div", { class: "actions" });
-    for (const [ko, m] of t.phrases) { const b = el("button", { type: "button", class: "btn alt", text: "🗣 " + m }); b.addEventListener("click", () => show(S.show, ko, "", XS.means + ": " + m)); act.append(b); }
-    if (act.children.length) body.append(act);
-    const det = el("details"); det.append(el("summary", { text: S.details })); const ul = el("ul");
-    for (const x of (t.notes || [])) ul.append(el("li", { text: x }));
-    for (const [nm, url] of t.sources) { const li = el("li"); li.append(el("a", { href: url, rel: "noopener", target: "_blank", text: nm })); ul.append(li); }
-    det.append(ul);
-    const gl = el("p"); gl.append(el("a", { href: t.slug + ".html", text: S.guide + " →" })); det.append(gl);
-    const key = "wik-report-" + t.id + "-" + P, rep = el("div", { class: "report" }), thx = el("span", { role: "status" });
-    for (const [val, txt2] of [["yes", U.worked], ["no", U.failed]]) {
-      const b = el("button", { type: "button", "aria-pressed": String(store(key) === val), text: txt2 });
-      b.addEventListener("click", () => {
-        if (store(key) !== val) count(`report/${D.lang}/${t.id}/${P}/${DEV}/${val}`, `${t.id} ${P} ${val}`);
-        store(key, val); rep.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", String(x === b))); thx.textContent = U.thanks;
-        if (val === "no" && window.openFeedback) { const fl = el("button", { type: "button", class: "linkbtn", text: FB_FAIL }); fl.addEventListener("click", () => openFeedback(t.id + " " + P + " " + DEV)); thx.replaceChildren(U.thanks + " ", fl); }
-      });
-      rep.append(b);
-    }
-    rep.append(thx);
-    ul.prepend(el("li", { text: U.checked + " " + D.checked })); det.append(rep);
-    body.append(det);
-    row.append(body); rows.append(row);
-  }
-  checklist(); filter();
-}
-function checklist() {
-  const pl = D.plan, items = pl.items.filter(it => (!it.p || it.p.includes(P)) && (!it.d || P === "arc" || it.d.includes(DEV)));
-  document.getElementById("ptitle").textContent = P === "arc" ? pl.title_arc : pl.title;
-  const key = "wik-plan-" + D.lang + "-" + P + "-" + DEV;
-  let done = []; try { done = JSON.parse(store(key) || "[]"); } catch (e) {}
-  const ul = document.getElementById("checklist"); ul.replaceChildren(); let last = "";
-  items.forEach((it, i) => {
-    if (it.st !== last) { ul.append(el("li", { class: "stage", text: pl.stages[it.st] })); last = it.st; }
-    const id = "ck-" + i, cb = el("input", { type: "checkbox", id });
-    cb.checked = done.includes(i);
-    cb.addEventListener("change", () => { done = cb.checked ? [...new Set([...done, i])] : done.filter(j => j !== i); store(key, JSON.stringify(done)); progress(done.length, items.length); });
-    ul.append(el("li", {}, [cb, el("label", { for: id, text: it.t })]));
+/* Until the reader chooses, the list answers for most visitors (no Korean number) on the phone the browser reports. */
+let P = "visitor", DEV = UAD || "ios", CAT = null;
+const saved = (store("wik-setup") || "").split("|");
+if (saved[0] && S.prof[saved[0]] && (saved[1] === "ios" || saved[1] === "android")) { P = saved[0]; DEV = saved[1]; }
+const $ = id => document.getElementById(id), main = $("main"), onb = $("onb");
+function setStep(n) { $("onb1").hidden = n !== 1; $("onb2").hidden = n !== 2; }
+function paint() {
+  $("mysetup").textContent = S.prof[P] + (P === "arc" ? "" : " · " + U[DEV]);
+  document.querySelectorAll(".grows li[data-t]").forEach(li => {
+    const s = (D.st[li.dataset.t] || {})[P + "|" + DEV] || "ok", pill = li.querySelector(".pill");
+    pill.className = "pill " + s; pill.textContent = UX.tone[s]; pill.hidden = false; li.dataset.s = s;
   });
-  progress(done.length, items.length);
 }
-function progress(d, n) { document.getElementById("pcount").textContent = d + "/" + n; document.getElementById("pbar").style.width = Math.round(100 * d / n) + "%";  }
+function choose() { store("wik-setup", P + "|" + DEV); onb.hidden = true; main.hidden = false; $("mybar").hidden = false; paint(); count("setup/" + D.lang + "/" + P + "/" + DEV, "setup"); $("tool-h").scrollIntoView({ block: "start" }); }
+document.querySelectorAll("#onb [data-p]").forEach(b => b.addEventListener("click", () => { P = b.dataset.p; if (P === "arc") { DEV = "ios"; choose(); } else if (UAD) { DEV = UAD; choose(); } else { setStep(2); document.querySelector("#onb2 .opt-big").focus(); } }));
+document.querySelectorAll("#onb [data-d]").forEach(b => b.addEventListener("click", () => { DEV = b.dataset.d; choose(); }));
+$("onb-back").addEventListener("click", () => setStep(1));
+$("change").addEventListener("click", () => { onb.hidden = false; main.hidden = true; $("mybar").hidden = true; setStep(1); document.querySelector("#onb1 .opt-big").focus(); });
+/* Colour tiles filter the list to one situation; the same tile (or "All guides") shows everything again. */
+function setCat(c) {
+  CAT = c; main.classList.toggle("by-cat", !!c); $("cat-all").hidden = !c;
+  document.querySelectorAll("#jump [data-go]").forEach(a => a.setAttribute("aria-pressed", String(a.dataset.go === c)));
+  filter();
+}
+document.querySelectorAll("#jump [data-go]").forEach(a => a.addEventListener("click", ev => {
+  ev.preventDefault(); const c = a.dataset.go; setCat(CAT === c ? null : c);
+  if (CAT) { $("tool-h").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" }); count("jump/" + c, "jump"); }
+}));
+$("cat-all").addEventListener("click", () => setCat(null));
 function filter() {
-  const q = document.getElementById("q").value.trim().toLowerCase(); let shown = 0;
-  let moreHits = 0;
-  document.querySelectorAll(".row").forEach(r => { const ok = !q || r.dataset.kw.includes(q); r.hidden = !ok; if (ok) { shown++; if (r.classList.contains("more")) moreHits++; } });
-  const mh = document.querySelector(".more-h"); if (mh) mh.hidden = !!q && !moreHits;
-  let cardHits = 0;
-  document.querySelectorAll(".sit-card").forEach(c => {
-    const links = [...c.querySelectorAll("a[data-t]")];
-    let any = false;
-    links.forEach(a => { const ok = !q || KW[a.dataset.t].includes(q); a.hidden = !ok; if (ok) any = true; });
-    if (!any && c.dataset.kw.includes(q)) { any = true; links.forEach(a => { a.hidden = false; }); }
-    c.hidden = !any; if (any) cardHits++;
+  const q = $("q").value.trim().toLowerCase(); let shown = 0;
+  document.querySelectorAll(".gcat").forEach(sec => {
+    const inCat = !CAT || sec.dataset.cat === CAT; let any = 0;
+    sec.querySelectorAll("li[data-t]").forEach(li => {
+      const dup = li.classList.contains("dup") && !CAT, ok = inCat && !dup && (!q || li.dataset.kw.includes(q));
+      li.hidden = !ok; if (ok) any++;
+    });
+    sec.hidden = !any; shown += any;
   });
-  document.getElementById("jump").hidden = !!q;
-  /* Deeper matches from the search index: questions answered inside guides, and Korean cards. */
-  const found = document.getElementById("found"); found.replaceChildren(); let deep = 0;
+  $("today").hidden = !!q; $("jump").hidden = !!q;
+  /* Deeper matches from the search index: questions answered inside guides, Korean cards, trouble screens. */
+  const found = $("found"); found.replaceChildren(); let deep = 0;
   if (q.length >= 2 && IDX) {
     const fq = IDX.faq.filter(x => x[2].toLowerCase().includes(q)).slice(0, 6), cd = IDX.cards.filter(x => (x[0] + " " + x[1]).toLowerCase().includes(q)).slice(0, 6);
     const fl = (IDX.flows || []).filter(x => (x[1] + " " + x[2]).toLowerCase().includes(q));
@@ -425,26 +350,20 @@ function filter() {
     if (cd.length) { found.append(el("h2", { text: D.found[1] }), el("ul", { class: "glist" }, cd.map(x => { const b = el("button", { type: "button", class: "card-hit" }, [el("b", { lang: "ko", text: x[0] }), el("span", { text: x[1] })]); b.addEventListener("click", () => show(S.show, x[0], "", XS.means + ": " + x[1])); return el("li", {}, b); }))); }
     deep = fq.length + cd.length + fl.length;
   }
-  document.getElementById("nores").hidden = !q || shown + cardHits + deep > 0;
-  if (q && shown === 1) { const r = [...document.querySelectorAll(".row")].find(x => !x.hidden); r.open = true; }
+  $("nores").hidden = !q || shown + deep > 0;
 }
 /* The search index (questions and Korean cards) loads the first time the box is used. */
 let IDX = null;
 function loadIdx() { if (IDX !== null) return; IDX = false; fetch("search.json").then(r => r.json()).then(j => { IDX = j; filter(); }).catch(() => { IDX = null; }); }
-document.getElementById("q").addEventListener("focus", loadIdx);
-document.getElementById("q").addEventListener("input", filter);
-document.getElementById("clear").addEventListener("click", () => { const q = document.getElementById("q"); q.value = ""; filter(); q.focus(); });
-document.getElementById("copy-btn").addEventListener("click", async () => {
-  const txt = document.getElementById("ptitle").textContent + "\n" + [...document.querySelectorAll("#checklist li")].map(l => l.classList.contains("stage") ? "\n" + l.textContent : "- " + l.textContent).join("\n") + "\n" + location.origin + location.pathname;
-  try { await navigator.clipboard.writeText(txt); document.getElementById("copied").textContent = "✓"; } catch (e) {}
-  count("copy-checklist/" + D.lang, "copy checklist");
-});
+$("q").addEventListener("focus", loadIdx);
+$("q").addEventListener("input", filter);
+$("clear").addEventListener("click", () => { const q = $("q"); q.value = ""; filter(); q.focus(); });
 function stay() {
   let g = null;
   try { const m = location.hash.match(/[#&]g=([A-Za-z0-9_-]+)/); if (m) { const b = atob(m[1].replace(/-/g, "+").replace(/_/g, "/")); g = JSON.parse(new TextDecoder().decode(Uint8Array.from(b, c => c.charCodeAt(0)))); } } catch (e) { g = null; }
   if (!g || typeof g !== "object") return;
   const s = (k, n) => String(g[k] || "").slice(0, n);
-  const box = document.getElementById("stay");
+  const box = $("stay");
   box.append(el("h2", { text: XS.stay_title + (s("n", 60) ? ": " + s("n", 60) : "") }));
   const a = s("a", 160);
   if (a) {
@@ -470,7 +389,7 @@ function stay() {
   const want = (navigator.language || "").toLowerCase();
   const target = want.startsWith("ja") ? "ja" : (want.startsWith("zh-tw") || want.startsWith("zh-hk") || want.startsWith("zh-mo") || want.startsWith("zh-hant")) ? "zh-tw" : want.startsWith("zh") ? "zh-cn" : want.startsWith("vi") ? "vi" : want.startsWith("en") ? "en" : null;
   if (!target || target === D.lang) return;
-  const b = document.getElementById("lang-suggest"), L2 = D.langs[target];
+  const b = $("lang-suggest"), L2 = D.langs[target];
   const go = el("a", { class: "btn alt", href: D.up + L2.dir + location.hash, text: UX.switch }); go.addEventListener("click", () => store("emk-lang", target));
   const no = el("button", { type: "button", class: "linkbtn", text: UX.dismiss }); no.addEventListener("click", () => { store("wik-lang-dismiss", "1"); b.hidden = true; });
   b.append(el("span", { text: UX.suggest.replace("{l}", L2.name) }), go, no); b.hidden = false;
@@ -480,20 +399,11 @@ function stay() {
   const a = (store("emk-addr") || "").slice(0, 160); if (!a) return;
   const b = el("button", { type: "button", class: "quick-driver" }, [el("span", { text: "🚕 " + S.show_driver }), el("b", { lang: "ko", text: a })]);
   b.addEventListener("click", () => show(XS.taxi_card, XS.taxi_ko, a, XS.means + ": " + XS.taxi_means));
-  const q = document.getElementById("quick"); q.append(b); q.hidden = false;
+  const q = $("quick"); q.append(b); q.hidden = false;
 })();
-/* Jump grid: scroll to the card without adding a step to the Back button. */
-document.querySelectorAll("#jump [data-go]").forEach(a => a.addEventListener("click", ev => {
-  const t = document.getElementById(a.dataset.go); if (!t) return; ev.preventDefault();
-  t.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
-  t.classList.add("lit"); setTimeout(() => t.classList.remove("lit"), 1400); count("jump/" + a.dataset.go, "jump");
-}));
 /* Install prompt, offline copy and notices live in app.js, shared by every page. */
-if (location.hash === "#q") { const qi = document.getElementById("q"); qi.focus(); loadIdx(); }
-const saved = (store("wik-setup") || "").split("|");
-if (saved[0] && S.prof[saved[0]] && (saved[1] === "ios" || saved[1] === "android")) { P = saved[0]; DEV = saved[1]; finish(); } else { openOnb(/^#task-/.test(location.hash)); }
-stay();
-const target = location.hash.match(/^#task-[\w-]+$/); if (target && P) { const r = document.querySelector(target[0]); if (r) { r.open = true; r.scrollIntoView(); } }
+if (location.hash === "#q") { const qi = $("q"); qi.focus(); loadIdx(); }
+paint(); filter(); stay();
 """
 
 
@@ -655,12 +565,12 @@ def build_topic(lang, t):
   {addr_html}
   {arrival_card(lang) if t['id'] == 'entry' else ''}
   {deep}
+  <p class="fb-line"><button type="button" class="linkbtn" data-feedback="{t['id']}">💬 {e(FEEDBACK[lang]['open'])}</button></p>
   <details class="more"><summary>{e(S['details'])}</summary><div class="in notes"><p>{e(t['intro'])}</p><ul><li>{e(U['checked'])} {e(CHECKED[lang])}</li>{notes}{srcs}</ul></div></details>
   </main>
   {ready_cta(lang)}
   <section class="related"><h2>{e(x['related'])}</h2><ul class="glist">{related}</ul></section>
   <details class="more"><summary>{e(LU['all'])}</summary><nav class="topics">{others}</nav></details>
-  {about(lang, up)}
 </div>
 {SHOW_HTML(lang)}
 <script>{COMMON_JS}{TOPIC_JS}{ARRIVAL_JS if t['id'] == 'entry' else ''}</script>
@@ -688,7 +598,7 @@ def build_changes(lang):
     alt = {k: f"{LANGS[k]['dir']}changes.html" for k in LANGS}
     rows = "".join(f'<li><b>{e(dt)}</b>{e(tx)}</li>' for dt, tx in x["changes"])
     body = f"""
-{hero(lang, alt, up, x['changes_title'], '')}
+{hero(lang, alt, up, x['changes_title'], '', back_to='./')}
 <div class="wrap">
   <section class="panel" style="margin-top:18px"><div class="in timeline" style="padding-top:16px"><ol>{rows}</ol></div></section>
   <div class="actions"><a class="btn" href="./">{e(L['ui']['open_tool'])}</a></div>
@@ -725,8 +635,8 @@ def footer(lang, tab="guides"):
     """Site links, then the bottom tabs (tab names the active one)."""
     P = PAGES[lang]; up = "../" if LANGS[lang]["dir"] else ""
     links = [("about.html", P["about"]), ("contact.html", P["contact"]), ("changes.html", P["changes"]), ("privacy.html", A.T[lang]["privacy"]), (f"{up}hosts.html", P["hosts"])]
-    return ('<footer class="foot"><div class="wrap"><nav aria-label="EasyModeKorea">' + " · ".join(f'<a href="{h}">{e(t)}</a>' for h, t in links)
-            + f'</nav><p>EasyModeKorea · <a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a></p></div></footer>\n' + A.tabbar(lang, tab))
+    return ('<footer class="foot"><div class="wrap"><nav aria-label="EasyModeKorea">' + "".join(f'<a href="{h}">{e(t)}</a>' for h, t in links)
+            + '</nav></div></footer>\n' + A.tabbar(lang, tab))
 
 
 def addr_card(lang):
@@ -897,7 +807,7 @@ def build_flow(lang, flow):
            "step": [{"@type": "HowToStep", "position": i, "text": s["t"][lang]} for i, s in enumerate(flow["steps"], 1)], "citation": cites},
           {"@context": "https://schema.org", "@type": "WebPage", "@id": SITE + path, "url": SITE + path, "name": flow["title"][lang], "inLanguage": L["html_lang"], "lastReviewed": max(dates),
            "reviewedBy": {"@type": "Organization", "name": BRAND, "url": SITE + L["dir"] + "about.html"}}]
-    return app_page(lang, flow["slug"], (flow["title"][lang], flow["lede"][lang]), flow["title"][lang], flow["lede"][lang], inner, "help", ld=ld)
+    return app_page(lang, flow["slug"], (flow["title"][lang], flow["lede"][lang]), flow["title"][lang], flow["lede"][lang], inner, "help", ld=ld, back_to="help.html")
 
 
 def flow_tiles(lang):
@@ -962,8 +872,8 @@ def alerts_block(lang, with_dates=False):
 def ready_cta(lang):
     """The entry to the Korea Ready check. Once the check is done, the line under the title shows the score instead."""
     t = A.T[lang]
-    return (f'<a class="ready-cta" href="ready.html" data-continue="{e(t["rd_continue"])}"><span class="ic">{A.IC["ready"]}</span>'
-            f'<span><b>{e(t["rd_title"])}</b><span class="ready-sub">{e(t["rd_cta_sub"])}</span></span></a>')
+    return (f'<a class="ready-cta" href="ready.html" data-continue="{e(t["rd_continue"])}" data-next="{e(t["rd_next_step"])}" data-lang="{lang}"><span class="ic">{A.IC["ready"]}</span>'
+            f'<span><b>{e(t["rd_title"])}</b><span class="ready-sub">{e(t["rd_cta_sub"])}</span><span class="ready-next" hidden></span></span></a>')
 
 
 # Where recent user reports disagree with a dated answer and we could not settle it ourselves, the Ready check says so
@@ -1103,7 +1013,9 @@ READY_JS = r"""
     const total = items.filter(early).length + extra.length;
     const score = () => { const d = items.filter((it, i) => early(it) && done.includes(i)).length + extra.filter(([id]) => xdone.includes(id)).length;
       $("rd-score").textContent = T.score.replace("{d}", d).replace("{n}", total); $("rd-sbar").style.width = Math.round(100 * d / total) + "%";
-      store("emk-rc-score", JSON.stringify({ d, n: total })); card(d, total); return d; };
+      /* The first open step before the flight is shown on the Ready card of every page, in this language. */
+      const nx = items.find((it, i) => early(it) && !done.includes(i)), nxx = extra.find(([id]) => !xdone.includes(id));
+      store("emk-rc-score", JSON.stringify({ d, n: total, next: nx ? nx.t : nxx ? nxx[1].t : "", lang: D.lang })); card(d, total); return d; };
     const row = (id, checked, text, more, on) => { const cb = el("input", { type: "checkbox", id }); cb.checked = checked; cb.addEventListener("change", () => { on(cb.checked); score(); });
       return el("li", {}, [cb, el("label", { for: id }, [text].concat(more || []))]); };
     const xrow = ([id, x]) => {
@@ -1232,14 +1144,14 @@ def say_row(lang, ko, mean, kw=""):
             f'<button class="sayrow-copy" type="button" data-copy="{e(ko)}" data-done="✓ {e(LU["copied"])}">{A.IC["copy"]}<span class="sr">{e(LU["copy"])}: {e(mean)}</span></button></div>')
 
 
-def app_page(lang, name, title, seo, desc, inner, tab, script="", index=True, ld=None):
+def app_page(lang, name, title, seo, desc, inner, tab, script="", index=True, ld=None, back_to=None):
     """Shared frame for the app pages (Korean cards, My trip, help, privacy)."""
     L = LANGS[lang]; d = L["dir"]; up = "../" if d else ""
     path = f"{d}{name}.html"
     alt = {k: f"{LANGS[k]['dir']}{name}.html" for k in LANGS}
     body = f"""
 <a class="skip" href="#main">{e(DEEP_HEAD[lang]['skip'])}</a>
-{hero(lang, alt, up, title[0], '')}
+{hero(lang, alt, up, title[0], '', back_to=back_to)}
 <div class="wrap"><main id="main" class="app-main">{inner}</main>
 </div>
 {SHOW_HTML(lang)}
@@ -1297,10 +1209,11 @@ def build_cards(lang):
         wide = ' class="wide"'
         chips = "".join(f'<li{wide if len(ko) > 8 else ''} data-kw="{e((ko + " " + tx(m, lang) + " " + kw).lower())}"><button class="chip" type="button" data-copy="{e(ko)}" data-done="✓ {e(LU["copied"])}"><span lang="ko">{e(ko)}</span><small>{e(tx(m, lang))}</small><i aria-hidden="true">📋</i></button></li>' for ko, m in names)
         groups.append(f'<section class="cgroup"><h2>{tk["icon"]}<a href="{tk["slug"]}.html">{e(tk["short"])}</a></h2>{says}' + (f'<div class="names"><ul>{chips}</ul></div>' if chips else "") + "</section>")
-    inner = f"""{own}
-<label class="search"><span class="sr">{e(t['cards_filter'])}</span><input id="cq" type="search" placeholder="{e(t['cards_filter'])}" autocomplete="off"></label>
+    # Ready-made cards first: a traveler rarely types Korean, so making one's own card comes after the list (27차).
+    inner = f"""<label class="search"><span class="sr">{e(t['cards_filter'])}</span><input id="cq" type="search" placeholder="{e(t['cards_filter'])}" autocomplete="off"></label>
 <p class="hint" id="cnores" hidden>{e(ux['nores'])}</p>
-<div id="cards">{''.join(groups)}</div>"""
+<div id="cards">{''.join(groups)}</div>
+{own}"""
     return app_page(lang, "phrases", (t["cards_title"], t["cards_lede"]), t["cards_seo"], t["cards_desc"], inner, "cards", CARDS_JS)
 
 
@@ -1443,7 +1356,7 @@ def build_help(lang):
 <section class="sec" aria-labelledby="cl-h"><h2 id="cl-h">{e(h['calls'])}</h2><div class="calls">{nums}</div></section>
 <section class="sec says" aria-labelledby="sh-h"><h2 id="sh-h">{e(h['phrases'])}</h2>{says}</section>
 {addr_card(lang)}
-<section class="sec" aria-labelledby="mh-h"><h2 id="mh-h">{e(t['help_more_h'])}</h2><ul class="glist">{more}<li><a href="phrases.html"><span class="ic">{A.IC['cards']}</span><span>{e(t['cards_title'])}</span></a></li></ul></section>"""
+<section class="sec" aria-labelledby="mh-h"><h2 id="mh-h">{e(t['help_more_h'])}</h2><ul class="glist">{more}<li><a href="phrases.html"><span class="ic">{A.IC['cards']}</span><span>{e(t['cards_title'])}</span></a></li><li><a href="contact.html"><span class="ic">{A.IC['help']}</span><span>{e(ASK[lang]['title'])}</span></a></li></ul></section>"""
     return app_page(lang, "help", (t["help_title"], t["help_lede"]), t["help_seo"], t["help_desc"], inner, "help")
 
 
@@ -1522,7 +1435,7 @@ def build_info(lang, kind):
         ld = {"@context": "https://schema.org", "@type": "ContactPage", "name": title, "url": SITE + path, "inLanguage": L["html_lang"],
               "mainEntity": {"@type": "Organization", "name": BRAND, "url": SITE, "email": CONTACT_EMAIL}}
     body = f"""
-{hero(lang, alt, up, title, desc)}
+{hero(lang, alt, up, title, '', back_to='./')}
 <div class="wrap"><main>{inner}</main>
   <div class="actions"><a class="btn" href="./">{e(L['ui']['open_tool'])}</a></div>
   <p class="fb-line"><button type="button" class="linkbtn" data-feedback="{kind}">💬 {e(FEEDBACK[lang]['open'])}</button></p>

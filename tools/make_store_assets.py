@@ -4,7 +4,7 @@ Run from the repo root after a build:  python tools/make_store_assets.py
 Needs Pillow and Microsoft Edge or Chrome (driven headless by tools/cdp.py; it starts its own local server).
 Icons are drawn here, so they can be rebuilt without any design tool.
 """
-import os, shutil, sys, time
+import os, shutil, sys, time, urllib.parse
 from PIL import Image, ImageDraw, ImageFont
 
 sys.path.insert(0, os.path.dirname(__file__))
@@ -45,6 +45,16 @@ def icons():
     shortcut("shortcut-help.png", RED, glyph_help); shortcut("shortcut-cards.png", BLUE, glyph_cards); shortcut("shortcut-trip.png", BLUE, glyph_trip)
 
 
+# Captions for the framed Play screenshots (store/screenshots/). *words* are drawn in yellow. Each claim is something
+# the app really does; keep them in step with store/listing.md.
+FRAMES = [("home", "Which Korean apps *work with your phone*", "A status for your phone on every guide"),
+          ("ready", "Your plan *before the flight*, in one minute", "Taps only. Saved on your phone"),
+          ("guide", "Short answers, *checked and dated*", "Each fact shows the day it was checked"),
+          ("show", "Show a driver *in big Korean*", "Full screen, even offline"),
+          ("cards", "Korean cards for *taxis, food, pharmacies*", "Tap a card to show it full screen"),
+          ("help", "Lost, sick or stuck? *Help in one tap*", "112 · 119 · 1330 and what to do, in order")]
+
+
 def screenshots():
     """Phone screenshots at 360x640 drawn at 3x (1080x1920, the 9:16 size Play recommends), light theme."""
     srv = cdp.Server(os.path.abspath(ROOT)); b = cdp.Browser(360, 640, 3, "light")
@@ -63,6 +73,12 @@ def screenshots():
             if name == "ready": b.js("['emk-rc', 'emk-rc-x', 'emk-rc-score', 'wik-setup', 'wik-plan-en-visitor-ios', 'emk-saved'].forEach(k => localStorage.removeItem(k))")
         b.cmd("Emulation.setDeviceMetricsOverride", width=1024, height=500, deviceScaleFactor=1, mobile=False)
         b.go(srv.url + "store/feature.html", wait=2.5); b.shot(out("store/feature-graphic.png")); flatten("store/feature-graphic.png")
+        # Play listing screenshots: the same screens in a phone frame under a one-line benefit, as top travel apps do.
+        b.cmd("Emulation.setDeviceMetricsOverride", width=1080, height=1920, deviceScaleFactor=1, mobile=False)
+        os.makedirs(out("store/screenshots"), exist_ok=True)
+        for n, (name, t, s) in enumerate(FRAMES, 1):
+            b.go(srv.url + "store/frame.html?" + urllib.parse.urlencode({"img": f"../shots/{name}.png", "t": t, "s": s}), wait=2.0)
+            rel = f"store/screenshots/{n}-{name}.png"; b.shot(out(rel)); flatten(rel)
     finally:
         b.close(); srv.stop()
 

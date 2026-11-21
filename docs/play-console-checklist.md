@@ -16,7 +16,7 @@ Claude는 로그인, 비밀번호 입력, 약관 동의, 업로드, 제출을 �
 ## 2. 앱 만들기
 - [ ] 플레이 콘솔 > 앱 만들기. 이름 `EasyModeKorea: Korea Travel`, 기본 언어 영어(미국), 유형 앱, 무료.
 - [ ] 대시보드의 "앱 설정" 항목을 차례로 채우기: 개인정보처리방침 주소, 앱 액세스, 광고, 콘텐츠 등급, 타겟층, 데이터 보안 등. 답은 listing.md의 "App content forms" 표 그대로.
-- [ ] 스토어 등록정보: 영어 이름·설명 붙여 넣기, 한국어 번역 추가, 아이콘(`icon-512.png`), 대표 이미지(`store/feature-graphic.png`), 폰 스크린샷 5장(`shots/` 폴더) 올리기.
+- [ ] 스토어 등록정보: 영어 이름·설명 붙여 넣기, 한국어 번역 추가, 아이콘(`icon-512.png`), 대표 이미지(`store/feature-graphic.png`), 폰 스크린샷 6장(`store/screenshots/` 폴더, 1번부터 순서대로) 올리기.
 
 ## 3. 앱 파일 만들기와 서명 (이 PC에서 한 번)
 - [ ] 자바 설치(무료, 약 180MB). PowerShell에서 `winget install EclipseAdoptium.Temurin.17.JDK`

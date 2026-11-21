@@ -16,8 +16,8 @@ READY = ("localStorage.setItem('emk-rc', JSON.stringify({p: 'visitor', dev: 'and
 # the dated facts. list: the Korean cards, a long list of short labels (no whole-page limit).
 # "sentences" counts text pieces longer than 8 words on the first screen.
 LIMITS = {"app": {"first": 70, "sentences": 3, "all": 300},
-          "answer": {"first": 120, "sentences": 6, "all": 330},
-          "list": {"first": 70, "sentences": 3, "all": 10 ** 6}}
+          "answer": {"first": 130, "sentences": 8, "all": 330},   # 27차: the slimmer top bar fits more of the answer on one screen
+          "list": {"first": 90, "sentences": 3, "all": 10 ** 6}}   # 27차: the first screen is the cards themselves (Korean + meaning)
 PAGES = [("", "home", "app"), ("taxi.html", "guide: taxi", "answer"), ("incheon-airport-to-seoul.html", "guide: airport", "answer"),
          ("ready.html", "ready: result", "app"), ("saved.html", "my trip", "app"), ("phrases.html", "korean cards", "list"),
          ("help.html", "help", "app"), ("foreign-card-declined-korea.html", "flow: card", "answer")]
