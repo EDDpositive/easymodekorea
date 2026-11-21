@@ -1,0 +1,78 @@
+name: Android app bundle
+
+# Builds the Android app as an UNSIGNED .aab. The app is a Trusted Web Activity: it opens
+# easymodekorea.com full screen, so site updates reach the app without a new upload.
+# Signing happens on the owner's PC (android/sign-aab.ps1). No key or password ever reaches GitHub.
+on:
+  workflow_dispatch:
+    inputs:
+      version_code:
+        description: "Version code (whole number, one higher than the last upload to Play)"
+        default: ""
+      version_name:
+        description: "Version name shown to users, e.g. 1.0.1"
+        default: ""
+  pull_request:
+    paths: ["android/**", ".github/workflows/android-build.yml"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: android-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install Bubblewrap and the Android build tools
+        run: |
+          npm install --global @bubblewrap/cli@1.27.0
+          SDKM="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          yes | "$SDKM" --licenses > /dev/null || true
+          "$SDKM" "build-tools;36.1.0" "platforms;android-36" > /dev/null
+          mkdir -p "$ANDROID_HOME/tools" || sudo mkdir -p "$ANDROID_HOME/tools"
+          mkdir -p ~/.bubblewrap
+          printf '{"jdkPath":"%s","androidSdkPath":"%s"}' "$JAVA_HOME" "$ANDROID_HOME" > ~/.bubblewrap/config.json
+      - name: Generate the Android project from android/twa-manifest.json
+        env:
+          VERSION_CODE: ${{ inputs.version_code }}
+          VERSION_NAME: ${{ inputs.version_name }}
+        run: |
+          python3 -m http.server 8000 --bind 127.0.0.1 > /dev/null 2>&1 &
+          sleep 2
+          python3 android/prepare_build.py http://127.0.0.1:8000/ "$VERSION_CODE" "$VERSION_NAME"
+          cd android/build
+          bubblewrap update --skipVersionUpgrade
+      - name: Build the unsigned bundle
+        working-directory: android/build
+        run: bubblewrap build --skipSigning --skipPwaValidation
+      - name: Check what the app asks the phone for
+        working-directory: android/build
+        run: |
+          ls -la *.aab *.apk
+          AAPT="$ANDROID_HOME/build-tools/36.1.0/aapt2"
+          "$AAPT" dump badging app-release-unsigned-aligned.apk | grep -E "^package|sdkVersion|targetSdkVersion|uses-permission" | tee app-info.txt
+          grep -q "name='com.easymodekorea.app'" app-info.txt
+          grep -q "targetSdkVersion:'36'" app-info.txt
+          # The privacy policy says the app asks for no access to location, contacts, camera or files.
+          if grep -E "LOCATION|CONTACTS|CAMERA|STORAGE|RECORD_AUDIO|READ_MEDIA" app-info.txt; then echo "Unexpected permission"; exit 1; fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: emk-android-unsigned
+          path: |
+            android/build/app-release-bundle.aab
+            android/build/app-release-unsigned-aligned.apk
+            android/build/app-info.txt
+          if-no-files-found: error
+          retention-days: 30

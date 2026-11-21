@@ -1,0 +1,11 @@
+# Never commit signing keys or built app packages.
+*.jks
+*.keystore
+*.p12
+*.pfx
+*.aab
+*.apk
+android/build/
+# Local leftovers
+__pycache__/
+_shot.html

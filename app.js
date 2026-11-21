@@ -42,7 +42,7 @@
     if (bar || !deferred || standalone) return;
     if (Date.now() - Number(get("emk-install-no") || 0) < 14 * 864e5) return;
     bar = mk("div", "install-bar"); bar.setAttribute("role", "region"); bar.setAttribute("aria-label", T.install_btn);
-    var go = mk("button", "btn", T.install_btn), no = mk("button", "x", T.later); go.type = no.type = "button";
+    var go = mk("button", "btn", T.install_btn), no = mk("button", "x", "\u2715"); go.type = no.type = "button"; no.setAttribute("aria-label", T.later);
     go.addEventListener("click", askInstall);
     no.addEventListener("click", function () { set("emk-install-no", String(Date.now())); hideBar(); });
     bar.appendChild(mk("span", "", T.install)); bar.appendChild(go); bar.appendChild(no); d.body.appendChild(bar);

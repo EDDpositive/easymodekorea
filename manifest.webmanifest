@@ -72,5 +72,34 @@
    ]
   }
  ],
- "screenshots": []
+ "screenshots": [
+  {
+   "src": "/shots/home.png",
+   "sizes": "1080x1920",
+   "type": "image/png",
+   "form_factor": "narrow",
+   "label": "Pick what you need right now"
+  },
+  {
+   "src": "/shots/guide.png",
+   "sizes": "1080x1920",
+   "type": "image/png",
+   "form_factor": "narrow",
+   "label": "A short answer with the date it was checked"
+  },
+  {
+   "src": "/shots/cards.png",
+   "sizes": "1080x1920",
+   "type": "image/png",
+   "form_factor": "narrow",
+   "label": "Korean cards to show a driver or staff"
+  },
+  {
+   "src": "/shots/help.png",
+   "sizes": "1080x1920",
+   "type": "image/png",
+   "form_factor": "narrow",
+   "label": "Emergency numbers, one tap away"
+  }
+ ]
 }

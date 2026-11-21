@@ -16,7 +16,7 @@ T = {
         "nav_label": "Main menu", "nav_guides": "Guides", "nav_cards": "Korean cards", "nav_trip": "My trip", "nav_help": "Help",
         "search": "Search guides", "save": "Save", "saved": "Saved", "share": "Share", "link_copied": "Link copied",
         "saved_toast": "Saved to My trip", "unsaved_toast": "Removed from My trip",
-        "install": "Install EasyModeKorea. Guides open without data.", "install_btn": "Install", "later": "Not now",
+        "install": "Install the app. Guides open without data.", "install_btn": "Install", "later": "Not now",
         "ios_hint": "On iPhone: tap the Share button, then Add to Home Screen.",
         "update": "This page has newer info.", "refresh": "Refresh",
         "trip_title": "My trip", "trip_lede": "Your saved guides, your stay's address and your Korean cards. Everything here stays on this phone.",
@@ -54,7 +54,7 @@ T = {
         "nav_label": "メインメニュー", "nav_guides": "ガイド", "nav_cards": "韓国語カード", "nav_trip": "マイページ", "nav_help": "ヘルプ",
         "search": "ガイドを検索", "save": "保存", "saved": "保存済み", "share": "共有", "link_copied": "リンクをコピーしました",
         "saved_toast": "マイページに保存しました", "unsaved_toast": "マイページから削除しました",
-        "install": "EasyModeKoreaをインストール。データ通信なしでもガイドが開けます。", "install_btn": "インストール", "later": "今はしない",
+        "install": "アプリを追加。通信なしでもガイドが開けます。", "install_btn": "インストール", "later": "今はしない",
         "ios_hint": "iPhoneの場合: 共有ボタンをタップし、「ホーム画面に追加」を選びます。",
         "update": "このページに新しい情報があります。", "refresh": "更新",
         "trip_title": "マイページ", "trip_lede": "保存したガイド、宿の住所、自分の韓国語カード。すべてこのスマホの中だけに保存されます。",
@@ -92,7 +92,7 @@ T = {
         "nav_label": "主選單", "nav_guides": "指南", "nav_cards": "韓文卡", "nav_trip": "我的旅程", "nav_help": "求助",
         "search": "搜尋指南", "save": "收藏", "saved": "已收藏", "share": "分享", "link_copied": "已複製連結",
         "saved_toast": "已存到「我的旅程」", "unsaved_toast": "已從「我的旅程」移除",
-        "install": "安裝EasyModeKorea,沒有網路也能看指南。", "install_btn": "安裝", "later": "先不要",
+        "install": "安裝App,沒有網路也能看指南。", "install_btn": "安裝", "later": "先不要",
         "ios_hint": "iPhone:點「分享」按鈕,再選「加入主畫面」。",
         "update": "這一頁有更新的內容。", "refresh": "重新整理",
         "trip_title": "我的旅程", "trip_lede": "你收藏的指南、住宿地址和自己做的韓文卡。全部只存在這支手機裡。",
@@ -130,7 +130,7 @@ T = {
         "nav_label": "主菜单", "nav_guides": "指南", "nav_cards": "韩文卡", "nav_trip": "我的行程", "nav_help": "求助",
         "search": "搜索指南", "save": "收藏", "saved": "已收藏", "share": "分享", "link_copied": "已复制链接",
         "saved_toast": "已存到“我的行程”", "unsaved_toast": "已从“我的行程”移除",
-        "install": "安装EasyModeKorea,没有网络也能看指南。", "install_btn": "安装", "later": "暂不",
+        "install": "安装App,没有网络也能看指南。", "install_btn": "安装", "later": "暂不",
         "ios_hint": "iPhone:点“分享”按钮,再选“添加到主屏幕”。",
         "update": "这一页有更新的内容。", "refresh": "刷新",
         "trip_title": "我的行程", "trip_lede": "你收藏的指南、住宿地址和自己做的韩文卡。全部只存在这部手机里。",
@@ -168,7 +168,7 @@ T = {
         "nav_label": "Menu chính", "nav_guides": "Hướng dẫn", "nav_cards": "Thẻ tiếng Hàn", "nav_trip": "Của tôi", "nav_help": "Trợ giúp",
         "search": "Tìm hướng dẫn", "save": "Lưu", "saved": "Đã lưu", "share": "Chia sẻ", "link_copied": "Đã sao chép liên kết",
         "saved_toast": "Đã lưu vào mục Của tôi", "unsaved_toast": "Đã bỏ khỏi mục Của tôi",
-        "install": "Cài EasyModeKorea. Mở hướng dẫn được cả khi không có mạng.", "install_btn": "Cài đặt", "later": "Để sau",
+        "install": "Cài ứng dụng. Xem hướng dẫn cả khi không có mạng.", "install_btn": "Cài đặt", "later": "Để sau",
         "ios_hint": "Trên iPhone: chạm nút Chia sẻ, rồi chọn Thêm vào Màn hình chính.",
         "update": "Trang này có thông tin mới hơn.", "refresh": "Tải lại",
         "trip_title": "Chuyến đi của tôi", "trip_lede": "Hướng dẫn đã lưu, địa chỉ chỗ ở và thẻ tiếng Hàn của bạn. Tất cả chỉ nằm trên điện thoại này.",
@@ -293,7 +293,7 @@ APP_JS = r"""/* EasyModeKorea app shell: offline, install, save, share, notices.
     if (bar || !deferred || standalone) return;
     if (Date.now() - Number(get("emk-install-no") || 0) < 14 * 864e5) return;
     bar = mk("div", "install-bar"); bar.setAttribute("role", "region"); bar.setAttribute("aria-label", T.install_btn);
-    var go = mk("button", "btn", T.install_btn), no = mk("button", "x", T.later); go.type = no.type = "button";
+    var go = mk("button", "btn", T.install_btn), no = mk("button", "x", "\u2715"); go.type = no.type = "button"; no.setAttribute("aria-label", T.later);
     go.addEventListener("click", askInstall);
     no.addEventListener("click", function () { set("emk-install-no", String(Date.now())); hideBar(); });
     bar.appendChild(mk("span", "", T.install)); bar.appendChild(go); bar.appendChild(no); d.body.appendChild(bar);
