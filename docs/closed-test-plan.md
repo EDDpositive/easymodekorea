@@ -21,18 +21,20 @@
 
 ## 테스터에게 보낼 글 (그대로 복사)
 
-**한국어**
+참여 링크는 패키지 이름으로 정해집니다: **https://play.google.com/apps/testing/com.easymodekorea.app**
+테스터 목록에 지메일이 들어간 사람만 열 수 있고, 비공개 테스트 검토가 끝난 뒤부터 작동합니다. 플레이 콘솔 > 비공개 테스트 > 테스터 탭의 "웹에서 참여" 링크와 같은지 한 번 확인하세요.
+
+**1단계: 지메일 주소 받기 (지금 보내기)**
 ```
-EasyModeKorea 앱 테스트를 도와주세요 (2주, 5분이면 됩니다).
-한국에 오는 외국인 여행자를 위한 안내 앱입니다.
+EasyModeKorea 앱(한국 여행 안내) 테스트 좀 도와줄래? 2주 동안 깔아만 두면 돼.
+안드로이드 폰에서 플레이 스토어에 쓰는 지메일 주소 하나만 알려 줘.
+```
 
-1. 아래 링크를 안드로이드 폰에서 열고 "테스터 되기"를 누릅니다. (플레이 스토어에 쓰는 지메일 계정으로)
-2. 플레이 스토어에서 앱을 설치합니다.
-3. 2주 동안 지우지 말고, 생각날 때 두세 번 열어 봐 주세요.
-4. 이상하거나 불편한 점이 있으면 한 줄만 알려 주세요.
-
-참여 링크: (플레이 콘솔에서 받은 링크)
-지메일 주소를 먼저 알려 주셔야 링크가 열립니다.
+**2단계: 참여 링크 보내기 (검토 통과 후)**
+```
+등록했어! 안드로이드 폰에서 아래 링크 열고 "테스터 되기" → 플레이 스토어에서 설치.
+https://play.google.com/apps/testing/com.easymodekorea.app
+2주 동안 지우지 말고 두세 번만 열어 봐 줘. 이상한 점은 한 줄만 알려 주면 돼. 고마워!
 ```
 
 **English**
@@ -45,7 +47,7 @@ It is a guide app for visitors to Korea.
 3. Keep it installed for 2 weeks and open it two or three times.
 4. If anything looks wrong or awkward, send me one line.
 
-Link: (link from Play Console)
+Link: https://play.google.com/apps/testing/com.easymodekorea.app
 I need your Gmail address first, or the link will not open.
 ```
 
