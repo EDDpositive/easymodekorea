@@ -8,10 +8,14 @@ Claude는 로그인, 비밀번호 입력, 약관 동의, 업로드, 제출을 �
 - 테스터는 구글 계정(지메일 주소) 12개 이상이 필요합니다. 중간에 빠지면 14일을 다시 세므로 넉넉히 15명쯤 모으는 것이 안전합니다.
 - 테스터에게 보낼 글, 14일 일정, 정식 출시 신청서 초안은 [closed-test-plan.md](closed-test-plan.md)에 있습니다.
 
+## 지금 어디까지 왔나 (2026-11-22)
+- 끝남: 사이트 반영(PR #9 머지), 개인정보처리방침 주소 작동, 앱 파일(서명 전) 빌드, 스토어 문구·스크린샷·출시 노트([store/release-notes.md](../store/release-notes.md)).
+- 막힌 곳: 크롬에 로그인된 구글 계정 세 개 모두 **플레이 개발자 계정이 아직 없습니다**. 주로 쓰는 계정은 2단계 인증이 이미 켜져 있어 바로 가입 화면("계정 유형 선택")이 뜹니다. 나머지 두 계정은 2단계 인증부터 요구합니다.
+
 ## 1. 먼저 (오늘)
-- [ ] 이 PR을 승인해 사이트에 반영하기. 개인정보처리방침 주소(https://easymodekorea.com/privacy.html)가 살아 있어야 플레이 콘솔에 넣을 수 있습니다.
-- [ ] 플레이 콘솔에서 계정 인증(신원 확인, 휴대전화 인증)이 모두 끝났는지 확인.
-- [ ] 테스터 12~15명의 지메일 주소 모으기.
+- [ ] 개발자 계정 만들기(주 계정으로): https://play.google.com/console/signup > **개인** > 시작하기 > 등록비 25달러(한 번) 결제 > 신분증 인증. 개발자 계정의 주인 계정은 나중에 바꿀 수 없습니다. 인증은 며칠 걸릴 수 있고, 안드로이드 폰에 "Play Console" 앱을 깔아 기기 인증도 요구합니다.
+- [ ] (다른 계정으로 만들 때만) 그 계정에서 2단계 인증 켜기: https://myaccount.google.com/signinoptions/twosv
+- [ ] 테스터 12~15명에게 지메일 주소 받기. 보낼 글은 [closed-test-plan.md](closed-test-plan.md)의 "1단계".
 
 ## 2. 앱 만들기
 - [ ] 플레이 콘솔 > 앱 만들기. 이름 `EasyModeKorea: Korea Travel`, 기본 언어 영어(미국), 유형 앱, 무료.
@@ -19,17 +23,18 @@ Claude는 로그인, 비밀번호 입력, 약관 동의, 업로드, 제출을 �
 - [ ] 스토어 등록정보: 영어 이름·설명 붙여 넣기, 한국어 번역 추가, 아이콘(`icon-512.png`), 대표 이미지(`store/feature-graphic.png`), 폰 스크린샷 7장(`store/screenshots/` 폴더, 1번부터 순서대로) 올리기.
 
 ## 3. 앱 파일 만들기와 서명 (이 PC에서 한 번)
+개발자 계정 인증을 기다리는 동안 해 둘 수 있습니다.
 - [ ] 자바 설치(무료, 약 180MB). PowerShell에서 `winget install EclipseAdoptium.Temurin.17.JDK`
-- [ ] GitHub > Actions > "Android app bundle" > Run workflow (Claude에게 시켜도 됩니다).
-- [ ] 저장소 폴더에서 `powershell -ExecutionPolicy Bypass -File android\sign-aab.ps1` 실행.
+- [ ] (끝남) main 기준 앱 파일 빌드: 버전 1.0.0, 코드 1. Claude가 내려받아 둔 파일: `내 사용자 폴더\.emk-android\out\main-1.0.0\easymodekorea-unsigned.aab`
+- [ ] 새 PowerShell 창에서 실행(서명 스크립트 사본도 같은 폴더에 있습니다): `powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\.emk-android\sign-aab.ps1" -Aab "$env:USERPROFILE\.emk-android\out\main-1.0.0\easymodekorea-unsigned.aab"`
   - 처음 한 번은 **새 비밀번호를 직접 정해 두 번 입력**합니다. 이 비밀번호와 `내 사용자 폴더\.emk-android\emk-upload.jks` 파일은 꼭 따로 보관하세요. 둘 다 잃으면 구글에 재설정을 요청해야 합니다.
   - 끝나면 서명된 파일(`easymodekorea-날짜.aab`)이 있는 폴더가 열리고, "지문(SHA-256)" 한 줄이 나옵니다.
 
 ## 4. 비공개 테스트 시작
-- [ ] 플레이 콘솔 > 테스트 > 비공개 테스트 > 새 버전 만들기 > 서명된 `.aab` 올리기.
+- [ ] 플레이 콘솔 > 테스트 > 비공개 테스트 > 새 버전 만들기 > 서명된 `.aab` 올리기. 출시 노트는 [store/release-notes.md](../store/release-notes.md)의 블록을 통째로 붙여 넣기.
 - [ ] 테스터 목록에 지메일 주소 12개 이상 넣기 > 검토 요청 보내기.
 - [ ] 플레이 콘솔 > 테스트 및 출시 > 앱 무결성 > 앱 서명에서 **"앱 서명 키 인증서"의 SHA-256 지문**을 복사해 Claude에게 전달. (공개해도 되는 값입니다. Claude가 사이트에 넣으면 앱에서 주소창이 사라집니다.)
-- [ ] 검토가 끝나면 테스터들에게 참여 링크 보내기. 설치 후 14일 동안 지우지 않게 부탁하기.
+- [ ] 검토가 끝나면 테스터들에게 참여 링크(https://play.google.com/apps/testing/com.easymodekorea.app) 보내기. 보낼 글은 closed-test-plan.md의 "2단계". 설치 후 14일 동안 지우지 않게 부탁하기.
 
 ## 5. 14일 뒤
 - [ ] 플레이 콘솔 대시보드의 "프로덕션 액세스 신청"에서 질문지 작성(테스트를 어떻게 했는지, 받은 의견 등).
