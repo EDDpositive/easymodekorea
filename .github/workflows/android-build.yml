@@ -1,0 +1,124 @@
+name: Android app bundle
+
+# Builds the Android app as an UNSIGNED .aab. The app is a Trusted Web Activity: it opens
+# easymodekorea.com full screen, so site updates reach the app without a new upload.
+# Signing happens on the owner's PC (android/sign-aab.ps1). No key or password ever reaches GitHub.
+on:
+  workflow_dispatch:
+    inputs:
+      version_code:
+        description: "Version code (whole number, one higher than the last upload to Play)"
+        default: ""
+      version_name:
+        description: "Version name shown to users, e.g. 1.0.1"
+        default: ""
+  pull_request:
+    # The app is built from these: its own settings, plus the site's manifest and icons.
+    paths: ["android/**", ".github/workflows/android-build.yml", "manifest.webmanifest", "icon-*.png", "shortcut-*.png"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: android-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install Bubblewrap and the Android build tools
+        run: |
+          npm install --global @bubblewrap/cli@1.27.0
+          SDKM="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          yes | "$SDKM" --licenses > /dev/null || true
+          "$SDKM" "build-tools;36.1.0" "platforms;android-36" > /dev/null
+          mkdir -p "$ANDROID_HOME/tools" || sudo mkdir -p "$ANDROID_HOME/tools"
+          mkdir -p ~/.bubblewrap
+          printf '{"jdkPath":"%s","androidSdkPath":"%s"}' "$JAVA_HOME" "$ANDROID_HOME" > ~/.bubblewrap/config.json
+      - name: Generate the Android project from android/twa-manifest.json
+        env:
+          VERSION_CODE: ${{ inputs.version_code }}
+          VERSION_NAME: ${{ inputs.version_name }}
+        run: |
+          python3 -m http.server 8000 --bind 127.0.0.1 > /dev/null 2>&1 &
+          sleep 2
+          python3 android/prepare_build.py http://127.0.0.1:8000/ "$VERSION_CODE" "$VERSION_NAME"
+          cd android/build
+          bubblewrap update --skipVersionUpgrade
+      - name: Build the unsigned bundle
+        working-directory: android/build
+        run: bubblewrap build --skipSigning --skipPwaValidation
+      - name: Check what the app asks the phone for
+        working-directory: android/build
+        run: |
+          cp app/build/outputs/bundle/release/app-release.aab easymodekorea-unsigned.aab
+          ls -la *.aab *.apk
+          AAPT="$ANDROID_HOME/build-tools/36.1.0/aapt2"
+          "$AAPT" dump badging app-release-unsigned-aligned.apk | grep -E "^package|sdkVersion|targetSdkVersion|uses-permission" | tee app-info.txt
+          grep -q "name='com.easymodekorea.app'" app-info.txt
+          grep -q "targetSdkVersion:'36'" app-info.txt
+          # The privacy policy says the app asks for no access to location, contacts, camera or files.
+          if grep -E "LOCATION|CONTACTS|CAMERA|STORAGE|RECORD_AUDIO|READ_MEDIA" app-info.txt; then echo "Unexpected permission"; exit 1; fi
+          # The app must open this site and claim it (that claim is what assetlinks.json answers).
+          "$AAPT" dump strings app-release-unsigned-aligned.apk > strings.txt
+          grep -q "https://easymodekorea.com/" strings.txt
+          grep -q "delegate_permission/common.handle_all_urls" strings.txt
+          # Links to the site should open in the app: the manifest must ask Android to verify the domain.
+          "$AAPT" dump xmltree --file AndroidManifest.xml app-release-unsigned-aligned.apk > manifest.txt
+          grep -q "autoVerify" manifest.txt
+          echo "asks Android to verify easymodekorea.com links (opens them in the app once assetlinks.json lists the key)" >> app-info.txt
+          # No native code, so Google's 16 KB page-size rule does not apply.
+          if unzip -l app-release-unsigned-aligned.apk | grep -E "\.so$"; then echo "Unexpected native library"; exit 1; fi
+          echo "opens https://easymodekorea.com/ full screen; no native code" >> app-info.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: emk-android-unsigned
+          path: |
+            android/build/easymodekorea-unsigned.aab
+            android/build/app-release-unsigned-aligned.apk
+            android/build/app-info.txt
+          if-no-files-found: error
+          retention-days: 30
+
+  signing-rehearsal:
+    # Runs the owner's signing script from start to finish on Windows, with a throwaway key made on
+    # this runner. That key and its password exist only inside this job and vanish with it; the file
+    # signed here is not kept. The real upload key is only ever made and used on the owner's PC.
+    needs: build
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: actions/download-artifact@v4
+        with:
+          name: emk-android-unsigned
+          path: dl
+      - name: Sign with a throwaway key, the way the owner will
+        shell: bash
+        run: |
+          AAB="$(cygpath -w "$PWD/dl/easymodekorea-unsigned.aab")"
+          RUN="powershell.exe -NoProfile -ExecutionPolicy Bypass -File android/sign-aab.ps1 -NoOpen -Aab"
+          # First run: the script makes the key (two password lines). A pipe is not a keyboard, so the
+          # key tool drains it and the signing step finds no input and stops; that stop is expected here.
+          printf 'rehearsal-only\nrehearsal-only\n' | $RUN "$AAB" || true
+          test -f "$USERPROFILE/.emk-android/emk-upload.jks"
+          # Every later run: the key exists, one password, signed file out.
+          printf 'rehearsal-only\n' | $RUN "$AAB"
+          SIGNED=$(ls "$USERPROFILE"/.emk-android/out/easymodekorea-*.aab | head -1)
+          test -n "$SIGNED"
+          jarsigner -verify "$SIGNED" | grep "jar verified"
+          keytool -printcert -jarfile "$SIGNED" | grep "SHA256:"

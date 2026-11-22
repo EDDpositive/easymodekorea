@@ -27,6 +27,15 @@ zh-cn에서 대만식 단어(计程车, 简讯, 储值, 公车, 萤幕, 网路, 
 | vi | 상황 카드 | Đi chơi xa · "thẻ đi tàu" (= rail passes) | 철도 패스를 thẻ로 부르는 게 맞는지(vé tàu trọn gói 등) |
 | vi | 이름 칩 | Climate Card, ATM Global | 영어를 그대로 두거나 어순을 바꾼 것이 자연스러운지 |
 | ja/zh-tw/vi | 주소 카드 | addr_note "이 폰에만 저장, 어디에도 보내지 않음" | 개인정보 안내 문구라 뜻이 정확히 전달되는지 꼭 확인 |
+| ja/zh-tw/zh-cn/vi | 개인정보처리방침 (21차) | `src/app_shell.py`의 privacy_body 7문단 | 법적 안내라 뜻이 정확한지 꼭 확인. 간체는 이번엔 변환이 아니라 직접 씀 |
+| ja | 아래 메뉴 (21차) | マイページ (= My trip) | "내 여행" 느낌이 사는지. 保存済み가 더 분명한지 |
+| zh-tw/zh-cn | 아래 메뉴 (21차) | 韓文卡 / 韩文卡 (= Korean cards) | 자연스러운 말인지(韓文字卡, 韩语卡片 등) |
+| vi | 아래 메뉴 (21차) | Của tôi (= My trip) | 메뉴 이름으로 어색하지 않은지(Chuyến đi 등) |
+| ja/zh-tw/zh-cn/vi | Korea Ready 점검 (25차) | `src/app_shell.py`의 `rd_*` 문구 약 50개 | 질문과 선택지가 한 번에 읽히는지. 특히 "확인 필요"(要確認 / 待確認 / 待确认 / Cần kiểm tra lại)와 점수 설명 문장 |
+| ja/zh-tw/zh-cn/vi | Korea Ready 점검 (25차) | `src/build.py`의 `READY_NC`(Naver 인증 "확인 필요" 안내), 택시 앱 카드 등록 단계 | 출처가 "리뷰"라는 점이 번역에서도 분명한지 |
+| ja/zh-tw/zh-cn/vi | 카드 거절 화면 (25차) | `src/trouble.py` 5·6단계에 추가한 두 문장(지하철 신형 기기, WOWPASS 교통 잔액) | 사실 문장이라 뜻이 바뀌지 않았는지 |
+| ja/zh-tw/vi (+zh-cn 변환) | 짧게 줄인 문구 (26차) | 체크리스트 20줄(`src/data_extra.py` PLAN, vi는 `src/vi.py`), Ready의 `rd_x_*`·`rd_continue`·`rd_cta_sub`·`trust`·`pack_*`·`share_lede`, `stamp`·`addr_note`·`src_short`·`names_h`, `READY_NC` | 줄이면서 뜻이 빠지거나 명령조로 딱딱해지지 않았는지. 특히 "🔒 이 폰에만"과 공유 안내(개인정보) |
+| ja/zh-tw/zh-cn/vi | 앱 바와 홈 (27차) | 언어 표시 `LANG_CODE`(JA, 繁中, 简中, VI), Ready 카드의 다음 할 일 `rd_next_step`(次: / 下一步: / Tiếp theo:) | 짧은 표시가 자연스러운지. 繁中/简中 대신 繁體/简体가 나은지 |
 
 ## 확인하는 방법 (제안)
 - 언어별로 원어민 한 명이 홈 + 가이드 3개(공항, 택시, 아플 때)를 폰으로 읽고 위 표에 O/X와 고친 문구를 적으면 30분 안에 끝남.

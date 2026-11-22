@@ -1,0 +1,4 @@
+{
+  "_note": "Public SHA-256 certificate fingerprints that may open easymodekorea.com as an app (Play app signing key first, upload key second). Not secrets. src/build.py writes them into .well-known/assetlinks.json. Format: AA:BB:... (32 pairs, upper case).",
+  "sha256_cert_fingerprints": []
+}

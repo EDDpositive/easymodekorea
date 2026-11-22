@@ -1,0 +1,780 @@
+# EasyModeKorea: full guide text
+
+Source: https://easymodekorea.com/ · Generated from the same data as the pages. Dates are ISO; "checked" is when a fact was last compared with its source.
+
+## Do I need a Korean phone number in Korea?
+URL: https://easymodekorea.com/mobile-data-sim.html
+Last checked: 2026-11-17
+
+### With a home number or data-only eSIM
+Data works anywhere. Apps that send a Korean SMS code will not reach you.
+1. Buy a Korea eSIM before you fly for data.
+2. Pick a plan with a 010 number if you want Korean SMS codes.
+If that fails: A Korean number still won't pass full identity checks (본인인증) without an ARC. Every answer on this page already assumes that.
+
+### With a Korean prepaid 010 number
+Korean SMS codes work. Full identity checks (본인인증) usually still fail.
+1. Use the 010 number for SMS sign-ups.
+2. Expect PASS-style identity checks to fail without an ARC.
+If that fails: Use passport verification where a service offers it, such as Naver.
+
+### With a Korean number in your name (ARC)
+A number in your own name passes most identity checks.
+1. Set up PASS identity verification with your carrier.
+2. Most Korean apps open up after that.
+If that fails: If a check fails, confirm your number is registered to your ARC with your carrier.
+
+Key facts
+- eSIM online before you fly, or a telecom counter at the airport (checked 2026-11-17)
+- A data-only eSIM can't receive Korean SMS codes (checked 2026-11-17)
+
+Questions
+- eSIM, physical SIM or pocket Wi-Fi? eSIM is easiest if your phone supports it. A pocket Wi-Fi suits groups sharing one connection. A physical SIM suits phones without eSIM.
+- Do I need a Korean phone number? Not for most visitors. Maps, taxis, delivery and restaurant bookings now have visitor routes without one.
+- Is there free Wi-Fi in Korea? Yes, in many subway stations, cafés and public spaces, but don't rely on it for directions on the move.
+- Will my bank's SMS codes still reach me? Only if your home line stays on and roaming lets you receive SMS. Check with your carrier before you fly.
+
+Sources
+- Seoulstart: the four keys Korean apps check: https://seoulstart.com/guides/digital-korea-guide
+- Alchera: why a Korean SIM alone fails identity checks: https://www.alchera.ai/resource/blog/ekyc-short-term-resident-foreigner-passport-authentication
+- LG U+: travel app guide for visitors: https://lguplus.com/korea-sim/eng/pc/support/blog/korea_travel_essential_apps_guide
+
+## How do I get from Incheon Airport to Seoul?
+URL: https://easymodekorea.com/incheon-airport-to-seoul.html
+Last checked: 2026-11-17
+
+### All visitors
+Every option works for visitors. The AREX train is the simplest.
+1. AREX Express: non-stop to Seoul Station, about 43 minutes from Terminal 1 and 51 from Terminal 2. Buy the ticket at the machine or counter.
+2. AREX all-stop train: about an hour, stops at Hongik Univ. and Gongdeok. Tap a T-money card.
+3. Airport bus: goes to major hotels and areas. Ask at the bus desk in arrivals for your route number.
+4. Taxi: k.ride or Uber, or the taxi stand outside arrivals.
+If that fails: Trains don't run all night. After the last train, take a taxi or a late-night airport bus.
+
+Key facts
+- AREX train from the arrivals floor; follow the Train signs (checked 2026-11-17)
+- AREX Express: about 43 min (T1) or 51 min (T2) to Seoul Station (checked 2026-11-17)
+- Fares change; check arex.or.kr (checked 2026-11-17)
+
+Questions
+- Express or all-stop train? Express if you are going to Seoul Station and want a seat with no stops. All-stop if your hotel is near Hongik Univ. or Gongdeok, or to save money.
+- How much is the AREX Express? Fares changed in 2026 and sources disagree, so we don't quote one. Check arex.or.kr or the counter.
+- Can I use T-money on the Express? The Express needs its own ticket. T-money works on the all-stop train.
+- Is Gimpo Airport different? Yes. Gimpo is closer to Seoul and on subway lines 5 and 9 as well as AREX. This guide covers Incheon.
+
+Sources
+- AREX (airport railroad) official site: https://www.arex.or.kr
+- Incheon International Airport: transport to the city: https://www.airport.kr/ap_en/1448/subview.do
+- Trip.com: AREX timetable and fares guide: https://sg.trip.com/guide/transport/arex.html
+
+## Does Google Maps work in Korea?
+URL: https://easymodekorea.com/maps.html
+Last checked: 2026-11-17
+
+### All visitors
+Naver Map works for everyone, in English, Japanese and Chinese.
+1. Install Naver Map and switch the language in settings.
+2. Use it for walking, subway and bus directions.
+If that fails: Kakao Map is a good second map. Google Maps shows places, but its walking and driving directions are limited in Korea.
+
+Key facts
+- Naver Map app, in English, Japanese or Chinese (checked 2026-11-17)
+- Free (checked 2026-11-17)
+
+Changed in 2026
+- 2026-06-04: Naver added passport verification, so visitors can book and pay on Naver Map.
+- 2026-02: The government conditionally approved Google's map-data export. Better Google routing is not confirmed yet.
+
+Questions
+- Does Google Maps work in Korea? It finds places and gives public transport routes, but walking and driving directions are limited. The government conditionally approved Google's map-data export in February 2026; better Google routing had not arrived at our last check.
+- Naver Map or Kakao Map: which is better? Both give full transit and walking directions. Naver Map has English, Japanese and Chinese menus and passport-verified bookings, so start there and keep Kakao Map as a second opinion.
+- Do I need a Korean phone number to use Naver Map? No. Search and directions work without an account. You only need an account to save places, write reviews or book.
+- Does Naver Map work without mobile data? Plan on needing data. Check your route on Wi-Fi first and take a screenshot of the steps if your signal is patchy.
+
+Sources
+- NAVER: usage guide for visitors in English, Chinese and Japanese (Dec 2024): https://www.navercorp.com/en/media/pressReleasesDetail?seq=32216
+- NAVER: passport verification for visitors: https://www.navercorp.com/media/pressReleasesDetail?seq=10034359
+- Korea Times: local maps gain popularity, but leave foreigners unsatisfied: https://www.koreatimes.co.kr/amp/business/tech-science/20250418/local-maps-gain-popularity-but-leave-foreigners-unsatisfied
+
+## Can I call a taxi in Korea without a Korean number?
+URL: https://easymodekorea.com/taxi.html
+Last checked: 2026-11-20
+
+### With a home number or data-only eSIM
+Use the taxi apps built for visitors. They take a foreign number and card.
+1. k.ride (by Kakao Mobility): sign up with Google, Apple or email.
+2. Uber also works in Korea with your existing account.
+3. TABA is another visitor app, run with Seoul and T-money.
+If that fails: Kakao T is what locals use, but reports on foreign cards in Kakao T disagree. If card setup fails, choose pay-to-driver, or hail on the street.
+
+### With a Korean prepaid 010 number
+k.ride, Uber or TABA are the reliable picks.
+1. k.ride or Uber with your card.
+2. Kakao T may accept your 010 number for sign-up.
+If that fails: If Kakao T rejects your card, pick pay-to-driver and pay in the taxi.
+
+### With a Korean number in your name (ARC)
+Kakao T works fully with a Korean number and Korean card.
+1. Kakao T for the most cars.
+2. k.ride or Uber as backups.
+If that fails: Street hailing works everywhere in big cities.
+
+Key facts
+- k.ride or Uber app, or a taxi rank (checked 2026-11-17)
+- Seoul: from 4,800 won, plus 20% from 22:00 to 04:00 and 40% from 23:00 to 02:00 (checked 2026-11-20)
+
+Questions
+- Does Uber work in Korea? Yes. Uber works in Seoul and other big cities with your existing account and sends regular metered taxis.
+- Do I tip taxi drivers in Korea? No. Tipping is not expected in Korean taxis.
+- Can I hail a taxi on the street? Yes. A lit sign on the roof or windscreen means the taxi is free. In busy areas at night, an app is usually faster than hailing.
+- Can I take a taxi from Incheon Airport to Seoul? Yes, from the taxi stand outside arrivals or by app. It costs far more than the AREX train, and tolls are added to the fare.
+
+Sources
+- Korea Herald: guide to choosing a taxi and checking the bill: https://www.koreaherald.com/article/10915844
+- Asia Economy: Seoul late-night surcharge up to 40%: https://www.asiae.co.kr/en/article/2022120109574990744
+- Asia Economy: Kakao Mobility launches k.ride for visitors: https://www.asiae.co.kr/en/article/2024060408155574996
+
+## Can I top up T-money with a foreign card?
+URL: https://easymodekorea.com/tmoney-subway-bus.html
+Last checked: 2026-11-20
+
+### With a home number or data-only eSIM (iPhone)
+On iPhone, Mobile T-money can now top up with some foreign cards. Not every card brand is supported.
+1. Install Mobile T-money and add a transit card.
+2. Try topping up with your card. If your card brand isn't accepted, use the backup below.
+If that fails: Buy a physical T-money card at a convenience store and top it up with cash at the counter or station machines.
+
+### With a home number or data-only eSIM (Android)
+Foreign-card top-up in the Android T-money app was not available at our last check.
+1. Buy a physical T-money card at a convenience store.
+2. Top up with cash at the counter or at station machines.
+If that fails: T-money says a separate app, Mobile Korea Tour Card, supports foreign cards.
+
+### With a Korean prepaid 010 number (iPhone)
+On iPhone, Mobile T-money can now top up with some foreign cards. Not every card brand is supported.
+1. Install Mobile T-money and add a transit card.
+2. Try topping up with your card. If your card brand isn't accepted, use the backup below.
+If that fails: Buy a physical T-money card at a convenience store and top it up with cash at the counter or station machines.
+
+### With a Korean prepaid 010 number (Android)
+Foreign-card top-up in the Android T-money app was not available at our last check.
+1. Buy a physical T-money card at a convenience store.
+2. Top up with cash at the counter or at station machines.
+If that fails: T-money says a separate app, Mobile Korea Tour Card, supports foreign cards.
+
+### With a Korean number in your name (ARC)
+With a Korean card, mobile or physical T-money works normally.
+1. Add T-money in your wallet app or use a transit-enabled Korean card.
+If that fails: Physical T-money with cash always works.
+
+Key facts
+- Buy T-money at convenience stores; top up with cash at stations (checked 2026-11-17)
+- Subway from 1,550 won by card (checked 2026-11-20)
+- Refunding a small balance at a store costs 500 won (checked 2026-11-20)
+
+Changed in 2026
+- 2026-09-01: The 30-day Climate Card was replaced by K-Pass. The 1 to 7-day tourist passes are still sold.
+- 2026-03: Mobile T-money on iPhone started accepting some foreign cards for top-up.
+
+Questions
+- How much should I top up? A Seoul subway ride starts at 1,550 won by card (the base fare since June 2025). 10,000 to 20,000 won lasts a few days for most visitors; add more when the balance gets low.
+- Does T-money work outside Seoul? Yes. It works on subways and buses in most cities, including Busan, Daegu and Jeju.
+- Can two people share one card? Use one card per person. Each rider needs their own tap at the subway gates.
+- Is a tourist pass better than T-money? Only if you ride a lot inside Seoul. See our Seoul tourist transit pass guide to compare.
+
+Sources
+- T-money (official site): https://www.t-money.co.kr
+- SBS Biz: foreign-card top-up for Mobile T-money (Mar 2026): https://biz.sbs.co.kr/amp/article/20000298518
+- Seoul city: clarification on T-money and Apple Pay (Mar 2026): https://mediahub.seoul.go.kr/archives/2017356
+
+## Is the Seoul Climate Card tourist pass worth buying?
+URL: https://easymodekorea.com/seoul-tourist-transit-pass.html
+Last checked: 2026-11-17
+
+### All visitors
+The 1, 2, 3, 5 and 7-day Climate Card tourist passes are still sold. Only the 30-day card ended, in September 2026. Check the price and where to buy before you go.
+1. Decide if you need it. Add up your planned subway and bus rides. For a short stay, a T-money card that you top up is often enough.
+2. Know the limits: reports say tourist passes work only in the Seoul area, so use T-money for taxis and trips outside Seoul.
+3. If you buy, reports name the tourist information centres, T-Money Town near Seoul Station and online vouchers as places to get it. Check the current price at purchase.
+If that fails: Not sure it pays off? A T-money card works for every subway and bus ride (see our T-money guide).
+
+Key facts
+- 1, 2, 3, 5 and 7-day passes are still sold (checked 2026-11-17)
+- Prices vary by source; check Seoul's or T-money's page (checked 2026-11-17)
+
+Changed in 2026
+- 2026-09-01: The 30-day Climate Card was replaced by K-Pass. The 1 to 7-day tourist passes are still sold.
+
+Questions
+- Is the Climate Card still on sale for tourists? Yes. The 1 to 7-day tourist passes continue; only the 30-day card ended.
+- Is a tourist pass cheaper than T-money? Only on days with many rides. For a few rides a day, T-money is usually cheaper.
+- Does it work on the airport train? Not on the AREX Express. Check the pass terms for the all-stop train.
+- Can visitors use K-Pass? No. K-Pass is for residents; visitors on a tourist stay can't register.
+
+Sources
+- Korea Times: Seoul's transit pass replaced by K-Pass from 1 Sep (Jul 2026): https://koreatimes.co.kr/southkorea/20260730/seouls-transit-pass-to-be-replaced-by-nationwide-k-pass-system-sept-1
+- JoongAng Daily: Seoul's 30-day Climate Card to end: https://www.koreajoongangdaily.com/korea/seouls-30day-climate-card-to-end-what-it-means-for-commuters-kpass-users/12758853
+- 10Mag: what K-Pass means for foreigners and tourists: https://10mag.com/what-k-pass-means-for-foreigners-and-tourists-in-korea/
+
+## How do I book a KTX train as a foreigner?
+URL: https://easymodekorea.com/ktx-train-booking.html
+Last checked: 2026-11-17
+
+### All visitors
+Book on KORAIL's English website with a foreign card. It's the most reliable channel.
+1. Use KORAIL's English booking site with your passport details.
+2. Tickets open two months ahead (since 1 Oct 2026). Book early for weekends and holidays.
+If that fails: If your card fails online, try the KORAIL+ app, a reseller like Klook, or a station counter.
+
+Key facts
+- KORAIL's English website, with a foreign card (checked 2026-11-17)
+- Seoul to Busan: about 2.5 hours on the fastest trains (checked 2026-11-17)
+- Since 1 Sep 2026, all high-speed trains are sold as KTX (checked 2026-11-17)
+
+Changed in 2026
+- 2026-10-01: KTX tickets now open two months ahead.
+- 2026-09-01: SRT was folded into KORAIL. All high-speed trains are now sold as KTX.
+- 2026-08: The KORAIL+ app replaced Korail Talk.
+
+Questions
+- Do I still need to book SRT separately? No. SRT was folded into KORAIL on 1 Sep 2026, and all high-speed trains are sold as KTX.
+- Can I book KTX without a Korean phone number? Yes. The English website takes passport details and a foreign card.
+- Is the KR Pass worth it? Only for several long trips in a few days. See our KR Pass guide to compare.
+- Is there Wi-Fi and food on board? Plan to bring your own snacks and use your own data; services on board vary by train.
+
+Sources
+- KORAIL English booking site: https://www.letskorail.com
+- Korea Times: KTX expands after SRT absorption (Aug 2026): https://koreatimes.co.kr/business/companies/20260831/ktx-expands-tuesday-following-srt-absorption
+- Korea.kr: two-month booking window: https://www.korea.kr/news/reporterView.do?newsId=148973714
+- Asia Economy: higher weekend cancellation fees (2025): https://www.asiae.co.kr/en/article/2025042711412342505
+
+## How do I get from Seoul to Busan, and what is the K-Tour Pass?
+URL: https://easymodekorea.com/seoul-to-busan-k-tour-pass.html
+Last checked: 2026-11-17
+
+### All visitors
+Take the KTX and buy the K-Tour Pass pilot online first. It gives free entry to one Busan attraction and discounts on the way there, until 31 Dec 2026.
+1. Book your KTX to Busan on KORAIL's English site. Tickets open two months ahead, so book early for weekends and holidays.
+2. Buy the K-Tour Pass online before you go. It costs 15,000 won and is sold through travel sites such as Klook. It includes free entry to one of about 35 Busan attractions.
+3. The pass also carries discount coupons for transport to Busan, reported as 40% off rail. Read the coupon terms before you book.
+If that fails: The pass is a pilot that runs only to 31 Dec 2026. If it is sold out or has ended, a normal KTX ticket still gets you there.
+
+Key facts
+- KTX Seoul to Busan: about 2.5 hours (checked 2026-11-17)
+- K-Tour Pass pilot runs until 31 Dec 2026 (checked 2026-11-17)
+
+Changed in 2026
+- 2026-09-01: SRT was folded into KORAIL. All high-speed trains are now sold as KTX.
+
+Questions
+- How long is the KTX from Seoul to Busan? About 2.5 hours on the fastest trains.
+- Is the K-Tour Pass only for foreigners? Yes, it is a pilot for foreign visitors run by the Ministry of Culture, Sports and Tourism and the Korea Tourism Organization.
+- Is the KR Pass better than single tickets for Busan? Only if you add more long trips. See our KR Pass guide.
+- Where do I store bags on a day trip? Lockers at Busan Station, or leave them at your Seoul accommodation. See our luggage guide.
+
+Sources
+- Ministry of Culture, Sports and Tourism: K-Tour Pass: https://www.mcst.go.kr/english/policy/pressView.jsp?pSeq=668
+- Korea Times: new K-Tour Pass (1 Oct 2026): https://www.koreatimes.co.kr/lifestyle/travel-food/20261001/koreas-new-k-tour-pass-offers-foreign-travelers-gateway-beyond-seoul
+- JoongAng Daily: Busan gets K-Tour Pass: https://www.koreajoongangdaily.com/lifestyle/busan-gets-ktour-pass-with-transit-discounts-free-attractions/12899918
+
+## Is the KR Pass (Korail pass) worth it?
+URL: https://easymodekorea.com/kr-pass-korail-pass.html
+Last checked: 2026-11-17
+
+### All visitors
+The KR Pass can save money on several long rides, but you still book each seat. Add up your single fares before you buy.
+1. Check you qualify. The pass is for foreign visitors, so bring your passport. Koreans and long-stay residents are not eligible.
+2. List your trips and look up each single fare on KORAIL's English site. Buy the pass only if the total is clearly higher.
+3. After buying, reserve a seat for every trip. The pass is not a seat, and popular routes sell out.
+If that fails: Not sure it pays off? Single KTX tickets from KORAIL's English site always work.
+
+Key facts
+- Covers KORAIL trains, not AREX or the subway (checked 2026-11-17)
+- You still book each seat after buying the pass (checked 2026-11-17)
+
+Changed in 2026
+- 2026-09-01: SRT was folded into KORAIL. All high-speed trains are now sold as KTX.
+
+Questions
+- Who can buy the KR Pass? Foreign visitors with a passport. Koreans and long-stay residents are not eligible.
+- Does the KR Pass include seat reservations? You reserve seats separately for each trip, using the pass.
+- Is it worth it for one Seoul–Busan return? Usually not. It pays off with several long trips in a few days.
+- Did the SRT merger change the pass? SRT was folded into KORAIL on 1 Sep 2026. Check that your route is covered before you buy.
+
+Sources
+- KORAIL English booking site: https://www.letskorail.com
+- Wikipedia: Korea Rail Pass: https://en.wikipedia.org/wiki/Korea_Rail_Pass
+- Trip.com: Korail guide for foreigners: https://www.trip.com/guide/train/korail.html
+
+## How do I book a DMZ or JSA tour in Korea?
+URL: https://easymodekorea.com/dmz-jsa-tour-booking.html
+Last checked: 2026-11-17
+
+### All visitors
+Book a guided tour in advance and carry your physical passport on the day. JSA visits can't be arranged on the spot.
+1. Book a DMZ or JSA tour ahead through a tour operator or a travel site. Same-day JSA booking is generally not possible, because names are registered in advance.
+2. Enter your passport details exactly as printed when you book. The list is checked against your passport on the day.
+3. Bring the physical passport on the tour day. Copies and expired passports are not accepted, and operators often do not refund a missed entry.
+If that fails: No tour slot? Imjingak Park is open without a booking, but it does not give access to the JSA or the 3rd Tunnel.
+
+Key facts
+- Guided tours only, booked in advance (checked 2026-11-17)
+- Bring your physical passport on the day (checked 2026-11-17)
+
+Questions
+- Can I visit the DMZ on my own? Only some areas such as Imjingak Park. Most DMZ sites and the JSA need a booked tour.
+- How far ahead should I book the JSA? As early as possible; slots are limited and names must be registered in advance.
+- Is there an official 2026 rulebook? We found operator and local-government pages but no single official 2026 notice, so follow your operator's instructions.
+- Do I need cash on the tour? Bring a little for snacks and souvenirs; tour fees are paid when you book.
+
+Sources
+- Paju DMZ Peace Tourism: visitor guide: https://dmz.paju.go.kr:8443/Eng/E20000/E20100/html
+- Klook: DMZ tour tickets and guide: https://www.klook.com/en-AU/blog/guide-tickets-dmz-tour-korea/
+- Voye Global: DMZ and Panmunjom visit guide: https://voyeglobal.com/dmz-panmunjom-visit-guide/
+
+## How do I get around Jeju as a tourist?
+URL: https://easymodekorea.com/jeju-getting-around.html
+Last checked: 2026-11-17
+
+### All visitors
+A rental car is the easiest way to see Jeju, but you need an International Driving Permit. Buses and taxis work for a few places.
+1. Driving: bring your passport, your home licence and a valid International Driving Permit. The rental desk can refuse an expired permit.
+2. Visit Jeju says foreign renters need full-coverage insurance. Confirm the cover with your rental company.
+3. Ask for the in-car GPS to be set to English before you leave the lot.
+4. No permit: buses run mainly in the city and not often, and taxis are easy in main areas but scarce near remote sights.
+If that fails: No driving permit? Use taxis for short hops and plan around the main bus routes.
+
+Key facts
+- A rental car needs an International Driving Permit (checked 2026-11-17)
+- Most visitors fly in from Gimpo or Busan (checked 2026-11-17)
+
+Questions
+- Do I need an International Driving Permit? Yes, to rent a car as a visitor. Bring it with your home licence and passport.
+- Can I get around Jeju without a car? Yes, but slowly. Buses and taxis work for a few main areas; a tour or a hired driver covers more.
+- Does T-money work in Jeju? Yes, on Jeju buses.
+- How do I get to Jeju? Most visitors fly from Seoul (Gimpo) or Busan; flights are short and frequent.
+
+Sources
+- Visit Jeju: traffic information: https://www.visitjeju.net/u/2ls
+- Trip.com: Jeju transport guide: https://sg.trip.com/guide/transport/jeju-transport.html
+- The Soul of Seoul: renting a car in Jeju: https://thesoulofseoul.net/how-to-rent-a-car-in-jeju-island/
+
+## Can I book restaurants in Korea without a Korean number?
+URL: https://easymodekorea.com/restaurant-reservations.html
+Last checked: 2026-11-20
+
+### With a home number or data-only eSIM
+CatchTable Global and Naver passport verification both work without a Korean number.
+1. CatchTable Global: sign up by email, pay deposits with a foreign card.
+2. Each restaurant sets its own cancellation rules. The app shows how much of the deposit comes back before you confirm a cancellation.
+3. Naver Map bookings: verify with your passport (available since 4 Jun 2026).
+If that fails: Not every restaurant is on these apps. Ask staff to add you to the waitlist in person.
+
+### With a Korean prepaid 010 number
+CatchTable Global and Naver passport verification both work without a Korean number.
+1. CatchTable Global: sign up by email, pay deposits with a foreign card.
+2. Each restaurant sets its own cancellation rules. The app shows how much of the deposit comes back before you confirm a cancellation.
+3. Naver Map bookings: verify with your passport (available since 4 Jun 2026).
+If that fails: Not every restaurant is on these apps. Ask staff to add you to the waitlist in person.
+
+### With a Korean number in your name (ARC)
+All booking apps work, including the local CatchTable app and Naver.
+1. Naver Map or CatchTable with your verified number.
+If that fails: CatchTable Global if the local app gives you trouble.
+
+Key facts
+- CatchTable Global app, or Naver with passport check (checked 2026-11-17)
+- Each restaurant sets its own deposit and cancellation rules (checked 2026-11-20)
+
+Changed in 2026
+- 2026-06-04: Naver added passport verification, so visitors can book and pay on Naver Map.
+
+Questions
+- Is the deposit refundable? It depends on the restaurant and how early you cancel. The app shows the refund amount before you confirm a cancellation.
+- Do I need a Korean phone number? No. CatchTable Global takes an email sign-up, and Naver accepts passport verification.
+- How far ahead should I book popular places? As early as the restaurant opens its slots. Some popular places fill within minutes of opening.
+- What if a place takes no bookings at all? Go before opening time and queue. Write the restaurant's Korean name down to show staff.
+
+Sources
+- VisitKorea: CatchTable Global for visitors: https://english.visitkorea.or.kr/svc/contents/contentsView.do?vcontsId=1590988
+- CatchTable Global on the App Store: https://apps.apple.com/us/app/catch-table/id1639046576
+- NAVER: passport verification for visitors: https://www.navercorp.com/media/pressReleasesDetail?seq=10034359
+- Seoulstart: CatchTable, Naver booking and no-show rules: https://seoulstart.com/guides/catchtable-reservations-guide
+
+## Can I order food delivery in Korea as a tourist?
+URL: https://easymodekorea.com/food-delivery.html
+Last checked: 2026-11-17
+
+### With a home number or data-only eSIM
+Baemin works without a Korean number. It runs in English and takes foreign cards.
+1. Install Baemin and set the app to English.
+2. Enter your home phone number to get the code, or order as a guest.
+3. Pay with a foreign card, or Apple Pay with a foreign card on iPhone.
+If that fails: If an order fails, your host or front desk can usually order for you.
+
+### With a Korean prepaid 010 number
+Baemin works without a Korean number. It runs in English and takes foreign cards.
+1. Install Baemin and set the app to English.
+2. Enter your home phone number to get the code, or order as a guest.
+3. Pay with a foreign card, or Apple Pay with a foreign card on iPhone.
+If that fails: If an order fails, your host or front desk can usually order for you.
+
+### With a Korean number in your name (ARC)
+Baemin, Coupang Eats and Yogiyo all work with a verified Korean number.
+1. Sign up with your number and add a Korean card or pay app.
+If that fails: Baemin also has an English mode if you prefer it.
+
+Key facts
+- Baemin app, in English (checked 2026-11-17)
+- Takes a foreign phone number and foreign cards in Apple Pay (checked 2026-11-17)
+
+Changed in 2026
+- 2026-07: Baemin: visitors can order with a foreign phone number. Seoul added delivery zones at Han River parks.
+- 2026-06-02: Baemin: Apple Pay now accepts foreign cards.
+- 2026-02-04: Baemin added English, Japanese and Chinese.
+
+Questions
+- Can I order to a hotel or a park? Hotels yes: add your room number, and the front desk may receive it. Seoul has delivery zones in Han River parks.
+- Are there other delivery apps? Coupang Eats and Yogiyo are popular but usually need a Korean number to sign up. Shuttle is an English delivery service many foreigners use.
+- Do I tip the rider? No. Tipping is not expected. The delivery fee is shown before you pay.
+- Is there a minimum order? Most restaurants set one, shown on their page. Eating alone? Look for single-serving menus, marked 1인분.
+
+Sources
+- Baemin (official site): https://www.baemin.com
+- News1: Seoul and Baemin, ordering without a Korean number (Jul 2026): https://www.news1.kr/amp/local/moi/6242106
+- Bizwatch: Baemin adds English, Japanese, Chinese (Feb 2026): https://news.bizwatch.co.kr/article/consumer/2026/02/04/0013
+
+## What is the best translation app for Korea?
+URL: https://easymodekorea.com/translation.html
+Last checked: 2026-11-17
+
+### All visitors
+Papago works for everyone. Point the camera at a menu or sign.
+1. Install Papago and download the Korean offline pack.
+If that fails: Naver Map also translates place names and reviews.
+
+Key facts
+- Papago app: camera mode for menus and signs (checked 2026-11-17)
+- Free (checked 2026-11-17)
+
+Questions
+- Papago or Google Translate? Both work in Korea. Many visitors find Papago more natural for Korean, so install both and compare.
+- Does Papago need a Korean phone number? No. You can use it without signing in.
+- Does camera translation work offline? Some features need data. Test camera mode in flight mode at home to see what works offline.
+- Is there a phone line that interprets for me? Yes. 1330, the travel helpline, can interpret over the phone, 24 hours.
+
+Sources
+- LG U+: travel app guide for visitors: https://lguplus.com/korea-sim/eng/pc/support/blog/korea_travel_essential_apps_guide
+- Papago on the App Store: https://apps.apple.com/app/naver-papago-ai-translator/id1147874819
+
+## How do I get a tax refund when shopping in Korea?
+URL: https://easymodekorea.com/tax-free-shopping.html
+Last checked: 2026-11-20
+
+### With a home number or data-only eSIM
+Tax refunds work for visitors. Show your passport at the till and the tax comes off right away at many stores.
+1. Look for the Tax Free or Tax Refund sign, and bring your actual passport.
+2. Spend at least 15,000 won in one payment. Receipts can't be added together, so pay for everything at once.
+3. Instant refund at the till works for payments under 1 million won, up to 5 million won in total per trip.
+4. No instant refund? Keep the refund receipt and claim it at a city refund booth or the airport kiosk before you check in your bags.
+If that fails: Refund receipts expire 3 months after purchase. Cosmetic and skin clinic treatments no longer qualify from 2026.
+
+### With a Korean prepaid 010 number
+Tax refunds work for visitors. Show your passport at the till and the tax comes off right away at many stores.
+1. Look for the Tax Free or Tax Refund sign, and bring your actual passport.
+2. Spend at least 15,000 won in one payment. Receipts can't be added together, so pay for everything at once.
+3. Instant refund at the till works for payments under 1 million won, up to 5 million won in total per trip.
+4. No instant refund? Keep the refund receipt and claim it at a city refund booth or the airport kiosk before you check in your bags.
+If that fails: Refund receipts expire 3 months after purchase. Cosmetic and skin clinic treatments no longer qualify from 2026.
+
+### With a Korean number in your name (ARC)
+Tourist tax refunds are for visitors staying under 6 months. Residents with an ARC usually don't qualify.
+1. Shop as usual. Prices already include tax.
+If that fails: If you've been in Korea less than 6 months, ask the store whether you still qualify.
+
+Key facts
+- Stores with a TAX FREE sign; show your passport at the till (checked 2026-11-17)
+- Purchases from 15,000 won qualify (checked 2026-11-20)
+
+Questions
+- Do cosmetics count? Cosmetic products bought in shops do. Cosmetic and skin clinic treatments no longer qualify from 2026.
+- Can residents with an ARC claim? Usually not. Tourist refunds are for visitors staying under 6 months.
+- How much do I get back? Most of the 10% tax, minus a service fee that depends on the refund company and the amount.
+- Can cruise passengers claim? Yes. International cruise passengers became eligible for instant and downtown refunds in April 2026.
+
+Sources
+- Korea.kr: instant tax refunds for visitors (government policy news): https://www.korea.kr/news/policyNewsView.do?newsId=148803831
+- Korea Tax Refund guide (2026): https://www.haniseoul.com/travels/korea/tax-free-korea
+- Creatrip: how to get a tax refund in Korea: https://creatrip.com/en/blog/414/How-to-get-a-tax-refund-in-Korea
+
+## Where can I store luggage in Seoul?
+URL: https://easymodekorea.com/luggage-storage.html
+Last checked: 2026-11-20
+
+### All visitors
+Lockers and staffed luggage counters work for everyone. You can also send bags to your hotel or the airport the same day.
+1. T-Locker: lockers in about 270 Seoul subway stations, from small bags to suitcases. Pay at the locker or in the T-Locker app.
+2. T-Luggage: staffed counters at Seoul Station, Hongik Univ., Myeongdong, Jamsil and other busy stations store bags and deliver them to hotels or the airport.
+3. Same-day delivery between the airport and Seoul hotels usually needs you to drop bags off before late morning.
+If that fails: Lockers full or the app won't work? Use a staffed counter, or ask your host or hotel to hold your bags.
+
+Key facts
+- Station lockers and staffed luggage counters (checked 2026-11-17)
+- Set by size and hours; shown on the locker screen and in the T-Locker app (checked 2026-11-20)
+
+Questions
+- How much do lockers cost? From about 2,000 won for 4 hours for a small locker and about 4,000 won for a large one, at our last check.
+- Will a large suitcase fit? Large lockers take most suitcases. Very big cases are easier at a staffed counter.
+- Is there storage at Incheon Airport? Yes, there are staffed baggage counters in the terminals.
+- Can I send bags from Seoul to Busan? Some delivery services cover other cities. Ask at the counter, or keep bags with you on the KTX.
+
+Sources
+- Seoul: T-Locker and T-Luggage: https://mediahub.seoul.go.kr/archives/2013639
+- Luggage storage and delivery guide (2026): https://www.haniseoul.com/ko/travels/korea/korea-luggage-storage-and-delivery-guide
+
+## What do I do if I get sick in Korea?
+URL: https://easymodekorea.com/pharmacy-hospital.html
+Last checked: 2026-11-20
+
+### All visitors
+Call 119 for an ambulance, and also for medical advice or the nearest open ER. Call 1330 if you need an interpreter.
+1. Emergency: call 119 and say "English, please" for an interpreter.
+2. Not sure how serious it is, or need the nearest open ER or pharmacy? Call 119 too. It gives medical advice and hospital information, not only ambulances, 24 hours a day.
+3. Minor problems: pharmacies (look for the 약 sign) sell common medicines. Convenience stores have basic painkillers and cold medicine.
+4. Major Seoul hospitals have international clinics with English- and Chinese-speaking staff.
+If that fails: Bring your passport. An ER may ask for a deposit before treatment.
+
+Key facts
+- Call 119 (ambulance, medical advice, nearest ER). 1330 interprets. (checked 2026-11-20)
+- Calling 119 is free (checked 2026-11-17)
+- Pharmacies have a 약 sign (checked 2026-11-17)
+
+Questions
+- Is medical care expensive for visitors? Without Korean health insurance you pay the full price, so travel insurance is worth having. Simple clinic visits are usually affordable.
+- Can I buy antibiotics at a pharmacy? No. Antibiotics need a doctor's prescription in Korea.
+- What is 1339 for? It is the disease-control hotline (KDCA), mainly for infectious diseases. For emergencies, call 119.
+- Do I need to bring my passport? Yes. Hospitals use it to register you.
+
+Sources
+- Korea Times: sick in Korea after hours (Mar 2026): https://www.koreatimes.co.kr/amp/lifestyle/travel-food/20260314/sick-in-korea-after-hours-heres-what-visitors-need-to-know
+- KDCA: 1339 call center: https://kdca.go.kr/eng/4276/subview.do
+- Korea emergency rooms guide: https://seoulstart.com/ko/guides/korea-emergency-room-guide
+- Night pharmacies and ER guide (2026): https://www.haniseoul.com/ko/travels/korea/midnight-pharmacy-hospital-guide-korea
+
+## Do I need K-ETA to visit Korea?
+URL: https://easymodekorea.com/k-eta-entry-requirements.html
+Last checked: 2026-11-20
+
+### All visitors
+Many passports are exempt from K-ETA through 31 Dec 2026, but not all. Check your own country on the official site before you fly.
+1. Check your passport country on the official K-ETA site (k-eta.go.kr). The temporary exemption for eligible countries runs from 1 Jan to 31 Dec 2026.
+2. If you are not exempt, apply for K-ETA before you fly, not at check-in.
+3. Since 1 Jan 2026, foreign visitors, including those exempt from K-ETA, must submit the e-Arrival Card online within 72 hours before arrival. If you already hold an approved K-ETA, you don't need it.
+If that fails: Unsure? Ask your airline or the nearest Korean embassy before you book. Rules for 2027 had not been announced at our last check.
+
+Key facts
+- Official sites only: k-eta.go.kr and e-arrivalcard.go.kr (checked 2026-11-20)
+- K-ETA 10,000 won. The e-Arrival Card is free. (checked 2026-11-20)
+- e-Arrival Card: within 72 hours before you land (checked 2026-11-20)
+
+Changed in 2026
+- 2026-01-01: Foreign visitors, including those exempt from K-ETA, must submit the e-Arrival Card within 72 hours before arrival.
+
+Questions
+- My country is exempt. Do I still need anything? Yes: the e-Arrival Card. You can also apply for a K-ETA voluntarily (the fee applies), and then you skip the e-Arrival Card.
+- How long does K-ETA approval take? Often within 72 hours, but it can take longer, so apply a week or more before you fly.
+- Does each child need a K-ETA? Yes. Each traveller applies separately, including children.
+- What happens in 2027? The exemption runs to 31 Dec 2026. Rules for 2027 had not been announced at our last check; we will update this page.
+
+Sources
+- K-ETA (official site): https://www.k-eta.go.kr
+- e-Arrival Card (official site): https://www.e-arrivalcard.go.kr
+- Korean Ministry of Foreign Affairs: K-ETA notice: https://overseas.mofa.go.kr/ie-en/brd/m_23773/view.do?seq=761699
+- Korean Ministry of Foreign Affairs: e-Arrival Card notice: https://overseas.mofa.go.kr/dk-en/brd/m_7038/view.do?seq=761304
+
+## Can I withdraw cash in Korea with a foreign card?
+URL: https://easymodekorea.com/atm-foreign-card-cash.html
+Last checked: 2026-11-17
+
+### All visitors
+Foreign debit cards work at Global ATMs and many convenience-store ATMs, usually with a fee.
+1. Look for ATMs marked "Global". Bank ATMs in busy areas such as Myeongdong and Hongdae, and convenience stores such as CU, GS25 and 7-Eleven, often have them.
+2. Use a debit card enabled for international withdrawals. A credit card withdrawal counts as a cash advance, with extra fees and interest.
+3. If the machine offers to charge you in your home currency, choose won (KRW). Otherwise you get a poor conversion rate.
+If that fails: If one machine rejects your card, try another at a major bank such as KB or Woori, or exchange cash at a bank or exchange counter.
+
+Key facts
+- ATMs marked Global, and convenience stores such as CU, GS25, 7-Eleven (checked 2026-11-17)
+- A machine fee plus your bank's fee. Choose KRW, not your currency. (checked 2026-11-17)
+
+Questions
+- Do I need cash in Korea? A little. Cards work in most shops, taxis and restaurants, but markets, street food and T-money top-ups often need cash.
+- Is it better to exchange money at the airport? Airport counters are convenient for a small first amount. Rates at city counters are often better, so compare before exchanging a lot.
+- Which won amount should I carry? Enough for a day of small purchases. Withdraw again when you need it instead of carrying a lot.
+- Can I pay by card in a taxi? Usually yes, and app taxis charge the card saved in the app. See our taxi guide.
+
+Sources
+- HaniSeoul: ATMs in Korea: https://www.haniseoul.com/travels/korea/atm-korea
+- Wise: ATMs in South Korea, cards and fees: https://wise.com/au/blog/atms-in-south-korea
+- Korea Times: Woori Bank prepaid card for tourists (May 2026): https://www.koreatimes.co.kr/amp/business/banking-finance/20260513/woori-bank-targets-foreign-tourists-with-prepaid-card-issued-at-airport
+
+## Do I need a plug adapter in Korea?
+URL: https://easymodekorea.com/korea-power-plug-voltage.html
+Last checked: 2026-11-17
+
+### All visitors
+Korean sockets take two round pins (types C and F) at 220 V and 60 Hz. Most chargers need only a plug adapter.
+1. Check your charger label. If it says 100-240V, it works in Korea with a plug adapter alone.
+2. Bring a Type C plug adapter. Type C plugs also fit the Type F sockets used in Korea.
+3. If a device says only 110V or 120V, it needs a voltage converter as well. Hair dryers and curling irons are the usual cases.
+If that fails: Forgot your adapter? Adapters are sold in Korea, so you can buy one after you arrive.
+
+Key facts
+- Type C and F sockets, 220 V, 60 Hz (checked 2026-11-17)
+- Bring a Type C adapter; shops in Korea sell them too (checked 2026-11-17)
+
+Questions
+- What plug type does Korea use? Types C and F: two round pins, 220V at 60Hz.
+- Do I need a converter for my phone or laptop? Usually not. Phone and laptop chargers are almost always 100-240V, so a plug adapter is enough.
+- Will my US plug work? No. US flat-pin plugs need an adapter to Type C/F.
+- Do hotels have USB ports? Many newer hotels do, but don't count on it; bring a charger and an adapter.
+
+Sources
+- Trip.com: South Korea plug types and voltage: https://www.trip.com/guide/info/south-korea-plug.html
+- Remitly: electrical outlets in South Korea: https://www.remitly.com/blog/technology/electrical-outlets-in-south-korea/
+
+## How do I get from Gimpo Airport to Seoul?
+URL: https://easymodekorea.com/gimpo-airport-to-seoul.html
+Last checked: 2026-11-20
+
+### All visitors
+Take AREX to Hongdae or Seoul Station, Line 9 to Yeouido or Gangnam, or Line 5 to Gwanghwamun. T-money works on all three.
+1. Follow the Subway / Railroad signs from arrivals to Gimpo Airport station.
+2. Use Line 9 express trains for Gangnam. They are faster but very crowded at rush hour.
+3. AREX from Gimpo is the all-stop train. The express train runs only from Incheon.
+If that fails: Trains stop around midnight. After that, take a taxi from the rank outside arrivals, or use k.ride or Uber.
+
+Key facts
+- Gimpo Airport station, a short walk from both terminals (checked 2026-11-20)
+- AREX to Seoul Station: about 20 to 25 min (checked 2026-11-20)
+- T-money works on AREX, Line 5 and Line 9 (checked 2026-11-20)
+
+Questions
+- Is Gimpo or Incheon closer to Seoul? Gimpo is much closer. Most of Seoul is under an hour away by subway.
+- Which flights use Gimpo? Most domestic flights, such as to Jeju and Busan, and some short international routes, for example to Tokyo Haneda, Osaka Kansai, Taipei Songshan and Shanghai Hongqiao.
+- Can I use T-money from the airport? Yes. The same T-money card works on AREX, Line 5 and Line 9.
+- Do I need the e-Arrival Card if I land at Gimpo? On an international flight, yes, the same rules apply as at Incheon. Domestic flights don't need it.
+
+Sources
+- Korea Airports Corporation: Gimpo International Airport: https://www.airport.co.kr/gimpoeng/main.do
+- AREX (Airport Railroad) official site: https://www.arex.or.kr/
+- Seoul Metropolitan Government: getting around Gimpo Airport (Korean): https://mediahub.seoul.go.kr/archives/1108547
+
+## Lost your phone, wallet or passport
+URL: https://easymodekorea.com/lost-phone-wallet-passport.html
+Last checked: 2026-11-22
+
+1. Left it on the subway? Ask at any station office first. Seoul Metro's lost-and-found centers are at City Hall (Lines 1, 2), Chungmuro (3, 4), Wangsimni (5, 8) and Taereung-ipgu (6, 7), open weekdays 9:00 to 18:00. Bring ID. (checked 2026-11-22; source: Seoul city: subway lost-and-found centers (10 Feb 2023) https://mediahub.seoul.go.kr/archives/2006929; Seoul city: lost-and-found hours and lockers (14 Dec 2020) https://mediahub.seoul.go.kr/archives/1305125)
+2. Left it in a taxi? The card receipt or the app's ride history names the taxi. Ask your hotel to phone for you.
+3. Anywhere else: report it at the nearest police station or police box. Police keep found items for six months. (checked 2026-11-22; source: Korea policy briefing: 경찰민원24 police portal (1 Oct 2026) https://www.korea.kr/news/policyNewsView.do?newsId=148969439)
+4. The police lost-and-found search moved to 경찰민원24 (minwon24.police.go.kr) on 26 Jan 2026. It uses a Korean identity login, so ask the police or your hotel to search for you. (checked 2026-11-22; source: Korea policy briefing: 경찰민원24 police portal (1 Oct 2026) https://www.korea.kr/news/policyNewsView.do?newsId=148969439)
+5. Lost passport: ask the police for a loss report, then contact your embassy. For questions about your stay or leaving Korea, call the Immigration Contact Center on 1345 (9:00 to 22:00, 20 languages; after 18:00 Korean, English and Chinese only). (checked 2026-11-22; source: Ministry of Justice: Immigration Contact Center 1345 (3 Nov 2025) https://www.moj.go.kr/bbs/moj/189/600164/artclView.do)
+6. Lost card: call your card issuer and block it now. Lost phone: lock it from another device with your phone's find-my-device service.
+7. Need an interpreter at any step? Call 1330, the travel helpline, and hand over the phone. (checked 2026-11-20; source: https://easymodekorea.com/pharmacy-hospital.html)
+
+Korean to show
+- 휴대폰을 잃어버렸어요. = I lost my phone.
+- 지갑을 잃어버렸어요. = I lost my wallet.
+- 여권을 잃어버렸어요. 분실 신고를 하고 싶어요. = I lost my passport. I want to report it.
+- 분실 신고 접수증을 받을 수 있나요? = Can I get a written loss report?
+- 열차에 물건을 두고 내렸어요. = I left something on the train.
+- 유실물센터가 어디예요? = Where is the lost and found?
+
+## Sick or hurt: pharmacy, clinic or ER?
+URL: https://easymodekorea.com/sick-or-hurt-what-to-do.html
+Last checked: 2026-11-22
+
+1. Serious (chest pain, trouble breathing, heavy bleeding, a bad fall): call 119 now. Say "English, please" to get an interpreter. The call is free. (checked 2026-11-20; source: https://easymodekorea.com/pharmacy-hospital.html)
+2. Not sure how serious? Call 119 too. It gives medical advice and tells you the nearest open ER or pharmacy, 24 hours. (checked 2026-11-20; source: https://easymodekorea.com/pharmacy-hospital.html)
+3. Mild (cold, headache, upset stomach): go to a pharmacy, marked 약. Shops licensed to sell basic medicines, such as convenience stores, carry 13 items including painkillers, cold medicine and digestive aids. (checked 2026-11-22; source: Seoul city: open clinics and pharmacies, Chuseok 2026 (22 Sep 2026) https://mediahub.seoul.go.kr/archives/2019473; https://easymodekorea.com/pharmacy-hospital.html)
+4. Needs a doctor but can wait: a small clinic (의원) is quicker and cheaper for simple problems. Big Seoul hospitals have international clinics with English- and Chinese-speaking staff. (checked 2026-11-17; source: https://easymodekorea.com/pharmacy-hospital.html)
+5. At night or on a holiday: clinics and pharmacies that are open are listed on the E-Gen portal, or ask 119 or 120. (checked 2026-11-22; source: Seoul city: open clinics and pharmacies, Chuseok 2026 (22 Sep 2026) https://mediahub.seoul.go.kr/archives/2019473; E-Gen emergency medical portal: open clinics and pharmacies https://www.e-gen.or.kr/egen/holiday_medical.do)
+6. Bring your passport and a payment card. An ER may ask for a deposit. Before you leave, ask for an itemised receipt and a diagnosis note in English for your insurer. (checked 2026-11-17; source: https://easymodekorea.com/pharmacy-hospital.html)
+7. Need an interpreter at the pharmacy or clinic? Call 1330 and hand over the phone. 1339 is the disease-control hotline, for infectious diseases. (checked 2026-11-20; source: https://easymodekorea.com/pharmacy-hospital.html)
+
+Korean to show
+- 구급차를 불러 주세요. = Please call an ambulance.
+- 여기가 아파요. = It hurts here. (point)
+- 열이 나요. 약 있어요? = I have a fever. Do you have medicine for it?
+- 병원에 가야 해요. = I need to go to a hospital.
+- 가까운 약국이 어디예요? = Where is the nearest pharmacy?
+- 영어 진단서와 영수증을 주세요. = Please give me a diagnosis note in English and a receipt.
+
+## Missed the last train
+URL: https://easymodekorea.com/missed-last-train-seoul.html
+Last checked: 2026-11-22
+
+1. Check there really is no train. On weekdays Seoul subway trains run until about 1 a.m. at their final stop; on weekends and public holidays they finish earlier. Your station's last train is on the platform timetable and in Naver Map. (checked 2026-11-22; source: Seoul city: subway until 1 a.m. on weekdays (30 May 2022) https://mediahub.seoul.go.kr/archives/2004711)
+2. Night bus: Seoul's N buses run from 23:00 to 06:00. Search your destination in Naver Map and look at the bus results. (checked 2026-11-22; source: Seoul city: Chuseok 2026 transport plan (22 Sep 2026) https://mediahub.seoul.go.kr/archives/2019414)
+3. Taxi: call one with k.ride or Uber, or go to a taxi rank. In Seoul the fare starts at 4,800 won, plus 20% from 22:00 to 04:00 and 40% from 23:00 to 02:00. (checked 2026-11-20; source: https://easymodekorea.com/taxi.html)
+4. Have your address ready in Korean before you get in. Save it once in My trip and show it full screen.
+5. Nothing running and no taxi? Wait somewhere lit and staffed, such as a 24-hour convenience store, and take the first train.
+
+Korean to show
+- 막차가 끊겼어요. 이 주소까지 어떻게 가요? = I missed the last train. How do I get to this address?
+- 심야버스 정류장이 어디예요? = Where is the night bus stop?
+- 택시를 불러 주실 수 있나요? = Could you call a taxi for me?
+- 첫차는 몇 시예요? = What time is the first train?
+
+## Card refused
+URL: https://easymodekorea.com/foreign-card-declined-korea.html
+Last checked: 2026-11-22
+
+1. At the till: ask staff to insert the card instead of tapping, and to charge in Korean won. Both cards are below.
+2. Try your other card. Then call your card issuer and ask them to allow payments in Korea and online payments.
+3. Pay cash: ATMs marked Global and the ATMs in CU, GS25 and 7-Eleven take foreign cards. Choose KRW, not your home currency. (checked 2026-11-17; source: https://easymodekorea.com/atm-foreign-card-cash.html)
+4. At an ordering kiosk: ask to pay at the counter instead.
+5. Subway and bus: buy a T-money card at a convenience store and top it up with cash at a station machine. Since March 2026 the newer machines in Seoul subway stations also take overseas cards; if one refuses yours, try another or pay cash. (checked 2026-11-22; source: https://easymodekorea.com/tmoney-subway-bus.html; Korea JoongAng Daily: digital barriers for visitors (12 May 2026) https://www.koreajoongangdaily.com/business/declined-cards-reservation-hassles-digital-barriers-still-undermine-the-korea-travel-experience/12519453)
+6. Staying a while: prepaid cards for visitors, WOWPASS and NAMANE, are issued at self-service kiosks, for example in subway stations. WOWPASS takes cash in 16 currencies; NAMANE takes won cash or a credit card. Both also work on public transport. On WOWPASS the transport balance is separate from the payment balance: top it up in the app before you ride. Fees and limits are on their own sites. (checked 2026-11-22; source: WOWPASS (official site) https://www.wowpass.io/; NAMANE card (official site) https://www.namanecard.com/)
+7. Paying online for trains, delivery or bookings? Each guide here says which site or app takes a foreign card.
+
+Korean to show
+- 카드가 안 돼요. 다른 방법으로 결제할 수 있나요? = My card isn't working. Can I pay another way?
+- 해외 카드인데 결제되나요? = This is a foreign card. Does it work here?
+- 카드를 꽂아서 결제해 주세요. = Please insert the card instead of tapping.
+- 키오스크에서 결제가 안 돼요. 카운터에서 계산해도 되나요? = The kiosk won't take my card. Can I pay at the counter?
+- 현금으로 계산할게요. = I'll pay in cash.
+- 원화로 결제해 주세요. = Please charge me in Korean won.
+- 영수증 주세요. = A receipt, please.
+
+## Taxi problem
+URL: https://easymodekorea.com/taxi-problem-overcharge-korea.html
+Last checked: 2026-11-22
+
+1. Before you get out: ask for the receipt and note the plate number. A photo of both is enough.
+2. Is the fare right? In Seoul it starts at 4,800 won, plus 20% from 22:00 to 04:00 and 40% from 23:00 to 02:00. (checked 2026-11-20; source: https://easymodekorea.com/taxi.html)
+3. Report overcharging or a refused ride: call 1330, the Tourist Complaint Center. Since 24 Oct 2025 it is linked with the local 120 lines, and reports are passed to the local government. (checked 2026-11-22; source: Asia Business Daily: 1330 and 120 complaint lines linked (28 Oct 2025) https://www.asiae.co.kr/en/article/2025102809181088232)
+4. In Seoul you can also call 120 and press 9 for English, Chinese, Japanese, Vietnamese or Mongolian, weekdays 9:00 to 18:00. (checked 2026-11-22; source: Guro-gu office, Seoul: 120 Dasan foreign-language service https://www.guro.go.kr/eng/contents.do?key=3251)
+5. Seoul has run a QR-code system for reporting unfair taxi practices since June 2025. (checked 2026-11-22; source: Korea Times: QR reports for Seoul taxis (20 Jan 2026) https://www.koreatimes.co.kr/amp/southkorea/society/20260120/seoul-moves-to-curb-taxi-fare-gouging-after-almost-500-complaints-of-overcharging)
+6. Rode with k.ride or Uber? Report it in the app's ride history. The route and fare are already recorded there.
+7. Feel unsafe? Ask to stop, get out where there are people, and call 112.
+
+Korean to show
+- 영수증 주세요. = A receipt, please.
+- 미터기를 켜 주세요. = Please turn on the meter.
+- 요금이 너무 많이 나왔어요. 영수증을 주세요. = The fare seems too high. Please give me a receipt.
+- 카드로 결제할게요. = I'll pay by card.
+- 여기서 내려 주세요. = Please let me out here.
+- 기사님, 이 주소로 가 주세요. = Please take me to this address.
+
+## Seollal (Lunar New Year) holiday: 2027-02-06 to 2027-02-09
+- Public holiday from Sat 6 to Tue 9 Feb 2027. Seollal itself is Sun 7 Feb. Government offices and banks are closed. (source: https://m.korea.kr/briefing/pressReleaseView.do?newsId=156768474)
+- Trains: holiday tickets are sold in a short advance sale and go fast. For Seollal 2026 the general sale ran 19 to 21 Jan for trains on 13 to 18 Feb. The 2027 dates were not announced at our last check. (source: https://www.hankyung.com/article/202601075989h)
+- Palaces: for Seollal 2026 the four main palaces and Jongmyo were free for the whole holiday, then closed the day after it ended. (source: https://view.asiae.co.kr/en/article/2026012209564811302)
+- Sick during the holiday? Open clinics and pharmacies are listed on E-Gen, or call 119. (source: https://mediahub.seoul.go.kr/archives/2019473; https://www.e-gen.or.kr/egen/holiday_medical.do)
+
+## Chuseok holiday: 2027-09-14 to 2027-09-16
+- Public holiday from Tue 14 to Thu 16 Sep 2027. Chuseok itself is Wed 15 Sep. Government offices and banks are closed. (source: https://m.korea.kr/briefing/pressReleaseView.do?newsId=156768474)
+- Getting home late: for Chuseok 2026 Seoul ran the last subway trains and buses until 1 a.m. on the two days after Chuseok, and night N buses ran as usual. Plans for 2027 come out shortly before the holiday. (source: https://mediahub.seoul.go.kr/archives/2019414)
+- Trains: holiday tickets are sold in a short advance sale and go fast. Book as soon as the sale opens, or travel outside these days. (source: https://www.hankyung.com/article/202601075989h)
+- Sick during the holiday? Open clinics and pharmacies are listed on E-Gen, or call 119. (source: https://mediahub.seoul.go.kr/archives/2019473; https://www.e-gen.or.kr/egen/holiday_medical.do)

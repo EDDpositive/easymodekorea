@@ -1,0 +1,36 @@
+name: Site checks
+
+# Runs on every pull request and on main. Confirms the committed pages match the sources and that
+# the app experience works: installable, offline, phone width, all five languages.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: site-check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Committed pages match the sources
+        run: |
+          python src/build.py
+          git status --porcelain
+          test -z "$(git status --porcelain)" || { echo "Run python src/build.py and commit the result."; git diff --stat; exit 1; }
+      - name: Static checks (pages, offline list, manifest, links, languages)
+        run: python tools/check_site.py
+      - name: Script syntax
+        run: node --check app.js && node --check sw.js
+      - name: Browser checks (installable, offline, phone width, app mode)
+        run: python tools/browser_check.py
