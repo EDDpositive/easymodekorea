@@ -37,6 +37,7 @@ zh-cn에서 대만식 단어(计程车, 简讯, 储值, 公车, 萤幕, 网路, 
 | ja/zh-tw/vi (+zh-cn 변환) | 짧게 줄인 문구 (26차) | 체크리스트 20줄(`src/data_extra.py` PLAN, vi는 `src/vi.py`), Ready의 `rd_x_*`·`rd_continue`·`rd_cta_sub`·`trust`·`pack_*`·`share_lede`, `stamp`·`addr_note`·`src_short`·`names_h`, `READY_NC` | 줄이면서 뜻이 빠지거나 명령조로 딱딱해지지 않았는지. 특히 "🔒 이 폰에만"과 공유 안내(개인정보) |
 | ja/zh-tw/zh-cn/vi | 앱 바와 홈 (27차) | 언어 표시 `LANG_CODE`(JA, 繁中, 简中, VI), Ready 카드의 다음 할 일 `rd_next_step`(次: / 下一步: / Tiếp theo:) | 짧은 표시가 자연스러운지. 繁中/简中 대신 繁體/简体가 나은지 |
 | ja/zh-tw/zh-cn/vi | 답 고르기 카드·주변 찾기·내 여행 접힘 (28차) | `src/app_shell.py`의 `ASK_CARDS`(질문 8개와 답 24개), `near`·`near_h`·`near_sub`, `f_addr`·`f_arrive`·`f_none`·`f_count`, `ask_h`·`ask_got`·`speak` | 답이 직원이 실제로 하는 말과 맞는지(특히 zh 有/沒有, vi "Được"), 짧은 줄이 자연스러운지. 한국어 쪽(`ASK_TAP` "아래에서 답을 눌러 주세요", 검색어 `NEAR`)은 한국어 화자가 확인 |
+| ja/zh-tw/zh-cn/vi | 약국 카드·카드 탭 접힘 (29차) | `src/app_shell.py`의 `PHARM_CARDS`(증상 14개), `PHARM_ASK`(약사에게 묻는 질문 4개와 답 12개), `pharm_h`·`pharm_link`·`f_cards`·`guide_cards_h` | 증상 표현이 약국에서 쓰는 말과 맞는지(ja 湿布, zh-tw OK繃·痠痛貼布, zh-cn 创可贴·膏药贴, vi băng cá nhân). 한국어 쪽("파스 주세요", "필요할 때만 드세요", "비슷한 약을 드릴게요")은 약사가 실제로 하는 말인지 한국어 화자가 확인 |
 
 ## 확인하는 방법 (제안)
 - 언어별로 원어민 한 명이 홈 + 가이드 3개(공항, 택시, 아플 때)를 폰으로 읽고 위 표에 O/X와 고친 문구를 적으면 30분 안에 끝남.

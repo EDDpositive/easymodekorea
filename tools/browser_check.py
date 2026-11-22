@@ -114,6 +114,24 @@ def main():
         b.js("history.back()"); time.sleep(0.3)
         check(ask.startswith("3|true|") and "No, it doesn't" in ask and ask.endswith("|true") and plain, "an ask card shows three Korean answers; a tap shows that answer in English; plain cards show none", ask)
 
+        # Korean cards fold to one row per group with a count; one opens at a time; search opens only groups with a match (29차).
+        cf = b.js("""(() => { const f = [...document.querySelectorAll('#cards > details.fold')].filter(x => !x.hidden), vh = innerHeight;
+          f[0].open = true; f[1].open = true; const one = f.filter(x => x.open).length; f.forEach(x => x.open = false);
+          const fit = f[f.length - 1].getBoundingClientRect().bottom <= vh;
+          const ph = document.getElementById('f-pharm'), pa = ph.querySelectorAll('.askrow').length, pn = ph.querySelectorAll('.sayrow').length;
+          const q = document.getElementById('cq'); q.value = 'pork'; q.dispatchEvent(new Event('input'));
+          const shown = [...document.querySelectorAll('#cards > details.fold')].filter(x => !x.hidden && x.open).map(x => x.id).join(',');
+          q.value = ''; q.dispatchEvent(new Event('input'));
+          const back = [...document.querySelectorAll('#cards > details.fold')].filter(x => !x.hidden && !x.open).length;
+          return [f.length, one, fit, document.querySelector('#fs-pharm .sr').textContent, pa, pn, shown, back === f.length].join('|'); })()""")
+        check(cf.startswith("7|1|true|18 cards|4|18|") and "f-ask" in cf and "f-food" in cf and "f-pharm" not in cf.split("|")[6] and cf.endswith("|true"),
+              "Korean cards show seven group rows on one screen with counts, one open at a time; search opens only groups with a match", cf)
+        b.go(srv.url + "phrases.html#f-pharm", wait=0.5)
+        ph = b.js("[document.getElementById('f-pharm').open, document.querySelectorAll('#cards > details.fold[open]').length].join()")
+        b.go(srv.url + "help.html", wait=0.5)
+        hl = b.js("!!document.querySelector('.near a[href=\"phrases.html#f-pharm\"]')")
+        check(ph == "true,1" and hl, "Help links to the pharmacist cards, and the link opens that group", f"{ph} / {hl}")
+
         # Find nearby: six Korean search words that open Naver Map.
         b.go(srv.url + "help.html", wait=0.5)
         near = b.js("[...document.querySelectorAll('.near-a')].map(a => decodeURIComponent(a.href)).join(' ')")

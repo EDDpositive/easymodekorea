@@ -754,3 +754,19 @@ html.offline .install-bar { display: none; }
 .btn { min-height: 44px; box-sizing: border-box; }
 /* In the installed app the site footer is web chrome: About and Privacy live in My trip > This app, Contact in Help. */
 .app .foot { display: none; }
+
+/* 29차: Korean cards fold to one row per group (count on the row), one open at a time */
+#cards.folds { margin-top: 12px; gap: 8px; }
+/* The count is short, so it sits on the same line as the name: the seven rows fit one phone screen. */
+#cards > .fold .ft { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+#cards > .fold .fst { flex: none; }
+#cards .fold .fin { display: grid; gap: 10px; }
+#f-guides .fin { gap: 18px; }
+.fold .fin > form > h2:first-child { display: none; }
+.fold .fin > form.own { margin: 0; padding: 0; border: 0; background: none; }
+.cgroup h3 { display: flex; align-items: center; gap: 8px; margin: 0; font: 700 16px var(--display); }
+.cgroup h3 svg { width: 22px; height: 22px; flex: none; fill: none; stroke: var(--link); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.cgroup h3 a { display: inline-flex; align-items: center; min-height: 44px; color: var(--ink); }
+.near .glist { margin-top: 10px; }
+#cards > .fold .fst { min-width: 28px; padding: 2px 8px; border-radius: 999px; background: var(--bg); color: var(--muted); font-weight: 700; text-align: center; box-sizing: border-box; }
+#cards > .fold .fst:empty { display: none; }

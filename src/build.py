@@ -1182,7 +1182,8 @@ def near_block(lang):
     ic = {"pharmacy": "pill", "er": "er", "police": "police", "store": "store", "wc": "wc", "subway": "transit"}
     rows = "".join(f'<a class="near-a" href="https://map.naver.com/p/search/{urllib.parse.quote(ko)}" data-q="{e(ko)}" rel="noopener" target="_blank">'
                    f'<span class="ic">{icon(ic[k])}</span><b>{e(t["near"][k])}</b><small lang="ko">{e(ko)}</small></a>' for k, ko in A.NEAR)
-    return f'<section class="sec near" aria-labelledby="nr-h"><h2 id="nr-h">{e(t["near_h"])}</h2><p class="hint">{e(t["near_sub"])}</p><div class="near-g">{rows}</div></section>'
+    return (f'<section class="sec near" aria-labelledby="nr-h"><h2 id="nr-h">{e(t["near_h"])}</h2><p class="hint">{e(t["near_sub"])}</p><div class="near-g">{rows}</div>'
+            f'<ul class="glist"><li><a href="phrases.html#f-pharm"><span class="ic">{icon("pill")}</span><span>{e(t["pharm_link"])}</span></a></li></ul></section>')
 
 
 NEAR_JS = r"""
@@ -1226,14 +1227,20 @@ CARDS_JS = r"""
 (function () {
   /* Filter the cards, and keep the visitor's own cards on this phone. */
   const q = document.getElementById("cq"), nores = document.getElementById("cnores");
+  const folds = [...document.querySelectorAll("#cards > details.fold")].filter(f => f.id !== "f-own");
   const run = () => { const v = q.value.trim().toLowerCase(); let n = 0;
     document.querySelectorAll("#cards .sayrow, #cards .names li").forEach(c => { const ok = !v || (c.dataset.kw || c.textContent.toLowerCase()).includes(v); c.hidden = !ok; if (ok) n++; });
     document.querySelectorAll("#cards .cgroup").forEach(g => { g.hidden = !g.querySelector(".sayrow:not([hidden]), .names li:not([hidden])"); });
+    /* While searching, every group with a match opens at once (the one-open rule is lifted); clearing closes them again. */
+    folds.forEach(f => { if (f.id === "f-yours" && !box.children.length) return;
+      const hit = !!f.querySelector(".sayrow:not([hidden]), .names li:not([hidden])");
+      if (v) { f.removeAttribute("name"); f.open = hit; f.hidden = !hit; } else { f.open = false; f.hidden = false; f.setAttribute("name", "cards"); } });
+    document.getElementById("f-own").hidden = !!v;
     nores.hidden = !v || n > 0; };
   q.addEventListener("input", run);
-  const cfg = document.getElementById("own").dataset, inp = document.getElementById("own-in"), box = document.getElementById("own-list"), wrap = document.getElementById("own-wrap");
+  const cfg = document.getElementById("own").dataset, inp = document.getElementById("own-in"), box = document.getElementById("own-list"), wrap = document.getElementById("f-yours");
   const load = () => { try { const a = JSON.parse(store("emk-cards") || "[]"); return Array.isArray(a) ? a.filter(s => typeof s === "string").slice(0, 30) : []; } catch (e) { return []; } };
-  const paint = () => { const a = load(); box.replaceChildren(); wrap.hidden = !a.length;
+  const paint = () => { const a = load(); box.replaceChildren(); wrap.hidden = !a.length; document.getElementById("fs-yours").replaceChildren(el("span", { "aria-hidden": "true", text: String(a.length) }), el("span", { class: "sr", text: cfg.count.replace("{n}", a.length) }));
     a.forEach((txt, i) => { const b = el("button", { type: "button", class: "chip", "aria-label": cfg.show + ": " + txt }, [el("span", { lang: "ko", text: txt }), el("small", { text: cfg.show }), el("i", { "aria-hidden": "true", text: "🗣" })]);
       b.addEventListener("click", () => show(cfg.lbl, txt, "", ""));
       const x = el("button", { type: "button", class: "linkbtn rm", text: cfg.remove }); x.addEventListener("click", () => { const n = load(); n.splice(i, 1); store("emk-cards", JSON.stringify(n)); paint(); });
@@ -1242,6 +1249,10 @@ CARDS_JS = r"""
   document.getElementById("own").addEventListener("submit", ev => { ev.preventDefault(); const v = inp.value.trim().slice(0, 200); if (!v) { inp.focus(); return; }
     const a = load().filter(s => s !== v); a.unshift(v); store("emk-cards", JSON.stringify(a.slice(0, 30))); inp.value = ""; paint(); count("own-card-save", "own card saved"); });
   paint();
+  /* A link such as phrases.html#f-pharm opens that group. */
+  const open = () => { const f = location.hash && document.getElementById(location.hash.slice(1)); if (f && f.tagName === "DETAILS") { f.open = true; f.scrollIntoView(); } };
+  open(); addEventListener("hashchange", open);
+  folds.forEach(f => f.addEventListener("toggle", () => { if (f.open && !q.value) count("cards/" + f.id.slice(2), "card group"); }));
 })();
 """
 
@@ -1249,14 +1260,20 @@ CARDS_JS = r"""
 def build_cards(lang):
     """Every Korean card on one page, grouped by guide, plus cards the visitor makes."""
     t = A.T[lang]; S = SHORT[lang]; LU = layout.UI.get(lang, layout.UI["en"]); ux = UX[lang]
-    own = f"""<form class="own" id="own" data-lbl="{e(S['show'])}" data-show="{e(t['own_show'])}" data-remove="{e(t['remove'])}"><h2>{e(t['own_h'])}</h2>
+    own = f"""<form class="own" id="own" data-lbl="{e(S['show'])}" data-show="{e(t['own_show'])}" data-remove="{e(t['remove'])}" data-count="{e(t['f_cards'])}"><h2>{e(t['own_h'])}</h2>
 <textarea id="own-in" lang="ko" maxlength="200" rows="1" aria-label="{e(t['own_h'])}" placeholder="{e(t['own_ph'])}"></textarea>
-<div class="actions"><button class="btn alt" type="button" id="own-show">🗣 {e(t['own_show'])}</button><button class="btn ghost" type="submit">{e(t['own_save'])}</button></div><p class="hint">{e(t['own_note'])}</p></form>
-<section id="own-wrap" class="names" hidden><h2>{e(t['own_list_h'])}</h2><ul id="own-list"></ul></section>"""
-    groups = [f'<section class="cgroup asks"><h2>{e(t["ask_h"])}</h2>' + "".join(ask_row(lang, q[0], q[1][lang], ans) for q, ans in A.ASK_CARDS) + "</section>",
-              f'<section class="cgroup"><h2>{e(t["basics_h"])}</h2>' + "".join(say_row(lang, ko, m[lang]) for ko, m in HELP_PHRASES) + "</section>"]
-    for key, cards in (("food_h", A.FOOD_CARDS), ("pay_h", A.PAY_CARDS)):
-        groups.append(f'<section class="cgroup"><h2>{e(t[key])}</h2>' + "".join(say_row(lang, ko, m[lang], t[key]) for ko, m in cards) + "</section>")
+<div class="actions"><button class="btn alt" type="button" id="own-show">🗣 {e(t['own_show'])}</button><button class="btn ghost" type="submit">{e(t['own_save'])}</button></div><p class="hint">{e(t['own_note'])}</p></form>"""
+    n_of = lambda n: f'<span aria-hidden="true">{n}</span><span class="sr">{e(t["f_cards"].replace("{n}", str(n)))}</span>'
+    pk = t["pharm_h"] + " " + t["near"]["pharmacy"]
+    # 29차: every group folds to one row with its card count, one open at a time, so the whole tab fits one screen.
+    folds = [fold("yours", "save", t["own_list_h"], '<div class="names"><ul id="own-list"></ul></div>', "cards", attrs=" hidden"),
+             fold("ask", "translate", t["ask_h"], "".join(ask_row(lang, q[0], q[1][lang], ans) for q, ans in A.ASK_CARDS), "cards", n_of(len(A.ASK_CARDS)), raw=True),
+             fold("pharm", "pill", t["pharm_h"], "".join(ask_row(lang, q[0], q[1][lang], ans).replace('data-kw="', f'data-kw="{e(pk.lower())} ', 1) for q, ans in A.PHARM_ASK)
+                  + "".join(say_row(lang, ko, m[lang], pk) for ko, m in A.PHARM_CARDS), "cards", n_of(len(A.PHARM_ASK) + len(A.PHARM_CARDS)), raw=True),
+             fold("basics", "help", t["basics_h"], "".join(say_row(lang, ko, m[lang]) for ko, m in HELP_PHRASES), "cards", n_of(len(HELP_PHRASES)), raw=True)]
+    for fid, ic, key, cards in (("food", "food-booking", "food_h", A.FOOD_CARDS), ("pay", "cash", "pay_h", A.PAY_CARDS)):
+        folds.append(fold(fid, ic, t[key], "".join(say_row(lang, ko, m[lang], t[key]) for ko, m in cards), "cards", n_of(len(cards)), raw=True))
+    groups, n_g = [], 0
     for tk in task_list(lang):
         names = COPY.get(tk["id"], [])
         if not tk["phrases"] and not names: continue
@@ -1264,12 +1281,14 @@ def build_cards(lang):
         says = "".join(say_row(lang, ko, m, kw) for ko, m in tk["phrases"])
         wide = ' class="wide"'
         chips = "".join(f'<li{wide if len(ko) > 8 else ''} data-kw="{e((ko + " " + tx(m, lang) + " " + kw).lower())}"><button class="chip" type="button" data-copy="{e(ko)}" data-done="✓ {e(LU["copied"])}"><span lang="ko">{e(ko)}</span><small>{e(tx(m, lang))}</small><i aria-hidden="true">📋</i></button></li>' for ko, m in names)
-        groups.append(f'<section class="cgroup"><h2>{tk["icon"]}<a href="{tk["slug"]}.html">{e(tk["short"])}</a></h2>{says}' + (f'<div class="names"><ul>{chips}</ul></div>' if chips else "") + "</section>")
-    # Ready-made cards first: a traveler rarely types Korean, so making one's own card comes after the list (27차).
+        n_g += len(tk["phrases"]) + len(names)
+        groups.append(f'<section class="cgroup"><h3>{tk["icon"]}<a href="{tk["slug"]}.html">{e(tk["short"])}</a></h3>{says}' + (f'<div class="names"><ul>{chips}</ul></div>' if chips else "") + "</section>")
+    folds.append(fold("guides", "maps", t["guide_cards_h"], "".join(groups), "cards", n_of(n_g), raw=True))
+    # Ready-made cards first: a traveler rarely types Korean, so making one's own card comes last (27차).
+    folds.append(fold("own", "cards", t["own_h"], own, "cards"))
     inner = f"""<label class="search"><span class="sr">{e(t['cards_filter'])}</span><input id="cq" type="search" placeholder="{e(t['cards_filter'])}" autocomplete="off"></label>
 <p class="hint" id="cnores" hidden>{e(ux['nores'])}</p>
-<div id="cards">{''.join(groups)}</div>
-{own}"""
+<div class="folds" id="cards">{''.join(folds)}</div>"""
     return app_page(lang, "phrases", (t["cards_title"], t["cards_lede"]), t["cards_seo"], t["cards_desc"], inner, "cards", CARDS_JS)
 
 
@@ -1347,11 +1366,11 @@ def build_trip(lang):
     return app_page(lang, "saved", (t["trip_title"], t["trip_lede"]), t["trip_title"], t["trip_lede"], inner, "trip", TRIP_JS + PLACES_JS + SHARE_JS + ALERTS_JS + ARRIVAL_JS + FOLD_JS, index=False)
 
 
-def fold(fid, ic, title, inner):
-    """One My trip tool folded to a single row (28차): icon, name and its state on this phone; tap to open. One open at a time."""
+def fold(fid, ic, title, inner, group="trip-tools", state="", attrs="", raw=False):
+    """One tool or card group folded to a single row (28차, cards 29차): icon, name and its state; tap to open. One open at a time."""
     svg = A.IC[ic] if ic in A.IC else icon(ic)
-    return (f'<details class="fold" id="f-{fid}" name="trip-tools"><summary><span class="ic">{svg}</span><span class="ft"><b>{e(title)}</b>'
-            f'<small class="fst" id="fs-{fid}"></small></span></summary><div class="fin">{inner}</div></details>')
+    return (f'<details class="fold" id="f-{fid}" name="{group}"{attrs}><summary><span class="ic">{svg}</span><span class="ft"><b>{e(title)}</b>'
+            f'<small class="fst" id="fs-{fid}">{state if raw else e(state)}</small></span></summary><div class="fin">{inner}</div></details>')
 
 
 FOLD_JS = r"""
@@ -1464,8 +1483,8 @@ def build_privacy(lang):
 def search_index(lang):
     """Questions answered inside guides and every Korean card, for the home page search box."""
     faq = [[sl, tid, q] for tid, sl, _ in TASK_META for q, _a in (DEEP.get(tid, {}).get(lang, {}).get("faq", []))]
-    cards = ([[q[0], q[1][lang], [[a, m[lang]] for a, m in ans]] for q, ans in A.ASK_CARDS]
-             + [[ko, m[lang]] for ko, m in HELP_PHRASES + A.FOOD_CARDS + A.PAY_CARDS] + [[ko, m[lang]] for lst in PHRASES.values() for ko, m in lst])
+    cards = ([[q[0], q[1][lang], [[a, m[lang]] for a, m in ans]] for q, ans in A.ASK_CARDS + A.PHARM_ASK]
+             + [[ko, m[lang]] for ko, m in HELP_PHRASES + A.PHARM_CARDS + A.FOOD_CARDS + A.PAY_CARDS] + [[ko, m[lang]] for lst in PHRASES.values() for ko, m in lst])
     seen = set(c[0] for c in cards)
     for rows in COPY.values():
         for ko, m in rows:

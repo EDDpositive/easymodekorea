@@ -35,7 +35,7 @@ T = {
         "trip_more_h": "More for your trip", "trip_cards": "Make a Korean card to show", "trip_setup": "Check what works with your phone", "trip_help": "Emergency numbers",
         "trip_app_h": "This app", "trip_offline": "{n} pages are stored on this phone and open without data.", "trip_install": "Install on this phone",
         "trip_clear": "Erase what I saved on this phone", "trip_clear_q": "Erase your saved guides, address, cards and phone setup from this phone?", "trip_cleared": "Erased.",
-        "f_addr": "Stay address", "f_arrive": "e-Arrival Card timing", "f_none": "Not added", "f_count": "{n} saved", "near_h": "Find nearby", "near_sub": "Opens Naver Map with the Korean word", "near": {"pharmacy": "Pharmacy", "er": "Emergency room", "police": "Police box", "store": "Convenience store", "wc": "Restroom", "subway": "Subway station"}, "ask_h": "Ask, they tap the answer", "ask_got": "Their answer", "speak": "Play aloud",
+        "f_addr": "Stay address", "f_arrive": "e-Arrival Card timing", "f_none": "Not added", "f_count": "{n} saved", "near_h": "Find nearby", "near_sub": "Opens Naver Map with the Korean word", "near": {"pharmacy": "Pharmacy", "er": "Emergency room", "police": "Police box", "store": "Convenience store", "wc": "Restroom", "subway": "Subway station"}, "ask_h": "Ask, they tap the answer", "ask_got": "Their answer", "speak": "Play aloud", "pharm_h": "At the pharmacy", "f_cards": "{n} cards", "guide_cards_h": "Names from each guide", "pharm_link": "Cards for the pharmacist",
         "remove": "Remove",
         "cards_title": "Korean cards to show", "cards_seo": "Korean phrases to show staff and drivers in Korea (offline cards)",
         "cards_desc": "Korean phrases and place names in big letters. Show them to a driver or staff, or copy them into Naver Map. Make your own card too. Works offline.",
@@ -84,7 +84,7 @@ T = {
         "trip_more_h": "旅行に役立つもの", "trip_cards": "見せる韓国語カードを作る", "trip_setup": "自分のスマホで使えるものを確認", "trip_help": "緊急連絡先",
         "trip_app_h": "このアプリ", "trip_offline": "{n}ページがこのスマホに保存され、データ通信なしで開けます。", "trip_install": "このスマホにインストール",
         "trip_clear": "このスマホに保存した内容を消去", "trip_clear_q": "保存したガイド、住所、カード、スマホの設定をこのスマホから消去しますか?", "trip_cleared": "消去しました。",
-        "f_addr": "宿泊先の住所", "f_arrive": "電子入国カードの提出時刻", "f_none": "未登録", "f_count": "{n}件", "near_h": "近くを探す", "near_sub": "韓国語の検索語でNAVER地図を開きます", "near": {"pharmacy": "薬局", "er": "救急外来", "police": "交番", "store": "コンビニ", "wc": "トイレ", "subway": "地下鉄駅"}, "ask_h": "質問して、答えをタップしてもらう", "ask_got": "相手の答え", "speak": "読み上げ",
+        "f_addr": "宿泊先の住所", "f_arrive": "電子入国カードの提出時刻", "f_none": "未登録", "f_count": "{n}件", "near_h": "近くを探す", "near_sub": "韓国語の検索語でNAVER地図を開きます", "near": {"pharmacy": "薬局", "er": "救急外来", "police": "交番", "store": "コンビニ", "wc": "トイレ", "subway": "地下鉄駅"}, "ask_h": "質問して、答えをタップしてもらう", "ask_got": "相手の答え", "speak": "読み上げ", "pharm_h": "薬局で", "f_cards": "{n}枚", "guide_cards_h": "ガイドごとの名前・場所", "pharm_link": "薬剤師に見せるカード",
         "remove": "削除",
         "cards_title": "見せる韓国語カード", "cards_seo": "韓国で店員や運転手に見せる韓国語フレーズ(オフライン対応)",
         "cards_desc": "韓国語のフレーズと地名を大きな文字で表示。運転手や店員に見せたり、Naver Mapにコピーしたりできます。自分のカードも作れます。オフライン対応。",
@@ -133,7 +133,7 @@ T = {
         "trip_more_h": "旅途中用得到", "trip_cards": "做一張給人看的韓文卡", "trip_setup": "查查你的手機能用哪些", "trip_help": "緊急電話",
         "trip_app_h": "這個App", "trip_offline": "這支手機已存好{n}個頁面,沒有網路也能開。", "trip_install": "安裝到這支手機",
         "trip_clear": "清除存在這支手機的內容", "trip_clear_q": "要從這支手機清除收藏的指南、地址、卡片和手機設定嗎?", "trip_cleared": "已清除。",
-        "f_addr": "住宿地址", "f_arrive": "電子入境卡何時能填", "f_none": "尚未新增", "f_count": "{n} 個", "near_h": "找附近", "near_sub": "用韓文關鍵字開啟 Naver 地圖", "near": {"pharmacy": "藥局", "er": "急診室", "police": "派出所", "store": "便利商店", "wc": "廁所", "subway": "地鐵站"}, "ask_h": "問完讓對方點答案", "ask_got": "對方的回答", "speak": "朗讀",
+        "f_addr": "住宿地址", "f_arrive": "電子入境卡何時能填", "f_none": "尚未新增", "f_count": "{n} 個", "near_h": "找附近", "near_sub": "用韓文關鍵字開啟 Naver 地圖", "near": {"pharmacy": "藥局", "er": "急診室", "police": "派出所", "store": "便利商店", "wc": "廁所", "subway": "地鐵站"}, "ask_h": "問完讓對方點答案", "ask_got": "對方的回答", "speak": "朗讀", "pharm_h": "在藥局", "f_cards": "{n} 張", "guide_cards_h": "各指南的名稱與地點", "pharm_link": "給藥師看的卡片",
         "remove": "移除",
         "cards_title": "給人看的韓文卡", "cards_seo": "在韓國給店員和司機看的韓文句子(可離線使用)",
         "cards_desc": "用大字顯示韓文句子和地名,可以給司機或店員看,也能複製到Naver Map。還能自己做卡片。離線也能用。",
@@ -182,7 +182,7 @@ T = {
         "trip_more_h": "旅途中用得到", "trip_cards": "做一张给人看的韩文卡", "trip_setup": "查查你的手机能用哪些", "trip_help": "紧急电话",
         "trip_app_h": "这个App", "trip_offline": "这部手机已存好{n}个页面,没有网络也能打开。", "trip_install": "安装到这部手机",
         "trip_clear": "清除存在这部手机的内容", "trip_clear_q": "要从这部手机清除收藏的指南、地址、卡片和手机设置吗?", "trip_cleared": "已清除。",
-        "f_addr": "住宿地址", "f_arrive": "电子入境卡何时能填", "f_none": "尚未添加", "f_count": "{n} 个", "near_h": "找附近", "near_sub": "用韩文关键词打开 Naver 地图", "near": {"pharmacy": "药店", "er": "急诊室", "police": "派出所", "store": "便利店", "wc": "厕所", "subway": "地铁站"}, "ask_h": "问完让对方点答案", "ask_got": "对方的回答", "speak": "朗读",
+        "f_addr": "住宿地址", "f_arrive": "电子入境卡何时能填", "f_none": "尚未添加", "f_count": "{n} 个", "near_h": "找附近", "near_sub": "用韩文关键词打开 Naver 地图", "near": {"pharmacy": "药店", "er": "急诊室", "police": "派出所", "store": "便利店", "wc": "厕所", "subway": "地铁站"}, "ask_h": "问完让对方点答案", "ask_got": "对方的回答", "speak": "朗读", "pharm_h": "在药店", "f_cards": "{n} 张", "guide_cards_h": "各指南的名称与地点", "pharm_link": "给药剂师看的卡片",
         "remove": "移除",
         "cards_title": "给人看的韩文卡", "cards_seo": "在韩国给店员和司机看的韩文句子(可离线使用)",
         "cards_desc": "用大字显示韩文句子和地名,可以给司机或店员看,也能复制到Naver Map。还能自己做卡片。离线也能用。",
@@ -231,7 +231,7 @@ T = {
         "trip_more_h": "Hữu ích cho chuyến đi", "trip_cards": "Tạo thẻ tiếng Hàn để đưa xem", "trip_setup": "Xem điện thoại của bạn dùng được gì", "trip_help": "Số khẩn cấp",
         "trip_app_h": "Ứng dụng này", "trip_offline": "{n} trang đã lưu trên điện thoại này và mở được khi không có mạng.", "trip_install": "Cài vào điện thoại này",
         "trip_clear": "Xóa những gì đã lưu trên điện thoại này", "trip_clear_q": "Xóa hướng dẫn đã lưu, địa chỉ, thẻ và thiết lập điện thoại khỏi máy này?", "trip_cleared": "Đã xóa.",
-        "f_addr": "Địa chỉ chỗ ở", "f_arrive": "Giờ nộp e-Arrival Card", "f_none": "Chưa thêm", "f_count": "{n} mục", "near_h": "Tìm gần đây", "near_sub": "Mở Naver Map bằng từ khóa tiếng Hàn", "near": {"pharmacy": "Nhà thuốc", "er": "Phòng cấp cứu", "police": "Đồn cảnh sát", "store": "Cửa hàng tiện lợi", "wc": "Nhà vệ sinh", "subway": "Ga tàu điện ngầm"}, "ask_h": "Hỏi, rồi để họ chạm vào câu trả lời", "ask_got": "Câu trả lời", "speak": "Đọc to",
+        "f_addr": "Địa chỉ chỗ ở", "f_arrive": "Giờ nộp e-Arrival Card", "f_none": "Chưa thêm", "f_count": "{n} mục", "near_h": "Tìm gần đây", "near_sub": "Mở Naver Map bằng từ khóa tiếng Hàn", "near": {"pharmacy": "Nhà thuốc", "er": "Phòng cấp cứu", "police": "Đồn cảnh sát", "store": "Cửa hàng tiện lợi", "wc": "Nhà vệ sinh", "subway": "Ga tàu điện ngầm"}, "ask_h": "Hỏi, rồi để họ chạm vào câu trả lời", "ask_got": "Câu trả lời", "speak": "Đọc to", "pharm_h": "Ở nhà thuốc", "f_cards": "{n} thẻ", "guide_cards_h": "Tên trong các hướng dẫn", "pharm_link": "Thẻ đưa dược sĩ xem",
         "remove": "Bỏ",
         "cards_title": "Thẻ tiếng Hàn để đưa xem", "cards_seo": "Câu tiếng Hàn để đưa nhân viên và tài xế xem ở Hàn Quốc (dùng offline)",
         "cards_desc": "Câu và tên địa điểm tiếng Hàn bằng chữ lớn. Đưa cho tài xế hoặc nhân viên xem, hoặc sao chép vào Naver Map. Bạn cũng có thể tự tạo thẻ. Dùng được khi không có mạng.",
@@ -321,6 +321,42 @@ ASK_CARDS = [
       _c("아니요", "No", "いいえ", "不行", "不行", "Không")]),
 ]
 ASK_TAP = "아래에서 답을 눌러 주세요"   # shown to staff, in Korean only
+
+# At the pharmacy (29차): symptoms to show, and questions the pharmacist answers with one tap. Phrases only, no medical advice.
+PHARM_CARDS = [
+    _c("열이 나고 몸이 아파요.", "I have a fever and my body aches.", "熱があって、体が痛いです。", "我發燒,全身痠痛。", "我发烧,全身酸痛。", "Tôi bị sốt và đau nhức người."),
+    _c("기침이 나고 목이 아파요.", "I have a cough and a sore throat.", "咳が出て、のどが痛いです。", "我咳嗽,喉嚨痛。", "我咳嗽,嗓子疼。", "Tôi bị ho và đau họng."),
+    _c("콧물이 나고 코가 막혀요.", "I have a runny, blocked nose.", "鼻水が出て、鼻が詰まっています。", "我流鼻水,鼻塞。", "我流鼻涕,鼻塞。", "Tôi bị sổ mũi và nghẹt mũi."),
+    _c("머리가 아파요.", "I have a headache.", "頭が痛いです。", "我頭痛。", "我头疼。", "Tôi bị đau đầu."),
+    _c("배가 아프고 설사를 해요.", "I have a stomach ache and diarrhea.", "お腹が痛くて、下痢をしています。", "我肚子痛,還拉肚子。", "我肚子疼,还拉肚子。", "Tôi bị đau bụng và tiêu chảy."),
+    _c("소화가 안 되고 속이 더부룩해요.", "I have indigestion and feel bloated.", "消化不良で、お腹が張っています。", "我消化不良,肚子脹。", "我消化不良,肚子胀。", "Tôi bị khó tiêu và đầy bụng."),
+    _c("멀미약 주세요.", "Motion sickness medicine, please.", "酔い止めをください。", "請給我暈車藥。", "请给我晕车药。", "Cho tôi thuốc chống say xe."),
+    _c("생리통이 있어요.", "I have period pain.", "生理痛があります。", "我經痛。", "我痛经。", "Tôi bị đau bụng kinh."),
+    _c("벌레에 물려서 가려워요.", "An insect bit me and it itches.", "虫に刺されて、かゆいです。", "我被蟲咬了,很癢。", "我被虫咬了,很痒。", "Tôi bị côn trùng cắn và bị ngứa."),
+    _c("손을 베었어요. 밴드와 소독약 주세요.", "I cut my hand. Plasters and antiseptic, please.", "手を切りました。絆創膏と消毒液をください。", "我手割傷了,請給我OK繃和消毒藥水。", "我手划伤了,请给我创可贴和消毒水。", "Tôi bị đứt tay. Cho tôi băng cá nhân và thuốc sát trùng."),
+    _c("근육이 아파요. 파스 주세요.", "My muscles ache. A pain relief patch, please.", "筋肉が痛いです。湿布をください。", "我肌肉痠痛,請給我痠痛貼布。", "我肌肉酸痛,请给我膏药贴。", "Tôi bị đau cơ. Cho tôi miếng dán giảm đau."),
+    _c("어린이용 약 있어요?", "Do you have medicine for children?", "子ども用の薬はありますか?", "有兒童用的藥嗎?", "有儿童用的药吗?", "Có thuốc cho trẻ em không?"),
+    _c("저는 임신 중이에요.", "I'm pregnant.", "妊娠中です。", "我懷孕了。", "我怀孕了。", "Tôi đang mang thai."),
+    _c("약 알레르기가 있어요.", "I'm allergic to some medicines.", "薬のアレルギーがあります。", "我對某些藥物過敏。", "我对某些药物过敏。", "Tôi bị dị ứng với một số loại thuốc."),
+]
+PHARM_ASK = [
+    (_c("이 약은 어떻게 먹어요?", "How do I take this?", "この薬はどう飲みますか?", "這個藥要怎麼吃?", "这个药怎么吃?", "Thuốc này uống thế nào?"),
+     [_c("하루 세 번, 식후에 드세요", "Three times a day, after meals", "1日3回、食後に飲んでください", "一天三次,飯後吃", "一天三次,饭后吃", "Ngày ba lần, sau bữa ăn"),
+      _c("하루 두 번, 아침저녁으로 드세요", "Twice a day, morning and evening", "1日2回、朝と夜に飲んでください", "一天兩次,早晚各一次", "一天两次,早晚各一次", "Ngày hai lần, sáng và tối"),
+      _c("필요할 때만 드세요", "Only when you need it", "必要なときだけ飲んでください", "需要時才吃", "需要时才吃", "Chỉ uống khi cần")]),
+    (_c("이 약을 먹으면 졸려요?", "Will this make me sleepy?", "この薬を飲むと眠くなりますか?", "吃這個藥會想睡嗎?", "吃这个药会犯困吗?", "Uống thuốc này có buồn ngủ không?"),
+     [_c("네, 졸릴 수 있어요", "Yes, it may", "はい、眠くなることがあります", "會,可能會想睡", "会,可能会犯困", "Có, có thể buồn ngủ"),
+      _c("조금 졸릴 수 있어요", "It may a little", "少し眠くなるかもしれません", "可能會有一點", "可能会有一点", "Có thể hơi buồn ngủ"),
+      _c("아니요, 안 졸려요", "No", "いいえ、眠くなりません", "不會", "不会", "Không")]),
+    (_c("처방전 없이 살 수 있어요?", "Can I buy this without a prescription?", "処方箋なしで買えますか?", "不用處方箋可以買嗎?", "不用处方可以买吗?", "Mua không cần đơn thuốc được không?"),
+     [_c("네, 살 수 있어요", "Yes, you can", "はい、買えます", "可以", "可以", "Được"),
+      _c("처방전이 필요해요", "You need a prescription", "処方箋が必要です", "需要處方箋", "需要处方", "Cần đơn thuốc"),
+      _c("비슷한 약을 드릴게요", "I'll give you a similar one", "似た薬をお出しします", "我給你類似的藥", "我给你类似的药", "Tôi sẽ đưa thuốc tương tự")]),
+    (_c("병원에 가야 해요?", "Should I see a doctor?", "病院に行ったほうがいいですか?", "需要去醫院嗎?", "需要去医院吗?", "Tôi có cần đi bệnh viện không?"),
+     [_c("이 약으로 괜찮아요", "This medicine should be enough", "この薬で大丈夫です", "吃這個藥就可以", "吃这个药就可以", "Thuốc này là được"),
+      _c("병원에 가 보세요", "Please see a doctor", "病院に行ってください", "請去醫院看看", "请去医院看看", "Hãy đi khám bác sĩ"),
+      _c("응급실로 가세요", "Go to the emergency room", "救急外来に行ってください", "請去急診室", "请去急诊室", "Hãy đến phòng cấp cứu")]),
+]
 
 # Find nearby (28차): one tap opens Naver Map on a Korean search word, so the reader never types Korean.
 NEAR = [("pharmacy", "약국"), ("er", "응급실"), ("police", "파출소"), ("store", "편의점"), ("wc", "공중화장실"), ("subway", "지하철역")]

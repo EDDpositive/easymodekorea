@@ -53,6 +53,7 @@ FRAMES = [("home", "Korea travel help, *one tap away*", "Ready check, 8 situatio
           ("guide", "Short answers, *checked and dated*", "Each fact shows the day it was checked"),
           ("ask", "Staff *tap the answer*, you read it", "Ask cards: no typing, works offline"),
           ("show", "Show a driver *in big Korean*", "Full screen, even offline"),
+          ("cards", "Korean cards for *every moment*", "Pharmacy, food, payment and more, offline"),
           ("help", "Lost, sick or stuck? *Help in one tap*", "112 · 119 · 1330, then find a pharmacy nearby")]
 
 
@@ -61,7 +62,7 @@ def screenshots():
     srv = cdp.Server(os.path.abspath(ROOT)); b = cdp.Browser(360, 640, 3, "light")
     try:
         for page, name, after in (("", "home", ""), ("ready.html", "ready", ""), ("taxi.html", "guide", ""), ("taxi.html", "show", "document.querySelector('[data-show]').click()"),
-                                  ("phrases.html", "cards", "document.getElementById('cards').scrollIntoView()"), ("help.html", "help", ""),
+                                  ("phrases.html", "cards", ""), ("help.html", "help", ""),
                                   ("", "list", "document.querySelector('#jump [data-go=move]').click()"),
                                   ("phrases.html", "ask", "document.querySelector('.sayrow.askrow .sayrow-main').click(); document.querySelectorAll('#ans-btns .ans')[1].click()")):
             b.go(srv.url + page)
