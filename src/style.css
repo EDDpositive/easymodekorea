@@ -683,3 +683,74 @@ html.offline .install-bar { display: none; }
 .foot nav a { color: var(--muted); text-decoration: none; }
 .ready-cta .ready-next { display: block; margin-top: 4px; font-size: 14px; line-height: 1.35; font-weight: 600; color: var(--ink); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .ready-cta .ready-next[hidden] { display: none; }
+/* Round 8 (critique 28차): one main action per screen and thumb-sized taps (44px). Home is two screens in one page
+   (home, then a list), My trip tools fold to one row each, full-screen cards can carry answers for staff. */
+.icon-btn, .lang-menu > summary { min-width: 44px; height: 44px; }
+@media (max-width: 480px) { .act { width: 44px; height: 44px; } }
+.hero .off-ok { margin-top: 8px; padding: 2px 9px; font-size: 12px; font-weight: 600; background: rgba(255,255,255,.14); }
+.hero-home h1 { font-size: 22px; }
+.all-row { display: flex; align-items: center; gap: 12px; min-height: 56px; margin: 0 0 6px; padding: 6px 16px 6px 10px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; color: var(--ink); font-weight: 700; text-decoration: none; }
+.all-row[hidden], .tool[hidden], .tool-top[hidden] { display: none; }
+.all-row .ic { width: 36px; height: 36px; flex: none; border-radius: 10px; background: var(--bg); color: var(--link); }
+.all-row .ic svg { width: 21px; height: 21px; }
+.all-row .name { flex: 1; }
+.all-row .n { font-size: 13px; color: var(--muted); font-weight: 600; }
+.all-row::after { content: ""; flex: none; width: 7px; height: 7px; border-right: 2px solid var(--muted); border-top: 2px solid var(--muted); transform: rotate(45deg); }
+.tool { margin-top: 18px; }
+.tool-top { justify-content: flex-start; gap: 6px; margin-bottom: 2px; }
+.tool-top .back-btn { margin-left: -8px; color: var(--ink); background: transparent; }
+.tool-top .tool-h { font-size: 22px; }
+#main.by-cat .gcat h3 { display: none; }
+.stamp a, .stamp .linkbtn, .trust-line a, #setup-now .linkbtn, #show-all, .foot nav a, .tool-top .linkbtn, .pl-acts .linkbtn, .rd-nav .linkbtn { display: inline-flex; align-items: center; min-height: 44px; }
+.stamp { padding-top: 2px; }
+.setbar .btn.small { min-height: 44px; }
+/* My trip: tools folded to rows */
+.folds { display: grid; gap: 8px; margin-top: 18px; }
+.fold { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
+.fold > summary { display: flex; align-items: center; gap: 12px; min-height: 58px; padding: 8px 14px 8px 10px; cursor: pointer; list-style: none; }
+.fold > summary::-webkit-details-marker { display: none; }
+.fold > summary .ic { width: 36px; height: 36px; flex: none; border-radius: 10px; background: var(--bg); color: var(--link); }
+.fold > summary .ic svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.fold .ft { flex: 1; min-width: 0; display: grid; }
+.fold .ft b { font-weight: 700; }
+.fold .fst { color: var(--muted); font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fold .fst:empty { display: none; }
+.fold > summary::after { content: ""; flex: none; width: 7px; height: 7px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(45deg); margin: -4px 4px 0 0; transition: transform .15s; }
+.fold[open] > summary::after { transform: rotate(225deg); margin-top: 4px; }
+.fold[open] > summary { border-bottom: 1px solid var(--line); }
+.fold .fin { padding: 12px 14px 14px; }
+.fold .fin > section, .fold .fin > .myaddr { margin: 0; padding: 0; border: 0; background: none; border-radius: 0; }
+.fold .fin > section > h2:first-child { display: none; }
+.fold .fin .sec { margin: 0; }
+/* Ask cards: staff tap a Korean answer, the reader sees it in their language */
+.sayrow.askrow { border-left-color: var(--brand); }
+.show .ko.asking { font-size: clamp(28px, 7.5vw, 52px); }
+.show-ans { display: grid; gap: 10px; margin: 0 0 14px; }
+.show-ans[hidden], .ans-out[hidden] { display: none; }
+.ans-tap { margin: 0; font: 700 16px var(--ko, var(--body)); color: #444f6b; }
+.ans-btns { display: grid; gap: 8px; }
+.ans { min-height: 56px; padding: 10px 14px; border: 2px solid #0e1430; border-radius: 14px; background: #fff; color: #0e1430; font: 800 22px/1.25 var(--ko, var(--body)); text-align: left; cursor: pointer; }
+.ans[aria-pressed="true"] { background: #ffd23f; }
+.ans-out { margin: 0; padding: 12px 14px; border-radius: 14px; background: #eef1fb; color: #0e1430; }
+.ans-out small { display: block; font-size: 13px; color: #444f6b; }
+.ans-out b { font: 800 22px/1.3 var(--display); }
+.show-acts { display: grid; grid-template-columns: auto 1fr; gap: 8px; }
+.show-acts .btn[hidden] { display: none; }
+.show-acts #show-say { background: #eef1fb; color: #0e1430; padding: 14px 16px; }
+.show-acts #show-say[hidden] + .btn { grid-column: 1 / -1; }
+/* Find nearby: six Korean search words that open Naver Map */
+.near-g { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 8px; }
+.near-a { display: grid; justify-items: center; gap: 3px; min-height: 96px; padding: 10px 4px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; color: var(--ink); text-decoration: none; text-align: center; }
+.near-a .ic { width: 38px; height: 38px; border-radius: 12px; background: #00a04a; color: #fff; }
+.near-a .ic svg { width: 22px; height: 22px; }
+.near-a b { font-size: 13.5px; line-height: 1.2; }
+.near-a small { font-size: 12px; color: var(--muted); }
+.near-a:active { background: var(--bg); }
+.near .hint { margin: 0; }
+.tool-top .back-btn { border: 0; }
+.listing .hero-home .hero-title, .listing .hero-home .skyline { display: none; }
+.listing .hero-home { padding-bottom: 6px; }
+.listing .tool { margin-top: 10px; }
+.btn { min-height: 44px; box-sizing: border-box; }
+/* In the installed app the site footer is web chrome: About and Privacy live in My trip > This app, Contact in Help. */
+.app .foot { display: none; }

@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap"></noscript>
-<link rel="stylesheet" href="../style.css?v=c4f9a655">
+<link rel="stylesheet" href="../style.css?v=e27e458e">
 <script>window.EMK={"lang": "zh-tw", "up": "../", "t": {"save": "收藏", "saved": "已收藏", "share": "分享", "link_copied": "已複製連結", "saved_toast": "已存到「我的旅程」", "unsaved_toast": "已從「我的旅程」移除", "install": "安裝App,沒有網路也能看指南。", "install_btn": "安裝", "later": "先不要", "update": "這一頁有更新的內容。", "refresh": "重新整理", "ready": "已存到這支手機,沒有網路也能看指南。", "miss": "那一頁還沒存到這支手機。有網路時先開一次。", "off_ok": "離線可用", "offline": "目前離線。這頁的內容照樣能用。", "suggest": "這個頁面也有{l}版。", "switch": "切換", "dismiss": "不用了"}}</script><script defer src="../app.js?v=f550a1d3"></script>
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "HowTo", "name": "刷卡被拒", "description": "在櫃台依序可以試的方法,以及卡一直不能用時怎麼付款。", "inLanguage": "zh-Hant-TW", "url": "https://easymodekorea.com/zh-tw/foreign-card-declined-korea.html", "step": [{"@type": "HowToStep", "position": 1, "text": "在櫃台:請店員用插卡而不是感應,並用韓元結帳。兩張卡片都在下方。"}, {"@type": "HowToStep", "position": 2, "text": "換另一張卡試試。再打給發卡銀行,請他們開通在韓國消費和線上付款。"}, {"@type": "HowToStep", "position": 3, "text": "付現金:標示Global的ATM,以及CU、GS25、7-Eleven裡的ATM可以用外國卡。請選KRW,不要選本國貨幣。"}, {"@type": "HowToStep", "position": 4, "text": "在自助點餐機刷不過:問能不能到櫃台結帳。"}, {"@type": "HowToStep", "position": 5, "text": "地鐵和公車:在便利商店買T-money卡,到車站的機器用現金儲值。2026年3月起,首爾地鐵站的新型機器也收外國卡;刷不過就換一台或付現金。"}, {"@type": "HowToStep", "position": 6, "text": "停留比較久:給旅客用的預付卡WOWPASS和NAMANE,可以在車站等地的自助機台申辦。WOWPASS可用16種貨幣的現金儲值;NAMANE用韓元現金或信用卡儲值。兩種都能搭大眾運輸。WOWPASS的交通餘額和付款餘額是分開的,搭車前先在App裡儲值。手續費和上限請看各自的官方網站。"}, {"@type": "HowToStep", "position": 7, "text": "要在網路上付火車、外送或訂位的錢?這裡每篇指南都寫了哪個網站或App收外國卡。"}], "citation": [{"@type": "WebPage", "name": "Korea JoongAng Daily: digital barriers for visitors (12 May 2026)", "url": "https://www.koreajoongangdaily.com/business/declined-cards-reservation-hassles-digital-barriers-still-undermine-the-korea-travel-experience/12519453"}, {"@type": "WebPage", "name": "WOWPASS (official site)", "url": "https://www.wowpass.io/"}, {"@type": "WebPage", "name": "NAMANE card (official site)", "url": "https://www.namanecard.com/"}]}, {"@context": "https://schema.org", "@type": "WebPage", "@id": "https://easymodekorea.com/zh-tw/foreign-card-declined-korea.html", "url": "https://easymodekorea.com/zh-tw/foreign-card-declined-korea.html", "name": "刷卡被拒", "inLanguage": "zh-Hant-TW", "lastReviewed": "2026-11-22", "reviewedBy": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/zh-tw/about.html"}}]</script>
@@ -31,7 +31,8 @@
 </div>
 <div class="show" id="show" hidden role="dialog" aria-modal="true" aria-labelledby="show-lbl">
   <div class="lbl" id="show-lbl"></div><div class="ko" lang="ko" id="show-ko"></div>
-  <div><p class="mean" id="show-mean"></p><button class="btn" type="button" id="show-close">關閉</button></div>
+  <div><div class="show-ans" id="show-ans" hidden data-got="對方的回答"><p class="ans-tap" lang="ko">아래에서 답을 눌러 주세요</p><div class="ans-btns" id="ans-btns"></div><p class="ans-out" id="ans-out" aria-live="polite" hidden></p></div>
+  <p class="mean" id="show-mean"></p><div class="show-acts"><button class="btn ghost" type="button" id="show-say" hidden>🔊 朗讀</button><button class="btn" type="button" id="show-close">關閉</button></div></div>
 </div>
 <script>
 /* Arriving from a search result: start at the top (the answer box) instead of the middle of the page,
@@ -45,13 +46,24 @@
 function el(tag, attrs = {}, kids = []) { const n = document.createElement(tag); for (const [k, v] of Object.entries(attrs)) { if (k === "text") n.textContent = v; else if (k === "html") n.innerHTML = v; else n.setAttribute(k, v); } for (const c of [].concat(kids)) if (c) n.append(c); return n; }
 function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
 function count(path, title) { try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path, title, event: true }); } catch (e) {} }
-/* Full-screen card to hand the phone to staff or a driver. */
-let lastFocus = null;
-function show(label, ko, big, mean) {
+/* Full-screen card to hand the phone to staff or a driver. With answers (ask cards), staff tap one of the Korean
+   answers and the reader sees it in their own language. Play aloud appears only when the phone has a Korean voice. */
+let lastFocus = null, SAY = "", KOV = null;
+function koVoice() { try { KOV = speechSynthesis.getVoices().find(v => /^ko([-_]|$)/i.test(v.lang)) || null; } catch (e) { KOV = null; } document.getElementById("show-say").hidden = !KOV; }
+if ("speechSynthesis" in window) { koVoice(); try { speechSynthesis.addEventListener("voiceschanged", koVoice); } catch (e) {} }
+document.getElementById("show-say").addEventListener("click", () => { try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(SAY); u.lang = "ko-KR"; if (KOV) u.voice = KOV; u.rate = 0.9; speechSynthesis.speak(u); count("speak", "play aloud"); } catch (e) {} });
+function show(label, ko, big, mean, ans) {
   lastFocus = document.activeElement;
   document.getElementById("show-lbl").textContent = label;
   const k = document.getElementById("show-ko"); k.textContent = ko;
   if (big) k.append(el("small", { text: big }));
+  SAY = ko + (big ? ". " + big : "");
+  const box = document.getElementById("show-ans"), btns = document.getElementById("ans-btns"), out = document.getElementById("ans-out");
+  btns.replaceChildren(); out.hidden = true; box.hidden = !(ans && ans.length); k.classList.toggle("asking", !box.hidden);
+  (ans || []).forEach(a => { const b = el("button", { type: "button", class: "ans", lang: "ko", "aria-pressed": "false", text: a[0] });
+    b.addEventListener("click", () => { btns.querySelectorAll(".ans").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+      out.replaceChildren(el("small", { text: box.dataset.got }), el("b", { text: a[1] })); out.hidden = false; count("ask-answer", label); });
+    btns.append(b); });
   document.getElementById("show-mean").textContent = mean || "";
   document.getElementById("show").hidden = false; document.getElementById("show-close").focus();
   try { if (navigator.wakeLock) navigator.wakeLock.request("screen").then(l => { wake = l; }).catch(() => {}); } catch (e) {}
@@ -63,6 +75,7 @@ let wake = null;
 function hideShow(fromBack) {
   if (document.getElementById("show").hidden) return;
   document.getElementById("show").hidden = true; try { if (wake) wake.release(); } catch (e) {} wake = null; if (lastFocus) lastFocus.focus();
+  try { if (window.speechSynthesis) speechSynthesis.cancel(); } catch (e) {}
   try { if (fromBack !== true && history.state && history.state.emkCard) history.back(); } catch (e) {}
 }
 addEventListener("popstate", () => hideShow(true));
@@ -70,7 +83,7 @@ document.getElementById("show-close").addEventListener("click", hideShow);
 document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !document.getElementById("show").hidden) hideShow(); });
 
 (function () {
-  document.querySelectorAll("[data-show]").forEach(b => b.addEventListener("click", () => show(b.dataset.lbl, b.dataset.show, "", b.dataset.mean)));
+  document.querySelectorAll("[data-show]").forEach(b => b.addEventListener("click", () => { let ans = null; try { ans = b.dataset.ans ? JSON.parse(b.dataset.ans) : null; } catch (e) {} show(b.dataset.lbl, b.dataset.show, "", b.dataset.mean, ans); }));
   const saved = (store("wik-setup") || "visitor|ios").split("|");
   document.querySelectorAll("[data-copy]").forEach(b => b.addEventListener("click", async () => {
     let ok = false;

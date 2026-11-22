@@ -41,11 +41,12 @@ SWEEP = """(async () => {
   return out; })()"""
 
 
-# Things people tap with a thumb must be at least 40px tall (most are 44px or more).
+# Things people tap with a thumb must be at least 44px tall (28차; links inside a sentence are exempt).
 TAPS = """(() => {
   const vis = e => { const r = e.getBoundingClientRect(); return r.width > 0 && r.height > 0 && !e.closest('[hidden]') && !e.closest('details:not([open]) > :not(summary)'); };
-  return [...document.querySelectorAll('.tabbar a, .jump a, .sit-links a, .glist a, .sayrow button, a.call, .act, .icon-btn, .lang-menu > summary, .btn, .chip, .opt-big, .ready-cta, .rd-app > summary, .steps summary, .flow-steps summary')]
-    .filter(vis).map(e => ({t: (e.innerText || e.getAttribute('aria-label') || e.className).trim().slice(0, 24), h: Math.round(e.getBoundingClientRect().height)})).filter(x => x.h < 40);
+  return [...document.querySelectorAll('.tabbar a, .jump a, .sit-links a, .glist a, .sayrow button, a.call, .act, .icon-btn, .lang-menu > summary, .btn, .chip, .opt-big, .ready-cta, .rd-app > summary, .steps summary, .flow-steps summary, '
+      + '.all-row, .fold > summary, .near-a, .ans, .stamp a, .stamp .linkbtn, .trust-line a, #setup-now .linkbtn, #show-all, .setbar .btn, .foot nav a')]
+    .filter(vis).map(e => ({t: (e.innerText || e.getAttribute('aria-label') || e.className).trim().slice(0, 24), h: Math.round(e.getBoundingClientRect().height)})).filter(x => x.h < 44);
 })()"""
 
 
@@ -89,8 +90,42 @@ def main():
         for page in ("", "taxi.html", "phrases.html", "saved.html", "help.html", "foreign-card-declined-korea.html", "ja/", "vi/phrases.html"):
             b.go(srv.url + page, wait=0.5)
             small += [f"/{page} {x['t']} {x['h']}px" for x in b.js(TAPS)]
-        check(not small, "buttons and links are at least 40px tall on the main screens", "; ".join(small[:5]))
+        check(not small, "buttons and links are at least 44px tall on the main screens", "; ".join(small[:5]))
         check(b.js("document.querySelectorAll('#jump a').length") == 8 if b.go(srv.url, wait=0.5) else False, "home shows all eight situations as a jump grid")
+
+        # 28차: home is one screen (your trip, tiles, All guides); a tile opens that situation's list; Back returns home.
+        home0 = b.js("[document.getElementById('tool').hidden, !document.getElementById('jump').hidden, !document.getElementById('all-row').hidden].join()")
+        b.js("document.querySelector('#jump [data-go=move]').click()"); time.sleep(0.3)
+        lst = b.js("""(() => { const rows = [...document.querySelectorAll('#main li[data-t]')].filter(li => !li.hidden && li.closest('.gcat:not([hidden])'));
+          return [location.hash, document.getElementById('jump').hidden, rows.length, rows.every(li => li.closest('.gcat').dataset.cat === 'move'), document.getElementById('tool-h').textContent].join('|'); })()""")
+        b.js("history.back()"); time.sleep(0.4)
+        back = b.js("[location.hash, document.getElementById('tool').hidden, !document.getElementById('jump').hidden].join()")
+        check(home0 == "true,true,true" and lst.startswith("#c=move|true|") and "|true|" in lst and back == ",true,true", "home shows one screen; a tile opens only that situation's guides, and Back returns home", f"{home0} / {lst} / {back}")
+        b.js("document.getElementById('all-row').click()"); time.sleep(0.3)
+        n_all = b.js("[...document.querySelectorAll('#main li[data-t]')].filter(li => !li.hidden).length")
+        check(n_all == 21, "All guides lists every guide once", str(n_all))
+
+        # Ask cards: staff tap a Korean answer on the full-screen card and the reader sees it in their language.
+        b.go(srv.url + "phrases.html", wait=0.5)
+        ask = b.js("""(() => { document.querySelector('.sayrow.askrow .sayrow-main').click(); const a = [...document.querySelectorAll('#ans-btns .ans')];
+          a[1].click(); const o = document.getElementById('ans-out'); return [a.length, !o.hidden, o.textContent, a[1].getAttribute('aria-pressed')].join('|'); })()""")
+        b.js("history.back()"); time.sleep(0.3)
+        plain = b.js("(() => { document.querySelector('.sayrow:not(.askrow) .sayrow-main').click(); return document.getElementById('show-ans').hidden; })()")
+        b.js("history.back()"); time.sleep(0.3)
+        check(ask.startswith("3|true|") and "No, it doesn't" in ask and ask.endswith("|true") and plain, "an ask card shows three Korean answers; a tap shows that answer in English; plain cards show none", ask)
+
+        # Find nearby: six Korean search words that open Naver Map.
+        b.go(srv.url + "help.html", wait=0.5)
+        near = b.js("[...document.querySelectorAll('.near-a')].map(a => decodeURIComponent(a.href)).join(' ')")
+        check(near.count("map.naver.com/p/search/") == 6 and "약국" in near and "응급실" in near, "Help finds a pharmacy, ER and four more nearby in Naver Map with the Korean word", near[:120])
+
+        # My trip: tools fold to rows that show their state; one opens at a time.
+        b.js("localStorage.setItem('emk-addr', 'FOLD TEST 1'); localStorage.setItem('emk-places', JSON.stringify(['A', 'B']))")
+        b.go(srv.url + "saved.html", wait=0.5)
+        fl = b.js("""(() => { const f = [...document.querySelectorAll('#folds > details.fold')], st = id => document.getElementById('fs-' + id).textContent;
+          f[0].open = true; f[1].open = true; return [f.length, f.filter(x => x.open).length, st('addr'), st('places')].join('|'); })()""")
+        b.js("localStorage.removeItem('emk-addr'); localStorage.removeItem('emk-places')")
+        check(fl == "7|1|FOLD TEST 1|2 saved", "My trip folds its tools to seven rows with their state, one open at a time", fl)
         b.go(srv.url + "taxi.html", wait=0.5)
         check(b.js("[...document.querySelectorAll('.guide-acts .act')].every(x => { const c = getComputedStyle(x); return c.backgroundColor !== c.color; })"), "save and share buttons on a guide are visible (icon colour differs from the button)")
 

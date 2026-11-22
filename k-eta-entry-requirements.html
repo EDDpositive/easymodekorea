@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap"></noscript>
-<link rel="stylesheet" href="style.css?v=c4f9a655">
+<link rel="stylesheet" href="style.css?v=e27e458e">
 <script>window.EMK={"lang": "en", "up": "", "t": {"save": "Save", "saved": "Saved", "share": "Share", "link_copied": "Link copied", "saved_toast": "Saved to My trip", "unsaved_toast": "Removed from My trip", "install": "Install the app. Guides open without data.", "install_btn": "Install", "later": "Not now", "update": "This page has newer info.", "refresh": "Refresh", "ready": "Saved on this phone. Guides now open without data.", "miss": "That page isn't saved on this phone yet. Open it once with data.", "off_ok": "Works offline", "offline": "You're offline. Everything here still works.", "suggest": "This page is also in {l}.", "switch": "Switch", "dismiss": "No thanks"}, "guide": "k-eta-entry-requirements"}</script><script defer src="app.js?v=f550a1d3"></script>
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Do I need K-ETA to visit Korea in 2026?", "description": "Many visitors can enter Korea without a K-ETA until the end of 2026, but it depends on your passport. Check before you fly, and fill in the arrival card if it applies to you.", "datePublished": "2026-11-19", "dateModified": "2026-11-22", "inLanguage": "en", "url": "https://easymodekorea.com/k-eta-entry-requirements.html", "mainEntityOfPage": "https://easymodekorea.com/k-eta-entry-requirements.html", "image": "https://easymodekorea.com/og.png", "author": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/about.html"}, "publisher": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/", "logo": {"@type": "ImageObject", "url": "https://easymodekorea.com/icon-512.png"}}, "citation": [{"@type": "WebPage", "name": "K-ETA (official site)", "url": "https://www.k-eta.go.kr"}, {"@type": "WebPage", "name": "e-Arrival Card (official site)", "url": "https://www.e-arrivalcard.go.kr"}, {"@type": "WebPage", "name": "Korean Ministry of Foreign Affairs: K-ETA notice", "url": "https://overseas.mofa.go.kr/ie-en/brd/m_23773/view.do?seq=761699"}, {"@type": "WebPage", "name": "Korean Ministry of Foreign Affairs: e-Arrival Card notice", "url": "https://overseas.mofa.go.kr/dk-en/brd/m_7038/view.do?seq=761304"}]}, {"@context": "https://schema.org", "@type": "WebPage", "@id": "https://easymodekorea.com/k-eta-entry-requirements.html", "url": "https://easymodekorea.com/k-eta-entry-requirements.html", "name": "Do I need K-ETA to visit Korea?", "inLanguage": "en", "lastReviewed": "2026-11-20", "reviewedBy": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/about.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "EasyModeKorea", "item": "https://easymodekorea.com/"}, {"@type": "ListItem", "position": 2, "name": "Entry rules", "item": "https://easymodekorea.com/k-eta-entry-requirements.html"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Do I need K-ETA to visit Korea?", "acceptedAnswer": {"@type": "Answer", "text": "Many passports are exempt from K-ETA through 31 Dec 2026, but not all. Check your own country on the official site before you fly. Check your passport country on the official K-ETA site (k-eta.go.kr). The temporary exemption for eligible countries runs from 1 Jan to 31 Dec 2026. If you are not exempt, apply for K-ETA before you fly, not at check-in. Since 1 Jan 2026, foreign visitors, including those exempt from K-ETA, must submit the e-Arrival Card online within 72 hours before arrival. If you already hold an approved K-ETA, you don't need it."}}, {"@type": "Question", "name": "My country is exempt. Do I still need anything?", "acceptedAnswer": {"@type": "Answer", "text": "Yes: the e-Arrival Card. You can also apply for a K-ETA voluntarily (the fee applies), and then you skip the e-Arrival Card."}}, {"@type": "Question", "name": "How long does K-ETA approval take?", "acceptedAnswer": {"@type": "Answer", "text": "Often within 72 hours, but it can take longer, so apply a week or more before you fly."}}, {"@type": "Question", "name": "Does each child need a K-ETA?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Each traveller applies separately, including children."}}, {"@type": "Question", "name": "What happens in 2027?", "acceptedAnswer": {"@type": "Answer", "text": "The exemption runs to 31 Dec 2026. Rules for 2027 had not been announced at our last check; we will update this page."}}]}]</script>
@@ -52,7 +52,8 @@
 </div>
 <div class="show" id="show" hidden role="dialog" aria-modal="true" aria-labelledby="show-lbl">
   <div class="lbl" id="show-lbl"></div><div class="ko" lang="ko" id="show-ko"></div>
-  <div><p class="mean" id="show-mean"></p><button class="btn" type="button" id="show-close">Close</button></div>
+  <div><div class="show-ans" id="show-ans" hidden data-got="Their answer"><p class="ans-tap" lang="ko">아래에서 답을 눌러 주세요</p><div class="ans-btns" id="ans-btns"></div><p class="ans-out" id="ans-out" aria-live="polite" hidden></p></div>
+  <p class="mean" id="show-mean"></p><div class="show-acts"><button class="btn ghost" type="button" id="show-say" hidden>🔊 Play aloud</button><button class="btn" type="button" id="show-close">Close</button></div></div>
 </div>
 <script>
 /* Arriving from a search result: start at the top (the answer box) instead of the middle of the page,
@@ -66,13 +67,24 @@
 function el(tag, attrs = {}, kids = []) { const n = document.createElement(tag); for (const [k, v] of Object.entries(attrs)) { if (k === "text") n.textContent = v; else if (k === "html") n.innerHTML = v; else n.setAttribute(k, v); } for (const c of [].concat(kids)) if (c) n.append(c); return n; }
 function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
 function count(path, title) { try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path, title, event: true }); } catch (e) {} }
-/* Full-screen card to hand the phone to staff or a driver. */
-let lastFocus = null;
-function show(label, ko, big, mean) {
+/* Full-screen card to hand the phone to staff or a driver. With answers (ask cards), staff tap one of the Korean
+   answers and the reader sees it in their own language. Play aloud appears only when the phone has a Korean voice. */
+let lastFocus = null, SAY = "", KOV = null;
+function koVoice() { try { KOV = speechSynthesis.getVoices().find(v => /^ko([-_]|$)/i.test(v.lang)) || null; } catch (e) { KOV = null; } document.getElementById("show-say").hidden = !KOV; }
+if ("speechSynthesis" in window) { koVoice(); try { speechSynthesis.addEventListener("voiceschanged", koVoice); } catch (e) {} }
+document.getElementById("show-say").addEventListener("click", () => { try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(SAY); u.lang = "ko-KR"; if (KOV) u.voice = KOV; u.rate = 0.9; speechSynthesis.speak(u); count("speak", "play aloud"); } catch (e) {} });
+function show(label, ko, big, mean, ans) {
   lastFocus = document.activeElement;
   document.getElementById("show-lbl").textContent = label;
   const k = document.getElementById("show-ko"); k.textContent = ko;
   if (big) k.append(el("small", { text: big }));
+  SAY = ko + (big ? ". " + big : "");
+  const box = document.getElementById("show-ans"), btns = document.getElementById("ans-btns"), out = document.getElementById("ans-out");
+  btns.replaceChildren(); out.hidden = true; box.hidden = !(ans && ans.length); k.classList.toggle("asking", !box.hidden);
+  (ans || []).forEach(a => { const b = el("button", { type: "button", class: "ans", lang: "ko", "aria-pressed": "false", text: a[0] });
+    b.addEventListener("click", () => { btns.querySelectorAll(".ans").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+      out.replaceChildren(el("small", { text: box.dataset.got }), el("b", { text: a[1] })); out.hidden = false; count("ask-answer", label); });
+    btns.append(b); });
   document.getElementById("show-mean").textContent = mean || "";
   document.getElementById("show").hidden = false; document.getElementById("show-close").focus();
   try { if (navigator.wakeLock) navigator.wakeLock.request("screen").then(l => { wake = l; }).catch(() => {}); } catch (e) {}
@@ -84,6 +96,7 @@ let wake = null;
 function hideShow(fromBack) {
   if (document.getElementById("show").hidden) return;
   document.getElementById("show").hidden = true; try { if (wake) wake.release(); } catch (e) {} wake = null; if (lastFocus) lastFocus.focus();
+  try { if (window.speechSynthesis) speechSynthesis.cancel(); } catch (e) {}
   try { if (fromBack !== true && history.state && history.state.emkCard) history.back(); } catch (e) {}
 }
 addEventListener("popstate", () => hideShow(true));
@@ -91,7 +104,7 @@ document.getElementById("show-close").addEventListener("click", hideShow);
 document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !document.getElementById("show").hidden) hideShow(); });
 
 (function () {
-  document.querySelectorAll("[data-show]").forEach(b => b.addEventListener("click", () => show(b.dataset.lbl, b.dataset.show, "", b.dataset.mean)));
+  document.querySelectorAll("[data-show]").forEach(b => b.addEventListener("click", () => { let ans = null; try { ans = b.dataset.ans ? JSON.parse(b.dataset.ans) : null; } catch (e) {} show(b.dataset.lbl, b.dataset.show, "", b.dataset.mean, ans); }));
   const saved = (store("wik-setup") || "visitor|ios").split("|");
   document.querySelectorAll("[data-copy]").forEach(b => b.addEventListener("click", async () => {
     let ok = false;

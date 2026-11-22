@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap"></noscript>
-<link rel="stylesheet" href="../style.css?v=c4f9a655">
+<link rel="stylesheet" href="../style.css?v=e27e458e">
 <script>window.EMK={"lang": "zh-tw", "up": "../", "t": {"save": "收藏", "saved": "已收藏", "share": "分享", "link_copied": "已複製連結", "saved_toast": "已存到「我的旅程」", "unsaved_toast": "已從「我的旅程」移除", "install": "安裝App,沒有網路也能看指南。", "install_btn": "安裝", "later": "先不要", "update": "這一頁有更新的內容。", "refresh": "重新整理", "ready": "已存到這支手機,沒有網路也能看指南。", "miss": "那一頁還沒存到這支手機。有網路時先開一次。", "off_ok": "離線可用", "offline": "目前離線。這頁的內容照樣能用。", "suggest": "這個頁面也有{l}版。", "switch": "切換", "dismiss": "不用了"}}</script><script defer src="../app.js?v=f550a1d3"></script>
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -27,40 +27,43 @@
 <a class="ready-cta" href="ready.html" data-continue="準備 {d}/{n} 完成" data-next="下一步:{t}" data-lang="zh-tw"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M7.5 12.5l3 3 6-6.5"/></svg></span><span><b>Korea Ready檢查</b><span class="ready-sub">一分鐘,點一點就好</span><span class="ready-next" hidden></span></span></a>
 <section class="sec" aria-labelledby="sv-h"><h2 id="sv-h">收藏的指南</h2><ul class="glist" id="saved-list"></ul><p class="hint" id="saved-empty">還沒有收藏。</p></section>
 <section class="sec" id="recent" hidden aria-labelledby="rc-h"><h2 id="rc-h">最近看過</h2><ul class="glist" id="recent-list"></ul></section>
-<section class="myaddr" id="myaddr" hidden aria-labelledby="ma-h" data-card="給計程車司機看" data-ko="기사님, 이 주소로 가 주세요." data-mean="意思: 請載我到這個地址。"><h2 id="ma-h">住宿的韓文地址</h2>
+<div class="folds" id="folds" data-none="尚未新增" data-count="{n} 個" data-lang="zh-Hant-TW">
+<details class="fold" id="f-addr" name="trip-tools"><summary><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7"/><path d="M6 10v10h12V10"/><path d="M10 20v-5h4v5"/></svg></span><span class="ft"><b>住宿地址</b><small class="fst" id="fs-addr"></small></span></summary><div class="fin"><section class="myaddr" id="myaddr" hidden aria-labelledby="ma-h" data-card="給計程車司機看" data-ko="기사님, 이 주소로 가 주세요." data-mean="意思: 請載我到這個地址。"><h2 id="ma-h">住宿的韓文地址</h2>
 <div id="ma-has" hidden><p class="addr" lang="ko" id="ma-text"></p><div class="actions"><button class="btn alt" type="button" id="ma-show">🚕 給司機看</button><button class="btn ghost" type="button" id="ma-copy" data-copy="" data-done="✓ 已複製">📋 複製地址</button><a class="btn ghost" id="ma-map" href="#" rel="noopener" target="_blank">用Naver Map開啟</a><button class="linkbtn" type="button" id="ma-edit">更改</button></div></div>
-<form id="ma-form" hidden><input id="ma-in" type="text" lang="ko" maxlength="160" autocomplete="street-address" aria-label="住宿的韓文地址" placeholder="貼上訂房確認信裡的韓文地址"><button class="btn" type="submit">存在這支手機</button></form><p class="hint">🔒 只存在本機</p></section>
-<section class="sec places" id="places" aria-labelledby="pl-h" data-card="給計程車司機看" data-ko="기사님, 이 주소로 가 주세요." data-mean="意思: 請載我到這個地址。" data-driver="給司機看" data-copy="複製" data-copied="已複製" data-remove="移除" data-short="短網址在手機上無法讀取,請改貼地點名稱。">
+<form id="ma-form" hidden><input id="ma-in" type="text" lang="ko" maxlength="160" autocomplete="street-address" aria-label="住宿的韓文地址" placeholder="貼上訂房確認信裡的韓文地址"><button class="btn" type="submit">存在這支手機</button></form><p class="hint">🔒 只存在本機</p></section></div></details>
+<details class="fold" id="f-places" name="trip-tools"><summary><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-6.2-6.5-11a6.5 6.5 0 0 1 13 0c0 4.8-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg></span><span class="ft"><b>要去的地方</b><small class="fst" id="fs-places"></small></span></summary><div class="fin"><section class="sec places" id="places" aria-labelledby="pl-h" data-card="給計程車司機看" data-ko="기사님, 이 주소로 가 주세요." data-mean="意思: 請載我到這個地址。" data-driver="給司機看" data-copy="複製" data-copied="已複製" data-remove="移除" data-short="短網址在手機上無法讀取,請改貼地點名稱。">
 <h2 id="pl-h">要去的地方</h2>
 <form id="pl-form"><input id="pl-in" type="text" maxlength="400" autocomplete="off" aria-label="要去的地方" placeholder="韓文地址、地點名稱或Google地圖連結"><button class="btn" type="submit">新增</button></form>
-<p class="hint" id="pl-msg" role="status"></p><ul id="pl-list" class="pl-list"></ul><p class="hint">🔒 只存在本機</p></section>
-<section class="share" id="share" aria-labelledby="sh-h" data-empty="請先加入住宿地址或地點。" data-copied="已複製連結" data-q="同行的人分享了行程清單給你:{n}項。要加到這支手機嗎?" data-done="已加入。">
-<h2 id="sh-h">分享給同行的人</h2><p class="hint">🔒 不上傳:內容在連結裡</p>
-<div class="actions"><button class="btn" type="button" id="share-make">產生連結和QR碼</button></div><p class="hint" id="share-msg" role="status"></p>
-<div id="share-out" hidden><div id="share-qr" role="img" aria-label="QR"></div>
-<div class="actions"><button class="btn ghost" type="button" id="share-send" hidden>分享</button><button class="btn ghost" type="button" id="share-copy">複製連結</button></div><p class="hint">拿到這個連結的人都能看到內容。</p></div></section>
-<section class="sec alerts-wrap" id="alerts-wrap" aria-labelledby="alerts-h"><h2>旅行日期</h2><div class="trip-dates"><label>抵達<input id="trip-from" type="date"></label><label>離開<input id="trip-to" type="date"></label></div>
+<p class="hint" id="pl-msg" role="status"></p><ul id="pl-list" class="pl-list"></ul><p class="hint">🔒 只存在本機</p></section></div></details>
+<details class="fold" id="f-dates" name="trip-tools"><summary><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg></span><span class="ft"><b>旅行日期</b><small class="fst" id="fs-dates"></small></span></summary><div class="fin"><section class="sec alerts-wrap" id="alerts-wrap" aria-labelledby="alerts-h"><h2>旅行日期</h2><div class="trip-dates"><label>抵達<input id="trip-from" type="date"></label><label>離開<input id="trip-to" type="date"></label></div>
 <h3 id="alerts-h" class="alerts-sub">旅途中要注意</h3><div id="alerts" data-h="旅途中要注意" data-soon="即將到來" data-none="你的日期內沒有遇到表列的連假。"></div></section>
-<script type="application/json" id="alerts-data">[{"id": "seollal-2027", "from": "2027-02-06", "to": "2027-02-09", "title": "春節(農曆新年)連假", "points": [{"t": "2027年2月6日(六)到9日(二)是國定假日,春節當天是2月7日(日)。政府機關和銀行休息。", "src": [["Korea AeroSpace Administration: 2027 official calendar (29 Jun 2026)", "https://m.korea.kr/briefing/pressReleaseView.do?newsId=156768474"]]}, {"t": "火車:連假車票採短期預售,很快賣完。2026年春節,2月13到18日的車票在1月19到21日開賣。2027年的日期在我們確認時尚未公布。", "src": [["Hankyung: KORAIL Seollal 2026 ticket sale (7 Jan 2026)", "https://www.hankyung.com/article/202601075989h"]]}, {"t": "宮殿:2026年春節,四大宮和宗廟在整個連假免費開放,連假結束的隔天休館。", "src": [["Asia Business Daily: palaces free for Seollal 2026 (22 Jan 2026)", "https://view.asiae.co.kr/en/article/2026012209564811302"]]}, {"t": "連假期間生病?有開的診所和藥局可以在E-Gen查,或打119。", "src": [["Seoul city: open clinics and pharmacies, Chuseok 2026 (22 Sep 2026)", "https://mediahub.seoul.go.kr/archives/2019473"], ["E-Gen emergency medical portal: open clinics and pharmacies", "https://www.e-gen.or.kr/egen/holiday_medical.do"]]}]}, {"id": "chuseok-2027", "from": "2027-09-14", "to": "2027-09-16", "title": "中秋連假", "points": [{"t": "2027年9月14日(二)到16日(四)是國定假日,中秋當天是9月15日(三)。政府機關和銀行休息。", "src": [["Korea AeroSpace Administration: 2027 official calendar (29 Jun 2026)", "https://m.korea.kr/briefing/pressReleaseView.do?newsId=156768474"]]}, {"t": "晚歸:2026年中秋,首爾在中秋隔天起的兩天把地鐵和公車末班車延到凌晨1點,深夜N公車照常行駛。2027年的安排會在連假前公布。", "src": [["Seoul city: Chuseok 2026 transport plan (22 Sep 2026)", "https://mediahub.seoul.go.kr/archives/2019414"]]}, {"t": "火車:連假車票採短期預售,很快賣完。開賣就訂,或避開這幾天移動。", "src": [["Hankyung: KORAIL Seollal 2026 ticket sale (7 Jan 2026)", "https://www.hankyung.com/article/202601075989h"]]}, {"t": "連假期間生病?有開的診所和藥局可以在E-Gen查,或打119。", "src": [["Seoul city: open clinics and pharmacies, Chuseok 2026 (22 Sep 2026)", "https://mediahub.seoul.go.kr/archives/2019473"], ["E-Gen emergency medical portal: open clinics and pharmacies", "https://www.e-gen.or.kr/egen/holiday_medical.do"]]}]}]</script>
-<section class="arrive" id="arrive" aria-labelledby="ar-h" data-from="從{t}(韓國時間)起到抵達前都可以提交。" data-local="以這支手機的時間:{t}" data-open="現在可以提交了。" data-wait="{r}開放提交。" data-past="這個抵達時間已經過了。">
+<script type="application/json" id="alerts-data">[{"id": "seollal-2027", "from": "2027-02-06", "to": "2027-02-09", "title": "春節(農曆新年)連假", "points": [{"t": "2027年2月6日(六)到9日(二)是國定假日,春節當天是2月7日(日)。政府機關和銀行休息。", "src": [["Korea AeroSpace Administration: 2027 official calendar (29 Jun 2026)", "https://m.korea.kr/briefing/pressReleaseView.do?newsId=156768474"]]}, {"t": "火車:連假車票採短期預售,很快賣完。2026年春節,2月13到18日的車票在1月19到21日開賣。2027年的日期在我們確認時尚未公布。", "src": [["Hankyung: KORAIL Seollal 2026 ticket sale (7 Jan 2026)", "https://www.hankyung.com/article/202601075989h"]]}, {"t": "宮殿:2026年春節,四大宮和宗廟在整個連假免費開放,連假結束的隔天休館。", "src": [["Asia Business Daily: palaces free for Seollal 2026 (22 Jan 2026)", "https://view.asiae.co.kr/en/article/2026012209564811302"]]}, {"t": "連假期間生病?有開的診所和藥局可以在E-Gen查,或打119。", "src": [["Seoul city: open clinics and pharmacies, Chuseok 2026 (22 Sep 2026)", "https://mediahub.seoul.go.kr/archives/2019473"], ["E-Gen emergency medical portal: open clinics and pharmacies", "https://www.e-gen.or.kr/egen/holiday_medical.do"]]}]}, {"id": "chuseok-2027", "from": "2027-09-14", "to": "2027-09-16", "title": "中秋連假", "points": [{"t": "2027年9月14日(二)到16日(四)是國定假日,中秋當天是9月15日(三)。政府機關和銀行休息。", "src": [["Korea AeroSpace Administration: 2027 official calendar (29 Jun 2026)", "https://m.korea.kr/briefing/pressReleaseView.do?newsId=156768474"]]}, {"t": "晚歸:2026年中秋,首爾在中秋隔天起的兩天把地鐵和公車末班車延到凌晨1點,深夜N公車照常行駛。2027年的安排會在連假前公布。", "src": [["Seoul city: Chuseok 2026 transport plan (22 Sep 2026)", "https://mediahub.seoul.go.kr/archives/2019414"]]}, {"t": "火車:連假車票採短期預售,很快賣完。開賣就訂,或避開這幾天移動。", "src": [["Hankyung: KORAIL Seollal 2026 ticket sale (7 Jan 2026)", "https://www.hankyung.com/article/202601075989h"]]}, {"t": "連假期間生病?有開的診所和藥局可以在E-Gen查,或打119。", "src": [["Seoul city: open clinics and pharmacies, Chuseok 2026 (22 Sep 2026)", "https://mediahub.seoul.go.kr/archives/2019473"], ["E-Gen emergency medical portal: open clinics and pharmacies", "https://www.e-gen.or.kr/egen/holiday_medical.do"]]}]}]</script></div></details>
+<details class="fold" id="f-arrive" name="trip-tools"><summary><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="3" width="12" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M9 16h6"/></svg></span><span class="ft"><b>電子入境卡何時能填</b><small class="fst" id="fs-arrive"></small></span></summary><div class="fin"><section class="arrive" id="arrive" aria-labelledby="ar-h" data-from="從{t}(韓國時間)起到抵達前都可以提交。" data-local="以這支手機的時間:{t}" data-open="現在可以提交了。" data-wait="{r}開放提交。" data-past="這個抵達時間已經過了。">
 <h2 id="ar-h">電子入境卡什麼時候可以提交?</h2><p class="hint">e-Arrival Card:抵達前72小時內填寫 <time class="ck" datetime="2026-11-20">✓ 2026年11月20日</time></p>
 <label class="fl" for="ar-in">抵達韓國的時間(韓國時間)</label><input id="ar-in" type="datetime-local">
 <div id="ar-out" hidden aria-live="polite"><p class="ar-main"></p><p class="hint ar-local"></p><p class="ar-state"></p></div>
 <div class="actions"><a class="btn ghost" href="https://www.e-arrivalcard.go.kr" rel="noopener" target="_blank">電子入境卡官方網站</a><a class="btn ghost" href="k-eta-entry-requirements.html">去韓國需要申請K-ETA嗎?</a></div>
-<p class="hint">🔒 只存在本機</p></section>
-<section class="pack" id="pack" aria-labelledby="pk-h" data-state="已存 {n}/{m}" data-ok="已全部離線保存" data-busy="下載中…"><h2 id="pk-h">離線包</h2>
+<p class="hint">🔒 只存在本機</p></section></div></details>
+<details class="fold" id="f-share" name="trip-tools"><summary><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3M8 7l4-4 4 4"/><path d="M5 12v7a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-7"/></svg></span><span class="ft"><b>分享給同行的人</b><small class="fst" id="fs-share"></small></span></summary><div class="fin"><section class="share" id="share" aria-labelledby="sh-h" data-empty="請先加入住宿地址或地點。" data-copied="已複製連結" data-q="同行的人分享了行程清單給你:{n}項。要加到這支手機嗎?" data-done="已加入。">
+<h2 id="sh-h">分享給同行的人</h2><p class="hint">🔒 不上傳:內容在連結裡</p>
+<div class="actions"><button class="btn" type="button" id="share-make">產生連結和QR碼</button></div><p class="hint" id="share-msg" role="status"></p>
+<div id="share-out" hidden><div id="share-qr" role="img" aria-label="QR"></div>
+<div class="actions"><button class="btn ghost" type="button" id="share-send" hidden>分享</button><button class="btn ghost" type="button" id="share-copy">複製連結</button></div><p class="hint">拿到這個連結的人都能看到內容。</p></div></section></div></details>
+<details class="fold" id="f-pack" name="trip-tools"><summary><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5"/><path d="M5 19h14"/></svg></span><span class="ft"><b>離線包</b><small class="fst" id="fs-pack"></small></span></summary><div class="fin"><section class="pack" id="pack" aria-labelledby="pk-h" data-state="已存 {n}/{m}" data-ok="已全部離線保存" data-busy="下載中…"><h2 id="pk-h">離線包</h2>
 <div class="pack-bar"><i id="pk-bar"></i></div><p class="pack-state" id="pk-state" role="status"></p>
-<div class="actions"><button class="btn ghost" type="button" id="pk-btn">重新下載</button></div></section>
-<section class="sec" aria-labelledby="mr-h"><h2 id="mr-h">旅途中用得到</h2><ul class="glist"><li><a href="phrases.html"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H10l-4.5 4v-4H4z"/><path d="M8 9h8M8 12h5"/></svg></span><span>做一張給人看的韓文卡</span></a></li><li><a href="./#tool-h"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg></span><span>查查你的手機能用哪些</span></a></li><li><a href="help.html"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.6"/><path d="M5.7 5.7l3.7 3.7M14.6 14.6l3.7 3.7M18.3 5.7l-3.7 3.7M9.4 14.6l-3.7 3.7"/></svg></span><span>緊急電話</span></a></li></ul></section>
-<section class="sec" aria-labelledby="ap-h"><h2 id="ap-h">這個App</h2>
+<div class="actions"><button class="btn ghost" type="button" id="pk-btn">重新下載</button></div></section></div></details>
+<details class="fold" id="f-app" name="trip-tools"><summary><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg></span><span class="ft"><b>這個App</b><small class="fst" id="fs-app"></small></span></summary><div class="fin"><section class="sec" aria-labelledby="ap-h"><h2 id="ap-h">這個App</h2>
+<ul class="glist"><li><a href="./#c=all"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg></span><span>查查你的手機能用哪些</span></a></li></ul>
 <p class="hint" id="ios-hint" hidden>iPhone:點「分享」按鈕,再選「加入主畫面」。</p>
 <div class="actions"><button class="btn" type="button" id="app-install" hidden>安裝到這支手機</button><button class="btn ghost" type="button" id="clear">清除存在這支手機的內容</button></div><p class="hint" id="cleared" role="status"></p>
-<p class="hint"><a href="privacy.html">隱私權政策</a> · <a href="about.html">關於本站</a> · <a href="changes.html">更新紀錄</a></p></section>
+<p class="hint"><a href="privacy.html">隱私權政策</a> · <a href="about.html">關於本站</a> · <a href="changes.html">更新紀錄</a></p></section></div></details>
+</div>
 </div><script type="application/json" id="trip-data">{"mobile-data-sim": ["電話與上網", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"7\" y=\"2.5\" width=\"10\" height=\"19\" rx=\"2.5\"/><path d=\"M10.5 18.5h3\"/><\/svg>"], "incheon-airport-to-seoul": ["機場到市區", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M2.5 19h19\"/><path d=\"M3 13.5l3.5 1 3-1.5-5-6 2-.8 7.5 4.6 4.6-2.3a1.8 1.8 0 0 1 1.6 3.2L8 18\"/><\/svg>"], "maps": ["地圖", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 21s-6.5-6.2-6.5-11a6.5 6.5 0 0 1 13 0c0 4.8-6.5 11-6.5 11z\"/><circle cx=\"12\" cy=\"10\" r=\"2.3\"/><\/svg>"], "taxi": ["計程車", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 16v-3.5L6 8h12l2 4.5V16\"/><path d=\"M3.5 16h17v2.5h-17z\"/><circle cx=\"7.5\" cy=\"18.5\" r=\"1.4\"/><circle cx=\"16.5\" cy=\"18.5\" r=\"1.4\"/><path d=\"M10 5.5h4\"/><\/svg>"], "tmoney-subway-bus": ["地鐵與公車", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"5\" y=\"3\" width=\"14\" height=\"14\" rx=\"3\"/><path d=\"M5 11h14\"/><circle cx=\"8.5\" cy=\"14\" r=\"1\"/><circle cx=\"15.5\" cy=\"14\" r=\"1\"/><path d=\"M8 20l2-3M16 20l-2-3\"/><\/svg>"], "seoul-tourist-transit-pass": ["交通票券", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"3\" y=\"5\" width=\"18\" height=\"14\" rx=\"2\"/><path d=\"M3 10h18M7 15h4\"/><\/svg>"], "ktx-train-booking": ["KTX火車", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 15V9a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v6a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2z\"/><path d=\"M5 11h14\"/><path d=\"M8 21l2-4M16 21l-2-4\"/><\/svg>"], "seoul-to-busan-k-tour-pass": ["釜山之旅", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M3 17c3-3 6 3 9 0s6 3 9 0\"/><path d=\"M3 12c3-3 6 3 9 0s6 3 9 0\"/><path d=\"M12 3v6\"/><\/svg>"], "kr-pass-korail-pass": ["KR Pass", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"4\" y=\"3\" width=\"16\" height=\"14\" rx=\"3\"/><path d=\"M4 11h16M8 21l2-4M16 21l-2-4\"/><\/svg>"], "dmz-jsa-tour-booking": ["DMZ導覽", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M3 20h18\"/><path d=\"M5 20V9l7-5 7 5v11\"/><path d=\"M9 20v-6h6v6\"/><\/svg>"], "jeju-getting-around": ["濟州交通", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 16l1.5-5h11L19 16\"/><rect x=\"3\" y=\"16\" width=\"18\" height=\"4\" rx=\"1.5\"/><circle cx=\"7.5\" cy=\"18\" r=\".6\"/><circle cx=\"16.5\" cy=\"18\" r=\".6\"/><\/svg>"], "restaurant-reservations": ["餐廳訂位", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M7 3v8a2 2 0 0 0 2 2v8M11 3v6M7 3v6\"/><path d=\"M17 21V3c-2 1.5-3 4-3 7v3h3\"/><\/svg>"], "food-delivery": ["叫外送", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 7h12v10H4z\"/><path d=\"M16 10h3l2 3v4h-5\"/><circle cx=\"7.5\" cy=\"18\" r=\"1.6\"/><circle cx=\"17.5\" cy=\"18\" r=\"1.6\"/><\/svg>"], "translation": ["翻譯", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M3 5h9M7.5 3v2M5 5c.8 3 2.8 5.3 6 6.5M10 5c-.8 3-2.8 5.3-6 6.5\"/><path d=\"M13 21l4-9 4 9M14.5 18h5\"/><\/svg>"], "tax-free-shopping": ["購物與退稅", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z\"/><path d=\"M9 8V6a3 3 0 0 1 6 0v2\"/><\/svg>"], "luggage-storage": ["寄放行李", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"6\" y=\"7\" width=\"12\" height=\"13\" rx=\"2\"/><path d=\"M9 7V4h6v3M9 11v6M15 11v6\"/><\/svg>"], "pharmacy-hospital": ["生病或受傷", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10z\"/><path d=\"M12 10v5M9.5 12.5h5\"/><\/svg>"], "k-eta-entry-requirements": ["入境規定", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"6\" y=\"3\" width=\"12\" height=\"18\" rx=\"2\"/><circle cx=\"12\" cy=\"10\" r=\"3\"/><path d=\"M9 16h6\"/><\/svg>"], "atm-foreign-card-cash": ["現金與ATM", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"3\" y=\"6\" width=\"18\" height=\"12\" rx=\"2\"/><circle cx=\"12\" cy=\"12\" r=\"2.5\"/><path d=\"M6 9v.01M18 15v.01\"/><\/svg>"], "korea-power-plug-voltage": ["插頭與電壓", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M9 3v5M15 3v5M7 8h10v3a5 5 0 0 1-10 0z\"/><path d=\"M12 16v5\"/><\/svg>"], "gimpo-airport-to-seoul": ["金浦機場", "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M3 15l18-6-3 6H8l-3 3H3z\"/><path d=\"M4 21h16\"/><\/svg>"]}</script><script src="../qr.js"></script></main>
 </div>
 <div class="show" id="show" hidden role="dialog" aria-modal="true" aria-labelledby="show-lbl">
   <div class="lbl" id="show-lbl"></div><div class="ko" lang="ko" id="show-ko"></div>
-  <div><p class="mean" id="show-mean"></p><button class="btn" type="button" id="show-close">關閉</button></div>
+  <div><div class="show-ans" id="show-ans" hidden data-got="對方的回答"><p class="ans-tap" lang="ko">아래에서 답을 눌러 주세요</p><div class="ans-btns" id="ans-btns"></div><p class="ans-out" id="ans-out" aria-live="polite" hidden></p></div>
+  <p class="mean" id="show-mean"></p><div class="show-acts"><button class="btn ghost" type="button" id="show-say" hidden>🔊 朗讀</button><button class="btn" type="button" id="show-close">關閉</button></div></div>
 </div>
 <script>
 /* Arriving from a search result: start at the top (the answer box) instead of the middle of the page,
@@ -74,13 +77,24 @@
 function el(tag, attrs = {}, kids = []) { const n = document.createElement(tag); for (const [k, v] of Object.entries(attrs)) { if (k === "text") n.textContent = v; else if (k === "html") n.innerHTML = v; else n.setAttribute(k, v); } for (const c of [].concat(kids)) if (c) n.append(c); return n; }
 function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
 function count(path, title) { try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path, title, event: true }); } catch (e) {} }
-/* Full-screen card to hand the phone to staff or a driver. */
-let lastFocus = null;
-function show(label, ko, big, mean) {
+/* Full-screen card to hand the phone to staff or a driver. With answers (ask cards), staff tap one of the Korean
+   answers and the reader sees it in their own language. Play aloud appears only when the phone has a Korean voice. */
+let lastFocus = null, SAY = "", KOV = null;
+function koVoice() { try { KOV = speechSynthesis.getVoices().find(v => /^ko([-_]|$)/i.test(v.lang)) || null; } catch (e) { KOV = null; } document.getElementById("show-say").hidden = !KOV; }
+if ("speechSynthesis" in window) { koVoice(); try { speechSynthesis.addEventListener("voiceschanged", koVoice); } catch (e) {} }
+document.getElementById("show-say").addEventListener("click", () => { try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(SAY); u.lang = "ko-KR"; if (KOV) u.voice = KOV; u.rate = 0.9; speechSynthesis.speak(u); count("speak", "play aloud"); } catch (e) {} });
+function show(label, ko, big, mean, ans) {
   lastFocus = document.activeElement;
   document.getElementById("show-lbl").textContent = label;
   const k = document.getElementById("show-ko"); k.textContent = ko;
   if (big) k.append(el("small", { text: big }));
+  SAY = ko + (big ? ". " + big : "");
+  const box = document.getElementById("show-ans"), btns = document.getElementById("ans-btns"), out = document.getElementById("ans-out");
+  btns.replaceChildren(); out.hidden = true; box.hidden = !(ans && ans.length); k.classList.toggle("asking", !box.hidden);
+  (ans || []).forEach(a => { const b = el("button", { type: "button", class: "ans", lang: "ko", "aria-pressed": "false", text: a[0] });
+    b.addEventListener("click", () => { btns.querySelectorAll(".ans").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+      out.replaceChildren(el("small", { text: box.dataset.got }), el("b", { text: a[1] })); out.hidden = false; count("ask-answer", label); });
+    btns.append(b); });
   document.getElementById("show-mean").textContent = mean || "";
   document.getElementById("show").hidden = false; document.getElementById("show-close").focus();
   try { if (navigator.wakeLock) navigator.wakeLock.request("screen").then(l => { wake = l; }).catch(() => {}); } catch (e) {}
@@ -92,6 +106,7 @@ let wake = null;
 function hideShow(fromBack) {
   if (document.getElementById("show").hidden) return;
   document.getElementById("show").hidden = true; try { if (wake) wake.release(); } catch (e) {} wake = null; if (lastFocus) lastFocus.focus();
+  try { if (window.speechSynthesis) speechSynthesis.cancel(); } catch (e) {}
   try { if (fromBack !== true && history.state && history.state.emkCard) history.back(); } catch (e) {}
 }
 addEventListener("popstate", () => hideShow(true));
@@ -99,7 +114,7 @@ document.getElementById("show-close").addEventListener("click", hideShow);
 document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !document.getElementById("show").hidden) hideShow(); });
 
 (function () {
-  document.querySelectorAll("[data-show]").forEach(b => b.addEventListener("click", () => show(b.dataset.lbl, b.dataset.show, "", b.dataset.mean)));
+  document.querySelectorAll("[data-show]").forEach(b => b.addEventListener("click", () => { let ans = null; try { ans = b.dataset.ans ? JSON.parse(b.dataset.ans) : null; } catch (e) {} show(b.dataset.lbl, b.dataset.show, "", b.dataset.mean, ans); }));
   const saved = (store("wik-setup") || "visitor|ios").split("|");
   document.querySelectorAll("[data-copy]").forEach(b => b.addEventListener("click", async () => {
     let ok = false;
@@ -342,6 +357,28 @@ addEventListener("DOMContentLoaded", () => { try { if (sessionStorage.getItem("e
   inp.value = store("emk-landing") || "";
   inp.addEventListener("input", () => { store("emk-landing", inp.value); paint(); if (inp.value && !counted) { counted = true; count("arrival-helper", "arrival helper"); } });
   paint();
+})();
+
+(function () {
+  /* Each folded row says what this phone holds for it, so the reader sees the state without opening anything. */
+  const F = document.getElementById("folds"); if (!F) return;
+  const c = F.dataset, set = (id, t) => { const s = document.getElementById("fs-" + id); if (s) s.textContent = t || ""; };
+  const arr = k => { try { const a = JSON.parse(store(k) || "[]"); return Array.isArray(a) ? a : []; } catch (e) { return []; } };
+  const day = s => { try { return new Date(s + "T12:00:00").toLocaleDateString(c.lang, { month: "short", day: "numeric" }); } catch (e) { return s; } };
+  function paint() {
+    const a = (store("emk-addr") || "").trim(); set("addr", a ? a.slice(0, 40) : c.none);
+    const p = arr("emk-places").length; set("places", p ? c.count.replace("{n}", p) : c.none);
+    let t = null; try { t = JSON.parse(store("emk-trip") || "null"); } catch (e) {}
+    set("dates", t && t.from ? day(t.from) + (t.to ? " – " + day(t.to) : "") : c.none);
+    const l = store("emk-landing") || ""; set("arrive", l ? l.replace("T", " ") : "");
+  }
+  paint();
+  F.addEventListener("toggle", ev => { if (ev.target.open) count("fold/" + ev.target.id, "my trip fold"); else paint(); }, true);
+  F.addEventListener("input", paint); F.addEventListener("submit", () => setTimeout(paint, 0)); F.addEventListener("click", () => setTimeout(paint, 0));
+  const st = document.getElementById("pk-state");
+  if (st) new MutationObserver(() => set("pack", st.textContent)).observe(st, { childList: true, characterData: true, subtree: true });
+  /* A link to a tool (for example #f-dates) opens it. */
+  const h = location.hash && document.getElementById(location.hash.slice(1)); if (h && h.classList.contains("fold")) h.open = true;
 })();
 </script>
 <footer class="foot"><div class="wrap"><nav aria-label="EasyModeKorea"><a href="about.html">關於本站</a><a href="contact.html">聯絡我們</a><a href="changes.html">更新紀錄</a><a href="privacy.html">隱私權</a><a href="../hosts.html">給房東(韓文)</a></nav></div></footer>

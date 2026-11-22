@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap"></noscript>
-<link rel="stylesheet" href="style.css?v=c4f9a655">
+<link rel="stylesheet" href="style.css?v=e27e458e">
 <script>window.EMK={"lang": "en", "up": "", "t": {"save": "Save", "saved": "Saved", "share": "Share", "link_copied": "Link copied", "saved_toast": "Saved to My trip", "unsaved_toast": "Removed from My trip", "install": "Install the app. Guides open without data.", "install_btn": "Install", "later": "Not now", "update": "This page has newer info.", "refresh": "Refresh", "ready": "Saved on this phone. Guides now open without data.", "miss": "That page isn't saved on this phone yet. Open it once with data.", "off_ok": "Works offline", "offline": "You're offline. Everything here still works.", "suggest": "This page is also in {l}.", "switch": "Switch", "dismiss": "No thanks"}, "guide": "ktx-train-booking"}</script><script defer src="app.js?v=f550a1d3"></script>
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "How to book KTX tickets as a foreigner (2026)", "description": "Korea's rail booking changed a lot in 2026: a new app, SRT folded into KTX, and a longer booking window. Here is the current way to book.", "datePublished": "2026-11-17", "dateModified": "2026-11-22", "inLanguage": "en", "url": "https://easymodekorea.com/ktx-train-booking.html", "mainEntityOfPage": "https://easymodekorea.com/ktx-train-booking.html", "image": "https://easymodekorea.com/og.png", "author": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/about.html"}, "publisher": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/", "logo": {"@type": "ImageObject", "url": "https://easymodekorea.com/icon-512.png"}}, "citation": [{"@type": "WebPage", "name": "KORAIL English booking site", "url": "https://www.letskorail.com"}, {"@type": "WebPage", "name": "Korea Times: KTX expands after SRT absorption (Aug 2026)", "url": "https://koreatimes.co.kr/business/companies/20260831/ktx-expands-tuesday-following-srt-absorption"}, {"@type": "WebPage", "name": "Korea.kr: two-month booking window", "url": "https://www.korea.kr/news/reporterView.do?newsId=148973714"}, {"@type": "WebPage", "name": "Asia Economy: higher weekend cancellation fees (2025)", "url": "https://www.asiae.co.kr/en/article/2025042711412342505"}]}, {"@context": "https://schema.org", "@type": "WebPage", "@id": "https://easymodekorea.com/ktx-train-booking.html", "url": "https://easymodekorea.com/ktx-train-booking.html", "name": "How do I book a KTX train as a foreigner?", "inLanguage": "en", "lastReviewed": "2026-11-17", "reviewedBy": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/about.html"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "EasyModeKorea", "item": "https://easymodekorea.com/"}, {"@type": "ListItem", "position": 2, "name": "KTX trains", "item": "https://easymodekorea.com/ktx-train-booking.html"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I book a KTX train as a foreigner?", "acceptedAnswer": {"@type": "Answer", "text": "Book on KORAIL's English website with a foreign card. It's the most reliable channel. Use KORAIL's English booking site with your passport details. Tickets open two months ahead (since 1 Oct 2026). Book early for weekends and holidays."}}, {"@type": "Question", "name": "Do I still need to book SRT separately?", "acceptedAnswer": {"@type": "Answer", "text": "No. SRT was folded into KORAIL on 1 Sep 2026, and all high-speed trains are sold as KTX."}}, {"@type": "Question", "name": "Can I book KTX without a Korean phone number?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The English website takes passport details and a foreign card."}}, {"@type": "Question", "name": "Is the KR Pass worth it?", "acceptedAnswer": {"@type": "Answer", "text": "Only for several long trips in a few days. See our KR Pass guide to compare."}}, {"@type": "Question", "name": "Is there Wi-Fi and food on board?", "acceptedAnswer": {"@type": "Answer", "text": "Plan to bring your own snacks and use your own data; services on board vary by train."}}]}]</script>
@@ -47,7 +47,8 @@
 </div>
 <div class="show" id="show" hidden role="dialog" aria-modal="true" aria-labelledby="show-lbl">
   <div class="lbl" id="show-lbl"></div><div class="ko" lang="ko" id="show-ko"></div>
-  <div><p class="mean" id="show-mean"></p><button class="btn" type="button" id="show-close">Close</button></div>
+  <div><div class="show-ans" id="show-ans" hidden data-got="Their answer"><p class="ans-tap" lang="ko">아래에서 답을 눌러 주세요</p><div class="ans-btns" id="ans-btns"></div><p class="ans-out" id="ans-out" aria-live="polite" hidden></p></div>
+  <p class="mean" id="show-mean"></p><div class="show-acts"><button class="btn ghost" type="button" id="show-say" hidden>🔊 Play aloud</button><button class="btn" type="button" id="show-close">Close</button></div></div>
 </div>
 <script>
 /* Arriving from a search result: start at the top (the answer box) instead of the middle of the page,
@@ -61,13 +62,24 @@
 function el(tag, attrs = {}, kids = []) { const n = document.createElement(tag); for (const [k, v] of Object.entries(attrs)) { if (k === "text") n.textContent = v; else if (k === "html") n.innerHTML = v; else n.setAttribute(k, v); } for (const c of [].concat(kids)) if (c) n.append(c); return n; }
 function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
 function count(path, title) { try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path, title, event: true }); } catch (e) {} }
-/* Full-screen card to hand the phone to staff or a driver. */
-let lastFocus = null;
-function show(label, ko, big, mean) {
+/* Full-screen card to hand the phone to staff or a driver. With answers (ask cards), staff tap one of the Korean
+   answers and the reader sees it in their own language. Play aloud appears only when the phone has a Korean voice. */
+let lastFocus = null, SAY = "", KOV = null;
+function koVoice() { try { KOV = speechSynthesis.getVoices().find(v => /^ko([-_]|$)/i.test(v.lang)) || null; } catch (e) { KOV = null; } document.getElementById("show-say").hidden = !KOV; }
+if ("speechSynthesis" in window) { koVoice(); try { speechSynthesis.addEventListener("voiceschanged", koVoice); } catch (e) {} }
+document.getElementById("show-say").addEventListener("click", () => { try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(SAY); u.lang = "ko-KR"; if (KOV) u.voice = KOV; u.rate = 0.9; speechSynthesis.speak(u); count("speak", "play aloud"); } catch (e) {} });
+function show(label, ko, big, mean, ans) {
   lastFocus = document.activeElement;
   document.getElementById("show-lbl").textContent = label;
   const k = document.getElementById("show-ko"); k.textContent = ko;
   if (big) k.append(el("small", { text: big }));
+  SAY = ko + (big ? ". " + big : "");
+  const box = document.getElementById("show-ans"), btns = document.getElementById("ans-btns"), out = document.getElementById("ans-out");
+  btns.replaceChildren(); out.hidden = true; box.hidden = !(ans && ans.length); k.classList.toggle("asking", !box.hidden);
+  (ans || []).forEach(a => { const b = el("button", { type: "button", class: "ans", lang: "ko", "aria-pressed": "false", text: a[0] });
+    b.addEventListener("click", () => { btns.querySelectorAll(".ans").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+      out.replaceChildren(el("small", { text: box.dataset.got }), el("b", { text: a[1] })); out.hidden = false; count("ask-answer", label); });
+    btns.append(b); });
   document.getElementById("show-mean").textContent = mean || "";
   document.getElementById("show").hidden = false; document.getElementById("show-close").focus();
   try { if (navigator.wakeLock) navigator.wakeLock.request("screen").then(l => { wake = l; }).catch(() => {}); } catch (e) {}
@@ -79,6 +91,7 @@ let wake = null;
 function hideShow(fromBack) {
   if (document.getElementById("show").hidden) return;
   document.getElementById("show").hidden = true; try { if (wake) wake.release(); } catch (e) {} wake = null; if (lastFocus) lastFocus.focus();
+  try { if (window.speechSynthesis) speechSynthesis.cancel(); } catch (e) {}
   try { if (fromBack !== true && history.state && history.state.emkCard) history.back(); } catch (e) {}
 }
 addEventListener("popstate", () => hideShow(true));
@@ -86,7 +99,7 @@ document.getElementById("show-close").addEventListener("click", hideShow);
 document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !document.getElementById("show").hidden) hideShow(); });
 
 (function () {
-  document.querySelectorAll("[data-show]").forEach(b => b.addEventListener("click", () => show(b.dataset.lbl, b.dataset.show, "", b.dataset.mean)));
+  document.querySelectorAll("[data-show]").forEach(b => b.addEventListener("click", () => { let ans = null; try { ans = b.dataset.ans ? JSON.parse(b.dataset.ans) : null; } catch (e) {} show(b.dataset.lbl, b.dataset.show, "", b.dataset.mean, ans); }));
   const saved = (store("wik-setup") || "visitor|ios").split("|");
   document.querySelectorAll("[data-copy]").forEach(b => b.addEventListener("click", async () => {
     let ok = false;
