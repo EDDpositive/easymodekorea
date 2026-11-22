@@ -47,12 +47,13 @@ def icons():
 
 # Captions for the framed Play screenshots (store/screenshots/). *words* are drawn in yellow. Each claim is something
 # the app really does; keep them in step with store/listing.md.
-FRAMES = [("home", "Which Korean apps *work with your phone*", "A status for your phone on every guide"),
+FRAMES = [("home", "Korea travel help, *one tap away*", "Ready check, 8 situations, works offline"),
+          ("list", "Which Korean apps *work with your phone*", "A status for your phone on every guide"),
           ("ready", "Your plan *before the flight*, in one minute", "Taps only. Saved on your phone"),
           ("guide", "Short answers, *checked and dated*", "Each fact shows the day it was checked"),
+          ("ask", "Staff *tap the answer*, you read it", "Ask cards: no typing, works offline"),
           ("show", "Show a driver *in big Korean*", "Full screen, even offline"),
-          ("cards", "Korean cards for *taxis, food, pharmacies*", "Tap a card to show it full screen"),
-          ("help", "Lost, sick or stuck? *Help in one tap*", "112 · 119 · 1330 and what to do, in order")]
+          ("help", "Lost, sick or stuck? *Help in one tap*", "112 · 119 · 1330, then find a pharmacy nearby")]
 
 
 def screenshots():
@@ -60,7 +61,9 @@ def screenshots():
     srv = cdp.Server(os.path.abspath(ROOT)); b = cdp.Browser(360, 640, 3, "light")
     try:
         for page, name, after in (("", "home", ""), ("ready.html", "ready", ""), ("taxi.html", "guide", ""), ("taxi.html", "show", "document.querySelector('[data-show]').click()"),
-                                  ("phrases.html", "cards", "document.getElementById('cards').scrollIntoView()"), ("help.html", "help", "")):
+                                  ("phrases.html", "cards", "document.getElementById('cards').scrollIntoView()"), ("help.html", "help", ""),
+                                  ("", "list", "document.querySelector('#jump [data-go=move]').click()"),
+                                  ("phrases.html", "ask", "document.querySelector('.sayrow.askrow .sayrow-main').click(); document.querySelectorAll('#ans-btns .ans')[1].click()")):
             b.go(srv.url + page)
             if not page:  # keep the install prompt out of the pictures
                 b.js("localStorage.setItem('emk-install-no', String(Date.now())); localStorage.setItem('emk-ready', '1')"); b.go(srv.url)

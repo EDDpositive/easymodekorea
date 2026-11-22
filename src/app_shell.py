@@ -35,6 +35,7 @@ T = {
         "trip_more_h": "More for your trip", "trip_cards": "Make a Korean card to show", "trip_setup": "Check what works with your phone", "trip_help": "Emergency numbers",
         "trip_app_h": "This app", "trip_offline": "{n} pages are stored on this phone and open without data.", "trip_install": "Install on this phone",
         "trip_clear": "Erase what I saved on this phone", "trip_clear_q": "Erase your saved guides, address, cards and phone setup from this phone?", "trip_cleared": "Erased.",
+        "f_addr": "Stay address", "f_arrive": "e-Arrival Card timing", "f_none": "Not added", "f_count": "{n} saved", "near_h": "Find nearby", "near_sub": "Opens Naver Map with the Korean word", "near": {"pharmacy": "Pharmacy", "er": "Emergency room", "police": "Police box", "store": "Convenience store", "wc": "Restroom", "subway": "Subway station"}, "ask_h": "Ask, they tap the answer", "ask_got": "Their answer", "speak": "Play aloud",
         "remove": "Remove",
         "cards_title": "Korean cards to show", "cards_seo": "Korean phrases to show staff and drivers in Korea (offline cards)",
         "cards_desc": "Korean phrases and place names in big letters. Show them to a driver or staff, or copy them into Naver Map. Make your own card too. Works offline.",
@@ -83,6 +84,7 @@ T = {
         "trip_more_h": "旅行に役立つもの", "trip_cards": "見せる韓国語カードを作る", "trip_setup": "自分のスマホで使えるものを確認", "trip_help": "緊急連絡先",
         "trip_app_h": "このアプリ", "trip_offline": "{n}ページがこのスマホに保存され、データ通信なしで開けます。", "trip_install": "このスマホにインストール",
         "trip_clear": "このスマホに保存した内容を消去", "trip_clear_q": "保存したガイド、住所、カード、スマホの設定をこのスマホから消去しますか?", "trip_cleared": "消去しました。",
+        "f_addr": "宿泊先の住所", "f_arrive": "電子入国カードの提出時刻", "f_none": "未登録", "f_count": "{n}件", "near_h": "近くを探す", "near_sub": "韓国語の検索語でNAVER地図を開きます", "near": {"pharmacy": "薬局", "er": "救急外来", "police": "交番", "store": "コンビニ", "wc": "トイレ", "subway": "地下鉄駅"}, "ask_h": "質問して、答えをタップしてもらう", "ask_got": "相手の答え", "speak": "読み上げ",
         "remove": "削除",
         "cards_title": "見せる韓国語カード", "cards_seo": "韓国で店員や運転手に見せる韓国語フレーズ(オフライン対応)",
         "cards_desc": "韓国語のフレーズと地名を大きな文字で表示。運転手や店員に見せたり、Naver Mapにコピーしたりできます。自分のカードも作れます。オフライン対応。",
@@ -131,6 +133,7 @@ T = {
         "trip_more_h": "旅途中用得到", "trip_cards": "做一張給人看的韓文卡", "trip_setup": "查查你的手機能用哪些", "trip_help": "緊急電話",
         "trip_app_h": "這個App", "trip_offline": "這支手機已存好{n}個頁面,沒有網路也能開。", "trip_install": "安裝到這支手機",
         "trip_clear": "清除存在這支手機的內容", "trip_clear_q": "要從這支手機清除收藏的指南、地址、卡片和手機設定嗎?", "trip_cleared": "已清除。",
+        "f_addr": "住宿地址", "f_arrive": "電子入境卡何時能填", "f_none": "尚未新增", "f_count": "{n} 個", "near_h": "找附近", "near_sub": "用韓文關鍵字開啟 Naver 地圖", "near": {"pharmacy": "藥局", "er": "急診室", "police": "派出所", "store": "便利商店", "wc": "廁所", "subway": "地鐵站"}, "ask_h": "問完讓對方點答案", "ask_got": "對方的回答", "speak": "朗讀",
         "remove": "移除",
         "cards_title": "給人看的韓文卡", "cards_seo": "在韓國給店員和司機看的韓文句子(可離線使用)",
         "cards_desc": "用大字顯示韓文句子和地名,可以給司機或店員看,也能複製到Naver Map。還能自己做卡片。離線也能用。",
@@ -179,6 +182,7 @@ T = {
         "trip_more_h": "旅途中用得到", "trip_cards": "做一张给人看的韩文卡", "trip_setup": "查查你的手机能用哪些", "trip_help": "紧急电话",
         "trip_app_h": "这个App", "trip_offline": "这部手机已存好{n}个页面,没有网络也能打开。", "trip_install": "安装到这部手机",
         "trip_clear": "清除存在这部手机的内容", "trip_clear_q": "要从这部手机清除收藏的指南、地址、卡片和手机设置吗?", "trip_cleared": "已清除。",
+        "f_addr": "住宿地址", "f_arrive": "电子入境卡何时能填", "f_none": "尚未添加", "f_count": "{n} 个", "near_h": "找附近", "near_sub": "用韩文关键词打开 Naver 地图", "near": {"pharmacy": "药店", "er": "急诊室", "police": "派出所", "store": "便利店", "wc": "厕所", "subway": "地铁站"}, "ask_h": "问完让对方点答案", "ask_got": "对方的回答", "speak": "朗读",
         "remove": "移除",
         "cards_title": "给人看的韩文卡", "cards_seo": "在韩国给店员和司机看的韩文句子(可离线使用)",
         "cards_desc": "用大字显示韩文句子和地名,可以给司机或店员看,也能复制到Naver Map。还能自己做卡片。离线也能用。",
@@ -227,6 +231,7 @@ T = {
         "trip_more_h": "Hữu ích cho chuyến đi", "trip_cards": "Tạo thẻ tiếng Hàn để đưa xem", "trip_setup": "Xem điện thoại của bạn dùng được gì", "trip_help": "Số khẩn cấp",
         "trip_app_h": "Ứng dụng này", "trip_offline": "{n} trang đã lưu trên điện thoại này và mở được khi không có mạng.", "trip_install": "Cài vào điện thoại này",
         "trip_clear": "Xóa những gì đã lưu trên điện thoại này", "trip_clear_q": "Xóa hướng dẫn đã lưu, địa chỉ, thẻ và thiết lập điện thoại khỏi máy này?", "trip_cleared": "Đã xóa.",
+        "f_addr": "Địa chỉ chỗ ở", "f_arrive": "Giờ nộp e-Arrival Card", "f_none": "Chưa thêm", "f_count": "{n} mục", "near_h": "Tìm gần đây", "near_sub": "Mở Naver Map bằng từ khóa tiếng Hàn", "near": {"pharmacy": "Nhà thuốc", "er": "Phòng cấp cứu", "police": "Đồn cảnh sát", "store": "Cửa hàng tiện lợi", "wc": "Nhà vệ sinh", "subway": "Ga tàu điện ngầm"}, "ask_h": "Hỏi, rồi để họ chạm vào câu trả lời", "ask_got": "Câu trả lời", "speak": "Đọc to",
         "remove": "Bỏ",
         "cards_title": "Thẻ tiếng Hàn để đưa xem", "cards_seo": "Câu tiếng Hàn để đưa nhân viên và tài xế xem ở Hàn Quốc (dùng offline)",
         "cards_desc": "Câu và tên địa điểm tiếng Hàn bằng chữ lớn. Đưa cho tài xế hoặc nhân viên xem, hoặc sao chép vào Naver Map. Bạn cũng có thể tự tạo thẻ. Dùng được khi không có mạng.",
@@ -282,6 +287,44 @@ PAY_CARDS = [
 ]
 
 # Home jump grid: a short label per situation card (card ids from layout.CARDS).
+# Ask cards (28차): the reader shows a question, staff tap one of the Korean answers on the same screen,
+# and the reader sees that answer in their own language. No typing, no speaking, works offline.
+_YN = [_c("네, 들어가요", "Yes, it does", "はい、入っています", "有", "有", "Có"),
+       _c("아니요, 안 들어가요", "No, it doesn't", "いいえ、入っていません", "沒有", "没有", "Không có"),
+       _c("잘 모르겠어요", "I'm not sure", "よく分かりません", "不太確定", "不太确定", "Tôi không chắc")]
+ASK_CARDS = [
+    (_c("이 음식에 돼지고기가 들어가요?", "Does this have pork in it?", "これに豚肉は入っていますか?", "這道菜有豬肉嗎?", "这道菜有猪肉吗?", "Món này có thịt lợn không?"), _YN),
+    (_c("이 음식에 견과류가 들어가요?", "Does this have nuts in it?", "これにナッツ類は入っていますか?", "這道菜有堅果嗎?", "这道菜有坚果吗?", "Món này có các loại hạt không?"), _YN),
+    (_c("많이 매워요?", "Is it very spicy?", "とても辛いですか?", "很辣嗎?", "很辣吗?", "Có cay lắm không?"),
+     [_c("안 매워요", "Not spicy", "辛くないです", "不辣", "不辣", "Không cay"),
+      _c("조금 매워요", "A little spicy", "少し辛いです", "有一點辣", "有一点辣", "Hơi cay"),
+      _c("많이 매워요", "Very spicy", "とても辛いです", "很辣", "很辣", "Rất cay")]),
+    (_c("카드로 결제할 수 있어요?", "Can I pay by card?", "カードで払えますか?", "可以刷卡嗎?", "可以刷卡吗?", "Tôi trả bằng thẻ được không?"),
+     [_c("네, 돼요", "Yes", "はい、使えます", "可以", "可以", "Được"),
+      _c("현금만 돼요", "Cash only", "現金のみです", "只收現金", "只收现金", "Chỉ nhận tiền mặt"),
+      _c("해외 카드는 안 돼요", "Foreign cards don't work here", "海外のカードは使えません", "不能用國外的卡", "不能用国外的卡", "Thẻ nước ngoài không dùng được")]),
+    (_c("지금 자리 있어요?", "Is there a table now?", "今、席は空いていますか?", "現在有位子嗎?", "现在有位子吗?", "Bây giờ còn bàn không?"),
+     [_c("네, 들어오세요", "Yes, come in", "はい、どうぞ", "有,請進", "有,请进", "Có, mời vào"),
+      _c("기다려야 해요", "You'll need to wait", "お待ちいただきます", "需要等", "需要等", "Phải đợi"),
+      _c("오늘은 마감했어요", "Closed for today", "今日はもう終わりました", "今天已經結束營業", "今天已经结束营业", "Hôm nay đã đóng cửa")]),
+    (_c("얼마나 기다려야 해요?", "How long is the wait?", "どのくらい待ちますか?", "要等多久?", "要等多久?", "Phải đợi bao lâu?"),
+     [_c("10분쯤", "About 10 minutes", "10分くらい", "大約10分鐘", "大约10分钟", "Khoảng 10 phút"),
+      _c("30분쯤", "About 30 minutes", "30分くらい", "大約30分鐘", "大约30分钟", "Khoảng 30 phút"),
+      _c("1시간 넘게", "Over an hour", "1時間以上", "超過一小時", "超过一小时", "Hơn một tiếng")]),
+    (_c("여기서 걸어서 갈 수 있어요?", "Can I walk there from here?", "ここから歩いて行けますか?", "從這裡走得到嗎?", "从这里走得到吗?", "Từ đây đi bộ tới được không?"),
+     [_c("네, 가까워요", "Yes, it's close", "はい、近いです", "可以,很近", "可以,很近", "Được, gần lắm"),
+      _c("택시 타세요", "Take a taxi", "タクシーに乗ってください", "請搭計程車", "请打车", "Hãy đi taxi"),
+      _c("버스나 지하철 타세요", "Take a bus or the subway", "バスか地下鉄に乗ってください", "請搭公車或地鐵", "请坐公交或地铁", "Hãy đi xe buýt hoặc tàu điện ngầm")]),
+    (_c("짐을 여기 맡길 수 있어요?", "Can I leave my bags here?", "荷物をここに預けられますか?", "行李可以寄放在這裡嗎?", "行李可以寄存在这里吗?", "Tôi gửi hành lý ở đây được không?"),
+     [_c("네, 무료예요", "Yes, free", "はい、無料です", "可以,免費", "可以,免费", "Được, miễn phí"),
+      _c("네, 유료예요", "Yes, for a fee", "はい、有料です", "可以,要付費", "可以,要付费", "Được, có tính phí"),
+      _c("아니요", "No", "いいえ", "不行", "不行", "Không")]),
+]
+ASK_TAP = "아래에서 답을 눌러 주세요"   # shown to staff, in Korean only
+
+# Find nearby (28차): one tap opens Naver Map on a Korean search word, so the reader never types Korean.
+NEAR = [("pharmacy", "약국"), ("er", "응급실"), ("police", "파출소"), ("store", "편의점"), ("wc", "공중화장실"), ("subway", "지하철역")]
+
 JUMP = {
     "landed": {"en": "Arrival", "ja": "到着", "zh-tw": "抵達", "zh-cn": "抵达", "vi": "Đến nơi"},
     "move": {"en": "Transport", "ja": "移動", "zh-tw": "交通", "zh-cn": "交通", "vi": "Đi lại"},
