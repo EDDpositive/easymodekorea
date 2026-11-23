@@ -1,7 +1,7 @@
 # Google Play listing kit
 
 Everything to paste into Play Console. Text limits: name 30, short description 80, full description 4,000 characters.
-Graphics are in this repo: icon `icon-512.png`, feature graphic `store/feature-graphic.png` (1024x500), phone screenshots `store/screenshots/1-home.png` to `7-help.png` (7 images) (1080x1920, a one-line caption above each screen in a phone frame; upload in that order). The plain screens in `shots/` are for the web install prompt. Rebuild them with `python tools/make_store_assets.py`.
+Graphics are in this repo: icon `icon-512.png`, feature graphic `store/feature-graphic.png` (1024x500), phone screenshots `store/screenshots/1-home.png` to `8-help.png` (8 images, the most Play allows) (1080x1920, a one-line caption above each screen in a phone frame; upload in that order). The plain screens in `shots/` are for the web install prompt. Rebuild them with `python tools/make_store_assets.py`.
 
 | Field | Value |
 |---|---|
@@ -31,6 +31,7 @@ WHAT YOU GET
 • Answers for your phone: tell the app once whether you have a Korean number, and it shows what works for you.
 • Korean cards: show a driver or staff a sentence in big Korean letters, or copy place names into a map app. Make your own card for a hotel name or an allergy. Play a card aloud when your phone has a Korean voice.
 • Ask cards: show a question ("Does this have pork in it?", "Can I pay by card?"), staff tap one of the Korean answers on your screen, and you read it in your language. No typing, no speaking, works offline.
+• At the pharmacy: 14 symptom cards to show, and four questions the pharmacist answers with one tap (how to take it, will it make me sleepy, do I need a prescription, should I see a doctor).
 • Find nearby: one tap opens Naver Map on the right Korean word for a pharmacy, emergency room, police box, convenience store, restroom or subway station.
 • Places to go: save your stay and other places once, show them to a taxi driver full screen, or open them in Naver Map or KakaoMap.
 • Food and payment cards: allergies, vegetarian, no pork, or a card that won't go through, in big Korean.
@@ -74,6 +75,7 @@ Questions or corrections: edandco.biz@gmail.com
 • 내 폰 기준 답: 한국 번호가 있는지 한 번만 알려 주면 나에게 되는 방법을 보여 줍니다.
 • 한국어 카드: 기사님이나 직원에게 큰 한국어 글씨로 보여 주거나, 장소 이름을 지도 앱에 복사합니다. 호텔 이름이나 알레르기는 직접 카드로 만들 수 있습니다. 폰에 한국어 음성이 있으면 소리 내어 읽어 줍니다.
 • 답 고르기 카드: 질문("돼지고기가 들어가요?", "카드 결제 돼요?")을 보여 주면 직원이 화면의 한국어 답 하나를 누르고, 여행자는 자기 언어로 읽습니다. 입력도 말도 필요 없고 오프라인에서도 됩니다.
+• 약국에서: 보여 줄 증상 카드 14개, 약사가 한 번 눌러 답하는 질문 4개(복용법, 졸음, 처방전, 병원에 가야 하는지).
 • 주변 찾기: 약국, 응급실, 파출소, 편의점, 화장실, 지하철역을 한 번 누르면 맞는 한국어 검색어로 네이버 지도가 열립니다.
 • 갈 곳 목록: 숙소와 가고 싶은 곳을 한 번 저장해 두면 기사님에게 전체 화면으로 보여 주거나 네이버 지도·카카오맵으로 바로 엽니다.
 • 식사·결제 카드: 알레르기, 채식, 돼지고기 제외, 카드 결제가 안 될 때 쓸 문장을 큰 한국어로 보여 줍니다.
