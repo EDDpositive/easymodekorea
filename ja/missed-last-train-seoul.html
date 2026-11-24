@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap"></noscript>
-<link rel="stylesheet" href="../style.css?v=83b5cbf5">
+<link rel="stylesheet" href="../style.css?v=4f4241ea">
 <script>window.EMK={"lang": "ja", "up": "../", "t": {"save": "保存", "saved": "保存済み", "share": "共有", "link_copied": "リンクをコピーしました", "saved_toast": "マイページに保存しました", "unsaved_toast": "マイページから削除しました", "install": "アプリを追加。通信なしでもガイドが開けます。", "install_btn": "インストール", "later": "今はしない", "update": "このページに新しい情報があります。", "refresh": "更新", "ready": "このスマホに保存しました。通信なしでもガイドが開けます。", "miss": "そのページはまだこのスマホに保存されていません。通信できるときに一度開いてください。", "off_ok": "オフラインで使えます", "offline": "オフラインです。このページの内容はそのまま使えます。", "suggest": "このページは{l}でも読めます。", "switch": "切り替える", "dismiss": "このままでいい"}}</script><script defer src="../app.js?v=f550a1d3"></script>
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "HowTo", "name": "終電を逃したら", "description": "ソウルで地下鉄が終わった後の帰り方3つ。安い順です。", "inLanguage": "ja", "url": "https://easymodekorea.com/ja/missed-last-train-seoul.html", "step": [{"@type": "HowToStep", "position": 1, "text": "本当に電車がないか確認します。ソウルの地下鉄は平日、終着駅に午前1時ごろ着くまで走り、土日・祝日はそれより早く終わります。自分の駅の終電はホームの時刻表かNaver Mapで分かります。"}, {"@type": "HowToStep", "position": 2, "text": "深夜バス: ソウルのNバスは23:00〜翌6:00に走ります。Naver Mapで目的地を検索し、バスの結果を見ます。"}, {"@type": "HowToStep", "position": 3, "text": "タクシー: k.rideかUberで呼ぶか、タクシー乗り場へ。ソウルの初乗りは4,800ウォンで、22時〜4時は20%、23時〜2時は40%増しです。"}, {"@type": "HowToStep", "position": 4, "text": "乗る前に、行き先の韓国語の住所を用意します。マイページに保存しておくと、全画面で見せられます。"}, {"@type": "HowToStep", "position": 5, "text": "何も走っておらずタクシーもつかまらないときは、24時間営業のコンビニなど明るく人のいる場所で待ち、始発に乗ります。"}], "citation": [{"@type": "WebPage", "name": "Seoul city: subway until 1 a.m. on weekdays (30 May 2022)", "url": "https://mediahub.seoul.go.kr/archives/2004711"}, {"@type": "WebPage", "name": "Seoul city: Chuseok 2026 transport plan (22 Sep 2026)", "url": "https://mediahub.seoul.go.kr/archives/2019414"}]}, {"@context": "https://schema.org", "@type": "WebPage", "@id": "https://easymodekorea.com/ja/missed-last-train-seoul.html", "url": "https://easymodekorea.com/ja/missed-last-train-seoul.html", "name": "終電を逃したら", "inLanguage": "ja", "lastReviewed": "2026-11-22", "reviewedBy": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/ja/about.html"}}]</script>
@@ -54,20 +54,21 @@ let lastFocus = null, SAY = "", KOV = null;
 function koVoice() { try { KOV = speechSynthesis.getVoices().find(v => /^ko([-_]|$)/i.test(v.lang)) || null; } catch (e) { KOV = null; } document.getElementById("show-say").hidden = !KOV; }
 if ("speechSynthesis" in window) { koVoice(); try { speechSynthesis.addEventListener("voiceschanged", koVoice); } catch (e) {} }
 document.getElementById("show-say").addEventListener("click", () => { try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(SAY); u.lang = "ko-KR"; if (KOV) u.voice = KOV; u.rate = 0.9; speechSynthesis.speak(u); count("speak", "play aloud"); } catch (e) {} });
-function show(label, ko, big, mean, ans) {
+function show(label, ko, big, mean, ans, opt) {
   lastFocus = document.activeElement;
   document.getElementById("show-lbl").textContent = label;
   const k = document.getElementById("show-ko"); k.textContent = ko;
+  if (opt && opt.list) k.replaceChildren(...ko.split("\n").map(l => { const m = /^([^:]{1,16}): (.+)$/.exec(l); return m ? el("div", { class: "show-kv" }, [el("span", { text: m[1] }), el("b", { text: m[2] })]) : el("div", { text: l, class: opt.hot && l === opt.hot ? "hot" : "" }); }));
   if (big) k.append(el("small", { text: big }));
-  SAY = ko + (big ? ". " + big : "");
+  SAY = (opt && opt.say) || ko + (big ? ". " + big : ""); k.classList.toggle("list", !!(opt && opt.list)); document.getElementById("show").classList.toggle("lists", !!(opt && opt.list));   /* list: several lines, smaller; say: how to read them aloud */
   const box = document.getElementById("show-ans"), btns = document.getElementById("ans-btns"), out = document.getElementById("ans-out");
   btns.replaceChildren(); out.hidden = true; box.hidden = !(ans && ans.length); k.classList.toggle("asking", !box.hidden);
   (ans || []).forEach(a => { const b = el("button", { type: "button", class: "ans", lang: "ko", "aria-pressed": "false", text: a[0] });
     b.addEventListener("click", () => { btns.querySelectorAll(".ans").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
-      out.replaceChildren(el("small", { text: box.dataset.got }), el("b", { text: a[1] })); out.hidden = false; count("ask-answer", label); });
+      out.replaceChildren(el("small", { text: box.dataset.got }), el("b", { text: a[1] })); out.hidden = false; out.scrollIntoView({ block: "nearest" }); count("ask-answer", label); });
     btns.append(b); });
   document.getElementById("show-mean").textContent = mean || "";
-  document.getElementById("show").hidden = false; document.getElementById("show-close").focus();
+  document.getElementById("show").hidden = false; document.getElementById("show-close").focus({ preventScroll: true }); document.getElementById("show").scrollTop = 0;
   try { if (navigator.wakeLock) navigator.wakeLock.request("screen").then(l => { wake = l; }).catch(() => {}); } catch (e) {}
   /* The phone's Back button closes the card instead of leaving the page. */
   try { if (!(history.state && history.state.emkCard)) history.pushState({ emkCard: 1 }, ""); } catch (e) {}

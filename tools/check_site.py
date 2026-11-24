@@ -60,11 +60,37 @@ def main():
     for f in pages:
         base = os.path.dirname(f)
         for href in re.findall(r'href="([^"#?]+)(?:[#?][^"]*)?"', rd(f)):
-            if re.match(r"^(https?:|mailto:|tel:|//)", href): continue
+            if re.match(r"^(https?:|mailto:|tel:|sms:|//)", href): continue
             t = href.lstrip("/") if href.startswith("/") else os.path.normpath(os.path.join(base, href)).replace("\\", "/")
             t = "" if t == "." else t
             if not (has(t) and not os.path.isdir(os.path.join(ROOT, t)) or has(os.path.join(t, "index.html"))): broken.append(f"{f} -> {href}")
     check(not broken, "no broken links inside the site", "; ".join(broken[:4]))
+
+    # 30차: the install-worthy screens. Every sentence exists in five languages, every dated item has a source, and nothing on them can send data.
+    sys.path.insert(0, os.path.join(ROOT, "src"))
+    import moments as M, trouble as TR  # noqa: E402
+    import ast
+    five = {"en", "ja", "zh-tw", "zh-cn", "vi"}; gaps = []
+    def walk(o, at):
+        if isinstance(o, dict):
+            if "en" in o and all(isinstance(v, str) for v in o.values()):
+                if set(o) != five or not all(v.strip() for v in o.values()): gaps.append(at)
+            else: [walk(v, f"{at}.{k}") for k, v in o.items()]
+        elif isinstance(o, (list, tuple)): [walk(v, f"{at}[{i}]") for i, v in enumerate(o)]
+    for n in ("SOS", "SOS_WHAT", "SOS_HELP_M", "ALLERGY", "AVOID", "COND", "DRUG", "FOOD_ANS", "MED_ANS", "CARD", "REFUSED", "RF", "DAYS", "TM", "MOS_LABEL"): walk(getattr(M, n), n)
+    for iid, st, w, text, src, d, link, cond in M.DAYS:
+        if any(not k.startswith("guide:") and k not in M.SRC and k not in TR.SRC for k in src): gaps.append("source of " + iid)
+        if any(not k.startswith("guide:") for k in src) and not d: gaps.append("date of " + iid)
+    js = rd("src/moments_js.py")
+    send = [w for w in ("fetch(", "XMLHttpRequest", "sendBeacon", "WebSocket", "new Image", "http://", "https://") if w in js.replace("/^http/", "")]
+    bad = [f"{d}{n}.html" for d in LANG_DIRS for n in ("sos", "refused", "my-card") if not has(f"{d}{n}.html") or f'"{d}{n}.html"' not in rd("sw.js")]
+    for d in LANG_DIRS:
+        sos = rd(d + "sos.html")
+        if not all(s in sos for s in ('href="tel:119"', 'href="tel:112"', 'href="tel:+82-2-1330"', 'id="sos-find"', 'href="sms:119"')): bad.append(d + "sos.html calls")
+        if sos.count('class="ck"') < 3: bad.append(d + "sos.html dates")
+        if not all(x in rd(d + "index.html") for x in ('href="sos.html"', 'href="refused.html"', 'href="my-card.html"', 'id="trip-now"')): bad.append(d + "index.html row")
+        if 'href="sos.html"' not in rd(d + "help.html") or 'id="days"' not in rd(d + "saved.html"): bad.append(d + "help/trip")
+    check(not gaps and not send and not bad, "SOS, Refused, food and health card, trip mode: five languages, dated and sourced, offline, and their scripts send nothing", "; ".join(gaps[:3] + send + bad[:3]))
 
     # Search index per language.
     idx_ok = all(len(json.loads(rd(d + "search.json"))["faq"]) > 20 and len(json.loads(rd(d + "search.json"))["cards"]) > 20 for d in LANG_DIRS)

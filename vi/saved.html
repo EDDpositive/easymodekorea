@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap"></noscript>
-<link rel="stylesheet" href="../style.css?v=83b5cbf5">
+<link rel="stylesheet" href="../style.css?v=4f4241ea">
 <script>window.EMK={"lang": "vi", "up": "../", "t": {"save": "Lưu", "saved": "Đã lưu", "share": "Chia sẻ", "link_copied": "Đã sao chép liên kết", "saved_toast": "Đã lưu vào mục Của tôi", "unsaved_toast": "Đã bỏ khỏi mục Của tôi", "install": "Cài ứng dụng. Xem hướng dẫn cả khi không có mạng.", "install_btn": "Cài đặt", "later": "Để sau", "update": "Trang này có thông tin mới hơn.", "refresh": "Tải lại", "ready": "Đã lưu trên điện thoại này. Giờ có thể mở hướng dẫn khi không có mạng.", "miss": "Trang đó chưa được lưu trên điện thoại này. Hãy mở một lần khi có mạng.", "off_ok": "Dùng được khi không có mạng", "offline": "Bạn đang ngoại tuyến. Mọi thứ ở đây vẫn dùng được.", "suggest": "Trang này có bản {l}.", "switch": "Chuyển", "dismiss": "Không, cảm ơn"}}</script><script defer src="../app.js?v=f550a1d3"></script>
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -24,6 +24,9 @@
 </header>
 <div class="wrap"><main id="main" class="app-main"><div id="trip" data-remove="Bỏ" data-offline="{n} trang đã lưu trên điện thoại này và mở được khi không có mạng." data-ask="Xóa hướng dẫn đã lưu, địa chỉ, thẻ và thiết lập điện thoại khỏi máy này?" data-cleared="Đã xóa.">
 <div id="import" hidden><p id="import-q"></p><div class="actions"><button class="btn" type="button" id="import-yes">Thêm</button><button class="linkbtn" type="button" id="import-no">Để sau</button></div></div>
+<section class="sec days" id="days" aria-labelledby="dy-h"><div class="dy-head"><h2 id="dy-h">Lịch của bạn</h2><b id="days-now" class="dy-now" hidden></b></div>
+<div id="days-need" hidden><p class="hint">Nhập ngày, màn hình chỉ hiện việc đến hạn.</p><div class="trip-dates"><label>Đến<input id="day-from" type="date"></label><label>Về<input id="day-to" type="date"></label></div></div>
+<div id="days-list" class="dgs"></div><p class="hint" id="days-note" hidden>🔔 lưu tệp lịch. Ứng dụng lịch sẽ nhắc, kể cả khi đóng ứng dụng này.</p></section><script type="application/json" id="days-data">{"t":{"to_go":"Còn {n} ngày","tomorrow":"Mai bay","day":"Ngày {n}/{m}","leaving":"Hôm nay về","nothing":"Hôm nay không có việc đến hạn.","over":"Hết chuyến? Xóa dữ liệu chuyến đi.","remind":"Thêm vào lịch","saved":"Đã lưu tệp lịch. Mở tệp để thêm.","now":"Ngay bây giờ","next":"Tiếp theo","all":"Xem tất cả","moved":"Ngày chuyển","by":"Báo trước {d}","stages":{"before":"Trước khi bay","arrive":"Ngày đến","trip":"Trong chuyến đi","eve":"Ngày trước khi về","leave":"Ngày về, theo thứ tự","long":"Ở lâu dài"}},"items":[{"id":"ktx","st":"before","w":["from",-60],"t":"Vé KTX mở bán trước hai tháng. Hãy đặt.","l":["Tàu KTX","ktx-train-booking.html"],"c":"busan","src":[["Tàu KTX","ktx-train-booking.html"]],"d":"2026-11-17"},{"id":"keta","st":"before","w":["from",-14],"t":"Kiểm tra có cần K-ETA không","l":["Quy định nhập cảnh","k-eta-entry-requirements.html"],"c":"visitor","src":[["Quy định nhập cảnh","k-eta-entry-requirements.html"]],"d":"2026-11-20"},{"id":"card","st":"before","w":["from",-7],"t":"Tạo thẻ ăn uống và sức khỏe","l":["Thẻ ăn uống và sức khỏe","my-card.html"],"c":null,"src":[],"d":""},{"id":"addr","st":"before","w":["from",-7],"t":"Lưu địa chỉ chỗ ở bằng tiếng Hàn","l":["Địa chỉ chỗ ở","#f-addr"],"c":null,"src":[],"d":""},{"id":"eac","st":"before","w":["from",-3],"t":"e-Arrival Card mở: 72 giờ trước khi hạ cánh","l":["Giờ nộp e-Arrival Card","#f-arrive"],"c":"visitor","src":[["Quy định nhập cảnh","k-eta-entry-requirements.html"]],"d":"2026-11-20"},{"id":"off","st":"before","w":["from",-1],"t":"Kiểm tra gói ngoại tuyến đã đủ","l":["Gói ngoại tuyến","#f-pack"],"c":null,"src":[],"d":""},{"id":"tmoney","st":"arrive","w":["from",0],"t":"Mua T-money ở cửa hàng tiện lợi, nạp tiền mặt","l":["Tàu điện và xe buýt","tmoney-subway-bus.html"],"c":null,"src":[["Tàu điện và xe buýt","tmoney-subway-bus.html"]],"d":"2026-11-17"},{"id":"city","st":"arrive","w":["from",0],"t":"Vào thành phố: tàu, xe buýt hoặc taxi","l":["Sân bay vào thành phố","incheon-airport-to-seoul.html"],"c":null,"src":[["Sân bay vào thành phố","incheon-airport-to-seoul.html"]],"d":"2026-11-17"},{"id":"tax1","st":"trip","w":["day",2],"t":"Mua sắm nhớ mang hộ chiếu: cửa hàng Tax Free hoàn thuế từ 15.000 won mỗi lần trả","l":["Mua sắm và hoàn thuế","tax-free-shopping.html"],"c":"visitor","src":[["Visit Seoul: tax refund","https://english.visitseoul.net/taxrefund"],["Incheon Airport: tax refund steps","https://www.airport.kr/ap_ko/898/subview.do"]],"d":"2026-11-25"},{"id":"eve_bag","st":"eve","w":["to",-1],"t":"Để hàng hoàn thuế còn nguyên, dễ lấy ra","l":null,"c":"visitor","src":[["Incheon Airport: tax refund steps","https://www.airport.kr/ap_ko/898/subview.do"]],"d":"2026-11-25"},{"id":"eve_tm","st":"eve","w":["to",-1],"t":"Dùng hết T-money: hoàn số dư nhỏ mất 500 won","l":["Tàu điện và xe buýt","tmoney-subway-bus.html"],"c":null,"src":[["Tàu điện và xe buýt","tmoney-subway-bus.html"]],"d":"2026-11-20"},{"id":"eve_bus","st":"eve","w":["to",-1],"t":"Xem chuyến đầu ra sân bay","l":["Sân bay vào thành phố","incheon-airport-to-seoul.html"],"c":null,"src":[],"d":""},{"id":"go_bag","st":"leave","w":["to",0],"t":"Hàng hoàn thuế trong hành lý ký gửi? Báo hãng khi check-in và nhận lại vali đã gắn thẻ (Incheon)","l":null,"c":"visitor","src":[["Incheon Airport: tax refund steps","https://www.airport.kr/ap_ko/898/subview.do"]],"d":"2026-11-25"},{"id":"go_kiosk","st":"leave","w":["to",0],"t":"Máy hoàn thuế: quét hộ chiếu và phiếu trước khi gửi hành lý (Incheon)","l":null,"c":"visitor","src":[["Incheon Airport Customs: tax refund check","https://www.customs.go.kr/incheon_airport/cm/cntnts/cntntsView.do?mi=12546&cntntsId=6688"],["Incheon Airport: tax refund steps","https://www.airport.kr/ap_ko/898/subview.do"]],"d":"2026-11-25"},{"id":"go_cust","st":"leave","w":["to",0],"t":"Máy báo kiểm tra? Đến quầy hải quan: hộ chiếu, hàng chưa mở, phiếu","l":null,"c":"visitor","src":[["Incheon Airport: tax refund steps","https://www.airport.kr/ap_ko/898/subview.do"]],"d":"2026-11-25"},{"id":"go_cash","st":"leave","w":["to",0],"t":"Sau an ninh: máy hoàn thuế 24 giờ, quầy 7:00–22:00 (T1) hoặc 21:30 (T2) (Incheon)","l":null,"c":"visitor","src":[["Incheon Airport: tax refund steps","https://www.airport.kr/ap_ko/898/subview.do"]],"d":"2026-11-25"},{"id":"arc","st":"long","w":["from",90],"t":"Ở trên 90 ngày: đăng ký trước ngày này","l":null,"c":"long","src":[["Study in Korea (government): registration and address rules","https://www.studyinkorea.go.kr/ko/life/residenceAndStayInfo.do"]],"d":"2026-11-25"},{"id":"move","st":"long","w":null,"t":"Chuyển nhà? Báo địa chỉ mới trong 15 ngày (F-4 kiều bào: 14 ngày)","l":null,"c":"long","src":[["Study in Korea (government): registration and address rules","https://www.studyinkorea.go.kr/ko/life/residenceAndStayInfo.do"],["Hanam City: address change report","https://www.hanam.go.kr/english/contents.do?key=9642"]],"d":"2026-11-25"}],"bell":"<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 2h-15z\"/><path d=\"M10 21h4\"/><\/svg>"}</script>
 <a class="ready-cta" href="ready.html" data-continue="Kế hoạch: xong {d}/{n}" data-next="Tiếp theo: {t}" data-lang="vi"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M7.5 12.5l3 3 6-6.5"/></svg></span><span><b>Kiểm tra Korea Ready</b><span class="ready-sub">1 phút, chỉ cần chạm</span><span class="ready-next" hidden></span></span></a>
 <section class="sec" aria-labelledby="sv-h"><h2 id="sv-h">Hướng dẫn đã lưu</h2><ul class="glist" id="saved-list"></ul><p class="hint" id="saved-empty">Chưa lưu gì.</p></section>
 <section class="sec" id="recent" hidden aria-labelledby="rc-h"><h2 id="rc-h">Mới mở gần đây</h2><ul class="glist" id="recent-list"></ul></section>
@@ -83,20 +86,21 @@ let lastFocus = null, SAY = "", KOV = null;
 function koVoice() { try { KOV = speechSynthesis.getVoices().find(v => /^ko([-_]|$)/i.test(v.lang)) || null; } catch (e) { KOV = null; } document.getElementById("show-say").hidden = !KOV; }
 if ("speechSynthesis" in window) { koVoice(); try { speechSynthesis.addEventListener("voiceschanged", koVoice); } catch (e) {} }
 document.getElementById("show-say").addEventListener("click", () => { try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(SAY); u.lang = "ko-KR"; if (KOV) u.voice = KOV; u.rate = 0.9; speechSynthesis.speak(u); count("speak", "play aloud"); } catch (e) {} });
-function show(label, ko, big, mean, ans) {
+function show(label, ko, big, mean, ans, opt) {
   lastFocus = document.activeElement;
   document.getElementById("show-lbl").textContent = label;
   const k = document.getElementById("show-ko"); k.textContent = ko;
+  if (opt && opt.list) k.replaceChildren(...ko.split("\n").map(l => { const m = /^([^:]{1,16}): (.+)$/.exec(l); return m ? el("div", { class: "show-kv" }, [el("span", { text: m[1] }), el("b", { text: m[2] })]) : el("div", { text: l, class: opt.hot && l === opt.hot ? "hot" : "" }); }));
   if (big) k.append(el("small", { text: big }));
-  SAY = ko + (big ? ". " + big : "");
+  SAY = (opt && opt.say) || ko + (big ? ". " + big : ""); k.classList.toggle("list", !!(opt && opt.list)); document.getElementById("show").classList.toggle("lists", !!(opt && opt.list));   /* list: several lines, smaller; say: how to read them aloud */
   const box = document.getElementById("show-ans"), btns = document.getElementById("ans-btns"), out = document.getElementById("ans-out");
   btns.replaceChildren(); out.hidden = true; box.hidden = !(ans && ans.length); k.classList.toggle("asking", !box.hidden);
   (ans || []).forEach(a => { const b = el("button", { type: "button", class: "ans", lang: "ko", "aria-pressed": "false", text: a[0] });
     b.addEventListener("click", () => { btns.querySelectorAll(".ans").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
-      out.replaceChildren(el("small", { text: box.dataset.got }), el("b", { text: a[1] })); out.hidden = false; count("ask-answer", label); });
+      out.replaceChildren(el("small", { text: box.dataset.got }), el("b", { text: a[1] })); out.hidden = false; out.scrollIntoView({ block: "nearest" }); count("ask-answer", label); });
     btns.append(b); });
   document.getElementById("show-mean").textContent = mean || "";
-  document.getElementById("show").hidden = false; document.getElementById("show-close").focus();
+  document.getElementById("show").hidden = false; document.getElementById("show-close").focus({ preventScroll: true }); document.getElementById("show").scrollTop = 0;
   try { if (navigator.wakeLock) navigator.wakeLock.request("screen").then(l => { wake = l; }).catch(() => {}); } catch (e) {}
   /* The phone's Back button closes the card instead of leaving the page. */
   try { if (!(history.state && history.state.emkCard)) history.pushState({ emkCard: 1 }, ""); } catch (e) {}
@@ -379,6 +383,85 @@ addEventListener("DOMContentLoaded", () => { try { if (sessionStorage.getItem("e
   if (st) new MutationObserver(() => set("pack", st.textContent)).observe(st, { childList: true, characterData: true, subtree: true });
   /* A link to a tool (for example #f-dates) opens it. */
   const h = location.hash && document.getElementById(location.hash.slice(1)); if (h && h.classList.contains("fold")) h.open = true;
+})();
+
+(function () {
+  /* Trip mode: the dates on this phone decide what shows. Home shows only what is due; My trip shows the whole list in order.
+     A reminder is a calendar file made here, so the phone's own calendar rings even when this app is closed. */
+  const J = document.getElementById("days-data"); if (!J) return;
+  const D = JSON.parse(J.textContent), c = D.t, home = document.getElementById("trip-now"), box = document.getElementById("days"), DAY = 864e5;
+  const day = s => { const m = /^(\d{4})-(\d\d)-(\d\d)$/.exec(s || ""); return m ? Date.UTC(+m[1], m[2] - 1, +m[3]) : NaN; };
+  const loc = document.documentElement.lang || "en", fmt = (t, y) => new Intl.DateTimeFormat(loc, { day: "numeric", month: "short", ...(y ? { year: "numeric" } : {}), timeZone: "UTC" }).format(new Date(t));
+  const now = new Date(), today = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+  const obj = k => { try { return JSON.parse(store(k) || "{}") || {}; } catch (e) { return {}; } };
+  const tr = obj("emk-trip"), from = day(tr.from), to = day(tr.to), has = !isNaN(from) && !isNaN(to) && to >= from;
+  const arc = /^arc/.test(store("wik-setup") || ""), busan = [].concat(obj("emk-rc").city || []).includes("busan"), long = has && to - from > 90 * DAY;
+  let done = []; try { done = JSON.parse(store("emk-days") || "[]"); if (!Array.isArray(done)) done = []; } catch (e) {}
+  const fits = i => !i.c || (i.c === "busan" ? busan : i.c === "visitor" ? !arc : arc || long);
+  const when = i => !i.w ? NaN : i.w[0] === "day" ? from + (i.w[1] - 1) * DAY : (i.w[0] === "from" ? from : to) + i.w[1] * DAY;
+  const list = D.items.filter(fits).map(i => ({ ...i, at: has ? (i.id === "arc" ? from + 89 * DAY : when(i)) : NaN })).filter(i => i.st !== "trip" || isNaN(i.at) || i.at < to);
+  const tick = id => { done = done.includes(id) ? done.filter(x => x !== id) : done.concat(id); store("emk-days", JSON.stringify(done)); };
+  const n = Math.round((from - today) / DAY), len = Math.round((to - from) / DAY) + 1;
+  const label = !has ? "" : n > 1 ? c.to_go.replace("{n}", n) : n === 1 ? c.tomorrow : today === to ? c.leaving : today < to ? c.day.replace("{n}", 1 - n).replace("{m}", len) : c.over;
+  const stage = !has ? "" : n > 0 ? "before" : today === to ? "leave" : today === to - DAY && today !== from ? "eve" : today === from ? "arrive" : today < to ? "trip" : "over";
+  /* Calendar file for one item: a timed event with an alarm. Long lines are folded by bytes, as the format asks. */
+  const fold = s => { const out = []; let cur = "", b = 0; for (const ch of s) { const w = new TextEncoder().encode(ch).length; if (b + w > 72) { out.push(cur); cur = " "; b = 1; } cur += ch; b += w; } out.push(cur); return out.join("\r\n"); };
+  const esc = s => s.replace(/[\\;,]/g, m => "\\" + m).replace(/\n/g, "\\n");
+  window.emkIcs = (id, text, at, hh) => { const d = new Date(at).toISOString().slice(0, 10).replace(/-/g, ""), st = new Date().toISOString().replace(/[-:]/g, "").slice(0, 15) + "Z";
+    return ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//EasyModeKorea//Trip//EN", "BEGIN:VEVENT", "UID:" + id + "-" + d + "@easymodekorea.com", "DTSTAMP:" + st, "DTSTART:" + d + "T" + hh + "0000", "DTEND:" + d + "T" + hh + "1500",
+      "SUMMARY:" + esc(text), "DESCRIPTION:EasyModeKorea", "BEGIN:VALARM", "ACTION:DISPLAY", "DESCRIPTION:" + esc(text), "TRIGGER:PT0S", "END:VALARM", "END:VEVENT", "END:VCALENDAR", ""].map(fold).join("\r\n"); };
+  const bell = (id, text, at, hh) => { const b = el("button", { type: "button", class: "dy-bell", "aria-label": c.remind + ": " + text, html: D.bell });
+    b.addEventListener("click", () => { const a = el("a", { href: URL.createObjectURL(new Blob([emkIcs(id, text, at, hh)], { type: "text/calendar;charset=utf-8" })), download: "easymodekorea-" + id + ".ics" });
+      document.body.append(a); a.click(); a.remove(); count("days/remind", "calendar reminder"); if (window.emkToast) emkToast("🔔 " + c.saved); });
+    return b; };
+  const hour = i => i.st === "eve" ? "19" : i.st === "leave" ? "08" : "10";
+  const tk = (i, after) => { const b = el("button", { type: "button", class: "dy-t", "aria-pressed": String(done.includes(i.id)), "aria-label": i.t }, el("i", { "aria-hidden": "true" }));
+    b.addEventListener("click", () => { tick(i.id); const on = done.includes(i.id); b.setAttribute("aria-pressed", String(on)); b.closest("li").classList.toggle("off", on); if (after) after(); }); return b; };
+  if (home && has && stage !== "over") {
+    const due = list.filter(i => !done.includes(i.id) && i.st !== "long" && (i.st === "before" ? n > 0 && i.at <= today : i.st === "trip" ? stage === "trip" && i.at <= today : i.st === stage));
+    const next = list.filter(i => i.at > today && !done.includes(i.id) && i.st !== "long").sort((a, b) => a.at - b.at)[0];
+    home.replaceChildren(el("p", { class: "tn-h" }, [el("b", { text: label }), el("a", { href: "saved.html#days", text: c.all })]));
+    if (due.length) home.append(el("ul", { class: "tn" }, due.slice(0, 2).map(i => el("li", {}, [tk(i), el("a", { href: i.l ? i.l[1].replace(/^#/, "saved.html#") : "saved.html#days", text: i.t })]))));
+    else home.append(el("p", { class: "tn-next" }, next ? [el("small", { text: c.next + " · " + fmt(next.at) }), el("span", { text: next.t })] : [el("span", { text: c.nothing })]));
+    home.hidden = false;
+    /* Once the trip has started, what is due today replaces the pre-trip check. */
+    if (n <= 0) { const r = document.querySelector("#today .ready-cta"); if (r) r.hidden = true; }
+  }
+  if (!box) return;
+  const L = document.getElementById("days-list"), need = document.getElementById("days-need"), head = document.getElementById("days-now");
+  need.hidden = has; head.hidden = !has; head.textContent = label;
+  const df = document.getElementById("day-from"), dt = document.getElementById("day-to");
+  const put = () => { if (df.value && dt.value && dt.value >= df.value) { store("emk-trip", JSON.stringify({ from: df.value, to: dt.value })); location.reload(); } };
+  df.addEventListener("change", put); dt.addEventListener("change", put);
+  const ORD = ["before", "arrive", "trip", "eve", "leave"], at0 = ORD.indexOf(stage);
+  const ord = !has ? (arc ? ["long"] : []) : at0 < 0 ? ORD.concat("long") : ORD.slice(at0).concat("long", ORD.slice(0, at0));
+  for (const g of ord) {
+    const items = list.filter(i => i.st === g); if (!items.length) continue;
+    const cnt = el("span", { class: "dg-n" }), left = () => { const k = items.filter(x => !done.includes(x.id)).length; cnt.textContent = k ? String(k) : "✓"; };
+    left();
+    const d = el("details", { class: "dg", name: "dg" }), same = items.every(i => i.at === items[0].at) && !isNaN(items[0].at);
+    d.append(el("summary", {}, [el("b", { text: c.stages[g] }), same ? el("small", { text: fmt(items[0].at) }) : null, cnt]));
+    if (g === stage || (!has && g === "long")) d.open = true;
+    const ul = el("ul", { class: "dy" });
+    for (const i of items) {
+      const info = [], line = [el("span", { text: i.t })]; if (!isNaN(i.at) && !same) line.push(el("small", { text: g === "before" && i.at <= today ? c.now : fmt(i.at) }));
+      if (i.l) info.push(el("a", { class: "btn ghost", href: i.l[1], text: i.l[0] }));
+      if (i.src.length) info.push(el("p", { class: "fact-src" }, [i.d ? el("time", { class: "ck", datetime: i.d, text: "✓ " + fmt(day(i.d), 1) + " " }) : null].concat(i.src.map(s => el("a", { href: s[1], ...(/^http/.test(s[1]) ? { target: "_blank", rel: "noopener" } : {}), text: s[0] + " " })))));
+      const li = el("li", { class: done.includes(i.id) ? "off" : "" }, [tk(i, left), info.length ? el("details", { class: "dy-d" }, [el("summary", {}, line), el("div", {}, info)]) : el("div", { class: "dy-d" }, line)]);
+      if (!isNaN(i.at) && (i.at > today || (i.at === today && now.getHours() < +hour(i)))) li.append(bell(i.id, i.t, i.at, hour(i)));
+      if (i.id === "move") li.append(mover(i));
+      ul.append(li);
+    }
+    d.append(ul); L.append(d);
+  }
+  document.getElementById("days-note").hidden = !L.querySelector(".dy-bell");
+  function mover(i) {   /* Moved on this date: the last day to report it, counted on the safe side. */
+    const inp = el("input", { type: "date" }), out = el("p", { class: "dy-by", role: "status" });
+    const calc = () => { const m = day(inp.value); out.replaceChildren(); if (isNaN(m)) return; store("emk-moved", inp.value); const by = m + 14 * DAY;
+      out.append(el("span", { text: c.by.replace("{d}", fmt(by)) + " · F-4: " + fmt(m + 13 * DAY) })); if (by >= today) out.append(bell("move", i.t, Math.max(today, by - 3 * DAY), "10")); };
+    inp.value = store("emk-moved") || ""; inp.addEventListener("change", calc); calc();
+    return el("div", { class: "dy-mv" }, [el("label", {}, [el("span", { text: c.moved }), inp]), out]); }
+  if (location.hash === "#days") box.scrollIntoView();
 })();
 </script>
 <footer class="foot"><div class="wrap"><nav aria-label="EasyModeKorea"><a href="about.html">Giới thiệu</a><a href="contact.html">Liên hệ</a><a href="changes.html">Thay đổi gần đây</a><a href="privacy.html">Quyền riêng tư</a><a href="../hosts.html">Dành cho chủ nhà (tiếng Hàn)</a></nav></div></footer>

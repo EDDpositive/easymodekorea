@@ -24,16 +24,22 @@
   "appVersionCode": 1,
   "shortcuts": [
     {
-      "name": "Emergency help in Korea",
-      "shortName": "Help",
-      "url": "/help.html",
-      "chosenIconUrl": "https://easymodekorea.com/shortcut-help.png"
+      "name": "Emergency: SOS",
+      "shortName": "SOS",
+      "url": "/sos.html",
+      "chosenIconUrl": "https://easymodekorea.com/shortcut-sos.png"
     },
     {
-      "name": "Korean cards to show",
-      "shortName": "Korean cards",
-      "url": "/phrases.html",
-      "chosenIconUrl": "https://easymodekorea.com/shortcut-cards.png"
+      "name": "Refused? 3 taps",
+      "shortName": "Refused?",
+      "url": "/refused.html",
+      "chosenIconUrl": "https://easymodekorea.com/shortcut-refused.png"
+    },
+    {
+      "name": "My food and health card",
+      "shortName": "My card",
+      "url": "/my-card.html",
+      "chosenIconUrl": "https://easymodekorea.com/shortcut-card.png"
     },
     {
       "name": "My trip",

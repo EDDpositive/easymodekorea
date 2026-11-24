@@ -36,24 +36,36 @@
  ],
  "shortcuts": [
   {
-   "name": "Emergency help in Korea",
-   "short_name": "Help",
-   "url": "/help.html",
+   "name": "Emergency: SOS",
+   "short_name": "SOS",
+   "url": "/sos.html",
    "icons": [
     {
-     "src": "/shortcut-help.png",
+     "src": "/shortcut-sos.png",
      "sizes": "96x96",
      "type": "image/png"
     }
    ]
   },
   {
-   "name": "Korean cards to show",
-   "short_name": "Korean cards",
-   "url": "/phrases.html",
+   "name": "Refused? 3 taps",
+   "short_name": "Refused?",
+   "url": "/refused.html",
    "icons": [
     {
-     "src": "/shortcut-cards.png",
+     "src": "/shortcut-refused.png",
+     "sizes": "96x96",
+     "type": "image/png"
+    }
+   ]
+  },
+  {
+   "name": "My food and health card",
+   "short_name": "My card",
+   "url": "/my-card.html",
+   "icons": [
+    {
+     "src": "/shortcut-card.png",
      "sizes": "96x96",
      "type": "image/png"
     }

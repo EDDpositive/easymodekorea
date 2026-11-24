@@ -67,7 +67,7 @@ jobs:
           "$AAPT" dump badging app-release-unsigned-aligned.apk | grep -E "^package|sdkVersion|targetSdkVersion|uses-permission" | tee app-info.txt
           grep -q "name='com.easymodekorea.app'" app-info.txt
           grep -q "targetSdkVersion:'36'" app-info.txt
-          # The privacy policy says the app asks for no access to location, contacts, camera or files.
+          # The privacy policy says the app itself asks for no access to location, contacts, camera or files (the browser asks before the emergency screen reads the location).
           if grep -E "LOCATION|CONTACTS|CAMERA|STORAGE|RECORD_AUDIO|READ_MEDIA" app-info.txt; then echo "Unexpected permission"; exit 1; fi
           # The app must open this site and claim it (that claim is what assetlinks.json answers).
           "$AAPT" dump strings app-release-unsigned-aligned.apk > strings.txt
