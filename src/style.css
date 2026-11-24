@@ -910,10 +910,6 @@ html.offline .install-bar { display: none; }
 .show .hot { color: #b3141b; }
 .show .ko.list.asking { font-size: clamp(20px, 5.4vw, 34px); }
 /* My card */
-.seg { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; margin: 0 0 12px; border-radius: 16px; background: var(--line); }
-.seg a { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; border-radius: 12px; color: var(--ink); font-weight: 700; text-decoration: none; }
-.seg a svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
-.seg a[aria-current="true"] { background: var(--surface); color: var(--link); }
 .mc-top { display: grid; gap: 10px; padding: 14px; border-radius: 18px; background: var(--surface); border: 1px solid var(--line); }
 .mc-prev { margin: 0; font: 700 17px/1.5 var(--ko, var(--body)); white-space: pre-line; overflow-wrap: anywhere; }
 .mc-empty { margin: 0; color: var(--muted); }
@@ -928,9 +924,6 @@ html.offline .install-bar { display: none; }
 .mc-words b { display: block; font: 800 20px/1.25 var(--ko, var(--body)); }
 .mc-words span { font-size: 13px; color: var(--muted); }
 .mc-off p, p.mc-off { margin: 0 0 8px; font-size: 14px; line-height: 1.45; }
-.mc-form { display: grid; gap: 12px; margin-top: 16px; }
-.mc-form label { display: grid; gap: 6px; font-weight: 700; }
-.mc-form textarea, .mc-form select, .mc-form input { width: 100%; min-height: 48px; padding: 10px 12px; border: 1.5px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--ink); font: 400 16px/1.4 var(--body); box-sizing: border-box; }
 .mc-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 16px 0 0; font-size: 14px; color: var(--muted); }
 .mc-foot .linkbtn { min-height: 44px; }
 .mc-links .mc-st { margin-left: auto; color: var(--muted); font-size: 13px; text-align: right; }

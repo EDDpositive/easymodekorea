@@ -1,4 +1,4 @@
-"""The moments that make the app worth installing (30차): the offline emergency screen, the food and health card,
+"""The moments that make the app worth installing (30차): the offline emergency screen, the food card,
 "Refused?" in three taps, and trip mode (today only, the last day in order, calendar reminders).
 
 Rules for this file:
@@ -74,8 +74,6 @@ SOS = {
                 t5("Elevator: the number inside the car", "エレベーター:かごの中の番号", "電梯:車廂裡的編號", "电梯:轿厢里的编号", "Thang máy: số bên trong buồng thang"),
                 t5("Mountain or coast: the sign with 2 Korean letters and 8 digits", "山や海岸:ハングル2文字と数字8桁の標識", "山上或海邊:2個韓文字加8位數字的牌子", "山上或海边:2个韩文字加8位数字的牌子", "Núi hoặc biển: biển có 2 chữ Hàn và 8 chữ số"),
                 t5("Motorway: the km sign every 200 m or so, with your direction", "高速道路:約200mごとの距離標と進行方向", "高速公路:約每200公尺的里程牌,加上行駛方向", "高速公路:约每200米的里程牌,加上行驶方向", "Cao tốc: biển km khoảng mỗi 200 m, kèm hướng đi")],
-    "med": t5("Show my health card", "自分の健康カードを見せる", "出示我的健康卡", "出示我的健康卡", "Cho xem thẻ sức khỏe"),
-    "med_make": t5("Make a health card", "健康カードを作る", "製作健康卡", "制作健康卡", "Tạo thẻ sức khỏe"),
     "what_is": t5("Korea is divided into 10 m squares, each with its own code (국가지점번호), made for rescue calls.", "韓国全土を10m四方に区切った番号(국가지점번호)で、救助の通報用です。", "韓國全境以10公尺見方劃分,每格有自己的編號(국가지점번호),供救援通報使用。", "韩国全境以10米见方划分,每格有自己的编号(국가지점번호),供救援报警使用。", "Hàn Quốc được chia thành ô 10 m, mỗi ô có mã riêng (국가지점번호), dùng khi gọi cứu hộ."),
     "stay": t5("I'm at my stay", "宿にいます", "我在住宿地點", "我在住宿地点", "Tôi đang ở chỗ ở"),
     "code_what": t5("What is this code?", "この番号は?", "這是什麼編號?", "这是什么编号?", "Mã này là gì?"),
@@ -106,7 +104,7 @@ SOS_LOC = ("제 위치는 국가지점번호 {c}입니다.", "je wichineun gukga
 SOS_ERR = ("오차는 약 {m}미터입니다.", "ochaneun yak {m} miteo imnida.", "オチャヌン ヤク {m} ミト イムニダ。")
 SOS_LANG_KO = {"en": "영어", "ja": "일본어", "zh-tw": "중국어", "zh-cn": "중국어", "vi": "베트남어"}
 
-# ---------------------------------------------------------------------------------------------- food and health card
+# ---------------------------------------------------------------------------------------------- food card
 # id, Korean on the card, word to look for on a package (None: not on Korea's label list), names, shown first
 ALLERGY = [
     ("peanut", "땅콩", "땅콩", t5("Peanut", "ピーナッツ", "花生", "花生", "Lạc"), 1),
@@ -152,50 +150,21 @@ FOOD_ANS = [("안 들어가요", t5("Not in it", "入っていません", "沒�
             ("빼 드릴 수 있어요", t5("We can leave it out", "抜くことができます", "可以不放", "可以不放", "Có thể bỏ ra")),
             ("다른 메뉴를 드세요", t5("Pick another dish", "別の料理にしてください", "請改點別的", "请改点别的", "Hãy chọn món khác")),
             ("잘 모르겠어요", t5("Not sure", "分かりません", "不確定", "不确定", "Không chắc"))]
-COND = [
-    ("diab", "당뇨병", t5("Diabetes", "糖尿病", "糖尿病", "糖尿病", "Tiểu đường")),
-    ("bp", "고혈압", t5("High blood pressure", "高血圧", "高血壓", "高血压", "Cao huyết áp")),
-    ("heart", "심장병", t5("Heart disease", "心臓病", "心臟病", "心脏病", "Bệnh tim")),
-    ("asthma", "천식", t5("Asthma", "ぜんそく", "氣喘", "哮喘", "Hen suyễn")),
-    ("epi", "뇌전증", t5("Epilepsy", "てんかん", "癲癇", "癫痫", "Động kinh")),
-    ("kidney", "신장병", t5("Kidney disease", "腎臓病", "腎臟病", "肾脏病", "Bệnh thận")),
-    ("preg", "임신 중", t5("Pregnant", "妊娠中", "懷孕中", "怀孕中", "Đang mang thai")),
-    ("thin", "피를 묽게 하는 약(항응고제) 복용 중", t5("On blood thinners", "血液をサラサラにする薬を服用", "服用抗凝血藥", "服用抗凝血药", "Đang dùng thuốc chống đông")),
-    ("insulin", "인슐린 사용", t5("On insulin", "インスリンを使用", "使用胰島素", "使用胰岛素", "Đang dùng insulin")),
-    ("pace", "심장 박동기 있음", t5("Pacemaker", "ペースメーカー", "心律調節器", "心脏起搏器", "Máy tạo nhịp tim")),
-    ("anaph", "심한 알레르기 쇼크(아나필락시스) 경험", t5("Past anaphylaxis", "アナフィラキシーの経験", "曾有嚴重過敏性休克", "曾有严重过敏性休克", "Từng sốc phản vệ")),
-]
-DRUG = [
-    ("peni", "페니실린", t5("Penicillin", "ペニシリン", "盤尼西林", "青霉素", "Penicillin")),
-    ("aspirin", "아스피린", t5("Aspirin", "アスピリン", "阿斯匹靈", "阿司匹林", "Aspirin")),
-    ("nsaid", "소염진통제(이부프로펜 등)", t5("Ibuprofen type", "イブプロフェンなど", "布洛芬類", "布洛芬类", "Nhóm ibuprofen")),
-    ("sulfa", "설파제", t5("Sulfa drugs", "サルファ剤", "磺胺類", "磺胺类", "Thuốc sulfa")),
-    ("contrast", "조영제", t5("Contrast dye", "造影剤", "顯影劑", "造影剂", "Thuốc cản quang")),
-    ("latex", "라텍스", t5("Latex", "ラテックス", "乳膠", "乳胶", "Latex")),
-]
-MED_KO = {"intro": "저는 한국어를 못해요. 제 건강 정보예요.", "cond": "병력", "drug": "알레르기(약)", "food": "알레르기(음식)", "meds": "복용 중인 약", "blood": "혈액형", "kin": "보호자 연락처"}
-MED_ANS = [("구급차를 부를게요", t5("I'll call an ambulance", "救急車を呼びます", "我來叫救護車", "我来叫救护车", "Tôi sẽ gọi cấp cứu")),
-           ("여기서 진료할 수 있어요", t5("We can treat you here", "ここで診察できます", "這裡可以看診", "这里可以看诊", "Có thể khám ở đây")),
-           ("큰 병원으로 가세요", t5("Go to a large hospital", "大きな病院へ行ってください", "請到大醫院", "请到大医院", "Hãy đến bệnh viện lớn")),
-           ("잠시 기다려 주세요", t5("Please wait a moment", "少しお待ちください", "請稍等", "请稍等", "Vui lòng đợi một chút"))]
 CARD = {
-    "title": t5("My food and health card", "食事・健康カード", "飲食與健康卡", "饮食与健康卡", "Thẻ ăn uống và sức khỏe"),
-    "short": t5("My card", "マイカード", "我的卡片", "我的卡片", "Thẻ của tôi"),
+    "title": t5("My food card", "食事カード", "我的飲食卡", "我的饮食卡", "Thẻ ăn uống của tôi"),
+    "short": t5("Food card", "食事カード", "飲食卡", "饮食卡", "Thẻ ăn"),
     "lede": t5("Tap once. Staff read it in Korean and tap an answer.", "一度選ぶだけ。スタッフは韓国語で読み、答えを押します。", "點選一次就好。店員看韓文並點選回答。", "点选一次就好。店员看韩文并点选回答。", "Chọn một lần. Nhân viên đọc tiếng Hàn và chạm câu trả lời."),
-    "seo": t5("Korean allergy, diet and medical card you make by tapping (offline)", "タップで作る韓国語のアレルギー・食事制限・医療カード(オフライン)", "點選製作的韓文過敏、飲食與醫療卡(離線)", "点选制作的韩文过敏、饮食与医疗卡(离线)", "Thẻ dị ứng, ăn kiêng và y tế tiếng Hàn tạo bằng cách chạm (ngoại tuyến)"),
-    "desc": t5("Tap your allergies, foods you avoid and medical facts once. Get one big Korean card for restaurants, where staff tap a Korean answer you can read, and one for doctors. Shows the Korean words to look for on packages. Stays on your phone.",
-               "アレルギー、食べないもの、健康の情報を一度選ぶだけ。食堂用(スタッフが韓国語の答えを押し、あなたの言語で表示)と医療用の大きな韓国語カードができます。包装で探す韓国語も表示。情報はスマホの中だけ。",
-               "把過敏、不吃的東西和健康資訊點選一次,就有一張給餐廳的韓文大卡(店員點韓文回答,你看得懂)和一張給醫生的卡,還會列出包裝上要找的韓文字。資料只留在手機裡。",
-               "把过敏、不吃的东西和健康信息点选一次,就有一张给餐厅的韩文大卡(店员点韩文回答,你看得懂)和一张给医生的卡,还会列出包装上要找的韩文字。数据只留在手机里。",
-               "Chạm một lần để chọn dị ứng, món không ăn và thông tin sức khỏe. Có thẻ tiếng Hàn lớn cho nhà hàng (nhân viên chạm câu trả lời, bạn đọc được) và thẻ cho bác sĩ. Hiện cả từ tiếng Hàn cần tìm trên bao bì. Chỉ lưu trên điện thoại."),
-    "tab_food": t5("Food", "食事", "飲食", "饮食", "Ăn uống"),
-    "tab_med": t5("Health", "健康", "健康", "健康", "Sức khỏe"),
+    "seo": t5("Korean food allergy and diet card you make by tapping (offline)", "タップで作る韓国語の食物アレルギー・食事カード(オフライン)", "點選製作的韓文食物過敏與飲食卡(離線)", "点选制作的韩文食物过敏与饮食卡(离线)", "Thẻ dị ứng thức ăn và ăn kiêng tiếng Hàn tạo bằng cách chạm (ngoại tuyến)"),
+    "desc": t5("Tap the foods you can't or don't eat once. Get one big Korean card for restaurants, where staff tap a Korean answer you can read. Shows the Korean words to look for on packages. Stays on your phone.",
+               "食べられないもの、食べないものを一度選ぶだけ。食堂で見せる大きな韓国語カードができ、スタッフが韓国語の答えを押すとあなたの言語で表示されます。包装で探す韓国語も表示。情報はスマホの中だけ。",
+               "把不能吃、不吃的東西點選一次,就有一張給餐廳看的韓文大卡,店員點韓文回答,你看得懂。還會列出包裝上要找的韓文字。資料只留在手機裡。",
+               "把不能吃、不吃的东西点选一次,就有一张给餐厅看的韩文大卡,店员点韩文回答,你看得懂。还会列出包装上要找的韩文字。数据只留在手机里。",
+               "Chạm một lần để chọn món không ăn được hoặc không ăn. Có thẻ tiếng Hàn lớn cho nhà hàng: nhân viên chạm câu trả lời, bạn đọc được. Hiện cả từ tiếng Hàn cần tìm trên bao bì. Chỉ lưu trên điện thoại."),
     "al_h": t5("I'm allergic to", "アレルギーがある", "我對這些過敏", "我对这些过敏", "Tôi dị ứng với"),
     "no_h": t5("I don't eat", "食べないもの", "我不吃", "我不吃", "Tôi không ăn"),
     "more": t5("More", "もっと見る", "更多", "更多", "Thêm"),
     "sev": t5("Even a little is dangerous", "少しでも危険", "一點點也危險", "一点点也危险", "Chỉ một chút cũng nguy hiểm"),
     "food_btn": t5("Show to staff", "スタッフに見せる", "給店員看", "给店员看", "Cho nhân viên xem"),
-    "med_btn": t5("Show to a doctor", "医師に見せる", "給醫生看", "给医生看", "Cho bác sĩ xem"),
     "empty": t5("Tap what applies to you.", "当てはまるものを選びます。", "點選符合你的項目。", "点选符合你的项目。", "Chạm vào mục đúng với bạn."),
     "label_h": t5("Look for these words on packages", "包装でこの文字を探します", "在包裝上找這些字", "在包装上找这些字", "Tìm các chữ này trên bao bì"),
     "label_no": t5("Korean labels don't have to list {x}. Ask.", "韓国の表示義務に {x} は入っていません。確認してください。", "韓國標示不強制列出{x},請詢問。", "韩国标签不强制列出{x},请询问。", "Nhãn Hàn Quốc không bắt buộc ghi {x}. Hãy hỏi."),
@@ -210,23 +179,12 @@ CARD = {
                     "2026年8月的草案(尚未施行):加入芝麻、紫蘇籽、杏仁和腰果。",
                     "2026年8月的草案(尚未施行):加入芝麻、紫苏籽、杏仁和腰果。",
                     "Dự thảo tháng 8/2026, chưa có hiệu lực: thêm vừng, tía tô, hạnh nhân và hạt điều."),
-    "cond_h": t5("Conditions", "持病", "病史", "病史", "Bệnh nền"),
-    "drug_h": t5("Medicine allergies", "薬のアレルギー", "藥物過敏", "药物过敏", "Dị ứng thuốc"),
-    "blood_h": t5("Blood type", "血液型", "血型", "血型", "Nhóm máu"),
-    "meds_h": t5("Medicines I take", "飲んでいる薬", "正在服用的藥", "正在服用的药", "Thuốc đang dùng"),
-    "meds_ph": t5("Name and dose, such as Metformin 500 mg", "名前と量(例:Metformin 500 mg)", "藥名和劑量,例如 Metformin 500 mg", "药名和剂量,例如 Metformin 500 mg", "Tên và liều, ví dụ Metformin 500 mg"),
-    "kin_h": t5("Emergency contact", "緊急連絡先", "緊急聯絡人", "紧急联系人", "Liên hệ khẩn cấp"),
-    "kin_ph": t5("Phone number with country code", "国番号つきの電話番号", "含國碼的電話", "含国家代码的电话", "Số điện thoại kèm mã quốc gia"),
     "note": t5("🔒 Kept only on this phone.", "🔒 このスマホの中だけに保存。", "🔒 只存在這支手機裡。", "🔒 只存在这部手机里。", "🔒 Chỉ lưu trên điện thoại này."),
-    "med_note": t5("Not medical advice. Ask a doctor or pharmacist.", "医療上の助言ではありません。医師や薬剤師に相談してください。", "這不是醫療建議,請諮詢醫師或藥師。", "这不是医疗建议,请咨询医生或药师。", "Không phải lời khuyên y tế. Hãy hỏi bác sĩ hoặc dược sĩ."),
     "clear": t5("Clear", "消す", "清除", "清除", "Xóa"),
-    "row": t5("My food and health card", "食事・健康カード", "飲食與健康卡", "饮食与健康卡", "Thẻ ăn uống và sức khỏe"),
-    "link_food": t5("Food card", "食事カード", "飲食卡", "饮食卡", "Thẻ ăn uống"),
-    "link_med": t5("Health card", "健康カード", "健康卡", "健康卡", "Thẻ sức khỏe"),
+    "row": t5("My food card", "食事カード", "我的飲食卡", "我的饮食卡", "Thẻ ăn uống của tôi"),
+    "link_food": t5("My food card", "食事カード", "我的飲食卡", "我的饮食卡", "Thẻ ăn uống của tôi"),
     "set": t5("Saved", "保存済み", "已儲存", "已保存", "Đã lưu"),
     "unset": t5("Make it in 10 seconds", "10秒で作れます", "10秒完成", "10秒完成", "Tạo trong 10 giây"),
-    "mean_food": t5("Your allergies and foods you avoid, with a question for the kitchen", "アレルギーと食べないもの、厨房への質問", "你的過敏和不吃的東西,加上問廚房的問題", "你的过敏和不吃的东西,加上问厨房的问题", "Dị ứng và món bạn không ăn, kèm câu hỏi cho bếp"),
-    "mean_med": t5("Your health facts for a doctor or ambulance", "医師・救急隊向けのあなたの健康情報", "給醫生或救護人員的健康資訊", "给医生或急救人员的健康信息", "Thông tin sức khỏe cho bác sĩ hoặc cấp cứu"),
 }
 
 # ---------------------------------------------------------------------------------------------- Refused? in three taps
@@ -353,7 +311,7 @@ RF = {
 DAYS = [
     ("ktx", "before", ("from", -60), t5("KTX tickets open two months ahead. Book yours.", "KTXの切符は2か月前から。予約しましょう。", "KTX票兩個月前開賣,可以訂了。", "KTX票两个月前开售,可以订了。", "Vé KTX mở bán trước hai tháng. Hãy đặt."), ["guide:ktx"], None, "guide:ktx", "busan"),
     ("keta", "before", ("from", -14), t5("Check if your passport needs K-ETA", "K-ETAが必要か確認", "確認護照是否需要K-ETA", "确认护照是否需要K-ETA", "Kiểm tra có cần K-ETA không"), ["guide:entry"], None, "guide:entry", "visitor"),
-    ("card", "before", ("from", -7), t5("Make your food and health card", "食事・健康カードを作る", "製作飲食與健康卡", "制作饮食与健康卡", "Tạo thẻ ăn uống và sức khỏe"), [], None, "my-card.html", None),
+    ("card", "before", ("from", -7), t5("Make your food card", "食事カードを作る", "製作飲食卡", "制作饮食卡", "Tạo thẻ ăn uống"), [], None, "my-card.html", None),
     ("addr", "before", ("from", -7), t5("Save your stay address in Korean", "宿の住所を韓国語で保存", "儲存韓文住宿地址", "保存韩文住宿地址", "Lưu địa chỉ chỗ ở bằng tiếng Hàn"), [], None, "#f-addr", None),
     ("eac", "before", ("from", -3), t5("e-Arrival Card opens: 72 hours before landing", "e-Arrival Card受付開始(到着72時間前)", "e-Arrival Card開放(抵達前72小時)", "e-Arrival Card开放(抵达前72小时)", "e-Arrival Card mở: 72 giờ trước khi hạ cánh"), ["guide:entry"], None, "#f-arrive", "visitor"),
     ("off", "before", ("from", -1), t5("Check the offline pack is complete", "オフラインパックを確認", "確認離線包已下載完", "确认离线包已下载完", "Kiểm tra gói ngoại tuyến đã đủ"), [], None, "#f-pack", None),

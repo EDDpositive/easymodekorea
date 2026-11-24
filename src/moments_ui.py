@@ -1,4 +1,4 @@
-"""Screens for moments.py (30차): emergency, food and health card, "Refused? 3 taps", and the trip-mode block.
+"""Screens for moments.py (30차): emergency, food card, "Refused? 3 taps", and the trip-mode block.
 
 Every builder takes B, the build module, for the shared helpers (app_page, say_row, icon and so on).
 Nothing here sends anything: location, allergies and dates are read and kept on the phone.
@@ -41,7 +41,7 @@ def build_sos(B, lang):
     """Emergency: call, find the rescue grid code on the phone, show or read it in Korean, or text it."""
     t = {k: v[lang] for k, v in M.SOS.items() if isinstance(v, dict)}; e = B.e
     itp = M.SOS_ITP[lang]
-    data = {"lang": lang, "lko": M.SOS_LANG_KO[lang], "t": {k: t[k] for k in ("acc", "where", "finding", "denied", "none", "out", "slow", "show", "text", "med", "med_make", "stay")},
+    data = {"lang": lang, "lko": M.SOS_LANG_KO[lang], "t": {k: t[k] for k in ("acc", "where", "finding", "denied", "none", "out", "slow", "show", "text", "stay")},
             "err": M.SOS_ERR, "help": M.SOS_HELP, "helpm": M.SOS_HELP_M[lang], "loc": M.SOS_LOC, "itp": itp[:3], "itpm": itp[3],
             "what": [[w[0], w[1], w[2][lang], w[3], w[4], w[5]] for w in M.SOS_WHAT]}
     call = lambda n, cls: f'<a class="sos-call {cls}" href="tel:{n}" data-n="{n}" aria-label="{e(A.T[lang]["call"])} {n}: {e(t["n" + n])}"><i aria-hidden="true">{A.IC["phone"]}</i><b>{n}</b><span>{e(t["n" + n])}</span></a>'
@@ -61,7 +61,7 @@ def build_sos(B, lang):
 <details class="tap" id="sos-near"><summary>{e(t['near'])}</summary><ul class="sos-near">{near}</ul><p class="fact-src">{checked(B, lang, M.CHK)} {source_links(B, lang, ['gg'])}</p></details>
 <details class="tap"><summary>{e(t['cant'])}</summary><p>{e(t['cant_t'])}</p><p>{e(t['text_sub'])}</p><p>{e(t['cant_sim'])}</p><p><a href="https://www.119.go.kr/" rel="noopener" target="_blank">{e(t['web'])}</a></p><p class="fact-src">{checked(B, lang, M.CHK)} {source_links(B, lang, ['sms119', 'sms112'])}</p></details>
 <details class="tap"><summary>{e(t['code_what'])}</summary><p>{e(t['what_is'])}</p><p class="fact-src">{checked(B, lang, M.CHK)} {source_links(B, lang, ['grid', 'gg'])}</p></details></section>
-<ul class="glist"><li><a href="my-card.html#health"><span class="ic">{A.IC['idcard']}</span><span id="sos-med-l">{e(t['med_make'])}</span></a></li><li><a href="help.html"><span class="ic">{A.IC['help']}</span><span>{e(A.T[lang]['help_title'])}</span></a></li></ul>
+<ul class="glist"><li><a href="help.html"><span class="ic">{A.IC['help']}</span><span>{e(A.T[lang]['help_title'])}</span></a></li></ul>
 </div><script type="application/json" id="sos-data">{js_json(data)}</script>"""
     L = LANGS[lang]; path = L["dir"] + "sos.html"
     ld = {"@context": "https://schema.org", "@type": "WebPage", "@id": B.SITE + path, "url": B.SITE + path, "name": t["title"], "description": t["desc"], "inLanguage": L["html_lang"], "lastReviewed": M.CHK}
@@ -69,28 +69,18 @@ def build_sos(B, lang):
 
 
 def build_mycard(B, lang):
-    """Food and health card: tap once, show one big Korean card; staff tap a Korean answer."""
+    """Food card: tap once, show one big Korean card; staff tap a Korean answer."""
     t = {k: v[lang] for k, v in M.CARD.items()}; e = B.e
-    ans = lambda rows: [[ko, m[lang]] for ko, m in rows]
-    data = {"t": {k: t[k] for k in ("al_h", "no_h", "sev", "drug_h", "blood_h", "meds_h", "kin_h", "label_no", "label_fish")}, "lbl": SHORT[lang]["show"],
+    data = {"t": {k: t[k] for k in ("al_h", "no_h", "sev", "label_no", "label_fish")}, "lbl": SHORT[lang]["show"],
             "al": [[a[0], a[1], a[2], a[3][lang]] for a in M.ALLERGY], "no": [[a[0], a[1], a[2][lang], a[3]] for a in M.AVOID],
-            "cond": [[a[0], a[1], a[2][lang]] for a in M.COND], "drug": [[a[0], a[1], a[2][lang]] for a in M.DRUG],
-            "fko": M.FOOD_KO, "mko": M.MED_KO, "fans": ans(M.FOOD_ANS), "mans": ans(M.MED_ANS)}
+            "fko": M.FOOD_KO, "fans": [[ko, m[lang]] for ko, m in M.FOOD_ANS]}
     tg = lambda key, rows: "".join(f'<button type="button" class="tg" data-set="{key}" data-id="{i}" aria-pressed="false">{e(n)}</button>' for i, n in rows)
-    first = tg("F.a", [(a[0], a[3][lang]) for a in M.ALLERGY if a[4]]); more = tg("F.a", [(a[0], a[3][lang]) for a in M.ALLERGY if not a[4]])
-    blood = "".join(f"<option>{b}</option>" for b in ("", "A+", "B+", "O+", "AB+", "A-", "B-", "O-", "AB-"))
-    top = lambda kind, btn: f"""<div class="mc-top"><p class="mc-prev" id="mc-{kind}-p" lang="ko" hidden></p><p class="mc-empty" id="mc-{kind}-e">{e(t['empty'])}</p><button class="btn alt" type="button" id="mc-{kind}" disabled>🗣 {e(btn)}</button></div>"""
-    inner = f"""<nav class="seg" aria-label="{e(t['title'])}"><a href="#food" id="mc-t-food">{B.icon('food-booking')}{e(t['tab_food'])}</a><a href="#health" id="mc-t-med">{B.icon('health')}{e(t['tab_med'])}</a></nav>
-<div id="mc-p-food">{top('food', t['food_btn'])}
+    first = tg("a", [(a[0], a[3][lang]) for a in M.ALLERGY if a[4]]); more = tg("a", [(a[0], a[3][lang]) for a in M.ALLERGY if not a[4]])
+    inner = f"""<div class="mc-top"><p class="mc-prev" id="mc-food-p" lang="ko" hidden></p><p class="mc-empty" id="mc-food-e">{e(t['empty'])}</p><button class="btn alt" type="button" id="mc-food" disabled>🗣 {e(t['food_btn'])}</button></div>
 <section class="mc-sec" aria-labelledby="ma1"><h2 id="ma1" class="mc-h">{e(t['al_h'])}</h2><div class="tgs">{first}</div><button type="button" class="tg sev" id="mc-sev" aria-pressed="false" hidden>⚠ {e(t['sev'])}</button><details class="mc-more"><summary>{e(t['more'])}</summary><div class="tgs">{more}</div></details></section>
 <section class="mc-label" id="mc-label" aria-labelledby="ml-h" hidden><h2 id="ml-h" class="mc-h">{e(t['label_h'])}</h2><ul class="mc-words" id="mc-words"></ul><div class="mc-off" id="mc-off"></div><p class="mc-off" id="mc-nuts" hidden>{e(t['label_nuts'])}</p><p class="mc-off" id="mc-new" hidden>{e(t['label_new'])}</p><p class="fact-src">{checked(B, lang, M.CHK)} {source_links(B, lang, ['label', 'label28'])}</p></section>
-<section class="mc-sec" aria-labelledby="ma2"><h2 id="ma2" class="mc-h">{e(t['no_h'])}</h2><div class="tgs">{tg("F.n", [(a[0], a[2][lang]) for a in M.AVOID])}</div></section>
-<p class="mc-foot"><span>{e(t['note'])}</span><button type="button" class="linkbtn" data-clear="F">{e(t['clear'])}</button></p></div>
-<div id="mc-p-med" hidden>{top('med', t['med_btn'])}
-<section class="mc-sec" aria-labelledby="ma3"><h2 id="ma3" class="mc-h">{e(t['cond_h'])}</h2><div class="tgs">{tg("H.c", [(a[0], a[2][lang]) for a in M.COND])}</div></section>
-<section class="mc-sec" aria-labelledby="ma4"><h2 id="ma4" class="mc-h">{e(t['drug_h'])}</h2><div class="tgs">{tg("H.d", [(a[0], a[2][lang]) for a in M.DRUG])}</div></section>
-<section class="mc-sec mc-form"><label>{e(t['meds_h'])}<textarea id="mc-meds" rows="2" maxlength="200" placeholder="{e(t['meds_ph'])}"></textarea></label><label>{e(t['blood_h'])}<select id="mc-blood">{blood}</select></label><label>{e(t['kin_h'])}<input id="mc-kin" type="tel" maxlength="60" autocomplete="off" placeholder="{e(t['kin_ph'])}"></label></section>
-<p class="mc-foot"><span>{e(t['note'])}<br>{e(t['med_note'])}</span><button type="button" class="linkbtn" data-clear="H">{e(t['clear'])}</button></p></div>
+<section class="mc-sec" aria-labelledby="ma2"><h2 id="ma2" class="mc-h">{e(t['no_h'])}</h2><div class="tgs">{tg("n", [(a[0], a[2][lang]) for a in M.AVOID])}</div></section>
+<p class="mc-foot"><span>{e(t['note'])}</span><button type="button" class="linkbtn" data-clear>{e(t['clear'])}</button></p>
 <script type="application/json" id="mc-data">{js_json(data)}</script>"""
     return B.app_page(lang, "my-card", (t["title"], t["lede"]), t["seo"], t["desc"], inner, "cards", MYCARD_JS, back_to="phrases.html")
 
@@ -167,9 +157,9 @@ def days_block(B, lang):
 def home_row(B, lang):
     """Home: the three one-tap moments."""
     e = B.e
-    b = lambda href, cls, ic, txt: f'<a class="mo {cls}" href="{href}"><span class="ic">{A.IC[ic]}</span><b>{e(txt)}</b></a>'
-    return (f'<nav class="mos" aria-label="{e(M.MOS_LABEL[lang])}">{b("sos.html", "mo-sos", "sos", M.SOS["short"][lang])}'
-            f'{b("refused.html", "mo-rf", "refused", M.RF["short"][lang])}{b("my-card.html", "mo-card", "idcard", M.CARD["short"][lang])}</nav>')
+    b = lambda href, cls, svg, txt: f'<a class="mo {cls}" href="{href}"><span class="ic">{svg}</span><b>{e(txt)}</b></a>'
+    return (f'<nav class="mos" aria-label="{e(M.MOS_LABEL[lang])}">{b("sos.html", "mo-sos", A.IC["sos"], M.SOS["short"][lang])}'
+            f'{b("refused.html", "mo-rf", A.IC["refused"], M.RF["short"][lang])}{b("my-card.html", "mo-card", B.icon("food-booking"), M.CARD["short"][lang])}</nav>')
 
 
 def help_rows(B, lang):
@@ -180,7 +170,7 @@ def help_rows(B, lang):
 
 
 def card_links(B, lang):
-    """Cards tab: food card and health card as two rows, with 'saved' or 'make it' as their state."""
+    """Cards tab: the food card as a row, with 'saved' or 'make it' as its state."""
     e = B.e; t = M.CARD
-    row = lambda h, ic, lbl, key: f'<li><a href="my-card.html#{h}"><span class="ic">{B.icon(ic)}</span><span>{e(t[lbl][lang])}</span><small class="mc-st" data-k="{key}" data-on="{e(t["set"][lang])}">{e(t["unset"][lang])}</small></a></li>'
-    return f'<ul class="glist mc-links">{row("food", "food-booking", "link_food", "emk-food")}{row("health", "health", "link_med", "emk-med")}</ul>'
+    return (f'<ul class="glist mc-links"><li><a href="my-card.html"><span class="ic">{B.icon("food-booking")}</span><span>{e(t["link_food"][lang])}</span>'
+            f'<small class="mc-st" data-k="emk-food" data-on="{e(t["set"][lang])}">{e(t["unset"][lang])}</small></a></li></ul>')

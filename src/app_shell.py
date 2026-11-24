@@ -53,7 +53,7 @@ T = {
         "privacy_updated": "Last updated: {date}",
         "privacy_body": [
             ["In short", "EasyModeKorea has no accounts, no ads and no tracking cookies. The Android app shows this website in full screen. The app itself asks for no access to your location, contacts, camera or files. Your browser asks before the emergency screen reads your location (see below)."],
-            ["What stays on your phone", "Your phone setup, your Korea Ready check answers, trip dates, saved guides and places, checklist ticks, your stay's address, your food and health card and the Korean cards you make are stored only in the browser or app on your phone. They are never sent to us. Erase them on the My trip page, or by clearing the site's data in your browser. If you make a share link for a companion, your stay address and places are written inside that link and nowhere else, so anyone who gets the link can read them."],
+            ["What stays on your phone", "Your phone setup, your Korea Ready check answers, trip dates, saved guides and places, checklist ticks, your stay's address, your food card and the Korean cards you make are stored only in the browser or app on your phone. They are never sent to us. Erase them on the My trip page, or by clearing the site's data in your browser. If you make a share link for a companion, your stay address and places are written inside that link and nowhere else, so anyone who gets the link can read them."],
             ["Location and emergency texts", "Your location is read only when you tap \"Where am I?\" on the emergency screen. The rescue code is worked out on your phone. The location is not stored and never sent to us. \"Text 119\" or \"Text 112\" opens your own messages app with a Korean message that may include your location; it goes only to that number, and only if you press Send. Calendar reminders are files made on your phone."],
             ["Visit counts", "We count page views and button taps with GoatCounter. It sets no cookies and stores no IP addresses. It shows us totals: which pages were opened, the referring site, browser and system type, screen width, language and country. We cannot tell who you are. If you open a link your host made for you, the name of the stay in that link is counted too."],
             ["Questions and feedback", "When you send a question or feedback, your message, the page you sent it from and your email address (only if you enter one) go to a Google Form that we own. We use them to answer you and to fix the guides. Email us to have a message deleted."],
@@ -103,7 +103,7 @@ T = {
         "privacy_updated": "最終更新: {date}",
         "privacy_body": [
             ["要点", "EasyModeKoreaにはアカウント登録も広告も追跡用Cookieもありません。Androidアプリはこのウェブサイトを全画面で表示するものです。アプリ自体は位置情報、連絡先、カメラ、ファイルへのアクセスを求めません。緊急の画面で位置を読む前には、ブラウザが許可をたずねます(下記)。"],
-            ["スマホの中だけに残るもの", "スマホの設定、Korea Readyチェックの回答、旅行の日程、保存したガイドと行き先、チェックリストの印、宿の住所、食事・健康カード、自分で作った韓国語カードは、あなたのスマホのブラウザまたはアプリの中だけに保存されます。私たちに送信されることはありません。マイページで消去するか、ブラウザでこのサイトのデータを削除すれば消えます。同行者用の共有リンクを作ると、宿の住所と行き先はそのリンクの中だけに書き込まれます。リンクを受け取った人は内容を読めます。"],
+            ["スマホの中だけに残るもの", "スマホの設定、Korea Readyチェックの回答、旅行の日程、保存したガイドと行き先、チェックリストの印、宿の住所、食事カード、自分で作った韓国語カードは、あなたのスマホのブラウザまたはアプリの中だけに保存されます。私たちに送信されることはありません。マイページで消去するか、ブラウザでこのサイトのデータを削除すれば消えます。同行者用の共有リンクを作ると、宿の住所と行き先はそのリンクの中だけに書き込まれます。リンクを受け取った人は内容を読めます。"],
             ["位置情報と緊急の文字メッセージ", "位置情報は、緊急の画面で「ここはどこ?」を押したときだけ読み取ります。救助用の番号はスマホの中で計算します。位置は保存されず、私たちに送信されることはありません。「119に文字で送る」「112に文字で送る」は、韓国語の文面(位置を含むことがあります)で自分のメッセージアプリを開きます。送信を押したときだけ、その番号に送られます。カレンダーの通知は、スマホの中で作るファイルです。"],
             ["アクセス数の集計", "ページの表示回数とボタンのタップ数をGoatCounterで集計しています。Cookieは使わず、IPアドレスも保存しません。私たちに見えるのは合計だけです(開かれたページ、参照元サイト、ブラウザとOSの種類、画面の幅、言語、国)。個人を特定することはできません。宿の方が作ったリンクを開いた場合は、リンクに含まれる宿の名前も集計されます。"],
             ["質問とフィードバック", "質問やフィードバックを送ると、メッセージ、送信したページ、メールアドレス(入力した場合のみ)が、私たちが管理するGoogleフォームに届きます。返信とガイドの修正のためだけに使います。削除を希望する場合はメールでお知らせください。"],
@@ -153,7 +153,7 @@ T = {
         "privacy_updated": "最後更新:{date}",
         "privacy_body": [
             ["重點", "EasyModeKorea沒有帳號、沒有廣告,也沒有追蹤用的Cookie。Android App只是把這個網站以全螢幕顯示,App本身不會要求存取你的位置、通訊錄、相機或檔案。緊急畫面讀取位置之前,瀏覽器會先徵求你同意(見下方)。"],
-            ["只留在你手機裡的內容", "你的手機設定、Korea Ready檢查的回答、旅行日期、收藏的指南和地點、清單勾選、住宿地址、飲食與健康卡和自己做的韓文卡,只存在你手機的瀏覽器或App裡,不會傳給我們。你可以在「我的旅程」頁面清除,或在瀏覽器裡清除本站資料。如果你為同行的人產生分享連結,住宿地址和地點只會寫在那個連結裡,拿到連結的人都能看到。"],
+            ["只留在你手機裡的內容", "你的手機設定、Korea Ready檢查的回答、旅行日期、收藏的指南和地點、清單勾選、住宿地址、飲食卡和自己做的韓文卡,只存在你手機的瀏覽器或App裡,不會傳給我們。你可以在「我的旅程」頁面清除,或在瀏覽器裡清除本站資料。如果你為同行的人產生分享連結,住宿地址和地點只會寫在那個連結裡,拿到連結的人都能看到。"],
             ["位置與緊急簡訊", "只有在緊急畫面按下「我在哪裡?」時才會讀取位置。救援編號在你的手機裡計算,位置不會儲存,也不會傳給我們。「傳簡訊給119」或「傳簡訊給112」會用韓文內容(可能包含位置)開啟你自己的簡訊App,只有你按下傳送才會送到該號碼。行事曆提醒是在手機裡產生的檔案。"],
             ["瀏覽次數統計", "我們用GoatCounter統計頁面瀏覽和按鈕點擊次數。它不使用Cookie,也不儲存IP位址。我們看到的只有總數:哪些頁面被打開、來源網站、瀏覽器和系統類型、螢幕寬度、語言和國家。我們無法得知你是誰。如果你打開房東為你製作的連結,連結裡的住宿名稱也會被計入。"],
             ["提問與意見", "你送出問題或意見時,訊息內容、送出時所在的頁面和電子郵件地址(有填才會有)會傳到我們管理的Google表單。我們只用來回覆你和修正指南。想刪除訊息,請寫信給我們。"],
@@ -203,7 +203,7 @@ T = {
         "privacy_updated": "最后更新:{date}",
         "privacy_body": [
             ["要点", "EasyModeKorea没有账号、没有广告,也没有用于追踪的Cookie。Android App只是把这个网站全屏显示,App本身不会要求访问你的位置、通讯录、相机或文件。紧急画面读取位置之前,浏览器会先征求你的同意(见下方)。"],
-            ["只留在你手机里的内容", "你的手机设置、Korea Ready检查的回答、旅行日期、收藏的指南和地点、清单勾选、住宿地址、饮食与健康卡和自己做的韩文卡,只存在你手机的浏览器或App里,不会发送给我们。你可以在“我的行程”页面清除,或在浏览器里清除本站数据。如果你为同行的人生成分享链接,住宿地址和地点只会写在那个链接里,拿到链接的人都能看到。"],
+            ["只留在你手机里的内容", "你的手机设置、Korea Ready检查的回答、旅行日期、收藏的指南和地点、清单勾选、住宿地址、饮食卡和自己做的韩文卡,只存在你手机的浏览器或App里,不会发送给我们。你可以在“我的行程”页面清除,或在浏览器里清除本站数据。如果你为同行的人生成分享链接,住宿地址和地点只会写在那个链接里,拿到链接的人都能看到。"],
             ["位置与紧急短信", "只有在紧急画面按下“我在哪里?”时才会读取位置。救援编号在你的手机里计算,位置不会保存,也不会发送给我们。“发短信给119”或“发短信给112”会用韩文内容(可能包含位置)打开你自己的短信App,只有你按下发送才会发到该号码。日历提醒是在手机里生成的文件。"],
             ["访问次数统计", "我们用GoatCounter统计页面浏览和按钮点击次数。它不使用Cookie,也不保存IP地址。我们看到的只有总数:哪些页面被打开、来源网站、浏览器和系统类型、屏幕宽度、语言和国家。我们无法得知你是谁。如果你打开房东为你制作的链接,链接里的住宿名称也会被计入。"],
             ["提问与反馈", "你提交问题或反馈时,留言内容、提交时所在的页面和电子邮件地址(填写了才会有)会发送到我们管理的Google表单。我们只用来回复你和修正指南。想删除留言,请给我们发邮件。"],
@@ -253,7 +253,7 @@ T = {
         "privacy_updated": "Cập nhật lần cuối: {date}",
         "privacy_body": [
             ["Tóm tắt", "EasyModeKorea không có tài khoản, không có quảng cáo và không dùng cookie theo dõi. Ứng dụng Android hiển thị trang web này ở chế độ toàn màn hình. Bản thân ứng dụng không xin quyền truy cập vị trí, danh bạ, máy ảnh hay tệp của bạn. Trình duyệt sẽ hỏi trước khi màn hình khẩn cấp đọc vị trí (xem bên dưới)."],
-            ["Những gì chỉ nằm trên điện thoại của bạn", "Thiết lập điện thoại, câu trả lời Kiểm tra Korea Ready, ngày đi, hướng dẫn và địa điểm đã lưu, các mục đã đánh dấu, địa chỉ chỗ ở, thẻ ăn uống và sức khỏe và thẻ tiếng Hàn bạn tạo chỉ được lưu trong trình duyệt hoặc ứng dụng trên điện thoại của bạn. Chúng không bao giờ được gửi cho chúng tôi. Bạn có thể xóa ở trang Chuyến đi của tôi, hoặc xóa dữ liệu của trang web trong trình duyệt. Nếu bạn tạo liên kết chia sẻ cho bạn đồng hành, địa chỉ chỗ ở và các địa điểm chỉ được ghi trong chính liên kết đó, nên ai có liên kết đều đọc được."],
+            ["Những gì chỉ nằm trên điện thoại của bạn", "Thiết lập điện thoại, câu trả lời Kiểm tra Korea Ready, ngày đi, hướng dẫn và địa điểm đã lưu, các mục đã đánh dấu, địa chỉ chỗ ở, thẻ ăn uống và thẻ tiếng Hàn bạn tạo chỉ được lưu trong trình duyệt hoặc ứng dụng trên điện thoại của bạn. Chúng không bao giờ được gửi cho chúng tôi. Bạn có thể xóa ở trang Chuyến đi của tôi, hoặc xóa dữ liệu của trang web trong trình duyệt. Nếu bạn tạo liên kết chia sẻ cho bạn đồng hành, địa chỉ chỗ ở và các địa điểm chỉ được ghi trong chính liên kết đó, nên ai có liên kết đều đọc được."],
             ["Vị trí và tin nhắn khẩn cấp", "Vị trí chỉ được đọc khi bạn bấm “Tôi đang ở đâu?” trên màn hình khẩn cấp. Mã cứu hộ được tính ngay trên điện thoại. Vị trí không được lưu và không bao giờ gửi cho chúng tôi. “Nhắn tin 119” hoặc “Nhắn tin 112” mở ứng dụng tin nhắn của bạn với nội dung tiếng Hàn (có thể gồm vị trí); tin chỉ gửi đến số đó khi bạn bấm Gửi. Nhắc lịch là tệp được tạo trên điện thoại."],
             ["Đếm lượt truy cập", "Chúng tôi đếm lượt xem trang và lượt chạm nút bằng GoatCounter. Dịch vụ này không đặt cookie và không lưu địa chỉ IP. Chúng tôi chỉ thấy tổng số: trang nào được mở, trang giới thiệu, loại trình duyệt và hệ điều hành, chiều rộng màn hình, ngôn ngữ và quốc gia. Chúng tôi không thể biết bạn là ai. Nếu bạn mở liên kết do chủ nhà tạo cho bạn, tên chỗ ở trong liên kết đó cũng được đếm."],
             ["Câu hỏi và góp ý", "Khi bạn gửi câu hỏi hoặc góp ý, nội dung tin nhắn, trang bạn đang xem và địa chỉ email (chỉ khi bạn nhập) được gửi tới một Google Form do chúng tôi quản lý. Chúng tôi chỉ dùng để trả lời bạn và sửa hướng dẫn. Hãy gửi email nếu bạn muốn xóa tin nhắn."],
@@ -632,7 +632,7 @@ def manifest(desc, shots):
         "shortcuts": [
             {"name": "Emergency: SOS", "short_name": "SOS", "url": "/sos.html", "icons": [{"src": "/shortcut-sos.png", "sizes": "96x96", "type": "image/png"}]},
             {"name": "Refused? 3 taps", "short_name": "Refused?", "url": "/refused.html", "icons": [{"src": "/shortcut-refused.png", "sizes": "96x96", "type": "image/png"}]},
-            {"name": "My food and health card", "short_name": "My card", "url": "/my-card.html", "icons": [{"src": "/shortcut-card.png", "sizes": "96x96", "type": "image/png"}]},
+            {"name": "My food card", "short_name": "Food card", "url": "/my-card.html", "icons": [{"src": "/shortcut-card.png", "sizes": "96x96", "type": "image/png"}]},
             {"name": T["en"]["trip_title"], "short_name": "My trip", "url": "/saved.html", "icons": [{"src": "/shortcut-trip.png", "sizes": "96x96", "type": "image/png"}]},
         ],
         "screenshots": [{"src": f"/{name}", "sizes": f"{w}x{h}", "type": "image/png", "form_factor": "narrow", "label": label} for name, w, h, label in shots],

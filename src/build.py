@@ -1665,9 +1665,9 @@ def png_size(rel):
 
 
 # Phone screenshots shown in the install dialog (and reused for the store listing).
-SHOTS = [("shots/home.png", "Pick what you need right now"), ("shots/ready.png", "See what works with your phone before you fly"), ("shots/guide.png", "A short answer with the date it was checked"),
-         ("shots/show.png", "Show a driver where to go, in big Korean"), ("shots/cards.png", "Korean cards to show a driver or staff"),
-         ("shots/help.png", "Emergency numbers, one tap away")]
+SHOTS = [("shots/home.png", "SOS, refused, food card and every guide"), ("shots/sos.png", "SOS: your location code without data"), ("shots/food.png", "A food card staff can answer with a tap"), ("shots/refused.png", "Refused? Three taps to the next step"),
+         ("shots/trip.png", "Each day, only what matters"), ("shots/ready.png", "See what works with your phone before you fly"), ("shots/guide.png", "A short answer with the date it was checked"),
+         ("shots/show.png", "Show a driver where to go, in big Korean")]
 LINKS_FILE = os.path.join(ROOT, "android", "fingerprints.json")
 
 

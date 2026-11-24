@@ -36,8 +36,8 @@
       "chosenIconUrl": "https://easymodekorea.com/shortcut-refused.png"
     },
     {
-      "name": "My food and health card",
-      "shortName": "My card",
+      "name": "My food card",
+      "shortName": "Food card",
       "url": "/my-card.html",
       "chosenIconUrl": "https://easymodekorea.com/shortcut-card.png"
     },

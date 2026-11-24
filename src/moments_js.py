@@ -1,5 +1,5 @@
 """Page scripts for moments_ui.py (30차). Plain scripts, no network: they read the location only on a tap and keep every
-choice in this phone's own storage (emk-food, emk-med, emk-days, emk-moved, emk-trip)."""
+choice in this phone's own storage (emk-food, emk-days, emk-moved, emk-trip)."""
 
 SOS_JS = r"""
 /* The rescue grid code (national point number): UTM-K on GRS80, origin moved 300 km west and 700 km south, 10 m squares.
@@ -74,7 +74,6 @@ window.emkGrid = function (lat, lon) {
   document.querySelectorAll(".sos-call").forEach(a => a.addEventListener("click", () => count("sos/call-" + a.dataset.n, "call")));
   $("sos-stay").addEventListener("click", () => { stay = true; stop(); msg(""); $("sos-stay-a").textContent = addr; paint(); });
   $("sos-stay-off").addEventListener("click", () => { stay = false; paint(); });
-  $("sos-med-l").textContent = store("emk-med") || store("emk-food") ? c.med : c.med_make;
   paint();
 })();
 """
@@ -83,11 +82,11 @@ MYCARD_JS = r"""
 (function () {
   const D = JSON.parse(document.getElementById("mc-data").textContent), c = D.t, $ = id => document.getElementById(id);
   const get = (k, d) => { try { const o = Object.assign({}, d, JSON.parse(store(k) || "{}")); for (const x in d) if (typeof o[x] !== typeof d[x] || Array.isArray(o[x]) !== Array.isArray(d[x])) o[x] = d[x]; return o; } catch (e) { return d; } };
-  let F = get("emk-food", { a: [], n: [], s: 0 }), H = get("emk-med", { c: [], d: [], b: "", m: "", k: "" });
-  const by = rows => Object.fromEntries(rows.map(x => [x[0], x])), A = by(D.al), N = by(D.no), C = by(D.cond), G = by(D.drug);
+  let F = get("emk-food", { a: [], n: [], s: 0 });
+  const by = rows => Object.fromEntries(rows.map(x => [x[0], x])), A = by(D.al), N = by(D.no);
   const some = o => Object.values(o).some(v => Array.isArray(v) ? v.length : v);
   const put = (k, o) => { if (some(o)) store(k, JSON.stringify(o)); else try { localStorage.removeItem(k); } catch (e) {} };
-  const save = () => { put("emk-food", F); put("emk-med", H); };
+  const save = () => put("emk-food", F);
   /* The Korean card text, one fact per line, so no grammar has to change with the choice. */
   function food() {
     const al = F.a.filter(i => A[i]), diet = F.n.filter(i => N[i] && N[i][3] === "diet"), no = F.n.filter(i => N[i] && N[i][3] !== "diet"), ko = [], me = [];
@@ -96,40 +95,23 @@ MYCARD_JS = r"""
     if (no.length) { ko.push(D.fko.no + ": " + no.map(i => N[i][1]).join(", ")); me.push(c.no_h + ": " + no.map(i => N[i][2]).join(", ")); }
     return ko.length ? [ko.concat(D.fko.ask).join("\n"), me.join(" · ")] : null;
   }
-  function med() {
-    const ko = [], me = [], al = F.a.filter(i => A[i]), cs = H.c.filter(i => C[i]), ds = H.d.filter(i => G[i]), m = H.m.trim(), kin = H.k.trim();
-    if (cs.length) { ko.push(D.mko.cond + ": " + cs.map(i => C[i][1]).join(", ")); me.push(cs.map(i => C[i][2]).join(", ")); }
-    if (ds.length) { ko.push(D.mko.drug + ": " + ds.map(i => G[i][1]).join(", ")); me.push(c.drug_h + ": " + ds.map(i => G[i][2]).join(", ")); }
-    if (al.length) { ko.push(D.mko.food + ": " + al.map(i => A[i][1]).join(", ")); me.push(c.al_h + ": " + al.map(i => A[i][3]).join(", ")); }
-    if (m) { ko.push(D.mko.meds + ": " + m.replace(/\s+/g, " ")); me.push(c.meds_h); }
-    if (H.b) { ko.push(D.mko.blood + ": " + H.b); me.push(c.blood_h + " " + H.b); }
-    if (kin) { ko.push(D.mko.kin + ": " + kin); me.push(c.kin_h); }
-    return ko.length ? [[D.mko.intro].concat(ko).join("\n"), me.join(" · ")] : null;
-  }
-  const of = b => { const [o, k] = b.dataset.set.split("."); return (o === "F" ? F : H)[k]; };
+  const of = b => F[b.dataset.set];
   document.querySelectorAll("[data-set]").forEach(b => b.addEventListener("click", () => { const arr = of(b), i = arr.indexOf(b.dataset.id); if (i < 0) arr.push(b.dataset.id); else arr.splice(i, 1); save(); paint(); }));
   $("mc-sev").addEventListener("click", () => { F.s = F.s ? 0 : 1; save(); paint(); });
-  $("mc-blood").addEventListener("change", ev => { H.b = ev.target.value; save(); paint(); });
-  $("mc-meds").addEventListener("input", ev => { H.m = ev.target.value.slice(0, 200); save(); paint(); });
-  $("mc-kin").addEventListener("input", ev => { H.k = ev.target.value.slice(0, 60); save(); paint(); });
-  const card = (f, id) => { const x = f(); $("mc-" + id).disabled = !x; $("mc-" + id + "-p").textContent = x ? x[0].split("\n").filter(l => l !== D.fko.ask && l !== D.mko.intro).join("\n") : ""; $("mc-" + id + "-p").hidden = !x; $("mc-" + id + "-e").hidden = !!x; };
   function paint() {
     document.querySelectorAll("[data-set]").forEach(b => b.setAttribute("aria-pressed", String(of(b).includes(b.dataset.id))));
     if (!F.a.length) F.s = 0;
     $("mc-sev").setAttribute("aria-pressed", String(!!F.s)); $("mc-sev").hidden = !F.a.length;
-    card(food, "food"); card(med, "med");
-    $("mc-blood").value = H.b; for (const [id, v] of [["mc-meds", H.m], ["mc-kin", H.k]]) if (document.activeElement !== $(id)) $(id).value = v;
+    const x = food(); $("mc-food").disabled = !x; $("mc-food-p").textContent = x ? x[0].split("\n").filter(l => l !== D.fko.ask).join("\n") : ""; $("mc-food-p").hidden = !x; $("mc-food-e").hidden = !!x;
     /* Words to look for on packages, and an honest note where the Korean label rule does not cover the allergy. */
     const al = F.a.filter(i => A[i]), words = al.filter(i => A[i][2]), off = al.filter(i => !A[i][2] && i !== "nuts");
     $("mc-label").hidden = !al.length; $("mc-words").replaceChildren(...words.map(i => el("li", {}, [el("b", { lang: "ko", text: A[i][2] }), el("span", { text: A[i][3] })])));
     $("mc-off").replaceChildren(...off.map(i => el("p", { text: c.label_no.replace("{x}", A[i][3]) + (i === "fish" ? " " + c.label_fish : "") })));
     $("mc-nuts").hidden = !al.includes("nuts"); $("mc-new").hidden = !al.some(i => i === "nuts" || i === "sesame");
   }
-  for (const [id, f, ans] of [["food", food, D.fans], ["med", med, D.mans]]) $("mc-" + id).addEventListener("click", () => { const x = f(); if (x) show(D.lbl, x[0], "", x[1], ans, { list: true, hot: D.fko.sev }); });
-  document.querySelectorAll("[data-clear]").forEach(b => b.addEventListener("click", () => { if (b.dataset.clear === "F") F = { a: [], n: [], s: 0 }; else H = { c: [], d: [], b: "", m: "", k: "" }; save(); paint(); }));
-  const tab = () => { const h = location.hash === "#health"; $("mc-p-food").hidden = h; $("mc-p-med").hidden = !h; $("mc-t-food").setAttribute("aria-current", String(!h)); $("mc-t-med").setAttribute("aria-current", String(h)); };
-  document.querySelectorAll(".seg a").forEach(a => a.addEventListener("click", ev => { ev.preventDefault(); try { history.replaceState(null, "", a.getAttribute("href")); } catch (e) {} tab(); }));
-  addEventListener("hashchange", tab); tab(); paint();
+  $("mc-food").addEventListener("click", () => { const x = food(); if (x) show(D.lbl, x[0], "", x[1], D.fans, { list: true, hot: D.fko.sev }); });
+  document.querySelector("[data-clear]").addEventListener("click", () => { F = { a: [], n: [], s: 0 }; save(); paint(); });
+  paint();
 })();
 """
 

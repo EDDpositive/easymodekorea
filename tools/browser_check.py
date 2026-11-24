@@ -88,7 +88,7 @@ def main():
 
         small = []
         for page in ("", "taxi.html", "phrases.html", "saved.html", "help.html", "foreign-card-declined-korea.html", "ja/", "vi/phrases.html",
-                     "sos.html", "refused.html", "refused.html#taxi", "refused.html#eat/card", "my-card.html", "my-card.html#health", "vi/sos.html"):
+                     "sos.html", "refused.html", "refused.html#taxi", "refused.html#eat/card", "my-card.html", "vi/my-card.html", "vi/sos.html"):
             b.go(srv.url + page, wait=0.5)
             small += [f"/{page} {x['t']} {x['h']}px" for x in b.js(TAPS)]
         check(not small, "buttons and links are at least 44px tall on the main screens", "; ".join(small[:5]))
@@ -157,8 +157,8 @@ def main():
         check(sos == "1|라마 2094 0462|true|true|true|true|true" and police and rough and out, "SOS puts the code, the situation and the language into the Korean text, the full-screen card and the reading; a wide fix says so; outside Korea it says so", f"{sos} {police} {rough} {out}")
         b.cmd("Browser.resetPermissions")
 
-        # Food and health card: taps make one Korean card; staff answers come back in the reader's language; nothing leaves the phone.
-        b.js("localStorage.removeItem('emk-food'); localStorage.removeItem('emk-med')")
+        # Food card: taps make one Korean card; staff answers come back in the reader's language; nothing leaves the phone.
+        b.js("localStorage.removeItem('emk-food')")
         b.go(srv.url + "my-card.html", wait=0.5)
         empty = b.js("document.getElementById('mc-food').disabled")
         fc = b.js("""(() => { ['peanut', 'fish', 'vegan', 'a_alc'].forEach(i => document.querySelector('[data-id=' + i + ']').click()); document.getElementById('mc-sev').click(); document.getElementById('mc-food').click();
@@ -166,15 +166,15 @@ def main():
           return [k.includes('땅콩, 생선') && k.includes('조금만 들어가도 위험해요') && k.includes('비건') && k.includes('술') && k.includes('육수'), a.length, document.getElementById('ans-out').textContent.includes("It's in it"),
             document.getElementById('mc-words').textContent.includes('땅콩'), document.getElementById('mc-off').textContent.includes('Fish') && document.getElementById('mc-off').textContent.includes('mackerel'), localStorage.getItem('emk-food')].join('|'); })()""")
         b.js("history.back()"); time.sleep(0.3)
-        b.go(srv.url + "ja/my-card.html#health", wait=0.5)
-        mc = b.js("""(() => { document.querySelector('[data-id=diab]').click(); document.querySelector('[data-id=peni]').click(); document.getElementById('mc-med').click(); const k = document.getElementById('show-ko').innerText;
-          return [!document.getElementById('mc-p-med').hidden, k.includes('당뇨병') && k.includes('페니실린') && k.includes('땅콩'), document.getElementById('show-mean').textContent.includes('糖尿病')].join('|'); })()""")
+        b.go(srv.url + "ja/my-card.html", wait=0.5)
+        mc = b.js("""(() => { document.getElementById('mc-food').click(); const k = document.getElementById('show-ko').innerText;
+          return [k.includes('땅콩, 생선'), document.getElementById('show-mean').textContent.includes('ピーナッツ'), document.querySelectorAll('#ans-btns .ans').length].join('|'); })()""")
         b.js("history.back()"); time.sleep(0.3)
         b.go(srv.url + "phrases.html", wait=0.5)
         st = b.js("[...document.querySelectorAll('.mc-st')].map(s => s.textContent).join() + '|' + document.querySelector('#fs-own [aria-hidden]').textContent")
-        b.js("localStorage.removeItem('emk-food'); localStorage.removeItem('emk-med')")
-        check(empty and fc == 'true|5|true|true|true|{"a":["peanut","fish"],"n":["vegan","a_alc"],"s":1}' and mc == "true|true|true" and st == "✓ Saved,✓ Saved|2",
-              "taps make a Korean food card with staff answers and label words, and a health card for doctors; the cards tab shows both as saved", f"{empty} {fc} / {mc} / {st}")
+        b.js("localStorage.removeItem('emk-food')")
+        check(empty and fc == 'true|5|true|true|true|{"a":["peanut","fish"],"n":["vegan","a_alc"],"s":1}' and mc == "true|true|5" and st == "✓ Saved|1",
+              "taps make a Korean food card with staff answers and label words; it opens ready in another language and the cards tab shows it as saved", f"{empty} {fc} / {mc} / {st}")
 
         # Refused? place, problem, one answer with Korean cards, the reader's own status and a date; Back walks the steps.
         b.js("localStorage.setItem('wik-setup', 'arc|android')")

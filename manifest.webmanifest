@@ -60,8 +60,8 @@
    ]
   },
   {
-   "name": "My food and health card",
-   "short_name": "My card",
+   "name": "My food card",
+   "short_name": "Food card",
    "url": "/my-card.html",
    "icons": [
     {
@@ -90,7 +90,35 @@
    "sizes": "1080x1920",
    "type": "image/png",
    "form_factor": "narrow",
-   "label": "Pick what you need right now"
+   "label": "SOS, refused, food card and every guide"
+  },
+  {
+   "src": "/shots/sos.png",
+   "sizes": "1080x1920",
+   "type": "image/png",
+   "form_factor": "narrow",
+   "label": "SOS: your location code without data"
+  },
+  {
+   "src": "/shots/food.png",
+   "sizes": "1080x1920",
+   "type": "image/png",
+   "form_factor": "narrow",
+   "label": "A food card staff can answer with a tap"
+  },
+  {
+   "src": "/shots/refused.png",
+   "sizes": "1080x1920",
+   "type": "image/png",
+   "form_factor": "narrow",
+   "label": "Refused? Three taps to the next step"
+  },
+  {
+   "src": "/shots/trip.png",
+   "sizes": "1080x1920",
+   "type": "image/png",
+   "form_factor": "narrow",
+   "label": "Each day, only what matters"
   },
   {
    "src": "/shots/ready.png",
@@ -112,20 +140,6 @@
    "type": "image/png",
    "form_factor": "narrow",
    "label": "Show a driver where to go, in big Korean"
-  },
-  {
-   "src": "/shots/cards.png",
-   "sizes": "1080x1920",
-   "type": "image/png",
-   "form_factor": "narrow",
-   "label": "Korean cards to show a driver or staff"
-  },
-  {
-   "src": "/shots/help.png",
-   "sizes": "1080x1920",
-   "type": "image/png",
-   "form_factor": "narrow",
-   "label": "Emergency numbers, one tap away"
   }
  ]
 }

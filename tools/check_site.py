@@ -77,7 +77,7 @@ def main():
                 if set(o) != five or not all(v.strip() for v in o.values()): gaps.append(at)
             else: [walk(v, f"{at}.{k}") for k, v in o.items()]
         elif isinstance(o, (list, tuple)): [walk(v, f"{at}[{i}]") for i, v in enumerate(o)]
-    for n in ("SOS", "SOS_WHAT", "SOS_HELP_M", "ALLERGY", "AVOID", "COND", "DRUG", "FOOD_ANS", "MED_ANS", "CARD", "REFUSED", "RF", "DAYS", "TM", "MOS_LABEL"): walk(getattr(M, n), n)
+    for n in ("SOS", "SOS_WHAT", "SOS_HELP_M", "ALLERGY", "AVOID", "FOOD_ANS", "CARD", "REFUSED", "RF", "DAYS", "TM", "MOS_LABEL"): walk(getattr(M, n), n)
     for iid, st, w, text, src, d, link, cond in M.DAYS:
         if any(not k.startswith("guide:") and k not in M.SRC and k not in TR.SRC for k in src): gaps.append("source of " + iid)
         if any(not k.startswith("guide:") for k in src) and not d: gaps.append("date of " + iid)
@@ -90,7 +90,7 @@ def main():
         if sos.count('class="ck"') < 3: bad.append(d + "sos.html dates")
         if not all(x in rd(d + "index.html") for x in ('href="sos.html"', 'href="refused.html"', 'href="my-card.html"', 'id="trip-now"')): bad.append(d + "index.html row")
         if 'href="sos.html"' not in rd(d + "help.html") or 'id="days"' not in rd(d + "saved.html"): bad.append(d + "help/trip")
-    check(not gaps and not send and not bad, "SOS, Refused, food and health card, trip mode: five languages, dated and sourced, offline, and their scripts send nothing", "; ".join(gaps[:3] + send + bad[:3]))
+    check(not gaps and not send and not bad, "SOS, Refused, food card, trip mode: five languages, dated and sourced, offline, and their scripts send nothing", "; ".join(gaps[:3] + send + bad[:3]))
 
     # Search index per language.
     idx_ok = all(len(json.loads(rd(d + "search.json"))["faq"]) > 20 and len(json.loads(rd(d + "search.json"))["cards"]) > 20 for d in LANG_DIRS)

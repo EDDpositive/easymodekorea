@@ -54,9 +54,11 @@ I need your Gmail address first, or the link will not open.
 ## 테스터에게 부탁할 확인 5가지
 1. 홈 화면 아이콘으로 열리는가
 2. 비행기 모드에서 가이드가 열리는가
-3. 한국어 카드를 전체 화면으로 띄우고, 답 고르기 카드(약국 카드 포함)에서 답을 누를 수 있는가
+3. Food card를 만들어 전체 화면으로 띄우고 한국어 답을 누를 수 있는가
 4. 언어를 바꾸면 다음에 그 언어로 열리는가
 5. 읽기 어렵거나 틀린 내용이 있는가
+6. SOS의 "Where am I?"가 위치번호를 보여 주는가. **119·112에 실제로 전화하거나 문자를 보내지 않기**
+7. Refused?에서 세 번 눌러 답까지 가는가, My trip의 종을 눌러 달력에 저장되는가
 
 의견은 받은 날짜와 함께 한 줄씩 적어 두세요. 15일 차 신청서에 그대로 씁니다.
 
@@ -65,12 +67,12 @@ I need your Gmail address first, or the link will not open.
 
 **비공개 테스트에 대해**
 - 테스터를 어떻게 모았나: `I invited [number] friends, family members and colleagues who use Android phones, by direct message, and added their Google accounts to the tester list.`
-- 테스터의 참여: `Testers installed the app from the closed track and used it over [number] days. They opened guides, used the offline mode and the Korean phrase cards, and switched languages.`
+- 테스터의 참여: `Testers installed the app from the closed track and used it over [number] days. They made a food card, tried the SOS location code and the "Refused? 3 taps" screen, used the app offline and switched languages.`
 - 받은 의견과 수집 방법: `I collected feedback by direct message and through the in-app feedback form. Main points: [의견 1], [의견 2], [의견 3].`
 
 **앱에 대해**
 - 대상: `Foreign visitors to South Korea who do not have a Korean phone number.`
-- 가치: `Short, dated answers on which Korean apps and services work for visitors, Korean phrase cards to show staff and drivers, emergency numbers, and offline access. Available in five languages. No account, no ads.`
+- 가치: `When something goes wrong (card refused, lost, food the traveler cannot eat), the next step in a few taps: an offline location code with Korean to show, a food card staff answer by tapping, and dated answers on which Korean apps and services work for visitors. Five languages. No account, no ads.`
 - 첫해 예상 설치 수: 가장 낮은 구간을 고르는 것이 정직합니다.
 
 **출시 준비에 대해**
