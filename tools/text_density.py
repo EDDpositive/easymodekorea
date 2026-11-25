@@ -20,6 +20,7 @@ LIMITS = {"app": {"first": 70, "sentences": 3, "all": 300},
           "list": {"first": 90, "sentences": 3, "all": 10 ** 6}}   # 27차: the first screen is the cards themselves (Korean + meaning)
 PAGES = [("", "home", "app"), ("taxi.html", "guide: taxi", "answer"), ("incheon-airport-to-seoul.html", "guide: airport", "answer"),
          ("ready.html", "ready: result", "app"), ("saved.html", "my trip", "app"), ("phrases.html", "korean cards", "list"),
+         ("sos.html", "sos", "app"), ("refused.html", "refused: where", "app"), ("refused.html#eat/card", "refused: answer", "answer"), ("my-card.html", "my card", "app"),
          ("help.html", "help", "app"), ("foreign-card-declined-korea.html", "flow: card", "answer")]
 
 

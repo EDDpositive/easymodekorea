@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap"></noscript>
-<link rel="stylesheet" href="../style.css?v=83b5cbf5">
+<link rel="stylesheet" href="../style.css?v=6ec30739">
 <script>window.EMK={"lang": "zh-cn", "up": "../", "t": {"save": "收藏", "saved": "已收藏", "share": "分享", "link_copied": "已复制链接", "saved_toast": "已存到“我的行程”", "unsaved_toast": "已从“我的行程”移除", "install": "安装App,没有网络也能看指南。", "install_btn": "安装", "later": "暂不", "update": "这一页有更新的内容。", "refresh": "刷新", "ready": "已存到这部手机,没有网络也能看指南。", "miss": "那一页还没存到这部手机。有网络时先打开一次。", "off_ok": "离线可用", "offline": "目前离线。这页的内容照样能用。", "suggest": "这个页面也有{l}版。", "switch": "切换", "dismiss": "不用了"}}</script><script defer src="../app.js?v=f550a1d3"></script>
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "HowTo", "name": "错过末班车", "description": "首尔地铁收班后回去的三个方法,从便宜的开始。", "inLanguage": "zh-CN", "url": "https://easymodekorea.com/zh-cn/missed-last-train-seoul.html", "step": [{"@type": "HowToStep", "position": 1, "text": "先确认真的没车了。首尔地铁工作日开到凌晨1点左右抵达终点站;周末和公共假日更早收班。你这一站的末班车时间在站台时刻表和Naver Map上。"}, {"@type": "HowToStep", "position": 2, "text": "夜间公交:首尔的N路公交从23:00开到次日06:00。在Naver Map搜索目的地,看公交线路。"}, {"@type": "HowToStep", "position": 3, "text": "出租车:用k.ride或Uber叫车,或到出租车候车点。首尔起步价4,800韩元,22:00到04:00加20%,23:00到02:00加40%。"}, {"@type": "HowToStep", "position": 4, "text": "上车前先准备好韩文地址。在“我的行程”存一次,就能全屏给司机看。"}, {"@type": "HowToStep", "position": 5, "text": "都没车也叫不到出租车?到24小时便利店这类明亮、有人的地方等,坐首班车。"}], "citation": [{"@type": "WebPage", "name": "Seoul city: subway until 1 a.m. on weekdays (30 May 2022)", "url": "https://mediahub.seoul.go.kr/archives/2004711"}, {"@type": "WebPage", "name": "Seoul city: Chuseok 2026 transport plan (22 Sep 2026)", "url": "https://mediahub.seoul.go.kr/archives/2019414"}]}, {"@context": "https://schema.org", "@type": "WebPage", "@id": "https://easymodekorea.com/zh-cn/missed-last-train-seoul.html", "url": "https://easymodekorea.com/zh-cn/missed-last-train-seoul.html", "name": "错过末班车", "inLanguage": "zh-CN", "lastReviewed": "2026-11-22", "reviewedBy": {"@type": "Organization", "name": "EasyModeKorea", "url": "https://easymodekorea.com/zh-cn/about.html"}}]</script>
@@ -54,20 +54,21 @@ let lastFocus = null, SAY = "", KOV = null;
 function koVoice() { try { KOV = speechSynthesis.getVoices().find(v => /^ko([-_]|$)/i.test(v.lang)) || null; } catch (e) { KOV = null; } document.getElementById("show-say").hidden = !KOV; }
 if ("speechSynthesis" in window) { koVoice(); try { speechSynthesis.addEventListener("voiceschanged", koVoice); } catch (e) {} }
 document.getElementById("show-say").addEventListener("click", () => { try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(SAY); u.lang = "ko-KR"; if (KOV) u.voice = KOV; u.rate = 0.9; speechSynthesis.speak(u); count("speak", "play aloud"); } catch (e) {} });
-function show(label, ko, big, mean, ans) {
+function show(label, ko, big, mean, ans, opt) {
   lastFocus = document.activeElement;
   document.getElementById("show-lbl").textContent = label;
   const k = document.getElementById("show-ko"); k.textContent = ko;
+  if (opt && opt.list) k.replaceChildren(...ko.split("\n").map(l => { const m = /^([^:]{1,16}): (.+)$/.exec(l); return m ? el("div", { class: "show-kv" }, [el("span", { text: m[1] }), el("b", { text: m[2] })]) : el("div", { text: l, class: opt.hot && l === opt.hot ? "hot" : "" }); }));
   if (big) k.append(el("small", { text: big }));
-  SAY = ko + (big ? ". " + big : "");
+  SAY = (opt && opt.say) || ko + (big ? ". " + big : ""); k.classList.toggle("list", !!(opt && opt.list)); document.getElementById("show").classList.toggle("lists", !!(opt && opt.list));   /* list: several lines, smaller; say: how to read them aloud */
   const box = document.getElementById("show-ans"), btns = document.getElementById("ans-btns"), out = document.getElementById("ans-out");
   btns.replaceChildren(); out.hidden = true; box.hidden = !(ans && ans.length); k.classList.toggle("asking", !box.hidden);
   (ans || []).forEach(a => { const b = el("button", { type: "button", class: "ans", lang: "ko", "aria-pressed": "false", text: a[0] });
     b.addEventListener("click", () => { btns.querySelectorAll(".ans").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
-      out.replaceChildren(el("small", { text: box.dataset.got }), el("b", { text: a[1] })); out.hidden = false; count("ask-answer", label); });
+      out.replaceChildren(el("small", { text: box.dataset.got }), el("b", { text: a[1] })); out.hidden = false; out.scrollIntoView({ block: "nearest" }); count("ask-answer", label); });
     btns.append(b); });
   document.getElementById("show-mean").textContent = mean || "";
-  document.getElementById("show").hidden = false; document.getElementById("show-close").focus();
+  document.getElementById("show").hidden = false; document.getElementById("show-close").focus({ preventScroll: true }); document.getElementById("show").scrollTop = 0;
   try { if (navigator.wakeLock) navigator.wakeLock.request("screen").then(l => { wake = l; }).catch(() => {}); } catch (e) {}
   /* The phone's Back button closes the card instead of leaving the page. */
   try { if (!(history.state && history.state.emkCard)) history.pushState({ emkCard: 1 }, ""); } catch (e) {}

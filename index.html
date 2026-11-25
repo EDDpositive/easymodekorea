@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap"></noscript>
-<link rel="stylesheet" href="style.css?v=83b5cbf5">
+<link rel="stylesheet" href="style.css?v=6ec30739">
 <script>window.EMK={"lang": "en", "up": "", "t": {"save": "Save", "saved": "Saved", "share": "Share", "link_copied": "Link copied", "saved_toast": "Saved to My trip", "unsaved_toast": "Removed from My trip", "install": "Install the app. Guides open without data.", "install_btn": "Install", "later": "Not now", "update": "This page has newer info.", "refresh": "Refresh", "ready": "Saved on this phone. Guides now open without data.", "miss": "That page isn't saved on this phone yet. Open it once with data.", "off_ok": "Works offline", "offline": "You're offline. Everything here still works.", "suggest": "This page is also in {l}.", "switch": "Switch", "dismiss": "No thanks"}}</script><script defer src="app.js?v=f550a1d3"></script>
 <script data-goatcounter="https://eddpositive.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script>try{var l=localStorage.getItem("emk-lang");if(l&&/^(ja|zh-tw|zh-cn|vi)$/.test(l)&&!sessionStorage.getItem("emk-go")&&(matchMedia("(display-mode: standalone)").matches||navigator.standalone)){sessionStorage.setItem("emk-go","1");location.replace("/"+l+location.pathname+location.hash)}}catch(e){}</script>
@@ -31,11 +31,14 @@
   <p class="hint" id="nores" hidden>Nothing matched. Try another word. <button type="button" class="linkbtn" id="clear">Clear</button></p>
   <div class="found" id="found" aria-live="polite"></div>
   <div class="today" id="today">
+    <section class="trip-now" id="trip-now" aria-label="Your days" hidden></section>
     <a class="ready-cta" href="ready.html" data-continue="Plan: {d}/{n} done" data-next="Next: {t}" data-lang="en"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M7.5 12.5l3 3 6-6.5"/></svg></span><span><b>Korea Ready check</b><span class="ready-sub">1 minute, taps only</span><span class="ready-next" hidden></span></span></a>
+    <nav class="mos" aria-label="Quick help"><a class="mo mo-sos" href="sos.html"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5v2M4.8 5.6l1.5 1.5M19.2 5.6l-1.5 1.5"/><path d="M7 17v-3.5a5 5 0 0 1 10 0V17"/><path d="M4.5 17h15v3.5h-15z"/></svg></span><b>SOS</b></a><a class="mo mo-rf" href="refused.html"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12.5" rx="2.5"/><path d="M3 10h18M9 12.8l6 4M15 12.8l-6 4"/></svg></span><b>Refused?</b></a><a class="mo mo-card" href="my-card.html"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3v8a2 2 0 0 0 2 2v8M11 3v6M7 3v6"/><path d="M17 21V3c-2 1.5-3 4-3 7v3h3"/></svg></span><b>Food card</b></a></nav>
     <div class="quick" id="quick" hidden></div>
     <section class="sec alerts-wrap" id="alerts-wrap" aria-labelledby="alerts-h" hidden><h2 id="alerts-h">Coming up</h2>
 <div id="alerts" data-h="During your trip" data-soon="Coming up" data-none=""></div></section>
 <script type="application/json" id="alerts-data">[{"id": "seollal-2027", "from": "2027-02-06", "to": "2027-02-09", "title": "Seollal (Lunar New Year) holiday", "points": [{"t": "Public holiday from Sat 6 to Tue 9 Feb 2027. Seollal itself is Sun 7 Feb. Government offices and banks are closed.", "src": [["Korea AeroSpace Administration: 2027 official calendar (29 Jun 2026)", "https://m.korea.kr/briefing/pressReleaseView.do?newsId=156768474"]]}, {"t": "Trains: holiday tickets are sold in a short advance sale and go fast. For Seollal 2026 the general sale ran 19 to 21 Jan for trains on 13 to 18 Feb. The 2027 dates were not announced at our last check.", "src": [["Hankyung: KORAIL Seollal 2026 ticket sale (7 Jan 2026)", "https://www.hankyung.com/article/202601075989h"]]}, {"t": "Palaces: for Seollal 2026 the four main palaces and Jongmyo were free for the whole holiday, then closed the day after it ended.", "src": [["Asia Business Daily: palaces free for Seollal 2026 (22 Jan 2026)", "https://view.asiae.co.kr/en/article/2026012209564811302"]]}, {"t": "Sick during the holiday? Open clinics and pharmacies are listed on E-Gen, or call 119.", "src": [["Seoul city: open clinics and pharmacies, Chuseok 2026 (22 Sep 2026)", "https://mediahub.seoul.go.kr/archives/2019473"], ["E-Gen emergency medical portal: open clinics and pharmacies", "https://www.e-gen.or.kr/egen/holiday_medical.do"]]}]}, {"id": "chuseok-2027", "from": "2027-09-14", "to": "2027-09-16", "title": "Chuseok holiday", "points": [{"t": "Public holiday from Tue 14 to Thu 16 Sep 2027. Chuseok itself is Wed 15 Sep. Government offices and banks are closed.", "src": [["Korea AeroSpace Administration: 2027 official calendar (29 Jun 2026)", "https://m.korea.kr/briefing/pressReleaseView.do?newsId=156768474"]]}, {"t": "Getting home late: for Chuseok 2026 Seoul ran the last subway trains and buses until 1 a.m. on the two days after Chuseok, and night N buses ran as usual. Plans for 2027 come out shortly before the holiday.", "src": [["Seoul city: Chuseok 2026 transport plan (22 Sep 2026)", "https://mediahub.seoul.go.kr/archives/2019414"]]}, {"t": "Trains: holiday tickets are sold in a short advance sale and go fast. Book as soon as the sale opens, or travel outside these days.", "src": [["Hankyung: KORAIL Seollal 2026 ticket sale (7 Jan 2026)", "https://www.hankyung.com/article/202601075989h"]]}, {"t": "Sick during the holiday? Open clinics and pharmacies are listed on E-Gen, or call 119.", "src": [["Seoul city: open clinics and pharmacies, Chuseok 2026 (22 Sep 2026)", "https://mediahub.seoul.go.kr/archives/2019473"], ["E-Gen emergency medical portal: open clinics and pharmacies", "https://www.e-gen.or.kr/egen/holiday_medical.do"]]}]}]</script>
+    <script type="application/json" id="days-data">{"t":{"to_go":"{n} days to go","tomorrow":"You fly tomorrow","day":"Day {n} of {m}","leaving":"You leave today","nothing":"Nothing due today. Enjoy.","over":"Trip over? Erase your trip data.","remind":"Add to calendar","saved":"Calendar file saved. Open it to add.","now":"Now","next":"Next","all":"See all days","moved":"Moved on","by":"Report by {d}","stages":{"before":"Before you fly","arrive":"Arrival day","trip":"During the trip","eve":"Day before you leave","leave":"Leaving day, in this order","long":"Staying longer"}},"items":[{"id":"ktx","st":"before","w":["from",-60],"t":"KTX tickets open two months ahead. Book yours.","l":["KTX trains","ktx-train-booking.html"],"c":"busan"},{"id":"keta","st":"before","w":["from",-14],"t":"Check if your passport needs K-ETA","l":["Entry rules","k-eta-entry-requirements.html"],"c":"visitor"},{"id":"card","st":"before","w":["from",-7],"t":"Make your food card","l":["My food card","my-card.html"],"c":null},{"id":"addr","st":"before","w":["from",-7],"t":"Save your stay address in Korean","l":["Stay address","#f-addr"],"c":null},{"id":"eac","st":"before","w":["from",-3],"t":"e-Arrival Card opens: 72 hours before landing","l":["e-Arrival Card timing","#f-arrive"],"c":"visitor"},{"id":"off","st":"before","w":["from",-1],"t":"Check the offline pack is complete","l":["Offline pack","#f-pack"],"c":null},{"id":"tmoney","st":"arrive","w":["from",0],"t":"Buy T-money at a convenience store, top up in cash","l":["Subway & bus","tmoney-subway-bus.html"],"c":null},{"id":"city","st":"arrive","w":["from",0],"t":"To the city: train, bus or taxi","l":["Airport to city","incheon-airport-to-seoul.html"],"c":null},{"id":"tax1","st":"trip","w":["day",2],"t":"Shopping? Carry your passport. Tax Free shops refund tax from 15,000 won in one payment","l":["Shopping & tax refund","tax-free-shopping.html"],"c":"visitor"},{"id":"eve_bag","st":"eve","w":["to",-1],"t":"Pack tax-refund goods unopened and within reach","l":null,"c":"visitor"},{"id":"eve_tm","st":"eve","w":["to",-1],"t":"Use up your T-money: refunding a small balance costs 500 won","l":["Subway & bus","tmoney-subway-bus.html"],"c":null},{"id":"eve_bus","st":"eve","w":["to",-1],"t":"Check the first train or bus to the airport","l":["Airport to city","incheon-airport-to-seoul.html"],"c":null},{"id":"go_bag","st":"leave","w":["to",0],"t":"Refund goods in a checked bag? Tell the airline at check-in and get the tagged bag back (Incheon)","l":null,"c":"visitor"},{"id":"go_kiosk","st":"leave","w":["to",0],"t":"Refund kiosk: scan passport and refund slips before the bag goes (Incheon)","l":null,"c":"visitor"},{"id":"go_cust","st":"leave","w":["to",0],"t":"Kiosk says inspection? Customs desk: passport, unopened goods, slips","l":null,"c":"visitor"},{"id":"go_cash","st":"leave","w":["to",0],"t":"After security: refund machines 24 h, desks 7:00 to 22:00 (T1) or 21:30 (T2) (Incheon)","l":null,"c":"visitor"},{"id":"arc","st":"long","w":["from",90],"t":"Staying over 90 days: register by this date","l":null,"c":"long"},{"id":"move","st":"long","w":null,"t":"Moved? Report the new address within 15 days (14 for F-4 overseas Koreans)","l":null,"c":"long"}],"bell":"<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 2h-15z\"/><path d=\"M10 21h4\"/><\/svg>"}</script>
   </div>
   <nav class="jump" id="jump" aria-label="Jump to a topic"><a href="#c=landed" data-go="landed" class="cat-landed"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="3" width="12" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M9 16h6"/></svg></span><span>Arrival</span></a><a href="#c=move" data-go="move" class="cat-move"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="14" rx="3"/><path d="M5 11h14"/><circle cx="8.5" cy="14" r="1"/><circle cx="15.5" cy="14" r="1"/><path d="M8 20l2-3M16 20l-2-3"/></svg></span><span>Transport</span></a><a href="#c=pay" data-go="pay" class="cat-pay"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 9v.01M18 15v.01"/></svg></span><span>Money</span></a><a href="#c=phone" data-go="phone" class="cat-phone"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg></span><span>Phone</span></a><a href="#c=eat" data-go="eat" class="cat-eat"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3v8a2 2 0 0 0 2 2v8M11 3v6M7 3v6"/><path d="M17 21V3c-2 1.5-3 4-3 7v3h3"/></svg></span><span>Food</span></a><a href="#c=shop" data-go="shop" class="cat-shop"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></span><span>Shopping</span></a><a href="#c=sick" data-go="sick" class="cat-sick"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10z"/><path d="M12 10v5M9.5 12.5h5"/></svg></span><span>Sick</span></a><a href="#c=trips" data-go="trips" class="cat-trips"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17c3-3 6 3 9 0s6 3 9 0"/><path d="M3 12c3-3 6 3 9 0s6 3 9 0"/><path d="M12 3v6"/></svg></span><span>Trips</span></a></nav>
   <a class="all-row" id="all-row" href="#c=all"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg></span><span class="name">All guides</span><span class="n">21</span></a>
@@ -74,20 +77,21 @@ let lastFocus = null, SAY = "", KOV = null;
 function koVoice() { try { KOV = speechSynthesis.getVoices().find(v => /^ko([-_]|$)/i.test(v.lang)) || null; } catch (e) { KOV = null; } document.getElementById("show-say").hidden = !KOV; }
 if ("speechSynthesis" in window) { koVoice(); try { speechSynthesis.addEventListener("voiceschanged", koVoice); } catch (e) {} }
 document.getElementById("show-say").addEventListener("click", () => { try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(SAY); u.lang = "ko-KR"; if (KOV) u.voice = KOV; u.rate = 0.9; speechSynthesis.speak(u); count("speak", "play aloud"); } catch (e) {} });
-function show(label, ko, big, mean, ans) {
+function show(label, ko, big, mean, ans, opt) {
   lastFocus = document.activeElement;
   document.getElementById("show-lbl").textContent = label;
   const k = document.getElementById("show-ko"); k.textContent = ko;
+  if (opt && opt.list) k.replaceChildren(...ko.split("\n").map(l => { const m = /^([^:]{1,16}): (.+)$/.exec(l); return m ? el("div", { class: "show-kv" }, [el("span", { text: m[1] }), el("b", { text: m[2] })]) : el("div", { text: l, class: opt.hot && l === opt.hot ? "hot" : "" }); }));
   if (big) k.append(el("small", { text: big }));
-  SAY = ko + (big ? ". " + big : "");
+  SAY = (opt && opt.say) || ko + (big ? ". " + big : ""); k.classList.toggle("list", !!(opt && opt.list)); document.getElementById("show").classList.toggle("lists", !!(opt && opt.list));   /* list: several lines, smaller; say: how to read them aloud */
   const box = document.getElementById("show-ans"), btns = document.getElementById("ans-btns"), out = document.getElementById("ans-out");
   btns.replaceChildren(); out.hidden = true; box.hidden = !(ans && ans.length); k.classList.toggle("asking", !box.hidden);
   (ans || []).forEach(a => { const b = el("button", { type: "button", class: "ans", lang: "ko", "aria-pressed": "false", text: a[0] });
     b.addEventListener("click", () => { btns.querySelectorAll(".ans").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
-      out.replaceChildren(el("small", { text: box.dataset.got }), el("b", { text: a[1] })); out.hidden = false; count("ask-answer", label); });
+      out.replaceChildren(el("small", { text: box.dataset.got }), el("b", { text: a[1] })); out.hidden = false; out.scrollIntoView({ block: "nearest" }); count("ask-answer", label); });
     btns.append(b); });
   document.getElementById("show-mean").textContent = mean || "";
-  document.getElementById("show").hidden = false; document.getElementById("show-close").focus();
+  document.getElementById("show").hidden = false; document.getElementById("show-close").focus({ preventScroll: true }); document.getElementById("show").scrollTop = 0;
   try { if (navigator.wakeLock) navigator.wakeLock.request("screen").then(l => { wake = l; }).catch(() => {}); } catch (e) {}
   /* The phone's Back button closes the card instead of leaving the page. */
   try { if (!(history.state && history.state.emkCard)) history.pushState({ emkCard: 1 }, ""); } catch (e) {}
@@ -164,7 +168,7 @@ function filter() {
   if (q.length >= 2 && IDX) {
     const fq = IDX.faq.filter(x => x[2].toLowerCase().includes(q)).slice(0, 6), cd = IDX.cards.filter(x => (x[0] + " " + x[1]).toLowerCase().includes(q)).slice(0, 6);
     const fl = (IDX.flows || []).filter(x => (x[1] + " " + x[2]).toLowerCase().includes(q));
-    if (fl.length) { found.append(el("ul", { class: "glist" }, fl.map(x => el("li", {}, el("a", { href: x[0] + ".html", text: x[1] }))))); }
+    if (fl.length) { found.append(el("ul", { class: "glist" }, fl.map(x => el("li", {}, el("a", { href: x[0].includes(".html") ? x[0] : x[0] + ".html", text: x[1] }))))); }
     if (fq.length) { found.append(el("h2", { text: D.found[0] }), el("ul", { class: "glist" }, fq.map(x => el("li", {}, el("a", { href: x[0] + ".html#fq-" + x[1], text: x[2] }))))); }
     if (cd.length) { found.append(el("h2", { text: D.found[1] }), el("ul", { class: "glist" }, cd.map(x => { const b = el("button", { type: "button", class: "card-hit" }, [el("b", { lang: "ko", text: x[0] }), el("span", { text: x[1] })]); b.addEventListener("click", () => show(S.show, x[0], "", XS.means + ": " + x[1], x[2])); return el("li", {}, b); }))); }
     deep = fq.length + cd.length + fl.length;
@@ -254,6 +258,86 @@ paint(); route(); stay();
     f.addEventListener("change", () => { if (f.value && t.value) save(); else store("emk-trip", JSON.stringify({ from: f.value, to: t.value })); });
     t.addEventListener("change", () => { if (f.value && t.value) save(); else store("emk-trip", JSON.stringify({ from: f.value, to: t.value })); });
   }
+})();
+
+
+(function () {
+  /* Trip mode: the dates on this phone decide what shows. Home shows only what is due; My trip shows the whole list in order.
+     A reminder is a calendar file made here, so the phone's own calendar rings even when this app is closed. */
+  const J = document.getElementById("days-data"); if (!J) return;
+  const D = JSON.parse(J.textContent), c = D.t, home = document.getElementById("trip-now"), box = document.getElementById("days"), DAY = 864e5;
+  const day = s => { const m = /^(\d{4})-(\d\d)-(\d\d)$/.exec(s || ""); return m ? Date.UTC(+m[1], m[2] - 1, +m[3]) : NaN; };
+  const loc = document.documentElement.lang || "en", fmt = (t, y) => new Intl.DateTimeFormat(loc, { day: "numeric", month: "short", ...(y ? { year: "numeric" } : {}), timeZone: "UTC" }).format(new Date(t));
+  const now = new Date(), today = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+  const obj = k => { try { return JSON.parse(store(k) || "{}") || {}; } catch (e) { return {}; } };
+  const tr = obj("emk-trip"), from = day(tr.from), to = day(tr.to), has = !isNaN(from) && !isNaN(to) && to >= from;
+  const arc = /^arc/.test(store("wik-setup") || ""), busan = [].concat(obj("emk-rc").city || []).includes("busan"), long = has && to - from > 90 * DAY;
+  let done = []; try { done = JSON.parse(store("emk-days") || "[]"); if (!Array.isArray(done)) done = []; } catch (e) {}
+  const fits = i => !i.c || (i.c === "busan" ? busan : i.c === "visitor" ? !arc : arc || long);
+  const when = i => !i.w ? NaN : i.w[0] === "day" ? from + (i.w[1] - 1) * DAY : (i.w[0] === "from" ? from : to) + i.w[1] * DAY;
+  const list = D.items.filter(fits).map(i => ({ ...i, at: has ? (i.id === "arc" ? from + 89 * DAY : when(i)) : NaN })).filter(i => i.st !== "trip" || isNaN(i.at) || i.at < to);
+  const tick = id => { done = done.includes(id) ? done.filter(x => x !== id) : done.concat(id); store("emk-days", JSON.stringify(done)); };
+  const n = Math.round((from - today) / DAY), len = Math.round((to - from) / DAY) + 1;
+  const label = !has ? "" : n > 1 ? c.to_go.replace("{n}", n) : n === 1 ? c.tomorrow : today === to ? c.leaving : today < to ? c.day.replace("{n}", 1 - n).replace("{m}", len) : c.over;
+  const stage = !has ? "" : n > 0 ? "before" : today === to ? "leave" : today === to - DAY && today !== from ? "eve" : today === from ? "arrive" : today < to ? "trip" : "over";
+  /* Calendar file for one item: a timed event with an alarm. Long lines are folded by bytes, as the format asks. */
+  const fold = s => { const out = []; let cur = "", b = 0; for (const ch of s) { const w = new TextEncoder().encode(ch).length; if (b + w > 72) { out.push(cur); cur = " "; b = 1; } cur += ch; b += w; } out.push(cur); return out.join("\r\n"); };
+  const esc = s => s.replace(/[\\;,]/g, m => "\\" + m).replace(/\n/g, "\\n");
+  window.emkIcs = (id, text, at, hh) => { const d = new Date(at).toISOString().slice(0, 10).replace(/-/g, ""), st = new Date().toISOString().replace(/[-:]/g, "").slice(0, 15) + "Z";
+    return ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//EasyModeKorea//Trip//EN", "BEGIN:VEVENT", "UID:" + id + "-" + d + "@easymodekorea.com", "DTSTAMP:" + st, "DTSTART:" + d + "T" + hh + "0000", "DTEND:" + d + "T" + hh + "1500",
+      "SUMMARY:" + esc(text), "DESCRIPTION:EasyModeKorea", "BEGIN:VALARM", "ACTION:DISPLAY", "DESCRIPTION:" + esc(text), "TRIGGER:PT0S", "END:VALARM", "END:VEVENT", "END:VCALENDAR", ""].map(fold).join("\r\n"); };
+  const bell = (id, text, at, hh) => { const b = el("button", { type: "button", class: "dy-bell", "aria-label": c.remind + ": " + text, html: D.bell });
+    b.addEventListener("click", () => { const a = el("a", { href: URL.createObjectURL(new Blob([emkIcs(id, text, at, hh)], { type: "text/calendar;charset=utf-8" })), download: "easymodekorea-" + id + ".ics" });
+      document.body.append(a); a.click(); a.remove(); count("days/remind", "calendar reminder"); if (window.emkToast) emkToast("🔔 " + c.saved); });
+    return b; };
+  const hour = i => i.st === "eve" ? "19" : i.st === "leave" ? "08" : "10";
+  const tk = (i, after) => { const b = el("button", { type: "button", class: "dy-t", "aria-pressed": String(done.includes(i.id)), "aria-label": i.t }, el("i", { "aria-hidden": "true" }));
+    b.addEventListener("click", () => { tick(i.id); const on = done.includes(i.id); b.setAttribute("aria-pressed", String(on)); b.closest("li").classList.toggle("off", on); if (after) after(); }); return b; };
+  if (home && has && stage !== "over") {
+    const due = list.filter(i => !done.includes(i.id) && i.st !== "long" && (i.st === "before" ? n > 0 && i.at <= today : i.st === "trip" ? stage === "trip" && i.at <= today : i.st === stage));
+    const next = list.filter(i => i.at > today && !done.includes(i.id) && i.st !== "long").sort((a, b) => a.at - b.at)[0];
+    home.replaceChildren(el("p", { class: "tn-h" }, [el("b", { text: label }), el("a", { href: "saved.html#days", text: c.all })]));
+    if (due.length) home.append(el("ul", { class: "tn" }, due.slice(0, 2).map(i => el("li", {}, [tk(i), el("a", { href: i.l ? i.l[1].replace(/^#/, "saved.html#") : "saved.html#days", text: i.t })]))));
+    else home.append(el("p", { class: "tn-next" }, next ? [el("small", { text: c.next + " · " + fmt(next.at) }), el("span", { text: next.t })] : [el("span", { text: c.nothing })]));
+    home.hidden = false;
+    /* Once the trip has started, what is due today replaces the pre-trip check. */
+    if (n <= 0) { const r = document.querySelector("#today .ready-cta"); if (r) r.hidden = true; }
+  }
+  if (!box) return;
+  const L = document.getElementById("days-list"), need = document.getElementById("days-need"), head = document.getElementById("days-now");
+  need.hidden = has; head.hidden = !has; head.textContent = label;
+  const df = document.getElementById("day-from"), dt = document.getElementById("day-to");
+  const put = () => { if (df.value && dt.value && dt.value >= df.value) { store("emk-trip", JSON.stringify({ from: df.value, to: dt.value })); location.reload(); } };
+  df.addEventListener("change", put); dt.addEventListener("change", put);
+  const ORD = ["before", "arrive", "trip", "eve", "leave"], at0 = ORD.indexOf(stage);
+  const ord = !has ? (arc ? ["long"] : []) : at0 < 0 ? ORD.concat("long") : ORD.slice(at0).concat("long", ORD.slice(0, at0));
+  for (const g of ord) {
+    const items = list.filter(i => i.st === g); if (!items.length) continue;
+    const cnt = el("span", { class: "dg-n" }), left = () => { const k = items.filter(x => !done.includes(x.id)).length; cnt.textContent = k ? String(k) : "✓"; };
+    left();
+    const d = el("details", { class: "dg", name: "dg" }), same = items.every(i => i.at === items[0].at) && !isNaN(items[0].at);
+    d.append(el("summary", {}, [el("b", { text: c.stages[g] }), same ? el("small", { text: fmt(items[0].at) }) : null, cnt]));
+    if (g === stage || (!has && g === "long")) d.open = true;
+    const ul = el("ul", { class: "dy" });
+    for (const i of items) {
+      const info = [], line = [el("span", { text: i.t })]; if (!isNaN(i.at) && !same) line.push(el("small", { text: g === "before" && i.at <= today ? c.now : fmt(i.at) }));
+      if (i.l) info.push(el("a", { class: "btn ghost", href: i.l[1], text: i.l[0] }));
+      if (i.src.length) info.push(el("p", { class: "fact-src" }, [i.d ? el("time", { class: "ck", datetime: i.d, text: "✓ " + fmt(day(i.d), 1) + " " }) : null].concat(i.src.map(s => el("a", { href: s[1], ...(/^http/.test(s[1]) ? { target: "_blank", rel: "noopener" } : {}), text: s[0] + " " })))));
+      const li = el("li", { class: done.includes(i.id) ? "off" : "" }, [tk(i, left), info.length ? el("details", { class: "dy-d" }, [el("summary", {}, line), el("div", {}, info)]) : el("div", { class: "dy-d" }, line)]);
+      if (!isNaN(i.at) && (i.at > today || (i.at === today && now.getHours() < +hour(i)))) li.append(bell(i.id, i.t, i.at, hour(i)));
+      if (i.id === "move") li.append(mover(i));
+      ul.append(li);
+    }
+    d.append(ul); L.append(d);
+  }
+  document.getElementById("days-note").hidden = !L.querySelector(".dy-bell");
+  function mover(i) {   /* Moved on this date: the last day to report it, counted on the safe side. */
+    const inp = el("input", { type: "date" }), out = el("p", { class: "dy-by", role: "status" });
+    const calc = () => { const m = day(inp.value); out.replaceChildren(); if (isNaN(m)) return; store("emk-moved", inp.value); const by = m + 14 * DAY;
+      out.append(el("span", { text: c.by.replace("{d}", fmt(by)) + " · F-4: " + fmt(m + 13 * DAY) })); if (by >= today) out.append(bell("move", i.t, Math.max(today, by - 3 * DAY), "10")); };
+    inp.value = store("emk-moved") || ""; inp.addEventListener("change", calc); calc();
+    return el("div", { class: "dy-mv" }, [el("label", {}, [el("span", { text: c.moved }), inp]), out]); }
+  if (location.hash === "#days") box.scrollIntoView();
 })();
 
 </script>

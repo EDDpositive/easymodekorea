@@ -16,8 +16,11 @@ import layout  # noqa: E402
 from layout import ADDR_GUIDES, AT, CARDS, COPY, tx  # noqa: E402
 import app_shell as A  # noqa: E402
 import trouble as TR  # noqa: E402
+import moments as M  # noqa: E402
+import moments_ui as MU  # noqa: E402
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
+B = sys.modules[__name__]  # handed to moments_ui.py, which reuses this module's helpers
 SITE = "https://easymodekorea.com/"
 GOAT = "https://eddpositive.goatcounter.com/count"
 CSS = open(os.path.join(os.path.dirname(__file__), "style.css"), encoding="utf-8").read()
@@ -152,20 +155,21 @@ let lastFocus = null, SAY = "", KOV = null;
 function koVoice() { try { KOV = speechSynthesis.getVoices().find(v => /^ko([-_]|$)/i.test(v.lang)) || null; } catch (e) { KOV = null; } document.getElementById("show-say").hidden = !KOV; }
 if ("speechSynthesis" in window) { koVoice(); try { speechSynthesis.addEventListener("voiceschanged", koVoice); } catch (e) {} }
 document.getElementById("show-say").addEventListener("click", () => { try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(SAY); u.lang = "ko-KR"; if (KOV) u.voice = KOV; u.rate = 0.9; speechSynthesis.speak(u); count("speak", "play aloud"); } catch (e) {} });
-function show(label, ko, big, mean, ans) {
+function show(label, ko, big, mean, ans, opt) {
   lastFocus = document.activeElement;
   document.getElementById("show-lbl").textContent = label;
   const k = document.getElementById("show-ko"); k.textContent = ko;
+  if (opt && opt.list) k.replaceChildren(...ko.split("\n").map(l => { const m = /^([^:]{1,16}): (.+)$/.exec(l); return m ? el("div", { class: "show-kv" }, [el("span", { text: m[1] }), el("b", { text: m[2] })]) : el("div", { text: l, class: opt.hot && l === opt.hot ? "hot" : "" }); }));
   if (big) k.append(el("small", { text: big }));
-  SAY = ko + (big ? ". " + big : "");
+  SAY = (opt && opt.say) || ko + (big ? ". " + big : ""); k.classList.toggle("list", !!(opt && opt.list)); document.getElementById("show").classList.toggle("lists", !!(opt && opt.list));   /* list: several lines, smaller; say: how to read them aloud */
   const box = document.getElementById("show-ans"), btns = document.getElementById("ans-btns"), out = document.getElementById("ans-out");
   btns.replaceChildren(); out.hidden = true; box.hidden = !(ans && ans.length); k.classList.toggle("asking", !box.hidden);
   (ans || []).forEach(a => { const b = el("button", { type: "button", class: "ans", lang: "ko", "aria-pressed": "false", text: a[0] });
     b.addEventListener("click", () => { btns.querySelectorAll(".ans").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
-      out.replaceChildren(el("small", { text: box.dataset.got }), el("b", { text: a[1] })); out.hidden = false; count("ask-answer", label); });
+      out.replaceChildren(el("small", { text: box.dataset.got }), el("b", { text: a[1] })); out.hidden = false; out.scrollIntoView({ block: "nearest" }); count("ask-answer", label); });
     btns.append(b); });
   document.getElementById("show-mean").textContent = mean || "";
-  document.getElementById("show").hidden = false; document.getElementById("show-close").focus();
+  document.getElementById("show").hidden = false; document.getElementById("show-close").focus({ preventScroll: true }); document.getElementById("show").scrollTop = 0;
   try { if (navigator.wakeLock) navigator.wakeLock.request("screen").then(l => { wake = l; }).catch(() => {}); } catch (e) {}
   /* The phone's Back button closes the card instead of leaving the page. */
   try { if (!(history.state && history.state.emkCard)) history.pushState({ emkCard: 1 }, ""); } catch (e) {}
@@ -276,9 +280,12 @@ def build_tool(lang):
   <p class="hint" id="nores" hidden>{e(ux['nores'])} <button type="button" class="linkbtn" id="clear">{e(ux['clear'])}</button></p>
   <div class="found" id="found" aria-live="polite"></div>
   <div class="today" id="today">
+    <section class="trip-now" id="trip-now" aria-label="{e(M.TM['h'][lang])}" hidden></section>
     {ready_cta(lang)}
+    {MU.home_row(B, lang)}
     <div class="quick" id="quick" hidden></div>
     {alerts_block(lang)}
+    {MU.days_json(B, lang)}
   </div>
   <nav class="jump" id="jump" aria-label="{e(A.T[lang]['jump_label'])}">{tiles}</nav>
   <a class="all-row" id="all-row" href="#c=all"><span class="ic">{A.IC['guides']}</span><span class="name">{e(HOME_LBL.get(lang, HOME_LBL['en']))}</span><span class="n">{len(tasks)}</span></a>
@@ -298,6 +305,7 @@ const D = {json.dumps(data, ensure_ascii=False)};
 {COMMON_JS}
 {TOOL_JS}
 {ALERTS_JS}
+{MU.DAYS_JS}
 </script>
 {footer(lang)}
 </body>
@@ -370,7 +378,7 @@ function filter() {
   if (q.length >= 2 && IDX) {
     const fq = IDX.faq.filter(x => x[2].toLowerCase().includes(q)).slice(0, 6), cd = IDX.cards.filter(x => (x[0] + " " + x[1]).toLowerCase().includes(q)).slice(0, 6);
     const fl = (IDX.flows || []).filter(x => (x[1] + " " + x[2]).toLowerCase().includes(q));
-    if (fl.length) { found.append(el("ul", { class: "glist" }, fl.map(x => el("li", {}, el("a", { href: x[0] + ".html", text: x[1] }))))); }
+    if (fl.length) { found.append(el("ul", { class: "glist" }, fl.map(x => el("li", {}, el("a", { href: x[0].includes(".html") ? x[0] : x[0] + ".html", text: x[1] }))))); }
     if (fq.length) { found.append(el("h2", { text: D.found[0] }), el("ul", { class: "glist" }, fq.map(x => el("li", {}, el("a", { href: x[0] + ".html#fq-" + x[1], text: x[2] }))))); }
     if (cd.length) { found.append(el("h2", { text: D.found[1] }), el("ul", { class: "glist" }, cd.map(x => { const b = el("button", { type: "button", class: "card-hit" }, [el("b", { lang: "ko", text: x[0] }), el("span", { text: x[1] })]); b.addEventListener("click", () => show(S.show, x[0], "", XS.means + ": " + x[1], x[2])); return el("li", {}, b); }))); }
     deep = fq.length + cd.length + fl.length;
@@ -1232,15 +1240,16 @@ CARDS_JS = r"""
     document.querySelectorAll("#cards .sayrow, #cards .names li").forEach(c => { const ok = !v || (c.dataset.kw || c.textContent.toLowerCase()).includes(v); c.hidden = !ok; if (ok) n++; });
     document.querySelectorAll("#cards .cgroup").forEach(g => { g.hidden = !g.querySelector(".sayrow:not([hidden]), .names li:not([hidden])"); });
     /* While searching, every group with a match opens at once (the one-open rule is lifted); clearing closes them again. */
-    folds.forEach(f => { if (f.id === "f-yours" && !box.children.length) return;
+    folds.forEach(f => {
       const hit = !!f.querySelector(".sayrow:not([hidden]), .names li:not([hidden])");
       if (v) { f.removeAttribute("name"); f.open = hit; f.hidden = !hit; } else { f.open = false; f.hidden = false; f.setAttribute("name", "cards"); } });
     document.getElementById("f-own").hidden = !!v;
     nores.hidden = !v || n > 0; };
   q.addEventListener("input", run);
-  const cfg = document.getElementById("own").dataset, inp = document.getElementById("own-in"), box = document.getElementById("own-list"), wrap = document.getElementById("f-yours");
+  const cfg = document.getElementById("own").dataset, inp = document.getElementById("own-in"), box = document.getElementById("own-list");
   const load = () => { try { const a = JSON.parse(store("emk-cards") || "[]"); return Array.isArray(a) ? a.filter(s => typeof s === "string").slice(0, 30) : []; } catch (e) { return []; } };
-  const paint = () => { const a = load(); box.replaceChildren(); wrap.hidden = !a.length; document.getElementById("fs-yours").replaceChildren(el("span", { "aria-hidden": "true", text: String(a.length) }), el("span", { class: "sr", text: cfg.count.replace("{n}", a.length) }));
+  const paint = () => { const a = load(); let k = a.length; box.replaceChildren(); document.querySelectorAll(".mc-st").forEach(s => { if (store(s.dataset.k)) { s.textContent = "✓ " + s.dataset.on; k++; } });
+    document.getElementById("fs-own").replaceChildren(...(k ? [el("span", { "aria-hidden": "true", text: String(k) }), el("span", { class: "sr", text: cfg.count.replace("{n}", k) })] : []));
     a.forEach((txt, i) => { const b = el("button", { type: "button", class: "chip", "aria-label": cfg.show + ": " + txt }, [el("span", { lang: "ko", text: txt }), el("small", { text: cfg.show }), el("i", { "aria-hidden": "true", text: "🗣" })]);
       b.addEventListener("click", () => show(cfg.lbl, txt, "", ""));
       const x = el("button", { type: "button", class: "linkbtn rm", text: cfg.remove }); x.addEventListener("click", () => { const n = load(); n.splice(i, 1); store("emk-cards", JSON.stringify(n)); paint(); });
@@ -1266,7 +1275,7 @@ def build_cards(lang):
     n_of = lambda n: f'<span aria-hidden="true">{n}</span><span class="sr">{e(t["f_cards"].replace("{n}", str(n)))}</span>'
     pk = t["pharm_h"] + " " + t["near"]["pharmacy"]
     # 29차: every group folds to one row with its card count, one open at a time, so the whole tab fits one screen.
-    folds = [fold("yours", "save", t["own_list_h"], '<div class="names"><ul id="own-list"></ul></div>', "cards", attrs=" hidden"),
+    folds = [fold("own", "idcard", t["own_list_h"], MU.card_links(B, lang) + '<div class="names"><ul id="own-list"></ul></div>' + own, "cards", raw=True),
              fold("ask", "translate", t["ask_h"], "".join(ask_row(lang, q[0], q[1][lang], ans) for q, ans in A.ASK_CARDS), "cards", n_of(len(A.ASK_CARDS)), raw=True),
              fold("pharm", "pill", t["pharm_h"], "".join(ask_row(lang, q[0], q[1][lang], ans).replace('data-kw="', f'data-kw="{e(pk.lower())} ', 1) for q, ans in A.PHARM_ASK)
                   + "".join(say_row(lang, ko, m[lang], pk) for ko, m in A.PHARM_CARDS), "cards", n_of(len(A.PHARM_ASK) + len(A.PHARM_CARDS)), raw=True),
@@ -1284,8 +1293,6 @@ def build_cards(lang):
         n_g += len(tk["phrases"]) + len(names)
         groups.append(f'<section class="cgroup"><h3>{tk["icon"]}<a href="{tk["slug"]}.html">{e(tk["short"])}</a></h3>{says}' + (f'<div class="names"><ul>{chips}</ul></div>' if chips else "") + "</section>")
     folds.append(fold("guides", "maps", t["guide_cards_h"], "".join(groups), "cards", n_of(n_g), raw=True))
-    # Ready-made cards first: a traveler rarely types Korean, so making one's own card comes last (27차).
-    folds.append(fold("own", "cards", t["own_h"], own, "cards"))
     inner = f"""<label class="search"><span class="sr">{e(t['cards_filter'])}</span><input id="cq" type="search" placeholder="{e(t['cards_filter'])}" autocomplete="off"></label>
 <p class="hint" id="cnores" hidden>{e(ux['nores'])}</p>
 <div class="folds" id="cards">{''.join(folds)}</div>"""
@@ -1340,6 +1347,7 @@ def build_trip(lang):
     link = lambda href, key, text: f'<li><a href="{href}"><span class="ic">{A.IC[key]}</span><span>{e(text)}</span></a></li>'
     inner = f"""<div id="trip" data-remove="{e(t['remove'])}" data-offline="{e(t['trip_offline'])}" data-ask="{e(t['trip_clear_q'])}" data-cleared="{e(t['trip_cleared'])}">
 <div id="import" hidden><p id="import-q"></p><div class="actions"><button class="btn" type="button" id="import-yes">{e(t['places_add'])}</button><button class="linkbtn" type="button" id="import-no">{e(t['later'])}</button></div></div>
+{MU.days_block(B, lang)}
 {ready_cta(lang)}
 <section class="sec" aria-labelledby="sv-h"><h2 id="sv-h">{e(t['trip_saved_h'])}</h2><ul class="glist" id="saved-list"></ul><p class="hint" id="saved-empty">{e(t['trip_saved_empty'])}</p></section>
 <section class="sec" id="recent" hidden aria-labelledby="rc-h"><h2 id="rc-h">{e(t['trip_recent_h'])}</h2><ul class="glist" id="recent-list"></ul></section>
@@ -1363,7 +1371,7 @@ def build_trip(lang):
 <p class="hint"><a href="privacy.html">{e(t['privacy_title'])}</a> · <a href="about.html">{e(P['about'])}</a> · <a href="changes.html">{e(P['changes'])}</a></p></section>''')}
 </div>
 </div><script type="application/json" id="trip-data">{json.dumps(G, ensure_ascii=False).replace("</", "<\\/")}</script><script src="{'../' if LANGS[lang]['dir'] else ''}qr.js"></script>"""
-    return app_page(lang, "saved", (t["trip_title"], t["trip_lede"]), t["trip_title"], t["trip_lede"], inner, "trip", TRIP_JS + PLACES_JS + SHARE_JS + ALERTS_JS + ARRIVAL_JS + FOLD_JS, index=False)
+    return app_page(lang, "saved", (t["trip_title"], t["trip_lede"]), t["trip_title"], t["trip_lede"], inner, "trip", TRIP_JS + PLACES_JS + SHARE_JS + ALERTS_JS + ARRIVAL_JS + FOLD_JS + MU.DAYS_JS, index=False)
 
 
 def fold(fid, ic, title, inner, group="trip-tools", state="", attrs="", raw=False):
@@ -1461,7 +1469,8 @@ def build_help(lang):
     nums = call_rows(lang)
     says = "".join(say_row(lang, ko, m[lang]) for ko, m in HELP_PHRASES[:4]) + "".join(say_row(lang, ko, m[lang]) for ko, m in PHRASES["health"])
     more = "".join(f'<li><a href="{slug_of[i]}.html"><span class="ic">{icon(i)}</span><span>{e(QUESTION[lang][i])}</span></a></li>' for i in ("health", "translate"))
-    inner = f"""{flow_tiles(lang)}
+    inner = f"""{MU.help_rows(B, lang)}
+{flow_tiles(lang)}
 <section class="sec" aria-labelledby="cl-h"><h2 id="cl-h">{e(h['calls'])}</h2><div class="calls">{nums}</div></section>
 {near_block(lang)}
 <section class="sec says" aria-labelledby="sh-h"><h2 id="sh-h">{e(h['phrases'])}</h2>{says}</section>
@@ -1491,6 +1500,8 @@ def search_index(lang):
             if ko not in seen: seen.add(ko); cards.append([ko, tx(m, lang)])
     cards += [[ko, m[lang]] for f in TR.FLOWS if f["cards"] != "PAY" for ko, m in f["cards"] if ko not in seen and not seen.add(ko)]
     flows = [[f["slug"], f["title"][lang], f["lede"][lang]] for f in TR.FLOWS]
+    flows += [["sos", M.SOS["row"][lang], M.SOS["desc"][lang]], ["refused", M.RF["row"][lang], M.RF["desc"][lang]], ["my-card", M.CARD["row"][lang], M.CARD["desc"][lang]]]
+    flows += [[f"refused.html#{p[0]}/{a[0]}", f"{p[2][lang]}: {a[1][lang]}", a[2][lang]] for p in M.REFUSED for a in p[3]]
     return json.dumps({"faq": faq, "cards": cards, "flows": flows}, ensure_ascii=False, separators=(",", ":"))
 
 
@@ -1654,9 +1665,9 @@ def png_size(rel):
 
 
 # Phone screenshots shown in the install dialog (and reused for the store listing).
-SHOTS = [("shots/home.png", "Pick what you need right now"), ("shots/ready.png", "See what works with your phone before you fly"), ("shots/guide.png", "A short answer with the date it was checked"),
-         ("shots/show.png", "Show a driver where to go, in big Korean"), ("shots/cards.png", "Korean cards to show a driver or staff"),
-         ("shots/help.png", "Emergency numbers, one tap away")]
+SHOTS = [("shots/home.png", "SOS, refused, food card and every guide"), ("shots/sos.png", "SOS: your location code without data"), ("shots/food.png", "A food card staff can answer with a tap"), ("shots/refused.png", "Refused? Three taps to the next step"),
+         ("shots/trip.png", "Each day, only what matters"), ("shots/ready.png", "See what works with your phone before you fly"), ("shots/guide.png", "A short answer with the date it was checked"),
+         ("shots/show.png", "Show a driver where to go, in big Korean")]
 LINKS_FILE = os.path.join(ROOT, "android", "fingerprints.json")
 
 
@@ -1669,7 +1680,7 @@ def main():
         paths.append(build_info(lang, "contact"))
         for t in task_list(lang):
             paths.append(build_topic(lang, t))
-        paths += [build_cards(lang), build_help(lang), build_privacy(lang), build_ready(lang)] + [build_flow(lang, f) for f in TR.FLOWS]
+        paths += [build_cards(lang), build_help(lang), build_privacy(lang), build_ready(lang), MU.build_sos(B, lang), MU.build_refused(B, lang), MU.build_mycard(B, lang)] + [build_flow(lang, f) for f in TR.FLOWS]
         local.append(build_trip(lang))  # personal page: offline copy, but not in the sitemap
         write(LANGS[lang]["dir"] + "search.json", search_index(lang)); local.append(LANGS[lang]["dir"] + "search.json")
     paths.append("hosts.html")

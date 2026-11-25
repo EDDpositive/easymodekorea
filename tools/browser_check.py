@@ -45,7 +45,7 @@ SWEEP = """(async () => {
 TAPS = """(() => {
   const vis = e => { const r = e.getBoundingClientRect(); return r.width > 0 && r.height > 0 && !e.closest('[hidden]') && !e.closest('details:not([open]) > :not(summary)'); };
   return [...document.querySelectorAll('.tabbar a, .jump a, .sit-links a, .glist a, .sayrow button, a.call, .act, .icon-btn, .lang-menu > summary, .btn, .chip, .opt-big, .ready-cta, .rd-app > summary, .steps summary, .flow-steps summary, '
-      + '.all-row, .fold > summary, .near-a, .ans, .stamp a, .stamp .linkbtn, .trust-line a, #setup-now .linkbtn, #show-all, .setbar .btn, .foot nav a')]
+      + '.mo, .mo-row, .sos-call, .sos-find, .sos-more summary, .tg, .seg a, .rf-g a, .rf-crumb, .dy-t, .dy-bell, .dg > summary, .mc-more summary, .all-row, .fold > summary, .near-a, .ans, .stamp a, .stamp .linkbtn, .trust-line a, #setup-now .linkbtn, #show-all, .setbar .btn, .foot nav a')]
     .filter(vis).map(e => ({t: (e.innerText || e.getAttribute('aria-label') || e.className).trim().slice(0, 24), h: Math.round(e.getBoundingClientRect().height)})).filter(x => x.h < 44);
 })()"""
 
@@ -87,7 +87,8 @@ def main():
         b.js("localStorage.setItem('emk-install-no', String(Date.now()))")
 
         small = []
-        for page in ("", "taxi.html", "phrases.html", "saved.html", "help.html", "foreign-card-declined-korea.html", "ja/", "vi/phrases.html"):
+        for page in ("", "taxi.html", "phrases.html", "saved.html", "help.html", "foreign-card-declined-korea.html", "ja/", "vi/phrases.html",
+                     "sos.html", "refused.html", "refused.html#taxi", "refused.html#eat/card", "my-card.html", "vi/my-card.html", "vi/sos.html"):
             b.go(srv.url + page, wait=0.5)
             small += [f"/{page} {x['t']} {x['h']}px" for x in b.js(TAPS)]
         check(not small, "buttons and links are at least 44px tall on the main screens", "; ".join(small[:5]))
@@ -131,6 +132,82 @@ def main():
         b.go(srv.url + "help.html", wait=0.5)
         hl = b.js("!!document.querySelector('.near a[href=\"phrases.html#f-pharm\"]')")
         check(ph == "true,1" and hl, "Help links to the pharmacist cards, and the link opens that group", f"{ph} / {hl}")
+
+        # 30차. SOS: the location is read only on a tap, turned into the rescue grid code on the phone, and put into the Korean text.
+        org = srv.url.rstrip("/")
+        b.cmd("Browser.grantPermissions", origin=org, permissions=["geolocation"])
+        b.cmd("Emulation.setGeolocationOverride", latitude=35.33697, longitude=127.73053, accuracy=8)
+        b.go(srv.url + "sos.html", wait=0.6)
+        b.js("window.__geo = 0; const w0 = navigator.geolocation.watchPosition.bind(navigator.geolocation); navigator.geolocation.watchPosition = (...a) => { window.__geo++; return w0(...a); }")
+        grid = b.js("[[37.57097, 126.97694], [35.33697, 127.73053], [35.1152, 129.0414], [37.23917, 131.86972], [33.59, 130.4], [34.2, 129.3], [40, 127], [35.68, 139.76]].map(p => emkGrid(...p) || '-').join('|')")
+        idle = b.js("window.__geo + '|' + document.getElementById('sos-out').hidden")
+        b.js("document.querySelector('#sos-what .tg[data-id=lost]').click(); document.getElementById('sos-find').click()"); time.sleep(1.2)
+        sos = b.js("""(() => { const t = decodeURIComponent(document.getElementById('sos-text').href); document.getElementById('sos-show').click();
+          const k = document.getElementById('show-ko').innerText.replace(/\u00a0/g, ' '); return [window.__geo, document.getElementById('sos-code').textContent.replace(/\u00a0/g, ' '), t.startsWith('sms:119'), t.includes('국가지점번호 라마 2094 0462 (35.33697, 127.73053, 오차 약 8m)') && t.includes('길을 잃었어요') && t.includes('영어로 답해'),
+          k.includes('라마 2094 0462입니다') && k.includes('영어 통역'), SAY.includes('라마, 이공구사, 공사육이'), document.getElementById('sos-rom').textContent.includes('ra-ma, i-gong-gu-sa, gong-sa-yuk-i')].join('|'); })()""")
+        b.js("history.back()"); time.sleep(0.3)
+        police = b.js("(() => { document.querySelector('#sos-what .tg[data-id=theft]').click(); return document.getElementById('sos-text').href.startsWith('sms:112') && document.querySelector('.sos-call.pol').classList.contains('on'); })()")
+        b.cmd("Emulation.setGeolocationOverride", latitude=37.57097, longitude=126.97694, accuracy=900)
+        b.js("document.getElementById('sos-again').click()"); time.sleep(1.0)
+        rough = b.js("!document.getElementById('sos-rough').hidden && document.getElementById('sos-rom').textContent.includes('900미터')")
+        b.cmd("Emulation.setGeolocationOverride", latitude=35.68, longitude=139.76, accuracy=10)
+        b.go(srv.url + "ja/sos.html", wait=0.6); b.js("document.getElementById('sos-find').click()"); time.sleep(1.0)
+        out = b.js("document.getElementById('sos-out').hidden && !document.getElementById('sos-msg').hidden && document.getElementById('sos-msg').textContent.includes('韓国の外')")
+        check(grid == "다사 5381 5252|라마 2094 0462|마라 4046 8109|사사 8768 2454|-|-|-|-" and idle == "0|true", "SOS works out the rescue grid code for known points, none outside Korea, and reads no location before a tap", grid + " " + idle)
+        check(sos == "1|라마 2094 0462|true|true|true|true|true" and police and rough and out, "SOS puts the code, the situation and the language into the Korean text, the full-screen card and the reading; a wide fix says so; outside Korea it says so", f"{sos} {police} {rough} {out}")
+        b.cmd("Browser.resetPermissions")
+
+        # Food card: taps make one Korean card; staff answers come back in the reader's language; nothing leaves the phone.
+        b.js("localStorage.removeItem('emk-food')")
+        b.go(srv.url + "my-card.html", wait=0.5)
+        empty = b.js("document.getElementById('mc-food').disabled")
+        fc = b.js("""(() => { ['peanut', 'fish', 'vegan', 'a_alc'].forEach(i => document.querySelector('[data-id=' + i + ']').click()); document.getElementById('mc-sev').click(); document.getElementById('mc-food').click();
+          const k = document.getElementById('show-ko').innerText; const a = [...document.querySelectorAll('#ans-btns .ans')]; a[1].click();
+          return [k.includes('땅콩, 생선') && k.includes('조금만 들어가도 위험해요') && k.includes('비건') && k.includes('술') && k.includes('육수'), a.length, document.getElementById('ans-out').textContent.includes("It's in it"),
+            document.getElementById('mc-words').textContent.includes('땅콩'), document.getElementById('mc-off').textContent.includes('Fish') && document.getElementById('mc-off').textContent.includes('mackerel'), localStorage.getItem('emk-food')].join('|'); })()""")
+        b.js("history.back()"); time.sleep(0.3)
+        b.go(srv.url + "ja/my-card.html", wait=0.5)
+        mc = b.js("""(() => { document.getElementById('mc-food').click(); const k = document.getElementById('show-ko').innerText;
+          return [k.includes('땅콩, 생선'), document.getElementById('show-mean').textContent.includes('ピーナッツ'), document.querySelectorAll('#ans-btns .ans').length].join('|'); })()""")
+        b.js("history.back()"); time.sleep(0.3)
+        b.go(srv.url + "phrases.html", wait=0.5)
+        st = b.js("[...document.querySelectorAll('.mc-st')].map(s => s.textContent).join() + '|' + document.querySelector('#fs-own [aria-hidden]').textContent")
+        b.js("localStorage.removeItem('emk-food')")
+        check(empty and fc == 'true|5|true|true|true|{"a":["peanut","fish"],"n":["vegan","a_alc"],"s":1}' and mc == "true|true|5" and st == "✓ Saved|1",
+              "taps make a Korean food card with staff answers and label words; it opens ready in another language and the cards tab shows it as saved", f"{empty} {fc} / {mc} / {st}")
+
+        # Refused? place, problem, one answer with Korean cards, the reader's own status and a date; Back walks the steps.
+        b.js("localStorage.setItem('wik-setup', 'arc|android')")
+        b.go(srv.url + "refused.html", wait=0.5)
+        rf0 = b.js("document.querySelectorAll('.rf-g a').length + '|' + [...document.querySelectorAll('.rf-g a')].every(a => a.getBoundingClientRect().bottom < innerHeight - 60)")
+        b.js("document.querySelector('.rf-g a[href=\"#app\"]').click()"); time.sleep(0.3)
+        rf1 = b.js("[...document.querySelectorAll('.rf-step')].filter(s => !s.hidden).map(s => s.querySelectorAll('.rf-list a').length).join()")
+        b.js("document.querySelector('.rf-step:not([hidden]) .rf-list a[href=\"#app/id\"]').click()"); time.sleep(0.3)
+        rf2 = b.js("""(() => { const a = [...document.querySelectorAll('.rf-ans')].filter(s => !s.hidden); return [a.length, a[0].dataset.a, a[0].querySelectorAll('.sayrow').length, a[0].querySelector('.pill').className, a[0].querySelector('.rf-who').textContent, !!a[0].querySelector('time.ck[datetime]')].join('|'); })()""")
+        b.js("history.back()"); time.sleep(0.3); b.js("history.back()"); time.sleep(0.3)
+        rf3 = b.js("!document.getElementById('rf-1').hidden")
+        bad = b.js("""(() => { const D = JSON.parse(document.getElementById('rf-data').textContent), out = []; for (const p in D.q) for (const a of D.q[p]) { const s = document.querySelector('.rf-ans[data-a="' + p + '/' + a + '"]');
+          if (!s || !s.querySelector('.rf-now p:last-child').textContent || !s.querySelector('.rf-fail p:last-child').textContent || !(s.querySelector('.sayrow') || s.querySelector('#myaddr')) || !(s.querySelector('time.ck') || s.querySelector('.hint'))) out.push(p + '/' + a); } return out.join(); })()""")
+        b.js("localStorage.removeItem('wik-setup')")
+        check(rf0 == "8|true" and rf1 == "4" and rf2 == "1|app/id|1|pill ok|Resident (ARC) · Android|true" and rf3 and not bad, "Refused? gives one dated answer with Korean to show in two taps, for the reader's setup, and Back walks the steps", f"{rf0} {rf1} {rf2} {rf3} {bad}")
+
+        # Trip mode: home shows only what is due; My trip opens the current stage; a reminder is a valid calendar file made on the phone.
+        trip = lambda a, z: f"(() => {{ const p = n => {{ const t = new Date(Date.now() + n * 864e5); return t.getFullYear() + '-' + String(t.getMonth() + 1).padStart(2, '0') + '-' + String(t.getDate()).padStart(2, '0'); }}; localStorage.setItem('emk-trip', JSON.stringify({{from: p({a}), to: p({z})}})); }})()"
+        see = "[(document.querySelector('#trip-now .tn-h b') || {}).textContent, document.querySelectorAll('#trip-now .tn li').length, document.querySelector('#today .ready-cta').hidden, document.getElementById('trip-now').hidden].join('|')"
+        got = []
+        for a, z in ((3, 10), (0, 7), (-3, 4), (-6, 1), (-7, 0), (-12, -5)):
+            b.js(trip(a, z)); b.go(srv.url, wait=0.4); got.append(b.js(see))
+        check(got[0] == "3 days to go|2|false|false" and got[1] == "Day 1 of 8|2|true|false" and got[2] == "Day 4 of 8|1|true|false" and got[3] == "Day 7 of 8|2|true|false" and got[4] == "You leave today|2|true|false" and got[5].endswith("|false|true"),
+              "trip mode: home shows the countdown, the day, and only what is due; after the trip it steps aside", " / ".join(map(str, got)))
+        b.js(trip(-6, 1)); b.go(srv.url + "saved.html", wait=0.5)
+        dg = b.js("""(() => { const o = [...document.querySelectorAll('.dg[open]')], li = o[0].querySelector('li'); li.querySelector('.dy-t').click();
+          const f = emkIcs('x', 'a, b; c', Date.UTC(2027, 0, 5), '19'), BS = String.fromCharCode(92), NL = String.fromCharCode(13, 10); return [o.length, document.querySelector('.dg') === o[0], li.className, localStorage.getItem('emk-days'),
+            f.startsWith('BEGIN:VCALENDAR' + NL + 'VERSION:2.0') && f.includes('DTSTART:20270105T190000') && f.includes('SUMMARY:a' + BS + ', b' + BS + '; c') && f.includes('BEGIN:VALARM') && f.endsWith('END:VCALENDAR' + NL) && f.split(NL).every(l => new TextEncoder().encode(l).length <= 75)].join('|'); })()""")
+        b.js("['emk-trip', 'emk-days'].forEach(k => localStorage.removeItem(k)); localStorage.setItem('wik-setup', 'arc|android'); localStorage.setItem('emk-moved', '2030-03-01')")
+        b.go(srv.url + "saved.html", wait=0.5)
+        arc = b.js("[document.querySelectorAll('.dg').length, (document.querySelector('.dy-by') || {}).textContent].join('|')")
+        b.js("['wik-setup', 'emk-moved'].forEach(k => localStorage.removeItem(k))")
+        check(dg == '1|true|off|["eve_bag"]|true' and arc == "1|Report by Mar 15 · F-4: Mar 14", "My trip opens the current stage, remembers ticks, and makes a valid calendar reminder; residents get the address-report date", f"{dg} / {arc}")
 
         # Find nearby: six Korean search words that open Naver Map.
         b.go(srv.url + "help.html", wait=0.5)
@@ -263,7 +340,7 @@ def main():
             time.sleep(0.2)
         time.sleep(1.0)
         srv.stop()  # from here on there is no server: only the copy on the "phone" can answer
-        for page in ("", "taxi.html", "phrases.html", "saved.html", "help.html", "privacy.html", "lost-phone-wallet-passport.html", "foreign-card-declined-korea.html", "ready.html"):
+        for page in ("", "taxi.html", "phrases.html", "saved.html", "help.html", "privacy.html", "lost-phone-wallet-passport.html", "foreign-card-declined-korea.html", "ready.html", "sos.html", "refused.html", "my-card.html"):
             ok = b.go(srv.url + page, wait=0.6) and b.js("document.querySelectorAll('.tabbar a').length === 4 && document.title.includes('EasyModeKorea')")
             why = b.last_error or (b.js("location.href + ' | ' + document.title + ' | tabs ' + document.querySelectorAll('.tabbar a').length") if not ok else "")
             check(bool(ok), f"offline: /{page} opens", why)

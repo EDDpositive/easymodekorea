@@ -7,24 +7,26 @@ Play limit: 500 characters per language. Paste the whole block below into the re
 ```
 <en-US>
 First test version.
-• Korea Ready check: a few taps, then a plan for your phone, card and trip
-• Guides show what works with your phone setup
-• Korean cards to show drivers and staff, full screen
-• Ask cards: staff tap the answer, you read it in your language
-• At the pharmacy: symptom cards, and the pharmacist taps how to take it
-• Find a pharmacy, ER or restroom nearby in Naver Map
+• SOS: your location code without data, with Korean to show or text
+• My food card: staff tap the answer, you read it in your language
+• Refused? 3 taps to the next step
+• Trip days: today's steps, calendar reminders
+• Korea Ready check and dated guides for your phone
+• Korean cards to show, full screen
 • Works offline once opened
+Please do not call or text 119 or 112 to test.
 Something wrong? Tap 'Send feedback' on any guide.
 </en-US>
 <ko-KR>
 첫 테스트 버전입니다.
-• Korea Ready 점검: 몇 번 탭하면 내 폰·카드·일정에 맞춘 계획
-• 가이드마다 내 폰 설정으로 되는지 표시
-• 기사님·직원에게 보여 줄 한국어 카드(전체 화면)
-• 답 고르기 카드: 직원이 답을 누르면 내 언어로 보임
-• 약국: 증상 카드, 복용법은 약사가 화면에서 고름
-• 근처 약국·응급실·화장실을 네이버 지도로 바로 찾기
+• SOS: 인터넷 없이 내 위치번호, 보여 주거나 문자로 보낼 한국어
+• 내 음식 카드: 직원이 답을 누르면 내 언어로 보임
+• 거절당했을 때 3번 눌러 다음 할 일
+• 여행 날짜별 오늘 할 일, 달력 알람
+• Korea Ready 점검과 날짜 있는 가이드
+• 보여 줄 한국어 카드(전체 화면)
 • 한 번 열면 오프라인에서도 작동
+시험할 때 119·112에 실제로 전화하거나 문자를 보내지 마세요.
 이상한 점은 가이드 아래 'Send feedback'으로 알려 주세요.
 </ko-KR>
 ```
