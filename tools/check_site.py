@@ -14,6 +14,7 @@ LANG_DIRS = ["", "ja/", "zh-tw/", "zh-cn/", "vi/"]
 FAILS = []
 rd = lambda rel: open(os.path.join(ROOT, rel), encoding="utf-8").read()
 has = lambda rel: os.path.exists(os.path.join(ROOT, rel))
+sm_text = lambda: rd("sitemap.xml")
 
 
 def check(ok, label, detail=""):
@@ -91,6 +92,22 @@ def main():
         if not all(x in rd(d + "index.html") for x in ('href="sos.html"', 'href="refused.html"', 'href="my-card.html"', 'id="trip-now"')): bad.append(d + "index.html row")
         if 'href="sos.html"' not in rd(d + "help.html") or 'id="days"' not in rd(d + "saved.html"): bad.append(d + "help/trip")
     check(not gaps and not send and not bad, "SOS, Refused, food card, trip mode: five languages, dated and sourced, offline, and their scripts send nothing", "; ".join(gaps[:3] + send + bad[:3]))
+
+    # 32차: the Korean page about Japan's tax refund. It stays apart from the app, shows only dated official procedure and names no refund company.
+    import jp_refund as JP
+    probs = []; page = rd(JP.PATH); worker = rd("ko/sw.js")
+    if f"easymodekorea.com/{JP.PATH}</loc>" not in sm_text(): probs.append("not in the sitemap")
+    if JP.PATH in sw or "x.startsWith('emk-')" not in sw or "x.startsWith('jpr-')" not in worker: probs.append("offline copies of the two workers can delete each other")
+    if any(f'href="{u}{JP.PATH}"' in rd(d + "index.html") for d in LANG_DIRS for u in ("", "/", "../")): probs.append("linked from a menu before the test says so")
+    if any(not u.startswith("https://") or not re.search(r"\.(go\.jp|go\.kr)/", u) for _n, u in JP.SRC.values()): probs.append("a source is not an official page")
+    if page.count(f'datetime="{JP.CHK}"') < len(JP.FAQ) or not re.fullmatch(r"\d{4}-\d\d-\d\d", JP.CHK): probs.append("facts without a check date")
+    ids = [p[0] for p in JP.AIR_TOP + JP.AIR + JP.SEA]
+    if len(set(ids)) != len(ids) or len(JP.AIR_TOP + JP.AIR) != 41: probs.append("airport list")
+    # The owner works in payments: no refund company, wallet or card may be named, compared or linked here.
+    named = [w for w in ("Global Blue", "글로벌블루", "PIE", "J&J", "Planet", "알리페이", "Alipay", "위챗", "WeChat", "카카오페이", "네이버페이", "토스", "트래블로그", "트래블월렛", "비자카드", "마스터카드", "추천인", "제휴 링크", "amzn", "utm_") if w in page]
+    if named: probs.append("names a payment company: " + ", ".join(named))
+    if any(w in JP.JS for w in ("fetch(", "XMLHttpRequest", "sendBeacon", "WebSocket", "new Image")): probs.append("its script can send data")
+    check(not probs, "Japan tax refund page: in the sitemap only, official dated sources, no payment company named, sends nothing", "; ".join(probs[:4]))
 
     # Search index per language.
     idx_ok = all(len(json.loads(rd(d + "search.json"))["faq"]) > 20 and len(json.loads(rd(d + "search.json"))["cards"]) > 20 for d in LANG_DIRS)
