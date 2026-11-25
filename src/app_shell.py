@@ -595,7 +595,7 @@ self.addEventListener('install',e=>{e.waitUntil(pack()
 /* My trip asks how complete the pack is ('status') or to fetch what is missing ('pack'). */
 self.addEventListener('message',e=>{const t=e.data&&e.data.t;if(t!=='status'&&t!=='pack')return;
   e.waitUntil((t==='pack'?pack():count()).then(n=>e.source&&e.source.postMessage({t:'pack',n,m:MINE.length})))});
-self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
+self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C&&x.startsWith('emk-')).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
 /* Only what the reader sees counts as newer info: a new stylesheet or script name in the head does not. */
 const body=t=>t.slice(Math.max(0,t.indexOf('<body')));
 const tell=p=>new Promise(r=>setTimeout(r,1500)).then(()=>self.clients.matchAll({type:'window'})).then(cs=>cs.forEach(cl=>{if(new URL(cl.url).pathname===p)cl.postMessage({t:'upd',p})}));
