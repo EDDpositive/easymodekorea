@@ -1,5 +1,5 @@
 /* Offline copy of one page, japan-tax-refund.html. Newest first: the rules are new, so a phone with data always gets the fresh page. */
-const C='jpr-febcd1c1',F='japan-tax-refund.html';
+const C='jpr-03127fea',F='japan-tax-refund.html';
 const key=()=>new URL(F,self.registration.scope).href;
 self.addEventListener('install',e=>e.waitUntil(caches.open(C).then(c=>c.add(new Request(key(),{cache:'reload'}))).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x.startsWith('jpr-')&&x!==C).map(x=>caches.delete(x)))).then(()=>self.clients.claim())));

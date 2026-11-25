@@ -85,7 +85,7 @@ CSS = r"""
 @media (prefers-color-scheme:dark){:root{--bg:#0b0f1e;--sf:#141a2e;--ink:#eef1fb;--mut:#b3bbd2;--ln:#2d3657;--br:#4a59ee;--lk:#9aa4ff;--ok:#5ad48c;--okb:#11301f;--wn:#f2b453;--wnb:#352610;--no:#ff8a80;--nob:#3a1616;--sel:#222b52;color-scheme:dark}}
 *{box-sizing:border-box}[hidden]{display:none!important}
 [lang=ja]{word-break:normal;word-break:auto-phrase;line-break:strict}
-html{scroll-padding-top:56px;-webkit-text-size-adjust:100%}
+html{scroll-padding-top:76px;-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.55 system-ui,-apple-system,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;word-break:keep-all;overflow-wrap:anywhere;padding-bottom:calc(96px + env(safe-area-inset-bottom))}
 a{color:var(--lk)}:focus-visible{outline:3px solid var(--ey);outline-offset:2px;border-radius:8px}
 .w{max-width:680px;margin:0 auto;padding:0 16px}
@@ -114,7 +114,8 @@ fieldset{border:0;margin:0 0 14px;padding:0;min-width:0}legend{padding:0}
 .tg{display:flex;align-items:center;gap:10px;min-height:48px;cursor:pointer}.tg input{width:22px;height:22px;margin:0;accent-color:var(--br);flex:none}
 .rh{display:flex;justify-content:space-between;align-items:center;margin:0 0 12px;min-height:44px}.rh h3{margin:0;font-size:18px}
 .x{min-height:44px;padding:0 8px;border:0;background:none;font:inherit;font-size:15px;color:var(--mut);text-decoration:underline;cursor:pointer}
-.res{border-radius:12px;padding:12px 14px;margin-top:14px;background:var(--bg);color:var(--mut)}
+.res{border-radius:12px;padding:12px 14px;margin:0 0 14px;background:var(--bg);color:var(--mut)}
+.rc:has(.res.no) .amt{display:none}
 .res b{display:block;font-size:19px;line-height:1.3}.res p{margin:4px 0 0}
 .res.ok{background:var(--okb);color:var(--ok)}.res.no{background:var(--nob);color:var(--no)}.res.wn{background:var(--wnb);color:var(--wn)}
 .res p{color:var(--ink)}
@@ -380,10 +381,10 @@ def build(B):
 <label><input type="radio" value="used"><span>옷·신발·가전을 써 봤어요<small>전부 가지고는 있어요</small></span></label>
 <label><input type="radio" value="ate"><span>먹거나 바른 것이 있어요<small>음식·화장품·약</small></span></label>
 <label><input type="radio" value="gone"><span>하나라도 지금 없어요<small>버림·선물·택배로 보냄</small></span></label></div></fieldset>
-<p class="leg">금액 <small>세금 포함, 안 넣어도 됩니다</small></p>
+<div class="res" aria-live="polite"></div>
+<div class="amt"><p class="leg">금액 <small>세금 포함, 안 넣어도 됩니다</small></p>
 <div class="two"><label class="f"><span><small>일반·술 10% (엔)</small></span><input type="text" inputmode="numeric" autocomplete="off" data-k="a" placeholder="0"></label><label class="f"><span><small>식품·음료 8% (엔)</small></span><input type="text" inputmode="numeric" autocomplete="off" data-k="b" placeholder="0"></label></div>
-<label class="tg"><input type="checkbox" data-k="g"><span>이 가게 환급 등록을 했어요</span></label>
-<div class="res" aria-live="polite"></div></div></template>
+<label class="tg"><input type="checkbox" data-k="g"><span>이 가게 환급 등록을 했어요</span></label></div></div></template>
 <button class="btn g full" type="button" id="add">+ 영수증 더하기</button>
 <div class="sum" id="sum" hidden style="margin-top:14px"><p class="mut">돌려받을 세금</p><b id="sum-b"></b><p id="sum-p"></p><p class="mut">세율로 계산한 어림값이고 수수료를 빼기 전입니다. 되는지는 일본 세관이 정합니다.</p></div>
 </section>
