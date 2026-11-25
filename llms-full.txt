@@ -767,6 +767,122 @@ Korean to show
 - 여기서 내려 주세요. = Please let me out here.
 - 기사님, 이 주소로 가 주세요. = Please take me to this address.
 
+## Nut allergy card in Korean
+URL: https://easymodekorea.com/nut-allergy-card-korean.html
+Last checked: 2026-11-25
+
+Korean to show: 알레르기가 있어요: 땅콩, 견과류 / 이 음식에 들어가나요? 육수, 양념, 소스도 확인해 주세요.
+Say: 저는 땅콩과 견과류 알레르기가 있어요. (jeoneun ttangkonggwa gyeongwaryu allereugiga isseoyo)
+- 알레르기가 있어요: 땅콩, 견과류 / 조금만 들어가도 위험해요. / 이 음식에 들어가나요? 육수, 양념, 소스도 확인해 주세요. = Same card, with: even a little is dangerous.
+- 알레르기가 있어요: 땅콩 / 이 음식에 들어가나요? 육수, 양념, 소스도 확인해 주세요. = Peanut only
+- 알레르기가 있어요: 견과류 / 이 음식에 들어가나요? 육수, 양념, 소스도 확인해 주세요. = Tree nuts only
+- 고명이나 소스에 땅콩, 잣, 호두가 들어가나요? = Are there peanuts, pine nuts or walnuts in the topping or sauce?
+- 땅콩버터나 땅콩소스를 쓰나요? = Do you use peanut butter or peanut sauce?
+Words to look for on packages: 땅콩 (Peanut), 호두 (Walnut), 잣 (Pine nut)
+Walnut, pine nut and peanut must be on labels. Almond and cashew need not be. Ask.
+Proposed in August 2026, not in force: adding sesame, perilla, almond and cashew.
+Chains with 50 or more shops that mainly sell burgers, pizza, baked goods or ice cream must show allergens. Anywhere else, ask. (checked 2026-11-25; source: Ministry of Food and Drug Safety: 22 allergens on labels (14 Jul 2021) https://www.korea.kr/multi/visualNewsView.do?newsId=148890102)
+
+## Shellfish allergy card in Korean
+URL: https://easymodekorea.com/shellfish-allergy-card-korean.html
+Last checked: 2026-11-25
+
+Korean to show: 알레르기가 있어요: 새우, 게, 조개류 / 이 음식에 들어가나요? 육수, 양념, 소스도 확인해 주세요.
+Say: 저는 갑각류와 조개 알레르기가 있어요. (jeoneun gapgangnyuwa jogae allereugiga isseoyo)
+- 알레르기가 있어요: 새우, 게, 조개류 / 조금만 들어가도 위험해요. / 이 음식에 들어가나요? 육수, 양념, 소스도 확인해 주세요. = Same card, with: even a little is dangerous.
+- 알레르기가 있어요: 새우 / 이 음식에 들어가나요? 육수, 양념, 소스도 확인해 주세요. = Shrimp only
+- 안 먹어요: 해산물 / 이 음식에 들어가나요? 육수, 양념, 소스도 확인해 주세요. = I don't eat seafood.
+- 김치에 새우젓이 들어가나요? = Does the kimchi have salted shrimp in it?
+- 육수에 새우나 조개가 들어가나요? = Is the broth made with shrimp or clams?
+- 새우를 튀긴 기름을 같이 쓰나요? = Do you reuse oil that has fried shrimp?
+Words to look for on packages: 새우 (Shrimp), 게 (Crab), 조개류(굴, 전복, 홍합 포함) (Shellfish), 오징어 (Squid)
+Only mackerel among fish is on the list.
+Kimchi is seasoned with salted seafood: shrimp in the centre and north of Korea, anchovy in the south. Ask each time. (checked 2026-11-25; source: Encyclopedia of Korean Culture: gimjang (kimchi making) https://encykorea.aks.ac.kr/Article/E0010314)
+Chains with 50 or more shops that mainly sell burgers, pizza, baked goods or ice cream must show allergens. Anywhere else, ask. (checked 2026-11-25; source: Ministry of Food and Drug Safety: 22 allergens on labels (14 Jul 2021) https://www.korea.kr/multi/visualNewsView.do?newsId=148890102)
+
+## Gluten free card in Korean
+URL: https://easymodekorea.com/gluten-free-card-korean.html
+Last checked: 2026-11-25
+
+Korean to show: 저는 글루텐을 못 먹어요. 밀, 보리, 호밀이 들어간 음식을 못 먹어요. / 이 음식에 들어가나요? 육수, 양념, 소스도 확인해 주세요.
+Say: 저는 글루텐을 못 먹어요. (jeoneun geulluteneul mon meogeoyo)
+- 알레르기가 있어요: 밀 / 이 음식에 들어가나요? 육수, 양념, 소스도 확인해 주세요. = Wheat allergy only
+- 알레르기가 있어요: 메밀 / 이 음식에 들어가나요? 육수, 양념, 소스도 확인해 주세요. = Buckwheat allergy
+- 양념에 간장이나 고추장이 들어가나요? = Is there soy sauce or gochujang in the seasoning?
+- 튀김옷이나 면에 밀가루가 들어가나요? = Is there wheat flour in the batter or noodles?
+Words to look for on packages: 밀 (Wheat), 메밀 (Buckwheat)
+Wheat is on Korea's allergen label list. Barley and rye are not, so a pack may not point them out. (checked 2026-11-25; source: Ministry of Food and Drug Safety: 22 allergens on labels (14 Jul 2021) https://www.korea.kr/multi/visualNewsView.do?newsId=148890102)
+Korea's Food Code lets soy sauce, doenjang and gochujang be made with grain such as wheat or barley. Check each bottle for 밀. (checked 2026-11-25; source: Korea Food Code: soy sauce, doenjang and gochujang (식품공전 장류) https://www.foodsafetykorea.go.kr/popup/safefoodlife/food/foodRvlv/foodRvlvDetail.do?rvlv_no=32)
+Chains with 50 or more shops that mainly sell burgers, pizza, baked goods or ice cream must show allergens. Anywhere else, ask. (checked 2026-11-25; source: Ministry of Food and Drug Safety: 22 allergens on labels (14 Jul 2021) https://www.korea.kr/multi/visualNewsView.do?newsId=148890102)
+
+## Vegetarian and vegan card in Korean
+URL: https://easymodekorea.com/vegetarian-vegan-card-korean.html
+Last checked: 2026-11-25
+
+Korean to show: 저는 채식주의자예요. 고기와 해산물을 안 먹어요. / 이 음식에 들어가나요? 육수, 양념, 소스도 확인해 주세요.
+Say: 저는 채식주의자예요. 고기와 해산물을 안 먹어요. (jeoneun chaesikjuuijayeyo. gogiwa haesanmureul an meogeoyo)
+- 저는 비건이에요. 고기, 해산물, 계란, 유제품을 안 먹어요. / 이 음식에 들어가나요? 육수, 양념, 소스도 확인해 주세요. = I'm vegan: no meat, seafood, eggs or dairy.
+- 안 먹어요: 고기 / 이 음식에 들어가나요? 육수, 양념, 소스도 확인해 주세요. = I don't eat meat.
+- 육수에 고기나 멸치가 들어가나요? = Is the broth made with meat or anchovy?
+- 김치에 젓갈이 들어가나요? = Does the kimchi have salted seafood in it?
+- 햄이나 어묵을 빼 주실 수 있나요? = Could you leave out ham and fish cake?
+Kimchi is seasoned with salted seafood: shrimp in the centre and north of Korea, anchovy in the south. Ask each time. (checked 2026-11-25; source: Encyclopedia of Korean Culture: gimjang (kimchi making) https://encykorea.aks.ac.kr/Article/E0010314)
+Chains with 50 or more shops that mainly sell burgers, pizza, baked goods or ice cream must show allergens. Anywhere else, ask. (checked 2026-11-25; source: Ministry of Food and Drug Safety: 22 allergens on labels (14 Jul 2021) https://www.korea.kr/multi/visualNewsView.do?newsId=148890102)
+
+## No pork, halal and no beef cards in Korean
+URL: https://easymodekorea.com/no-pork-halal-card-korean.html
+Last checked: 2026-11-25
+
+Korean to show: 안 먹어요: 돼지고기 / 이 음식에 들어가나요? 육수, 양념, 소스도 확인해 주세요.
+Say: 저는 돼지고기를 안 먹어요. (jeoneun dwaejigogireul an meogeoyo)
+- 저는 할랄 음식을 먹어요. 돼지고기와 술을 안 먹어요. / 이 음식에 들어가나요? 육수, 양념, 소스도 확인해 주세요. = I eat halal: no pork, no alcohol.
+- 안 먹어요: 쇠고기 / 이 음식에 들어가나요? 육수, 양념, 소스도 확인해 주세요. = I don't eat beef.
+- 안 먹어요: 술 / 이 음식에 들어가나요? 육수, 양념, 소스도 확인해 주세요. = No alcohol in the food, please.
+- 육수에 돼지뼈나 소뼈가 들어가나요? = Is the broth made with pork or beef bones?
+- 햄이나 베이컨이 들어가나요? = Is there ham or bacon in it?
+- 돼지고기를 구운 불판을 같이 쓰나요? = Do you use the same grill for pork?
+Words to look for on packages: 돼지고기 (Pork), 쇠고기 (Beef)
+VisitKorea sorts restaurants into four groups: Halal Certified; Self-certified; Muslim Friendly (some halal dishes, alcohol may be sold); Pork Free (no halal menu, no pork, alcohol may be sold). (checked 2026-11-25; source: VisitKorea: Muslim-friendly restaurant categories https://english.visitkorea.or.kr/svc/thingsToDo/subMuslimFriendly.do)
+Chains with 50 or more shops that mainly sell burgers, pizza, baked goods or ice cream must show allergens. Anywhere else, ask. (checked 2026-11-25; source: Ministry of Food and Drug Safety: 22 allergens on labels (14 Jul 2021) https://www.korea.kr/multi/visualNewsView.do?newsId=148890102)
+
+## Egg and milk allergy card in Korean
+URL: https://easymodekorea.com/egg-milk-allergy-card-korean.html
+Last checked: 2026-11-25
+
+Korean to show: 알레르기가 있어요: 계란, 우유 / 이 음식에 들어가나요? 육수, 양념, 소스도 확인해 주세요.
+Say: 저는 계란과 우유 알레르기가 있어요. (jeoneun gyerangwa uyu allereugiga isseoyo)
+- 알레르기가 있어요: 계란 / 이 음식에 들어가나요? 육수, 양념, 소스도 확인해 주세요. = Egg only
+- 알레르기가 있어요: 우유 / 이 음식에 들어가나요? 육수, 양념, 소스도 확인해 주세요. = Milk only
+- 우유와 유제품을 못 먹어요. / 이 음식에 들어가나요? 육수, 양념, 소스도 확인해 주세요. = I can't have milk or dairy (lactose).
+- 계란을 빼 주실 수 있나요? = Could you leave out the egg?
+- 우유, 버터, 치즈가 들어가나요? = Is there milk, butter or cheese in it?
+Words to look for on packages: 알류 (계란) (Egg), 우유 (Milk)
+Chains with 50 or more shops that mainly sell burgers, pizza, baked goods or ice cream must show allergens. Anywhere else, ask. (checked 2026-11-25; source: Ministry of Food and Drug Safety: 22 allergens on labels (14 Jul 2021) https://www.korea.kr/multi/visualNewsView.do?newsId=148890102)
+
+## Sesame allergy card in Korean
+URL: https://easymodekorea.com/sesame-allergy-card-korean.html
+Last checked: 2026-11-25
+
+Korean to show: 알레르기가 있어요: 참깨 / 참기름도 못 먹어요. / 이 음식에 들어가나요? 육수, 양념, 소스도 확인해 주세요.
+Say: 저는 참깨 알레르기가 있어요. 참기름도 못 먹어요. (jeoneun chamkkae allereugiga isseoyo. chamgireumdo mon meogeoyo)
+- 알레르기가 있어요: 참깨 / 참기름도 못 먹어요. / 조금만 들어가도 위험해요. / 이 음식에 들어가나요? 육수, 양념, 소스도 확인해 주세요. = Same card, with: even a little is dangerous.
+- 참기름을 빼 주실 수 있나요? = Could you leave out the sesame oil?
+- 소스나 나물에 참깨가 들어가나요? = Is there sesame in the sauce or side dishes?
+Proposed in August 2026, not in force: adding sesame, perilla, almond and cashew.
+Sesame is not on Korea's list of allergens that labels must show. A pack without the word can still contain it. (checked 2026-11-25; source: Ministry of Food and Drug Safety: 22 allergens on labels (14 Jul 2021) https://www.korea.kr/multi/visualNewsView.do?newsId=148890102)
+Chains with 50 or more shops that mainly sell burgers, pizza, baked goods or ice cream must show allergens. Anywhere else, ask. (checked 2026-11-25; source: Ministry of Food and Drug Safety: 22 allergens on labels (14 Jul 2021) https://www.korea.kr/multi/visualNewsView.do?newsId=148890102)
+
+## Korea without a Korean phone number
+URL: https://easymodekorea.com/korea-without-korean-phone-number.html
+Last checked: 2026-11-17
+- Taxi: Use the taxi apps built for visitors. They take a foreign number and card. (checked 2026-11-17)
+- Food delivery: Baemin works without a Korean number. It runs in English and takes foreign cards. (checked 2026-11-17)
+- Restaurant booking: CatchTable Global and Naver passport verification both work without a Korean number. (checked 2026-11-17)
+- Maps: Naver Map works for everyone, in English, Japanese and Chinese. (checked 2026-11-17)
+- KTX trains: Book on KORAIL's English website with a foreign card. It's the most reliable channel. (checked 2026-11-17)
+- Subway & bus: iPhone: On iPhone, Mobile T-money can now top up with some foreign cards. Not every card brand is supported. Android: Foreign-card top-up in the Android T-money app was not available at our last check. (checked 2026-11-17)
+- Phone & data: Data works anywhere. Apps that send a Korean SMS code will not reach you. (checked 2026-11-17)
+
 ## Seollal (Lunar New Year) holiday: 2027-02-06 to 2027-02-09
 - Public holiday from Sat 6 to Tue 9 Feb 2027. Seollal itself is Sun 7 Feb. Government offices and banks are closed. (source: https://m.korea.kr/briefing/pressReleaseView.do?newsId=156768474)
 - Trains: holiday tickets are sold in a short advance sale and go fast. For Seollal 2026 the general sale ran 19 to 21 Jan for trains on 13 to 18 Feb. The 2027 dates were not announced at our last check. (source: https://www.hankyung.com/article/202601075989h)

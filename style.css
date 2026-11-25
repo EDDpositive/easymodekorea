@@ -950,3 +950,37 @@ html.offline .install-bar { display: none; }
 .rf-go { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin: 0; }
 .rf-1330 { margin-top: 16px; }
 #sos-show { scroll-margin-bottom: 110px; }
+
+/* 31차: ready-made food cards and the no-Korean-number page */
+.lp .sec, .lp > .mc-label { margin-top: 24px; }
+.lp .sec > .mc-h { margin: 0 0 10px; }
+.lp > .hint { margin-top: 14px; }
+h1:lang(ja), h2:lang(ja), .lp:lang(ja) { word-break: auto-phrase; }
+.lp [lang="ko"], .mc-prev { word-break: keep-all; }
+.lp-card .mc-prev { font-size: 22px; }
+.lp-mean { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.45; }
+.lp-acts { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
+.lp-acts .btn { min-height: 48px; justify-content: center; font-size: 15px; }
+.lp-say { margin: 0; padding: 12px 14px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); }
+.lp-say b { display: block; font: 700 19px/1.4 var(--ko, var(--body)); }
+.lp-rom { display: block; margin-top: 4px; color: var(--muted); font-size: 15px; line-height: 1.4; overflow-wrap: anywhere; }
+.lp .sayrow { margin-bottom: 8px; }
+.lp .sayrow-main b { white-space: pre-line; }
+.lp-know p { margin: 0 0 6px; font-size: 16px; line-height: 1.5; }
+.lp-know .fact-src { margin: 0 0 12px; font-size: 13px; line-height: 1.45; color: var(--muted); }
+.lp-know .fact-src a { color: var(--muted); overflow-wrap: anywhere; }
+.lp-nav { margin-top: 14px; }
+.lp-nav small { display: block; font-weight: 400; color: var(--muted); }
+.lp-rows, .lp-chg { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 10px; }
+.lp-row { padding: 12px 14px; border-radius: 16px; background: var(--surface); border: 1px solid var(--line); }
+.lp-row > a { display: flex; align-items: center; gap: 10px; min-height: 44px; color: var(--ink); text-decoration: none; font-size: 17px; }
+.lp-row .ic svg { display: block; width: 22px; height: 22px; color: var(--link); }
+.lp-v { margin: 4px 0 6px; line-height: 1.45; }
+.lp-v .pill { margin-right: 6px; }
+.lp-v small { margin-right: 6px; font-weight: 700; color: var(--muted); }
+.lp-chg li { padding-left: 12px; border-left: 3px solid var(--easy); line-height: 1.45; }
+.lp-chg time { display: block; font-size: 13px; color: var(--muted); }
+@media print {
+  .lp > *:not(.lp-card), .lp-acts, .lp-card .btn, .lp-card .hint, .hero .top-actions, footer, .fb, .show { display: none !important; }
+  .lp-card { border: 2px solid #000; } .lp-card .mc-prev { font-size: 30px; }
+}

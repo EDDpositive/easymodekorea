@@ -84,9 +84,12 @@ MYCARD_JS = r"""
   const get = (k, d) => { try { const o = Object.assign({}, d, JSON.parse(store(k) || "{}")); for (const x in d) if (typeof o[x] !== typeof d[x] || Array.isArray(o[x]) !== Array.isArray(d[x])) o[x] = d[x]; return o; } catch (e) { return d; } };
   let F = get("emk-food", { a: [], n: [], s: 0 });
   const by = rows => Object.fromEntries(rows.map(x => [x[0], x])), A = by(D.al), N = by(D.no);
+  /* Coming from a ready-made card: its foods are added to what is already chosen. */
+  const pick = /^#pick=([a-z_,]{1,120})$/.exec(location.hash);
   const some = o => Object.values(o).some(v => Array.isArray(v) ? v.length : v);
   const put = (k, o) => { if (some(o)) store(k, JSON.stringify(o)); else try { localStorage.removeItem(k); } catch (e) {} };
   const save = () => put("emk-food", F);
+  if (pick) { pick[1].split(",").forEach(i => { const arr = A[i] ? F.a : N[i] ? F.n : null; if (arr && !arr.includes(i)) arr.push(i); }); save(); history.replaceState(null, "", location.pathname); }
   /* The Korean card text, one fact per line, so no grammar has to change with the choice. */
   function food() {
     const al = F.a.filter(i => A[i]), diet = F.n.filter(i => N[i] && N[i][3] === "diet"), no = F.n.filter(i => N[i] && N[i][3] !== "diet"), ko = [], me = [];
@@ -112,6 +115,14 @@ MYCARD_JS = r"""
   $("mc-food").addEventListener("click", () => { const x = food(); if (x) show(D.lbl, x[0], "", x[1], D.fans, { list: true, hot: D.fko.sev }); });
   document.querySelector("[data-clear]").addEventListener("click", () => { F = { a: [], n: [], s: 0 }; save(); paint(); });
   paint();
+})();
+"""
+
+LANDING_JS = r"""
+(function () {
+  const W = document.getElementById("lp"); if (!W) return;
+  document.querySelectorAll("[data-fc]").forEach(b => b.addEventListener("click", () => show(W.dataset.lbl, b.dataset.fc, "", b.dataset.mean, JSON.parse(b.dataset.ans), { list: true, hot: W.dataset.hot })));
+  const p = document.getElementById("lp-print"); if (window.print) p.addEventListener("click", () => window.print()); else p.hidden = true;
 })();
 """
 
