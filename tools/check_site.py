@@ -215,6 +215,14 @@ def main():
               and tw["themeColor"].lower() == m["theme_color"].lower() and tw["display"] == "standalone" and not tw.get("enableNotifications"))
         check(ok, "Android wrapper settings match the web manifest")
 
+    # Play listing: every language within Play's limits, and the count written next to each line is the real one.
+    if has("store/listing.md"):
+        ls = rd("store/listing.md").replace("\r\n", "\n")
+        rows = re.findall(r"\*\*(App name|Short description)\*\* \((\d+)\): `([^`]+)`", ls)
+        fulls = re.findall(r"\*\*Full description\*\*\n\n```\n(.*?)\n```", ls, re.S)
+        bad = [t for k, n, t in rows if int(n) != len(t) or len(t) > (30 if k == "App name" else 80)] + [t[:30] for t in fulls if len(t) > 4000]
+        check(len(rows) == 10 and len(fulls) == 5 and not bad, "Play listing: five languages, every text within Play's limits", "; ".join(bad[:3]))
+
     # The signing script shows Korean text; Windows PowerShell only reads that right from UTF-8 with a BOM.
     check(open(os.path.join(ROOT, "android", "sign-aab.ps1"), "rb").read(3) == bytes([0xEF, 0xBB, 0xBF]), "signing script is saved as UTF-8 with BOM")
 
