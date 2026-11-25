@@ -1,6 +1,6 @@
-# 다음 변경 요약 (2026-11-19, 기웅 님이 할 일)
+# 다음 변경 요약 (2026-11-19, 운영자가 할 일)
 
-머지·배포·게시는 전부 기웅 님이 직접 합니다. 아래 PR은 열려만 있고 자동 머지는 꺼져 있습니다.
+머지·배포·게시는 전부 운영자가 직접 합니다. 아래 PR은 열려만 있고 자동 머지는 꺼져 있습니다.
 
 ## PR 두 개
 
@@ -15,7 +15,7 @@
    - ④ `localize-promo.yml` (수동 실행): `overnight-promo.md`의 `### 3-x` 초안 블록을 붙여 넣으면 커뮤니티별 번역 초안 파일(Actions 아티팩트, 7일 보관)을 만듭니다. 게시·커밋은 하지 않습니다.
    - 공통: `claude-opus-5-5`, Batch API, 프롬프트 캐싱, 실행당 출력 토큰 상한(상한 초과 시 실행 중단). 키는 `ANTHROPIC_API_KEY` GitHub Secret에서만 읽습니다. 이번 작업에서는 API를 한 번도 호출하지 않았고(`--dry-run`만 확인), 비용은 발생하지 않았습니다.
 
-## 기웅 님이 할 일
+## 운영자가 할 일
 
 1. GitHub 저장소 → Settings → Secrets and variables → Actions → **New repository secret**: 이름 `ANTHROPIC_API_KEY`, 값은 직접 만든 키. (채팅·파일에는 붙여 넣지 마세요.)
 2. ①이 PR을 만들려면 Settings → Actions → General → "Allow GitHub Actions to create and approve pull requests"를 켜세요.

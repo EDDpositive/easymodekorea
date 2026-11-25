@@ -12,10 +12,10 @@ BRAND = "Won a Day"  # working name, see docs/won-game.md
 
 # Characters the shared table does not have yet, then mainland words that differ from the straight conversion
 CN_CH = dict(x for x in ("藍蓝 綠绿 紅红 鈴铃 麵面 鍋锅 醬酱 雞鸡 蔘参 鮑鲍 顆颗 葉叶 蝦虾 隻只 魷鱿 乾干 蘿萝 蔔卜 醃腌 蠣蛎 宮宫 廟庙 館馆 髮发 蔥葱 黃黄 鳳凤 鯖鲭 檸柠 鮮鲜 針针 鹽盐 櫛栉 薑姜 凍冻 盤盘 漸渐 "
-                        "戰战 組组 繪绘 鈔钞 紙纸 農农 術术 壽寿 摺折 遊游 鈕钮 錄录 貴贵 較较 歲岁 輪轮 漢汉 濟济 鎖锁 薦荐 艙舱 籃篮 煎煎 蔥葱 隧隧 繫系 熱热 慶庆 蓋盖 燙烫 齡龄 氈毡 藝艺 壓压 墜坠 潔洁 齊齐 讓让 憑凭 湯汤 陽阳 學学 漁渔 顏颜 煥焕 餅饼 穀谷 遺遗 跡迹 績绩").split())
+                        "戰战 組组 繪绘 鈔钞 紙纸 農农 術术 壽寿 摺折 遊游 鈕钮 錄录 貴贵 較较 歲岁 輪轮 漢汉 濟济 鎖锁 薦荐 艙舱 籃篮 煎煎 蔥葱 隧隧 繫系 熱热 慶庆 蓋盖 燙烫 齡龄 氈毡 藝艺 壓压 墜坠 潔洁 齊齐 讓让 憑凭 湯汤 陽阳 學学 漁渔 顏颜 煥焕 餅饼 穀谷 遺遗 跡迹 績绩 贏赢").split())
 CN = [("计程车", "出租车"), ("市内公车", "市内公交"), ("公车", "公交"), ("凤梨", "菠萝"), ("酪梨", "牛油果"), ("番茄", "西红柿"), ("奇异果", "猕猴桃"), ("红萝卜", "胡萝卜"), ("青花菜", "西兰花"),
       ("番薯", "红薯"), ("小黄瓜", "黄瓜"), ("韩国栉瓜", "韩国西葫芦"), ("白带鱼", "带鱼"), ("免注册", "无需注册"), ("储存", "保存"), ("装置", "设备"), ("公尺", "米"), ("公克", "克"), ("公升", "升"),
-      ("营运", "运营"), ("造访", "访问"), ("回报", "反馈"), ("整合票", "联票"), ("门票", "门票"), ("车资", "车费"), ("起步里程", "起步里程"), ("手机", "手机"), ("纪录", "记录")]
+      ("营运", "运营"), ("造访", "访问"), ("回报", "反馈"), ("整合票", "联票"), ("门票", "门票"), ("车资", "车费"), ("起步里程", "起步里程"), ("手机", "手机"), ("纪录", "记录"), ("有概念了", "找到感觉了"), ("分享给朋友挑战", "分享，向朋友发起挑战"), ("你能赢过我吗", "你能超过我吗")]
 
 
 def pick(s, lang):
@@ -61,18 +61,18 @@ T = {
     "c_ride": "Getting around|乗りもの|交通|Đi lại", "c_table": "On the table|食べもの|餐桌上|Món ăn", "c_out": "Out and about|おでかけと暮らし|出門與生活|Đi chơi, đời sống",
     "c_market": "At the market|買いもの|逛市場|Đi chợ", "c_bill": "The bill|お会計|結帳|Hóa đơn",
     "billq": "What does it all add up to?|全部でいくら？|總共多少？|Tổng cộng bao nhiêu?",
-    "tray": "Your tray|お金のトレー|你的錢盤|Khay tiền", "clear": "Clear|戻す|清空|Xóa", "back": "Take back ₩{n}|₩{n}を戻す|拿回 ₩{n}|Lấy lại ₩{n}", "add": "Add ₩{n}|₩{n}を出す|放上 ₩{n}|Thêm ₩{n}",
+    "tray": "Your tray|お金のトレー|把錢放在這裡|Khay tiền", "clear": "Clear|戻す|清空|Xóa", "back": "Take back ₩{n}|₩{n}を戻す|拿回 ₩{n}|Lấy lại ₩{n}", "add": "Add ₩{n}|₩{n}を出す|放上 ₩{n}|Thêm ₩{n}",
     "pay": "Pay {n}|{n} を払う|付 {n}|Trả {n}", "free": "Pay nothing: it's free|払わない（無料だと思う）|不用付（我猜免費）|Không trả: miễn phí",
     "isfree": "Free|無料|免費|Miễn phí", "paid": "You paid {n}|あなた：{n}|你付了 {n}|Bạn trả {n}", "you": "You|あなた|你|Bạn", "real": "Real price|本当の値段|真實價格|Giá thật",
     "over": "{n} too much|{n} 払いすぎ|多付 {n}|Dư {n}", "under": "{n} short|{n} 足りない|少付 {n}|Thiếu {n}", "spot": "Spot on|ぴったり|完全正確|Chính xác",
     "pts": "points|点|分|điểm", "next": "Next price|次の値段|下一題|Giá tiếp theo", "fin": "See my score|結果を見る|看我的成績|Xem điểm của tôi", "src": "Source|出典|來源|Nguồn",
     "of": "Price {n} of 5|5問中{n}問目|第 {n} 題，共 5 題|Giá {n} trên 5",
-    "lv0": "Just landed|着いたばかり|剛下飛機|Vừa xuống máy bay", "lv1": "Still on airport prices|まだ空港の値段|還停在機場物價|Vẫn theo giá sân bay", "lv2": "Getting the feel|感覚をつかみ中|漸漸抓到感覺|Bắt đầu quen giá",
-    "lv3": "Market regular|市場の常連|市場熟客|Khách quen của chợ", "lv4": "Could live here|もう住めます|可以住下來了|Sống ở đây được rồi",
-    "sum": "You laid down {a} for {b} of Seoul.|ソウルの{b}分に、{a}を出しました。|{b} 的首爾，你付了 {a}。|Bạn trả {a} cho {b} ở Seoul.",
-    "mine": "I laid down {a} for {b} of Seoul.|ソウルの{b}分に、{a}を出しました。|{b} 的首爾，我付了 {a}。|Mình trả {a} cho {b} ở Seoul.",
-    "beat": "Can you beat it?|超えられる？|你能超過嗎？|Bạn vượt được không?",
-    "share": "Share and dare a friend|シェアして友だちに挑戦|分享並挑戰朋友|Chia sẻ và thách bạn bè", "pic": "Result picture|結果の画像|結果圖片|Hình kết quả", "score": "Result|結果|成績|Kết quả", "send": "Send picture|画像を送る|傳送圖片|Gửi hình", "save": "Save picture|画像を保存|儲存圖片|Lưu hình", "copied": "Copied. Paste it anywhere.|コピーしました。貼り付けてください。|已複製，貼到哪裡都可以。|Đã sao chép. Dán ở đâu cũng được.",
+    "lv0": "Just landed|着いたばかり|剛下飛機|Vừa xuống máy bay", "lv1": "Still on airport prices|まだ空港の値段|還停在機場物價|Vẫn theo giá sân bay", "lv2": "Getting the feel|感覚をつかみ中|慢慢有概念了|Bắt đầu quen giá",
+    "lv3": "Market regular|市場の常連|菜市場常客|Khách quen của chợ", "lv4": "Could live here|もう住めます|可以住下來了|Sống ở đây được rồi",
+    "sum": "You laid down {a} for {b} of Seoul.|ソウルの合計は{b}、出したのは{a}。|在首爾共 {b}，你付了 {a}。|Ở Seoul hết {b}, bạn trả {a}.",
+    "mine": "I laid down {a} for {b} of Seoul.|ソウルの合計は{b}、わたしが出したのは{a}。|在首爾共 {b}，我付了 {a}。|Ở Seoul hết {b}, mình trả {a}.",
+    "beat": "Can you beat it?|超えられる？|你能贏過我嗎？|Bạn vượt được không?",
+    "share": "Share and dare a friend|シェアして友だちに挑戦|分享給朋友挑戰|Chia sẻ và thách bạn bè", "pic": "Result picture|結果の画像|結果圖片|Hình kết quả", "score": "Result|結果|成績|Kết quả", "send": "Send picture|画像を送る|傳送圖片|Gửi hình", "save": "Save picture|画像を保存|儲存圖片|Lưu hình", "copied": "Copied. Paste it anywhere.|コピーしました。貼り付けてください。|已複製，貼到哪裡都可以。|Đã sao chép. Dán ở đâu cũng được.",
     "hold": "Or press and hold the picture to save it.|画像を長押ししても保存できます。|也可以長按圖片儲存。|Hoặc nhấn giữ hình để lưu.",
     "friend": "A friend scored {n} on this set. Your turn.|友だちはこの5問で{n}点。次はあなた。|朋友在這一組拿到 {n} 分，換你了。|Một người bạn được {n} điểm ở bộ này. Đến lượt bạn.", "vs": "You {a}, your friend {b}|あなた{a}点、友だち{b}点|你 {a} 分，朋友 {b} 分|Bạn {a}, bạn của bạn {b}",
     "streak": "Streak|連続日数|連續天數|Chuỗi ngày", "played": "Played|プレイ数|玩過|Đã chơi", "avg": "Average|平均|平均|Trung bình",

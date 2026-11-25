@@ -1,6 +1,6 @@
 /* Offline copy of the daily price game, separate from the rest of the site. Newest first; the saved copy answers without a connection or after three seconds.
    Only the languages opened on this phone are kept. */
-const C='won-2dd37a1c',S=self.registration.scope;
+const C='won-96057c5c',S=self.registration.scope;
 const key=u=>{u=new URL(u);return u.origin+u.pathname.replace(/index\.html$/,'')};
 const fresh=u=>new Request(u,{cache:'reload'});
 self.addEventListener('install',()=>self.skipWaiting());

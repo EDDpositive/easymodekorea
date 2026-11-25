@@ -73,6 +73,19 @@ WON_RUN = """(async () => { const $ = s => document.querySelector(s), sleep = t 
   return out; })()"""
 
 
+# The same game opened some days after day 1 (a late publication, or a first visit later on): earlier days, yesterday's answers, the count of days in a row.
+WON_SHIFT = "(() => { const R = Date, off = %d * 864e5; class D extends R { constructor(...a) { a.length ? super(...a) : super(R.now() + off); } static now() { return R.now() + off; } } window.Date = D; })()"
+WON_LATE = """(async () => { const sleep = t => new Promise(r => setTimeout(r, t)), t = WAD.today(), bad = [], all = s => [...document.querySelectorAll(s)], txt = () => document.getElementById('game').textContent;
+  for (let d = 1; d <= t; d++) { const q = WAD.setOf(d); if (q.length !== 5 || q.some(x => !Number.isInteger(x.p) || x.p < 0 || !x.l.length)) bad.push('set ' + d); }
+  const pays = () => document.getElementById('pay'), play = async () => { for (let i = 0; i < 5; i++) { document.querySelector('[data-add="10000"]').click(); pays().click(); await sleep(20); document.getElementById('next').click(); } };
+  await play();
+  const n = all('.ar button').length, y = all('.yl li').length, look = w => { if (/NaN|undefined|Invalid/.test(txt())) bad.push(w); };
+  look('today'); const tm = all('.tm').length, row = all('.stats b').map(x => x.textContent).join(), days = all('.ar button').map(x => x.dataset.day);
+  for (const d of days.slice(1).filter((x, i, l) => i < 2 || i > l.length - 3)) { location.hash = '#' + d; await sleep(40); look('#' + d); if (!pays()) bad.push('not open ' + d); else { await play(); look('done #' + d); } }
+  const row2 = all('.stats b').map(x => x.textContent).join(); location.hash = '#' + (t + 1); await sleep(40); if (txt().includes('#' + (t + 1) + ' ')) bad.push('tomorrow opens');
+  return {t, n, y, tm, row: row.split(',').slice(0, 2).join(), streak: row2.split(',')[0], bad}; })()"""
+
+
 # Korea Ready check, answered by taps alone: no Korean number, (Android when asked), phone wallet only, Incheon, Busan, a food rule, dates.
 READY_RUN = """(() => { const o = () => [...document.querySelectorAll('#rd-opts .opt-big')], n = () => document.getElementById('rd-next'); let taps = 0;
   const tap = e => { e.click(); taps++; };
@@ -417,6 +430,15 @@ def main():
         check(b.js("JSON.stringify([1, 5, 40].map(WAD.setOf).map(d => d.map(q => [q.c, q.p, q.l])))") == json.dumps([[[q["c"], q["p"], q["l"]] for q in d] for d in json.loads(same)], separators=(",", ":")), "Seoul price game: everyone gets the same five on the same date, in any language")
         b.js("localStorage.removeItem('wad1')"); b.go(srv.url + "won/ja/#1-62", wait=0.8)
         check(b.js("!!document.querySelector('.fr') && document.querySelector('.fr').textContent.includes('62') && [...document.querySelectorAll('.lg a')].every(a => a.hash === '#1-62')"), "Seoul price game: a friend's link shows the score to beat, also after a language change")
+        late = []; raw = "(() => { const n = new Date(), d = JSON.parse(document.getElementById('won-data').textContent); return Math.floor((Date.UTC(n.getFullYear(), n.getMonth(), n.getDate()) - d.start) / 864e5) + 1; })()"
+        now = b.js(raw)  # the day number today; 0 or less before day 1
+        for code, day in (("", 0), ("", 1), ("ja/", 2), ("zh-tw/", 6), ("zh-cn/", 29), ("vi/", 41), ("", 201)):
+            b.js("localStorage.removeItem('wad1')"); sid = b.cmd("Page.addScriptToEvaluateOnNewDocument", source=WON_SHIFT % (day - now))["identifier"]
+            b.go(srv.url + "manifest.webmanifest", wait=0.1); b.go(srv.url + "won/" + code, wait=0.8); r = b.js(WON_LATE); t = max(1, day)
+            b.cmd("Page.removeScriptToEvaluateOnNewDocument", identifier=sid)
+            if r["t"] != t or r["n"] != (0 if t == 1 else min(t, 30)) or r["y"] != (5 if t > 1 else 0) or r["tm"] != (1 if day > 0 else 0) or r["row"] != "1,1" or r["streak"] != "1" or r["bad"]: late.append(f"day {day}: {r}")
+            b.go(srv.url + "won/", wait=0.8)
+        check(not late, "Seoul price game: the evening before day 1, on days 1, 2, 6, 29, 41 and 201, earlier days, yesterday's answers and the days in a row stay right", str(late)[:500])
         k = b.js("navigator.serviceWorker.ready.then(() => new Promise(r => setTimeout(r, 800))).then(() => caches.keys())")
         check(all(any(x.startswith(p) for x in k) for p in ("won-", "jpr-", "emk-")), "Seoul price game: its offline copy sits next to the others", str(k))
         time.sleep(1.0)

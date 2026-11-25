@@ -10,7 +10,7 @@ import won_art as A
 import won_data as W
 import won_text as X
 
-START = "2026-11-26"   # day 1
+START = "2026-11-26"   # day 1 = the day of publication in Korea (tools/won_publish_day.py sets it)
 PATHS = [X.DIR[k] for k in X.LANGS]
 CATS = ["ride", "table", "out", "market", "bill"]
 NOTES = [50000, 10000, 5000, 1000, 500, 100]
@@ -114,7 +114,9 @@ JS = r"""
   function num(n) { return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, D.sep); }
   function won(n) { return '₩' + num(n); }
   function f(s, o) { return s.replace(/\{(\w)\}/g, function (_, k) { return o[k]; }); }
-  function today() { var n = new Date(); return Math.max(1, Math.floor((Date.UTC(n.getFullYear(), n.getMonth(), n.getDate()) - D.start) / 864e5) + 1); }
+  function since() { var n = new Date(); return Math.floor((Date.UTC(n.getFullYear(), n.getMonth(), n.getDate()) - D.start) / 864e5) + 1; }
+  /* On the evening before day 1 (the Americas, when Korea publishes) day 1 is already open; only then no new five follow at midnight. */
+  function today() { return Math.max(1, since()); }
   function dateOf(d) { return new Date(D.start + (d - 1) * 864e5); }
   function fmt(d, o) { try { return new Intl.DateTimeFormat(D.tag, Object.assign({ timeZone: 'UTC' }, o)).format(dateOf(d)); } catch (e) { return ''; } }
 
@@ -221,7 +223,7 @@ JS = r"""
       + '</ul><p class="sum">' + esc(f(T.sum, { a: won(s.a), b: won(s.b) })) + '</p>' + (friend !== null ? '<p class="vs">' + esc(f(T.vs, { a: sc, b: friend })) + '</p>' : '') + '</section>'
       + '<div class="acts"><button type="button" class="pay" id="share">' + esc(T.share) + '</button><button type="button" class="pay sec" id="pic">' + esc(T.pic) + '</button><p class="msg" id="msg" role="status"></p><div id="pvb"></div></div>'
       + '<div class="stats"><div><b>' + streak() + '</b><span>' + esc(T.streak) + '</span></div><div><b>' + all.length + '</b><span>' + esc(T.played) + '</span></div><div><b>' + avg + '</b><span>' + esc(T.avg) + '</span></div></div>'
-      + (day === t ? '<p class="tm">' + esc(T.tmrw) + '</p>' : '<button type="button" class="pay sec" data-day="' + t + '" style="margin-bottom:12px">' + esc(T.totoday) + '</button>')
+      + (day === t ? since() < 1 ? '' : '<p class="tm">' + esc(T.tmrw) + '</p>' : '<button type="button" class="pay sec" data-day="' + t + '" style="margin-bottom:12px">' + esc(T.totoday) + '</button>')
       + '<a class="emk" href="' + esc(D.home) + '" data-emk><b>' + esc(T.emk_h) + '</b><span>' + esc(T.emk_p) + '</span></a>'
       + (old.length > 1 ? '<details class="b"><summary>' + esc(T.earlier) + '</summary><div class="ar">' + old.map(function (k) { var r = st.d[k], d = r && r.g && r.g.length === 5; return '<button type="button" data-day="' + k + '"' + (k === day ? ' aria-current="true"' : '') + '>#' + k + (d ? ' · ' + score(k, r.g) : '') + '<small>' + esc(k === t ? T.today : fmt(k, { day: 'numeric', month: 'short' })) + '</small></button>'; }).join('') + '</div></details>' : '')
       + (day === t && t > 1 ? '<details class="b"><summary>' + esc(T.yest) + '</summary><div><ul class="yl">' + setOf(t - 1).map(function (q) { return '<li><span>' + esc(name(q)) + '</span><b>' + esc(price(q.p)) + '</b></li>'; }).join('') + '</ul></div></details>' : '');

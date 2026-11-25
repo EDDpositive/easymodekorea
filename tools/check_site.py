@@ -4,7 +4,7 @@ Covers what the app experience depends on: every page is app-ready, the offline 
 the manifest and the Android link file are valid, all five languages have the app pages, and no
 link inside the site is broken. Exit code 0 means every check passed.
 """
-import json, os, re, subprocess, sys
+import hashlib, json, os, re, subprocess, sys
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, os.path.join(ROOT, "src"))
@@ -138,6 +138,16 @@ def main():
     if any(not has(f"won/og-{k}.png") or png_size(f"won/og-{k}.png") != "1200x630" for k in WX.LANGS) or any(png_size(f"won/icon-{n}.png") != f"{n}x{n}" for n in (192, 512)): probs.append("pictures")
     if any(json.loads(rd(WX.DIR[k] + "manifest.webmanifest"))["start_url"] != "/" + WX.DIR[k] or f'href="/{WX.DIR[k]}manifest.webmanifest"' not in pages[k] for k in WX.LANGS): probs.append("manifest")
     check(not probs, f"Seoul price game: {len(WD.ITEMS)} prices from dated official pages, five languages, in the sitemap only, nothing sent, no payment company named", "; ".join(probs[:5]))
+
+    # The repo is public: the owner's given name, romanised name, PC account and private mail name must not come back (docs say 운영자).
+    # Only the first five hex digits of each hash stand here, so the names cannot be read back out of this file.
+    gone = {"43274", "0e75b", "75bf2", "49a69", "758e4"}; seen = {}
+    for f in subprocess.run(["git", "ls-files", "-z"], cwd=ROOT, capture_output=True).stdout.decode("utf-8").split("\0"):
+        if not re.search(r"\.(md|py|html|js|json|css|txt|xml|yml|ps1|webmanifest)$", f) or not has(f): continue
+        t = open(os.path.join(ROOT, f), encoding="utf-8", errors="ignore").read()
+        for w in {w[i:i + 2] for w in re.findall(r"[가-힣]{2,}", t) for i in range(len(w) - 1)} | set(re.findall(r"[a-z0-9]{5,}", t.lower())): seen.setdefault(w, f)
+    named = sorted({f for w, f in seen.items() if hashlib.sha256(w.encode()).hexdigest()[:5] in gone})
+    check(not named, "no personal name or private account stands in the public repo", ", ".join(named[:5]))
 
     # Search index per language.
     idx_ok = all(len(json.loads(rd(d + "search.json"))["faq"]) > 20 and len(json.loads(rd(d + "search.json"))["cards"]) > 20 for d in LANG_DIRS)
