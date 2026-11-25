@@ -60,6 +60,24 @@ READY_RUN = """(() => { const o = () => [...document.querySelectorAll('#rd-opts 
   return taps; })()"""
 
 
+# Japan tax refund page: [receipt, day of leaving Japan] and what the official rules say (state, deadline, tax back in yen).
+JP_RULES = """(() => [[{d:'2026-11-01',st:'all',a:11000},''],[{d:'2026-11-01',st:'all'},'2027-01-30'],[{d:'2026-11-01',st:'all'},'2027-01-31'],[{d:'2026-10-31',st:'all'},''],
+  [{d:'2026-12-02',st:'ate',a:9000},''],[{d:'2026-12-02',st:'gone'},''],[{d:'2026-12-02',st:'used',a:33000},'2026-12-05'],[{d:'2026-12-02',st:'all',b:5399},''],[{d:'2026-12-02',st:'all',b:5400},''],
+  [{d:'2026-12-02',st:'all',a:3300,b:2160},''],[{d:'2027-04-01',st:'all',b:10800},''],[{d:'2026-12-10',st:'all'},'2026-12-05'],[{d:'2026-12-02'},''],[{},'']]
+  .map(([r, dep]) => { const j = JPR.judge(r, dep); return [j.s, j.by || '', j.tax || 0].join(' ').trim(); }))()"""
+JP_WANT = ["ok 2027-01-30 1000", "ok 2027-01-30 0", "no 2027-01-30 0", "wn  0", "no 2027-03-02 0", "no 2027-03-02 0", "ok 2027-03-02 3000", "wn 2027-03-02 0", "ok 2027-03-02 400",
+           "ok 2027-03-02 460", "ok 2027-06-30 0", "wn  0", "2027-03-02 0", "0"]
+JP_STEPS = """(() => { const $ = i => document.getElementById(i), set = (e, v) => { e.value = v; e.dispatchEvent(new Event('input', {bubbles: true})); e.dispatchEvent(new Event('change', {bubbles: true})); };
+  set($('port'), 'NRT1'); set($('dep'), '2026-12-05');
+  const one = (d, st, a, b2) => { const c = [...document.querySelectorAll('.rc')].pop(); set(c.querySelector('[data-k=d]'), d); const r = c.querySelector('input[value=' + st + ']'); r.checked = true; r.dispatchEvent(new Event('input', {bubbles: true})); set(c.querySelector('[data-k=a]'), a); set(c.querySelector('[data-k=b]'), b2); };
+  one('2026-12-02', 'used', '33,000', ''); $('add').click(); one('2026-12-03', 'ate', '', '6480'); $('add').click(); one('2026-12-04', 'all', '11000', '5400');
+  const li = [...document.querySelectorAll('#st li')].map(x => x.innerText), at = w => li.findIndex(x => x.includes(w)), out = {};
+  out.order = at('세관 직원에게') > 0 && at('세관 직원에게') < at('여권 스캔') && at('여권 스캔') < at('짐 부치고'); out.floor = at('나리타 1터미널 4층') > 0; out.wifi = at('Customs_WiFi_For_TaxRefund') > 0;
+  out.ics = JPR.ics().includes('DTSTART;VALUE=DATE:20261205') && JPR.ics().includes('DTEND;VALUE=DATE:20261206'); out.sum = $('sum-b').innerText;
+  set($('port'), 'HIJ'); out.wifi2 = $('st').innerText.includes('Customs_WiFi_For_TaxRefund') || $('st').innerText.includes('Visit Japan Web'); set($('port'), 'NRT1'); return out; })()"""
+JP_TAPS = """[...document.querySelectorAll('button, select, input:not([type=radio]):not([type=checkbox]), .ch label, .tg, .jump a, .btn, summary')].filter(e => { const r = e.getBoundingClientRect(); return r.width > 0 && r.height > 0 && r.height < 43.5; }).map(e => (e.innerText || e.id || e.className).slice(0, 20) + ' ' + Math.round(e.getBoundingClientRect().height))"""
+
+
 def main():
     pre = json.loads(re.search(r"const PRE=(\[[^\]]*\]);", open(os.path.join(ROOT, "sw.js"), encoding="utf-8").read()).group(1))
     pages = [p for p in pre if p.endswith("/") or p.endswith(".html")]
@@ -338,12 +356,23 @@ def main():
         for _ in range(75):
             if b.js("navigator.serviceWorker.getRegistration().then(r => !!r && !!r.active && /l=en$/.test(r.active.scriptURL) && !r.installing && !r.waiting)"): break
             time.sleep(0.2)
+        # 32차: the Korean Japan tax refund page (rules, airport steps, calendar, tap sizes, its own offline copy).
+        b.go(srv.url + "ko/japan-tax-refund.html", wait=1.0)
+        got = b.js(JP_RULES); bad = [f"{w} got {g}" for w, g in zip(JP_WANT, got) if w != g]
+        check(len(got) == len(JP_WANT) and not bad, f"Japan tax refund: {len(JP_WANT)} receipt rules give the official answer", "; ".join(bad[:3]))
+        r = b.js(JP_STEPS)
+        check(r["order"] and r["floor"] and r["wifi"] and not r["wifi2"] and r["ics"] and r["sum"] == "약 4,400엔", "Japan tax refund: steps fit the trip (floor, Wi-Fi only where it exists, customs first when something was eaten), total and calendar file", str(r))
+        t = b.js(JP_TAPS); check(not t and b.js("document.documentElement.scrollWidth") <= 375, "Japan tax refund: fits 375px, everything tappable is 44px or more", str(t)[:200])
+        k = b.js("navigator.serviceWorker.ready.then(() => new Promise(r => setTimeout(r, 800))).then(() => caches.keys())")
+        check(any(x.startswith("jpr-") for x in k) and any(x.startswith("emk-") for x in k), "Japan tax refund: its offline copy sits next to the app's", str(k))
         time.sleep(1.0)
         srv.stop()  # from here on there is no server: only the copy on the "phone" can answer
         for page in ("", "taxi.html", "phrases.html", "saved.html", "help.html", "privacy.html", "lost-phone-wallet-passport.html", "foreign-card-declined-korea.html", "ready.html", "sos.html", "refused.html", "my-card.html"):
             ok = b.go(srv.url + page, wait=0.6) and b.js("document.querySelectorAll('.tabbar a').length === 4 && document.title.includes('EasyModeKorea')")
             why = b.last_error or (b.js("location.href + ' | ' + document.title + ' | tabs ' + document.querySelectorAll('.tabbar a').length") if not ok else "")
             check(bool(ok), f"offline: /{page} opens", why)
+        ok = b.go(srv.url + "ko/japan-tax-refund.html", wait=0.8) and b.js("document.querySelectorAll('#st li').length >= 7 && document.title.includes('일본 면세 환급')")
+        check(bool(ok), "offline: the Japan tax refund page opens and still works out the steps", b.last_error or "")
         # The sweep above saved every page, so take one off the "phone" first (and empty the browser's own short-term cache).
         b.js("caches.keys().then(ks => Promise.all(ks.map(k => caches.open(k).then(c => c.delete(location.origin + '/zh-tw/taxi.html')))))")
         b.cmd("Network.clearBrowserCache")

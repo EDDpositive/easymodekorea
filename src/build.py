@@ -18,6 +18,7 @@ import app_shell as A  # noqa: E402
 import trouble as TR  # noqa: E402
 import moments as M  # noqa: E402
 import moments_ui as MU  # noqa: E402
+import jp_refund as JP  # noqa: E402
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 B = sys.modules[__name__]  # handed to moments_ui.py, which reuses this module's helpers
@@ -1684,6 +1685,7 @@ def main():
         local.append(build_trip(lang))  # personal page: offline copy, but not in the sitemap
         write(LANGS[lang]["dir"] + "search.json", search_index(lang)); local.append(LANGS[lang]["dir"] + "search.json")
     paths.append("hosts.html")
+    apart = [JP.build(B)]  # Korean page about Japan: in the sitemap only, with its own offline worker
     build_404()
     by_rel = {}
     for p in paths:
@@ -1695,7 +1697,7 @@ def main():
         links = "" if len(alts) < 2 else "".join(f'<xhtml:link rel="alternate" hreflang="{LANGS[k]["html_lang"]}" href="{SITE}{q}"/>' for k, q in alts.items()) + f'<xhtml:link rel="alternate" hreflang="x-default" href="{SITE}{alts.get("en", p)}"/>'
         d = DATES[p]["d"] if p in DATED else page_date(p, open(os.path.join(ROOT, (p + "index.html") if (p == "" or p.endswith("/")) else p), encoding="utf-8").read())
         return f"<url><loc>{SITE}{p}</loc><lastmod>{d}</lastmod>{links}</url>\n"
-    urls = "".join(url(p) for p in paths)
+    urls = "".join(url(p) for p in paths + apart)
     write("style.css", CSS)
     write("app.js", A.APP_JS)
     llms_files()
@@ -1707,7 +1709,7 @@ def main():
     # Offline: precache every page, so a guide opened once (or not yet) still works without signal.
     pre = ["./", "ja/", "zh-tw/", "zh-cn/", "vi/", "icon-192.png", "manifest.webmanifest", f"style.css?v={CSS_V}", f"app.js?v={APP_V}", "qr.js"] + [p for p in paths + local if p and not p.endswith("/")]
     # The cache name changes whenever any page, the stylesheet, the script or the worker itself changes.
-    ver = hashlib.sha256(("".join(DATES[p]["h"] for p in sorted(DATES)) + CSS_V + APP_V + A.SW_JS + "".join(sorted(pre))).encode()).hexdigest()[:8]
+    ver = hashlib.sha256(("".join(DATES[p]["h"] for p in sorted(DATES) if p not in apart) + CSS_V + APP_V + A.SW_JS + "".join(sorted(pre))).encode()).hexdigest()[:8]
     sw = re.sub(r"const C='[^']*';const PRE=\[[^\]]*\];", lambda m: f"const C='emk-{ver}';const PRE={json.dumps(pre)};", A.SW_JS, count=1)
     write("sw.js", sw)
     open(DATES_FILE, "w", encoding="utf-8").write(json.dumps(dict(sorted(DATES.items())), indent=0, ensure_ascii=False) + "\n")
