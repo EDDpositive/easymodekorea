@@ -50,6 +50,29 @@ TAPS = """(() => {
 })()"""
 
 
+# 33차: the daily Seoul price game. Scoring rules, then a full round played by taps.
+WON_PTS = [[10000, 10000, 100], [5000, 10000, 50], [20000, 10000, 50], [0, 10000, 0], [0, 0, 100], [1000, 0, 60], [5000, 0, 0]]
+WON_RUN = """(async () => { const $ = s => document.querySelector(s), sleep = t => new Promise(r => setTimeout(r, t)), out = {seen: [], small: [], wide: 0};
+  const tap = n => $('[data-add="' + n + '"]').click();
+  const look = () => { if (document.documentElement.scrollWidth > innerWidth) out.wide++;
+    for (const e of document.querySelectorAll('header a, header summary, #game button, #game a, #game summary, footer a, footer button, details.b > summary')) { const r = e.getBoundingClientRect(); if (r.width && !e.closest('details:not([open]) > :not(summary)') && !e.closest('.so') && r.height < 43.5) out.small.push(e.className + ' ' + e.textContent.slice(0, 16) + ' ' + Math.round(r.height)); } };
+  const q = WAD.setOf(WAD.today());
+  for (let i = 0; i < 5; i++) {
+    for (const n of [10000, 1000, 1000, 500]) tap(n);
+    $('[data-back="1000"]').click(); out.sum = $('#out').textContent.replace(/\\D/g, ''); look();
+    $('#pay').click(); await sleep(60); look();
+    out.seen.push(WAD.pts(11500, q[i].p) + '=' + $('.sc b').textContent, document.querySelectorAll('.so a[href^="https://"]').length > 0);
+    await sleep(750); out.seen.push($('#rp').textContent.replace(/\\D/g, '') === String(q[i].p) || q[i].p === 0);
+    $('#next').click(); }
+  look(); const want = Math.round(q.reduce((a, x) => a + WAD.pts(11500, x.p), 0) / 5);
+  out.board = document.querySelectorAll('.rl li').length; out.score = parseInt($('.big').textContent) === want; out.want = want;
+  out.bill = q[4].l.length > 1 && q[4].l.reduce((a, x) => a + x[0], 0) > 1;
+  out.kept = JSON.parse(localStorage.getItem('wad1')).d[WAD.today()].g.length; out.text = WAD.text();
+  const c = await WAD.paint(), d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data, set = new Set(); for (let i = 0; i < d.length; i += 4004) set.add(d[i] + ',' + d[i + 1] + ',' + d[i + 2]);
+  out.pic = c.width + 'x' + c.height + ' ' + (set.size > 4); $('#pic').click(); await sleep(900); out.img = !!$('#pvb img') && $('#pvb img').naturalHeight; look();
+  return out; })()"""
+
+
 # Korea Ready check, answered by taps alone: no Korean number, (Android when asked), phone wallet only, Incheon, Busan, a food rule, dates.
 READY_RUN = """(() => { const o = () => [...document.querySelectorAll('#rd-opts .opt-big')], n = () => document.getElementById('rd-next'); let taps = 0;
   const tap = e => { e.click(); taps++; };
@@ -381,6 +404,21 @@ def main():
         t = b.js(JP_TAPS); check(not t and b.js("document.documentElement.scrollWidth") <= 375, "Japan tax refund: fits 375px, everything tappable is 44px or more", str(t)[:200])
         k = b.js("navigator.serviceWorker.ready.then(() => new Promise(r => setTimeout(r, 800))).then(() => caches.keys())")
         check(any(x.startswith("jpr-") for x in k) and any(x.startswith("emk-") for x in k), "Japan tax refund: its offline copy sits next to the app's", str(k))
+        # 33차: the daily Seoul price game in five languages (its records stay on the phone, so the phone is cleared before each).
+        for code in ("", "ja/", "zh-tw/", "zh-cn/", "vi/"):
+            b.go(srv.url + "won/" + code, wait=0.8); b.js("localStorage.removeItem('wad1')"); b.go(srv.url + "won/" + code, wait=0.8)
+            r = b.js(WON_RUN); name = code.rstrip("/") or "en"
+            fine = r["board"] == 5 and r["score"] and r["bill"] and r["kept"] == 5 and r["sum"] == "11500" and all(x is True or (isinstance(x, str) and len(set(x.split("="))) == 1) for x in r["seen"]) and r["pic"] == "1080x1350 true" and r["img"] == 1350
+            check(fine, f"Seoul price game ({name}): a full round by taps scores right, shows sources, keeps the result and draws the picture", str(r)[:400])
+            check(not r["small"] and not r["wide"], f"Seoul price game ({name}): fits 375px, everything tappable is 44px or more", str(r["small"][:4]) + str(r["wide"]))
+        b.go(srv.url + "won/", wait=0.8)
+        pts = b.js("%s.map(x => WAD.pts(x[0], x[1]))" % json.dumps(WON_PTS)); check(pts == [x[2] for x in WON_PTS], "Seoul price game: seven scoring rules", str(pts))
+        same = b.js("JSON.stringify([1, 5, 40].map(WAD.setOf))"); b.go(srv.url + "won/vi/", wait=0.8)
+        check(b.js("JSON.stringify([1, 5, 40].map(WAD.setOf).map(d => d.map(q => [q.c, q.p, q.l])))") == json.dumps([[[q["c"], q["p"], q["l"]] for q in d] for d in json.loads(same)], separators=(",", ":")), "Seoul price game: everyone gets the same five on the same date, in any language")
+        b.js("localStorage.removeItem('wad1')"); b.go(srv.url + "won/ja/#1-62", wait=0.8)
+        check(b.js("!!document.querySelector('.fr') && document.querySelector('.fr').textContent.includes('62') && [...document.querySelectorAll('.lg a')].every(a => a.hash === '#1-62')"), "Seoul price game: a friend's link shows the score to beat, also after a language change")
+        k = b.js("navigator.serviceWorker.ready.then(() => new Promise(r => setTimeout(r, 800))).then(() => caches.keys())")
+        check(all(any(x.startswith(p) for x in k) for p in ("won-", "jpr-", "emk-")), "Seoul price game: its offline copy sits next to the others", str(k))
         time.sleep(1.0)
         srv.stop()  # from here on there is no server: only the copy on the "phone" can answer
         for page in ("", "taxi.html", "phrases.html", "saved.html", "help.html", "privacy.html", "lost-phone-wallet-passport.html", "foreign-card-declined-korea.html", "ready.html", "sos.html", "refused.html", "my-card.html"):
@@ -389,6 +427,9 @@ def main():
             check(bool(ok), f"offline: /{page} opens", why)
         ok = b.go(srv.url + "ko/japan-tax-refund.html", wait=0.8) and b.js("document.querySelectorAll('#st li').length >= 7 && document.title.includes('일본 면세 환급')")
         check(bool(ok), "offline: the Japan tax refund page opens and still works out the steps", b.last_error or "")
+        ok = b.go(srv.url + "won/vi/", wait=0.8) and b.js("localStorage.removeItem('wad1'), true") and b.go(srv.url + "won/vi/", wait=0.8)
+        r = b.js(WON_RUN) if ok else {}
+        check(bool(ok) and r.get("board") == 5 and r.get("img") == 1350, "offline: the Seoul price game opens, plays and draws the picture", b.last_error or str(r)[:200])
         # The sweep above saved every page, so take one off the "phone" first (and empty the browser's own short-term cache).
         b.js("caches.keys().then(ks => Promise.all(ks.map(k => caches.open(k).then(c => c.delete(location.origin + '/zh-tw/taxi.html')))))")
         b.cmd("Network.clearBrowserCache")

@@ -109,6 +109,36 @@ def main():
     if any(w in JP.JS for w in ("fetch(", "XMLHttpRequest", "sendBeacon", "WebSocket", "new Image")): probs.append("its script can send data")
     check(not probs, "Japan tax refund page: in the sitemap only, official dated sources, no payment company named, sends nothing", "; ".join(probs[:4]))
 
+    # 33차: the daily Seoul price game. Five languages, apart from the app; every price comes from a dated official page; nothing played is sent.
+    import won as WON, won_data as WD, won_text as WX
+    probs = []; pages = {k: rd(WX.DIR[k] + "index.html") for k in WX.LANGS}; wsw = rd("won/sw.js")
+    if any(f"easymodekorea.com/{WX.DIR[k]}</loc>" not in sm_text() or pages[k].count('rel="alternate" hreflang=') != 6 for k in WX.LANGS): probs.append("sitemap or language links")
+    if any(p.startswith("won") for p in pre) or "x.startsWith('emk-')" not in sw or "k.startsWith('won-')" not in wsw: probs.append("offline copies of the workers can delete each other")
+    if any(re.search(r'href="[^"]*\bwon/', rd(d + f)) for d in LANG_DIRS for f in ("index.html", "help.html", "saved.html")): probs.append("linked from a menu before the test says so")
+    official = re.compile(r"https://[\w.-]*(\.go\.kr|kamis\.or\.kr|sisul\.or\.kr|bikeseoul\.com|hgbus\.co\.kr|visitseoul\.net)/")
+    probs += [f"source {k}" for k, (u, day, kind, n) in WD.SRC.items() if not official.match(u) or not re.fullmatch(r"20\d\d-\d\d(-\d\d)?", day) or day > WD.CHK or kind not in WX.KIND or len(n.split("|")) != 4]
+    probs += [f"price {i}" for i, v in WD.ITEMS.items() if not (isinstance(v["p"], int) and v["p"] >= 0)]
+    order = [i for c in WD.ORDER.values() for i in c]; scenes = [WD.scene(x) for _n, x in WD.SCENES]
+    if len(set(order)) != len(order) or any(i not in WD.ITEMS for i in order) or any(i not in WD.ITEMS for sc in scenes for _q, i in sc): probs.append("question lists")
+    at = lambda l, step, i: l[(i + i // len(l) * step) % len(l)]
+    for i in range(365):
+        day = [at(WD.ORDER[c], t, i) for c, t in (("ride", 3), ("table", 5), ("out", 7), ("market", 11))]
+        if set(day) & {x for _q, x in at(scenes, 9, i)}: probs.append(f"day {i + 1} asks a price and then puts it on the bill"); break
+    if not all(f"p(D.{n}, {t})" in WON.JS for n, t in (("o.ride", 3), ("o.table", 5), ("o.out", 7), ("o.market", 11), ("s", 9))): probs.append("lap steps differ from this check")
+    words = list(WX.T.values()) + WX.HOW + [x for q in WX.FAQ for x in q] + [n for n, _x in WD.SCENES] + [v[3] for v in WD.SRC.values()] + ["|".join(v[f]) for v in WD.ITEMS.values() for f in ("n", "u", "tip") if v[f]]
+    hole = lambda t: sorted(re.findall(r"\{\w\}", t))
+    probs += [f"text: {w[:30]}" for w in words if len(w.split("|")) != 4 or not all(x.strip() for x in w.split("|")) or len({str(hole(x)) for x in w.split("|")}) != 1][:3]
+    left = sorted({c for w in words for c in WX.pick(w, "zh-cn") if ord(c) > 0x3400 and not c.encode("gb2312", "ignore")})
+    if left: probs.append("not simplified: " + "".join(left[:8]))
+    # The owner works in payments: no payment company, wallet or card is named here. And no other game either.
+    named = [w for w in ("Global Blue", "Alipay", "WeChat", "Visa", "Mastercard", "JCB", "UnionPay", "T-money", "Tmoney", "WOWPASS", "NAMANE", "Kakao", "Naver", "Toss", "Wise", "Revolut", "PayPal", "Apple Pay", "Google Pay", "utm_", "amzn", "Wordle", "Costcodle") if any(re.search(rf"\b{re.escape(w)}\b", p, re.I) for p in pages.values())]
+    if named: probs.append("names " + ", ".join(named))
+    if any(w in WON.JS for w in ("fetch(", "XMLHttpRequest", "sendBeacon", "WebSocket", "new Audio", "AudioContext", "vibrate")) or re.findall(r"\.src = ([^;]{6})", WON.JS) != ["'data:"]: probs.append("its script can send data or make a sound")
+    if any(x not in ("gc.zgo.at",) for p in pages.values() for x in re.findall(r'<(?:script|img|link rel="stylesheet")[^>]+(?:src|href)="(?:https?:)?//([^/"]+)', p)): probs.append("loads something from elsewhere")
+    if any(not has(f"won/og-{k}.png") or png_size(f"won/og-{k}.png") != "1200x630" for k in WX.LANGS) or any(png_size(f"won/icon-{n}.png") != f"{n}x{n}" for n in (192, 512)): probs.append("pictures")
+    if any(json.loads(rd(WX.DIR[k] + "manifest.webmanifest"))["start_url"] != "/" + WX.DIR[k] or f'href="/{WX.DIR[k]}manifest.webmanifest"' not in pages[k] for k in WX.LANGS): probs.append("manifest")
+    check(not probs, f"Seoul price game: {len(WD.ITEMS)} prices from dated official pages, five languages, in the sitemap only, nothing sent, no payment company named", "; ".join(probs[:5]))
+
     # Search index per language.
     idx_ok = all(len(json.loads(rd(d + "search.json"))["faq"]) > 20 and len(json.loads(rd(d + "search.json"))["cards"]) > 20 for d in LANG_DIRS)
     check(idx_ok, "search index has questions and Korean cards in every language")

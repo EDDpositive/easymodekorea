@@ -1,0 +1,31 @@
+{
+ "id": "/won/",
+ "name": "Won a Day: How much in Seoul?",
+ "short_name": "Won a Day",
+ "lang": "en",
+ "start_url": "/won/",
+ "scope": "/won/",
+ "display": "standalone",
+ "background_color": "#e9efec",
+ "theme_color": "#e9efec",
+ "icons": [
+  {
+   "src": "/won/icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "/won/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "/won/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
+ ]
+}
