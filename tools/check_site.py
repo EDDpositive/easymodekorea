@@ -178,6 +178,33 @@ def main():
             if 'class="ready-cta" href="ready.html"' not in rd(d + g): probs.append(d + g + ": no way into the Ready check")
     check(not probs and "ready.html" in rd("llms.txt"), "Korea Ready check: all languages, taps only, every added fact dated and sourced, reachable from home, My trip, guides and flows", "; ".join(probs[:4]))
 
+    # Search pages (31차): five languages, Korean only on the cards and in the label words a fact quotes, every fact sourced and dated, each page reachable inside the site, no two titles alike.
+    import landing as LD, moments as MO
+    probs = []; titles = {}
+    def five(o, at):
+        if isinstance(o, dict) and set(o) >= set(TR.L5):
+            probs.extend(f"{at}: {l} empty or has Korean in it" for l in TR.L5 if not o[l] or (re.search("[가-힣]", o[l]) and ".facts" not in at))
+        elif isinstance(o, dict): [five(v, f"{at}.{k}") for k, v in o.items()]
+        elif isinstance(o, (list, tuple)): [five(v, at) for v in o]
+    for p in LD.FOOD:
+        five(p, p["slug"])
+        if not all(re.search("[가-힣]", c["ko"]) for c in [p["main"]] + p["more"] + p["ask"]): probs.append(p["slug"] + ": a card has no Korean")
+        if not set(p["pick"].split(",")) <= {a[0] for a in MO.ALLERGY + MO.AVOID}: probs.append(p["slug"] + ": picks a food the food card does not have")
+        probs += [p["slug"] + ": unknown source " + f["src"] for f in p["facts"] if f["src"] not in LD.SRC and f["src"] not in MO.SRC]
+    five(LD.NONUM, LD.NONUM["slug"]); five(LD.T, "text")
+    probs += [k + ": source is not an https link" for k, (_n, u) in LD.SRC.items() if not u.startswith("https://")]
+    for d in LANG_DIRS:
+        for s in LD.SLUGS:
+            page = d + s + ".html"
+            if not has(page): probs.append("missing " + page); continue
+            h = rd(page); ti = re.search("<title>(.*?)</title>", h).group(1)
+            if ti in titles: probs.append(f"{page}: same title as {titles[ti]}")
+            titles[ti] = page
+            if page not in files or f"easymodekorea.com/{page}</loc>" not in sm: probs.append(page + ": not in the offline list or the sitemap")
+            if '"FAQPage"' not in h or '"lastReviewed"' not in h or h.count('rel="alternate"') < 5: probs.append(page + ": structured data or language links missing")
+            if f'href="{s}.html"' not in rd(d + ("refused.html" if s == LD.NONUM["slug"] else "my-card.html")): probs.append(page + ": no link to it inside the site")
+    check(not probs and all(s in rd("llms.txt") for s in LD.SLUGS), f"{len(LD.SLUGS)} search pages: all languages, sourced, linked, on the offline list, no two titles alike", "; ".join(probs[:4]))
+
     # Web manifest.
     m = json.loads(rd("manifest.webmanifest")); probs = []
     for k in ("id", "name", "short_name", "start_url", "scope", "display", "icons", "theme_color", "background_color"):
@@ -204,6 +231,14 @@ def main():
         ok = (tw["packageId"] == A.PACKAGE_ID and tw["host"] == "easymodekorea.com" and tw["startUrl"] == m["start_url"] and tw["backgroundColor"].lower() == m["background_color"].lower()
               and tw["themeColor"].lower() == m["theme_color"].lower() and tw["display"] == "standalone" and not tw.get("enableNotifications"))
         check(ok, "Android wrapper settings match the web manifest")
+
+    # Play listing: every language within Play's limits, and the count written next to each line is the real one.
+    if has("store/listing.md"):
+        ls = rd("store/listing.md").replace("\r\n", "\n")
+        rows = re.findall(r"\*\*(App name|Short description)\*\* \((\d+)\): `([^`]+)`", ls)
+        fulls = re.findall(r"\*\*Full description\*\*\n\n```\n(.*?)\n```", ls, re.S)
+        bad = [t for k, n, t in rows if int(n) != len(t) or len(t) > (30 if k == "App name" else 80)] + [t[:30] for t in fulls if len(t) > 4000]
+        check(len(rows) == 10 and len(fulls) == 5 and not bad, "Play listing: five languages, every text within Play's limits", "; ".join(bad[:3]))
 
     # The signing script shows Korean text; Windows PowerShell only reads that right from UTF-8 with a BOM.
     check(open(os.path.join(ROOT, "android", "sign-aab.ps1"), "rb").read(3) == bytes([0xEF, 0xBB, 0xBF]), "signing script is saved as UTF-8 with BOM")

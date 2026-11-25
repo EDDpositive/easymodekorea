@@ -106,7 +106,8 @@ def main():
 
         small = []
         for page in ("", "taxi.html", "phrases.html", "saved.html", "help.html", "foreign-card-declined-korea.html", "ja/", "vi/phrases.html",
-                     "sos.html", "refused.html", "refused.html#taxi", "refused.html#eat/card", "my-card.html", "vi/my-card.html", "vi/sos.html"):
+                     "sos.html", "refused.html", "refused.html#taxi", "refused.html#eat/card", "my-card.html", "vi/my-card.html", "vi/sos.html",
+                     "nut-allergy-card-korean.html", "ja/korea-without-korean-phone-number.html"):
             b.go(srv.url + page, wait=0.5)
             small += [f"/{page} {x['t']} {x['h']}px" for x in b.js(TAPS)]
         check(not small, "buttons and links are at least 44px tall on the main screens", "; ".join(small[:5]))
@@ -193,6 +194,21 @@ def main():
         b.js("localStorage.removeItem('emk-food')")
         check(empty and fc == 'true|5|true|true|true|{"a":["peanut","fish"],"n":["vegan","a_alc"],"s":1}' and mc == "true|true|5" and st == "✓ Saved|1",
               "taps make a Korean food card with staff answers and label words; it opens ready in another language and the cards tab shows it as saved", f"{empty} {fc} / {mc} / {st}")
+
+        # Search pages: the ready-made card opens full screen with the staff answers, adds its foods to the food card, and prints as the card alone.
+        b.go(srv.url + "nut-allergy-card-korean.html", wait=0.5)
+        lp = b.js("""(() => { document.querySelector('.lp-card [data-fc]').click(); const k = document.getElementById('show-ko').innerText; const a = [...document.querySelectorAll('#ans-btns .ans')]; a[1].click();
+          return [k.includes('땅콩') && k.includes('견과류') && k.includes('육수'), a.length, document.getElementById('ans-out').textContent.includes("It's in it")].join('|'); })()""")
+        b.js("history.back()"); time.sleep(0.3)
+        b.cmd("Emulation.setEmulatedMedia", media="print")
+        pr = b.js("[...document.querySelectorAll('.lp > *, .tabbar, footer')].filter(x => x.getBoundingClientRect().height > 0).map(x => x.className.split(' ')[0]).join()")
+        b.cmd("Emulation.setEmulatedMedia", media="")
+        b.js("localStorage.setItem('emk-food', '{\"a\":[\"egg\"],\"n\":[],\"s\":0}')")
+        b.go(srv.url + "my-card.html#pick=peanut,nuts,glu,zzz", wait=0.6)
+        pk = b.js("localStorage.getItem('emk-food') + '|' + location.hash + '|' + document.querySelectorAll('.lp-nav a').length")
+        b.js("localStorage.removeItem('emk-food')")
+        check(lp == "true|5|true" and pr == "mc-top" and pk == '{"a":["egg","peanut","nuts"],"n":["glu"],"s":0}||7',
+              "a search page shows its Korean card with staff answers, prints the card alone, and adds its foods to the food card", f"{lp} / {pr} / {pk}")
 
         # Refused? place, problem, one answer with Korean cards, the reader's own status and a date; Back walks the steps.
         b.js("localStorage.setItem('wik-setup', 'arc|android')")

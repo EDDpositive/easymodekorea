@@ -18,6 +18,8 @@ import app_shell as A  # noqa: E402
 import trouble as TR  # noqa: E402
 import moments as M  # noqa: E402
 import moments_ui as MU  # noqa: E402
+import landing as LD  # noqa: E402
+import landing_ui as LU  # noqa: E402
 import jp_refund as JP  # noqa: E402
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
@@ -1502,6 +1504,7 @@ def search_index(lang):
     cards += [[ko, m[lang]] for f in TR.FLOWS if f["cards"] != "PAY" for ko, m in f["cards"] if ko not in seen and not seen.add(ko)]
     flows = [[f["slug"], f["title"][lang], f["lede"][lang]] for f in TR.FLOWS]
     flows += [["sos", M.SOS["row"][lang], M.SOS["desc"][lang]], ["refused", M.RF["row"][lang], M.RF["desc"][lang]], ["my-card", M.CARD["row"][lang], M.CARD["desc"][lang]]]
+    flows += [[p["slug"], p["h1"][lang], p["desc"][lang]] for p in LD.FOOD + [LD.NONUM]]
     flows += [[f"refused.html#{p[0]}/{a[0]}", f"{p[2][lang]}: {a[1][lang]}", a[2][lang]] for p in M.REFUSED for a in p[3]]
     return json.dumps({"faq": faq, "cards": cards, "flows": flows}, ensure_ascii=False, separators=(",", ":"))
 
@@ -1628,6 +1631,11 @@ def llms_files():
               "## Public holidays that affect a visit (table updated each December)"] + [
               f"- {a['title']['en']}: {a['from']} to {a['to']}. {a['points'][0]['t']['en']}" for a in TR.ALERTS] + ["",
               "## Tools on the site (work offline once opened)",
+              f"- [Emergency screen]({SITE}sos.html): call 119, 112 or 1330 and get the national point number (the location code Korean rescuers use), worked out on the phone without data, with Korean to show, read or text.",
+              f"- [Korean food card]({SITE}my-card.html): tap what you can't or don't eat, show one Korean card, staff tap a Korean answer the visitor can read; lists the Korean allergen words to look for on packages, checked {M.CHK}.",
+              f"- [Refused? in 3 taps]({SITE}refused.html): restaurant, taxi, transit, train, shop, ATM, app sign-up or online payment; one thing to do now and the Korean to show.",
+              f"- [{LD.NONUM['h1']['en']}]({SITE}{LD.NONUM['slug']}.html): status of taxi, delivery, bookings, maps, trains, T-money and data for a visitor with no Korean number, each with its check date."] + [
+              f"- [{p['h1']['en']}]({SITE}{p['slug']}.html): {p['desc']['en']} Korean: {p['say'][0]} (checked {LD.CHK})" for p in LD.FOOD] + [
               f"- [Korea Ready check]({SITE}ready.html): seven tap questions (Korean number, phone, payment, airport, cities, food rule, dates) give a personal plan built from the dated answers on this site: which apps work with that setup, what to do before the flight, and a readiness score. No account; answers stay on the phone.",
               f"- [Korean cards to show staff and drivers]({SITE}phrases.html): full-screen Korean sentences, place names to copy, the visitor's own cards.",
               f"- [Emergency help in Korea]({SITE}help.html): 112, 119, 1330 and Korean sentences to show.",
@@ -1654,6 +1662,7 @@ def llms_files():
             src = "; ".join((TR.SRC[k][0] + " " + TR.SRC[k][1]) if not k.startswith("guide:") else f"{SITE}{next(sl for tid, sl, _ in TASK_META if tid == k[6:])}.html" for k in s["src"])
             full.append(f"{i}. {s['t']['en']}" + (f" (checked {s['d']}; source: {src})" if s["d"] else ""))
         full += ["", "Korean to show"] + [f"- {ko} = {m['en']}" for ko, m in flow_cards(f)]
+    full += LU.llms_full(B)
     for a in TR.ALERTS:
         full += ["", f"## {a['title']['en']}: {a['from']} to {a['to']}"] + [f"- {p['t']['en']} (source: " + "; ".join(TR.SRC[k][1] for k in p["src"]) + ")" for p in a["points"]]
     write("llms-full.txt", NL.join(full) + NL)
@@ -1681,7 +1690,7 @@ def main():
         paths.append(build_info(lang, "contact"))
         for t in task_list(lang):
             paths.append(build_topic(lang, t))
-        paths += [build_cards(lang), build_help(lang), build_privacy(lang), build_ready(lang), MU.build_sos(B, lang), MU.build_refused(B, lang), MU.build_mycard(B, lang)] + [build_flow(lang, f) for f in TR.FLOWS]
+        paths += [build_cards(lang), build_help(lang), build_privacy(lang), build_ready(lang), MU.build_sos(B, lang), MU.build_refused(B, lang), MU.build_mycard(B, lang)] + [build_flow(lang, f) for f in TR.FLOWS] + LU.build_all(B, lang)
         local.append(build_trip(lang))  # personal page: offline copy, but not in the sitemap
         write(LANGS[lang]["dir"] + "search.json", search_index(lang)); local.append(LANGS[lang]["dir"] + "search.json")
     paths.append("hosts.html")

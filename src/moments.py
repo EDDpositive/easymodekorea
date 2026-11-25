@@ -130,11 +130,12 @@ ALLERGY = [
     ("tomato", "토마토", "토마토", t5("Tomato", "トマト", "番茄", "番茄", "Cà chua"), 0),
     ("sulfite", "아황산류", "아황산류", t5("Sulfites", "亜硫酸塩", "亞硫酸鹽", "亚硫酸盐", "Sunfit"), 0),
 ]
-# Not eaten by choice or belief: id, Korean, names. The first four are whole diets and come first on the card.
+# Not eaten by choice or belief: id, Korean, names. The first five are whole diets and come first on the card.
 AVOID = [
     ("vegan", "저는 비건이에요. 고기, 해산물, 계란, 유제품을 안 먹어요.", t5("Vegan", "ヴィーガン", "純素", "纯素", "Thuần chay"), "diet"),
     ("veg", "저는 채식주의자예요. 고기와 해산물을 안 먹어요.", t5("Vegetarian", "ベジタリアン", "素食", "素食", "Ăn chay"), "diet"),
     ("halal", "저는 할랄 음식을 먹어요. 돼지고기와 술을 안 먹어요.", t5("Halal", "ハラール", "清真", "清真", "Halal"), "diet"),
+    ("glu", "저는 글루텐을 못 먹어요. 밀, 보리, 호밀이 들어간 음식을 못 먹어요.", t5("Gluten free", "グルテンフリー", "無麩質", "无麸质", "Không gluten"), "diet"),
     ("kosher", "저는 코셔 음식을 먹어요. 돼지고기와 조개·갑각류를 안 먹어요.", t5("Kosher", "コーシャ", "猶太潔食", "犹太洁食", "Kosher"), "diet"),
     ("a_meat", "고기", t5("Meat", "肉", "肉類", "肉类", "Thịt"), ""),
     ("a_pork", "돼지고기", t5("Pork", "豚肉", "豬肉", "猪肉", "Thịt lợn"), ""),

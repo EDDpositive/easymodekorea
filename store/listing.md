@@ -11,18 +11,18 @@ Graphics are in this repo: icon `icon-512.png`, feature graphic `store/feature-g
 | Website | https://easymodekorea.com |
 | Privacy policy | https://easymodekorea.com/privacy.html |
 | Contact email | edandco.biz@gmail.com (already public on the site) |
-| Default language | English (United States); add Korean as a second listing |
+| Default language | English (United States); add Japanese, Chinese (Traditional), Chinese (Simplified) and Vietnamese. No Korean listing: the app has no Korean screens |
 
 ## English (default)
 
-**App name** (27): `EasyModeKorea: Korea Travel`
+**App name** (27): `EasyMode Korea Travel Guide`
 
-**Short description** (76): `Refused, lost or hungry in Korea? SOS, food card, next steps. Works offline.`
+**Short description** (74): `Offline Korea guide: SOS, Korean food card, refused card or app, next step`
 
 **Full description**
 
 ```
-Your card is refused. The app wants a Korean phone number. The kitchen can't read your allergy. You can't say where you are. EasyModeKorea gives you the next step in a few taps, even with no signal.
+A Korea travel guide for the moment something goes wrong, and it works offline. Your card is refused. The app wants a Korean phone number. The kitchen can't read your allergy. You can't say where you are. EasyModeKorea gives you the next step in a few taps, even with no signal.
 
 WHEN IT HAPPENS
 • SOS: call 119, 112 or the 1330 interpreter line. Tap "Where am I?" and your phone works out the national point number, the location code Korean rescuers use, without data. Say it, show it in Korean, or open your own messages app with the Korean text ready. Nothing is sent unless you press Send.
@@ -48,7 +48,7 @@ WHILE YOU ARE HERE
 • Share your stay address and place list with a companion by link or QR code.
 
 TOPICS
-Entry rules and arrival forms, airport to the city, subway and bus, transit cards, maps, taxis, KTX trains, mobile data and eSIM, cash and ATMs, restaurant bookings, food delivery, translation, tax-free shopping, luggage storage, power plugs, Busan, Jeju and the DMZ.
+Entry rules and arrival forms, airport to the city, Seoul subway and bus, T-money and transit passes, maps, taxis, KTX trains, mobile data and eSIM, cash and ATMs, restaurant bookings, food delivery without a Korean number, translation, shopping and tax refund, luggage storage, power plugs, Busan, Jeju and the DMZ.
 
 FIVE LANGUAGES
 English, Japanese, Traditional Chinese, Simplified Chinese and Vietnamese.
@@ -62,54 +62,193 @@ EasyModeKorea is an independent guide, not affiliated with any app, company or g
 Questions or corrections: edandco.biz@gmail.com
 ```
 
-## Korean (한국어)
+## Japanese (日本語)
 
-**앱 이름** (24): `EasyModeKorea: 한국 여행 도우미`
+**App name** (23): `EasyMode 韓国旅行ガイド 困ったときに`
 
-**간단한 설명** (51): `한국에서 거절당하거나 길을 잃었을 때. 위치번호 SOS, 음식 카드, 다음 행동. 오프라인.`
+**Short description** (47): `オフラインで使える韓国旅行ガイド。SOS位置番号、韓国語の食事カード、断られたときの次の一手。`
 
-**자세한 설명**
+**Full description**
 
 ```
-카드가 거절되고, 앱이 한국 전화번호를 요구하고, 주방에서 알레르기를 이해하지 못하고, 내가 어디 있는지 말할 수 없을 때. EasyModeKorea는 신호가 없어도 몇 번 눌러서 다음에 할 일을 알려 줍니다.
+韓国旅行で「困った」その瞬間のためのガイドです。通信がなくても開けます。カードが使えない。アプリに韓国の電話番号を求められた。厨房にアレルギーが伝わらない。自分の居場所を説明できない。EasyModeKoreaは、数回のタップで次にやることを1つ示します。
 
-그 순간에
-• SOS: 119, 112, 1330 통역 전화. "Where am I?"를 누르면 폰이 인터넷 없이 국가지점번호(구조대가 쓰는 위치번호)를 계산합니다. 소리 내어 읽거나, 한국어로 보여 주거나, 내 문자 앱에 한국어 문구를 채워 엽니다. 전송을 누르지 않으면 아무것도 보내지 않습니다.
-• 내 음식 카드: 못 먹거나 안 먹는 것을 한 번만 고릅니다. 직원은 큰 한국어로 읽고 답을 누르고, 여행자는 자기 언어로 읽습니다. 포장지에서 찾을 한국어 글자도 보여 줍니다.
-• 거절당했을 때 3번 누르기: 식당, 택시, 지하철·버스, KTX, 가게, ATM, 앱 가입, 온라인 결제. 지금 할 일 하나, 보여 줄 한국어, 내 폰과 카드로 되는지와 확인 날짜.
-• 여행 날짜별 할 일: 날짜를 넣으면 홈에 오늘 할 일만 나옵니다. 도착 날부터 출국 날 순서(짐 부치기 전에 세금 환급)까지. 달력에 넣으면 앱이 닫혀 있어도 알람이 울립니다.
-• 앱 아이콘을 길게 누르면 SOS, Refused?, Food card, My trip이 바로 열립니다.
+困ったとき
+• SOS:119(救急・消防)、112(警察)、1330(通訳・24時間)に電話。「ここはどこ?」を押すと、韓国の救助隊が使う国家地点番号をスマホの中だけで計算します。読み上げる、韓国語で見せる、自分のメッセージアプリに韓国語の文を入れて開く、のどれでも。送信を押さない限り、何も送られません。
+• 食事カード:食べられないもの、食べないものを一度だけ選びます。スタッフは大きな韓国語を読んで答えを押し、あなたは日本語で読みます。包装で探す韓国語の文字も分かります。
+• 断られたら3タップ:飲食店、タクシー、地下鉄・バス、KTX、店、ATM、アプリ登録、オンライン決済。今やること1つ、見せる韓国語、あなたのスマホとカードでの状況と確認日。
+• 旅行日程:日付を入れると、その日にやることだけがホームに出ます。出国日は順番どおり(荷物を預ける前に免税手続き)。カレンダーに入れれば、アプリを閉じていても知らせます。
+• アイコンの長押しで、SOS、断られたとき、食事カード、マイページへ。
 
-출발 전
-• Korea Ready 점검: 입력 없이 몇 번 탭하면 내 폰·카드·일정에 맞춘 준비 계획이 나옵니다.
-• 짧은 답 먼저: 결론, 장소, 비용, 시간, 그다음 번호 순서. 핵심 사실마다 확인한 날짜와 출처, 올해 바뀐 내용이 있습니다.
-• 내 폰 기준 답: 한국 번호가 있는지 한 번만 알려 주면 나에게 되는 방법을 보여 줍니다.
-• 입국 도우미: 도착 시각을 넣으면 전자도착카드를 언제부터 낼 수 있는지 알려 줍니다.
-• 여행 날짜에 맞춘 명절 알림: 설과 추석에 여행자에게 달라지는 점.
+出発前
+• Korea Readyチェック:入力なし、タップだけで、あなたのスマホ・カード・日程に合わせた準備リスト。
+• 短い答えが先:結論、場所、費用と時間、次に番号つきの手順。大事な事実には確認日と出典があります。
+• 到着時刻を入れると、電子入国カード(e-Arrival Card)をいつから出せるか分かります。
+• 旅行日に旧正月や秋夕が重なると、何が変わるかを知らせます。
 
-여행 중
-• 한국어 카드: 기사님이나 직원에게 큰 한국어 글씨로 보여 줍니다. 호텔 이름 카드도 직접 만들 수 있습니다. 폰에 한국어 음성이 있으면 소리 내어 읽습니다.
-• 답 고르기 카드: 질문("카드 결제 돼요?")을 보여 주면 직원이 한국어 답을 누르고, 여행자는 자기 언어로 읽습니다.
-• 주변 찾기: 편의점, 화장실, 지하철역, 파출소, 약국을 맞는 한국어 검색어로 네이버 지도에서 엽니다.
-• 갈 곳 목록: 숙소와 장소를 저장해 두고 기사님에게 보여 주거나 네이버 지도·카카오맵으로 엽니다.
-• 문제가 생겼을 때: 휴대폰·여권 분실, 막차 놓침, 카드 거절, 택시 문제. 한 화면에 순서대로, 전화 버튼과 날짜 있는 출처.
-• 진짜 오프라인 팩: 가이드, 카드, SOS, 여행 목록이 신호 없이 열리고, 모두 저장됐는지 알려 줍니다.
-• 숙소 주소와 갈 곳 목록을 링크나 QR로 일행에게 넘길 수 있습니다.
+滞在中
+• 韓国語カード:運転手さんや店員さんに大きな韓国語で見せます。ホテル名のカードも作れます。スマホに韓国語の音声があれば読み上げます。
+• 質問カード:「カードで払えますか?」などを見せると、相手が韓国語の答えを押し、日本語で読めます。
+• コンビニ、トイレ、地下鉄駅、交番、薬局を、正しい韓国語でNaver Mapに開きます。
+• 宿と行きたい場所を保存して運転手さんに見せる、Naver MapやKakaoMapで開く。
+• スマホやパスポートの紛失、終電を逃した、カードが使えない、タクシーのトラブル。1画面に手順と電話ボタン、日付つきの出典。
 
-주제
-입국 규정과 도착 서류, 공항에서 시내로, 지하철과 버스, 교통카드, 지도, 택시, KTX, 데이터와 eSIM, 현금과 ATM, 식당 예약, 음식 배달, 번역, 면세 쇼핑, 짐 보관, 전원 플러그, 부산·제주·DMZ.
+テーマ
+入国ルール、空港から市内、ソウルの地下鉄・バス、T-moneyと交通パス、地図、タクシー、KTX、eSIMとデータ、現金とATM、飲食店の予約、デリバリー、翻訳、買い物と免税、荷物の預け、電源プラグ、釜山、済州、DMZ。
 
-5개 언어
-영어, 일본어, 중국어 번체, 중국어 간체, 베트남어. (앱 화면은 한국어를 지원하지 않습니다.)
+5言語:英語、日本語、中国語(繁体字・簡体字)、ベトナム語。
 
-개인정보를 모으지 않습니다
-가입도 광고도 없습니다. 고른 답, 음식 카드, 날짜, 주소, 카드는 폰 안에만 남습니다. 위치는 누를 때만 읽고, 폰 안에서 계산하며, 우리에게 보내지 않습니다.
+登録も広告もありません。答え、食事カード、日付、住所はスマホの中だけに残ります。位置は押したときだけ読み、スマホの中で計算し、こちらには送りません。
 
-독립 운영
-EasyModeKorea는 독립적으로 운영하는 안내서이며, 소개하는 앱, 회사, 정부 기관과 제휴 관계가 없습니다. 응급·의료 서비스가 아닙니다. 응급이면 119나 112에 전화하고, 건강 문제는 의사나 약사에게 물어보세요. 규정은 자주 바뀌므로 공식 앱이나 사이트에서 한 번 더 확인하세요.
+EasyModeKoreaは独立したガイドで、紹介するアプリ、会社、政府機関とは関係ありません。救急・医療サービスではありません。緊急のときは119か112に電話し、体のことは医師や薬剤師に聞いてください。ルールはよく変わるため、公式アプリやサイトで確認してから頼ってください。
 
-문의·정정: edandco.biz@gmail.com
+質問・訂正:edandco.biz@gmail.com
 ```
+
+## Chinese, Traditional (繁體中文)
+
+**App name** (21): `EasyMode 韓國旅遊自由行 離線指南`
+
+**Short description** (42): `離線可用的韓國自由行指南:SOS位置編號、韓文飲食卡、刷卡或App被拒絕時的下一步。`
+
+**Full description**
+
+```
+為韓國旅遊「卡住的那一刻」做的指南,沒有網路也能打開。刷卡被拒絕、App要韓國電話號碼、廚房看不懂你的過敏、說不出自己在哪裡。EasyModeKorea用幾次點按告訴你下一步。
+
+發生狀況時
+• SOS:撥打119(救護、消防)、112(警察)、1330(24小時口譯)。點「我在哪裡?」,手機不用網路就算出韓國救援人員使用的國家地點編號。可以唸出來、用韓文給人看,或開啟你自己的簡訊App並填好韓文。不按傳送就不會傳送任何內容。
+• 我的飲食卡:把不能吃或不吃的東西選一次。店員看大字韓文並點回答,你用中文看。也列出包裝上要找的韓文字。
+• 被拒絕?點三下:餐廳、計程車、地鐵與公車、KTX、商店、ATM、App註冊、線上付款。現在做的一件事、給對方看的韓文,以及以你的手機和卡來說能不能用,附確認日期。
+• 旅程日期:輸入日期,首頁只顯示當天要做的事,從抵達到離境依順序(行李託運前先辦退稅)。加進行事曆,App關著也會提醒。
+• 長按App圖示:SOS、被拒絕?、飲食卡、我的旅程。
+
+出發前
+• Korea Ready檢查:不用打字,點幾下就有符合你的手機、卡片和行程的準備清單。
+• 先給短答案:結論、地點、費用與時間,再來是編號步驟。重要資訊附確認日期和來源。
+• 輸入抵達時間,就知道電子入境卡(e-Arrival Card)什麼時候可以填。
+• 旅程遇到春節或中秋,告訴你旅客會受什麼影響。
+
+在韓國
+• 韓文卡:用大字韓文給司機或店員看,也能做飯店名稱卡。手機有韓文語音時可以播放。
+• 問答卡:出示「可以刷卡嗎?」等問題,對方點韓文回答,你用中文看。
+• 一鍵用正確的韓文在Naver Map找便利商店、洗手間、地鐵站、派出所、藥局。
+• 儲存住宿和想去的地方,全螢幕給司機看,或用Naver Map、KakaoMap開啟。
+• 遺失手機或護照、錯過末班車、刷卡被拒、計程車糾紛。一個畫面,依序做,附電話按鈕和有日期的來源。
+
+主題
+入境規定、機場到市區、首爾地鐵與公車、T-money與交通票券、地圖、計程車、KTX、eSIM與上網、現金與ATM、餐廳訂位、叫外送、翻譯、購物與退稅、寄放行李、插頭、釜山、濟州、DMZ。
+
+5種語言:英文、日文、繁體中文、簡體中文、越南文。
+
+不用註冊,沒有廣告。你的回答、飲食卡、日期、地址都只留在手機裡。只有你點的時候才讀取位置,在手機裡計算,不會傳給我們。
+
+EasyModeKorea是獨立指南,與介紹的App、公司、政府機關沒有合作關係。這不是緊急或醫療服務:緊急時請打119或112,身體問題請問醫師或藥師。規定常變,使用前請在官方App或網站再確認。
+
+問題或更正:edandco.biz@gmail.com
+```
+
+## Chinese, Simplified (简体中文)
+
+**App name** (21): `EasyMode 韩国旅游自由行 离线指南`
+
+**Short description** (42): `离线可用的韩国自由行指南:SOS位置编号、韩语饮食卡、刷卡或App被拒绝时的下一步。`
+
+**Full description**
+
+```
+为韩国旅游“卡住的那一刻”做的指南,没有网络也能打开。刷卡被拒绝、App要韩国手机号、厨房看不懂你的过敏、说不出自己在哪里。EasyModeKorea用几次点按告诉你下一步。
+
+发生状况时
+• SOS:拨打119(急救、消防)、112(警察)、1330(24小时口译)。点“我在哪里?”,手机不用网络就算出韩国救援人员使用的国家地点编号。可以念出来、用韩文给人看,或打开你自己的短信App并填好韩文。不按发送就不会发送任何内容。
+• 我的饮食卡:把不能吃或不吃的东西选一次。店员看大字韩文并点回答,你用中文看。也列出包装上要找的韩文字。
+• 被拒绝?点三下:餐厅、出租车、地铁和公交、KTX、商店、ATM、App注册、在线付款。现在做的一件事、给对方看的韩文,以及以你的手机和卡来说能不能用,附确认日期。
+• 行程日期:输入日期,首页只显示当天要做的事,从到达到离境按顺序(行李托运前先办退税)。加进日历,App关着也会提醒。
+• 长按App图标:SOS、被拒绝?、饮食卡、我的行程。
+
+出发前
+• Korea Ready检查:不用打字,点几下就有符合你的手机、卡片和行程的准备清单。
+• 先给短答案:结论、地点、费用与时间,再来是编号步骤。重要信息附确认日期和来源。
+• 输入到达时间,就知道电子入境卡(e-Arrival Card)什么时候可以填。
+• 行程遇到春节或中秋,告诉你旅客会受什么影响。
+
+在韩国
+• 韩语卡:用大字韩文给司机或店员看,也能做酒店名称卡。手机有韩语语音时可以播放。
+• 问答卡:出示“可以刷卡吗?”等问题,对方点韩文回答,你用中文看。
+• 一键用正确的韩文在Naver Map找便利店、洗手间、地铁站、派出所、药店。
+• 保存住宿和想去的地方,全屏给司机看,或用Naver Map、KakaoMap打开。
+• 丢手机或护照、错过末班车、刷卡被拒、出租车纠纷。一个画面,按顺序做,附电话按钮和有日期的来源。
+
+主题
+入境规定、机场到市区、首尔地铁和公交、T-money与交通票券、地图、出租车、KTX、eSIM与上网、现金与ATM、餐厅订座、点外卖、翻译、购物与退税、寄存行李、插头、釜山、济州、DMZ。
+
+5种语言:英文、日文、繁体中文、简体中文、越南文。
+
+不用注册,没有广告。你的回答、饮食卡、日期、地址都只留在手机里。只有你点的时候才读取位置,在手机里计算,不会发给我们。
+
+EasyModeKorea是独立指南,与介绍的App、公司、政府机关没有合作关系。这不是紧急或医疗服务:紧急时请打119或112,身体问题请问医生或药师。规定常变,使用前请在官方App或网站再确认。
+
+问题或更正:edandco.biz@gmail.com
+```
+
+## Vietnamese (Tiếng Việt)
+
+**App name** (25): `EasyMode Du lịch Hàn Quốc`
+
+**Short description** (76): `Cẩm nang du lịch Hàn Quốc không cần mạng: SOS, thẻ món ăn, việc cần làm ngay`
+
+**Full description**
+
+```
+Cẩm nang du lịch Hàn Quốc cho đúng lúc bạn bị kẹt, mở được cả khi không có mạng. Thẻ bị từ chối. Ứng dụng đòi số điện thoại Hàn. Nhà bếp không hiểu bạn dị ứng gì. Bạn không nói được mình đang ở đâu. EasyModeKorea chỉ ra việc cần làm tiếp theo chỉ sau vài lần chạm.
+
+KHI CÓ CHUYỆN
+• SOS: gọi 119 (cấp cứu, cứu hỏa), 112 (cảnh sát) hoặc 1330 (phiên dịch 24 giờ). Chạm "Tôi đang ở đâu?" và điện thoại tự tính mã vị trí quốc gia mà đội cứu hộ Hàn Quốc dùng, không cần mạng. Đọc mã, cho xem bằng tiếng Hàn, hoặc mở ứng dụng tin nhắn của bạn với sẵn câu tiếng Hàn. Không bấm Gửi thì không có gì được gửi đi.
+• Thẻ ăn uống của tôi: chọn một lần những món bạn không ăn được hoặc không ăn. Nhân viên đọc chữ Hàn lớn và chạm câu trả lời, bạn đọc bằng tiếng Việt. Có cả các từ tiếng Hàn cần tìm trên bao bì.
+• Bị từ chối? 3 lần chạm: nhà hàng, taxi, tàu điện và xe buýt, KTX, cửa hàng, ATM, đăng ký ứng dụng, thanh toán online. Một việc cần làm ngay, câu tiếng Hàn để cho xem, và tình trạng với điện thoại và thẻ của bạn kèm ngày kiểm tra.
+• Ngày đi của bạn: nhập ngày, trang chủ chỉ hiện việc của hôm nay, theo đúng thứ tự từ lúc đến tới lúc về (hoàn thuế trước khi ký gửi hành lý). Thêm vào lịch để được nhắc cả khi ứng dụng đã đóng.
+• Nhấn giữ biểu tượng để mở SOS, Bị từ chối?, Thẻ ăn uống và Chuyến đi của tôi.
+
+TRƯỚC KHI BAY
+• Kiểm tra Korea Ready: không cần gõ, chỉ vài lần chạm là có danh sách chuẩn bị cho điện thoại, thẻ và lịch trình của bạn.
+• Câu trả lời ngắn trước: kết luận, ở đâu, giá và thời gian, rồi các bước. Thông tin quan trọng đều có ngày kiểm tra và nguồn.
+• Nhập giờ hạ cánh để biết khi nào nộp được thẻ nhập cảnh điện tử (e-Arrival Card).
+• Nếu chuyến đi trùng Tết Hàn hoặc Chuseok, bạn được báo những gì thay đổi.
+
+KHI Ở HÀN QUỐC
+• Thẻ tiếng Hàn: cho tài xế hoặc nhân viên xem câu chữ lớn. Tự tạo thẻ tên khách sạn. Nghe đọc nếu điện thoại có giọng tiếng Hàn.
+• Thẻ hỏi: cho xem "Trả bằng thẻ được không?", nhân viên chạm câu trả lời tiếng Hàn, bạn đọc bằng tiếng Việt.
+• Một chạm để mở Naver Map với đúng từ tiếng Hàn: cửa hàng tiện lợi, nhà vệ sinh, ga tàu điện, đồn cảnh sát, nhà thuốc.
+• Lưu chỗ ở và nơi muốn đến, cho tài xế xem hoặc mở bằng Naver Map, KakaoMap.
+• Mất điện thoại hoặc hộ chiếu, lỡ chuyến tàu cuối, thẻ bị từ chối, rắc rối taxi. Mỗi việc một màn hình, từng bước, có nút gọi và nguồn kèm ngày.
+
+CHỦ ĐỀ
+Quy định nhập cảnh, từ sân bay vào thành phố, tàu điện và xe buýt Seoul, T-money và vé đi lại, bản đồ, taxi, tàu KTX, eSIM và dữ liệu, tiền mặt và ATM, đặt bàn, giao đồ ăn, dịch thuật, mua sắm và hoàn thuế, gửi hành lý, ổ cắm điện, Busan, Jeju, DMZ.
+
+5 NGÔN NGỮ
+Anh, Nhật, Trung phồn thể, Trung giản thể, Việt.
+
+Không cần tài khoản, không quảng cáo. Câu trả lời, thẻ ăn uống, ngày đi và địa chỉ chỉ nằm trên điện thoại. Vị trí chỉ được đọc khi bạn chạm, tính ngay trên máy và không gửi cho chúng tôi.
+
+EasyModeKorea là cẩm nang độc lập, không liên kết với ứng dụng, công ty hay cơ quan nhà nước nào được nhắc tới. Đây không phải dịch vụ cấp cứu hay y tế: khi khẩn cấp hãy gọi 119 hoặc 112, và hỏi bác sĩ hoặc dược sĩ về sức khỏe. Quy định thay đổi thường xuyên, hãy xác nhận trên ứng dụng hoặc trang chính thức.
+
+Câu hỏi hoặc góp ý: edandco.biz@gmail.com
+```
+
+## Why these words (public Play search, read 2026-11-25)
+
+Rank and installs are what the public Play pages show without a login; how many people search is not shown (not confirmed).
+
+| Search | What the first results are | What we do |
+|---|---|---|
+| korea travel guide (US) | Two official apps (500K+), then two new small apps in 3rd and 4th place (10+ and 0+ installs) | The exact phrase goes into the English name. Ranking is easy; the two small apps show it brings very few installs |
+| du lịch hàn quốc (VN) | Three English-named apps first; one app has the phrase in its Vietnamese name (5K+) and is 6th of only 9 results | Vietnamese name with the exact phrase: the widest gap |
+| 韓國旅遊 / 韓國自由行 (TW) | Creatrip (100K+), map, subway and taxi apps, most with Chinese names; an app with 10+ installs is 6th for 韓國旅遊 because the phrase is in its name | Traditional Chinese name with both words and 離線 |
+| 韩国旅游 / 韩国自由行 (SG) | The same apps with Chinese names | Simplified Chinese name with both words; Google Play is not in mainland China, so expect little |
+| 韓国旅行 ガイド (JP) | Konest map and subway (100K+) and a 10K+ trip app, all with Japanese names | Japanese name, but expect little |
+| korean food card, korea offline guide (US) | Recipes, language courses | Not used as main words |
+
+Not used: "allergy" in a name (a food card is not a health app, and the health form says none), other companies' names in a name, "best", "free", "No. 1", lists of words.
 
 ## App content forms (draft answers)
 

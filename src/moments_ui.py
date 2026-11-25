@@ -81,6 +81,7 @@ def build_mycard(B, lang):
 <section class="mc-label" id="mc-label" aria-labelledby="ml-h" hidden><h2 id="ml-h" class="mc-h">{e(t['label_h'])}</h2><ul class="mc-words" id="mc-words"></ul><div class="mc-off" id="mc-off"></div><p class="mc-off" id="mc-nuts" hidden>{e(t['label_nuts'])}</p><p class="mc-off" id="mc-new" hidden>{e(t['label_new'])}</p><p class="fact-src">{checked(B, lang, M.CHK)} {source_links(B, lang, ['label', 'label28'])}</p></section>
 <section class="mc-sec" aria-labelledby="ma2"><h2 id="ma2" class="mc-h">{e(t['no_h'])}</h2><div class="tgs">{tg("n", [(a[0], a[2][lang]) for a in M.AVOID])}</div></section>
 <p class="mc-foot"><span>{e(t['note'])}</span><button type="button" class="linkbtn" data-clear>{e(t['clear'])}</button></p>
+{B.LU.ready_links(B, lang)}
 <script type="application/json" id="mc-data">{js_json(data)}</script>"""
     return B.app_page(lang, "my-card", (t["title"], t["lede"]), t["seo"], t["desc"], inner, "cards", MYCARD_JS, back_to="phrases.html")
 
@@ -120,6 +121,7 @@ def build_refused(B, lang):
     inner = f"""<div id="rf"><section id="rf-1"><h2 tabindex="-1">{e(t['q1'])}</h2><nav class="rf-g" aria-label="{e(t['q1'])}">{''.join(tiles)}</nav></section>
 {''.join(steps)}{''.join(answers)}</div>
 <a class="call rf-1330" href="tel:+82-2-1330" aria-label="{e(A.T[lang]['call'])} 1330: {e(t['stuck'])}"><b>1330</b><span>{e(t['stuck'])}</span><i aria-hidden="true">{A.IC['phone']}</i></a>
+{B.LU.nonum_link(B, lang)}
 <script type="application/json" id="rf-data">{js_json(data)}</script>"""
     path = L["dir"] + "refused.html"
     ld = {"@context": "https://schema.org", "@type": "FAQPage", "@id": B.SITE + path, "url": B.SITE + path, "name": t["title"], "inLanguage": L["html_lang"], "mainEntity": faq}
