@@ -981,6 +981,7 @@ h1:lang(ja), h2:lang(ja), .lp:lang(ja) { word-break: auto-phrase; }
 .lp-chg li { padding-left: 12px; border-left: 3px solid var(--easy); line-height: 1.45; }
 .lp-chg time { display: block; font-size: 13px; color: var(--muted); }
 @media print {
-  .lp > *:not(.lp-card), .lp-acts, .lp-card .btn, .lp-card .hint, .hero .top-actions, footer, .fb, .show { display: none !important; }
-  .lp-card { border: 2px solid #000; } .lp-card .mc-prev { font-size: 30px; }
+  .lp > *:not(.lp-card), .lp-acts, .lp-card .btn, .lp-card .hint, body:has(.lp-card) .hero, .toast, .install-bar, footer, .fb, .show { display: none !important; }
+  .lp-card::after { content: "easymodekorea.com"; font-size: 12px; }
+  .lp-card { border: 2px solid #000; } .lp-card .mc-prev { font-size: 30px; } body, .lp-card, .lp-card p { color: #000 !important; background: #fff !important; }
 }
