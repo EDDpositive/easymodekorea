@@ -12,7 +12,7 @@ Claude는 로그인, 비밀번호 입력, 약관 동의, 업로드, 제출을 �
 - 끝남: 개발자 계정 만들기(개인, 이름 "EasyModeKorea", 사업용 지메일 계정, 등록비 결제). 사이트 반영(PR #9, #11 머지). 스토어 문구·스크린샷 8장·출시 노트([store/release-notes.md](../store/release-notes.md)). 앱 파일(서명 전).
 - 막힌 곳: 플레이 콘솔 홈의 세 가지가 모두 "조치 필요"라 **"앱 만들기" 버튼이 꺼져 있습니다**. 2026-11-23 크롬에서 다시 봤을 때도 "본인 확인"에 서류 올리기 창이 그대로 있었습니다.
 
-- **2026-11-25: 앱을 설치할 이유가 있게 다시 만들었습니다**(SOS 위치번호, 음식 카드, 거절당했을 때 3번 누르기, 여행 날짜별 할 일, 앱 아이콘 바로가기 4개). 그 PR을 머지한 뒤에 앱 파일을 **다시 만들어야** 합니다. 11-23에 받아 둔 파일은 바로가기가 옛것이라 올리지 않습니다.
+- **2026-11-25: 앱을 설치할 이유가 있게 다시 만들었습니다**(SOS 위치번호, 음식 카드, 거절당했을 때 3번 누르기, 여행 날짜별 할 일, 앱 아이콘 바로가기 4개). PR #13으로 사이트에 반영했고 앱 파일도 다시 만들었습니다(아래 3번).
 - **개인 계정은 건강 기능이 있는 앱을 낼 수 없습니다**([구글 안내](https://support.google.com/googleplay/android-developer/answer/13634885), 2026-11-25 확인). 그래서 병력·약·혈액형 카드는 이번 버전에서 뺐습니다. 자세한 이유는 listing.md의 "Health question".
 
 ## 1. 계정 확인 (기웅 님, 순서대로)
@@ -33,7 +33,7 @@ Claude는 로그인, 비밀번호 입력, 약관 동의, 업로드, 제출을 �
 ## 3. 앱 파일 만들기와 서명 (이 PC에서 한 번)
 개발자 계정 인증을 기다리는 동안 해 둘 수 있습니다.
 - [ ] 자바 설치(무료, 약 180MB). PowerShell에서 `winget install EclipseAdoptium.Temurin.17.JDK`
-- [ ] (PR 머지 뒤) main 기준 앱 파일 다시 빌드: 버전 1.0.0, 코드 1. Claude가 만들어 `내 사용자 폴더\.emk-android\out\main-1.0.0\easymodekorea-unsigned.aab`에 바꿔 넣습니다. **바꿨다고 말하기 전에는 서명하지 마세요**(지금 있는 파일은 옛 바로가기).
+- [x] main 기준 앱 파일 다시 빌드: 버전 1.0.0, 코드 1(2026-11-25, PR #13 머지 뒤). 바로가기 4개와 위치 권한 없음을 파일 안에서 확인. 서명할 파일: `내 사용자 폴더\.emk-android\out\main-1.0.0\easymodekorea-unsigned.aab` (옛 파일은 `old-2026-11-22-do-not-sign` 폴더)
 - [ ] 새 PowerShell 창에서 실행(서명 스크립트 사본도 같은 폴더에 있습니다): `powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\.emk-android\sign-aab.ps1" -Aab "$env:USERPROFILE\.emk-android\out\main-1.0.0\easymodekorea-unsigned.aab"`
   - 처음 한 번은 **새 비밀번호를 직접 정해 두 번 입력**합니다. 이 비밀번호와 `내 사용자 폴더\.emk-android\emk-upload.jks` 파일은 꼭 따로 보관하세요. 둘 다 잃으면 구글에 재설정을 요청해야 합니다.
   - 끝나면 서명된 파일(`easymodekorea-날짜.aab`)이 있는 폴더가 열리고, "지문(SHA-256)" 한 줄이 나옵니다.
