@@ -1,10 +1,10 @@
 {
 "": {
-"h": "be648a655d13f448",
+"h": "862b298982bdffe0",
 "d": "2026-11-25"
 },
 "about.html": {
-"h": "3da611eafdca64af",
+"h": "5247402d356a1473",
 "d": "2026-11-25"
 },
 "atm-foreign-card-cash.html": {
@@ -12,11 +12,11 @@
 "d": "2026-11-25"
 },
 "changes.html": {
-"h": "fb3a3d9b6f121202",
+"h": "3fbc24c0f63aeb31",
 "d": "2026-11-25"
 },
 "contact.html": {
-"h": "3b92822fa10b7611",
+"h": "2b684bd71f82b884",
 "d": "2026-11-25"
 },
 "dmz-jsa-tour-booking.html": {
@@ -24,7 +24,7 @@
 "d": "2026-11-25"
 },
 "egg-milk-allergy-card-korean.html": {
-"h": "f00ae5f8677f77fd",
+"h": "16c23207a6dbb2db",
 "d": "2026-11-25"
 },
 "food-delivery.html": {
@@ -32,7 +32,7 @@
 "d": "2026-11-25"
 },
 "foreign-card-declined-korea.html": {
-"h": "cca53a24cfdc0f81",
+"h": "b123ad035f18dc23",
 "d": "2026-11-25"
 },
 "gimpo-airport-to-seoul.html": {
@@ -40,27 +40,27 @@
 "d": "2026-11-25"
 },
 "gluten-free-card-korean.html": {
-"h": "37f905b8dcb5f65e",
+"h": "5e686691d97c8537",
 "d": "2026-11-25"
 },
 "help.html": {
-"h": "90e7619b255991fd",
+"h": "14cc54bd0c3723c5",
 "d": "2026-11-25"
 },
 "hosts.html": {
-"h": "b50f3e0aee4fb922",
-"d": "2026-11-20"
+"h": "6930a7151d11e9b0",
+"d": "2026-11-27"
 },
 "incheon-airport-to-seoul.html": {
 "h": "2deb2063498e7b68",
 "d": "2026-11-25"
 },
 "ja/": {
-"h": "a8cb2ce93f538add",
+"h": "cbd0f718e7670b79",
 "d": "2026-11-25"
 },
 "ja/about.html": {
-"h": "875e8514602c5501",
+"h": "c5e97961602f0b34",
 "d": "2026-11-25"
 },
 "ja/atm-foreign-card-cash.html": {
@@ -68,11 +68,11 @@
 "d": "2026-11-25"
 },
 "ja/changes.html": {
-"h": "7929663559da89dc",
+"h": "167f59c86ef5960f",
 "d": "2026-11-25"
 },
 "ja/contact.html": {
-"h": "21dc1169a5bfb95e",
+"h": "cd9c43592b703508",
 "d": "2026-11-25"
 },
 "ja/dmz-jsa-tour-booking.html": {
@@ -80,7 +80,7 @@
 "d": "2026-11-25"
 },
 "ja/egg-milk-allergy-card-korean.html": {
-"h": "e71c2ccf9df30a15",
+"h": "4e2283843e4969b8",
 "d": "2026-11-25"
 },
 "ja/food-delivery.html": {
@@ -88,7 +88,7 @@
 "d": "2026-11-25"
 },
 "ja/foreign-card-declined-korea.html": {
-"h": "1e2be5eee2357f30",
+"h": "d89dd7902d47baf6",
 "d": "2026-11-25"
 },
 "ja/gimpo-airport-to-seoul.html": {
@@ -96,11 +96,11 @@
 "d": "2026-11-25"
 },
 "ja/gluten-free-card-korean.html": {
-"h": "9c8ef6cf98659aaf",
+"h": "836d7fb1d87cfbca",
 "d": "2026-11-25"
 },
 "ja/help.html": {
-"h": "b03a0069381e01e7",
+"h": "0db9169175a902c5",
 "d": "2026-11-25"
 },
 "ja/incheon-airport-to-seoul.html": {
@@ -120,7 +120,7 @@
 "d": "2026-11-25"
 },
 "ja/korea-without-korean-phone-number.html": {
-"h": "d45640d10d8d69b4",
+"h": "14ccd3b073c8bbc3",
 "d": "2026-11-25"
 },
 "ja/kr-pass-korail-pass.html": {
@@ -132,7 +132,7 @@
 "d": "2026-11-25"
 },
 "ja/lost-phone-wallet-passport.html": {
-"h": "2c5185abe0525760",
+"h": "2d94baad34ef1186",
 "d": "2026-11-25"
 },
 "ja/luggage-storage.html": {
@@ -144,7 +144,7 @@
 "d": "2026-11-25"
 },
 "ja/missed-last-train-seoul.html": {
-"h": "1f46b661df935e6e",
+"h": "150371e59d16b7ca",
 "d": "2026-11-25"
 },
 "ja/mobile-data-sim.html": {
@@ -152,15 +152,15 @@
 "d": "2026-11-25"
 },
 "ja/my-card.html": {
-"h": "9e92c8b6926ec41f",
+"h": "aaf45212881a27d3",
 "d": "2026-11-25"
 },
 "ja/no-pork-halal-card-korean.html": {
-"h": "ed025df6043a5424",
+"h": "f120033ccaa340eb",
 "d": "2026-11-25"
 },
 "ja/nut-allergy-card-korean.html": {
-"h": "31947dbbded3e51f",
+"h": "053c898fa48315c2",
 "d": "2026-11-25"
 },
 "ja/pharmacy-hospital.html": {
@@ -168,19 +168,19 @@
 "d": "2026-11-25"
 },
 "ja/phrases.html": {
-"h": "d1092b89bb4ae90b",
+"h": "3f973dc86eba52eb",
 "d": "2026-11-25"
 },
 "ja/privacy.html": {
-"h": "88db3cf6876b5100",
+"h": "88ba96bb5d25164c",
 "d": "2026-11-25"
 },
 "ja/ready.html": {
-"h": "51c3a996030b9001",
+"h": "da3884c6487a1911",
 "d": "2026-11-25"
 },
 "ja/refused.html": {
-"h": "8b4772524f595f41",
+"h": "041385dbb60f3372",
 "d": "2026-11-25"
 },
 "ja/restaurant-reservations.html": {
@@ -196,19 +196,19 @@
 "d": "2026-11-25"
 },
 "ja/sesame-allergy-card-korean.html": {
-"h": "373a5d04c9fa0607",
+"h": "e42d58f6e0f07831",
 "d": "2026-11-25"
 },
 "ja/shellfish-allergy-card-korean.html": {
-"h": "aad8bb8ba39b2275",
+"h": "38fd3c07ec9864f7",
 "d": "2026-11-25"
 },
 "ja/sick-or-hurt-what-to-do.html": {
-"h": "d4b8532b556cc5a9",
+"h": "93e2f2da59bfe31a",
 "d": "2026-11-25"
 },
 "ja/sos.html": {
-"h": "c53b72b6d27df17d",
+"h": "6b093e17ebc3060d",
 "d": "2026-11-25"
 },
 "ja/tax-free-shopping.html": {
@@ -216,7 +216,7 @@
 "d": "2026-11-25"
 },
 "ja/taxi-problem-overcharge-korea.html": {
-"h": "9b74a70623cf95e0",
+"h": "b94e35b13c07aeff",
 "d": "2026-11-25"
 },
 "ja/taxi.html": {
@@ -232,7 +232,7 @@
 "d": "2026-11-25"
 },
 "ja/vegetarian-vegan-card-korean.html": {
-"h": "b6c8fd2543b0f5ad",
+"h": "b8f18b47c6af8214",
 "d": "2026-11-25"
 },
 "jeju-getting-around.html": {
@@ -252,7 +252,7 @@
 "d": "2026-11-25"
 },
 "korea-without-korean-phone-number.html": {
-"h": "b8947141d81baeb3",
+"h": "f8eef170bb99874b",
 "d": "2026-11-25"
 },
 "kr-pass-korail-pass.html": {
@@ -264,7 +264,7 @@
 "d": "2026-11-25"
 },
 "lost-phone-wallet-passport.html": {
-"h": "3d77a75038eb71b7",
+"h": "a117d0677b53de7b",
 "d": "2026-11-25"
 },
 "luggage-storage.html": {
@@ -276,7 +276,7 @@
 "d": "2026-11-25"
 },
 "missed-last-train-seoul.html": {
-"h": "04eae073f92d15af",
+"h": "16451def668d95f2",
 "d": "2026-11-25"
 },
 "mobile-data-sim.html": {
@@ -284,15 +284,15 @@
 "d": "2026-11-25"
 },
 "my-card.html": {
-"h": "265a5b4366be76b3",
+"h": "192a0ae73bf896fa",
 "d": "2026-11-25"
 },
 "no-pork-halal-card-korean.html": {
-"h": "22d42c17c86b40c6",
+"h": "20190c3a7015d118",
 "d": "2026-11-25"
 },
 "nut-allergy-card-korean.html": {
-"h": "7b2e732a7689e9ec",
+"h": "180959213662ecbc",
 "d": "2026-11-25"
 },
 "pharmacy-hospital.html": {
@@ -300,19 +300,19 @@
 "d": "2026-11-25"
 },
 "phrases.html": {
-"h": "201eaa6721b04828",
+"h": "df8b8641d821a92f",
 "d": "2026-11-25"
 },
 "privacy.html": {
-"h": "63de6717ab0d3c63",
+"h": "3353edf7022ec402",
 "d": "2026-11-25"
 },
 "ready.html": {
-"h": "02529d26f39e6562",
+"h": "dbe5eabf3accb540",
 "d": "2026-11-25"
 },
 "refused.html": {
-"h": "883f38ef2dfc4ca7",
+"h": "a9224a2cc628c4ba",
 "d": "2026-11-25"
 },
 "restaurant-reservations.html": {
@@ -328,19 +328,19 @@
 "d": "2026-11-25"
 },
 "sesame-allergy-card-korean.html": {
-"h": "3185acc8ab5c6a07",
+"h": "90a7a5fda3966b15",
 "d": "2026-11-25"
 },
 "shellfish-allergy-card-korean.html": {
-"h": "d6d59e391f5f22ba",
+"h": "4eaff36c80049d2b",
 "d": "2026-11-25"
 },
 "sick-or-hurt-what-to-do.html": {
-"h": "5d872a1cbf417e41",
+"h": "e18e376a801e19a9",
 "d": "2026-11-25"
 },
 "sos.html": {
-"h": "b3cd59e64b2d051c",
+"h": "f1c48efc1448fcb6",
 "d": "2026-11-25"
 },
 "tax-free-shopping.html": {
@@ -348,7 +348,7 @@
 "d": "2026-11-25"
 },
 "taxi-problem-overcharge-korea.html": {
-"h": "e9b6281186151db0",
+"h": "47bd67aa20a52878",
 "d": "2026-11-25"
 },
 "taxi.html": {
@@ -364,15 +364,15 @@
 "d": "2026-11-25"
 },
 "vegetarian-vegan-card-korean.html": {
-"h": "2bf63dae20d69b84",
+"h": "6612635a0d5be573",
 "d": "2026-11-25"
 },
 "vi/": {
-"h": "35003d4bce80f284",
+"h": "6ebc5a9e094178d1",
 "d": "2026-11-25"
 },
 "vi/about.html": {
-"h": "3ecab2375eb0ed10",
+"h": "2851973823212558",
 "d": "2026-11-25"
 },
 "vi/atm-foreign-card-cash.html": {
@@ -380,11 +380,11 @@
 "d": "2026-11-25"
 },
 "vi/changes.html": {
-"h": "3a8f07b62599a987",
+"h": "841aecbba76b8e90",
 "d": "2026-11-25"
 },
 "vi/contact.html": {
-"h": "41614045533528e6",
+"h": "d1aa81ea175e710d",
 "d": "2026-11-25"
 },
 "vi/dmz-jsa-tour-booking.html": {
@@ -392,7 +392,7 @@
 "d": "2026-11-25"
 },
 "vi/egg-milk-allergy-card-korean.html": {
-"h": "77156806eb0bd98d",
+"h": "036609660d661ced",
 "d": "2026-11-25"
 },
 "vi/food-delivery.html": {
@@ -400,7 +400,7 @@
 "d": "2026-11-25"
 },
 "vi/foreign-card-declined-korea.html": {
-"h": "005dc39e6b30fa5d",
+"h": "8d11d7cfcb274228",
 "d": "2026-11-25"
 },
 "vi/gimpo-airport-to-seoul.html": {
@@ -408,11 +408,11 @@
 "d": "2026-11-25"
 },
 "vi/gluten-free-card-korean.html": {
-"h": "590bfe8f2bb1ef57",
+"h": "64bc42dc90c3206e",
 "d": "2026-11-25"
 },
 "vi/help.html": {
-"h": "b390ebc0b315be53",
+"h": "49cf84005efae2c3",
 "d": "2026-11-25"
 },
 "vi/incheon-airport-to-seoul.html": {
@@ -432,7 +432,7 @@
 "d": "2026-11-25"
 },
 "vi/korea-without-korean-phone-number.html": {
-"h": "1194bb90a3824e68",
+"h": "643d1a84f3ad59f6",
 "d": "2026-11-25"
 },
 "vi/kr-pass-korail-pass.html": {
@@ -444,7 +444,7 @@
 "d": "2026-11-25"
 },
 "vi/lost-phone-wallet-passport.html": {
-"h": "20c905d4b278cf42",
+"h": "7123b270c233114a",
 "d": "2026-11-25"
 },
 "vi/luggage-storage.html": {
@@ -456,7 +456,7 @@
 "d": "2026-11-25"
 },
 "vi/missed-last-train-seoul.html": {
-"h": "6a16839bc8fdd29e",
+"h": "5d567f1279d5cc36",
 "d": "2026-11-25"
 },
 "vi/mobile-data-sim.html": {
@@ -464,15 +464,15 @@
 "d": "2026-11-25"
 },
 "vi/my-card.html": {
-"h": "b65d942707d8f205",
+"h": "02e36429b4144782",
 "d": "2026-11-25"
 },
 "vi/no-pork-halal-card-korean.html": {
-"h": "389ec6479171a7f0",
+"h": "6c63d1662555323b",
 "d": "2026-11-25"
 },
 "vi/nut-allergy-card-korean.html": {
-"h": "f26c6920921a428b",
+"h": "bdc89b8d31689a98",
 "d": "2026-11-25"
 },
 "vi/pharmacy-hospital.html": {
@@ -480,19 +480,19 @@
 "d": "2026-11-25"
 },
 "vi/phrases.html": {
-"h": "5d8cfa08df5fd58f",
+"h": "2b28dd95bb063414",
 "d": "2026-11-25"
 },
 "vi/privacy.html": {
-"h": "a62659904c0769c7",
+"h": "69e9e1d72f720309",
 "d": "2026-11-25"
 },
 "vi/ready.html": {
-"h": "b22a7f8b1a103aaf",
+"h": "becbd1fcb18154b8",
 "d": "2026-11-25"
 },
 "vi/refused.html": {
-"h": "39af849eb1638175",
+"h": "7c9ae86c9a75defd",
 "d": "2026-11-25"
 },
 "vi/restaurant-reservations.html": {
@@ -508,19 +508,19 @@
 "d": "2026-11-25"
 },
 "vi/sesame-allergy-card-korean.html": {
-"h": "701db3d0de5e03a2",
+"h": "fe7696968346f3c4",
 "d": "2026-11-25"
 },
 "vi/shellfish-allergy-card-korean.html": {
-"h": "e32d52decc3f15de",
+"h": "09d874e074772987",
 "d": "2026-11-25"
 },
 "vi/sick-or-hurt-what-to-do.html": {
-"h": "faacd9f6bcfad788",
+"h": "ab329ff48be1aeef",
 "d": "2026-11-25"
 },
 "vi/sos.html": {
-"h": "a870bd3ffb3ff401",
+"h": "45d48121889e5b0b",
 "d": "2026-11-25"
 },
 "vi/tax-free-shopping.html": {
@@ -528,7 +528,7 @@
 "d": "2026-11-25"
 },
 "vi/taxi-problem-overcharge-korea.html": {
-"h": "217f40c6fde4470a",
+"h": "021166695d90094d",
 "d": "2026-11-25"
 },
 "vi/taxi.html": {
@@ -544,7 +544,7 @@
 "d": "2026-11-25"
 },
 "vi/vegetarian-vegan-card-korean.html": {
-"h": "cc36d4d6336f074c",
+"h": "e916f2a105f7a979",
 "d": "2026-11-25"
 },
 "won/": {
@@ -568,11 +568,11 @@
 "d": "2026-11-26"
 },
 "zh-cn/": {
-"h": "4a03de26dd90ab4a",
+"h": "cb06c25745d1ce9e",
 "d": "2026-11-25"
 },
 "zh-cn/about.html": {
-"h": "c6c1c490a63d8187",
+"h": "bd808641ff8208d2",
 "d": "2026-11-25"
 },
 "zh-cn/atm-foreign-card-cash.html": {
@@ -580,11 +580,11 @@
 "d": "2026-11-25"
 },
 "zh-cn/changes.html": {
-"h": "f709951eac66504a",
+"h": "6a83b19e0d55ba66",
 "d": "2026-11-25"
 },
 "zh-cn/contact.html": {
-"h": "968e376b6ef68a0e",
+"h": "0e61483f8c103461",
 "d": "2026-11-25"
 },
 "zh-cn/dmz-jsa-tour-booking.html": {
@@ -592,7 +592,7 @@
 "d": "2026-11-25"
 },
 "zh-cn/egg-milk-allergy-card-korean.html": {
-"h": "9766bf8b6e5bee0f",
+"h": "376d23ea03bffc9d",
 "d": "2026-11-25"
 },
 "zh-cn/food-delivery.html": {
@@ -600,7 +600,7 @@
 "d": "2026-11-25"
 },
 "zh-cn/foreign-card-declined-korea.html": {
-"h": "f9f35b7c47d1653b",
+"h": "89f7cb0f00def1c9",
 "d": "2026-11-25"
 },
 "zh-cn/gimpo-airport-to-seoul.html": {
@@ -608,11 +608,11 @@
 "d": "2026-11-25"
 },
 "zh-cn/gluten-free-card-korean.html": {
-"h": "5a2b54da658adda4",
+"h": "7b1215f0b5b63cb5",
 "d": "2026-11-25"
 },
 "zh-cn/help.html": {
-"h": "a377bc8205c67d2c",
+"h": "06be6974ecc05953",
 "d": "2026-11-25"
 },
 "zh-cn/incheon-airport-to-seoul.html": {
@@ -632,7 +632,7 @@
 "d": "2026-11-25"
 },
 "zh-cn/korea-without-korean-phone-number.html": {
-"h": "16aa415815a250ca",
+"h": "aaa3063e31f0b459",
 "d": "2026-11-25"
 },
 "zh-cn/kr-pass-korail-pass.html": {
@@ -644,7 +644,7 @@
 "d": "2026-11-25"
 },
 "zh-cn/lost-phone-wallet-passport.html": {
-"h": "0fe9af1791fe18d1",
+"h": "a9ecbcc9bd4f7971",
 "d": "2026-11-25"
 },
 "zh-cn/luggage-storage.html": {
@@ -656,7 +656,7 @@
 "d": "2026-11-25"
 },
 "zh-cn/missed-last-train-seoul.html": {
-"h": "ddbb1a4538880199",
+"h": "aefd4cd214f65a62",
 "d": "2026-11-25"
 },
 "zh-cn/mobile-data-sim.html": {
@@ -664,15 +664,15 @@
 "d": "2026-11-25"
 },
 "zh-cn/my-card.html": {
-"h": "aa16727600679d14",
+"h": "d92e6ac0ea49b31e",
 "d": "2026-11-25"
 },
 "zh-cn/no-pork-halal-card-korean.html": {
-"h": "fb5d5f9aafc77533",
+"h": "099a56862a5e73f4",
 "d": "2026-11-25"
 },
 "zh-cn/nut-allergy-card-korean.html": {
-"h": "2faf13239788f7da",
+"h": "2cb2ffabbf0bbc73",
 "d": "2026-11-25"
 },
 "zh-cn/pharmacy-hospital.html": {
@@ -680,19 +680,19 @@
 "d": "2026-11-25"
 },
 "zh-cn/phrases.html": {
-"h": "e24fcd958f43faee",
+"h": "7e912bf7ed74cc52",
 "d": "2026-11-25"
 },
 "zh-cn/privacy.html": {
-"h": "0897b04d576fec6d",
+"h": "88437b7cf619f3dc",
 "d": "2026-11-25"
 },
 "zh-cn/ready.html": {
-"h": "e2832c81fe42db9d",
+"h": "3245b3dd9d5e77a6",
 "d": "2026-11-25"
 },
 "zh-cn/refused.html": {
-"h": "8ce06197159e0406",
+"h": "56ba4b85223e467d",
 "d": "2026-11-25"
 },
 "zh-cn/restaurant-reservations.html": {
@@ -708,19 +708,19 @@
 "d": "2026-11-25"
 },
 "zh-cn/sesame-allergy-card-korean.html": {
-"h": "e6fc7492595521f6",
+"h": "963d195e78412d46",
 "d": "2026-11-25"
 },
 "zh-cn/shellfish-allergy-card-korean.html": {
-"h": "9f8c7ee66efce191",
+"h": "ccec1a08bc988453",
 "d": "2026-11-25"
 },
 "zh-cn/sick-or-hurt-what-to-do.html": {
-"h": "d14f5ab0168a6c62",
+"h": "b1022b9af9e47fa7",
 "d": "2026-11-25"
 },
 "zh-cn/sos.html": {
-"h": "da97c9a9a7b37f61",
+"h": "47a4fb214716729a",
 "d": "2026-11-25"
 },
 "zh-cn/tax-free-shopping.html": {
@@ -728,7 +728,7 @@
 "d": "2026-11-25"
 },
 "zh-cn/taxi-problem-overcharge-korea.html": {
-"h": "bc7231ccd3de1460",
+"h": "16fae30f5a2ce6a1",
 "d": "2026-11-25"
 },
 "zh-cn/taxi.html": {
@@ -744,15 +744,15 @@
 "d": "2026-11-25"
 },
 "zh-cn/vegetarian-vegan-card-korean.html": {
-"h": "6612c530c605e308",
+"h": "623deda7ec2b4097",
 "d": "2026-11-25"
 },
 "zh-tw/": {
-"h": "962995ed40202525",
+"h": "0c24d069f7b2d2d4",
 "d": "2026-11-25"
 },
 "zh-tw/about.html": {
-"h": "e73a17980c867f99",
+"h": "ee6c56c3d4b5911e",
 "d": "2026-11-25"
 },
 "zh-tw/atm-foreign-card-cash.html": {
@@ -760,11 +760,11 @@
 "d": "2026-11-25"
 },
 "zh-tw/changes.html": {
-"h": "348427d641489181",
+"h": "f9288b9771a71b05",
 "d": "2026-11-25"
 },
 "zh-tw/contact.html": {
-"h": "37ecadced819844c",
+"h": "5eea4513c44db19b",
 "d": "2026-11-25"
 },
 "zh-tw/dmz-jsa-tour-booking.html": {
@@ -772,7 +772,7 @@
 "d": "2026-11-25"
 },
 "zh-tw/egg-milk-allergy-card-korean.html": {
-"h": "c48297fe3633e8c7",
+"h": "d1b27b7689fe8945",
 "d": "2026-11-25"
 },
 "zh-tw/food-delivery.html": {
@@ -780,7 +780,7 @@
 "d": "2026-11-25"
 },
 "zh-tw/foreign-card-declined-korea.html": {
-"h": "deb1cf0536d7c0b0",
+"h": "2a3f1b913217be31",
 "d": "2026-11-25"
 },
 "zh-tw/gimpo-airport-to-seoul.html": {
@@ -788,11 +788,11 @@
 "d": "2026-11-25"
 },
 "zh-tw/gluten-free-card-korean.html": {
-"h": "b37881b6d89a7b70",
+"h": "00230c34053108ac",
 "d": "2026-11-25"
 },
 "zh-tw/help.html": {
-"h": "ddacda8e8541038e",
+"h": "e0d6f80824a6693f",
 "d": "2026-11-25"
 },
 "zh-tw/incheon-airport-to-seoul.html": {
@@ -812,7 +812,7 @@
 "d": "2026-11-25"
 },
 "zh-tw/korea-without-korean-phone-number.html": {
-"h": "59cd609f428d71f0",
+"h": "c347d2dedbaf0d14",
 "d": "2026-11-25"
 },
 "zh-tw/kr-pass-korail-pass.html": {
@@ -824,7 +824,7 @@
 "d": "2026-11-25"
 },
 "zh-tw/lost-phone-wallet-passport.html": {
-"h": "9769e7323dd75cb8",
+"h": "4ffd90c46b4c8702",
 "d": "2026-11-25"
 },
 "zh-tw/luggage-storage.html": {
@@ -836,7 +836,7 @@
 "d": "2026-11-25"
 },
 "zh-tw/missed-last-train-seoul.html": {
-"h": "c77dd235af9aa59c",
+"h": "a750765b027e4331",
 "d": "2026-11-25"
 },
 "zh-tw/mobile-data-sim.html": {
@@ -844,15 +844,15 @@
 "d": "2026-11-25"
 },
 "zh-tw/my-card.html": {
-"h": "2ca19444f171f707",
+"h": "a0f1525506ea2d7d",
 "d": "2026-11-25"
 },
 "zh-tw/no-pork-halal-card-korean.html": {
-"h": "03264e620285880e",
+"h": "ec4f99af59f7a74d",
 "d": "2026-11-25"
 },
 "zh-tw/nut-allergy-card-korean.html": {
-"h": "5e079e1682d66eca",
+"h": "9d8e84922a5006b6",
 "d": "2026-11-25"
 },
 "zh-tw/pharmacy-hospital.html": {
@@ -860,19 +860,19 @@
 "d": "2026-11-25"
 },
 "zh-tw/phrases.html": {
-"h": "cfeeb1ec518da06e",
+"h": "7e2cf90291e46b1d",
 "d": "2026-11-25"
 },
 "zh-tw/privacy.html": {
-"h": "db67bfb3ae59f328",
+"h": "7e0b172812ca7067",
 "d": "2026-11-25"
 },
 "zh-tw/ready.html": {
-"h": "145ab1bfd7cf33c8",
+"h": "9320ee2d04dbaac9",
 "d": "2026-11-25"
 },
 "zh-tw/refused.html": {
-"h": "8fa61f5b99c222ff",
+"h": "158a1633bf1e0aa9",
 "d": "2026-11-25"
 },
 "zh-tw/restaurant-reservations.html": {
@@ -888,19 +888,19 @@
 "d": "2026-11-25"
 },
 "zh-tw/sesame-allergy-card-korean.html": {
-"h": "228a46b088ea6d49",
+"h": "f7795c34adc360ba",
 "d": "2026-11-25"
 },
 "zh-tw/shellfish-allergy-card-korean.html": {
-"h": "397ff60821d58015",
+"h": "8f8bd771b7affd39",
 "d": "2026-11-25"
 },
 "zh-tw/sick-or-hurt-what-to-do.html": {
-"h": "4f0a66f99a78ef79",
+"h": "9283e92661041d72",
 "d": "2026-11-25"
 },
 "zh-tw/sos.html": {
-"h": "b7f159c2d4988425",
+"h": "ea17a87f5bfe90c9",
 "d": "2026-11-25"
 },
 "zh-tw/tax-free-shopping.html": {
@@ -908,7 +908,7 @@
 "d": "2026-11-25"
 },
 "zh-tw/taxi-problem-overcharge-korea.html": {
-"h": "561d3b9be5639638",
+"h": "efa349264c2a4d69",
 "d": "2026-11-25"
 },
 "zh-tw/taxi.html": {
@@ -924,7 +924,7 @@
 "d": "2026-11-25"
 },
 "zh-tw/vegetarian-vegan-card-korean.html": {
-"h": "c31c83112cf1f36d",
+"h": "0ffdcd3cf1138921",
 "d": "2026-11-25"
 }
 }

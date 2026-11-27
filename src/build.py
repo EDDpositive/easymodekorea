@@ -35,6 +35,11 @@ FONTS = "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@
 APP_V = hashlib.sha256(A.APP_JS.encode("utf-8")).hexdigest()[:8]  # cache-busting query for the shared script
 
 
+def og_image(lang):
+    """Link-preview picture in the page's own language (made by tools/make_og.py)."""
+    return "og.png" if lang == "en" else f"og-{lang}.png"
+
+
 def head(lang, title, desc, path, alt_paths, extra="", guide=None, index=True):
     up = up_of(lang)
     alts = "".join(f'<link rel="alternate" hreflang="{LANGS[k]["html_lang"]}" href="{SITE}{p}">' for k, p in alt_paths.items())
@@ -50,7 +55,7 @@ def head(lang, title, desc, path, alt_paths, extra="", guide=None, index=True):
 <title>{e(title)}</title>{'' if index else '<meta name="robots" content="noindex">'}
 <meta name="description" content="{e(desc)}">
 <link rel="canonical" href="{SITE}{path}">{alts}
-<meta property="og:type" content="website"><meta property="og:site_name" content="{BRAND}"><meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(desc)}"><meta property="og:url" content="{SITE}{path}"><meta property="og:image" content="{SITE}og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="robots" content="max-snippet:-1, max-image-preview:large">
+<meta property="og:type" content="website"><meta property="og:site_name" content="{BRAND}"><meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(desc)}"><meta property="og:url" content="{SITE}{path}"><meta property="og:image" content="{SITE}{og_image(lang)}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="robots" content="max-snippet:-1, max-image-preview:large">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="{FONTS}" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="{FONTS}"></noscript>
@@ -618,7 +623,7 @@ def build_topic(lang, t):
 """
     first = resolve(t, "visitor", "ios")
     answer = first["verdict"] + " " + " ".join(first["route"])
-    ld = [{"@context": "https://schema.org", "@type": "Article", "headline": t["seo"], "description": t["intro"], "datePublished": PUBLISHED.get(t["slug"], FIRST_PUBLISH), "dateModified": page_date(path, body), "inLanguage": L["html_lang"], "url": SITE + path, "mainEntityOfPage": SITE + path, "image": SITE + "og.png", "author": {"@type": "Organization", "name": BRAND, "url": SITE + L["dir"] + "about.html"}, "publisher": {"@type": "Organization", "name": BRAND, "url": SITE, "logo": {"@type": "ImageObject", "url": SITE + "icon-512.png"}},
+    ld = [{"@context": "https://schema.org", "@type": "Article", "headline": t["seo"], "description": t["intro"], "datePublished": PUBLISHED.get(t["slug"], FIRST_PUBLISH), "dateModified": page_date(path, body), "inLanguage": L["html_lang"], "url": SITE + path, "mainEntityOfPage": SITE + path, "image": SITE + og_image(lang), "author": {"@type": "Organization", "name": BRAND, "url": SITE + L["dir"] + "about.html"}, "publisher": {"@type": "Organization", "name": BRAND, "url": SITE, "logo": {"@type": "ImageObject", "url": SITE + "icon-512.png"}},
            "citation": [{"@type": "WebPage", "name": n, "url": u} for n, u in (g["cites"] if g else t["sources"])]},
           {"@context": "https://schema.org", "@type": "WebPage", "@id": SITE + path, "url": SITE + path, "name": QUESTION[lang][t["id"]], "inLanguage": L["html_lang"], "lastReviewed": stamp_date,
            "reviewedBy": {"@type": "Organization", "name": BRAND, "url": SITE + L["dir"] + "about.html"}},
@@ -660,7 +665,8 @@ TODAY = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).da
 
 
 def page_date(path, content):
-    h = hashlib.sha256(content.encode("utf-8")).hexdigest()[:16]
+    # A new stylesheet or script name (?v=...) or a new link-preview picture is not a change of the page: Google uses lastmod only while it is accurate.
+    h = hashlib.sha256(re.sub(r"easymodekorea\.com/og-[a-z-]+\.png", "easymodekorea.com/og.png", re.sub(r"\?v=[0-9a-f]+", "", content)).encode("utf-8")).hexdigest()[:16]
     DATED.add(path)
     rec = DATES.get(path)
     if not rec or rec["h"] != h:

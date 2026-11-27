@@ -283,6 +283,17 @@ def main():
     # The signing script shows Korean text; Windows PowerShell only reads that right from UTF-8 with a BOM.
     check(open(os.path.join(ROOT, "android", "sign-aab.ps1"), "rb").read(3) == bytes([0xEF, 0xBB, 0xBF]), "signing script is saved as UTF-8 with BOM")
 
+    # Link previews: every page in the sitemap names a picture that exists, is 1200x630, and is in the page's own language
+    # (the old single og.png showed empty boxes for 日本語 and 中文 on every page).
+    probs = []
+    for loc in re.findall(r"<loc>https://easymodekorea\.com/([^<]*)</loc>", sm_text()):
+        f = loc + "index.html" if loc == "" or loc.endswith("/") else loc
+        m = re.search(r'<meta property="og:image" content="https://easymodekorea\.com/([^"]+)"', rd(f))
+        top = f.split("/")[0]; want = f"og-{top}.png" if top in ("ja", "zh-tw", "zh-cn", "vi") else "og-ko.png" if f == "hosts.html" else "og.png"
+        if not m or not has(m.group(1)) or png_size(m.group(1)) != "1200x630": probs.append(f"{f}: {m.group(1) if m else 'none'}")
+        elif m.group(1).startswith("og") and m.group(1) != want: probs.append(f"{f}: {m.group(1)}, should be {want}")
+    check(not probs, "every page has a link-preview picture in its own language", "; ".join(probs[:3]))
+
     # No signing keys or app packages in the repo.
     tracked = subprocess.run(["git", "ls-files"], cwd=ROOT, capture_output=True, text=True).stdout.split("\n")
     secrets = [f for f in tracked if re.search(r"\.(jks|keystore|p12|pfx|aab|apk)$", f)]
